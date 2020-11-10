@@ -1,0 +1,100 @@
+
+.placeholder {
+	border-color:#D4D4D4;
+	border-style:dotted;
+	border-radius:3px;
+}
+
+.mjs-nestedSortable-error {
+	background: #fbe3e4;
+	border-color: transparent;
+}
+
+ol.sortable,ol.sortable ol {
+	list-style-type: none;
+}
+
+.sortable li div {
+	border: 1px solid #d4d4d4;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	cursor: move;
+	border-color: #D4D4D4 #D4D4D4 #BCBCBC;
+	margin: 0;
+	padding: 3px;
+}
+
+li.mjs-nestedSortable-collapsed.mjs-nestedSortable-hovering div {
+	border-color: #999;
+}
+
+.disclose, .expandEditor {
+	cursor: pointer;
+	width: 20px;
+	display: none;
+}
+
+.sortable li.mjs-nestedSortable-collapsed > ol {
+	display: none;
+}
+
+.sortable li.mjs-nestedSortable-branch {
+	padding:1px;
+}
+
+.sortable li.mjs-nestedSortable-branch > div > .disclose {
+	display: inline-block;
+}
+
+.sortable span.ui-icon {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+}
+
+.menuDiv {
+	background: #FFF;
+	padding:10px !important;
+    height:50px !important;
+}
+
+.menuEdit {
+	background: #FFF;
+}
+
+.itemTitle {
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+.deleteMenu {
+	float: right;
+	cursor: pointer;
+}
+
+.sortable li.mjs-nestedSortable-branch > div > .disclose {
+    display: inline-block;
+}
+.sortable span.ui-icon {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+.ui-icon-minusthick {
+	background-image: url(../icons/16/nested-minus.png);
+}
+.ui-icon-plusthick {
+	background-image: url(../icons/16/nested-plus.png);
+}
+.ui-icon {
+    display: block;
+    text-indent: -99999px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+}
+.disclose, .expandEditor {
+    cursor: pointer;
+    width: 20px;
+    display: none;
+}

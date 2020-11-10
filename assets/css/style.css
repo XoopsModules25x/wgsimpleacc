@@ -1,0 +1,102 @@
+@charset "UTF-8";
+
+.wgsa-startminheader-link {
+    margin:10px 5px !important;
+    font-size:150%;
+}
+.wgsa-startminheader-link-important {
+    color:#d43f3a !important;
+}
+.wgsa-startminheader-bagde {
+    background-color:#d43f3a;
+}
+
+.wgsa-content {
+	min-height:700px !important;
+}
+
+.wgsa-form-inline {
+	margin-bottom:50px;
+	border-bottom: 1px solid #ccc;
+}
+.wgsa-form-inline label, .wgsa-form-inline input {
+	margin:5px 0;
+}
+.wgsa-form-inline #submit {
+	float: right;
+}
+
+.wgsa-transaction-img-list {
+	max-height:50px !important;
+}
+
+.wgsa-nav-icon {
+	height:20px;
+	margin:0 5px 0 0;
+}
+
+.wgsa-index-assets {
+	margin-top:50px;
+	font-size:120%;
+}
+.wgsa-statistics-assets {
+	padding-top:25px;
+}
+.wgsa-statistics-assets-row {
+	margin:5px 0;
+}
+
+.wgsa-btn-list {
+	margin:5px;
+}
+
+.wgsa-files-preview {
+	max-height:50px;
+}
+
+ul.menu {
+	list-style: none;
+	background-color: #f5f5f5;
+	border-radius: 4px;
+}
+
+ul.menu > li {
+	display: inline-block;
+}
+
+ul.menu > li + li:before {  
+    content: "|\a0";
+}
+
+.printOnly {
+	display: none;
+}
+
+img {
+	max-width: 300px;
+}
+
+.list-sort-panelbody {
+	padding:10px 0 !important;
+}
+.list-sort-ol {
+	padding:0 !important;
+}
+
+.no-border {
+	border:0 !important;
+}
+
+.row-class-2 {
+	border-left:10px solid red;
+}
+.row-class-2 > td {
+	border-top:1px solid red !important;
+}
+.row-class-3 {
+	border-left:10px solid green;
+}
+.row-class-3 > td {
+	border-top:1px solid green !important;
+}
+

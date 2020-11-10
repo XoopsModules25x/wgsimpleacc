@@ -1,0 +1,7 @@
+==============================================================
+1.0 [2020/09/18 7:38:42]
+==============================================================
+ - Original release wgsimpleacc (Goffy - Wedega.com)
+ - rebuilt tpl (Goffy)
+ - added new colors (Goffy)
+ - changes in file handlings (Goffy)
