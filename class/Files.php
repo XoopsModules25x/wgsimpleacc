@@ -132,7 +132,6 @@ class Files extends \XoopsObject
 
     /**
      * @public function getForm
-     * @param int $traId
      * @param bool $action
      * @return \XoopsThemeForm
      */
