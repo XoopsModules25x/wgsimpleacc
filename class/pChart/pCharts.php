@@ -111,7 +111,7 @@ class pCharts
 				$PosArray = $this->myPicture->scaleComputeY($Serie["Data"], $Serie["Axis"]);
 				$Data["Series"][$SerieName]["XOffset"] = 0;
 
-				$XStep = $this->getXStep($Data["Orientation"], $XDivs, $XMargin);
+				$XStep = $this->getXstep($Data["Orientation"], $XDivs, $XMargin);
 
 				if ($Data["Orientation"] == SCALE_POS_LEFTRIGHT) {
 
@@ -207,7 +207,7 @@ class pCharts
 				$LastX = 1;
 				$LastY = 1;
 
-				$XStep = $this->getXStep($Data["Orientation"], $XDivs, $XMargin);
+				$XStep = $this->getXstep($Data["Orientation"], $XDivs, $XMargin);
 				$splineSettings = ["Force" => $XStep / 5, "Color" => $Serie["Color"], "Ticks" => $Serie["Ticks"], "Weight" => $Serie["Weight"]];
 
 				if ($Data["Orientation"] == SCALE_POS_LEFTRIGHT) {
@@ -328,7 +328,7 @@ class pCharts
 
 				$Data["Series"][$SerieName]["XOffset"] = 0;
 
-				$XStep = $this->getXStep($Data["Orientation"], $XDivs, $XMargin);
+				$XStep = $this->getXstep($Data["Orientation"], $XDivs, $XMargin);
 				$WayPoints = [];
 				$Force = $XStep / 5;
 
@@ -519,7 +519,7 @@ class pCharts
 				$LastGoodY = NULL;
 				$LastGoodX = NULL;
 
-				$XStep = $this->getXStep($Data["Orientation"], $XDivs, $XMargin);
+				$XStep = $this->getXstep($Data["Orientation"], $XDivs, $XMargin);
 
 				if ($Data["Orientation"] == SCALE_POS_LEFTRIGHT) {
 
@@ -627,7 +627,7 @@ class pCharts
 		$BoundsA = [];
 		$BoundsB = [];
 
-		$XStep = $this->getXStep($Data["Orientation"], $XDivs, $XMargin);
+		$XStep = $this->getXstep($Data["Orientation"], $XDivs, $XMargin);
 		$GraphAreaCoordinates = $this->myPicture->getGraphAreaCoordinates();
 
 		if ($Data["Orientation"] == SCALE_POS_LEFTRIGHT) {
@@ -714,7 +714,7 @@ class pCharts
 				$LastGoodX = NULL;
 				$Init = FALSE;
 
-				$XStep = $this->getXStep($Data["Orientation"], $XDivs, $XMargin);
+				$XStep = $this->getXstep($Data["Orientation"], $XDivs, $XMargin);
 
 				if ($Data["Orientation"] == SCALE_POS_LEFTRIGHT) {
 
@@ -869,7 +869,7 @@ class pCharts
 				$LastY = VOID;
 				$Points = [];
 
-				$XStep = $this->getXStep($Data["Orientation"], $XDivs, $XMargin);
+				$XStep = $this->getXstep($Data["Orientation"], $XDivs, $XMargin);
 
 				if ($Data["Orientation"] == SCALE_POS_LEFTRIGHT) {
 					if ($YZero > $GraphAreaCoordinates["B"] - 1) {
@@ -1034,7 +1034,7 @@ class pCharts
 
 				$Data["Series"][$SerieName]["XOffset"] = 0;
 
-				$XStep = $this->getXStep($Data["Orientation"], $XDivs, $XMargin);
+				$XStep = $this->getXstep($Data["Orientation"], $XDivs, $XMargin);
 
 				if ($Data["Orientation"] == SCALE_POS_LEFTRIGHT) {
 					if ($YZero > $GraphAreaCoordinates["B"] - 1) {
@@ -1512,7 +1512,7 @@ class pCharts
 				$Data["Series"][$SerieName]["XOffset"] = 0;
 				$RectangleSettings = ["TransCorner" => TRUE,"Color" => $Color,"BorderColor" => $BorderColor];
 
-				$XStep = $this->getXStep($Data["Orientation"], $XDivs, $XMargin);
+				$XStep = $this->getXstep($Data["Orientation"], $XDivs, $XMargin);
 
 				if ($Data["Orientation"] == SCALE_POS_LEFTRIGHT) {
 					($YZero > $GraphAreaCoordinates["B"] - 1) AND $YZero = $GraphAreaCoordinates["B"] - 1;
@@ -1727,7 +1727,7 @@ class pCharts
 				$PosArray = $this->myPicture->scaleComputeY0HeightOnly($Serie["Data"], $Serie["Axis"]);
 				$YZero = $this->myPicture->scaleComputeYSingle(0, $Serie["Axis"]);
 				$Data["Series"][$SerieName]["XOffset"] = 0;
-				$XStep = $this->getXStep($Data["Orientation"], $XDivs, $XMargin);
+				$XStep = $this->getXstep($Data["Orientation"], $XDivs, $XMargin);
 
 				if ($Data["Orientation"] == SCALE_POS_LEFTRIGHT) {
 					($YZero < $GraphAreaCoordinates["T"] + 1) AND $YZero = $GraphAreaCoordinates["T"] + 1;
@@ -2157,7 +2157,7 @@ class pCharts
 			if ($Serie["isDrawable"] && $SerieName != $Data["Abscissa"]) {
 
 				$PosArray = $this->myPicture->scaleComputeY($Serie["Data"], $Serie["Axis"]);
-				$XStep = $this->getXStep($Data["Orientation"], $XDivs, $XMargin);
+				$XStep = $this->getXstep($Data["Orientation"], $XDivs, $XMargin);
 				$CaptionSettings = ["Color" => $Serie["Color"],"Ticks" => $Serie["Ticks"],"Weight" => $Serie["Weight"]];
 				$LastX = VOID;
 				$LastY = VOID;
