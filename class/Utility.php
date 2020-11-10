@@ -439,7 +439,7 @@ class Utility
             'text/x-scriptzsh'                                                          => 'zsh',
         ];
 
-        return isset($mime_map[$mime]) ? $mime_map[$mime] : $mime;
+        return $mime_map[$mime] ?? $mime;
     }
 
     /**
