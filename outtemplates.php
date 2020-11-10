@@ -176,7 +176,7 @@ switch ($op) {
             \redirect_header('outtemplates.php?op=list', 3, _NOPERM);
         }
         // Form Create
-        $form = $outtemplatesHandler->getFormSelectOutput($otplId);
+        $form = $outtemplatesHandler::getFormSelectOutput($otplId);
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
     case 'exec_output':
@@ -194,7 +194,7 @@ switch ($op) {
         $outTarget = Request::getString('target', 'show');
 
         // Form Create
-        $template = $outtemplatesHandler->getFetchedOutput($outParams);
+        $template = $outtemplatesHandler::getFetchedOutput($outParams);
         switch ($outTarget) {
             case 'show':
             default:

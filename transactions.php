@@ -110,7 +110,7 @@ switch ($op) {
             foreach (\array_keys($transactionsAll) as $i) {
                 $yearMax = date('Y', $transactionsAll[$i]->getVar('tra_date'));
             }
-            $formFilter = $transactionsHandler->getFormFilterTransactions($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId);
+            $formFilter = $transactionsHandler::getFormFilterTransactions($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId);
             $GLOBALS['xoopsTpl']->assign('formFilter', $formFilter->render());
         }
 	    $crTransactions = new \CriteriaCompo();
