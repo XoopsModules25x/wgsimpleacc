@@ -123,7 +123,7 @@ switch ($op) {
                         //filter data based on form select month and year from/to
                         $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYearFrom-$filterMonthFrom-1");
                         $tradateFrom = $dtime->getTimestamp();
-                        $last = \DateTime::createFromFormat('Y-m-d', "$filterYearTo-$filterMonthTo-1")->format("Y-m-t");
+                        $last = \DateTime::createFromFormat('Y-m-d', "$filterYearTo-$filterMonthTo-1")->format('Y-m-t');
                         $dtime = \DateTime::createFromFormat('Y-m-d', $last);
                         $tradateTo = $dtime->getTimestamp();
                     }
