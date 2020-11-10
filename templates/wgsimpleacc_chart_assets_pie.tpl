@@ -93,6 +93,19 @@
 				//Draw text in center
 				ctx.fillText(line, centerX, centerY);
 			}
+		},
+		afterLayout: function(chart) {
+			let total = chart.data.datasets[0].data.reduce((a, b) => {
+				return a + b;
+			});
+			chart.legend.legendItems.forEach(
+					(label) => {
+						let value = chart.data.datasets[0].data[label.index];
+
+						label.text += ': ' + value;
+						return label;
+					}
+			)
 		}
 	});
 
