@@ -20,13 +20,15 @@
  * @author         XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
+use XoopsModules\Wgsimpleacc\Helper;
+
 $dirname       = \basename(\dirname(__DIR__));
 $moduleHandler = \xoops_getHandler('module');
 $xoopsModule   = XoopsModule::getByDirname($dirname);
 $moduleInfo    = $moduleHandler->get($xoopsModule->getVar('mid'));
 $sysPathIcon32 = $moduleInfo->getInfo('sysicons32');
 
-$helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+$helper = Helper::getInstance();
 
 $adminmenu[] = [
     'title' => \_MI_WGSIMPLEACC_ADMENU1,

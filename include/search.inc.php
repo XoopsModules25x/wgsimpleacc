@@ -21,7 +21,7 @@
  */
 
 use XoopsModules\Wgsimpleacc;
-
+use XoopsModules\Wgsimpleacc\Helper;
 
 /**
  * search callback functions
@@ -36,7 +36,7 @@ use XoopsModules\Wgsimpleacc;
 function wgsimpleacc_search($queryarray, $andor, $limit, $offset, $userid)
 {
 	$ret = [];
-	$helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+	$helper = Helper::getInstance();
 
 	// search in table transactions
 	// search keywords

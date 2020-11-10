@@ -235,12 +235,12 @@ class Utility
         $dec = $helper->getConfig('sep_comma');
         $thnd = $helper->getConfig('sep_thousand');
 
-        $str = \preg_replace('[^0-9\,\.\-\+]', '', \strval($str));
+        $str = \preg_replace('[^0-9\,\.\-\+]', '', (string)$str);
         $str = \str_replace($thnd, '', $str);
         $str = \str_replace(' ', '', $str);
         $str = \str_replace($dec, '.', $str);
 
-        return \floatval($str);
+        return (float)$str;
 
     }
 
@@ -439,7 +439,7 @@ class Utility
             'text/x-scriptzsh'                                                          => 'zsh',
         ];
 
-        return isset($mime_map[$mime]) ? $mime_map[$mime] : $mime;
+        return $mime_map[$mime] ?? $mime;
     }
 
     /**

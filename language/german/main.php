@@ -52,16 +52,16 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_APPROVE', 'Freigeben');
 // ---------------- Contents ----------------
 // There aren't
-\define('_MA_WGSIMPLEACC_THEREARENT_ACCOUNTS', "Es gibt derzeit keine Konten in der Datenbank");
-\define('_MA_WGSIMPLEACC_THEREARENT_TRANSACTIONS', "Es gibt derzeit keine Transaktionen in der Datenbank");
-\define('_MA_WGSIMPLEACC_THEREARENT_ALLOCATIONS', "Es gibt derzeit keine Zuordnungen in der Datenbank");
-\define('_MA_WGSIMPLEACC_THEREARENT_ASSETS', "Es gibt derzeit keine Vermögenswerte in der Datenbank");
-\define('_MA_WGSIMPLEACC_THEREARENT_CURRENCIES', "Es gibt derzeit keine Währungen in der Datenbank");
-\define('_MA_WGSIMPLEACC_THEREARENT_TAXES', "Es gibt derzeit keine Steuerarten in der Datenbank");
-\define('_MA_WGSIMPLEACC_THEREARENT_FILES', "Es gibt derzeit keine Dateien in der Datenbank");
-\define('_MA_WGSIMPLEACC_THEREARENT_BALANCES', "Es gibt derzeit keine Abschlüsse in der Datenbank");
-\define('_MA_WGSIMPLEACC_THEREARENT_TRATEMPLATES', "Es gibt derzeit keine Transaktionsvorlagen in der Datenbank");
-\define('_MA_WGSIMPLEACC_THEREARENT_OUTTEMPLATES', "Es gibt derzeit keine Ausgabevorlagen in der Datenbank");
+\define('_MA_WGSIMPLEACC_THEREARENT_ACCOUNTS', 'Es gibt derzeit keine Konten in der Datenbank');
+\define('_MA_WGSIMPLEACC_THEREARENT_TRANSACTIONS', 'Es gibt derzeit keine Transaktionen in der Datenbank');
+\define('_MA_WGSIMPLEACC_THEREARENT_ALLOCATIONS', 'Es gibt derzeit keine Zuordnungen in der Datenbank');
+\define('_MA_WGSIMPLEACC_THEREARENT_ASSETS', 'Es gibt derzeit keine Vermögenswerte in der Datenbank');
+\define('_MA_WGSIMPLEACC_THEREARENT_CURRENCIES', 'Es gibt derzeit keine Währungen in der Datenbank');
+\define('_MA_WGSIMPLEACC_THEREARENT_TAXES', 'Es gibt derzeit keine Steuerarten in der Datenbank');
+\define('_MA_WGSIMPLEACC_THEREARENT_FILES', 'Es gibt derzeit keine Dateien in der Datenbank');
+\define('_MA_WGSIMPLEACC_THEREARENT_BALANCES', 'Es gibt derzeit keine Abschlüsse in der Datenbank');
+\define('_MA_WGSIMPLEACC_THEREARENT_TRATEMPLATES', 'Es gibt derzeit keine Transaktionsvorlagen in der Datenbank');
+\define('_MA_WGSIMPLEACC_THEREARENT_OUTTEMPLATES', 'Es gibt derzeit keine Ausgabevorlagen in der Datenbank');
 // Account
 \define('_MA_WGSIMPLEACC_ACCOUNT', 'Konto');
 \define('_MA_WGSIMPLEACC_ACCOUNTS', 'Buchungskonten');
@@ -305,7 +305,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_FORM_DELETE_OK', 'Erfolgreich gelöscht');
 \define('_MA_WGSIMPLEACC_FORM_SURE_DELETE', "Wollen Sie diesen Eintrag wirklich löschen: <b><span style='color : Red;'>%s </span></b>");
 \define('_MA_WGSIMPLEACC_FORM_SURE_RENEW', "Wollen Sie diesen Eintrag wirklich aktualisieren: <b><span style='color : Red;'>%s </span></b>");
-\define('_MA_WGSIMPLEACC_INVALID_PARAM', "Ungültiger Parameter");
+\define('_MA_WGSIMPLEACC_INVALID_PARAM', 'Ungültiger Parameter');
 \define('_MA_WGSIMPLEACC_FORM_ACTION', 'Aktion');
 \define('_MA_WGSIMPLEACC_FORM_UPLOAD', 'Datei hochladen');
 \define('_MA_WGSIMPLEACC_FORM_UPLOAD_SIZE', 'Maximale Dateigröße: ');
@@ -324,10 +324,10 @@ require_once __DIR__ . '/admin.php';
 // ---------------- Print ----------------
 \define('_MA_WGSIMPLEACC_PRINT', 'Print');
 // ---------------- Menu ----------------
-\define('_MA_WGSIMPLEACC_MENUADMIN', "Administration");
-\define('_MA_WGSIMPLEACC_MENUUSER', "Benutzer");
-\define('_MA_WGSIMPLEACC_MENUNOTIF', "Benachrichtigungen");
-\define('_MA_WGSIMPLEACC_MENUINBOX', "Posteingang");
+\define('_MA_WGSIMPLEACC_MENUADMIN', 'Administration');
+\define('_MA_WGSIMPLEACC_MENUUSER', 'Benutzer');
+\define('_MA_WGSIMPLEACC_MENUNOTIF', 'Benachrichtigungen');
+\define('_MA_WGSIMPLEACC_MENUINBOX', 'Posteingang');
 // Admin link
 \define('_MA_WGSIMPLEACC_ADMIN', 'Admin');
 // ---------------- End ----------------

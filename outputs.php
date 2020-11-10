@@ -87,7 +87,7 @@ switch ($op) {
         foreach (\array_keys($transactionsAll) as $i) {
             $yearMax = date('Y', $transactionsAll[$i]->getVar('tra_date'));
         }
-        $formFilter = $transactionsHandler->getFormFilterTransactions($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, 'tra_output');
+        $formFilter = $transactionsHandler::getFormFilterTransactions($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, 'tra_output');
         $GLOBALS['xoopsTpl']->assign('formFilter', $formFilter->render());
         break;
     case 'tra_output';
@@ -123,7 +123,7 @@ switch ($op) {
                         //filter data based on form select month and year from/to
                         $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYearFrom-$filterMonthFrom-1");
                         $tradateFrom = $dtime->getTimestamp();
-                        $last = \DateTime::createFromFormat('Y-m-d', "$filterYearTo-$filterMonthTo-1")->format("Y-m-t");
+                        $last = \DateTime::createFromFormat('Y-m-d', "$filterYearTo-$filterMonthTo-1")->format('Y-m-t');
                         $dtime = \DateTime::createFromFormat('Y-m-d', $last);
                         $tradateTo = $dtime->getTimestamp();
                     }

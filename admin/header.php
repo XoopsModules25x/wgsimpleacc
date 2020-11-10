@@ -19,7 +19,11 @@
  * @min_xoops      2.5.10
  * @author         XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
-include \dirname(\dirname(\dirname(__DIR__))) . '/include/cp_header.php';
+
+use Xmf\Module\Admin;
+use XoopsModules\Wgsimpleacc\Helper;
+
+include dirname(__DIR__, 3) . '/include/cp_header.php';
 require_once \dirname(__DIR__) . '/include/common.php';
 
 $sysPathIcon16   = '../' . $GLOBALS['xoopsModule']->getInfo('sysicons16');
@@ -29,7 +33,7 @@ $modPathIcon16   = WGSIMPLEACC_URL . '/' . $GLOBALS['xoopsModule']->getInfo('mod
 $modPathIcon32   = WGSIMPLEACC_URL . '/' . $GLOBALS['xoopsModule']->getInfo('modicons32') . '/';
 
 // Get instance of module
-$helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+$helper = Helper::getInstance();
 $accountsHandler = $helper->getHandler('Accounts');
 $transactionsHandler = $helper->getHandler('Transactions');
 $allocationsHandler = $helper->getHandler('Allocations');
@@ -67,5 +71,5 @@ $GLOBALS['xoopsTpl']->assign('sysPathIcon32', $sysPathIcon32);
 $GLOBALS['xoopsTpl']->assign('modPathIcon16', $modPathIcon16);
 $GLOBALS['xoopsTpl']->assign('modPathIcon32', $modPathIcon32);
 
-$adminObject = \Xmf\Module\Admin::getInstance();
+$adminObject = Admin::getInstance();
 $style = WGSIMPLEACC_URL . '/assets/css/admin/style.css';
