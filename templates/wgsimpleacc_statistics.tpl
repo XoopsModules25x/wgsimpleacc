@@ -18,8 +18,8 @@
         <div class="col-xs-12 col-sm-5 wgsa-statistics-assets">
             <{foreach item=asset from=$assetList}>
             <div class="row wgsa-statistics-assets-row" style="margin:5px 0">
-                <div class="col-sm-6 col-md-8"><span style="display:inline-block;width:20px;background-color:<{$asset.color}>">&nbsp;</span> <{$asset.name}>:</div>
-                <div class="col-sm-6 col-md-4"><{$asset.amount}></div>
+                <div class="col-sm-6 col-md-6 left"><span style="display:inline-block;width:20px;background-color:<{$asset.color}>">&nbsp;</span> <{$asset.name}>:</div>
+                <div class="col-sm-4 col-md-4 right"><{$asset.amount}></div>
             </div>
             <{/foreach}>
         </div>

@@ -5,3 +5,6 @@
  - rebuilt tpl (Goffy)
  - added new colors (Goffy)
  - changes in file handlings (Goffy)
+ - implemented Mambas changes (mamba/goffy)
+ - graphical improvements (mamba/goffy)
+ - removed unneccessary pchart folder from assets (goffy)
