@@ -21,6 +21,7 @@
  */
 
 use XoopsModules\Wgsimpleacc;
+use XoopsModules\Wgsimpleacc\Helper;
 
 require \dirname(\dirname(__DIR__)) . '/mainfile.php';
 require __DIR__ . '/include/common.php';
@@ -31,7 +32,7 @@ $moduleDirName = \basename(__DIR__);
 $xoBreadcrumbs = [];
 $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_TITLE, 'link' => WGSIMPLEACC_URL . '/'];
 // Get instance of module
-$helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+$helper = Helper::getInstance();
 $accountsHandler = $helper->getHandler('Accounts');
 $transactionsHandler = $helper->getHandler('Transactions');
 $allocationsHandler = $helper->getHandler('Allocations');

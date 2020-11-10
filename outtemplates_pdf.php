@@ -10,6 +10,8 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
 
+use XoopsModules\Wgsimpleacc\Helper;
+
 /**
  * wgSimpleAcc module for xoops
  *
@@ -30,7 +32,7 @@ function execute_output ($template, $outParams)
     }
     require_once $tcpdf . 'config/tcpdf_config.php';
 
-    $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+    $helper = Helper::getInstance();
 
     // Get Instance of Handler
     $transactionsHandler = $helper->getHandler('Transactions');

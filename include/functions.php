@@ -20,6 +20,8 @@
  * @author         XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
+use XoopsModules\Wgsimpleacc\Helper;
+
 /**
  * Get the permissions ids
  *
@@ -89,7 +91,7 @@ function wgsimpleaccMetaDescription($content)
 function wgsimpleacc_RewriteUrl($module, $array, $type = 'content')
 {
     $comment = '';
-    $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+    $helper = Helper::getInstance();
     $lenght_id = $helper->getConfig('lenght_id');
     $rewrite_url = $helper->getConfig('rewrite_url');
 
@@ -176,7 +178,7 @@ function wgsimpleacc_RewriteUrl($module, $array, $type = 'content')
 function wgsimpleacc_Filter($url, $type = '') {
 
     // Get regular expression from module setting. default setting is : `[^a-z0-9]`i
-    $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+    $helper = Helper::getInstance();
     $taxesHandler = $helper->getHandler('taxes');
     $regular_expression = $helper->getConfig('regular_expression');
 
