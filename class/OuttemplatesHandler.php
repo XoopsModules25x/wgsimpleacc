@@ -123,8 +123,9 @@ class OuttemplatesHandler extends \XoopsPersistableObjectHandler
 	}
     /**
      * @public function to select transactions/template for output
-     * @param int $traId
      * @param int $otplId
+     * @param int $traYear
+     * @param int $traNb
      * @return \XoopsThemeFormForm
      */
     public static function getFormSelectOutput($otplId = 0, $traYear = 0, $traNb = 0)

@@ -305,7 +305,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_FORM_DELETE_OK', 'Successfully deleted');
 \define('_MA_WGSIMPLEACC_FORM_SURE_DELETE', "Are you sure to delete: <b><span style='color : Red;'>%s </span></b>");
 \define('_MA_WGSIMPLEACC_FORM_SURE_RENEW', "Are you sure to update: <b><span style='color : Red;'>%s </span></b>");
-\define('_MA_WGSIMPLEACC_INVALID_PARAM', "Invalid parameter");
+\define('_MA_WGSIMPLEACC_INVALID_PARAM', 'Invalid parameter');
 \define('_MA_WGSIMPLEACC_FORM_ACTION', 'Action');
 \define('_MA_WGSIMPLEACC_FORM_UPLOAD', 'Upload file');
 \define('_MA_WGSIMPLEACC_FORM_UPLOAD_SIZE', 'Max file size: ');
@@ -324,10 +324,10 @@ require_once __DIR__ . '/admin.php';
 // ---------------- Print ----------------
 \define('_MA_WGSIMPLEACC_PRINT', 'Print');
 // ---------------- Menu ----------------
-\define('_MA_WGSIMPLEACC_MENUADMIN', "Administration");
-\define('_MA_WGSIMPLEACC_MENUUSER', "User");
-\define('_MA_WGSIMPLEACC_MENUNOTIF', "Notification");
-\define('_MA_WGSIMPLEACC_MENUINBOX', "Inbox");
+\define('_MA_WGSIMPLEACC_MENUADMIN', 'Administration');
+\define('_MA_WGSIMPLEACC_MENUUSER', 'User');
+\define('_MA_WGSIMPLEACC_MENUNOTIF', 'Notification');
+\define('_MA_WGSIMPLEACC_MENUINBOX', 'Inbox');
 // Admin link
 \define('_MA_WGSIMPLEACC_ADMIN', 'Admin');
 // ---------------- End ----------------

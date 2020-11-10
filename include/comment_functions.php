@@ -20,6 +20,8 @@
  * @author         XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
+use XoopsModules\Wgsimpleacc\Helper;
+
 /**
  * CommentsUpdate
  *
@@ -30,7 +32,7 @@
 function wgsimpleaccCommentsUpdate($itemId, $itemNumb)
 {
 	// Get instance of module
-	$helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+	$helper = Helper::getInstance();
     /*
 	$imagesHandler = $helper->getHandler('Images');
 	$imgId = (int)$itemId;
@@ -53,7 +55,7 @@ function wgsimpleaccCommentsApprove(&$comment)
 {
 	// Notification event
 	// Get instance of module
-	$helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+	$helper = Helper::getInstance();
     /*
 	$imagesHandler = $helper->getHandler('Images');
 	$imgId = $comment->getVar('com_itemid');

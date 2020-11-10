@@ -19,5 +19,5 @@
  * @min_xoops      2.5.10
  * @author         XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
-require_once \dirname(\dirname(__DIR__)) . '/mainfile.php';
+require_once dirname(__DIR__, 2) . '/mainfile.php';
 require_once \XOOPS_ROOT_PATH.'/include/comment_delete.php';

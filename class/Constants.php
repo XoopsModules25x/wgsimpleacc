@@ -29,14 +29,14 @@ namespace XoopsModules\Wgsimpleacc;
 interface Constants
 {
 	// Constants for tables
-	const TABLE_ACCOUNTS = 0;
-	const TABLE_TRANSACTIONS = 1;
-	const TABLE_ALLOCATIONS = 2;
-	const TABLE_ASSETS = 3;
-	const TABLE_CURRENCIES = 4;
-	const TABLE_TAXES = 5;
-	const TABLE_FILES = 6;
-	const TABLE_IMAGES = 7;
+    public const TABLE_ACCOUNTS = 0;
+    public const TABLE_TRANSACTIONS = 1;
+    public const TABLE_ALLOCATIONS = 2;
+    public const TABLE_ASSETS = 3;
+    public const TABLE_CURRENCIES = 4;
+    public const TABLE_TAXES = 5;
+    public const TABLE_FILES = 6;
+    public const TABLE_IMAGES = 7;
 
 	// Constants for status
 	public const STATUS_NONE      = 0;

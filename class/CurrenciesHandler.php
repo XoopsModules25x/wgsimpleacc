@@ -124,7 +124,7 @@ class CurrenciesHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Set given currency as primary
-     * @param int $asId
+     * @param int $curId
      * @return bool
      */
     public function setPrimaryCurrencies($curId)

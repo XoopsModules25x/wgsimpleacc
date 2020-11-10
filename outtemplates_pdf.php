@@ -10,6 +10,8 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
 
+use XoopsModules\Wgsimpleacc\Helper;
+
 /**
  * wgSimpleAcc module for xoops
  *
@@ -30,7 +32,7 @@ function execute_output ($template, $outParams)
     }
     require_once $tcpdf . 'config/tcpdf_config.php';
 
-    $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+    $helper = Helper::getInstance();
 
     // Get Instance of Handler
     $transactionsHandler = $helper->getHandler('Transactions');
@@ -85,17 +87,17 @@ function execute_output ($template, $outParams)
     $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO); //set image scale factor
     // For chinese
     if ('cn' == _LANGCODE) {
-        $pdf->setHeaderFont(array('gbsn00lp', '', $pdfData['fontsize']));
+        $pdf->setHeaderFont(['gbsn00lp', '', $pdfData['fontsize']]);
         $pdf->SetFont('gbsn00lp', '', $pdfData['fontsize']);
-        $pdf->setFooterFont(array('gbsn00lp', '', $pdfData['fontsize']));
+        $pdf->setFooterFont(['gbsn00lp', '', $pdfData['fontsize']]);
     } else {
-        $pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+        $pdf->setHeaderFont([PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN]);
         $pdf->SetFont($pdfData['fontname'], '', $pdfData['fontsize']);
-        $pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+        $pdf->setFooterFont([PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA]);
     }
     // Set some language-dependent strings (optional)
     $lang = \XOOPS_ROOT_PATH . '/Frameworks/tcpdf/lang/eng.php';
-    if (@\file_exists($lang)) {
+    if (@\is_file($lang)) {
         require_once $lang;
         $pdf->setLanguageArray($lang);
     }

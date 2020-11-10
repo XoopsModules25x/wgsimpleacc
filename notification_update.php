@@ -19,5 +19,5 @@
  * @min_xoops      2.5.10
  * @author         XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
-include \dirname(\dirname(__DIR__)) . '/mainfile.php';
+include dirname(__DIR__, 2) . '/mainfile.php';
 include \XOOPS_ROOT_PATH . '/include/notification_update.php';
