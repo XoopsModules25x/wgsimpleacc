@@ -97,7 +97,7 @@ function execute_output ($template, $outParams)
     }
     // Set some language-dependent strings (optional)
     $lang = \XOOPS_ROOT_PATH . '/Frameworks/tcpdf/lang/eng.php';
-    if (@\file_exists($lang)) {
+    if (@\is_file($lang)) {
         require_once $lang;
         $pdf->setLanguageArray($lang);
     }
