@@ -78,11 +78,11 @@ $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO); //set image scale factor
 if ('cn' == _LANGCODE) {
-	$pdf->setHeaderFont(array('gbsn00lp', '', $pdfData['fontsize']));
-	$pdf->setFooterFont(array('gbsn00lp', '', $pdfData['fontsize']));
+	$pdf->setHeaderFont(['gbsn00lp', '', $pdfData['fontsize']]);
+	$pdf->setFooterFont(['gbsn00lp', '', $pdfData['fontsize']]);
 } else {
-	$pdf->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-	$pdf->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+	$pdf->setHeaderFont([PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN]);
+	$pdf->setFooterFont([PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA]);
 }
 // Set some language-dependent strings (optional)
 $lang = \XOOPS_ROOT_PATH.'/Frameworks/tcpdf/lang/eng.php';

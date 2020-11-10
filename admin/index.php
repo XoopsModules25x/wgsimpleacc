@@ -64,7 +64,7 @@ if ($configurator->uploadFolders && \is_array($configurator->uploadFolders)) {
 // Uploads Folders Created
 foreach (\array_keys($folder) as $i) {
 	$adminObject->addConfigBoxLine($folder[$i], 'folder');
-	$adminObject->addConfigBoxLine(array($folder[$i], '777'), 'chmod');
+	$adminObject->addConfigBoxLine([$folder[$i], '777'], 'chmod');
 }
 
 /*
