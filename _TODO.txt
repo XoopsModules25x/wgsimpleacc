@@ -1,0 +1,12 @@
+akkordeon menu statt navbar
+https://codepen.io/LewisBriffa/pen/qjwqLb
+https://codepen.io/shehab-eltawel/pen/dYwOgX
+https://codepen.io/abergin/pen/ihlDf
+
+https://www.jqueryscript.net/other/dashboard-starter-template-bootstrap.html
+
+
+indikator calc relevant?
+
+
+Ausgabe: was?

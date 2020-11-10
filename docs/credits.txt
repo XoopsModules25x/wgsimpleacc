@@ -1,0 +1,14 @@
+Read Me First
+=============
+
+Originally created by the TDM Team.
+
+Modified by Timgno (http://www.txmodxoops.org)
+
+Contributors: Mamba (https://xoops.org), Goffy (German Xoops)
+
+Included ideas for Logo Generator from Trabis (Publisher module) and Suin (Koins module)
+
+Left side menu:
+- based on Startmin
+- Startmin is an open source, admin dashboard template for [Bootstrap](http://getbootstrap.com/) originally created by [Start Bootstrap](http://startbootstrap.com/).
