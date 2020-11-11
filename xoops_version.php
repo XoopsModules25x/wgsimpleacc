@@ -103,7 +103,7 @@ $modversion['templates'] = [
     ['file' => 'wgsimpleacc_chart_balances_line.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_chart_transactions_hbar.tpl', 'description' => ''],
 	['file' => 'wgsimpleacc_files.tpl', 'description' => ''],
-	['file' => 'wgsimpleacc_files_list.tpl', 'description' => ''],
+	['file' => 'wgsimpleacc_files_item.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_footer.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_header.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_index.tpl', 'description' => ''],
