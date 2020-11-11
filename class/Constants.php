@@ -79,4 +79,12 @@ interface Constants
     public const FILTER_TYPEALL    = 0;
     public const FILTER_TYPECUSTOM = 1;
 
+    //Output balances
+    public const BALANCES_OUT_LEVEL_ALLOC0 = 0;
+    public const BALANCES_OUT_LEVEL_ALLOC1 = 1;
+    public const BALANCES_OUT_LEVEL_ALLOC2 = 2;
+    public const BALANCES_OUT_LEVEL_ACC0 = 0;
+    public const BALANCES_OUT_LEVEL_ACC1 = 1;
+    public const BALANCES_OUT_LEVEL_ACC2 = 2;
+
 }

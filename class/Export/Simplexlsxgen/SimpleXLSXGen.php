@@ -198,12 +198,12 @@ class SimpleXLSXGen {
 					if ( \is_string($v) ) {
 
 						if ( $v === '0' || \preg_match( '/^[-+]?[1-9]\d{0,14}$/', $v ) ) { // Integer as General
-							$cv = l\trim( $v, '+' );
+							$cv = ltrim( $v, '+' );
 							if ( $vl > 10 ) {
 								$cs = 1; // [1] 0
 							}
 						} elseif ( \preg_match('/^[-+]?(0|[1-9]\d*)\.\d+$/', $v ) ) {
-							$cv = l\trim($v,'+');
+							$cv = ltrim($v,'+');
 						} elseif ( \preg_match('/^([-+]?\d+)%$/', $v, $m) ) {
 							$cv = \round( $m[1] / 100, 2);
 							$cs = 2; // [9] 0%
@@ -226,7 +226,7 @@ class SimpleXLSXGen {
 							if ( \preg_match('/^[0-9+-.]+$/', $v ) ) { // Long ?
 								$cs = 7; // Align Right
 							}
-							$v = l\trim($v,"\0"); // disabled type detection
+							$v = ltrim($v,"\0"); // disabled type detection
 							$ct = 's'; // shared string
 							$v = \str_replace(['&','<','>',"\x03"],['&amp;','&lt;','&gt;',''], $v);
 							$cv = false;

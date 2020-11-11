@@ -230,6 +230,17 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_BALANCE_VALUEEND', 'Berechneter Vermögenswertes am Ende');
 \define('_MA_WGSIMPLEACC_BALANCE_DATEUSED', "Das 'Datum von' or 'Datum bis' ist innerhalb des Zeitraumes eines anderen Abschlusses");
 \define('_MA_WGSIMPLEACC_BALANCE_ERRORS', 'Abschlüsse wurden erstellt, jedoch sind Fehler aufgetreten');
+// Output balances
+\define('_MA_WGSIMPLEACC_BALANCES_OUT_SELECT', 'Abschlüsse auswählen');
+\define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL', 'Detailgrad auswählen');
+\define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ALLOC', 'Detailgrad Zuordnungen');
+\define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ALLOC0', 'Alle Zuordnungen zusammenfassen');
+\define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ALLOC1', 'Zuordnungen erstes Level zusammenfassen');
+\define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ALLOC2', 'Alle Zuordnungen detailiert ausgeben');
+\define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ACC', 'Detailgrad Konten');
+\define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ACC0', 'Alle Konten zusammenfassen');
+\define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ACC1', 'Konten erstes Level zusammenfassen');
+\define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ACC2', 'Alle Konten detailiert ausgeben');
 // Templates general
 \define('_MA_WGSIMPLEACC_TEMPLATES', 'Vorlagen');
 \define('_MA_WGSIMPLEACC_TEMPLATE_NONE', 'Keine');

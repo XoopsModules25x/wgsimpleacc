@@ -59,8 +59,31 @@ $period_type = $helper->getConfig('balance_period');
 $GLOBALS['xoopsTpl']->assign('displayfilter', 1);
 
 switch ($op) {
-    case 'transactions';
+    case 'none':
     default:
+        break;
+    case 'balances':
+        $balancesHandler = $helper->getHandler('Balances');
+        $formFilter = $balancesHandler::getFormBalancesSelect();
+        $GLOBALS['xoopsTpl']->assign('formFilter', $formFilter->render());
+        break;
+    case 'bal_output':
+        $bal_ids = Request::getArray('bal_ids');
+        foreach ($bal_ids as $bal_id) {
+            echo '<br>'.$bal_id;
+        }
+        $crBalIds = implode(',', $bal_ids);
+        $assets = [];
+        $crBalances = new \CriteriaCompo();
+        $crBalances->add(new \Criteria('bal_id', "($crBalIds)", 'IN'));
+        $balancesAll = $balancesHandler->getAll($crBalances);
+        foreach (\array_keys($balancesAll) as $i) {
+            $balances[$i] = $balancesAll[$i]->getValuesBalances();
+            $assets[$balances[$i]['bal_asid']] = $balances[$i]['asset'];
+        }
+        var_dump($assets);
+        break;
+    case 'transactions';
         $filterYear = Request::getInt('filterYear', 0);
         $filterMonthFrom = Request::getInt('filterMonthFrom', 0);
         $filterYearFrom = Request::getInt('filterYearFrom', 0);

@@ -8,3 +8,4 @@
  - implemented Mambas changes (mamba/goffy)
  - graphical improvements (mamba/goffy)
  - removed unneccessary pchart folder from assets (goffy)
+ - fixed bug with l\trim (alain/goffy)
