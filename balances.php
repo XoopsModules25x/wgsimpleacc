@@ -24,7 +24,8 @@ use Xmf\Request;
 use XoopsModules\Wgsimpleacc;
 use XoopsModules\Wgsimpleacc\{
     Constants,
-    Common
+    Common,
+    Utility
 };
 
 require __DIR__ . '/header.php';
@@ -60,11 +61,11 @@ switch ($op) {
         if (!$permissionsHandler->getPermBalancesCreate()) {
             \redirect_header('balances.php?op=list', 3, _NOPERM);
         }
-        $balFrom = Request::getString('bal_from') . ' 00:00:00';
-        $balanceFromObj = \DateTime::createFromFormat(_DATESTRING, $balFrom);
+        $balFrom = Request::getString('bal_from') . ' 00:00';
+        $balanceFromObj = \DateTime::createFromFormat(Utility::CustomDateFormat(), $balFrom);
         $balanceFrom = $balanceFromObj->getTimestamp();
-        $balTo = Request::getString('bal_to') . ' 23:59:59';
-        $balanceToObj = \DateTime::createFromFormat(_DATESTRING, $balTo);
+        $balTo = Request::getString('bal_to') . ' 23:59';
+        $balanceToObj = \DateTime::createFromFormat(Utility::CustomDateFormat(), $balTo);
         $balanceTo = $balanceToObj->getTimestamp();
 
         ///check whether balance already exists

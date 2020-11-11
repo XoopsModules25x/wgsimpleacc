@@ -87,15 +87,14 @@ switch ($op) {
 			$balancesObj = $balancesHandler->create();
 		}
 		// Set Vars
-		$balanceFromObj = \DateTime::createFromFormat(_DATESTRING, Request::getString('bal_from') . '00:00:00');
+        $balanceFromObj = \DateTime::createFromFormat(Utility::CustomDateFormat(), Request::getString('bal_from') . ' 00:00');
 		$balancesObj->setVar('bal_from', $balanceFromObj->getTimestamp());
-		$balanceToObj = \DateTime::createFromFormat(_DATESTRING, Request::getString('bal_to') . '23:59:59');
+		$balanceToObj = \DateTime::createFromFormat(Utility::CustomDateFormat(), Request::getString('bal_to') . ' 23:59');
 		$balancesObj->setVar('bal_to', $balanceToObj->getTimestamp());
         $balancesObj->setVar('bal_asid', Request::getInt('bal_asid', 0));
         $balancesObj->setVar('bal_curid', Request::getInt('bal_curid', 0));
         $balAmount = Request::getString('bal_amount');
         $balancesObj->setVar('bal_amount', Utility::StringToFloat($balAmount));
-        $assetDateObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('as_date'));
 		$balancesObj->setVar('bal_status', Request::getInt('bal_status', 0));
 		$balanceDatecreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('bal_datecreated'));
 		$balancesObj->setVar('bal_datecreated', $balanceDatecreatedObj->getTimestamp());

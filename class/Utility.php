@@ -41,6 +41,19 @@ class Utility
 
     use Common\FilesManagement; // Files Management Trait
 
+    /**
+     * @public function to convert float into string
+     * @return string
+     */
+    public static function CustomDateFormat() {
+
+        // $customDateFormat: fix problem that XoopsFormTextDateSelect use _SHORTDATESTRING and _DATESTRING can differ
+        // e.g. english:
+        // define('_DATESTRING',      'Y/n/j G:i:s');
+        // define('_SHORTDATESTRING', 'm/d/Y');
+        return _SHORTDATESTRING . ' H:i';
+
+    }
 
     /**
      * @public function to get colors for charts
