@@ -68,6 +68,7 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('formFilter', $formFilter->render());
         break;
     case 'bal_output':
+        $GLOBALS['xoopsTpl']->assign('displayBalOutput', 1);
         $bal_ids = Request::getArray('bal_ids');
         foreach ($bal_ids as $bal_id) {
             echo '<br>'.$bal_id;
@@ -211,8 +212,6 @@ switch ($op) {
                 } else {
                     $csv = Simplecsv\SimpleCSV::downloadAs( $data, $filename );
                 }
-
-
                 break;
             case 'none':
             default:

@@ -51,12 +51,15 @@ $GLOBALS['xoTheme']->addStylesheet($style, null);
 
 $GLOBALS['xoopsTpl']->assign('xoops_icons32_url', XOOPS_ICONS32_URL);
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_files_url', WGSIMPLEACC_UPLOAD_FILES_URL);
 
 $keywords = [];
 
 $GLOBALS['xoopsTpl']->assign('upload_by_app', $uploadByApp);
 $GLOBALS['xoopsTpl']->assign('start', $start);
 $GLOBALS['xoopsTpl']->assign('limit', $limit);
+$GLOBALS['xoopsTpl']->assign('fil_traid', $filTraid);
+
 
 switch ($op) {
 	case 'show':
@@ -69,6 +72,7 @@ switch ($op) {
         }
 	    $crFiles = new \CriteriaCompo();
 		if ($filId > 0) {
+            $GLOBALS['xoopsTpl']->assign('template_sub', 'db:wgsimpleacc_files_item.tpl');
 			$crFiles->add(new \Criteria('fil_id', $filId));
 		}
         $crFiles->add(new \Criteria('fil_traid', $filTraid));
