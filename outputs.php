@@ -81,9 +81,9 @@ switch ($op) {
             $sumAmountin += $balance['bal_amountstart'];
             $sumAmountout += $balance['bal_amountend'];
         }
-        $GLOBALS['xoopsTpl']->assign('balancesTotal', $sumTotal);
-        $GLOBALS['xoopsTpl']->assign('balancesAmountIn', $sumAmountin);
-        $GLOBALS['xoopsTpl']->assign('balancesAmountOut', $sumAmountout);
+        $GLOBALS['xoopsTpl']->assign('balancesTotal', Utility::FloatToString($sumTotal));
+        $GLOBALS['xoopsTpl']->assign('balancesAmountIn', Utility::FloatToString($sumAmountin));
+        $GLOBALS['xoopsTpl']->assign('balancesAmountOut', Utility::FloatToString($sumAmountout));
         $GLOBALS['xoopsTpl']->assign('balancesCount', \count($balances));
         $GLOBALS['xoopsTpl']->assign('balances', $balances);
 
@@ -97,9 +97,9 @@ switch ($op) {
                 $sumAmountin += $account['amountin_val'];
                 $sumAmountout += $account['amountout_val'];
             }
-            $GLOBALS['xoopsTpl']->assign('accountsTotal', $sumTotal);
-            $GLOBALS['xoopsTpl']->assign('accountsAmountIn', $sumAmountin);
-            $GLOBALS['xoopsTpl']->assign('accountsAmountOut', $sumAmountout);
+            $GLOBALS['xoopsTpl']->assign('accountsTotal', Utility::FloatToString($sumTotal));
+            $GLOBALS['xoopsTpl']->assign('accountsAmountIn', Utility::FloatToString($sumAmountin));
+            $GLOBALS['xoopsTpl']->assign('accountsAmountOut', Utility::FloatToString($sumAmountout));
             $GLOBALS['xoopsTpl']->assign('accountsCount', \count($accounts));
             $GLOBALS['xoopsTpl']->assign('accounts', $accounts);
         }
@@ -114,9 +114,9 @@ switch ($op) {
                 $sumAmountin += $allocation['amountin_val'];
                 $sumAmountout += $allocation['amountout_val'];
             }
-            $GLOBALS['xoopsTpl']->assign('allocationsTotal', $sumTotal);
-            $GLOBALS['xoopsTpl']->assign('allocationsAmountIn', $sumAmountin);
-            $GLOBALS['xoopsTpl']->assign('allocationsAmountOut', $sumAmountout);
+            $GLOBALS['xoopsTpl']->assign('allocationsTotal', Utility::FloatToString($sumTotal));
+            $GLOBALS['xoopsTpl']->assign('allocationsAmountIn', Utility::FloatToString($sumAmountin));
+            $GLOBALS['xoopsTpl']->assign('allocationsAmountOut', Utility::FloatToString($sumAmountout));
             $GLOBALS['xoopsTpl']->assign('allocationsCount', \count($allocations));
             $GLOBALS['xoopsTpl']->assign('allocations', $allocations);
         }

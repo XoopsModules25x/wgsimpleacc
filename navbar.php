@@ -50,6 +50,8 @@ $GLOBALS['xoopsTpl']->assign('permTratemplatesSubmit', $permissionsHandler->getP
 $GLOBALS['xoopsTpl']->assign('permTratemplatesView', $permissionsHandler->getPermTratemplatesView());
 $GLOBALS['xoopsTpl']->assign('permOuttemplatesSubmit', $permissionsHandler->getPermOuttemplatesSubmit());
 $GLOBALS['xoopsTpl']->assign('permOuttemplatesView', $permissionsHandler->getPermOuttemplatesView());
+
+$outtemplates = [];
 $crOuttemplates = new \CriteriaCompo();
 $crOuttemplates->add(new \Criteria('otpl_online', 1));
 $outtemplatesAll = $outtemplatesHandler->getAll($crOuttemplates);
