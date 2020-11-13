@@ -22,7 +22,7 @@ namespace XoopsModules\Wgsimpleacc;
  * @package        wgsimpleacc
  * @since          1.0
  * @min_xoops      2.5.10
- * @author         XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
+ * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
 use XoopsModules\Wgsimpleacc;
@@ -120,30 +120,12 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
 	 */
 	public function getPermGlobalView()
 	{
-		global $xoopsUser, $xoopsModule;
 
         if ($this->getPermGlobalSubmit()) {
             return true;
         }
-        $currentuid = 0;
-		if (isset($xoopsUser) && \is_object($xoopsUser)) {
-			if ($xoopsUser->isAdmin($xoopsModule->mid())) {
-				return true;
-			}
-			$currentuid = $xoopsUser->uid();
-		}
-		$grouppermHandler = \xoops_getHandler('groupperm');
-		$mid = $xoopsModule->mid();
-		$memberHandler = \xoops_getHandler('member');
-		if (0 == $currentuid) {
-			$my_group_ids = [\XOOPS_GROUP_ANONYMOUS];
-		} else {
-			$my_group_ids = $memberHandler->getGroupsByUser($currentuid);;
-		}
-		if ($grouppermHandler->checkRight('wgsimpleacc_ac', Constants::PERM_GLOBAL_VIEW, $my_group_ids, $mid)) {
-			return true;
-		}
-		return false;
+        return $this->getPermView(Constants::PERM_GLOBAL_VIEW);
+
 	}
 
     /**
@@ -190,33 +172,12 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      */
     public function getPermTransactionsSubmit()
     {
-        global $xoopsUser, $xoopsModule;
 
-        if ($this->getPermGlobalSubmit()) {
-            return true;
-        }
         if ($this->getPermTransactionsApprove()) {
             return true;
         }
-        $currentuid = 0;
-        if (isset($xoopsUser) && \is_object($xoopsUser)) {
-            if ($xoopsUser->isAdmin($xoopsModule->mid())) {
-                return true;
-            }
-            $currentuid = $xoopsUser->uid();
-        }
-        $grouppermHandler = \xoops_getHandler('groupperm');
-        $mid = $xoopsModule->mid();
-        $memberHandler = \xoops_getHandler('member');
-        if (0 == $currentuid) {
-            $my_group_ids = [\XOOPS_GROUP_ANONYMOUS];
-        } else {
-            $my_group_ids = $memberHandler->getGroupsByUser($currentuid);;
-        }
-        if ($grouppermHandler->checkRight('wgsimpleacc_ac', Constants::PERM_TRANSACTIONS_SUBMIT, $my_group_ids, $mid)) {
-            return true;
-        }
-        return false;
+
+        return $this->getPermSubmit(Constants::PERM_TRANSACTIONS_SUBMIT);
     }
 
     /**
@@ -252,7 +213,20 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
         if ($this->getPermTransactionsSubmit() && $currentuid == $traSubmitter && Constants::STATUS_SUBMITTED == $traStatus) {
             return true;
         }
+
         return false;
+    }
+
+    /**
+     * @public function getPermTransactionsView
+     * returns right for view Transactions
+     *
+     * @param null
+     * @return bool
+     */
+    public function getPermTransactionsView()
+    {
+        return $this->getPermView(Constants::PERM_TRANSACTIONS_VIEW);
     }
 
 	/**
@@ -264,30 +238,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      */
     public function getPermAllocationsSubmit()
     {
-        global $xoopsUser, $xoopsModule;
-
-        if ($this->getPermGlobalSubmit()) {
-            return true;
-        }
-        $currentuid = 0;
-        if (isset($xoopsUser) && \is_object($xoopsUser)) {
-            if ($xoopsUser->isAdmin($xoopsModule->mid())) {
-                return true;
-            }
-            $currentuid = $xoopsUser->uid();
-        }
-        $grouppermHandler = \xoops_getHandler('groupperm');
-        $mid = $xoopsModule->mid();
-        $memberHandler = \xoops_getHandler('member');
-        if (0 == $currentuid) {
-            $my_group_ids = [\XOOPS_GROUP_ANONYMOUS];
-        } else {
-            $my_group_ids = $memberHandler->getGroupsByUser($currentuid);;
-        }
-        if ($grouppermHandler->checkRight('wgsimpleacc_ac', Constants::PERM_ALLOCATIONS_SUBMIT, $my_group_ids, $mid)) {
-            return true;
-        }
-        return false;
+        return $this->getPermSubmit(Constants::PERM_ALLOCATIONS_SUBMIT);
     }
 
     /**
@@ -315,7 +266,20 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
         if ($this->getPermAllocationsSubmit() && $currentuid == $allSubmitter) {
             return true;
         }
+
         return false;
+    }
+
+    /**
+     * @public function getPermAllocationsView
+     * returns right for view Allocations
+     *
+     * @param null
+     * @return bool
+     */
+    public function getPermAllocationsView()
+    {
+        return $this->getPermView(Constants::PERM_ALLOCATIONS_VIEW);
     }
 
     /**
@@ -327,30 +291,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      */
     public function getPermAccountsSubmit()
     {
-        global $xoopsUser, $xoopsModule;
-
-        if ($this->getPermGlobalSubmit()) {
-            return true;
-        }
-        $currentuid = 0;
-        if (isset($xoopsUser) && \is_object($xoopsUser)) {
-            if ($xoopsUser->isAdmin($xoopsModule->mid())) {
-                return true;
-            }
-            $currentuid = $xoopsUser->uid();
-        }
-        $grouppermHandler = \xoops_getHandler('groupperm');
-        $mid = $xoopsModule->mid();
-        $memberHandler = \xoops_getHandler('member');
-        if (0 == $currentuid) {
-            $my_group_ids = [\XOOPS_GROUP_ANONYMOUS];
-        } else {
-            $my_group_ids = $memberHandler->getGroupsByUser($currentuid);;
-        }
-        if ($grouppermHandler->checkRight('wgsimpleacc_ac', Constants::PERM_ACCOUNTS_SUBMIT, $my_group_ids, $mid)) {
-            return true;
-        }
-        return false;
+        return $this->getPermSubmit(Constants::PERM_ACCOUNTS_SUBMIT);
     }
 
     /**
@@ -378,7 +319,20 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
         if ($this->getPermAccountsSubmit() && $currentuid == $accSubmitter) {
             return true;
         }
+
         return false;
+    }
+
+    /**
+     * @public function getPermAccountsView
+     * returns right for view accounts
+     *
+     * @param null
+     * @return bool
+     */
+    public function getPermAccountsView()
+    {
+        return $this->getPermView(Constants::PERM_ACCOUNTS_VIEW);
     }
 
     /**
@@ -390,30 +344,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      */
     public function getPermAssetsSubmit()
     {
-        global $xoopsUser, $xoopsModule;
-
-        if ($this->getPermGlobalSubmit()) {
-            return true;
-        }
-        $currentuid = 0;
-        if (isset($xoopsUser) && \is_object($xoopsUser)) {
-            if ($xoopsUser->isAdmin($xoopsModule->mid())) {
-                return true;
-            }
-            $currentuid = $xoopsUser->uid();
-        }
-        $grouppermHandler = \xoops_getHandler('groupperm');
-        $mid = $xoopsModule->mid();
-        $memberHandler = \xoops_getHandler('member');
-        if (0 == $currentuid) {
-            $my_group_ids = [\XOOPS_GROUP_ANONYMOUS];
-        } else {
-            $my_group_ids = $memberHandler->getGroupsByUser($currentuid);;
-        }
-        if ($grouppermHandler->checkRight('wgsimpleacc_ac', Constants::PERM_ASSETS_SUBMIT, $my_group_ids, $mid)) {
-            return true;
-        }
-        return false;
+        return $this->getPermSubmit(Constants::PERM_ASSETS_SUBMIT);
     }
 
     /**
@@ -441,7 +372,20 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
         if ($this->getPermAssetsSubmit() && $currentuid == $asSubmitter) {
             return true;
         }
+
         return false;
+    }
+
+    /**
+     * @public function getPermAssetsView
+     * returns right for view assets
+     *
+     * @param null
+     * @return bool
+     */
+    public function getPermAssetsView()
+    {
+        return $this->getPermView(Constants::PERM_ASSETS_VIEW);
     }
 
     /**
@@ -469,6 +413,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
         if ($this->getPermTransactionsSubmit() && $currentuid == $asSubmitter) {
             return true;
         }
+
         return false;
     }
 
@@ -481,30 +426,19 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      */
     public function getPermBalancesCreate()
     {
-        global $xoopsUser, $xoopsModule;
+        return $this->getPermSubmit(Constants::PERM_BALANCES_CREATE);
+    }
 
-        if ($this->getPermGlobalSubmit()) {
-            return true;
-        }
-        $currentuid = 0;
-        if (isset($xoopsUser) && \is_object($xoopsUser)) {
-            if ($xoopsUser->isAdmin($xoopsModule->mid())) {
-                return true;
-            }
-            $currentuid = $xoopsUser->uid();
-        }
-        $grouppermHandler = \xoops_getHandler('groupperm');
-        $mid = $xoopsModule->mid();
-        $memberHandler = \xoops_getHandler('member');
-        if (0 == $currentuid) {
-            $my_group_ids = [\XOOPS_GROUP_ANONYMOUS];
-        } else {
-            $my_group_ids = $memberHandler->getGroupsByUser($currentuid);;
-        }
-        if ($grouppermHandler->checkRight('wgsimpleacc_ac', Constants::PERM_BALANCES_CREATE, $my_group_ids, $mid)) {
-            return true;
-        }
-        return false;
+    /**
+     * @public function getPermBalancesView
+     * returns right for view balances
+     *
+     * @param null
+     * @return bool
+     */
+    public function getPermBalancesView()
+    {
+        return $this->getPermView(Constants::PERM_BALANCES_VIEW);
     }
 
     /**
@@ -516,30 +450,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      */
     public function getPermTratemplatesSubmit()
     {
-        global $xoopsUser, $xoopsModule;
-
-        if ($this->getPermGlobalSubmit()) {
-            return true;
-        }
-        $currentuid = 0;
-        if (isset($xoopsUser) && \is_object($xoopsUser)) {
-            if ($xoopsUser->isAdmin($xoopsModule->mid())) {
-                return true;
-            }
-            $currentuid = $xoopsUser->uid();
-        }
-        $grouppermHandler = \xoops_getHandler('groupperm');
-        $mid = $xoopsModule->mid();
-        $memberHandler = \xoops_getHandler('member');
-        if (0 == $currentuid) {
-            $my_group_ids = [\XOOPS_GROUP_ANONYMOUS];
-        } else {
-            $my_group_ids = $memberHandler->getGroupsByUser($currentuid);;
-        }
-        if ($grouppermHandler->checkRight('wgsimpleacc_ac', Constants::PERM_TRATEMPLATES_SUBMIT, $my_group_ids, $mid)) {
-            return true;
-        }
-        return false;
+        return $this->getPermSubmit(Constants::PERM_TRATEMPLATES_SUBMIT);
     }
 
     /**
@@ -567,6 +478,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
         if ($this->getPermTratemplatesSubmit() && $currentuid == $tplSubmitter) {
             return true;
         }
+
         return false;
     }
 
@@ -579,27 +491,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      */
     public function getPermTratemplatesView()
     {
-        global $xoopsUser, $xoopsModule;
-
-        $currentuid = 0;
-        if (isset($xoopsUser) && \is_object($xoopsUser)) {
-            if ($xoopsUser->isAdmin($xoopsModule->mid())) {
-                return true;
-            }
-            $currentuid = $xoopsUser->uid();
-        }
-        $grouppermHandler = \xoops_getHandler('groupperm');
-        $mid = $xoopsModule->mid();
-        $memberHandler = \xoops_getHandler('member');
-        if (0 == $currentuid) {
-            $my_group_ids = [\XOOPS_GROUP_ANONYMOUS];
-        } else {
-            $my_group_ids = $memberHandler->getGroupsByUser($currentuid);;
-        }
-        if ($grouppermHandler->checkRight('wgsimpleacc_ac', Constants::PERM_TRATEMPLATES_VIEW, $my_group_ids, $mid)) {
-            return true;
-        }
-        return false;
+        return $this->getPermView(Constants::PERM_TRATEMPLATES_VIEW);
     }
     /**
      * @public function getPermOuttemplatesSubmit
@@ -610,30 +502,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      */
     public function getPermOuttemplatesSubmit()
     {
-        global $xoopsUser, $xoopsModule;
-
-        if ($this->getPermGlobalSubmit()) {
-            return true;
-        }
-        $currentuid = 0;
-        if (isset($xoopsUser) && \is_object($xoopsUser)) {
-            if ($xoopsUser->isAdmin($xoopsModule->mid())) {
-                return true;
-            }
-            $currentuid = $xoopsUser->uid();
-        }
-        $grouppermHandler = \xoops_getHandler('groupperm');
-        $mid = $xoopsModule->mid();
-        $memberHandler = \xoops_getHandler('member');
-        if (0 == $currentuid) {
-            $my_group_ids = [\XOOPS_GROUP_ANONYMOUS];
-        } else {
-            $my_group_ids = $memberHandler->getGroupsByUser($currentuid);;
-        }
-        if ($grouppermHandler->checkRight('wgsimpleacc_ac', Constants::PERM_OUTTEMPLATES_SUBMIT, $my_group_ids, $mid)) {
-            return true;
-        }
-        return false;
+        return $this->getPermSubmit(Constants::PERM_OUTTEMPLATES_SUBMIT);
     }
 
     /**
@@ -661,6 +530,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
         if ($this->getPermOuttemplatesSubmit() && $currentuid == $tplSubmitter) {
             return true;
         }
+
         return false;
     }
 
@@ -673,7 +543,59 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      */
     public function getPermOuttemplatesView()
     {
+        return $this->getPermView(Constants::PERM_OUTTEMPLATES_VIEW);
+    }
+
+    /**
+     * @private function getPermSubmit
+     * returns right to submit for given perm
+     *
+     * @param $constantPerm
+     * @return bool
+     */
+    private function getPermSubmit($constantPerm)
+    {
         global $xoopsUser, $xoopsModule;
+
+        if ($this->getPermGlobalSubmit()) {
+            return true;
+        }
+        $currentuid = 0;
+        if (isset($xoopsUser) && \is_object($xoopsUser)) {
+            if ($xoopsUser->isAdmin($xoopsModule->mid())) {
+                return true;
+            }
+            $currentuid = $xoopsUser->uid();
+        }
+        $grouppermHandler = \xoops_getHandler('groupperm');
+        $mid = $xoopsModule->mid();
+        $memberHandler = \xoops_getHandler('member');
+        if (0 == $currentuid) {
+            $my_group_ids = [\XOOPS_GROUP_ANONYMOUS];
+        } else {
+            $my_group_ids = $memberHandler->getGroupsByUser($currentuid);;
+        }
+        if ($grouppermHandler->checkRight('wgsimpleacc_ac', $constantPerm, $my_group_ids, $mid)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @private function getPermView
+     * returns right for view of given perm
+     *
+     * @param $constantPerm
+     * @return bool
+     */
+    private function getPermView($constantPerm)
+    {
+        global $xoopsUser, $xoopsModule;
+
+        if ($this->getPermGlobalView()) {
+            return true;
+        }
 
         $currentuid = 0;
         if (isset($xoopsUser) && \is_object($xoopsUser)) {
@@ -690,7 +612,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
         } else {
             $my_group_ids = $memberHandler->getGroupsByUser($currentuid);;
         }
-        if ($grouppermHandler->checkRight('wgsimpleacc_ac', Constants::PERM_OUTTEMPLATES_VIEW, $my_group_ids, $mid)) {
+        if ($grouppermHandler->checkRight('wgsimpleacc_ac', $constantPerm, $my_group_ids, $mid)) {
             return true;
         }
         return false;

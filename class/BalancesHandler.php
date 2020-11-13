@@ -20,7 +20,7 @@ namespace XoopsModules\Wgsimpleacc;
  * @package        wgsimpleacc
  * @since          1.0
  * @min_xoops      2.5.10
- * @author         XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
+ * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
 use XoopsModules\Wgsimpleacc;
@@ -126,6 +126,7 @@ class BalancesHandler extends \XoopsPersistableObjectHandler
      * Get current value of all assets
      * @return array
      */
+    /*
     public function getCurrentAssetsValues()
     {
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
@@ -148,7 +149,7 @@ class BalancesHandler extends \XoopsPersistableObjectHandler
             $crBalances->setLimit(1);
             $balancesAll = $balancesHandler->getAll($crBalances);
             foreach (\array_keys($balancesAll) as $b) {
-                $balAmount = $balancesAll[$b]->getVar('bal_amount');
+                $balAmount = $balancesAll[$b]->getVar('bal_amountend');
                 $balDate = $balancesAll[$b]->getVar('bal_datecreate');
             }
             unset($crBalances);
@@ -158,54 +159,5 @@ class BalancesHandler extends \XoopsPersistableObjectHandler
 
         return $ret;
     }
-
-    /**
-     * @public function getForm
-     * @param bool $action
-     * @return \XoopsThemeForm
-     */
-    public static function getFormBalancesSelect($action = false)
-    {
-        $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
-        if (!$action) {
-            $action = $_SERVER['REQUEST_URI'];
-        }
-        // Get Theme Form
-        \xoops_load('XoopsFormLoader');
-        $form = new \XoopsThemeForm(\_MA_WGSIMPLEACC_BALANCES_OUT_SELECT, 'formBalSelect', $action, 'post', true);
-        $form->setExtra('enctype="multipart/form-data"');
-        $balancesHandler = $helper->getHandler('Balances');
-        $crBalances = new \CriteriaCompo();
-        $crBalances->setSort('bal_id');
-        $crBalances->setOrder('DESC');
-        $crBalances->setStart(0);
-        $crBalances->setLimit(50);
-        $balancesAll = $balancesHandler->getAll($crBalances);
-        $balSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_BALANCES_OUT_SELECT, 'bal_ids', '', 10, true);
-        foreach (\array_keys($balancesAll) as $i) {
-            $balances[$i] = $balancesAll[$i]->getValuesBalances();
-            $balSelect->addOption($balances[$i]['bal_id'], $balances[$i]['from'] . ' - ' . $balances[$i]['to'] . ' ' .$balances[$i]['asset']);
-        }
-        $form->addElement($balSelect);
-
-        $balLevelDetails = new \XoopsFormElementTray(\_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL,'<br>');
-        $levelAllocations = new \XoopsFormSelect(\_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ALLOC, 'level_alloc', Constants::BALANCES_OUT_LEVEL_ALLOC0);
-        $levelAllocations->addOption(Constants::BALANCES_OUT_LEVEL_ALLOC0, \_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ALLOC0);
-        $levelAllocations->addOption(Constants::BALANCES_OUT_LEVEL_ALLOC1, \_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ALLOC1);
-        $levelAllocations->addOption(Constants::BALANCES_OUT_LEVEL_ALLOC2, \_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ALLOC2);
-        $balLevelDetails->addElement($levelAllocations);
-        $levelAccounts = new \XoopsFormSelect(\_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ACC, 'level_alloc', Constants::BALANCES_OUT_LEVEL_ALLOC0);
-        $levelAccounts->addOption(Constants::BALANCES_OUT_LEVEL_ACC0, \_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ACC0);
-        $levelAccounts->addOption(Constants::BALANCES_OUT_LEVEL_ACC1, \_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ACC1);
-        $levelAccounts->addOption(Constants::BALANCES_OUT_LEVEL_ACC2, \_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ACC2);
-        $balLevelDetails->addElement($levelAccounts);
-
-        $form->addElement($balLevelDetails);
-
-        $form->addElement(new \XoopsFormHidden('op', 'bal_output'));
-        $form->addElement(new \XoopsFormButtonTray('', \_MA_WGSIMPLEACC_BALANCE_CREATE, 'submit', '', false));
-
-
-        return $form;
-    }
+    */
 }

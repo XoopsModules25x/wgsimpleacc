@@ -17,7 +17,7 @@
  * @package        wgsimpleacc
  * @since          1.0
  * @min_xoops      2.5.10
- * @author         XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
+ * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
 require_once __DIR__ . '/admin.php';
@@ -222,7 +222,9 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_BALANCE_TO', 'To');
 \define('_MA_WGSIMPLEACC_BALANCE_ASID', 'Asset');
 \define('_MA_WGSIMPLEACC_BALANCE_CURID', 'Currency');
-\define('_MA_WGSIMPLEACC_BALANCE_AMOUNT', 'Amount');
+\define('_MA_WGSIMPLEACC_BALANCE_AMOUNTSTART', 'Amount Start');
+\define('_MA_WGSIMPLEACC_BALANCE_AMOUNTEND', 'Amount End');
+\define('_MA_WGSIMPLEACC_BALANCE_DIFFERENCE', 'Difference');
 \define('_MA_WGSIMPLEACC_BALANCE_STATUS', 'Status');
 \define('_MA_WGSIMPLEACC_BALANCE_CALC_PERIOD', 'Calculated values for period from %f to %t');
 \define('_MA_WGSIMPLEACC_BALANCE_DATE', 'Last date of asset');
@@ -231,16 +233,18 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_BALANCE_DATEUSED', "The 'date from' or 'date to' is within the period of another balance");
 \define('_MA_WGSIMPLEACC_BALANCE_ERRORS', 'Balances were created, but errors occured');
 // Output balances
+\define('_MA_WGSIMPLEACC_BALANCES_OUT_TOTAL', 'Total');
+\define('_MA_WGSIMPLEACC_BALANCES_OUT_SUMS', 'Total');
 \define('_MA_WGSIMPLEACC_BALANCES_OUT_SELECT', 'Select balances');
 \define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL', 'Select level of details');
+\define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_SKIP', 'No output');
 \define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ALLOC', 'Level of allocations');
-\define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ALLOC0', 'Aggregate all allocations');
 \define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ALLOC1', 'Aggregate allocations on first level');
 \define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ALLOC2', 'Output detailed allocations');
 \define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ACC', 'Level of account');
-\define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ACC0', 'Aggregate all account');
-\define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ACC1', 'Aggregate accounts on first level');
-\define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ACC2', 'Output detailed accounts');
+\define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ACC1', 'Aggregate all account');
+\define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ACC2', 'Aggregate accounts on first level');
+\define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ACC3', 'Output detailed accounts');
 // Templates general
 \define('_MA_WGSIMPLEACC_TEMPLATES', 'Templates');
 \define('_MA_WGSIMPLEACC_TEMPLATE_NONE', 'None');

@@ -20,7 +20,7 @@ namespace XoopsModules\Wgsimpleacc;
  * @package        wgsimpleacc
  * @since          1.0
  * @min_xoops      2.5.10
- * @author         XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
+ * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
 use XoopsModules\Wgsimpleacc;
@@ -272,4 +272,59 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
 
         return $childsAll;
     }
+
+    /**
+     * Get value of all accounts for a period
+     * @param array $bal_ids
+     * @return array
+     */
+    /*
+    public function getAccountsValues($bal_ids)
+    {
+        $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+        $transactionsHandler = $helper->getHandler('Transactions');
+        $accountsHandler = $helper->getHandler('Accounts');
+        $currenciesHandler = $helper->getHandler('Currencies');
+
+        $ret = [];
+        $balAmountStart = 0;
+        $sumAmountin = 0;
+        $sumAmountout = 0;
+        $crBalIds = implode(',', $bal_ids);
+        $balCurid = $currenciesHandler->getPrimaryCurrency() > 0 ? $currenciesHandler->getPrimaryCurrency() : 0;
+
+        $accountsAll = $accountsHandler->getAll();
+        foreach (\array_keys($accountsAll) as $i) {
+            $accId = $accountsAll[$i]->getVar('acc_id');
+            $accName = $accountsAll[$i]->getVar('acc_name');
+            $crTransactions = new \CriteriaCompo();
+            $crTransactions->add(new \Criteria('tra_accid', $accId));
+            $crTransactions->add(new \Criteria('tra_balid', "($crBalIds)", 'IN'));
+            $transactionsCount = $transactionsHandler->getCount($crTransactions);
+            $transactionsAll   = $transactionsHandler->getAll($crTransactions);
+            if ($transactionsCount > 0) {
+                foreach (\array_keys($transactionsAll) as $t) {
+                    $sumAmountin += $transactionsAll[$t]->getVar('tra_amountin');
+                    $sumAmountout += $transactionsAll[$t]->getVar('tra_amountout');
+                    $balCurid = $transactionsAll[$t]->getVar('tra_curid'); //TODO: handle multiple currencies
+                }
+            }
+            unset($crTransactions);
+            unset($crBalances);
+            $balAmountEnd = $balAmountStart - $sumAmountout + $sumAmountin;
+            $ret[] = [
+                'id' => $accId,
+                'name' => $accName,
+                'amount_start_val' => $balAmountStart,
+                'amount_start' => Utility::FloatToString($balAmountStart),
+                'amount_end_val' => $balAmountEnd,
+                'amount_end' => Utility::FloatToString($balAmountEnd),
+                'diffence' => Utility::FloatToString($balAmountStart + $balAmountEnd),
+                'curid' => $balCurid,
+            ];
+        }
+
+        return $ret;
+    }
+    */
 }

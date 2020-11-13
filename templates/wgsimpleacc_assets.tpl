@@ -17,7 +17,6 @@
                 <{include file='db:wgsimpleacc_assets_item.tpl' }>
                 <{/foreach}>
             </tbody>
-            <tfoot><tr><td>&nbsp;</td></tr></tfoot>
         </table>
     </div>
 <{/if}>

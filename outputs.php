@@ -17,7 +17,7 @@
  * @package        wgsimpleacc
  * @since          1.0
  * @min_xoops      2.5.10
- * @author         XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
+ * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
 use Xmf\Request;
@@ -63,26 +63,63 @@ switch ($op) {
     default:
         break;
     case 'balances':
-        $balancesHandler = $helper->getHandler('Balances');
-        $formFilter = $balancesHandler::getFormBalancesSelect();
+        $formFilter = $outputsHandler::getFormBalancesSelect();
         $GLOBALS['xoopsTpl']->assign('formFilter', $formFilter->render());
         break;
     case 'bal_output':
         $GLOBALS['xoopsTpl']->assign('displayBalOutput', 1);
-        $bal_ids = Request::getArray('bal_ids');
-        foreach ($bal_ids as $bal_id) {
-            echo '<br>'.$bal_id;
+        $balIds       = Request::getArray('bal_ids');
+        $levelAlloc   = Request::getInt('level_alloc');
+        $levelAccount = Request::getInt('level_account');
+
+        $balances = $outputsHandler->getListBalances($balIds);
+        $sumTotal = 0;
+        $sumAmountin = 0;
+        $sumAmountout = 0;
+        foreach ($balances as $balance) {
+            $sumTotal += ($balance['bal_amountend'] - $balance['bal_amountstart']);
+            $sumAmountin += $balance['bal_amountstart'];
+            $sumAmountout += $balance['bal_amountend'];
         }
-        $crBalIds = implode(',', $bal_ids);
-        $assets = [];
-        $crBalances = new \CriteriaCompo();
-        $crBalances->add(new \Criteria('bal_id', "($crBalIds)", 'IN'));
-        $balancesAll = $balancesHandler->getAll($crBalances);
-        foreach (\array_keys($balancesAll) as $i) {
-            $balances[$i] = $balancesAll[$i]->getValuesBalances();
-            $assets[$balances[$i]['bal_asid']] = $balances[$i]['asset'];
+        $GLOBALS['xoopsTpl']->assign('balancesTotal', $sumTotal);
+        $GLOBALS['xoopsTpl']->assign('balancesAmountIn', $sumAmountin);
+        $GLOBALS['xoopsTpl']->assign('balancesAmountOut', $sumAmountout);
+        $GLOBALS['xoopsTpl']->assign('balancesCount', \count($balances));
+        $GLOBALS['xoopsTpl']->assign('balances', $balances);
+
+        if ($levelAccount > 0) {
+            $accounts = $outputsHandler->getListAccountsValues($balIds);
+            $sumTotal = 0;
+            $sumAmountin = 0;
+            $sumAmountout = 0;
+            foreach ($accounts as $account) {
+                $sumTotal += $account['total_val'];
+                $sumAmountin += $account['amountin_val'];
+                $sumAmountout += $account['amountout_val'];
+            }
+            $GLOBALS['xoopsTpl']->assign('accountsTotal', $sumTotal);
+            $GLOBALS['xoopsTpl']->assign('accountsAmountIn', $sumAmountin);
+            $GLOBALS['xoopsTpl']->assign('accountsAmountOut', $sumAmountout);
+            $GLOBALS['xoopsTpl']->assign('accountsCount', \count($accounts));
+            $GLOBALS['xoopsTpl']->assign('accounts', $accounts);
         }
-        var_dump($assets);
+
+        if ($levelAlloc > 0) {
+            $allocations = $outputsHandler->getListAllocationsValues($balIds);
+            $sumTotal = 0;
+            $sumAmountin = 0;
+            $sumAmountout = 0;
+            foreach ($allocations as $allocation) {
+                $sumTotal += $allocation['total_val'];
+                $sumAmountin += $allocation['amountin_val'];
+                $sumAmountout += $allocation['amountout_val'];
+            }
+            $GLOBALS['xoopsTpl']->assign('allocationsTotal', $sumTotal);
+            $GLOBALS['xoopsTpl']->assign('allocationsAmountIn', $sumAmountin);
+            $GLOBALS['xoopsTpl']->assign('allocationsAmountOut', $sumAmountout);
+            $GLOBALS['xoopsTpl']->assign('allocationsCount', \count($allocations));
+            $GLOBALS['xoopsTpl']->assign('allocations', $allocations);
+        }
         break;
     case 'transactions';
         $filterYear = Request::getInt('filterYear', 0);

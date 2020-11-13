@@ -20,7 +20,7 @@ namespace XoopsModules\Wgsimpleacc;
  * @package        wgsimpleacc
  * @since          1.0
  * @min_xoops      2.5.10
- * @author         XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
+ * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
 use XoopsModules\Wgsimpleacc;
@@ -134,7 +134,6 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
         $assetsHandler = $helper->getHandler('Assets');
         $balancesHandler = $helper->getHandler('Balances');
 
-        $colors = Utility::getColors();
         $ret = [];
 
         $sql = 'SELECT `tra_asid`, Sum(`tra_amountin`) AS Sum_tra_amountin, Sum(`tra_amountout`) AS Sum_tra_amountout ';
@@ -180,7 +179,7 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
             $crBalances->setLimit(1);
             $balancesAll = $balancesHandler->getAll($crBalances);
             foreach (\array_keys($balancesAll) as $b) {
-                $balAmount = $balancesAll[$b]->getVar('bal_amount');
+                $balAmount = $balancesAll[$b]->getVar('bal_amountend');
                 $balDate = $balancesAll[$b]->getVar('bal_datecreate');
             }
             unset($crBalances);
@@ -219,13 +218,13 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
             $crBalances->setOrder('DESC');
             $crBalances->setStart(0);
             $crBalances->setLimit(1);
-            $balAmountStart = 0;
-            $sumAmountin    = 0;
-            $sumAmountout   = 0;
-            $balDate        = 0;
+            $balAmountStart = (float)0;
+            $sumAmountin    = (float)0;
+            $sumAmountout   = (float)0;
+            $balDate        = (float)0;
             $balancesAll = $balancesHandler->getAll($crBalances);
             foreach (\array_keys($balancesAll) as $b) {
-                $balAmountStart = $balancesAll[$b]->getVar('bal_amount');
+                $balAmountStart = $balancesAll[$b]->getVar('bal_amountend');
                 $balDate = \formatTimestamp($balancesAll[$b]->getVar('bal_to'), 's');
             }
             $crTransactions = new \CriteriaCompo();
@@ -248,7 +247,7 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
                 'id' => $asId,
                 'name' => $asName,
                 'date' => $balDate,
-                //'amount_start_val' => $balAmountStart,
+                'amount_start_val' => $balAmountStart,
                 'amount_start' => Utility::FloatToString($balAmountStart),
                 'amount_end_val' => $balAmountEnd,
                 'amount_end' => Utility::FloatToString($balAmountEnd),
@@ -257,8 +256,61 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
         }
 
         return $ret;
-
     }
+
+    /**
+     * Get value of all assets for a balance
+     * @param $balId
+     * @param $asId
+     * @return array
+     */
+    /*
+    public function getAssetsValuesByBalance($balId, $asId)
+    {
+        $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+        $transactionsHandler = $helper->getHandler('Transactions');
+        $assetsHandler = $helper->getHandler('Assets');
+        $balancesHandler = $helper->getHandler('Balances');
+        $currenciesHandler = $helper->getHandler('Currencies');
+
+        $ret = [];
+        $balCurid = $currenciesHandler->getPrimaryCurrency() > 0 ? $currenciesHandler->getPrimaryCurrency() : 0;
+
+        $assetsObj = $assetsHandler->get($asId);
+        $asName = $assetsObj->getVar('as_name');
+        $balAmountStart = 0;
+        $sumAmountin    = 0;
+        $sumAmountout   = 0;
+        $balDate        = 0;
+        $crTransactions = new \CriteriaCompo();
+        $crTransactions->add(new \Criteria('tra_asid', $asId));
+        $crTransactions->add(new \Criteria('tra_balid', $balId));
+        $transactionsCount = $transactionsHandler->getCount($crTransactions);
+        $transactionsAll   = $transactionsHandler->getAll($crTransactions);
+        if ($transactionsCount > 0) {
+            foreach (\array_keys($transactionsAll) as $t) {
+                $sumAmountin += $transactionsAll[$t]->getVar('tra_amountin');
+                $sumAmountout += $transactionsAll[$t]->getVar('tra_amountout');
+                $balCurid = $transactionsAll[$t]->getVar('tra_curid'); //TODO: handle multiple currencies
+            }
+        }
+        unset($crTransactions);
+        $balAmountEnd = $balAmountStart - $sumAmountout + $sumAmountin;
+        $ret = [
+            'id' => $asId,
+            'name' => $asName,
+            'date' => $balDate,
+            'from' => $balDate,
+            'amount_start_val' => $balAmountStart,
+            'amount_start' => Utility::FloatToString($balAmountStart),
+            'amount_end_val' => $balAmountEnd,
+            'amount_end' => Utility::FloatToString($balAmountEnd),
+            'curid' => $balCurid,
+        ];
+
+        return $ret;
+    }
+    */
 
     /**
      * Set given asset as primary
@@ -307,6 +359,5 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
         }
 
         return $asId;
-
     }
 }

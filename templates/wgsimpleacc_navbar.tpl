@@ -23,72 +23,80 @@
                         <a href="index.php" class="active"><i class="fa fa-dashboard fa-fw fa-lg"></i> Dashboard</a>
                     </li>
                     <!-- transactions -->
-                    <li>
-                        <{if $permTransactionsSubmit}>
-                        <a href="#"><i class="fa fa-files-o fa-fw fa-lg"></i></i> <{$smarty.const._MA_WGSIMPLEACC_TRANSACTIONS}><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="transactions.php?op=list"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTIONS_LIST}></a>
-                            </li>
-                            <li>
-                                <a href="transactions.php?op=new&tra_type=3"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_SUBMIT_INCOME}></a>
-                            </li>
-                            <li>
-                                <a href="transactions.php?op=new&tra_type=2"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_SUBMIT_EXPENSE}></a>
-                            </li>
-                        </ul>
-                        <{else}>
-                        <a href="transactions.php"><i class="fa fa-files-o fa-fw"></i> <{$smarty.const._MA_WGSIMPLEACC_TRANSACTIONS_LIST}></a>
-                        <{/if}>
-                    </li>
+                    <{if $permTransactionsView}>
+                        <li>
+                            <{if $permTransactionsSubmit}>
+                            <a href="#"><i class="fa fa-files-o fa-fw fa-lg"></i></i> <{$smarty.const._MA_WGSIMPLEACC_TRANSACTIONS}><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="transactions.php?op=list"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTIONS_LIST}></a>
+                                </li>
+                                <li>
+                                    <a href="transactions.php?op=new&tra_type=3"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_SUBMIT_INCOME}></a>
+                                </li>
+                                <li>
+                                    <a href="transactions.php?op=new&tra_type=2"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_SUBMIT_EXPENSE}></a>
+                                </li>
+                            </ul>
+                            <{else}>
+                            <a href="transactions.php"><i class="fa fa-files-o fa-fw"></i> <{$smarty.const._MA_WGSIMPLEACC_TRANSACTIONS_LIST}></a>
+                            <{/if}>
+                        </li>
+                    <{/if}>
                     <!-- Allocations -->
-                    <li>
-                        <{if $permAllocationsSubmit}>
-                        <a href="#"><i class="fa fa-sitemap fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_ALLOCATIONS}><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="allocations.php?op=list"><{$smarty.const._MA_WGSIMPLEACC_ALLOCATIONS_LIST}></a>
-                            </li>
-                            <li>
-                                <a href="allocations.php?op=new"><{$smarty.const._MA_WGSIMPLEACC_ALLOCATION_SUBMIT}></a>
-                            </li>
-                        </ul>
-                        <{else}>
-                        <a href="allocations.php?op=list"><i class="fa fa-sitemap fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_ALLOCATIONS_LIST}></a>
-                        <{/if}>
-                    </li>
+                    <{if $permAllocationsView}>
+                        <li>
+                            <{if $permAllocationsSubmit}>
+                            <a href="#"><i class="fa fa-sitemap fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_ALLOCATIONS}><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="allocations.php?op=list"><{$smarty.const._MA_WGSIMPLEACC_ALLOCATIONS_LIST}></a>
+                                </li>
+                                <li>
+                                    <a href="allocations.php?op=new"><{$smarty.const._MA_WGSIMPLEACC_ALLOCATION_SUBMIT}></a>
+                                </li>
+                            </ul>
+                            <{else}>
+                            <a href="allocations.php?op=list"><i class="fa fa-sitemap fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_ALLOCATIONS_LIST}></a>
+                            <{/if}>
+                        </li>
+                    <{/if}>
                     <!-- Accounts -->
-                    <li>
-                        <{if $permAccountsSubmit}>
-                        <a href="#"><i class="fa fa-table fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_ACCOUNTS}><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="accounts.php?op=list"><{$smarty.const._MA_WGSIMPLEACC_ACCOUNTS_LIST}></a>
-                            </li>
-                            <li>
-                                <a href="accounts.php?op=new"><{$smarty.const._MA_WGSIMPLEACC_ACCOUNT_SUBMIT}></a>
-                            </li>
-                        </ul>
-                        <{else}>
-                        <a href="accounts.php?op=list"><i class="fa fa-table fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_ACCOUNTS_LIST}></a>
-                        <{/if}>
-                    </li>
+                    <{if $permAccountsView}>
+                        <li>
+                            <{if $permAccountsSubmit}>
+                            <a href="#"><i class="fa fa-table fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_ACCOUNTS}><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="accounts.php?op=list"><{$smarty.const._MA_WGSIMPLEACC_ACCOUNTS_LIST}></a>
+                                </li>
+                                <li>
+                                    <a href="accounts.php?op=new"><{$smarty.const._MA_WGSIMPLEACC_ACCOUNT_SUBMIT}></a>
+                                </li>
+                            </ul>
+                            <{else}>
+                            <a href="accounts.php?op=list"><i class="fa fa-table fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_ACCOUNTS_LIST}></a>
+                            <{/if}>
+                        </li>
+                    <{/if}>
                     <!-- Assets -->
-                    <li>
-                        <{if $permAssetsSubmit}>
-                        <a href="#"><i class="fa fa-credit-card fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_ASSETS}><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="assets.php?op=list"><{$smarty.const._MA_WGSIMPLEACC_ASSETS_LIST}></a>
-                            </li>
-                            <li>
-                                <a href="assets.php?op=new"><{$smarty.const._MA_WGSIMPLEACC_ASSET_SUBMIT}></a>
-                            </li>
-                        </ul>
-                        <{else}>
-                        <a href="assets.php?op=list"><i class="fa fa-credit-card fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_ASSETS_LIST}></a>
-                        <{/if}>
-                    </li>
+                    <{if $permAssetsView}>
+                        <li>
+                            <{if $permAssetsSubmit}>
+                            <a href="#"><i class="fa fa-credit-card fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_ASSETS}><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="assets.php?op=list"><{$smarty.const._MA_WGSIMPLEACC_ASSETS_LIST}></a>
+                                </li>
+                                <li>
+                                    <a href="assets.php?op=new"><{$smarty.const._MA_WGSIMPLEACC_ASSET_SUBMIT}></a>
+                                </li>
+                            </ul>
+                            <{else}>
+                            <a href="assets.php?op=list"><i class="fa fa-credit-card fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_ASSETS_LIST}></a>
+                            <{/if}>
+                        </li>
+                    <{/if}>
                     <!-- Templates -->
                     <{if $permTratemplatesView || $permOuttemplatesView}>
                         <li>
@@ -131,49 +139,63 @@
                             </ul>
                         </li>
                     <{/if}>
-                    <li>
-                        <{if $permBalancesCreate}>
-                        <a href="#"><i class="fa fa-tasks fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_BALANCES}><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="balances.php?op=list"><{$smarty.const._MA_WGSIMPLEACC_BALANCES_LIST}></a>
-                            </li>
-                            <li>
-                                <a href="balances.php?op=new"><{$smarty.const._MA_WGSIMPLEACC_BALANCE_CREATE}></a>
-                            </li>
-                        </ul>
-                        <{else}>
-                        <a href="balances.php?op=list"><i class="fa fa-tasks fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_BALANCES_LIST}></a>
-                        <{/if}>
-                    </li>
+                    <!-- Balances -->
+                    <{if $permBalancesView}>
+                        <li>
+                            <{if $permBalancesCreate}>
+                            <a href="#"><i class="fa fa-tasks fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_BALANCES}><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="balances.php?op=list"><{$smarty.const._MA_WGSIMPLEACC_BALANCES_LIST}></a>
+                                </li>
+                                <li>
+                                    <a href="balances.php?op=new"><{$smarty.const._MA_WGSIMPLEACC_BALANCE_CREATE}></a>
+                                </li>
+                            </ul>
+                            <{else}>
+                            <a href="balances.php?op=list"><i class="fa fa-tasks fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_BALANCES_LIST}></a>
+                            <{/if}>
+                        </li>
+                    <{/if}>
                     <li>
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_STATISTICS}><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li>
-                                <a href="statistics.php?op=allocations"><i class="fa fa-sitemap fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_ALLOCATIONS}></a>
-                            </li>
-                            <li>
-                                <a href="statistics.php?op=assets"><i class="fa fa-credit-card fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_ASSETS}></a>
-                            </li>
-                            <li>
-                                <a href="statistics.php?op=accounts"><i class="fa fa-table fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_ACCOUNTS}></a>
-                            </li>
-                            <li>
-                                <a href="statistics.php?op=balances"><i class="fa fa-tasks fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_BALANCES}></a>
-                            </li>
+                            <{if $permTransactionsView}>
+                                <li>
+                                    <a href="statistics.php?op=allocations"><i class="fa fa-sitemap fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_ALLOCATIONS}></a>
+                                </li>
+                                <li>
+                                    <a href="statistics.php?op=assets"><i class="fa fa-credit-card fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_ASSETS}></a>
+                                </li>
+                                <li>
+                                    <a href="statistics.php?op=accounts"><i class="fa fa-table fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_ACCOUNTS}></a>
+                                </li>
+                            <{/if}>
+                            <{if $permBalancesView}>
+                                <li>
+                                    <a href="statistics.php?op=balances"><i class="fa fa-tasks fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_BALANCES}></a>
+                                </li>
+                            <{/if}>
                         </ul>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-download fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_OUTPUTS}><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li>
-                                <a href="outputs.php?op=transactions"><i class="fa fa-files-o fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_TRANSACTIONS_LIST}></a>
-                            </li>
-                            <{foreach item=template from=$outtemplates}>
-                            <li>
-                                <a href="outtemplates.php?op=select&amp;otpl_id=<{$template.id}>"><i class="fa fa-files-o fa-fw fa-lg"></i> <{$template.name}></a>
-                            </li>
-                            <{/foreach}>
+                            <{if $permTransactionsView}>
+                                <li>
+                                    <a href="outputs.php?op=transactions"><i class="fa fa-files-o fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_TRANSACTIONS_LIST}></a>
+                                </li>
+                                <{foreach item=template from=$outtemplates}>
+                                <li>
+                                    <a href="outtemplates.php?op=select&amp;otpl_id=<{$template.id}>"><i class="fa fa-files-o fa-fw fa-lg"></i> <{$template.name}></a>
+                                </li>
+                                <{/foreach}>
+                            <{/if}>
+                            <{if $permBalancesView}>
+                                <li>
+                                    <a href="outputs.php?op=balances"><i class="fa fa-tasks fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_BALANCES}></a>
+                                </li>
+                            <{/if}>
                         </ul>
 
                     </li>

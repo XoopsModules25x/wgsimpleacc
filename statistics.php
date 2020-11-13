@@ -17,7 +17,7 @@
  * @package        wgsimpleacc
  * @since          1.0
  * @min_xoops      2.5.10
- * @author         XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
+ * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
 use Xmf\Request;
@@ -279,7 +279,7 @@ switch ($op) {
             $crBalances->add(new \Criteria('bal_asid', $balAsid));
             $balancesAll = $balancesHandler->getAll($crBalances);
             foreach (\array_keys($balancesAll) as $i) {
-                $balAmounts .= $balancesAll[$i]->getVar('bal_amount') . ',';
+                $balAmounts .= $balancesAll[$i]->getVar('bal_amountend') . ',';
                 $labelDate = $balancesAll[$i]->getVar('bal_to');
                 $labels[$labelDate] = \formatTimestamp($labelDate, 's');
             }

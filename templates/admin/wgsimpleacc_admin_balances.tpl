@@ -10,7 +10,8 @@
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_BALANCE_TO}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_BALANCE_ASID}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_BALANCE_CURID}></th>
-				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_BALANCE_AMOUNT}></th>
+				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_BALANCE_AMOUNTSTART}></th>
+				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_BALANCE_AMOUNTEND}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_BALANCE_STATUS}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_DATECREATED}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_SUBMITTER}></th>
@@ -26,7 +27,8 @@
 				<td class='center'><{$balance.to}></td>
 				<td class='center'><{$balance.asset}></td>
 				<td class='center'><{$balance.curid}></td>
-				<td class='center'><{$balance.amount}></td>
+				<td class='center'><{$balance.amountstart}></td>
+				<td class='center'><{$balance.amountend}></td>
 				<td class='center'><img src="<{$modPathIcon16}>status<{$balance.status}>.png" alt="<{$balance.status_text}>" title="<{$balance.status_text}>" /></td>
 				<td class='center'><{$balance.datecreated}></td>
 				<td class='center'><{$balance.submitter}></td>
