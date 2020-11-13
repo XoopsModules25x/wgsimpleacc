@@ -57,6 +57,8 @@
 .wgsa-output-sum td {
 	font-weight:500;
 	font-size: 120%;
+	border-top:1px solid #ddd;
+	border-bottom:1px double #ddd;
 }
 
 ul.menu {

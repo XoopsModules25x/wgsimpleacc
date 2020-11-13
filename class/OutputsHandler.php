@@ -107,6 +107,7 @@ class OutputsHandler extends \XoopsPersistableObjectHandler
         $balancesCount = $balancesHandler->getCount($crBalances);
         $GLOBALS['xoopsTpl']->assign('balancesCount', $balancesCount);
         if ($balancesCount > 0) {
+            $balances = [];
             $balancesAll = $balancesHandler->getAll($crBalances);
             foreach (\array_keys($balancesAll) as $i) {
                 $balances[$i] = $balancesAll[$i]->getValuesBalances();
