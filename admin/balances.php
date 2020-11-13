@@ -93,6 +93,8 @@ switch ($op) {
 		$balancesObj->setVar('bal_to', $balanceToObj->getTimestamp());
         $balancesObj->setVar('bal_asid', Request::getInt('bal_asid', 0));
         $balancesObj->setVar('bal_curid', Request::getInt('bal_curid', 0));
+        $balAmountStart = Request::getString('bal_amountstart');
+        $balancesObj->setVar('bal_amountstart', Utility::StringToFloat($balAmountStart));
         $balAmount = Request::getString('bal_amountend');
         $balancesObj->setVar('bal_amountend', Utility::StringToFloat($balAmount));
 		$balancesObj->setVar('bal_status', Request::getInt('bal_status', 0));
