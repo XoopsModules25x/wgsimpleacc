@@ -17,7 +17,7 @@
  * @package        wgsimpleacc
  * @since          1.0
  * @min_xoops      2.5.10
- * @author         XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
+ * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 include dirname(__DIR__, 2) . '/mainfile.php';
 include \XOOPS_ROOT_PATH . '/include/notification_update.php';

@@ -54,6 +54,11 @@
 	max-height:50px;
 }
 
+.wgsa-output-sum td {
+	font-weight:500;
+	font-size: 120%;
+}
+
 ul.menu {
 	list-style: none;
 	background-color: #f5f5f5;

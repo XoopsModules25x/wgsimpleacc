@@ -21,7 +21,6 @@
                 <{include file='db:wgsimpleacc_tratemplates_list.tpl' }>
                 <{/foreach}>
             </tbody>
-            <tfoot><tr><td>&nbsp;</td></tr></tfoot>
         </table>
     </div>
     <{else}>

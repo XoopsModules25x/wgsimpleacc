@@ -17,7 +17,7 @@
  * @package        wgsimpleacc
  * @since          1.0
  * @min_xoops      2.5.10
- * @author         XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
+ * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
 use Xmf\Request;
@@ -106,9 +106,8 @@ switch ($op) {
             $strFilter = "&amp;balanceFrom=$balanceFrom&amp;balanceTo=$balanceTo";
             $GLOBALS['xoopsTpl']->assign('balfilter', $strFilter);
         }
-
         break;
-    //case 'show':
+
 	case 'list':
 	default:
         $GLOBALS['xoopsTpl']->assign('balancesList', true);
@@ -174,7 +173,8 @@ switch ($op) {
             $balancesObj->setVar('bal_to', $balanceTo);
             $balancesObj->setVar('bal_asid', $asset['id']);
             $balancesObj->setVar('bal_curid', $asset['curid']);
-            $balancesObj->setVar('bal_amount', $asset['amount_end_val']);
+            $balancesObj->setVar('bal_amountstart', $asset['amount_start_val']);
+            $balancesObj->setVar('bal_amountend', $asset['amount_end_val']);
             $balancesObj->setVar('bal_status', Request::getInt('bal_status', Constants::STATUS_APPROVED));
             $balancesObj->setVar('bal_datecreated', \time());
             $balancesObj->setVar('bal_submitter', $submitter);

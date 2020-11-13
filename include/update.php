@@ -131,10 +131,10 @@ function wgsimpleacc_check_db($module)
 
     // Example: update table (add new field)
     $table   = $GLOBALS['xoopsDB']->prefix('wgsimpleacc_balances');
-    $field   = 'bal_curid';
+    $field   = 'bal_currid';
     $check   = $GLOBALS['xoopsDB']->queryF('SHOW COLUMNS FROM `' . $table . "` LIKE '" . $field . "'");
     $numRows = $GLOBALS['xoopsDB']->getRowsNum($check);
-    if (!$numRows) {
+    if ($numRows) {
         $sql = "ALTER TABLE `$table` CHANGE `bal_currid` `bal_curid` INT(10) NOT NULL DEFAULT '0';";
         if (!$result = $GLOBALS['xoopsDB']->queryF($sql)) {
             xoops_error($GLOBALS['xoopsDB']->error() . '<br>' . $sql);
@@ -207,8 +207,23 @@ function wgsimpleacc_check_db($module)
             $ret = false;
         }
     }
+
+    // Example: update table (add new field)
     $table   = $GLOBALS['xoopsDB']->prefix('wgsimpleacc_balances');
     $field   = 'bal_amount';
+    $check   = $GLOBALS['xoopsDB']->queryF('SHOW COLUMNS FROM `' . $table . "` LIKE '" . $field . "'");
+    $numRows = $GLOBALS['xoopsDB']->getRowsNum($check);
+    if ($numRows) {
+        $sql = "ALTER TABLE `$table` CHANGE `bal_amount` `bal_amountend` DOUBLE(16, 2) NOT NULL DEFAULT '0.00';";
+        if (!$result = $GLOBALS['xoopsDB']->queryF($sql)) {
+            xoops_error($GLOBALS['xoopsDB']->error() . '<br>' . $sql);
+            $module->setErrors("Error when adding '$field' to table '$table'.");
+            $ret = false;
+        }
+    }
+
+    $table   = $GLOBALS['xoopsDB']->prefix('wgsimpleacc_balances');
+    $field   = 'bal_amountend';
     $check   = $GLOBALS['xoopsDB']->queryF('SHOW COLUMNS FROM `' . $table . "` LIKE '" . $field . "'");
     $numRows = $GLOBALS['xoopsDB']->getRowsNum($check);
     if (!$numRows) {
@@ -255,6 +270,34 @@ function wgsimpleacc_check_db($module)
             $ret = false;
         }
     }
+    $table   = $GLOBALS['xoopsDB']->prefix('wgsimpleacc_accounts');
+    $field   = 'acc_iecalc';
+    $check   = $GLOBALS['xoopsDB']->queryF('SHOW COLUMNS FROM `' . $table . "` LIKE '" . $field . "'");
+    $numRows = $GLOBALS['xoopsDB']->getRowsNum($check);
+    if (!$numRows) {
+        $sql = "ALTER TABLE `$table` ADD `$field` int(1) NOT NULL DEFAULT '0' AFTER `acc_color`;";
+        if (!$result = $GLOBALS['xoopsDB']->queryF($sql)) {
+            xoops_error($GLOBALS['xoopsDB']->error() . '<br>' . $sql);
+            $module->setErrors("Error when adding '$field' to table '$table'.");
+            $ret = false;
+        }
+    }
+
+    $table   = $GLOBALS['xoopsDB']->prefix('wgsimpleacc_balances');
+    $field   = 'bal_amountstart';
+    $check   = $GLOBALS['xoopsDB']->queryF('SHOW COLUMNS FROM `' . $table . "` LIKE '" . $field . "'");
+    $numRows = $GLOBALS['xoopsDB']->getRowsNum($check);
+    if (!$numRows) {
+        $sql = "ALTER TABLE `$table` ADD `$field` DOUBLE(16, 2) NOT NULL DEFAULT '0.00' AFTER `bal_curid`;";
+        if (!$result = $GLOBALS['xoopsDB']->queryF($sql)) {
+            xoops_error($GLOBALS['xoopsDB']->error() . '<br>' . $sql);
+            $module->setErrors("Error when adding '$field' to table '$table'.");
+            $ret = false;
+        }
+    }
+
+
+
     $table   = $GLOBALS['xoopsDB']->prefix('wgsimpleacc_accounts');
     $field   = 'acc_iecalc';
     $check   = $GLOBALS['xoopsDB']->queryF('SHOW COLUMNS FROM `' . $table . "` LIKE '" . $field . "'");

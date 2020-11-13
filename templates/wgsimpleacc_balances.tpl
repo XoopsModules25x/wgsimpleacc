@@ -9,7 +9,8 @@
                         <th><{$smarty.const._MA_WGSIMPLEACC_BALANCE_TO}></th>
                         <th><{$smarty.const._MA_WGSIMPLEACC_BALANCE_ASID}></th>
                         <th><{$smarty.const._MA_WGSIMPLEACC_BALANCE_CURID}></th>
-                        <th><{$smarty.const._MA_WGSIMPLEACC_BALANCE_AMOUNT}></th>
+                        <th><{$smarty.const._MA_WGSIMPLEACC_BALANCE_AMOUNTSTART}></th>
+                        <th><{$smarty.const._MA_WGSIMPLEACC_BALANCE_AMOUNTEND}></th>
                         <th><{$smarty.const._MA_WGSIMPLEACC_DATECREATED}></th>
                         <th><{$smarty.const._MA_WGSIMPLEACC_SUBMITTER}></th>
                     </tr>
@@ -17,19 +18,17 @@
                 <tbody>
                     <{foreach item=balance from=$balances}>
                         <tr>
-
                             <td><{$balance.from}></td>
                             <td><{$balance.to}></td>
                             <td><{$balance.asset}></td>
                             <td><{$balance.curid}></td>
-                            <td><{$balance.amount}></td>
+                            <td><{$balance.amountstart}></td>
+                            <td><{$balance.amountend}></td>
                             <td><{$balance.datecreated}></td>
                             <td><{$balance.submitter}></td>
-
                         </tr>
                     <{/foreach}>
                 </tbody>
-                <tfoot><tr><td>&nbsp;</td></tr></tfoot>
             </table>
         </div>
     <{else}>
@@ -52,7 +51,7 @@
             <{foreach item=balance from=$balances_calc}>
                 <tr>
                     <td><{$balance.name}></td>
-                    <td><{$balance.date}></td>
+                    <td><{if $balance.date > 0}><{$balance.date}><{/if}></td>
                     <td><{$balance.amount_start}></td>
                     <td><{$balance.amount_end}></td>
                     <td class="center">

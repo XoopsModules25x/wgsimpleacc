@@ -1,0 +1,7 @@
+-
+    otpl_id: '1'
+    otpl_name: 'Donation receipt'
+    otpl_content: '<table style="border: 0; width: 100%;"><tbody><tr><td><p><img alt="Logo" src="&lt;{$xoops_url}&gt;/uploads/wgsimpleacc/images/wedega_logo.png" style="margin: 150px 10px;" title="Logo" /></p></td><td style="text-align: right;">&lt;{$sender}&gt;</td></tr></tbody></table><p>To&nbsp;&lt;{$recipient}&gt;</p><p></p><p>Hereby we confirm the result of the amount</p><p></p><p style="text-align: center;"><strong><span style="font-size: xx-large;">&lt;{$amount}&gt;</span></strong></p><p></p><p>John Doe</p><p>Somewheretown, the &lt;{$output_date}&gt;</p><p>&lt;{$output_user}&gt;</p>'
+    otpl_online: '1'
+    otpl_datecreated: '1604734016'
+    otpl_submitter: '1'

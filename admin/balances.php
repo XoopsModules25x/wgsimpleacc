@@ -17,7 +17,7 @@
  * @package        wgsimpleacc
  * @since          1.0
  * @min_xoops      2.5.10
- * @author         XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
+ * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
 use Xmf\Request;
@@ -93,8 +93,8 @@ switch ($op) {
 		$balancesObj->setVar('bal_to', $balanceToObj->getTimestamp());
         $balancesObj->setVar('bal_asid', Request::getInt('bal_asid', 0));
         $balancesObj->setVar('bal_curid', Request::getInt('bal_curid', 0));
-        $balAmount = Request::getString('bal_amount');
-        $balancesObj->setVar('bal_amount', Utility::StringToFloat($balAmount));
+        $balAmount = Request::getString('bal_amountend');
+        $balancesObj->setVar('bal_amountend', Utility::StringToFloat($balAmount));
 		$balancesObj->setVar('bal_status', Request::getInt('bal_status', 0));
 		$balanceDatecreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('bal_datecreated'));
 		$balancesObj->setVar('bal_datecreated', $balanceDatecreatedObj->getTimestamp());

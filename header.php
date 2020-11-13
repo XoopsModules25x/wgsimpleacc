@@ -17,7 +17,7 @@
  * @package        wgsimpleacc
  * @since          1.0
  * @min_xoops      2.5.10
- * @author         XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
+ * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
 use XoopsModules\Wgsimpleacc;
@@ -44,6 +44,7 @@ $permissionsHandler = $helper->getHandler('Permissions');
 $balancesHandler = $helper->getHandler('Balances');
 $tratemplatesHandler = $helper->getHandler('Tratemplates');
 $outtemplatesHandler = $helper->getHandler('Outtemplates');
+$outputsHandler = $helper->getHandler('Outputs');
 // 
 $myts = MyTextSanitizer::getInstance();
 // Default Css Style

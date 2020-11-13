@@ -17,7 +17,7 @@
  * @package        wgsimpleacc
  * @since          1.0
  * @min_xoops      2.5.10
- * @author         XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
+ * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
 require_once __DIR__ . '/common.php';
@@ -115,10 +115,15 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_PERMISSIONS_GLOBAL_APPROVE', 'Globale Berechtigungen zum Bestätigen');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_TRANSACTION_SUBMIT', 'Berechtigungen zum Einsenden von Transaktionen');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_TRANSACTION_APPROVE', 'Berechtigungen zum Bestätigen von Transaktionen');
-\define('_AM_WGSIMPLEACC_PERMISSIONS_ALLOCATION_SUBMIT', 'Berechtigungen zum Einsenden Zuordnungen');
-\define('_AM_WGSIMPLEACC_PERMISSIONS_ASSET_SUBMIT', 'Berechtigungen zum Einsenden von Vermögenswerten');
-\define('_AM_WGSIMPLEACC_PERMISSIONS_ACCOUNT_SUBMIT', 'Berechtigungen zum Einsenden von Konten');
-\define('_AM_WGSIMPLEACC_PERMISSIONS_BALANCE_CREATE', 'Berechtigungen zum Erstellen von Abschlüssen');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_TRANSACTION_VIEW', 'Berechtigungen zum Ansehen der Transaktionen');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_ALLOCATION_SUBMIT', 'Berechtigungen zum Einsenden einer Zuordnung');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_ALLOCATION_VIEW', 'Berechtigungen zum Ansehen der Zuordnungen');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_ASSET_SUBMIT', 'Berechtigungen zum Einsenden von eines Vermögenswertes');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_ASSET_VIEW', 'Berechtigungen zum Ansehen der Vermögenswerten');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_ACCOUNT_SUBMIT', 'Berechtigungen zum Einsenden von eines Kontos');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_ACCOUNT_VIEW', 'Berechtigungen zum Ansehen der Konten');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_BALANCE_CREATE', 'Berechtigungen zum Erstellen von eines Abschlüsses');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_BALANCE_VIEW', 'Berechtigungen zum Ansehen der Abschlüssen');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_TRATEMPLATE_SUBMIT', 'Berechtigungen zum Erstellen von Transaktionensvorlagen');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_TRATEMPLATE_VIEW', 'Berechtigungen zum Ansehen der Transaktionensvorlagen');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_OUTTEMPLATE_SUBMIT', 'Berechtigungen zum Erstellen von Ausgabevorlagen');

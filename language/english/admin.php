@@ -17,7 +17,7 @@
  * @package        wgsimpleacc
  * @since          1.0
  * @min_xoops      2.5.10
- * @author         XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
+ * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
 require_once __DIR__ . '/common.php';
@@ -113,12 +113,17 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_PERMISSIONS_GLOBAL_VIEW', 'Permissions global to view');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_GLOBAL_SUBMIT', 'Permissions global to submit');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_GLOBAL_APPROVE', 'Permissions global to approve');
-\define('_AM_WGSIMPLEACC_PERMISSIONS_TRANSACTION_SUBMIT', 'Permissions to submit transactions');
-\define('_AM_WGSIMPLEACC_PERMISSIONS_TRANSACTION_APPROVE', 'Permissions to approve submitted transactions');
-\define('_AM_WGSIMPLEACC_PERMISSIONS_ALLOCATION_SUBMIT', 'Permissions to submit allocations');
-\define('_AM_WGSIMPLEACC_PERMISSIONS_ASSET_SUBMIT', 'Permissions to submit assets');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_TRANSACTION_SUBMIT', 'Permissions to submit transaction');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_TRANSACTION_APPROVE', 'Permissions to approve submitted transaction');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_TRANSACTION_VIEW', 'Permissions to view transactions');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_ALLOCATION_SUBMIT', 'Permissions to submit allocation');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_ALLOCATION_VIEW', 'Permissions to view allocations');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_ASSET_SUBMIT', 'Permissions to submit asset');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_ASSET_VIEW', 'Permissions to view assets');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_ACCOUNT_SUBMIT', 'Permissions to submit account');
-\define('_AM_WGSIMPLEACC_PERMISSIONS_BALANCE_CREATE', 'Permissions to create balances');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_ACCOUNT_VIEW', 'Permissions to view accounts');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_BALANCE_CREATE', 'Permissions to create balance');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_BALANCE_VIEW', 'Permissions to view balances');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_TRATEMPLATE_SUBMIT', 'Permissions to submit templates');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_TRATEMPLATE_VIEW', 'Permissions to view templates');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_OUTTEMPLATE_SUBMIT', 'Permissions to submit output templates');

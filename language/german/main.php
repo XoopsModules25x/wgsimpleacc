@@ -17,7 +17,7 @@
  * @package        wgsimpleacc
  * @since          1.0
  * @min_xoops      2.5.10
- * @author         XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
+ * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
 require_once __DIR__ . '/admin.php';
@@ -222,7 +222,9 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_BALANCE_TO', 'Bis');
 \define('_MA_WGSIMPLEACC_BALANCE_ASID', 'Vermögenswert');
 \define('_MA_WGSIMPLEACC_BALANCE_CURID', 'Währung');
-\define('_MA_WGSIMPLEACC_BALANCE_AMOUNT', 'Betrag');
+\define('_MA_WGSIMPLEACC_BALANCE_AMOUNTSTART', 'Startbetrag');
+\define('_MA_WGSIMPLEACC_BALANCE_AMOUNTEND', 'Endbetrag');
+\define('_MA_WGSIMPLEACC_BALANCE_DIFFERENCE', 'Differenz');
 \define('_MA_WGSIMPLEACC_BALANCE_STATUS', 'Status');
 \define('_MA_WGSIMPLEACC_BALANCE_CALC_PERIOD', 'Berechnete Werte für den Zeitraum von %f bis %t');
 \define('_MA_WGSIMPLEACC_BALANCE_DATE', 'Letztes Datum des Vermögenswertes');
@@ -231,16 +233,17 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_BALANCE_DATEUSED', "Das 'Datum von' or 'Datum bis' ist innerhalb des Zeitraumes eines anderen Abschlusses");
 \define('_MA_WGSIMPLEACC_BALANCE_ERRORS', 'Abschlüsse wurden erstellt, jedoch sind Fehler aufgetreten');
 // Output balances
+\define('_MA_WGSIMPLEACC_BALANCES_OUT_TOTAL', 'Total');
+\define('_MA_WGSIMPLEACC_BALANCES_OUT_SUMS', 'Summen');
 \define('_MA_WGSIMPLEACC_BALANCES_OUT_SELECT', 'Abschlüsse auswählen');
 \define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL', 'Detailgrad auswählen');
+\define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_SKIP', 'Nicht ausgeben');
 \define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ALLOC', 'Detailgrad Zuordnungen');
-\define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ALLOC0', 'Alle Zuordnungen zusammenfassen');
 \define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ALLOC1', 'Zuordnungen erstes Level zusammenfassen');
-\define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ALLOC2', 'Alle Zuordnungen detailiert ausgeben');
+\define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ALLOC2', 'Alle Zuordnungen detailliert ausgeben');
 \define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ACC', 'Detailgrad Konten');
-\define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ACC0', 'Alle Konten zusammenfassen');
 \define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ACC1', 'Konten erstes Level zusammenfassen');
-\define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ACC2', 'Alle Konten detailiert ausgeben');
+\define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ACC2', 'Alle Konten detailliert ausgeben');
 // Templates general
 \define('_MA_WGSIMPLEACC_TEMPLATES', 'Vorlagen');
 \define('_MA_WGSIMPLEACC_TEMPLATE_NONE', 'Keine');

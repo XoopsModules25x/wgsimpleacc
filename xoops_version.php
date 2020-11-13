@@ -17,7 +17,7 @@
  * @package        wgsimpleacc
  * @since          1.0
  * @min_xoops      2.5.10
- * @author         XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
+ * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
 //
@@ -30,11 +30,11 @@ $modversion = [
 	'name'                => \_MI_WGSIMPLEACC_NAME,
 	'version'             => 1.0,
 	'description'         => \_MI_WGSIMPLEACC_DESC,
-	'author'              => 'XOOPS Development Team',
+	'author'              => 'Goffy - XOOPS Development Team',
 	'author_mail'         => 'webmaster@wedega.com',
 	'author_website_url'  => 'https://xoops.wedega.com',
 	'author_website_name' => 'XOOPS on Wedega',
-	'credits'             => 'XOOPS Development Team',
+	'credits'             => 'Goffy - XOOPS Development Team',
 	'license'             => 'GPL 2.0 or later',
 	'license_url'         => 'http://www.gnu.org/licenses/gpl-3.0.en.html',
 	'help'                => 'page=help',

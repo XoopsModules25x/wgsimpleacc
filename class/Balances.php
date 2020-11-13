@@ -20,7 +20,7 @@ namespace XoopsModules\Wgsimpleacc;
  * @package        wgsimpleacc
  * @since          1.0
  * @min_xoops      2.5.10
- * @author         XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
+ * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
 use XoopsModules\Wgsimpleacc;
@@ -44,7 +44,8 @@ class Balances extends \XoopsObject
 		$this->initVar('bal_to', \XOBJ_DTYPE_INT);
         $this->initVar('bal_asid', \XOBJ_DTYPE_INT);
         $this->initVar('bal_curid', \XOBJ_DTYPE_INT);
-        $this->initVar('bal_amount', \XOBJ_DTYPE_DECIMAL);
+        $this->initVar('bal_amountstart', \XOBJ_DTYPE_DECIMAL);
+        $this->initVar('bal_amountend', \XOBJ_DTYPE_DECIMAL);
 		$this->initVar('bal_status', \XOBJ_DTYPE_INT);
 		$this->initVar('bal_datecreated', \XOBJ_DTYPE_INT);
 		$this->initVar('bal_submitter', \XOBJ_DTYPE_INT);
@@ -115,10 +116,15 @@ class Balances extends \XoopsObject
             $balCuridSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_BALANCE_CURID, 'bal_curid', $this->getVar('bal_curid'));
             $balCuridSelect->addOptionArray($currenciesHandler->getList());
             $form->addElement($balCuridSelect);
-            // Form Text balAmount
-            $balAmount = $this->isNew() ? 0 : $this->getVar('bal_amount');
-            $balAmount = Utility::FloatToString($balAmount);
-            $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_BALANCE_AMOUNT, 'bal_amount', 20, 150, $balAmount), true);
+            // Form Text balAmountStart
+            $balAmountStart = $this->isNew() ? 0 : $this->getVar('bal_amountstart');
+            $balAmountStart = Utility::FloatToString($balAmountStart);
+            $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_BALANCE_AMOUNTSTART, 'bal_amountstart', 20, 150, $balAmountStart), true);
+            // Form Text balAmountEnd
+            $balAmountEnd = $this->isNew() ? 0 : $this->getVar('bal_amountend');
+            $balAmountEnd = Utility::FloatToString($balAmountEnd);
+            $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_BALANCE_AMOUNTEND, 'bal_amountend', 20, 150, $balAmountEnd), true);
+            // Form Select Status
             $balStatusSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_BALANCE_STATUS, 'bal_status', $balStatus);
             //$balStatusSelect->addOption(Constants::STATUS_CREATED, \_AM_WGSIMPLEACC_STATUS_CREATED);
             $balStatusSelect->addOption(Constants::STATUS_APPROVED, \_AM_WGSIMPLEACC_STATUS_APPROVED);
@@ -156,18 +162,20 @@ class Balances extends \XoopsObject
 	{
         $helper  = \XoopsModules\Wgsimpleacc\Helper::getInstance();
 	    $ret = $this->getValues($keys, $format, $maxDepth);
-		$ret['id']          = $this->getVar('bal_id');
+		$ret['id']         = $this->getVar('bal_id');
         $assetsHandler = $helper->getHandler('Assets');
         $assetsObj = $assetsHandler->get($this->getVar('bal_asid'));
-        $ret['asset']       = $assetsObj->getVar('as_name');
-		$ret['from']        = \formatTimestamp($this->getVar('bal_from'), 's');
-		$ret['to']          = \formatTimestamp($this->getVar('bal_to'), 's');
+        $ret['asset']      = $assetsObj->getVar('as_name');
+		$ret['from']       = \formatTimestamp($this->getVar('bal_from'), 's');
+		$ret['to']         = \formatTimestamp($this->getVar('bal_to'), 's');
         $currenciesHandler = $helper->getHandler('Currencies');
         $currenciesObj = $currenciesHandler->get($this->getVar('bal_curid'));
         if (\is_object($currenciesObj)) {
             $ret['curid'] = $currenciesObj->getVar('cur_code');
         }
-        $ret['amount']      = Utility::FloatToString($this->getVar('bal_amount'));
+        $ret['amountstart'] = Utility::FloatToString($this->getVar('bal_amountstart'));
+        $ret['amountend']   = Utility::FloatToString($this->getVar('bal_amountend'));
+        $ret['difference']   = Utility::FloatToString($this->getVar('bal_amountend') - $this->getVar('bal_amountstart'));
 		$status             = $this->getVar('bal_status');
 		$ret['status']      = $status;
 		switch ($status) {

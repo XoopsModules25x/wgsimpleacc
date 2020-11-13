@@ -17,7 +17,7 @@
  * @package        wgsimpleacc
  * @since          1.0
  * @min_xoops      2.5.10
- * @author         XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
+ * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
 use Xmf\Request;
@@ -37,10 +37,15 @@ $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/startmin.js');
 $GLOBALS['xoopsTpl']->assign('permGlobalView', $permissionsHandler->getPermGlobalView());
 $GLOBALS['xoopsTpl']->assign('permGlobalApprove', $permissionsHandler->getPermGlobalApprove());
 $GLOBALS['xoopsTpl']->assign('permTransactionsSubmit', $permissionsHandler->getPermTransactionsSubmit());
+$GLOBALS['xoopsTpl']->assign('permTransactionsView', $permissionsHandler->getPermTransactionsView());
 $GLOBALS['xoopsTpl']->assign('permAllocationsSubmit', $permissionsHandler->getPermAllocationsSubmit());
+$GLOBALS['xoopsTpl']->assign('permAllocationsView', $permissionsHandler->getPermAllocationsView());
 $GLOBALS['xoopsTpl']->assign('permAccountsSubmit', $permissionsHandler->getPermAccountsSubmit());
+$GLOBALS['xoopsTpl']->assign('permAccountsView', $permissionsHandler->getPermAccountsView());
 $GLOBALS['xoopsTpl']->assign('permAssetsSubmit', $permissionsHandler->getPermAssetsSubmit());
+$GLOBALS['xoopsTpl']->assign('permAssetsView', $permissionsHandler->getPermAssetsView());
 $GLOBALS['xoopsTpl']->assign('permBalancesCreate', $permissionsHandler->getPermBalancesCreate());
+$GLOBALS['xoopsTpl']->assign('permBalancesView', $permissionsHandler->getPermBalancesView());
 $GLOBALS['xoopsTpl']->assign('permTratemplatesSubmit', $permissionsHandler->getPermTratemplatesSubmit());
 $GLOBALS['xoopsTpl']->assign('permTratemplatesView', $permissionsHandler->getPermTratemplatesView());
 $GLOBALS['xoopsTpl']->assign('permOuttemplatesSubmit', $permissionsHandler->getPermOuttemplatesSubmit());

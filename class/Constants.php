@@ -20,7 +20,7 @@ namespace XoopsModules\Wgsimpleacc;
  * @package        wgsimpleacc
  * @since          1.0
  * @min_xoops      2.5.10
- * @author         XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
+ * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
 /**
@@ -80,11 +80,12 @@ interface Constants
     public const FILTER_TYPECUSTOM = 1;
 
     //Output balances
-    public const BALANCES_OUT_LEVEL_ALLOC0 = 0;
+    public const BALANCES_OUT_LEVEL_SKIP = 0;
     public const BALANCES_OUT_LEVEL_ALLOC1 = 1;
     public const BALANCES_OUT_LEVEL_ALLOC2 = 2;
-    public const BALANCES_OUT_LEVEL_ACC0 = 0;
+    //public const BALANCES_OUT_LEVEL_ALLOC3 = 3;
     public const BALANCES_OUT_LEVEL_ACC1 = 1;
     public const BALANCES_OUT_LEVEL_ACC2 = 2;
+    //public const BALANCES_OUT_LEVEL_ACC3 = 3;
 
 }
