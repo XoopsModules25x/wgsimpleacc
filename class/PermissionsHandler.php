@@ -593,7 +593,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     {
         global $xoopsUser, $xoopsModule;
 
-        if ($this->getPermGlobalView()) {
+        if ($constantPerm !== Constants::PERM_GLOBAL_VIEW && $this->getPermGlobalView()) {
             return true;
         }
 

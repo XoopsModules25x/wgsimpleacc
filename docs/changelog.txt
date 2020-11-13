@@ -11,3 +11,4 @@
  - fixed bug with l\trim (alain/goffy)
  - removed old files (goffy)
  - implemented output of balances (goffy)
+ - fixed bug in permisson handler for guests (goffy)
