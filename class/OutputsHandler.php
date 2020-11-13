@@ -72,7 +72,7 @@ class OutputsHandler extends \XoopsPersistableObjectHandler
         $balLevelDetails = new \XoopsFormElementTray(\_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL,'<br>');
         $levelAllocations = new \XoopsFormSelect(\_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ALLOC, 'level_alloc', Constants::BALANCES_OUT_LEVEL_SKIP);
         $levelAllocations->addOption(Constants::BALANCES_OUT_LEVEL_SKIP, \_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_SKIP);
-        //$levelAllocations->addOption(Constants::BALANCES_OUT_LEVEL_ALLOC1, \_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ALLOC1);
+        $levelAllocations->addOption(Constants::BALANCES_OUT_LEVEL_ALLOC1, \_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ALLOC1);
         $levelAllocations->addOption(Constants::BALANCES_OUT_LEVEL_ALLOC2, \_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ALLOC2);
         $balLevelDetails->addElement($levelAllocations);
         $levelAccounts = new \XoopsFormSelect(\_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ACC, 'level_account', Constants::BALANCES_OUT_LEVEL_SKIP);
@@ -106,8 +106,8 @@ class OutputsHandler extends \XoopsPersistableObjectHandler
         $crBalances->add(new \Criteria('bal_id', "($crBalIds)", 'IN'));
         $balancesCount = $balancesHandler->getCount($crBalances);
         $GLOBALS['xoopsTpl']->assign('balancesCount', $balancesCount);
+        $balances = [];
         if ($balancesCount > 0) {
-            $balances = [];
             $balancesAll = $balancesHandler->getAll($crBalances);
             foreach (\array_keys($balancesAll) as $i) {
                 $balances[$i] = $balancesAll[$i]->getValuesBalances();
@@ -199,4 +199,66 @@ class OutputsHandler extends \XoopsPersistableObjectHandler
         return $ret;
 
     }
+
+    /**
+     * Get current value of level 1 allocations including sub allocs
+     * @param array $bal_ids
+     * @param       $level
+     * @return array
+     */
+    public function getLevelAllocations($bal_ids, $level = 1)
+    {
+        $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+        $allocationsHandler = $helper->getHandler('Allocations');
+        $transactionsHandler = $helper->getHandler('Transactions');
+
+        $crBalIds = implode(',', $bal_ids);
+        $ret = [];
+
+        //get all allocations
+        $crAllocations = new \CriteriaCompo();
+        $crAllocations->add(new \Criteria('all_online', 1));
+        $crAllocations->add(new \Criteria('all_level', $level));
+        $crAllocations->setSort('all_weight ASC, all_id');
+        $crAllocations->setOrder('ASC');
+        $allocationsCount = $allocationsHandler->getCount($crAllocations);
+        $allocationsAll = $allocationsHandler->getAll($crAllocations);
+        if ($allocationsCount > 0) {
+            foreach (\array_keys($allocationsAll) as $i) {
+                $allId = $allocationsAll[$i]->getVar('all_id');
+                $allName = $allocationsAll[$i]->getVar('all_name');
+                $allocations_list[] = ['all_id' => $allId, 'all_name' => $allName];
+                $sumAmountin = 0;
+                $sumAmountout = 0;
+                $subAllIds = $allocationsHandler->getSubsOfAllocations($allId);
+                foreach ($subAllIds as $subAllId) {
+                    $crTransactions = new \CriteriaCompo();
+                    $crTransactions->add(new \Criteria('tra_allid', $subAllId));
+                    $crTransactions->add(new \Criteria('tra_balid', '(' . $crBalIds . ')', 'IN'));
+                    $transactionsAll = $transactionsHandler->getAll($crTransactions);
+                    foreach (\array_keys($transactionsAll) as $t) {
+                        $sumAmountin += $transactionsAll[$t]->getVar('tra_amountin');
+                        $sumAmountout += $transactionsAll[$t]->getVar('tra_amountout');
+                    }
+
+                    unset($crTransactions);
+                }
+                $ret[] = [
+                    'name' => $allName,
+                    'total_val' => ($sumAmountin - $sumAmountout),
+                    'total' => Utility::FloatToString(($sumAmountin - $sumAmountout)),
+                    'amountin_val' => $sumAmountin,
+                    'amountin' => Utility::FloatToString($sumAmountin),
+                    'amountout_val' => $sumAmountout,
+                    'amountout' => Utility::FloatToString($sumAmountout),
+                    'date' => \time()
+                ];
+            }
+        }
+        unset($crAllocations);
+
+        return $ret;
+    }
+
+
 }

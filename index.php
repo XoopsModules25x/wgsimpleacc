@@ -149,9 +149,9 @@ if ($transactionsCount > 0) {
                 $transactionsCount = $transactionsHandler->getCount($crTransactions);
                 $transactionsAll   = $transactionsHandler->getAll($crTransactions);
                 if ($transactionsCount > 0) {
-                    foreach (\array_keys($transactionsAll) as $i) {
-                        $sumAmountin += $transactionsAll[$i]->getVar('tra_amountin');
-                        $sumAmountout += $transactionsAll[$i]->getVar('tra_amountout');
+                    foreach (\array_keys($transactionsAll) as $t) {
+                        $sumAmountin += $transactionsAll[$t]->getVar('tra_amountin');
+                        $sumAmountout += $transactionsAll[$t]->getVar('tra_amountout');
                     }
                 }
                 unset($crTransactions);

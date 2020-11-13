@@ -104,8 +104,14 @@ switch ($op) {
             $GLOBALS['xoopsTpl']->assign('accounts', $accounts);
         }
 
-        if ($levelAlloc > 0) {
+        $allocations = [];
+        if (Constants::BALANCES_OUT_LEVEL_ALLOC1 === $levelAlloc) {
+            $allocations = $outputsHandler->getLevelAllocations($balIds);
+        }
+        if (Constants::BALANCES_OUT_LEVEL_ALLOC2 === $levelAlloc) {
             $allocations = $outputsHandler->getListAllocationsValues($balIds);
+        }
+        if ($levelAlloc > 0) {
             $sumTotal = 0;
             $sumAmountin = 0;
             $sumAmountout = 0;
