@@ -122,7 +122,7 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_PERMISSIONS_ASSET_VIEW', 'Permissions to view assets');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_ACCOUNT_SUBMIT', 'Permissions to submit account');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_ACCOUNT_VIEW', 'Permissions to view accounts');
-\define('_AM_WGSIMPLEACC_PERMISSIONS_BALANCE_CREATE', 'Permissions to create balance');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_BALANCE_SUBMIT', 'Permissions to create balance');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_BALANCE_VIEW', 'Permissions to view balances');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_TRATEMPLATE_SUBMIT', 'Permissions to submit templates');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_TRATEMPLATE_VIEW', 'Permissions to view templates');

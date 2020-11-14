@@ -58,7 +58,7 @@ $GLOBALS['xoopsTpl']->assign('showItem', $balId > 0);
 switch ($op) {
     case 'precalc':
         // Check permissions
-        if (!$permissionsHandler->getPermBalancesCreate()) {
+        if (!$permissionsHandler->getPermBalancesSubmit()) {
             \redirect_header('balances.php?op=list', 3, _NOPERM);
         }
         $balFrom = Request::getString('bal_from') . ' 00:00';
@@ -136,7 +136,7 @@ switch ($op) {
 		break;
 	case 'save':
         // Check permissions
-        if (!$permissionsHandler->getPermBalancesCreate()) {
+        if (!$permissionsHandler->getPermBalancesSubmit()) {
             \redirect_header('balances.php?op=list', 3, _NOPERM);
         }
 
@@ -230,7 +230,7 @@ switch ($op) {
 		break;
 	case 'new':
         // Check permissions
-        if (!$permissionsHandler->getPermBalancesCreate()) {
+        if (!$permissionsHandler->getPermBalancesSubmit()) {
             \redirect_header('balances.php?op=list', 3, _NOPERM);
         }
 		// Form Create

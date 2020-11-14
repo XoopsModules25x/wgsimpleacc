@@ -45,7 +45,7 @@ $transactionsObj = $transactionsHandler->get($traId);
 $myts = MyTextSanitizer::getInstance();
 
 // Set defaults
-$pdfFilename = \str_replace(['%y', '%n'], [$transactionsObj->getVar('tra_year'), $transactionsObj->getVar('tra_nb')], \_MA_WGSIMPLEACC_PDF_NAME) . '.pdf';
+$pdfFilename = \str_replace(['%y', '%n'], [$transactionsObj->getVar('tra_year'), $transactionsObj->getVar('tra_nb')], \_MA_WGSIMPLEACC_PDF_TRANAME) . '.pdf';
 $title       = $GLOBALS['xoopsConfig']['sitename'];
 $subject     = 'Pdf Subject';
 $content     = '';
@@ -74,10 +74,9 @@ $pdfData['keywords']  = $helper->getConfig('keywords');
 
 // Assign customs tpl fields
 
-$pdfTpl->assign('content_header', \str_replace(['%y', '%n'], [$transactionsObj->getVar('tra_year'), $transactionsObj->getVar('tra_nb')], \_MA_WGSIMPLEACC_PDF_HEADER));
+$pdfTpl->assign('content_header', \str_replace(['%y', '%n'], [$transactionsObj->getVar('tra_year'), $transactionsObj->getVar('tra_nb')], \_MA_WGSIMPLEACC_PDF_TRAHEADER));
 $transaction = $transactionsObj->getValuesTransactions();
 $pdfTpl->assign('transaction', $transaction);
-$pdfTpl->assign('logo', $transaction);
 $pdfTpl->assign('useCurrencies', $helper->getConfig('use_currencies'));
 $pdfTpl->assign('useTaxes', $helper->getConfig('use_taxes'));
 $logo = ['src' => WGSIMPLEACC_UPLOAD_IMAGES_URL . '/logoPdf.png', 'height' => '100px'];
@@ -129,4 +128,3 @@ $content = $pdfTpl->fetch($template_path);
 //$pdf->writeHTMLCell($w=0, $h=0, $x='', $y='', $content, $border=0, $ln=1, $fill=0, $reseth=true, $align='', $autopadding=false);
 $pdf->writeHTML($content, true, false, true, false, '');
 $pdf->Output($pdfFilename, 'I');
-

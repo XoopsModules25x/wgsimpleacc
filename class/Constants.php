@@ -61,7 +61,7 @@ interface Constants
     public const PERM_ASSETS_VIEW          = 10;
     public const PERM_ACCOUNTS_SUBMIT      = 11;
     public const PERM_ACCOUNTS_VIEW        = 12;
-    public const PERM_BALANCES_CREATE      = 13;
+    public const PERM_BALANCES_SUBMIT      = 13;
     public const PERM_BALANCES_VIEW        = 14;
     public const PERM_TRATEMPLATES_SUBMIT  = 15;
     public const PERM_TRATEMPLATES_VIEW    = 16;

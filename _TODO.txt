@@ -6,7 +6,5 @@ https://codepen.io/abergin/pen/ihlDf
 https://www.jqueryscript.net/other/dashboard-starter-template-bootstrap.html
 
 
-indikator calc relevant?
 
-
-Ausgabe: was?
+Output balances as PDF

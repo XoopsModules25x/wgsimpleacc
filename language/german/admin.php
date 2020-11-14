@@ -122,7 +122,7 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_PERMISSIONS_ASSET_VIEW', 'Berechtigungen zum Ansehen der Vermögenswerten');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_ACCOUNT_SUBMIT', 'Berechtigungen zum Einsenden von eines Kontos');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_ACCOUNT_VIEW', 'Berechtigungen zum Ansehen der Konten');
-\define('_AM_WGSIMPLEACC_PERMISSIONS_BALANCE_CREATE', 'Berechtigungen zum Erstellen von eines Abschlüsses');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_BALANCE_SUBMIT', 'Berechtigungen zum Erstellen von eines Abschlüsses');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_BALANCE_VIEW', 'Berechtigungen zum Ansehen der Abschlüssen');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_TRATEMPLATE_SUBMIT', 'Berechtigungen zum Erstellen von Transaktionensvorlagen');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_TRATEMPLATE_VIEW', 'Berechtigungen zum Ansehen der Transaktionensvorlagen');

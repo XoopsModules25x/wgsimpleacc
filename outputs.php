@@ -71,6 +71,11 @@ switch ($op) {
         $balIds       = Request::getArray('bal_ids');
         $levelAlloc   = Request::getInt('level_alloc');
         $levelAccount = Request::getInt('level_account');
+        $GLOBALS['xoopsTpl']->assign('buttonBalPdf', true);
+        $GLOBALS['xoopsTpl']->assign('balIds', implode(',', $balIds));
+        $GLOBALS['xoopsTpl']->assign('level_alloc', $levelAlloc);
+        $GLOBALS['xoopsTpl']->assign('level_account', $levelAccount);
+
 
         $balances = $outputsHandler->getListBalances($balIds);
         $sumTotal = 0;

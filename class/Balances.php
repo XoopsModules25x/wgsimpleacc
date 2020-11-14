@@ -142,7 +142,7 @@ class Balances extends \XoopsObject
 		// To Save
         if ($admin) {
             $form->addElement(new \XoopsFormHidden('op', 'save'));
-            $form->addElement(new \XoopsFormButtonTray('', \_MA_WGSIMPLEACC_BALANCE_CREATE, 'submit', '', false));
+            $form->addElement(new \XoopsFormButtonTray('', \_MA_WGSIMPLEACC_BALANCE_SUBMIT, 'submit', '', false));
         } else {
             $form->addElement(new \XoopsFormHidden('op', 'precalc'));
             $form->addElement(new \XoopsFormButtonTray('', \_MA_WGSIMPLEACC_BALANCE_PRECALC, 'submit', '', false));

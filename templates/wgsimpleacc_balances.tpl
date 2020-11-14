@@ -63,7 +63,7 @@
         <tfoot>
             <tr>
                 <td class="center" colspan="5">
-                    <a class='btn btn-primary' href='balances.php?op=save<{$balfilter}>' title='<{$smarty.const._MA_WGSIMPLEACC_BALANCE_CREATE_FINAL}>'><{$smarty.const._MA_WGSIMPLEACC_BALANCE_CREATE_FINAL}></a>
+                    <a class='btn btn-primary' href='balances.php?op=save<{$balfilter}>' title='<{$smarty.const._MA_WGSIMPLEACC_BALANCE_SUBMIT_FINAL}>'><{$smarty.const._MA_WGSIMPLEACC_BALANCE_SUBMIT_FINAL}></a>
                 </td>
             </tr>
         </tfoot>
