@@ -28,13 +28,11 @@ use XoopsModules\Wgsimpleacc\{
     Common
 };
 
-/* startmin */
 $GLOBALS['xoTheme']->addStylesheet(WGSIMPLEACC_URL . '/assets/css/startmin.css', null);
+$GLOBALS['xoTheme']->addStylesheet(WGSIMPLEACC_URL . '/assets/css/style.css', null);
+
 $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/metisMenu.min.js');
 $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/startmin.js');
-
-/* wgSimpleAcc */
-$GLOBALS['xoTheme']->addStylesheet(WGSIMPLEACC_URL . '/assets/css/style.css', null);
 
 $GLOBALS['xoopsTpl']->assign('permGlobalView', $permissionsHandler->getPermGlobalView());
 $GLOBALS['xoopsTpl']->assign('permGlobalApprove', $permissionsHandler->getPermGlobalApprove());
@@ -46,7 +44,7 @@ $GLOBALS['xoopsTpl']->assign('permAccountsSubmit', $permissionsHandler->getPermA
 $GLOBALS['xoopsTpl']->assign('permAccountsView', $permissionsHandler->getPermAccountsView());
 $GLOBALS['xoopsTpl']->assign('permAssetsSubmit', $permissionsHandler->getPermAssetsSubmit());
 $GLOBALS['xoopsTpl']->assign('permAssetsView', $permissionsHandler->getPermAssetsView());
-$GLOBALS['xoopsTpl']->assign('permBalancesSubmit', $permissionsHandler->getPermBalancesSubmit());
+$GLOBALS['xoopsTpl']->assign('permBalancesCreate', $permissionsHandler->getPermBalancesCreate());
 $GLOBALS['xoopsTpl']->assign('permBalancesView', $permissionsHandler->getPermBalancesView());
 $GLOBALS['xoopsTpl']->assign('permTratemplatesSubmit', $permissionsHandler->getPermTratemplatesSubmit());
 $GLOBALS['xoopsTpl']->assign('permTratemplatesView', $permissionsHandler->getPermTratemplatesView());

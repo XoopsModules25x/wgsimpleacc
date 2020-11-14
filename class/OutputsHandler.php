@@ -84,7 +84,7 @@ class OutputsHandler extends \XoopsPersistableObjectHandler
         $form->addElement($balLevelDetails);
 
         $form->addElement(new \XoopsFormHidden('op', 'bal_output'));
-        $form->addElement(new \XoopsFormButtonTray('', \_MA_WGSIMPLEACC_BALANCE_CREATE, 'submit', '', false));
+        $form->addElement(new \XoopsFormButtonTray('', \_MA_WGSIMPLEACC_BALANCE_SUBMIT, 'submit', '', false));
 
 
         return $form;

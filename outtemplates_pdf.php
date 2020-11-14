@@ -41,7 +41,7 @@ function execute_output ($template, $outParams)
     $myts = MyTextSanitizer::getInstance();
 
     // Set defaults
-    $pdfFilename = \str_replace(['%y', '%n'], [$outParams['tra_year'], $outParams['tra_nb']], \_MA_WGSIMPLEACC_PDF_NAME) . '.pdf';
+    $pdfFilename = \str_replace(['%y', '%n'], [$outParams['tra_year'], $outParams['tra_nb']], \_MA_WGSIMPLEACC_PDF_TRANAME) . '.pdf';
     $title = $GLOBALS['xoopsConfig']['sitename'];
     $subject = 'Pdf Subject';
 

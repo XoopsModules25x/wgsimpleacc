@@ -142,14 +142,14 @@
                     <!-- Balances -->
                     <{if $permBalancesView}>
                         <li>
-                            <{if $permBalancesCreate}>
+                            <{if $permBalancesSubmit}>
                             <a href="#"><i class="fa fa-tasks fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_BALANCES}><span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="balances.php?op=list"><{$smarty.const._MA_WGSIMPLEACC_BALANCES_LIST}></a>
                                 </li>
                                 <li>
-                                    <a href="balances.php?op=new"><{$smarty.const._MA_WGSIMPLEACC_BALANCE_CREATE}></a>
+                                    <a href="balances.php?op=new"><{$smarty.const._MA_WGSIMPLEACC_BALANCE_SUBMIT}></a>
                                 </li>
                             </ul>
                             <{else}>
@@ -157,6 +157,7 @@
                             <{/if}>
                         </li>
                     <{/if}>
+                    <!-- Statistics -->
                     <li>
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_STATISTICS}><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
@@ -178,6 +179,7 @@
                             <{/if}>
                         </ul>
                     </li>
+                    <!-- Outputs -->
                     <li>
                         <a href="#"><i class="fa fa-download fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_OUTPUTS}><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
@@ -197,7 +199,6 @@
                                 </li>
                             <{/if}>
                         </ul>
-
                     </li>
                 </ul>
             </div>

@@ -50,6 +50,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_SUBMITTER', 'Submitter');
 \define('_MA_WGSIMPLEACC_LIST_CHILDS', 'Click to show/hide sub categories');
 \define('_MA_WGSIMPLEACC_APPROVE', 'Approve');
+\define('_MA_WGSIMPLEACC_DASHBOARD', 'Dashboard');
 // ---------------- Contents ----------------
 // There aren't
 \define('_MA_WGSIMPLEACC_THEREARENT_ACCOUNTS', "There aren't accounts at the moment");
@@ -212,8 +213,8 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_BALANCES', 'Balances');
 \define('_MA_WGSIMPLEACC_BALANCES_TITLE', 'Balances title');
 \define('_MA_WGSIMPLEACC_BALANCES_LIST', 'List of Balances');
-\define('_MA_WGSIMPLEACC_BALANCE_CREATE', 'Create balance');
-\define('_MA_WGSIMPLEACC_BALANCE_CREATE_FINAL', 'Create balance finally');
+\define('_MA_WGSIMPLEACC_BALANCE_SUBMIT', 'Create balance');
+\define('_MA_WGSIMPLEACC_BALANCE_SUBMIT_FINAL', 'Create balance finally');
 \define('_MA_WGSIMPLEACC_BALANCE_PRECALC', 'Pre-Calculate');
 \define('_MA_WGSIMPLEACC_BALANCES_TIMELINE', 'Development of assets per balance');
 // Caption of Balance
@@ -332,8 +333,11 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_CLASS_INCOME', 'Incomes');
 \define('_MA_WGSIMPLEACC_CLASS_BOTH', 'Both');
 //PDF files
-\define('_MA_WGSIMPLEACC_PDF_NAME', 'Transaction_%y_%n');
-\define('_MA_WGSIMPLEACC_PDF_HEADER', 'Transaction %y / %n');
+\define('_MA_WGSIMPLEACC_PDF_BUTTON', 'Output as PDF');
+\define('_MA_WGSIMPLEACC_PDF_TRANAME', 'Transaction_%y_%n');
+\define('_MA_WGSIMPLEACC_PDF_TRAHEADER', 'Transaction %y / %n');
+\define('_MA_WGSIMPLEACC_PDF_BALNAME', 'Output_Balances');
+\define('_MA_WGSIMPLEACC_PDF_BALHEADER', 'Output Balances');
 //output files
 \define('_MA_WGSIMPLEACC_OUTPUT_TRA_TITLE', 'Output Transaktions');
 // ---------------- Print ----------------

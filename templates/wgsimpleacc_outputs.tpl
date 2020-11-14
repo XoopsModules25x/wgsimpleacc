@@ -12,15 +12,15 @@
             <table class='table table-<{$table_type}>'>
                 <thead>
                 <tr class='head'>
-                    <td class="left"><{$smarty.const._MA_WGSIMPLEACC_BALANCE_ASID}></th>
-                    <td class="center"><{$smarty.const._MA_WGSIMPLEACC_BALANCE_FROM}></th>
-                    <td class="center"><{$smarty.const._MA_WGSIMPLEACC_BALANCE_TO}></th>
-                    <td class="center"><{$smarty.const._MA_WGSIMPLEACC_BALANCE_CURID}></th>
-                    <td class="right"><{$smarty.const._MA_WGSIMPLEACC_BALANCE_AMOUNTSTART}></th>
-                    <td class="right"><{$smarty.const._MA_WGSIMPLEACC_BALANCE_AMOUNTEND}></th>
-                    <td class="right"><{$smarty.const._MA_WGSIMPLEACC_BALANCE_DIFFERENCE}></th>
-                    <td class="center"><{$smarty.const._MA_WGSIMPLEACC_DATECREATED}></th>
-                    <td class="center"><{$smarty.const._MA_WGSIMPLEACC_SUBMITTER}></th>
+                    <th class="left"><{$smarty.const._MA_WGSIMPLEACC_BALANCE_ASID}></th>
+                    <th class="center"><{$smarty.const._MA_WGSIMPLEACC_BALANCE_FROM}></th>
+                    <th class="center"><{$smarty.const._MA_WGSIMPLEACC_BALANCE_TO}></th>
+                    <th class="center"><{$smarty.const._MA_WGSIMPLEACC_BALANCE_CURID}></th>
+                    <th class="right"><{$smarty.const._MA_WGSIMPLEACC_BALANCE_AMOUNTSTART}></th>
+                    <th class="right"><{$smarty.const._MA_WGSIMPLEACC_BALANCE_AMOUNTEND}></th>
+                    <th class="right"><{$smarty.const._MA_WGSIMPLEACC_BALANCE_DIFFERENCE}></th>
+                    <th class="center"><{$smarty.const._MA_WGSIMPLEACC_DATECREATED}></th>
+                    <th class="center"><{$smarty.const._MA_WGSIMPLEACC_SUBMITTER}></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -54,10 +54,10 @@
             <table class='table table-<{$table_type}>'>
                 <thead>
                 <tr class='head'>
-                    <td class="center"><{$smarty.const._MA_WGSIMPLEACC_ACCOUNT_NAME}></th>
-                    <td class="right"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_AMOUNTIN}></th>
-                    <td class="right"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_AMOUNTOUT}></th>
-                    <td class="right"><{$smarty.const._MA_WGSIMPLEACC_BALANCES_OUT_TOTAL}></th>
+                    <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ACCOUNT_NAME}></th>
+                    <th class="right"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_AMOUNTIN}></th>
+                    <th class="right"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_AMOUNTOUT}></th>
+                    <th class="right"><{$smarty.const._MA_WGSIMPLEACC_BALANCES_OUT_TOTAL}></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -85,10 +85,10 @@
             <table class='table table-<{$table_type}>'>
                 <thead>
                 <tr class='head'>
-                    <td class="center"><{$smarty.const._MA_WGSIMPLEACC_ALLOCATION_NAME}></th>
-                    <td class="right"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_AMOUNTIN}></th>
-                    <td class="right"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_AMOUNTOUT}></th>
-                    <td class="right"><{$smarty.const._MA_WGSIMPLEACC_BALANCES_OUT_TOTAL}></th>
+                    <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ALLOCATION_NAME}></th>
+                    <th class="right"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_AMOUNTIN}></th>
+                    <th class="right"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_AMOUNTOUT}></th>
+                    <th class="right"><{$smarty.const._MA_WGSIMPLEACC_BALANCES_OUT_TOTAL}></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -109,6 +109,9 @@
                 </tbody>
             </table>
         </div>
+    <{/if}>
+    <{if $buttonBalPdf}>
+        <a class='btn btn-primary pull-right' href='balances_pdf.php?balIds=<{$balIds}>&amp;level_alloc=<{$level_alloc}>&amp;level_account=<{$level_account}>' title='<{$smarty.const._MA_WGSIMPLEACC_PDF_BUTTON}>'><{$smarty.const._MA_WGSIMPLEACC_PDF_BUTTON}></a>
     <{/if}>
 <{/if}>
                 

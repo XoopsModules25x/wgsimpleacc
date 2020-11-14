@@ -2,7 +2,7 @@
 
 <div class="container-fluid">
 	<div class="row wgsa-content">
-        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-2">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <div class="col-sm-4 col-md-4 col-lg-2 col-xl-2">
                 <div class=""><a class="navbar-brand" href="index.php">wgSimpleAcc</a></div>
             </div>
@@ -23,6 +23,7 @@
                 </div>
             </div>
         </div>
+        <div class="clear"></div>
 		<div class="col-sm-4 col-md-4 col-lg-2 col-xl-2"><{include file='db:wgsimpleacc_navbar.tpl'}></div>
 		<div class="col-sm-8 col-md-8 col-lg-10 col-xl-10">
             <{include file=$template_sub}>

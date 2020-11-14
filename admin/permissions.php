@@ -52,7 +52,7 @@ $globalPerms = [
     Constants::PERM_ASSETS_VIEW => \_AM_WGSIMPLEACC_PERMISSIONS_ASSET_VIEW,
     Constants::PERM_ACCOUNTS_SUBMIT => \_AM_WGSIMPLEACC_PERMISSIONS_ACCOUNT_SUBMIT,
     Constants::PERM_ACCOUNTS_VIEW => \_AM_WGSIMPLEACC_PERMISSIONS_ACCOUNT_VIEW,
-    Constants::PERM_BALANCES_CREATE => \_AM_WGSIMPLEACC_PERMISSIONS_BALANCE_CREATE,
+    Constants::PERM_BALANCES_SUBMIT => \_AM_WGSIMPLEACC_PERMISSIONS_BALANCE_SUBMIT,
     Constants::PERM_BALANCES_VIEW => \_AM_WGSIMPLEACC_PERMISSIONS_BALANCE_VIEW,
     Constants::PERM_TRATEMPLATES_SUBMIT => \_AM_WGSIMPLEACC_PERMISSIONS_TRATEMPLATE_SUBMIT,
     Constants::PERM_TRATEMPLATES_VIEW => \_AM_WGSIMPLEACC_PERMISSIONS_TRATEMPLATE_VIEW,
@@ -61,13 +61,13 @@ $globalPerms = [
     ];
 
 $moduleId = $xoopsModule->getVar('mid');
-$permform = new \XoopsGroupPermForm($formTitle, $moduleId, $permName, $permDesc, 'admin/permissions.php');
+$permForm = new \XoopsGroupPermForm($formTitle, $moduleId, $permName, $permDesc, 'admin/permissions.php');
 $permFound = false;
 if ('global' === $op) {
 	foreach ($globalPerms as $gPermId => $gPermName) {
-		$permform->addItem($gPermId, $gPermName);
+		$permForm->addItem($gPermId, $gPermName);
 	}
-	$GLOBALS['xoopsTpl']->assign('form', $permform->render());
+	$GLOBALS['xoopsTpl']->assign('form', $permForm->render());
 	$permFound = true;
 }
 if ($op === 'approve_transactions' || $op === 'submit_transactions' || $op === 'view_transactions') {
@@ -75,13 +75,13 @@ if ($op === 'approve_transactions' || $op === 'submit_transactions' || $op === '
 	if ($transactionsCount > 0) {
 		$transactionsAll = $transactionsHandler->getAllTransactions(0, 'tra_desc');
 		foreach (\array_keys($transactionsAll) as $i) {
-			$permform->addItem($transactionsAll[$i]->getVar('tra_id'), $transactionsAll[$i]->getVar('tra_desc'));
+			$permForm->addItem($transactionsAll[$i]->getVar('tra_id'), $transactionsAll[$i]->getVar('tra_desc'));
 		}
-		$GLOBALS['xoopsTpl']->assign('form', $permform->render());
+		$GLOBALS['xoopsTpl']->assign('form', $permForm->render());
 	}
 	$permFound = true;
 }
-unset($permform);
+unset($permForm);
 if (true !== $permFound) {
 	\redirect_header('permissions.php', 3, \_AM_WGSIMPLEACC_NO_PERMISSIONS_SET);
 	exit();
