@@ -111,6 +111,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_TRANSACTION_YEARNB', 'Year/Number');
 \define('_MA_WGSIMPLEACC_TRANSACTION_DESC', 'Description');
 \define('_MA_WGSIMPLEACC_TRANSACTION_REFERENCE', 'Reference');
+\define('_MA_WGSIMPLEACC_TRANSACTION_REMARKS', 'Remarks');
 \define('_MA_WGSIMPLEACC_TRANSACTION_ACCID', 'Account');
 \define('_MA_WGSIMPLEACC_TRANSACTION_ALLID', 'Allocation');
 \define('_MA_WGSIMPLEACC_TRANSACTION_DATE', 'Date');

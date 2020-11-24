@@ -223,8 +223,9 @@ switch ($op) {
         }
         $transactionsObj->setVar('tra_year', $traYear);
         $transactionsObj->setVar('tra_nb', $traNb);
-		$transactionsObj->setVar('tra_desc', Request::getString('tra_desc', ''));
+		$transactionsObj->setVar('tra_desc', Request::getText('tra_desc', ''));
 		$transactionsObj->setVar('tra_reference', Request::getString('tra_reference', ''));
+        $transactionsObj->setVar('tra_remarks', Request::getText('tra_remarks', ''));
 		$transactionsObj->setVar('tra_accid', Request::getInt('tra_accid', 0));
 		$transactionsObj->setVar('tra_allid', Request::getInt('tra_allid', 0));
 		$transactionDateObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('tra_date'));

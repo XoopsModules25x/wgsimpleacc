@@ -14,3 +14,4 @@
  - fixed bug in permisson handler for guests (goffy)
  - implemented next output of balances (goffy)
  - implemented pdf output of balances (goffy)
+ - added field remarks to transactions (goffy)

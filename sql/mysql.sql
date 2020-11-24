@@ -17,6 +17,7 @@ CREATE TABLE `wgsimpleacc_transactions` (
   `tra_nb` INT(10) NOT NULL DEFAULT '0',
   `tra_desc` TEXT NOT NULL ,
   `tra_reference` VARCHAR(255) NOT NULL DEFAULT '',
+  `tra_remarks` TEXT NOT NULL,
   `tra_accid` INT(10) NOT NULL DEFAULT '0',
   `tra_allid` INT(10) NOT NULL DEFAULT '0',
   `tra_date` INT(11) NOT NULL DEFAULT '0',

@@ -29,13 +29,13 @@
                             <a href="#"><i class="fa fa-files-o fa-fw fa-lg"></i></i> <{$smarty.const._MA_WGSIMPLEACC_TRANSACTIONS}><span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="transactions.php?op=list"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTIONS_LIST}></a>
+                                    <a href="transactions.php?op=list"><i class="fa fa-list-ol fa-fw"></i> <{$smarty.const._MA_WGSIMPLEACC_TRANSACTIONS_LIST}></a>
                                 </li>
                                 <li>
-                                    <a href="transactions.php?op=new&tra_type=3"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_SUBMIT_INCOME}></a>
+                                    <a href="transactions.php?op=new&tra_type=3"><i class="fa fa-plus-square fa-fw"></i> <{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_SUBMIT_INCOME}></a>
                                 </li>
                                 <li>
-                                    <a href="transactions.php?op=new&tra_type=2"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_SUBMIT_EXPENSE}></a>
+                                    <a href="transactions.php?op=new&tra_type=2"><i class="fa fa-plus-square fa-fw"></i> <{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_SUBMIT_EXPENSE}></a>
                                 </li>
                             </ul>
                             <{else}>
@@ -50,10 +50,10 @@
                             <a href="#"><i class="fa fa-sitemap fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_ALLOCATIONS}><span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="allocations.php?op=list"><{$smarty.const._MA_WGSIMPLEACC_ALLOCATIONS_LIST}></a>
+                                    <a href="allocations.php?op=list"><i class="fa fa-list-ol fa-fw"></i> <{$smarty.const._MA_WGSIMPLEACC_ALLOCATIONS_LIST}></a>
                                 </li>
                                 <li>
-                                    <a href="allocations.php?op=new"><{$smarty.const._MA_WGSIMPLEACC_ALLOCATION_SUBMIT}></a>
+                                    <a href="allocations.php?op=new"><i class="fa fa-plus-square fa-fw"></i> <{$smarty.const._MA_WGSIMPLEACC_ALLOCATION_SUBMIT}></a>
                                 </li>
                             </ul>
                             <{else}>
@@ -68,10 +68,10 @@
                             <a href="#"><i class="fa fa-table fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_ACCOUNTS}><span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="accounts.php?op=list"><{$smarty.const._MA_WGSIMPLEACC_ACCOUNTS_LIST}></a>
+                                    <a href="accounts.php?op=list"><i class="fa fa-list-ol fa-fw"></i> <{$smarty.const._MA_WGSIMPLEACC_ACCOUNTS_LIST}></a>
                                 </li>
                                 <li>
-                                    <a href="accounts.php?op=new"><{$smarty.const._MA_WGSIMPLEACC_ACCOUNT_SUBMIT}></a>
+                                    <a href="accounts.php?op=new"><i class="fa fa-plus-square fa-fw"></i> <{$smarty.const._MA_WGSIMPLEACC_ACCOUNT_SUBMIT}></a>
                                 </li>
                             </ul>
                             <{else}>
@@ -86,10 +86,10 @@
                             <a href="#"><i class="fa fa-credit-card fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_ASSETS}><span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="assets.php?op=list"><{$smarty.const._MA_WGSIMPLEACC_ASSETS_LIST}></a>
+                                    <a href="assets.php?op=list"><i class="fa fa-list-ol fa-fw"></i> <{$smarty.const._MA_WGSIMPLEACC_ASSETS_LIST}></a>
                                 </li>
                                 <li>
-                                    <a href="assets.php?op=new"><{$smarty.const._MA_WGSIMPLEACC_ASSET_SUBMIT}></a>
+                                    <a href="assets.php?op=new"><i class="fa fa-plus-square fa-fw"></i> <{$smarty.const._MA_WGSIMPLEACC_ASSET_SUBMIT}></a>
                                 </li>
                             </ul>
                             <{else}>
@@ -108,10 +108,10 @@
                                         <a href="#"><i class="fa fa-paste fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_TRATEMPLATES}><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
                                             <li>
-                                                <a href="tratemplates.php?op=list"><{$smarty.const._MA_WGSIMPLEACC_TRATEMPLATES_LIST}></a>
+                                                <a href="tratemplates.php?op=list"><i class="fa fa-list-ol fa-fw"></i> <{$smarty.const._MA_WGSIMPLEACC_TRATEMPLATES_LIST}></a>
                                             </li>
                                             <li>
-                                                <a href="tratemplates.php?op=new"><{$smarty.const._MA_WGSIMPLEACC_TRATEMPLATE_SUBMIT}></a>
+                                                <a href="tratemplates.php?op=new"><i class="fa fa-plus-square fa-fw"></i> <{$smarty.const._MA_WGSIMPLEACC_TRATEMPLATE_SUBMIT}></a>
                                             </li>
                                         </ul>
                                         <{else}>
@@ -125,10 +125,10 @@
                                         <a href="#"><i class="fa fa-paste fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_OUTTEMPLATES}><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
                                             <li>
-                                                <a href="outtemplates.php?op=list"><{$smarty.const._MA_WGSIMPLEACC_OUTTEMPLATES_LIST}></a>
+                                                <a href="outtemplates.php?op=list"><i class="fa fa-list-ol fa-fw"></i> <{$smarty.const._MA_WGSIMPLEACC_OUTTEMPLATES_LIST}></a>
                                             </li>
                                             <li>
-                                                <a href="outtemplates.php?op=new"><{$smarty.const._MA_WGSIMPLEACC_OUTTEMPLATE_SUBMIT}></a>
+                                                <a href="outtemplates.php?op=new"><i class="fa fa-plus-square fa-fw"></i> <{$smarty.const._MA_WGSIMPLEACC_OUTTEMPLATE_SUBMIT}></a>
                                             </li>
                                         </ul>
                                         <{else}>
@@ -146,10 +146,10 @@
                             <a href="#"><i class="fa fa-tasks fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_BALANCES}><span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="balances.php?op=list"><{$smarty.const._MA_WGSIMPLEACC_BALANCES_LIST}></a>
+                                    <a href="balances.php?op=list"><i class="fa fa-list-ol fa-fw"></i> <{$smarty.const._MA_WGSIMPLEACC_BALANCES_LIST}></a>
                                 </li>
                                 <li>
-                                    <a href="balances.php?op=new"><{$smarty.const._MA_WGSIMPLEACC_BALANCE_SUBMIT}></a>
+                                    <a href="balances.php?op=new"><i class="fa fa-plus-square fa-fw"></i> <{$smarty.const._MA_WGSIMPLEACC_BALANCE_SUBMIT}></a>
                                 </li>
                             </ul>
                             <{else}>
