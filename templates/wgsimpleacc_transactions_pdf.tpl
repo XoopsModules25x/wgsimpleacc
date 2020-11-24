@@ -25,6 +25,10 @@
         <td style="border-bottom:1px solid #ccc;"><{$transaction.reference}></td>
     </tr>
     <tr>
+        <td style="width:30%;border-bottom:1px solid #ccc;"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_REMARKS}>:</td>
+        <td style="border-bottom:1px solid #ccc;"><{$transaction.remarks}></td>
+    </tr>
+    <tr>
         <td style="width:30%;border-bottom:1px solid #ccc;"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_ALLID}>:</td>
         <td style="border-bottom:1px solid #ccc;"><{$transaction.allocation}></td>
     </tr>

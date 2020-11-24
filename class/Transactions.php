@@ -43,8 +43,9 @@ class Transactions extends \XoopsObject
 		$this->initVar('tra_id', \XOBJ_DTYPE_INT);
         $this->initVar('tra_year', \XOBJ_DTYPE_INT);
         $this->initVar('tra_nb', \XOBJ_DTYPE_INT);
-		$this->initVar('tra_desc', \XOBJ_DTYPE_TXTAREA);
+		$this->initVar('tra_desc', \XOBJ_DTYPE_OTHER);
 		$this->initVar('tra_reference', \XOBJ_DTYPE_TXTBOX);
+        $this->initVar('tra_remarks', \XOBJ_DTYPE_OTHER);
 		$this->initVar('tra_accid', \XOBJ_DTYPE_INT);
 		$this->initVar('tra_allid', \XOBJ_DTYPE_INT);
 		$this->initVar('tra_date', \XOBJ_DTYPE_INT);
@@ -100,6 +101,7 @@ class Transactions extends \XoopsObject
 		if (!$action) {
 			$action = $_SERVER['REQUEST_URI'];
 		}
+        $isAdmin = $GLOBALS['xoopsUser']->isAdmin($GLOBALS['xoopsModule']->mid());
         $traClass = $this->isNew() ? $type : $this->getVar('tra_class');
         // Title
         $title = $this->isNew() ? \sprintf(\_MA_WGSIMPLEACC_TRANSACTION_ADD) : \sprintf(\_MA_WGSIMPLEACC_TRANSACTION_EDIT);
@@ -156,8 +158,38 @@ class Transactions extends \XoopsObject
         }
         // Form Text traReference
         $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_TRANSACTION_REFERENCE, 'tra_reference', 50, 255, $this->getVar('tra_reference')));
-        // Form Editor TextArea traDesc
-		$form->addElement(new \XoopsFormTextArea(\_MA_WGSIMPLEACC_TRANSACTION_DESC, 'tra_desc', $this->getVar('tra_desc', 'e'), 4, 47));
+        // Form Editor DhtmlTextArea traDesc
+        $editorConfigs = [];
+        if ($isAdmin) {
+            $editor = $helper->getConfig('editor_admin');
+        } else {
+            $editor = $helper->getConfig('editor_user');
+        }
+        $editorConfigs['name'] = 'tra_desc';
+        $editorConfigs['value'] = $this->getVar('tra_desc', 'e');
+        $editorConfigs['rows'] = 5;
+        $editorConfigs['cols'] = 40;
+        $editorConfigs['width'] = '100%';
+        $editorConfigs['height'] = '400px';
+        $editorConfigs['editor'] = $editor;
+        $traDesc = new \XoopsFormEditor(\_MA_WGSIMPLEACC_TRANSACTION_DESC, 'tra_desc', $editorConfigs);
+        $form->addElement($traDesc);
+        // Form Editor DhtmlTextArea traRemarks
+        $editorConfigs = [];
+        if ($isAdmin) {
+            $editor = $helper->getConfig('editor_admin');
+        } else {
+            $editor = $helper->getConfig('editor_user');
+        }
+        $editorConfigs['name'] = 'tra_remarks';
+        $editorConfigs['value'] = $this->getVar('tra_remarks', 'e');
+        $editorConfigs['rows'] = 5;
+        $editorConfigs['cols'] = 40;
+        $editorConfigs['width'] = '100%';
+        $editorConfigs['height'] = '400px';
+        $editorConfigs['editor'] = $editor;
+        $traRemarks = new \XoopsFormEditor(\_MA_WGSIMPLEACC_TRANSACTION_REMARKS, 'tra_remarks', $editorConfigs);
+        $form->addElement($traRemarks);
 		// Form Table accounts
 		$accountsHandler = $helper->getHandler('Accounts');
 		$traAccidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_ACCID, 'tra_accid', $this->getVar('tra_accid'), 5);
@@ -277,44 +309,47 @@ class Transactions extends \XoopsObject
 	{
 		$helper  = \XoopsModules\Wgsimpleacc\Helper::getInstance();
 		$utility = new \XoopsModules\Wgsimpleacc\Utility();
+        $editorMaxchar = $helper->getConfig('editor_maxchar');
+
 		$ret = $this->getValues($keys, $format, $maxDepth);
-		$ret['id']          = $this->getVar('tra_id');
-        $ret['year']        = $this->getVar('tra_year');
-        $ret['nb']          = $this->getVar('tra_nb');
-        $ret['year_nb']     = $this->getVar('tra_year') . '/' . \substr('00000' . $this->getVar('tra_nb'), -5);
-		$ret['desc']        = \strip_tags($this->getVar('tra_desc', 'e'));
-		$editorMaxchar = $helper->getConfig('editor_maxchar');
-		$ret['desc_short']  = $utility::truncateHtml($ret['desc'], $editorMaxchar);
-		$ret['reference']   = $this->getVar('tra_reference');
-		$accountsHandler = $helper->getHandler('Accounts');
-		$accountsObj = $accountsHandler->get($this->getVar('tra_accid'));
-		$ret['accid']       = $accountsObj->getVar('acc_key');
-        $ret['account']     = $accountsObj->getVar('acc_key') . ' ' . $accountsObj->getVar('acc_name');
-		$allocationsHandler = $helper->getHandler('Allocations');
-		$allocationsObj = $allocationsHandler->get($this->getVar('tra_allid'));
-		$ret['allocation']  = $allocationsObj->getVar('all_name');
-		$ret['date']        = \formatTimestamp($this->getVar('tra_date'), 's');
-		$currenciesHandler = $helper->getHandler('Currencies');
-		$currenciesObj = $currenciesHandler->get($this->getVar('tra_curid'));
+		$ret['id']            = $this->getVar('tra_id');
+        $ret['year']          = $this->getVar('tra_year');
+        $ret['nb']            = $this->getVar('tra_nb');
+        $ret['year_nb']       = $this->getVar('tra_year') . '/' . \substr('00000' . $this->getVar('tra_nb'), -5);
+		$ret['desc']          = $this->getVar('tra_desc', 'e');
+		$ret['desc_short']    = $utility::truncateHtml($ret['desc'], $editorMaxchar);
+		$ret['reference']     = $this->getVar('tra_reference');
+        $ret['remarks']       = $this->getVar('tra_remarks', 'e');
+        $ret['remarks_short'] = $utility::truncateHtml($ret['remarks'], $editorMaxchar);
+		$accountsHandler      = $helper->getHandler('Accounts');
+		$accountsObj          = $accountsHandler->get($this->getVar('tra_accid'));
+		$ret['accid']         = $accountsObj->getVar('acc_key');
+        $ret['account']       = $accountsObj->getVar('acc_key') . ' ' . $accountsObj->getVar('acc_name');
+		$allocationsHandler   = $helper->getHandler('Allocations');
+		$allocationsObj       = $allocationsHandler->get($this->getVar('tra_allid'));
+		$ret['allocation']    = $allocationsObj->getVar('all_name');
+		$ret['date']          = \formatTimestamp($this->getVar('tra_date'), 's');
+		$currenciesHandler    = $helper->getHandler('Currencies');
+		$currenciesObj        = $currenciesHandler->get($this->getVar('tra_curid'));
         if (\is_object($currenciesObj)) {
-            $ret['curid']      = $currenciesObj->getVar('cur_code');
+            $ret['curid'] = $currenciesObj->getVar('cur_code');
         }
-		$ret['amountin']    =  Utility::FloatToString($this->getVar('tra_amountin'));
-		$ret['amountout']   =  Utility::FloatToString($this->getVar('tra_amountout'));
+		$ret['amountin']      =  Utility::FloatToString($this->getVar('tra_amountin'));
+		$ret['amountout']     =  Utility::FloatToString($this->getVar('tra_amountout'));
 		if ($this->getVar('tra_amountin') > 0) {
             $ret['amount'] = $ret['amountin'];
         } else {
             $ret['amount'] = $ret['amountout'];
         }
-        $taxesHandler = $helper->getHandler('Taxes');
-		$taxesObj = $taxesHandler->get($this->getVar('tra_taxid'));
-		$ret['taxid']       = $taxesObj->getVar('tax_name');
+        $taxesHandler         = $helper->getHandler('Taxes');
+		$taxesObj             = $taxesHandler->get($this->getVar('tra_taxid'));
+		$ret['taxid']         = $taxesObj->getVar('tax_name');
         $ret['taxrate']       = $taxesObj->getVar('tax_rate');
-        $assetsHandler = $helper->getHandler('Assets');
-        $assetsObj = $assetsHandler->get($this->getVar('tra_asid'));
-        $ret['asset']        = $assetsObj->getVar('as_name');
-		$status             = $this->getVar('tra_status');
-		$ret['status']      = $status;
+        $assetsHandler        = $helper->getHandler('Assets');
+        $assetsObj            = $assetsHandler->get($this->getVar('tra_asid'));
+        $ret['asset']         = $assetsObj->getVar('as_name');
+		$status               = $this->getVar('tra_status');
+		$ret['status']        = $status;
 		switch ($status) {
 			case Constants::STATUS_NONE:
 			default:
@@ -349,8 +384,8 @@ class Transactions extends \XoopsObject
                 $class_text = \_MA_WGSIMPLEACC_CLASS_INCOME;
                 break;
         }
-        $ret['class_text'] = $class_text;
-        $ret['balid']    = $this->getVar('tra_balid');
+        $ret['class_text']  = $class_text;
+        $ret['balid']       = $this->getVar('tra_balid');
 		$ret['datecreated'] = \formatTimestamp($this->getVar('tra_datecreated'), 's');
 		$ret['submitter']   = \XoopsUser::getUnameFromId($this->getVar('tra_submitter'));
         $filesHandler = $helper->getHandler('Files');

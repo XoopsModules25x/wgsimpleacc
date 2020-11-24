@@ -15,6 +15,10 @@
 				<td><{$transaction.reference}></td>
 			</tr>
 			<tr>
+				<th><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_REMARKS}></th>
+				<td><{$transaction.remarks}></td>
+			</tr>
+			<tr>
 				<th><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_ACCID}></th>
 				<td><{$transaction.account}></td>
 			</tr>
