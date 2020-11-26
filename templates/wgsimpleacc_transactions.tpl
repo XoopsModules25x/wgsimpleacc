@@ -67,3 +67,32 @@
         <{$smarty.const._MA_WGSIMPLEACC_THEREARENT_TRANSACTIONS}>
     <{/if}>
 <{/if}>
+
+<div class="clear"></div>
+<div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="infoModalLabel">Default Title</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="<{$smarty.const._CLOSE}>">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><{$smarty.const._CLOSE}></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#infoModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var info = button.data('info');
+        var title = button.data('title');
+        var modal = $(this);
+        modal.find('.modal-title').text(title);
+        modal.find('.modal-body').html(info);
+    })
+</script>

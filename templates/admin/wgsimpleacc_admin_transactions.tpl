@@ -9,6 +9,7 @@
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_YEARNB}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_DESC}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_REFERENCE}></th>
+				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_REMARKS}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_ACCID}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_ALLID}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_DATE}></th>
@@ -34,6 +35,7 @@
 				<td class='center'><{$transaction.year}>/<{$transaction.nb}></td>
 				<td class='center'><{$transaction.desc_short}></td>
 				<td class='center'><{$transaction.reference}></td>
+				<td class='center'><{$transaction.remarks_short}></td>
 				<td class='center'><{$transaction.accid}></td>
 				<td class='center'><{$transaction.allocation}></td>
 				<td class='center'><{$transaction.date}></td>

@@ -119,7 +119,7 @@ switch ($op) {
 			$crTransactions->add(new \Criteria('tra_id', $traId));
 		} else {
             $tradateFrom = 0;
-            $tradateTo = \time();
+            $tradateTo = \time() + (10 * 365 * 24 * 60 * 60);;
             if (Constants::FILTER_PYEARLY == $period_type) {
                 //filter data based on form select year
                 if ($filterYear > Constants::FILTER_TYPEALL) {
@@ -164,6 +164,9 @@ switch ($op) {
 				$transactions[$i] = $transactionsAll[$i]->getValuesTransactions();
                 $transactions[$i]['editable'] = $permissionsHandler->getPermTransactionsEdit($transactions[$i]['tra_submitter'], $transactions[$i]['tra_status']);
                 $transactions[$i]['waiting'] = (Constants::STATUS_SUBMITTED == $transactions[$i]['tra_status']);
+                if ('' !== (string)$transactions[$i]['tra_remarks']) {
+                    $transactions[$i]['modaltitle'] = str_replace('%s', $transactions[$i]['year_nb'], \_MA_WGSIMPLEACC_MODAL_TRATITLE);
+                }
 				$keywords[$i] = $transactionsAll[$i]->getVar('tra_desc');
 			}
 			$GLOBALS['xoopsTpl']->assign('transactions', $transactions);
@@ -258,7 +261,7 @@ switch ($op) {
 			if (Constants::STATUS_SUBMITTED == $traStatus) {
 				// Event approve notification
 				$notificationHandler->triggerEvent('global', 0, 'global_approve', $tags);
-				//$notificationHandler->triggerEvent('transactions', $newTraId, 'transaction_approve', $tags);
+				$notificationHandler->triggerEvent('transactions', $newTraId, 'transaction_approve', $tags);
 			} else {
 				if ($traId > 0) {
 					// Event modify notification

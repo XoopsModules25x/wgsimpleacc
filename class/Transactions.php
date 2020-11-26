@@ -272,6 +272,7 @@ class Transactions extends \XoopsObject
             // Form Select traClass
             $traBalidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_BALID, 'tra_balid', $traBalid);
             $balancesHandler = $helper->getHandler('Balances');
+            $traBalidSelect->addOption(0, '');
             $traBalidSelect->addOptionArray($balancesHandler->getList());
             $form->addElement($traBalidSelect);
             $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_TRANSACTION_COMMENTS, 'tra_comments', 50, 255, $traComments));

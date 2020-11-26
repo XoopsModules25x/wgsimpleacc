@@ -316,6 +316,8 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_OUTPUTS', 'Ausgabe');
 // Submit
 \define('_MA_WGSIMPLEACC_SUBMIT', 'Einsenden');
+// Modal
+\define('_MA_WGSIMPLEACC_MODAL_TRATITLE', 'Details zu Transaktion %s');
 // Form
 \define('_MA_WGSIMPLEACC_FORM_OK', 'Erfolgreich gespeichert');
 \define('_MA_WGSIMPLEACC_FORM_DELETE_OK', 'Erfolgreich gelöscht');

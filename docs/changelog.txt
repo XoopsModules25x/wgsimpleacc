@@ -15,3 +15,4 @@
  - implemented next output of balances (goffy)
  - implemented pdf output of balances (goffy)
  - added field remarks to transactions (goffy)
+ - added modal for remarks to transactions (goffy)

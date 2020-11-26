@@ -27,7 +27,7 @@
 }
 
 .wgsa-transaction-img-list {
-	max-height:50px !important;
+	max-height:200px !important;
 }
 
 .wgsa-nav-icon {
@@ -54,11 +54,19 @@
 	max-height:50px;
 }
 
+.wgsa-files-badge {
+	background-color:#ffc107;
+}
+
 .wgsa-output-sum td {
 	font-weight:500;
 	font-size: 120%;
 	border-top:1px solid #ddd;
 	border-bottom:1px double #ddd;
+}
+
+.wgsa-modal {
+	cursor: pointer;
 }
 
 ul.menu {

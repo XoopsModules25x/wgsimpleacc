@@ -7,4 +7,4 @@ https://www.jqueryscript.net/other/dashboard-starter-template-bootstrap.html
 
 
 
-Output balances as PDF
+klick auf Foto Transaktion in Modal groß anzeigen
