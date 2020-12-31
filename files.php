@@ -104,8 +104,6 @@ switch ($op) {
         $crFiles->add(new \Criteria('fil_traid', $filTraid));
 		$filesCount = $filesHandler->getCount($crFiles);
 		$GLOBALS['xoopsTpl']->assign('filesCount', $filesCount);
-		$crFiles->setStart($start);
-		$crFiles->setLimit($limit);
 		$filesAll = $filesHandler->getAll($crFiles);
 		if ($filesCount > 0) {
 			$files = [];

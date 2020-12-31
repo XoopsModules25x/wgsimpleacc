@@ -6,8 +6,3 @@ https://codepen.io/abergin/pen/ihlDf
 https://www.jqueryscript.net/other/dashboard-starter-template-bootstrap.html
 
 
-
-Statistiken:
-bei Zuordnung: wenn Unterzuordnung, dann alles aus Überebene ohne Zuordnung als "ohne Zuordnung" anzeigen
-
-
