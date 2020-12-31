@@ -291,7 +291,7 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
             $select .= ', ' . $var;
         }
         $insert .= ') ';
-        $result = $GLOBALS['xoopsDB']->queryF($insert . $select . $from . $where) or die ("MySQL-Error: " . mysqli_error());
+        $GLOBALS['xoopsDB']->queryF($insert . $select . $from . $where) or die ("MySQL-Error: " . mysqli_error());
 
         return true;
     }

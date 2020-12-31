@@ -74,7 +74,10 @@ switch ($op) {
                 //zip, csv, txt, xlsx, docx
                 header("Content-Type: $fileMimetype");
                 header('Content-Disposition: attachment; filename="' . $filePath . '"');
-                readfile($dir.$file);
+                $result = @readfile($dir . $file);
+                if ($result === FALSE) {
+                    throw new Exception('Cannot access ' . $dir . $file .' to read.');
+                }
                 exit;
                 break;
             case 'application/pdf':
@@ -84,7 +87,10 @@ switch ($op) {
                 header('Content-Transfer-Encoding: binary');
                 header('Accept-Ranges: bytes');
                 // Read the file
-                @readfile($filePath);
+                $result = @readfile($filePath);
+                if ($result === FALSE) {
+                    throw new Exception("Cannot access '$filePath' to read.");
+                }
                 exit;
                 break;
         }
