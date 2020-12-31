@@ -1,5 +1,21 @@
 @charset "UTF-8";
 
+/* pagination */
+#xo-pagenav {
+    margin: 20px 0;
+}
+
+.xo-pagact, 
+.xo-counterpage,
+.xo-pagarrow {
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius:5px;
+    display: inline-block;
+    padding: 3px 6px;
+}
+
 .wgsa-startminheader-link {
     margin:10px 5px !important;
     font-size:150%;
@@ -27,7 +43,7 @@
 }
 
 .wgsa-transaction-img-list {
-	max-height:50px !important;
+	max-height:200px !important;
 }
 
 .wgsa-nav-icon {
@@ -54,11 +70,19 @@
 	max-height:50px;
 }
 
+.wgsa-files-badge {
+	background-color:#ffc107;
+}
+
 .wgsa-output-sum td {
 	font-weight:500;
 	font-size: 120%;
 	border-top:1px solid #ddd;
 	border-bottom:1px double #ddd;
+}
+
+.wgsa-modal {
+	cursor: pointer;
 }
 
 ul.menu {
@@ -77,10 +101,6 @@ ul.menu > li + li:before {
 
 .printOnly {
 	display: none;
-}
-
-img {
-	max-width: 300px;
 }
 
 .list-sort-panelbody {

@@ -1,23 +1,23 @@
-Hello {X_UNAME},
+Hallo {X_UNAME},
 
-The item "{ITEM_NAME}" has been modified at {X_SITENAME}.
+Der Eintrag "{ITEM_NAME}" auf {X_SITENAME} wurde abgeändert.
 
-You can view this item here:
+Du findest den Eintrag hier:
 {ITEM_URL}
 
 ------------------------------------------------------------------
 
-You are receiving this message because you selected to be notified when an item is modified on our site.
+Du erhältst diese Nachricht weil du dich entschieden hast, dass du über geänderte Einträge auf deiner Webseite informiert werden möchtest.
 
-If this is an error or you wish not to receive further such notifications, please update your subscriptions by visiting the link below:
+Wenn du diese Nachricht irrtümlich erhalten hast oder du keine weiteren Benachrichtigungen wünscht, dann ändere deine Abonnements unter folgendem Link:
 {X_UNSUBSCRIBE_URL}
 
-Please do not reply to this message.
+Bitte antworte nicht auf diese Nachricht
 
 ------------------------------------------------------------------
 
 {X_SITENAME} ({X_SITEURL})
-webmaster
+Webmaster
 {X_ADMINMAIL}
 
 ------------------------------------------------------------------

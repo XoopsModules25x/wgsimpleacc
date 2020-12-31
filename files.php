@@ -62,7 +62,39 @@ $GLOBALS['xoopsTpl']->assign('fil_traid', $filTraid);
 
 
 switch ($op) {
-	case 'show':
+    case 'showfile':
+        $filesObj = $filesHandler->get($filId);
+        $filName = $filesObj->getVar('fil_name');
+        $filePath = \XOOPS_ROOT_PATH . '/uploads/wgsimpleacc/files/' . $filName;
+        $fileMimetype   = $filesObj->getVar('fil_type');
+
+        switch ($fileMimetype) {
+            case '':
+            default:
+                //zip, csv, txt, xlsx, docx
+                header("Content-Type: $fileMimetype");
+                header('Content-Disposition: attachment; filename="' . $filePath . '"');
+                $result = @readfile($dir . $file);
+                if ($result === FALSE) {
+                    throw new Exception('Cannot access ' . $dir . $file .' to read.');
+                }
+                exit;
+                break;
+            case 'application/pdf':
+                // Header content type
+                header('Content-type: application/pdf');
+                header('Content-Disposition: inline; filename="' . $filePath . '"');
+                header('Content-Transfer-Encoding: binary');
+                header('Accept-Ranges: bytes');
+                // Read the file
+                $result = @readfile($filePath);
+                if ($result === FALSE) {
+                    throw new Exception("Cannot access '$filePath' to read.");
+                }
+                exit;
+                break;
+        }
+        break;
 	case 'list':
 	default:
 	    if ($filTraid > 0) {
@@ -78,8 +110,6 @@ switch ($op) {
         $crFiles->add(new \Criteria('fil_traid', $filTraid));
 		$filesCount = $filesHandler->getCount($crFiles);
 		$GLOBALS['xoopsTpl']->assign('filesCount', $filesCount);
-		$crFiles->setStart($start);
-		$crFiles->setLimit($limit);
 		$filesAll = $filesHandler->getAll($crFiles);
 		if ($filesCount > 0) {
 			$files = [];

@@ -39,6 +39,7 @@ require_once 'common.php';
 \define('_MI_WGSIMPLEACC_ADMENU11', 'Vorlagen Ausgabe');
 \define('_MI_WGSIMPLEACC_ADMENU12', 'Berechtigungen');
 \define('_MI_WGSIMPLEACC_ADMENU13', 'Feedback');
+\define('_MI_WGSIMPLEACC_ADMENU14', 'Transaktionen Historie');
 \define('_MI_WGSIMPLEACC_ABOUT', 'Über');
 // ---------------- Admin Nav ----------------
 \define('_MI_WGSIMPLEACC_ADMIN_PAGER', 'Listen Admin');

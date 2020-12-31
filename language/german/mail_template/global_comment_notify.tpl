@@ -1,23 +1,23 @@
-Hello {X_UNAME},
+Hallo {X_UNAME},
 
-A new comment has been added to "{ITEM_NAME}" at {X_SITENAME}.
+Ein neuer Kommentar wurde zu "{ITEM_NAME}" auf {X_SITENAME} hinzugefügt.
 
-You can view this comment here:
+Du findest den Kommentar hier:
 {ITEM_URL}
 
 ------------------------------------------------------------------
 
-You are receiving this message because you selected to be notified when a new comment is added to an item of our site.
+Du erhältst diese Nachricht weil du dich entschieden hast, dass du über neue Kommentare auf deiner Webseite informiert werden möchtest.
 
-If this is an error or you wish not to receive further such notifications, please update your subscriptions by visiting the link below:
+Wenn du diese Nachricht irrtümlich erhalten hast oder du keine weiteren Benachrichtigungen wünscht, dann ändere deine Abonnements unter folgendem Link:
 {X_UNSUBSCRIBE_URL}
 
-Please do not reply to this message.
+Bitte antworte nicht auf diese Nachricht
 
 ------------------------------------------------------------------
 
 {X_SITENAME} ({X_SITEURL})
-webmaster
+Webmaster
 {X_ADMINMAIL}
 
 ------------------------------------------------------------------

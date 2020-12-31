@@ -1,23 +1,23 @@
-Hello {X_UNAME},
+Hallo {X_UNAME},
 
-The item "{ITEM_NAME}" is waiting for approval at {X_SITENAME}.
+Der Eintrag "{ITEM_NAME}" wartet auf {X_SITENAME} auf die Freigabe.
 
-You can view this item here:
+Du findest den Eintrag hier:
 {ITEM_URL}
 
 ------------------------------------------------------------------
 
-You are receiving this message because you selected to be notified when an item is waitung for approval on our site.
+Du erhältst diese Nachricht weil du dich entschieden hast, dass du über offene Freigaben auf deiner Webseite informiert werden möchtest.
 
-If this is an error or you wish not to receive further such notifications, please update your subscriptions by visiting the link below:
+Wenn du diese Nachricht irrtümlich erhalten hast oder du keine weiteren Benachrichtigungen wünscht, dann ändere deine Abonnements unter folgendem Link:
 {X_UNSUBSCRIBE_URL}
 
-Please do not reply to this message.
+Bitte antworte nicht auf diese Nachricht
 
 ------------------------------------------------------------------
 
 {X_SITENAME} ({X_SITEURL})
-webmaster
+Webmaster
 {X_ADMINMAIL}
 
 ------------------------------------------------------------------

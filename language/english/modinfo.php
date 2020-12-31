@@ -39,6 +39,7 @@ require_once 'common.php';
 \define('_MI_WGSIMPLEACC_ADMENU11', 'Templates Outputs');
 \define('_MI_WGSIMPLEACC_ADMENU12', 'Permissions');
 \define('_MI_WGSIMPLEACC_ADMENU13', 'Feedback');
+\define('_MI_WGSIMPLEACC_ADMENU14', 'Transactions History');
 \define('_MI_WGSIMPLEACC_ABOUT', 'About');
 // ---------------- Admin Nav ----------------
 \define('_MI_WGSIMPLEACC_ADMIN_PAGER', 'Admin pager');

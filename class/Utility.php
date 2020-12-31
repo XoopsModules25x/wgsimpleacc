@@ -56,6 +56,35 @@ class Utility
     }
 
     /**
+     * @public function to get text of status
+     * @param $status
+     * @return string
+     */
+    public static function getStatusText($status)
+    {
+        switch ($status) {
+            case Constants::STATUS_NONE:
+            default:
+                $status_text = \_AM_WGSIMPLEACC_STATUS_NONE;
+                break;
+            case Constants::STATUS_OFFLINE:
+                $status_text = \_AM_WGSIMPLEACC_STATUS_OFFLINE;
+                break;
+            case Constants::STATUS_SUBMITTED:
+                $status_text = \_AM_WGSIMPLEACC_STATUS_SUBMITTED;
+                break;
+            case Constants::STATUS_APPROVED:
+                $status_text = \_AM_WGSIMPLEACC_STATUS_APPROVED;
+                break;
+            case Constants::STATUS_LOCKED:
+                $status_text = \_AM_WGSIMPLEACC_STATUS_LOCKED;
+                break;
+        }
+
+        return $status_text;
+    }
+
+    /**
      * @public function to get colors for charts
      * @return array
      */

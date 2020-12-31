@@ -28,7 +28,7 @@ $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 // ------------------- Informations ------------------- //
 $modversion = [
 	'name'                => \_MI_WGSIMPLEACC_NAME,
-	'version'             => 1.0,
+	'version'             => 1.1,
 	'description'         => \_MI_WGSIMPLEACC_DESC,
 	'author'              => 'Goffy - XOOPS Development Team',
 	'author_mail'         => 'webmaster@wedega.com',
@@ -40,7 +40,7 @@ $modversion = [
 	'help'                => 'page=help',
 	'release_info'        => 'release_info',
 	'release_file'        => \XOOPS_URL . '/modules/wgsimpleacc/docs/release_info file',
-	'release_date'        => '2020/09/18',
+	'release_date'        => '2020/12/31',
 	'manual'              => 'link to manual file',
 	'manual_file'         => \XOOPS_URL . '/modules/wgsimpleacc/docs/install.txt',
 	'min_php'             => '7.3',
@@ -60,7 +60,7 @@ $modversion = [
 	'support_name'        => 'Support Forum',
 	'module_website_url'  => 'www.xoops.org',
 	'module_website_name' => 'XOOPS Project',
-	'release'             => '09/01/2020',
+	'release'             => '12/31/2020',
 	'module_status'       => 'Beta 1',
 	'system_menu'         => 1,
 	'hasAdmin'            => 1,
@@ -88,6 +88,7 @@ $modversion['templates'] = [
     ['file' => 'wgsimpleacc_admin_permissions.tpl', 'description' => '', 'type' => 'admin'],
 	['file' => 'wgsimpleacc_admin_taxes.tpl', 'description' => '', 'type' => 'admin'],
     ['file' => 'wgsimpleacc_admin_transactions.tpl', 'description' => '', 'type' => 'admin'],
+    ['file' => 'wgsimpleacc_admin_trahistories.tpl', 'description' => '', 'type' => 'admin'],
     ['file' => 'wgsimpleacc_admin_tratemplates.tpl', 'description' => '', 'type' => 'admin'],
 	// User templates
     ['file' => 'wgsimpleacc_main_startmin.tpl', 'description' => ''],
@@ -116,6 +117,7 @@ $modversion['templates'] = [
 	['file' => 'wgsimpleacc_tratemplates_list.tpl', 'description' => ''],
 	['file' => 'wgsimpleacc_transactions.tpl', 'description' => ''],
 	['file' => 'wgsimpleacc_transactions_list.tpl', 'description' => ''],
+    ['file' => 'wgsimpleacc_transactions_hist.tpl', 'description' => ''],
 	['file' => 'wgsimpleacc_transactions_item.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_transactions_pdf.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_transactions_print.tpl', 'description' => ''],
@@ -126,6 +128,7 @@ $modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
 $modversion['tables'] = [
 	'wgsimpleacc_accounts',
 	'wgsimpleacc_transactions',
+    'wgsimpleacc_trahistories',
 	'wgsimpleacc_allocations',
 	'wgsimpleacc_assets',
 	'wgsimpleacc_currencies',

@@ -92,6 +92,53 @@ if ($transactionsCount > 0) {
     $strFilter .= "&amp;filterMonthFrom=$filterMonthFrom&amp;filterYearFrom=$filterYearFrom";
     $strFilter .= "&amp;filterMonthTo=$filterMonthTo&amp;filterYearTo=$filterYearTo";
     if ($allocationsCount > 0) {
+        if ($allPid > 0) {
+            //read current allocations
+            $allocCurrObj = $allocationsHandler->get($allPid);
+            $allName = $allocCurrObj->getVar('all_name');
+            $sumAmountin = 0;
+            $sumAmountout = 0;
+            //create filter
+            $tradateFrom = 0;
+            $tradateTo = \time();
+            if (Constants::FILTER_PYEARLY == $period_type) {
+                //filter data based on form select year
+                if ($filterYear > Constants::FILTER_TYPEALL) {
+                    $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYear-1-1");
+                    $tradateFrom = $dtime->getTimestamp();
+                    $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYear-12-31");
+                    $tradateTo = $dtime->getTimestamp();
+                }
+            } else {
+                //filter data based on form select month and year from/to
+                if ($filterType > Constants::FILTER_TYPEALL) {
+                    $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYearFrom-$filterMonthFrom-1");
+                    $tradateFrom = $dtime->getTimestamp();
+                    $last = \DateTime::createFromFormat('Y-m-d', "$filterYearTo-$filterMonthTo-1")->format('Y-m-t');
+                    $dtime = \DateTime::createFromFormat('Y-m-d', $last);
+                    $tradateTo = $dtime->getTimestamp();
+                }
+            }
+
+            $crTransactions = new \CriteriaCompo();
+            $crTransactions->add(new \Criteria('tra_allid', $allPid));
+            $crTransactions->add(new \Criteria('tra_date', $tradateFrom, '>='));
+            $crTransactions->add(new \Criteria('tra_date', $tradateTo, '<='));
+            $transactionsAll   = $transactionsHandler->getAll($crTransactions);
+            foreach (\array_keys($transactionsAll) as $i) {
+                $sumAmountin += $transactionsAll[$i]->getVar('tra_amountin');
+                $sumAmountout += $transactionsAll[$i]->getVar('tra_amountout');
+            }
+
+            if ((float)$sumAmountin > 0 || (float)$sumAmountout > 0) {
+                $transactions_datain .= $sumAmountin . ',';
+                $transactions_dataout .= $sumAmountout . ',';
+                $allocations_list[] = ['all_id' => $allId, 'all_name' => $allName];
+                $transactions_labels .= "'" . str_replace('%s', $allName, \_MA_WGSIMPLEACC_ALLOCATION_CURRID) . "',";
+            }
+
+            unset($crAllocCur, $allocCurObj, $crTransactions);
+        }
         // Go through all allocations
         $crAlloc2 = new \CriteriaCompo();
         $crAlloc2->add(new \Criteria('all_id', $allPid));

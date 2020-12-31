@@ -119,7 +119,7 @@ switch ($op) {
 			$crTransactions->add(new \Criteria('tra_id', $traId));
 		} else {
             $tradateFrom = 0;
-            $tradateTo = \time();
+            $tradateTo = \time() + (10 * 365 * 24 * 60 * 60);;
             if (Constants::FILTER_PYEARLY == $period_type) {
                 //filter data based on form select year
                 if ($filterYear > Constants::FILTER_TYPEALL) {
@@ -164,6 +164,9 @@ switch ($op) {
 				$transactions[$i] = $transactionsAll[$i]->getValuesTransactions();
                 $transactions[$i]['editable'] = $permissionsHandler->getPermTransactionsEdit($transactions[$i]['tra_submitter'], $transactions[$i]['tra_status']);
                 $transactions[$i]['waiting'] = (Constants::STATUS_SUBMITTED == $transactions[$i]['tra_status']);
+                if ('' !== (string)$transactions[$i]['tra_remarks']) {
+                    $transactions[$i]['modaltitle'] = str_replace('%s', $transactions[$i]['year_nb'], \_MA_WGSIMPLEACC_MODAL_TRATITLE);
+                }
 				$keywords[$i] = $transactionsAll[$i]->getVar('tra_desc');
 			}
 			$GLOBALS['xoopsTpl']->assign('transactions', $transactions);
@@ -196,11 +199,13 @@ switch ($op) {
         $createYearNb = false;
 		if ($traId > 0) {
 			$transactionsObj = $transactionsHandler->get($traId);
+            $traHist = $transactionsHandler->saveHistoryTransactions($traId);
 			if (date('Y', $traDate) != $traYear) {
                 $createYearNb = true;
             }
 		} else {
 			$transactionsObj = $transactionsHandler->create();
+            $traHist = 0;
             $createYearNb = true;
 		}
 		if ($createYearNb) {
@@ -241,6 +246,7 @@ switch ($op) {
 		$transactionsObj->setVar('tra_comments', Request::getInt('tra_comments', 0));
         $traClass = $traAmountin > 0 ? Constants::CLASS_INCOME : Constants::CLASS_EXPENSES;;
         $transactionsObj->setVar('tra_class', $traClass);
+        $transactionsObj->setVar('tra_hist', $traHist);
 		$transactionsObj->setVar('tra_datecreated', Request::getInt('tra_datecreated', 0));
 		$transactionsObj->setVar('tra_submitter', Request::getInt('tra_submitter', 0));
 		// Insert Data
@@ -253,12 +259,12 @@ switch ($op) {
 			$traStatus = $transactionsObj->getVar('tra_status');
 			$tags = [];
 			$tags['ITEM_NAME'] = $traDesc;
-			$tags['ITEM_URL']  = \XOOPS_URL . '/modules/wgsimpleacc/transactions.php?op=show&tra_id=' . $traId;
+			$tags['ITEM_URL']  = \XOOPS_URL . '/modules/wgsimpleacc/transactions.php?op=show&tra_id=' . $newTraId;
 			$notificationHandler = \xoops_getHandler('notification');
 			if (Constants::STATUS_SUBMITTED == $traStatus) {
 				// Event approve notification
 				$notificationHandler->triggerEvent('global', 0, 'global_approve', $tags);
-				//$notificationHandler->triggerEvent('transactions', $newTraId, 'transaction_approve', $tags);
+				$notificationHandler->triggerEvent('transactions', $newTraId, 'transaction_approve', $tags);
 			} else {
 				if ($traId > 0) {
 					// Event modify notification
@@ -288,6 +294,40 @@ switch ($op) {
 		$form = $transactionsObj->getFormTransactions(false, false, $traType, $start, $limit);
 		$GLOBALS['xoopsTpl']->assign('form', $form->render());
 		break;
+    case 'history':
+        $GLOBALS['xoopsTpl']->assign('showHist', true);
+        //get current version
+        $transactions = [];
+        $crTransactions = new \CriteriaCompo();
+        $crTransactions->add(new \Criteria('tra_id', $traId));
+        $transactionsCount = $transactionsHandler->getCount($crTransactions);
+        $transactionsAll = $transactionsHandler->getAll($crTransactions);
+        if ($transactionsCount > 0) {
+            // Get All Transactions
+            foreach (\array_keys($transactionsAll) as $i) {
+                $transactions[] = $transactionsAll[$i]->getValuesTransactions();
+            }
+        }
+        //get history versions
+        $crHistory = new \CriteriaCompo();
+        $crHistory->add(new \Criteria('tra_id', $traId));
+        $crHistory->setSort('hist_id');
+        $crHistory->setOrder('DESC');
+        $trahistorCount = $trahistoriesHandler->getCount($crHistory);
+        $trahistorAll = $trahistoriesHandler->getAll($crHistory);
+        if ($trahistorCount > 0) {
+            // Get All Transactions
+            foreach (\array_keys($trahistorAll) as $i) {
+                $transactions[] = $trahistorAll[$i]->getValuesTrahistories();
+            }
+        }
+
+        $GLOBALS['xoopsTpl']->assign('historyTransactions', $transactions);
+
+        unset($crTransactions, $crHistory, $transactions);
+
+        $GLOBALS['xoopsTpl']->assign('traOp',$traOp);
+        break;
 	case 'edit':
     case 'approve':
         $approve = (bool)('approve' == $op);
@@ -318,6 +358,7 @@ switch ($op) {
 			\redirect_header('transactions.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
 		}
 		$transactionsObj = $transactionsHandler->get($traId);
+        $transactionsHandler->saveHistoryTransactions($traId, 'delete');
 		$traDesc = $transactionsObj->getVar('tra_desc');
 		if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
 			if (!$GLOBALS['xoopsSecurity']->check()) {

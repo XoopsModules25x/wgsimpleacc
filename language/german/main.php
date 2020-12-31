@@ -51,10 +51,12 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_LIST_CHILDS', 'Klicke zum Anzeigen/Verstecken der Unterkategorien');
 \define('_MA_WGSIMPLEACC_APPROVE', 'Freigeben');
 \define('_MA_WGSIMPLEACC_DASHBOARD', 'Dashboard');
+\define('_MA_WGSIMPLEACC_DOWNLOAD', 'Download');
 // ---------------- Contents ----------------
 // There aren't
 \define('_MA_WGSIMPLEACC_THEREARENT_ACCOUNTS', 'Es gibt derzeit keine Konten in der Datenbank');
 \define('_MA_WGSIMPLEACC_THEREARENT_TRANSACTIONS', 'Es gibt derzeit keine Transaktionen in der Datenbank');
+\define('_MA_WGSIMPLEACC_THEREARENT_TRAHISTORIES', 'Es gibt derzeit keine historischen Transaktionen in der Datenbank');
 \define('_MA_WGSIMPLEACC_THEREARENT_ALLOCATIONS', 'Es gibt derzeit keine Zuordnungen in der Datenbank');
 \define('_MA_WGSIMPLEACC_THEREARENT_ASSETS', 'Es gibt derzeit keine Vermögenswerte in der Datenbank');
 \define('_MA_WGSIMPLEACC_THEREARENT_CURRENCIES', 'Es gibt derzeit keine Währungen in der Datenbank');
@@ -126,6 +128,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_TRANSACTION_CLASS', 'Klasse');
 \define('_MA_WGSIMPLEACC_TRANSACTION_FILES', 'Dateien');
 \define('_MA_WGSIMPLEACC_TRANSACTION_BALID', 'Abschluss');
+\define('_MA_WGSIMPLEACC_TRANSACTION_HIST', 'Historie');
 \define('_MA_WGSIMPLEACC_TRANSACTION_TEMPLATE', 'Vorlage');
 // Allocation
 \define('_MA_WGSIMPLEACC_ALLOCATION', 'Zuordnung');
@@ -146,6 +149,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_ALLOCATION_WEIGHT', 'Reihung');
 \define('_MA_WGSIMPLEACC_ALLOCATION_ERR_DELETE1', 'Löschen der Zuordnung nicht zulässig!<br>Die Zuordnung wurde bereits für Transaktionen verwendet!<br>Bitte zuerst diese Transaktionen ändern');
 \define('_MA_WGSIMPLEACC_ALLOCATION_ERR_DELETE2', 'Löschen der Zuordnung nicht zulässig!<br>Die Zuordnung besitzt Unterkategorien!<br>Bitte zuerst Unterkategorien löschen');
+\define('_MA_WGSIMPLEACC_ALLOCATION_CURRID', 'Diese Zuordnung: %s');
 // Asset
 \define('_MA_WGSIMPLEACC_ASSET', 'Vermögenswert');
 \define('_MA_WGSIMPLEACC_ASSETS', 'Vermögenswerte');
@@ -314,8 +318,16 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_STATISTICS', 'Statistiken');
 // Outputs
 \define('_MA_WGSIMPLEACC_OUTPUTS', 'Ausgabe');
+\define('_MA_WGSIMPLEACC_OUTPUT_TRA_TITLE', 'Ausgabe Transaktionen');
+\define('_MA_WGSIMPLEACC_OUTPUT_BALANCES', 'Ausgabe Abschlüsse');
+// History
+\define('_MA_WGSIMPLEACC_HISTORY_ID', 'History Id');
+\define('_MA_WGSIMPLEACC_HISTORY_TYPE', 'Typ');
+\define('_MA_WGSIMPLEACC_HISTORY_DATECREATED', 'Datum Historie');
 // Submit
 \define('_MA_WGSIMPLEACC_SUBMIT', 'Einsenden');
+// Modal
+\define('_MA_WGSIMPLEACC_MODAL_TRATITLE', 'Details zu Transaktion %s');
 // Form
 \define('_MA_WGSIMPLEACC_FORM_OK', 'Erfolgreich gespeichert');
 \define('_MA_WGSIMPLEACC_FORM_DELETE_OK', 'Erfolgreich gelöscht');
@@ -338,8 +350,6 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_PDF_TRAHEADER', 'Beleg %y / %n');
 \define('_MA_WGSIMPLEACC_PDF_BALNAME', 'Ausgabe_Abschluesse');
 \define('_MA_WGSIMPLEACC_PDF_BALHEADER', 'Ausgabe Abschlüsse');
-//output files
-\define('_MA_WGSIMPLEACC_OUTPUT_TRA_TITLE', 'Ausgabe Transaktionen');
 // ---------------- Print ----------------
 \define('_MA_WGSIMPLEACC_PRINT', 'Print');
 // ---------------- Menu ----------------

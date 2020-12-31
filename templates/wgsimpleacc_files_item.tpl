@@ -3,15 +3,15 @@
 </div>
 <div class='panel-body'>
     <{foreach item=file from=$files}>                              
-        <span class='col-sm-3 left'><{$smarty.const._MA_WGSIMPLEACC_FILE_TRAID}></span><span class='col-sm-9 left'><{$file.traid}></span>
-        <span class='col-sm-3 left'><{$smarty.const._MA_WGSIMPLEACC_FILE_NAME}></span><span class='col-sm-9 left'><{$file.name}></span>
-        <span class='col-sm-3 left'><{$smarty.const._MA_WGSIMPLEACC_FILE_TYPE}></span><span class='col-sm-9 left'><{$file.type}></span>
+        <div class='col-sm-3 left'><{$smarty.const._MA_WGSIMPLEACC_FILE_TRAID}></div><div class='col-sm-9'><{$file.traid}></div>
+        <div class='col-sm-3 left'><{$smarty.const._MA_WGSIMPLEACC_FILE_NAME}></div><div class='col-sm-9'><{$file.name}></div>
+        <div class='col-sm-3 left'><{$smarty.const._MA_WGSIMPLEACC_FILE_TYPE}></div><div class='col-sm-9'><{$file.type}></div>
         <{if $file.image}>
-            <span class='col-sm-3 left'></span><span class='col-sm-9 left'><img class="img-responsive" src="<{$wgsimpleacc_upload_files_url}>/<{$file.name}>" alt="<{$file.name}>" title="<{$file.name}>"></span>
+            <div class='col-sm-3 left'></div><div class='col-sm-9 left'><img class="img-responsive" src="<{$wgsimpleacc_upload_files_url}>/<{$file.name}>" alt="<{$file.name}>" title="<{$file.name}>"></div>
         <{/if}>
-        <span class='col-sm-3 left'><{$smarty.const._MA_WGSIMPLEACC_FILE_DESC}></span><span class='col-sm-9 left'><{$file.desc}></span>
-        <span class='col-sm-3 left'><{$smarty.const._MA_WGSIMPLEACC_DATECREATED}></span><span class='col-sm-9 left'><{$file.datecreated}></span>
-        <span class='col-sm-3 left'><{$smarty.const._MA_WGSIMPLEACC_SUBMITTER}></span><span class='col-sm-9 left'><{$file.submitter}></span>
+        <div class='col-sm-3 left'><{$smarty.const._MA_WGSIMPLEACC_FILE_DESC}></div><div class='col-sm-9'><{$file.desc}>&nbsp;</div>
+        <div class='col-sm-3 left'><{$smarty.const._MA_WGSIMPLEACC_DATECREATED}></div><div class='col-sm-9'><{$file.datecreated}></div>
+        <div class='col-sm-3 left'><{$smarty.const._MA_WGSIMPLEACC_SUBMITTER}></div><div class='col-sm-9'><{$file.submitter}></div>
         
     <{/foreach}>
 </div>

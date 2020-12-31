@@ -26,7 +26,6 @@ use XoopsModules\Wgsimpleacc\Helper;
 require dirname(__DIR__, 2) . '/mainfile.php';
 require __DIR__ . '/include/common.php';
 
-
 $moduleDirName = \basename(__DIR__);
 // Breadcrumbs
 $xoBreadcrumbs = [];
@@ -45,6 +44,7 @@ $balancesHandler = $helper->getHandler('Balances');
 $tratemplatesHandler = $helper->getHandler('Tratemplates');
 $outtemplatesHandler = $helper->getHandler('Outtemplates');
 $outputsHandler = $helper->getHandler('Outputs');
+$trahistoriesHandler = $helper->getHandler('Trahistories');
 // 
 $myts = MyTextSanitizer::getInstance();
 // Default Css Style
@@ -58,4 +58,3 @@ $modPathIcon32 = $GLOBALS['xoopsModule']->getInfo('modicons16');
 // Load Languages
 \xoops_loadLanguage('main');
 \xoops_loadLanguage('modinfo');
-

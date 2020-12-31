@@ -6,5 +6,3 @@ https://codepen.io/abergin/pen/ihlDf
 https://www.jqueryscript.net/other/dashboard-starter-template-bootstrap.html
 
 
-
-Output balances as PDF
