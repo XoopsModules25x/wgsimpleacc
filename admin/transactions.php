@@ -85,8 +85,10 @@ switch ($op) {
 		}
 		if ($traId > 0) {
 			$transactionsObj = $transactionsHandler->get($traId);
+            $traHist = $transactionsHandler->saveHistoryTransactions($traId);
 		} else {
 			$transactionsObj = $transactionsHandler->create();
+            $traHist = 0;
 		}
 		// Set Vars
         $transactionsObj->setVar('tra_year', Request::getInt('tra_year', 0));
@@ -109,6 +111,7 @@ switch ($op) {
         $transactionsObj->setVar('tra_class', Request::getInt('tra_class', 0));
         $transactionsObj->setVar('tra_asid', Request::getString('tra_asid', ''));
         $transactionsObj->setVar('tra_balid', Request::getString('tra_balid', ''));
+        $transactionsObj->setVar('tra_hist', $traHist);
 		$transactionDatecreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('tra_datecreated'));
 		$transactionsObj->setVar('tra_datecreated', $transactionDatecreatedObj->getTimestamp());
 		$transactionsObj->setVar('tra_submitter', Request::getInt('tra_submitter', 0));
@@ -137,6 +140,7 @@ switch ($op) {
 		$templateMain = 'wgsimpleacc_admin_transactions.tpl';
 		$GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('transactions.php'));
 		$transactionsObj = $transactionsHandler->get($traId);
+        $transactionsHandler->saveHistoryTransactions($traId, 'delete Admin');
 		$traDesc = $transactionsObj->getVar('tra_desc');
 		if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
 			if (!$GLOBALS['xoopsSecurity']->check()) {

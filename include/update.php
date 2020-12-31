@@ -113,7 +113,6 @@ function update_wgsimpleacc_v10($module)
 function wgsimpleacc_check_db($module)
 {
     $ret = true;
-	//insert here code for database check
 
     $table   = $GLOBALS['xoopsDB']->prefix('wgsimpleacc_transactions');
     $field   = 'tra_remarks';
@@ -127,4 +126,59 @@ function wgsimpleacc_check_db($module)
             $ret = false;
         }
     }
+
+    $table   = $GLOBALS['xoopsDB']->prefix('wgsimpleacc_transactions');
+    $field   = 'tra_hist';
+    $check   = $GLOBALS['xoopsDB']->queryF('SHOW COLUMNS FROM `' . $table . "` LIKE '" . $field . "'");
+    $numRows = $GLOBALS['xoopsDB']->getRowsNum($check);
+    if (!$numRows) {
+        $sql = "ALTER TABLE `$table` ADD `$field` INT(1) NOT NULL DEFAULT '0' AFTER `tra_balid`;";
+        if (!$result = $GLOBALS['xoopsDB']->queryF($sql)) {
+            xoops_error($GLOBALS['xoopsDB']->error() . '<br>' . $sql);
+            $module->setErrors("Error when adding '$field' to table '$table'.");
+            $ret = false;
+        }
+    }
+
+    // create new table
+    $table   = $GLOBALS['xoopsDB']->prefix('wgsimpleacc_trahistories');
+    $check   = $GLOBALS['xoopsDB']->queryF("SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME='$table'");
+    $numRows = $GLOBALS['xoopsDB']->getRowsNum($check);
+    if (!$numRows) {
+        // create new table 'wgsimpleacc_trahistories'
+        $sql = "CREATE TABLE `$table` (
+                  `hist_id` INT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
+                  `hist_type` VARCHAR(25) NOT NULL DEFAULT '',
+                  `hist_datecreated` INT(10) NOT NULL DEFAULT '0',
+                  `tra_id` INT(8) NOT NULL DEFAULT '0',
+                  `tra_year` INT(10) NOT NULL DEFAULT '0',
+                  `tra_nb` INT(10) NOT NULL DEFAULT '0',
+                  `tra_desc` TEXT NOT NULL ,
+                  `tra_reference` VARCHAR(255) NOT NULL DEFAULT '',
+                  `tra_remarks` TEXT NOT NULL,
+                  `tra_accid` INT(10) NOT NULL DEFAULT '0',
+                  `tra_allid` INT(10) NOT NULL DEFAULT '0',
+                  `tra_date` INT(11) NOT NULL DEFAULT '0',
+                  `tra_curid` INT(10) NOT NULL DEFAULT '0',
+                  `tra_amountin` DOUBLE(16, 2) NOT NULL DEFAULT '0.00',
+                  `tra_amountout` DOUBLE(16,2) NOT NULL DEFAULT '0.00',
+                  `tra_taxid` INT(10) NOT NULL DEFAULT '0',
+                  `tra_asid` VARCHAR(45) NOT NULL DEFAULT '',
+                  `tra_status` INT(1) NOT NULL DEFAULT '0',
+                  `tra_comments` INT(10) NOT NULL DEFAULT '0',
+                  `tra_class` INT(10) NOT NULL DEFAULT '0',
+                  `tra_balid` INT(10) NOT NULL DEFAULT '0',
+                  `tra_hist` INT(1) NOT NULL DEFAULT '0',
+                  `tra_datecreated` INT(10) NOT NULL DEFAULT '0',
+                  `tra_submitter` INT(10) NOT NULL DEFAULT '0',
+                PRIMARY KEY (`hist_id`)
+            ) ENGINE=InnoDB;";
+        if (!$result = $GLOBALS['xoopsDB']->queryF($sql)) {
+            xoops_error($GLOBALS['xoopsDB']->error() . '<br>' . $sql);
+            $module->setErrors("Error when creating table '$table'.");
+            $ret = false;
+        }
+    }
+
+    return $ret;
 }

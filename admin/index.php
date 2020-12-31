@@ -31,6 +31,7 @@ $templateMain = 'wgsimpleacc_admin_index.tpl';
 
 // Count elements
 $countTransactions = $transactionsHandler->getCount();
+$countTrahistories = $trahistoriesHandler->getCount();
 $countAssets = $assetsHandler->getCount();
 $countFiles = $filesHandler->getCount();
 $countAccounts = $accountsHandler->getCount();
@@ -45,6 +46,7 @@ $countOuttemplates = $outtemplatesHandler->getCount();
 $adminObject->addInfoBox(\_AM_WGSIMPLEACC_STATISTICS);
 // Info elements
 $adminObject->addInfoBoxLine(\sprintf( '<label>' . \_AM_WGSIMPLEACC_THEREARE_TRANSACTIONS . '</label>', $countTransactions));
+$adminObject->addInfoBoxLine(\sprintf( '<label>' . \_AM_WGSIMPLEACC_THEREARE_TRAHISTORIES . '</label>', $countTrahistories));
 $adminObject->addInfoBoxLine(\sprintf( '<label>' . \_AM_WGSIMPLEACC_THEREARE_ASSETS . '</label>', $countAssets));
 $adminObject->addInfoBoxLine(\sprintf( '<label>' . \_AM_WGSIMPLEACC_THEREARE_FILES . '</label>', $countFiles));
 $adminObject->addInfoBoxLine(\sprintf( '<label>' . \_AM_WGSIMPLEACC_THEREARE_ACCOUNTS . '</label>', $countAccounts));

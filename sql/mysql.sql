@@ -30,9 +30,42 @@ CREATE TABLE `wgsimpleacc_transactions` (
   `tra_comments` INT(10) NOT NULL DEFAULT '0',
   `tra_class` INT(10) NOT NULL DEFAULT '0',
   `tra_balid` INT(10) NOT NULL DEFAULT '0',
+  `tra_hist` INT(1) NOT NULL DEFAULT '0',
   `tra_datecreated` INT(10) NOT NULL DEFAULT '0',
   `tra_submitter` INT(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`tra_id`)
+) ENGINE=InnoDB;
+
+#
+# Structure table for `wgsimpleacc_trahistories` 16
+#
+
+CREATE TABLE `wgsimpleacc_trahistories` (
+  `hist_id` INT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `hist_type` VARCHAR(25) NOT NULL DEFAULT '',
+  `hist_datecreated` INT(10) NOT NULL DEFAULT '0',
+  `tra_id` INT(8) NOT NULL DEFAULT '0',
+  `tra_year` INT(10) NOT NULL DEFAULT '0',
+  `tra_nb` INT(10) NOT NULL DEFAULT '0',
+  `tra_desc` TEXT NOT NULL ,
+  `tra_reference` VARCHAR(255) NOT NULL DEFAULT '',
+  `tra_remarks` TEXT NOT NULL,
+  `tra_accid` INT(10) NOT NULL DEFAULT '0',
+  `tra_allid` INT(10) NOT NULL DEFAULT '0',
+  `tra_date` INT(11) NOT NULL DEFAULT '0',
+  `tra_curid` INT(10) NOT NULL DEFAULT '0',
+  `tra_amountin` DOUBLE(16, 2) NOT NULL DEFAULT '0.00',
+  `tra_amountout` DOUBLE(16,2) NOT NULL DEFAULT '0.00',
+  `tra_taxid` INT(10) NOT NULL DEFAULT '0',
+  `tra_asid` VARCHAR(45) NOT NULL DEFAULT '',
+  `tra_status` INT(1) NOT NULL DEFAULT '0',
+  `tra_comments` INT(10) NOT NULL DEFAULT '0',
+  `tra_class` INT(10) NOT NULL DEFAULT '0',
+  `tra_balid` INT(10) NOT NULL DEFAULT '0',
+  `tra_hist` INT(1) NOT NULL DEFAULT '0',
+  `tra_datecreated` INT(10) NOT NULL DEFAULT '0',
+  `tra_submitter` INT(10) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`hist_id`)
 ) ENGINE=InnoDB;
 
 #

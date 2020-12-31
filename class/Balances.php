@@ -178,19 +178,7 @@ class Balances extends \XoopsObject
         $ret['difference']   = Utility::FloatToString($this->getVar('bal_amountend') - $this->getVar('bal_amountstart'));
 		$status             = $this->getVar('bal_status');
 		$ret['status']      = $status;
-		switch ($status) {
-			case Constants::STATUS_NONE:
-			default:
-				$status_text = \_AM_WGSIMPLEACC_STATUS_NONE;
-				break;
-			case Constants::STATUS_OFFLINE:
-				$status_text = \_AM_WGSIMPLEACC_STATUS_OFFLINE;
-				break;
-			case Constants::STATUS_SUBMITTED:
-				$status_text = \_AM_WGSIMPLEACC_STATUS_SUBMITTED;
-				break;
-		}
-		$ret['status_text'] = $status_text;
+        $ret['status_text'] = Utility::getStatusText($status);
 		$ret['datecreated'] = \formatTimestamp($this->getVar('bal_datecreated'), 's');
 		$ret['submitter']   = \XoopsUser::getUnameFromId($this->getVar('bal_submitter'));
 		return $ret;

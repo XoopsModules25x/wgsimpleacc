@@ -28,6 +28,7 @@ require_once __DIR__ . '/main.php';
 // There are
 \define('_AM_WGSIMPLEACC_THEREARE_ACCOUNTS', "There are <span class='bold'>%s</span> accounts in the database");
 \define('_AM_WGSIMPLEACC_THEREARE_TRANSACTIONS', "There are <span class='bold'>%s</span> transactions in the database");
+\define('_AM_WGSIMPLEACC_THEREARE_TRAHISTORIES', "There are <span class='bold'>%s</span> transaction histories in the database");
 \define('_AM_WGSIMPLEACC_THEREARE_ALLOCATIONS', "There are <span class='bold'>%s</span> allocations in the database");
 \define('_AM_WGSIMPLEACC_THEREARE_ASSETS', "There are <span class='bold'>%s</span> assets in the database");
 \define('_AM_WGSIMPLEACC_THEREARE_CURRENCIES', "There are <span class='bold'>%s</span> currencies in the database");
@@ -60,6 +61,10 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_LIST_TRATEMPLATES', 'List of Transaction Templates');
 \define('_AM_WGSIMPLEACC_LIST_OUTTEMPLATES', 'List of Output Templates');
 // ---------------- Admin Classes ----------------
+// Caption of Transaction
+\define('_AM_WGSIMPLEACC_TRANSACTION_HISTID', 'History Id');
+\define('_AM_WGSIMPLEACC_TRANSACTION_HISTTYPE', 'History Type');
+\define('_AM_WGSIMPLEACC_TRANSACTION_HISTDATE', 'History date');
 // Account add/edit
 \define('_AM_WGSIMPLEACC_ACCOUNT_ADD', 'Add Account');
 \define('_AM_WGSIMPLEACC_ACCOUNT_EDIT', 'Edit Account');

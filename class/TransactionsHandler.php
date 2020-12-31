@@ -123,7 +123,7 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
 	}
 
     /**
-     * @public function to get form for filter transactions
+     * @public function to get form for filter Transactions
      * @param int $allId
      * @param $filterYear
      * @param $filterMonthFrom
@@ -168,7 +168,7 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
             for ($i = $yearMin; $i <= $yearMax; $i++) {
                 $filterYearSelect->addOption($i, $i);
             }
-            $filterYearSelect->addOption(\date('Y'), \date('Y')); //if no transactions available for current year
+            $filterYearSelect->addOption(\date('Y'), \date('Y')); //if no Transactions available for current year
             $form->addElement($filterYearSelect, true);
         } else {
             //select from/to
@@ -195,7 +195,7 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
             for ($i = $yearMin; $i <= $yearMax; $i++) {
                 $filterYearFromSelect->addOption($i, $i);
             }
-            $filterYearFromSelect->addOption(\date('Y'), \date('Y')); //if no transactions available for current year
+            $filterYearFromSelect->addOption(\date('Y'), \date('Y')); //if no Transactions available for current year
             $selectFromToTray->addElement($filterYearFromSelect);
             //select to
             if (0 == $filterMonthTo) {
@@ -219,7 +219,7 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
             for ($i = $yearMin; $i <= $yearMax; $i++) {
                 $filterYearToSelect->addOption($i, $i);
             }
-            $filterYearToSelect->addOption(\date('Y'), \date('Y')); //if no transactions available for current year
+            $filterYearToSelect->addOption(\date('Y'), \date('Y')); //if no Transactions available for current year
             $selectFromToTray->addElement($filterYearToSelect);
             $form->addElement($selectFromToTray);
         }
@@ -266,5 +266,33 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
         $form->addElement(new \XoopsFormHidden('start', 0));
         $form->addElement(new \XoopsFormHidden('op', $op));
         return $form;
+    }
+
+    /**
+     * @public function to save old transaction as history before updating or deleting
+     * @param int    $traId
+     * @param string $type
+     * @return bool
+     */
+    public static function saveHistoryTransactions($traId, $type = "update")
+    {
+        $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+        $transactionsHandler = $helper->getHandler('Transactions');
+        $transactionsObj = $transactionsHandler->get($traId);
+        $traVars = $transactionsObj->getVars();
+
+        $insert = 'INSERT INTO ' . $GLOBALS['xoopsDB']->prefix('wgsimpleacc_trahistories') . ' (hist_datecreated, hist_type';
+        $select = 'SELECT ' . time() . " AS histdatecreated, '$type' AS histtype";
+        $from = ' FROM '. $GLOBALS['xoopsDB']->prefix('wgsimpleacc_transactions');
+        $where = " WHERE (tra_id=$traId)";
+
+        foreach (\array_keys($traVars) as $var) {
+            $insert .= ', ' . $var;
+            $select .= ', ' . $var;
+        }
+        $insert .= ') ';
+        $result = $GLOBALS['xoopsDB']->queryF($insert . $select . $from . $where) or die ("MySQL-Error: " . mysqli_error());
+
+        return true;
     }
 }

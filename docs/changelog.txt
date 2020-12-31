@@ -1,5 +1,12 @@
 ==============================================================
-1.0 [2020/09/18 7:38:42]
+1.1 [2020/12/31 10:10]
+==============================================================
+ - added show file (goffy)
+ - added history of transactions (goffy)
+ - changes statistics to include current allocation (goffy)
+
+==============================================================
+1.0 [2020/09/18 7:38]
 ==============================================================
  - Original release wgsimpleacc (Goffy - Wedega.com)
  - rebuilt tpl (Goffy)
@@ -16,3 +23,4 @@
  - implemented pdf output of balances (goffy)
  - added field remarks to transactions (goffy)
  - added modal for remarks to transactions (goffy)
+ - added modal and download for attachments of transactions (goffy)

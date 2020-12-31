@@ -1,11 +1,14 @@
 <!-- Header -->
 <{include file='db:wgsimpleacc_admin_header.tpl' }>
 
-<{if $transactions_list}>
+<{if $trahistories_list}>
 	<table class='table table-bordered'>
 		<thead>
 			<tr class='head'>
-				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_ID}></th>
+				<th class="center"><{$smarty.const._AM_WGSIMPLEACC_TRANSACTION_HISTID}></th>
+                <th class="center"><{$smarty.const._AM_WGSIMPLEACC_TRANSACTION_HISTTYPE}></th>
+                <th class="center"><{$smarty.const._AM_WGSIMPLEACC_TRANSACTION_HISTDATE}></th>
+                <th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_ID}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_YEARNB}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_DESC}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_REFERENCE}></th>
@@ -28,11 +31,14 @@
 				<th class="center width5"><{$smarty.const._MA_WGSIMPLEACC_FORM_ACTION}></th>
 			</tr>
 		</thead>
-		<{if $transactions_count}>
+		<{if $trahistories_count}>
 		<tbody>
-			<{foreach item=transaction from=$transactions_list}>
+			<{foreach item=transaction from=$trahistories_list}>
 			<tr class='<{cycle values='odd, even'}>'>
-				<td class='center'><{$transaction.id}></td>
+				<td class='center'><{$transaction.histid}></td>
+                <td class='center'><{$transaction.histtype}></td>
+                <td class='center'><{$transaction.histdate}></td>
+                <td class='center'><{$transaction.id}></td>
 				<td class='center'><{$transaction.year}>/<{$transaction.nb}></td>
 				<td class='center'><{$transaction.desc_short}></td>
 				<td class='center'><{$transaction.reference}></td>
@@ -53,8 +59,7 @@
 				<td class='center'><{$transaction.datecreated}></td>
 				<td class='center'><{$transaction.submitter}></td>
 				<td class="center  width5">
-					<a href="transactions.php?op=edit&amp;tra_id=<{$transaction.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="<{$smarty.const._EDIT}> transactions" /></a>
-					<a href="transactions.php?op=delete&amp;tra_id=<{$transaction.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> transactions" /></a>
+					<a href="trahistories.php?op=delete&amp;hist_id=<{$transaction.histid}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> trahistories" /></a>
 				</td>
 			</tr>
 			<{/foreach}>

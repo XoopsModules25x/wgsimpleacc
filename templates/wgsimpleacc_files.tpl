@@ -57,3 +57,37 @@
 <{if $formFilesEdit}>
     <{$formFilesEdit}>
 <{/if}>
+
+<div class="clear"></div>
+<div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-labelledby="imgModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="imgModalLabel">Default Title</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="<{$smarty.const._CLOSE}>">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img id="modalimg" class="modal-img" src="" alt="" title="">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><{$smarty.const._CLOSE}></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#imgModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var info = button.data('info');
+        var title = button.data('title');
+        var modal = $(this);
+        modal.find('.modal-title').text(title);
+        var modalimg = document.getElementById("modalimg");
+        modalimg.src = info;
+        var width = modalimg.naturalWidth;
+        modal.find(".modal-dialog").css("width", width + 100);
+    })
+</script>

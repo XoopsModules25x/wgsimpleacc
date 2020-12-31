@@ -165,7 +165,7 @@ switch ($op) {
         // Check whether allocation has sub allocations
         $crAllocations = new \CriteriaCompo();
         $crAllocations->add(new \Criteria('all_pid', $allId));
-        $allocationsCount = $allocationsHandler->getCount($crTransactions);
+        $allocationsCount = $allocationsHandler->getCount($crAllocations);
         if ($allocationsCount > 0) {
             \redirect_header('allocations.php?op=list', 3, \_MA_WGSIMPLEACC_ALLOCATION_ERR_DELETE2);
         }

@@ -51,10 +51,12 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_LIST_CHILDS', 'Click to show/hide sub categories');
 \define('_MA_WGSIMPLEACC_APPROVE', 'Approve');
 \define('_MA_WGSIMPLEACC_DASHBOARD', 'Dashboard');
+\define('_MA_WGSIMPLEACC_DOWNLOAD', 'Download');
 // ---------------- Contents ----------------
 // There aren't
 \define('_MA_WGSIMPLEACC_THEREARENT_ACCOUNTS', "There aren't accounts at the moment");
 \define('_MA_WGSIMPLEACC_THEREARENT_TRANSACTIONS', "There aren't transactions at the moment");
+\define('_MA_WGSIMPLEACC_THEREARENT_TRAHISTORIES', "There aren't transaction histories at the moment");
 \define('_MA_WGSIMPLEACC_THEREARENT_ALLOCATIONS', "There aren't allocations at the moment");
 \define('_MA_WGSIMPLEACC_THEREARENT_ASSETS', "There aren't assets at the moment");
 \define('_MA_WGSIMPLEACC_THEREARENT_CURRENCIES', "There aren't currencies at the moment");
@@ -126,6 +128,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_TRANSACTION_CLASS', 'Class');
 \define('_MA_WGSIMPLEACC_TRANSACTION_FILES', 'Files');
 \define('_MA_WGSIMPLEACC_TRANSACTION_BALID', 'Balance');
+\define('_MA_WGSIMPLEACC_TRANSACTION_HIST', 'History');
 \define('_MA_WGSIMPLEACC_TRANSACTION_TEMPLATE', 'Template');
 // Allocation
 \define('_MA_WGSIMPLEACC_ALLOCATION', 'Allocation');
@@ -146,6 +149,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_ALLOCATION_WEIGHT', 'Weight');
 \define('_MA_WGSIMPLEACC_ALLOCATION_ERR_DELETE1', 'Deleting allocation not possible!<br>Allocation already used for transactions!<br>Please change these transactions first');
 \define('_MA_WGSIMPLEACC_ALLOCATION_ERR_DELETE2', 'Deleting allocation not possible!<br>Allocation has sub allocations!<br>Please delete sub allocations first');
+\define('_MA_WGSIMPLEACC_ALLOCATION_CURRID', 'Current allocation: %s');
 // Asset
 \define('_MA_WGSIMPLEACC_ASSET', 'Asset');
 \define('_MA_WGSIMPLEACC_ASSETS', 'Assets');
@@ -315,6 +319,12 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_STATISTICS', 'Statistics');
 // Outputs
 \define('_MA_WGSIMPLEACC_OUTPUTS', 'Outputs');
+\define('_MA_WGSIMPLEACC_OUTPUT_TRA_TITLE', 'Output Transaktions');
+\define('_MA_WGSIMPLEACC_OUTPUT_BALANCES', 'Output Balances');
+// History
+\define('_MA_WGSIMPLEACC_HISTORY_ID', 'History Id');
+\define('_MA_WGSIMPLEACC_HISTORY_TYPE', 'Type');
+\define('_MA_WGSIMPLEACC_HISTORY_DATECREATED', 'Date History');
 // Submit
 \define('_MA_WGSIMPLEACC_SUBMIT', 'Submit');
 // Modal
@@ -341,8 +351,6 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_PDF_TRAHEADER', 'Transaction %y / %n');
 \define('_MA_WGSIMPLEACC_PDF_BALNAME', 'Output_Balances');
 \define('_MA_WGSIMPLEACC_PDF_BALHEADER', 'Output Balances');
-//output files
-\define('_MA_WGSIMPLEACC_OUTPUT_TRA_TITLE', 'Output Transaktions');
 // ---------------- Print ----------------
 \define('_MA_WGSIMPLEACC_PRINT', 'Print');
 // ---------------- Menu ----------------

@@ -62,7 +62,33 @@ $GLOBALS['xoopsTpl']->assign('fil_traid', $filTraid);
 
 
 switch ($op) {
-	case 'show':
+    case 'showfile':
+        $filesObj = $filesHandler->get($filId);
+        $filName = $filesObj->getVar('fil_name');
+        $filePath = \XOOPS_ROOT_PATH . '/uploads/wgsimpleacc/files/' . $filName;
+        $fileMimetype   = $filesObj->getVar('fil_type');
+
+        switch ($fileMimetype) {
+            case '':
+            default:
+                //zip, csv, txt, xlsx, docx
+                header("Content-Type: $fileMimetype");
+                header('Content-Disposition: attachment; filename="' . $filePath . '"');
+                readfile($dir.$file);
+                exit;
+                break;
+            case 'application/pdf':
+                // Header content type
+                header('Content-type: application/pdf');
+                header('Content-Disposition: inline; filename="' . $filePath . '"');
+                header('Content-Transfer-Encoding: binary');
+                header('Accept-Ranges: bytes');
+                // Read the file
+                @readfile($filePath);
+                exit;
+                break;
+        }
+        break;
 	case 'list':
 	default:
 	    if ($filTraid > 0) {

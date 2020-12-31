@@ -54,6 +54,6 @@
 			<a class='btn btn-primary right' href='transactions.php?op=edit&amp;tra_id=<{$transaction.tra_id}><{$traOp}>' title='<{$smarty.const._EDIT}>'><i class="fa fa-edit fa-fw"></i></a>
 			<a class='btn btn-danger right' href='transactions.php?op=delete&amp;tra_id=<{$transaction.tra_id}>' title='<{$smarty.const._DELETE}>'><i class="fa fa-trash fa-fw"></i></a>
 		<{/if}>
-		<a class='btn btn-default right' href='transactions_pdf.php?tra_id=<{$transaction.tra_id}>' title='<{$smarty.const._MA_WGSIMPLEACC_DETAILS}>'><i class="fa fa-download fa-fw"></i></a>
+		<a class='btn btn-default right' href='transactions_pdf.php?tra_id=<{$transaction.tra_id}>' title='<{$smarty.const._MA_WGSIMPLEACC_DOWNLOAD}>'><i class="fa fa-download fa-fw"></i></a>
 	</td>
 </tr>

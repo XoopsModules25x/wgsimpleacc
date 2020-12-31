@@ -53,9 +53,11 @@
 						<td>
 							<{foreach item=file from=$transaction.files}>
 							<{if $file.image}>
-								<img class="wgsa-transaction-img-list" src="<{$wgsimpleacc_upload_files_url}>/<{$file.name}>" alt="<{$file.name}>" title="<{$file.name}>">
+								<span class="wgsa-modal" data-toggle="modal" data-target="#imgModal" data-title="<{$file.name}>" data-info="<{$wgsimpleacc_upload_files_url}>/<{$file.name}>">
+									<img class="wgsa-transaction-img-list" src="<{$wgsimpleacc_upload_files_url}>/<{$file.name}>" alt="<{$file.name}>" title="<{$file.name}>">
+								</span>
 							<{else}>
-								<{$file.name}>
+								<{$file.name}> <a class='btn btn-default' href='files.php?op=showfile&amp;fil_id=<{$file.id}>' title='<{$file.name}>'><i class="fa fa-download fa-fw"></i></a>
 							<{/if}>
 							<{/foreach}>
 							<{if $permSubmit && $transaction.edit}>
@@ -64,6 +66,18 @@
 						</td>
 					</tr>
 				<{/if}>
+			<{/if}>
+			<tr>
+				<th><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_STATUS}></th>
+				<td><{$transaction.status_text}></td>
+			</tr>
+			<{if $transaction.hist}>
+				<tr>
+					<th><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_HIST}></th>
+					<td>
+						<a class='btn btn-default right' href='transactions.php?op=history&amp;tra_id=<{$transaction.tra_id}><{$traOp}>' title='<{$smarty.const._MA_WGSIMPLEACC_DETAILS}>'><{$smarty.const._MA_WGSIMPLEACC_DETAILS}></a>
+					</td>
+				</tr>
 			<{/if}>
 		</tbody>
 		<tfoot>

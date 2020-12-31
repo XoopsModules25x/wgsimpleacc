@@ -58,6 +58,7 @@ class Transactions extends \XoopsObject
 		$this->initVar('tra_comments', \XOBJ_DTYPE_INT);
         $this->initVar('tra_class', \XOBJ_DTYPE_INT);
         $this->initVar('tra_balid', \XOBJ_DTYPE_INT);
+        $this->initVar('tra_hist', \XOBJ_DTYPE_TXTBOX);
 		$this->initVar('tra_datecreated', \XOBJ_DTYPE_INT);
 		$this->initVar('tra_submitter', \XOBJ_DTYPE_INT);
 	}
@@ -249,14 +250,17 @@ class Transactions extends \XoopsObject
         $traComments = $this->isNew() ? 0 : $this->getVar('tra_comments');
         // Form Text traBalid
         $traBalid = $this->isNew() ? 0 : $this->getVar('tra_balid');
+        // Form Text traHist
+        $traHist = $this->isNew() ? 0 : $this->getVar('tra_hist');
 		// Form Text Date Select traDatecreated
 		$traDatecreated = $this->isNew() ? \time() : $this->getVar('tra_datecreated');
         // Form Select User traSubmitter
         $traSubmitter = $this->isNew() ? $GLOBALS['xoopsUser']->uid() : $this->getVar('tra_submitter');
         $permissionsHandler = $helper->getHandler('Permissions');
+        $traStatus = $this->getVar('tra_status');
         if ($admin) {
             // Form Select Status traStatus
-            $traStatusSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_STATUS, 'tra_status', $this->getVar('tra_status'));
+            $traStatusSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_STATUS, 'tra_status', $traStatus);
             $traStatusSelect->addOption(Constants::STATUS_NONE, \_AM_WGSIMPLEACC_STATUS_NONE);
             $traStatusSelect->addOption(Constants::STATUS_OFFLINE, \_AM_WGSIMPLEACC_STATUS_OFFLINE);
             $traStatusSelect->addOption(Constants::STATUS_SUBMITTED, \_AM_WGSIMPLEACC_STATUS_SUBMITTED);
@@ -276,14 +280,25 @@ class Transactions extends \XoopsObject
             $traBalidSelect->addOptionArray($balancesHandler->getList());
             $form->addElement($traBalidSelect);
             $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_TRANSACTION_COMMENTS, 'tra_comments', 50, 255, $traComments));
+            $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_TRANSACTION_HIST, 'tra_hist', 20, 150, $traHist));
             $form->addElement(new \XoopsFormTextDateSelect(\_MA_WGSIMPLEACC_DATECREATED, 'tra_datecreated', '', $traDatecreated));
             $form->addElement(new \XoopsFormSelectUser(\_MA_WGSIMPLEACC_SUBMITTER, 'tra_submitter', false, $traSubmitter));
         } else {
-            $traStatus = Constants::STATUS_SUBMITTED;
+            // Form Select Status traStatus
+            $traStatusNew = Constants::STATUS_SUBMITTED;
             if ($permissionsHandler->getPermTransactionsApprove()) {
-                $traStatus = Constants::STATUS_APPROVED;
+                $traStatusNew = Constants::STATUS_APPROVED;
             }
-            $form->addElement(new \XoopsFormHidden('tra_status', $traStatus));
+            if ($this->isNew()) {
+                $form->addElement(new \XoopsFormLabel(_MA_WGSIMPLEACC_TRANSACTION_STATUS, Utility::getStatusText($traStatusNew)));
+            } else {
+                $form->addElement(new \XoopsFormLabel(_MA_WGSIMPLEACC_TRANSACTION_STATUS, Utility::getStatusText($traStatus)));
+            }
+            $form->addElement(new \XoopsFormHidden('tra_status', $traStatusNew));
+            $form->addElement(new \XoopsFormHidden('tra_class', $traClass));
+            $form->addElement(new \XoopsFormHidden('tra_balid', $traBalid));
+            $form->addElement(new \XoopsFormHidden('tra_comments', $traComments));
+            $form->addElement(new \XoopsFormHidden('tra_hist', $traHist));
             $form->addElement(new \XoopsFormHidden('tra_datecreated', $traDatecreated));
             $form->addElement(new \XoopsFormHidden('tra_submitter', $traSubmitter));
         }
@@ -342,34 +357,16 @@ class Transactions extends \XoopsObject
         } else {
             $ret['amount'] = $ret['amountout'];
         }
-        $taxesHandler         = $helper->getHandler('Taxes');
-		$taxesObj             = $taxesHandler->get($this->getVar('tra_taxid'));
-		$ret['taxid']         = $taxesObj->getVar('tax_name');
-        $ret['taxrate']       = $taxesObj->getVar('tax_rate');
-        $assetsHandler        = $helper->getHandler('Assets');
-        $assetsObj            = $assetsHandler->get($this->getVar('tra_asid'));
-        $ret['asset']         = $assetsObj->getVar('as_name');
-		$status               = $this->getVar('tra_status');
-		$ret['status']        = $status;
-		switch ($status) {
-			case Constants::STATUS_NONE:
-			default:
-				$status_text = \_AM_WGSIMPLEACC_STATUS_NONE;
-				break;
-			case Constants::STATUS_OFFLINE:
-				$status_text = \_AM_WGSIMPLEACC_STATUS_OFFLINE;
-				break;
-			case Constants::STATUS_SUBMITTED:
-				$status_text = \_AM_WGSIMPLEACC_STATUS_SUBMITTED;
-				break;
-			case Constants::STATUS_APPROVED:
-				$status_text = \_AM_WGSIMPLEACC_STATUS_APPROVED;
-				break;
-            case Constants::STATUS_LOCKED:
-                $status_text = \_AM_WGSIMPLEACC_STATUS_LOCKED;
-                break;
-		}
-		$ret['status_text'] = $status_text;
+        $taxesHandler       = $helper->getHandler('Taxes');
+		$taxesObj           = $taxesHandler->get($this->getVar('tra_taxid'));
+		$ret['taxid']       = $taxesObj->getVar('tax_name');
+        $ret['taxrate']     = $taxesObj->getVar('tax_rate');
+        $assetsHandler      = $helper->getHandler('Assets');
+        $assetsObj          = $assetsHandler->get($this->getVar('tra_asid'));
+        $ret['asset']       = $assetsObj->getVar('as_name');
+		$status             = $this->getVar('tra_status');
+		$ret['status']      = $status;
+		$ret['status_text'] = Utility::getStatusText($status);
 		$ret['comments']    = $this->getVar('tra_comments');
         $traClass           = $this->getVar('tra_class');
         $ret['class']       = $traClass;
@@ -387,6 +384,7 @@ class Transactions extends \XoopsObject
         }
         $ret['class_text']  = $class_text;
         $ret['balid']       = $this->getVar('tra_balid');
+        $ret['hist']        = $this->getVar('tra_hist');
 		$ret['datecreated'] = \formatTimestamp($this->getVar('tra_datecreated'), 's');
 		$ret['submitter']   = \XoopsUser::getUnameFromId($this->getVar('tra_submitter'));
         $filesHandler = $helper->getHandler('Files');

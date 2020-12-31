@@ -41,6 +41,11 @@ $adminmenu[] = [
     'icon' => 'assets/icons/32/transactions.png',
 ];
 $adminmenu[] = [
+    'title' => \_MI_WGSIMPLEACC_ADMENU14,
+    'link' => 'admin/trahistories.php',
+    'icon' => 'assets/icons/32/trahistories.png',
+];
+$adminmenu[] = [
     'title' => \_MI_WGSIMPLEACC_ADMENU3,
     'link' => 'admin/files.php',
     'icon' => 'assets/icons/32/files.png',
