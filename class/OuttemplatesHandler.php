@@ -145,29 +145,10 @@ class OuttemplatesHandler extends \XoopsPersistableObjectHandler
         $otplSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_OUTTEMPLATE, 'otpl_id', $otplId);
         $otplSelect->addOptionArray($outtemplatesHandler->getList());
         $form->addElement($otplSelect);
-
-        $selYears = [];
-        $selNbMax = 0;
-        $transactionsHandler = $helper->getHandler('Transactions');
-        $transactionsAll = $transactionsHandler->getAll();
-        foreach (\array_keys($transactionsAll) as $i) {
-            $selYears[] = $transactionsAll[$i]->getVar('tra_year');
-            $selNbMax = $selNbMax < $transactionsAll[$i]->getVar('tra_nb') ?: $transactionsAll[$i]->getVar('tra_nb');
-        }
-        if (0 === $traYear) {
-            $traYear = \date('Y');
-        }
-        $yearSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_OUTTEMPLATE_YEAR, 'tra_year', $traYear);
-        foreach ($selYears as $selYear) {
-            $yearSelect->addOption($selYear, $selYear);
-        }
-        $form->addElement($yearSelect, true);
-
-        $nbSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_OUTTEMPLATE_NB, 'tra_nb', $traNb);
-        for ($i = 1; $i <= $selNbMax; $i++) {
-            $nbSelect->addOption($i, $i);
-        }
-        $form->addElement($nbSelect, true);
+        //traYear
+        $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_OUTTEMPLATE_YEAR, 'tra_year', 50, 255, $traYear));
+        //traNb
+        $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_OUTTEMPLATE_NB, 'tra_nb', 50, 255, $traNb));
 
         if ($isAdmin) {
             $editor = $helper->getConfig('editor_admin');

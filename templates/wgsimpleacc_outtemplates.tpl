@@ -21,4 +21,7 @@
 <{/if}>
 <{if $outputText}>
 	<div class="wgsa_outtemplate"><{$outputText}></div>
+	<div class="wgsa_outtemplate_footer center">
+		<a href="#" class="btn btn-warning" onclick="history.go(-1);return true;"><{$smarty.const._BACK}></a>
+	</div>
 <{/if}>

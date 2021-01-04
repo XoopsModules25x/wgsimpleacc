@@ -98,12 +98,21 @@ class Assets extends \XoopsObject
         // Form Editor TextArea asDescr
         $form->addElement(new \XoopsFormTextArea(\_MA_WGSIMPLEACC_ASSET_DESCR, 'as_descr', $this->getVar('as_descr', 'e'), 4, 47));
         // Form Select asColor
-        $asColorSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_ASSET_COLOR, 'as_color', $this->getVar('as_color'));
         $colors = Utility::getColors();
+        $asColor = $this->getVar('as_color');
+        $asColorRadio = new \XoopsFormRadio(\_MA_WGSIMPLEACC_ASSET_COLOR, 'as_color', $asColor);
         foreach($colors as $color) {
-            $asColorSelect->addOption($color['code'], $color['descr']);
+            $desc = '<span style="background-color:' . $color['code'] . ';';
+            if ($color['code'] == $asColor) {
+                $desc .= 'border:3px double #000"';
+            } else {
+                $desc .= 'border:1px solid #000"';
+            }
+            $desc .= '>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;' . $color['descr'];
+            $asColorRadio->addOption($color['code'], $desc);
         }
-        $form->addElement($asColorSelect);
+        $form->addElement($asColorRadio);
+
         // Form Radio Yes/No asOnline
         $asOnline = $this->isNew() ?: $this->getVar('as_online');
         $form->addElement(new \XoopsFormRadioYN(\_MA_WGSIMPLEACC_ASSET_ONLINE, 'as_online', $asOnline));
