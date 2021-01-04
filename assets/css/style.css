@@ -85,6 +85,12 @@
 	cursor: pointer;
 }
 
+.wgsa_outtemplate {}
+.wgsa_outtemplate_footer {
+	margin-top:50px;
+	border-top: 1px solid #000;
+}
+
 ul.menu {
 	list-style: none;
 	background-color: #f5f5f5;

@@ -122,12 +122,20 @@ class Accounts extends \XoopsObject
         $accClassificationSelect->addOption(Constants::CLASS_BOTH, \_MA_WGSIMPLEACC_CLASS_BOTH);
 		$form->addElement($accClassificationSelect);
         // Form Select accColor
-        $accColorSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_ACCOUNT_COLOR, 'acc_color', $this->getVar('acc_color'));
         $colors = Utility::getColors();
+        $accColor = $this->getVar('acc_color');
+        $accColorRadio = new \XoopsFormRadio(\_MA_WGSIMPLEACC_ACCOUNT_COLOR, 'acc_color', $accColor);
         foreach($colors as $color) {
-            $accColorSelect->addOption($color['code'], $color['descr']);
+            $desc = '<span style="background-color:' . $color['code'] . ';';
+            if ($color['code'] == $accColor) {
+                $desc .= 'border:3px double #000"';
+            } else {
+                $desc .= 'border:1px solid #000"';
+            }
+            $desc .= '>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;' . $color['descr'];
+            $accColorRadio->addOption($color['code'], $desc);
         }
-        $form->addElement($accColorSelect);
+        $form->addElement($accColorRadio);
         // Form Radio Yes/No accIecalc
         $accIecalc = $this->isNew() ? 1 : $this->getVar('acc_iecalc');
         $form->addElement(new \XoopsFormRadioYN(\_MA_WGSIMPLEACC_ACCOUNT_IECALC, 'acc_iecalc', $accIecalc));

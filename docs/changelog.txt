@@ -6,6 +6,7 @@
  - changes statistics to include current allocation (goffy)
  - fixed bug in listing files (goffy)
  - cosmetics (goffy)
+ - changed color selection into radio (goffy)
 
 ==============================================================
 1.0 [2020/09/18 7:38]
