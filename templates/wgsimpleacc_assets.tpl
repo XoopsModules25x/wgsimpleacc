@@ -1,4 +1,4 @@
-<{if $assetsList}>
+<{if $assetsList|default:''}>
     <h3><{$smarty.const._MA_WGSIMPLEACC_ASSETS_LIST}></h3>
     <div class='table-responsive'>
         <table class='table table-striped'>
@@ -20,6 +20,6 @@
         </table>
     </div>
 <{/if}>
-<{if $assetsCount == 0}>
+<{if $assetsCount|default:0 == 0}>
     <{$smarty.const._MA_WGSIMPLEACC_THEREARENT_ASSETS}>
 <{/if}>

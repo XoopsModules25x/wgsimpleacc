@@ -17,13 +17,13 @@
 		<{/if}>
 		<{$transaction.amount}>
 	</td>
-	<{if $showAssets}>
+	<{if $showAssets|default:''}>
 		<td><{$transaction.asset}></td>
 	<{/if}>
-	<{if $useTaxes}>
+	<{if $useTaxes|default:''}>
 		<td><{$transaction.taxrate}></td>
 	<{/if}>
-	<{if $useFiles}>
+	<{if $useFiles|default:''}>
 		<td><{$transaction.nbfiles}></td>
 	<{/if}>
 	<td><{$transaction.status_text}></td>

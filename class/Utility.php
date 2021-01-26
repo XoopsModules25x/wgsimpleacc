@@ -65,19 +65,19 @@ class Utility
         switch ($status) {
             case Constants::STATUS_NONE:
             default:
-                $status_text = \_AM_WGSIMPLEACC_STATUS_NONE;
+                $status_text = \_MA_WGSIMPLEACC_STATUS_NONE;
                 break;
             case Constants::STATUS_OFFLINE:
-                $status_text = \_AM_WGSIMPLEACC_STATUS_OFFLINE;
+                $status_text = \_MA_WGSIMPLEACC_STATUS_OFFLINE;
                 break;
             case Constants::STATUS_SUBMITTED:
-                $status_text = \_AM_WGSIMPLEACC_STATUS_SUBMITTED;
+                $status_text = \_MA_WGSIMPLEACC_STATUS_SUBMITTED;
                 break;
             case Constants::STATUS_APPROVED:
-                $status_text = \_AM_WGSIMPLEACC_STATUS_APPROVED;
+                $status_text = \_MA_WGSIMPLEACC_STATUS_APPROVED;
                 break;
             case Constants::STATUS_LOCKED:
-                $status_text = \_AM_WGSIMPLEACC_STATUS_LOCKED;
+                $status_text = \_MA_WGSIMPLEACC_STATUS_LOCKED;
                 break;
         }
 

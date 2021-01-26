@@ -9,7 +9,7 @@
 
 <h3><{$smarty.const._MA_WGSIMPLEACC_TRANSACTIONS_OVERVIEW}></h3>
 
-<{if $formFilter}>
+<{if $formFilter|default:''}>
     <{$formFilter}>
  <{/if}>
 <{if $tra_allocs_level > 2}>

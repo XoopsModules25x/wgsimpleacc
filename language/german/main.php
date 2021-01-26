@@ -324,6 +324,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_HISTORY_ID', 'History Id');
 \define('_MA_WGSIMPLEACC_HISTORY_TYPE', 'Typ');
 \define('_MA_WGSIMPLEACC_HISTORY_DATECREATED', 'Datum Historie');
+\define('_MA_WGSIMPLEACC_HISTORY_DELETED', 'Liste der gelöschten Transaktionen');
 // Submit
 \define('_MA_WGSIMPLEACC_SUBMIT', 'Einsenden');
 // Modal
@@ -360,3 +361,30 @@ require_once __DIR__ . '/admin.php';
 // Admin link
 \define('_MA_WGSIMPLEACC_ADMIN', 'Admin');
 // ---------------- End ----------------
+// Konto add/edit
+\define('_MA_WGSIMPLEACC_ACCOUNT_ADD', 'Konto hinzufügen');
+\define('_MA_WGSIMPLEACC_ACCOUNT_EDIT', 'Konto bearbeiten');
+// Allocation add/edit
+\define('_MA_WGSIMPLEACC_ALLOCATION_ADD', 'Zuordnung hinzufügen');
+\define('_MA_WGSIMPLEACC_ALLOCATION_EDIT', 'Zuordnung bearbeiten');
+// Asset add/edit
+\define('_MA_WGSIMPLEACC_ASSET_ADD', 'Vermögenswert hinzufügen');
+\define('_MA_WGSIMPLEACC_ASSET_EDIT', 'Vermögenswert bearbeiten');
+// Balance add/edit
+\define('_MA_WGSIMPLEACC_BALANCE_ADD', 'Abschluss hinzufügen');
+\define('_MA_WGSIMPLEACC_BALANCE_EDIT', 'Abschluss bearbeiten');
+// Template add/edit
+\define('_MA_WGSIMPLEACC_TRATEMPLATE_ADD', 'Vorlage hinzufügen');
+\define('_MA_WGSIMPLEACC_TRATEMPLATE_EDIT', 'Vorlage bearbeiten');
+// Template add/edit
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_ADD', 'Vorlage hinzufügen');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_EDIT', 'Vorlage bearbeiten');
+// Status
+\define('_MA_WGSIMPLEACC_STATUS_NONE', 'Kein Status');
+\define('_MA_WGSIMPLEACC_STATUS_OFFLINE', 'Offline');
+\define('_MA_WGSIMPLEACC_STATUS_SUBMITTED', 'Eingesendet');
+\define('_MA_WGSIMPLEACC_STATUS_APPROVED', 'Bestätigt');
+\define('_MA_WGSIMPLEACC_STATUS_BROKEN', 'Fehlerhaft');
+\define('_MA_WGSIMPLEACC_STATUS_CREATED', 'Erstellt');
+\define('_MA_WGSIMPLEACC_STATUS_LOCKED', 'Gesperrt');
+

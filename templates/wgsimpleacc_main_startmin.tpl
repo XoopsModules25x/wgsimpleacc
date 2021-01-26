@@ -7,7 +7,7 @@
                 <div class=""><a class="navbar-brand" href="index.php">wgSimpleAcc</a></div>
             </div>
             <div class="col-sm-8 col-md-8 col-lg-10 col-xl-10">
-                <{if $indexHeader}><h3 class="pull-left"><{$indexHeader}></h3><{/if}>
+                <{if $indexHeader|default:''}><h3 class="pull-left"><{$indexHeader}></h3><{/if}>
                 <div class="pull-right">
                     <{if $xoops_isuser|default:false}>
                         <{if $xoops_isadmin|default:false}>
@@ -27,15 +27,15 @@
 		<div class="col-sm-4 col-md-4 col-lg-2 col-xl-2"><{include file='db:wgsimpleacc_navbar.tpl'}></div>
 		<div class="col-sm-8 col-md-8 col-lg-10 col-xl-10">
             <{include file=$template_sub}>
-            <{if $form}>
+            <{if $form|default:''}>
 				<{$form}>
 			<{/if}>
-			<{if $error}>
+			<{if $error|default:''}>
 				<{$error}>
 			<{/if}>
         </div>
 	</div>
-	<{if $adv}>
+	<{if $adv|default:''}>
         <div class="row">
             <div class="col-sm-12"><{$adv}></div>
         </div>

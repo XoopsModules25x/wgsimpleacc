@@ -34,19 +34,19 @@
 				<th><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_AMOUNT}></th>
 				<td><{$transaction.curid}> <{$transaction.amount}></td>
 			</tr>
-			<{if $showAssets}>
+			<{if $showAssets|default:''}>
 				<tr>
 					<th><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_ASID}></th>
 					<td><{$transaction.curid}> <{$transaction.asset}></td>
 				</tr>
 			<{/if}>
-			<{if $useTaxes}>
+			<{if $useTaxes|default:''}>
 			<tr>
 				<th><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_TAXID}></th>
 				<td><{$transaction.taxrate}></td>
 			</tr>
 			<{/if}>
-			<{if $useFiles}>
+			<{if $useFiles|default:''}>
 				<{if $transaction.nbfiles > 0}>
 					<tr>
 						<th><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_FILES}></th>

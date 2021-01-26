@@ -86,6 +86,9 @@ switch ($op) {
 				$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
 			}
 		}
+
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_OUTTEMPLATES];
 		break;
 	case 'save':
 		// Security Check
@@ -126,6 +129,10 @@ switch ($op) {
 		$outtemplatesObj = $outtemplatesHandler->create();
 		$form = $outtemplatesObj->getFormOuttemplates();
 		$GLOBALS['xoopsTpl']->assign('form', $form->render());
+
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_OUTTEMPLATES, 'link' => 'outtemplates.php?op=list'];
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_OUTTEMPLATE_ADD];
 		break;
 	case 'edit':
 		// Check permissions
@@ -140,6 +147,10 @@ switch ($op) {
 		$outtemplatesObj = $outtemplatesHandler->get($otplId);
 		$form = $outtemplatesObj->getFormOuttemplates();
 		$GLOBALS['xoopsTpl']->assign('form', $form->render());
+
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_OUTTEMPLATES, 'link' => 'outtemplates.php?op=list'];
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_OUTTEMPLATE_EDIT];
 		break;
 	case 'delete':
 		// Check permissions
@@ -168,6 +179,10 @@ switch ($op) {
 				\sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $outtemplatesObj->getVar('otpl_name')));
 			$form = $xoopsconfirm->getFormXoopsConfirm();
 			$GLOBALS['xoopsTpl']->assign('form', $form->render());
+
+            // Breadcrumbs
+            $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_OUTTEMPLATES, 'link' => 'outtemplates.php?op=list'];
+            $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_OUTTEMPLATE_EDIT];
 		}
 		break;
     case 'select':
@@ -209,9 +224,6 @@ switch ($op) {
         }
         break;
 }
-
-// Breadcrumbs
-$xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_OUTTEMPLATES];
 
 // Keywords
 wgsimpleaccMetaKeywords($helper->getConfig('keywords') . ', ' . \implode(',', $keywords));

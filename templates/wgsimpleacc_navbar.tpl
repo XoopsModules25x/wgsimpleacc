@@ -37,6 +37,11 @@
                                 <li>
                                     <a href="transactions.php?op=new&tra_type=2"><i class="fa fa-plus-square fa-fw"></i> <{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_SUBMIT_EXPENSE}></a>
                                 </li>
+                                <{if $permGlobalApprove}>
+                                    <li>
+                                        <a href="transactions.php?op=listhist"><i class="fa fa-trash fa-fw"></i> <{$smarty.const._MA_WGSIMPLEACC_HISTORY_DELETED}></a>
+                                    </li>
+                                <{/if}>
                             </ul>
                             <{else}>
                             <a href="transactions.php"><i class="fa fa-files-o fa-fw"></i> <{$smarty.const._MA_WGSIMPLEACC_TRANSACTIONS_LIST}></a>

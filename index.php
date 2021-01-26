@@ -124,6 +124,7 @@ if ($transactionsCount > 0) {
             $crTransactions->add(new \Criteria('tra_allid', $allPid));
             $crTransactions->add(new \Criteria('tra_date', $tradateFrom, '>='));
             $crTransactions->add(new \Criteria('tra_date', $tradateTo, '<='));
+            $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_SUBMITTED, '>'));
             $transactionsAll   = $transactionsHandler->getAll($crTransactions);
             foreach (\array_keys($transactionsAll) as $i) {
                 $sumAmountin += $transactionsAll[$i]->getVar('tra_amountin');
@@ -193,6 +194,7 @@ if ($transactionsCount > 0) {
                 $crTransactions->add(new \Criteria('tra_allid', $subAllId));
                 $crTransactions->add(new \Criteria('tra_date', $tradateFrom, '>='));
                 $crTransactions->add(new \Criteria('tra_date', $tradateTo, '<='));
+                $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_SUBMITTED, '>'));
                 $transactionsCount = $transactionsHandler->getCount($crTransactions);
                 $transactionsAll   = $transactionsHandler->getAll($crTransactions);
                 if ($transactionsCount > 0) {

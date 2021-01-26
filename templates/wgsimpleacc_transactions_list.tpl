@@ -22,13 +22,13 @@
 		<{/if}>
 		<{$transaction.amount}>
 	</td>
-	<{if $showAssets}>
+	<{if $showAssets|default:''}>
 		<td><{$transaction.asset}></td>
 	<{/if}>
-	<{if $useTaxes}>
+	<{if $useTaxes|default:''}>
 		<td><{$transaction.taxrate}></td>
 	<{/if}>
-	<{if $useFiles}>
+	<{if $useFiles|default:''}>
 		<td>
 			<{if $transaction.nbfiles > 0}>
 				<span class="badge wgsa-files-badge"><{$transaction.nbfiles}></span>
@@ -42,7 +42,7 @@
 		</td>
 	<{/if}>
 	<td class="center">
-		<{if $transaction.waiting}>
+		<{if $transaction.waiting|default:''}>
 			<{if $permApprove}>
 				<a class='btn btn-warning right' href='transactions.php?op=approve&amp;tra_id=<{$transaction.tra_id}><{$traOp}>' title='<{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_STATUS_WAITING}>'><i class="fa fa-hourglass fa-fw"></i></a>
 			<{else}>
@@ -52,7 +52,9 @@
 		<a class='btn btn-success right' href='transactions.php?op=show&amp;tra_id=<{$transaction.tra_id}><{$traOp}>' title='<{$smarty.const._MA_WGSIMPLEACC_DETAILS}>'><i class="fa fa-search fa-fw"></i></a>
 		<{if $permSubmit && $transaction.editable}>
 			<a class='btn btn-primary right' href='transactions.php?op=edit&amp;tra_id=<{$transaction.tra_id}><{$traOp}>' title='<{$smarty.const._EDIT}>'><i class="fa fa-edit fa-fw"></i></a>
-			<a class='btn btn-danger right' href='transactions.php?op=delete&amp;tra_id=<{$transaction.tra_id}>' title='<{$smarty.const._DELETE}>'><i class="fa fa-trash fa-fw"></i></a>
+			<{if $permDelete|default:0}>
+				<a class='btn btn-danger right' href='transactions.php?op=delete&amp;tra_id=<{$transaction.tra_id}>' title='<{$smarty.const._DELETE}>'><i class="fa fa-trash fa-fw"></i></a>
+			<{/if}>
 		<{/if}>
 		<a class='btn btn-default right' href='transactions_pdf.php?tra_id=<{$transaction.tra_id}>' title='<{$smarty.const._MA_WGSIMPLEACC_DOWNLOAD}>'><i class="fa fa-download fa-fw"></i></a>
 	</td>

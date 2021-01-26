@@ -61,19 +61,6 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_LIST_TRATEMPLATES', 'List of Transaction Templates');
 \define('_AM_WGSIMPLEACC_LIST_OUTTEMPLATES', 'List of Output Templates');
 // ---------------- Admin Classes ----------------
-// Caption of Transaction
-\define('_AM_WGSIMPLEACC_TRANSACTION_HISTID', 'History Id');
-\define('_AM_WGSIMPLEACC_TRANSACTION_HISTTYPE', 'History Type');
-\define('_AM_WGSIMPLEACC_TRANSACTION_HISTDATE', 'History date');
-// Account add/edit
-\define('_AM_WGSIMPLEACC_ACCOUNT_ADD', 'Add Account');
-\define('_AM_WGSIMPLEACC_ACCOUNT_EDIT', 'Edit Account');
-// Allocation add/edit
-\define('_AM_WGSIMPLEACC_ALLOCATION_ADD', 'Add Allocation');
-\define('_AM_WGSIMPLEACC_ALLOCATION_EDIT', 'Edit Allocation');
-// Asset add/edit
-\define('_AM_WGSIMPLEACC_ASSET_ADD', 'Add Asset');
-\define('_AM_WGSIMPLEACC_ASSET_EDIT', 'Edit Asset');
 // Currency add/edit
 \define('_AM_WGSIMPLEACC_CURRENCY_ADD', 'Add Currency');
 \define('_AM_WGSIMPLEACC_CURRENCY_EDIT', 'Edit Currency');
@@ -93,23 +80,10 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_TAX_RATE', 'Rate');
 \define('_AM_WGSIMPLEACC_TAX_ONLINE', 'Online');
 \define('_AM_WGSIMPLEACC_TAX_PRIMARY', 'Primary');
-// Balance add/edit
-\define('_AM_WGSIMPLEACC_BALANCE_ADD', 'Add Balance');
-\define('_AM_WGSIMPLEACC_BALANCE_EDIT', 'Edit Balance');
-// Template add/edit
-\define('_AM_WGSIMPLEACC_TRATEMPLATE_ADD', 'Add Template');
-\define('_AM_WGSIMPLEACC_TRATEMPLATE_EDIT', 'Edit Template');
-// Template add/edit
-\define('_AM_WGSIMPLEACC_OUTTEMPLATE_ADD', 'Add Template');
-\define('_AM_WGSIMPLEACC_OUTTEMPLATE_EDIT', 'Edit Template');
-// Status
-\define('_AM_WGSIMPLEACC_STATUS_NONE', 'No status');
-\define('_AM_WGSIMPLEACC_STATUS_OFFLINE', 'Offline');
-\define('_AM_WGSIMPLEACC_STATUS_SUBMITTED', 'Submitted');
-\define('_AM_WGSIMPLEACC_STATUS_APPROVED', 'Approved');
-\define('_AM_WGSIMPLEACC_STATUS_BROKEN', 'Broken');
-\define('_AM_WGSIMPLEACC_STATUS_CREATED', 'Created');
-\define('_AM_WGSIMPLEACC_STATUS_LOCKED', 'Locked');
+// Caption of Transaction
+\define('_AM_WGSIMPLEACC_TRANSACTION_HISTID', 'History Id');
+\define('_AM_WGSIMPLEACC_TRANSACTION_HISTTYPE', 'History Type');
+\define('_AM_WGSIMPLEACC_TRANSACTION_HISTDATE', 'History date');
 // ---------------- Admin Permissions ----------------
 // Permissions
 \define('_AM_WGSIMPLEACC_NO_PERMISSIONS_SET', 'No permission set');

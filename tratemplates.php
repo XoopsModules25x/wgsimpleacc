@@ -89,6 +89,9 @@ switch ($op) {
 				$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
 			}
 		}
+
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_TRATEMPLATES];
 		break;
 	case 'save':
 		// Security Check
@@ -136,6 +139,10 @@ switch ($op) {
 		$tratemplatesObj = $tratemplatesHandler->create();
 		$form = $tratemplatesObj->getFormTratemplates();
 		$GLOBALS['xoopsTpl']->assign('form', $form->render());
+
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_TRATEMPLATES, 'link' => 'tratemplates.php?op=list'];
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_TRATEMPLATE_ADD];
 		break;
 	case 'edit':
 		// Check params
@@ -150,6 +157,10 @@ switch ($op) {
         }
 		$form = $tratemplatesObj->getFormTratemplates();
 		$GLOBALS['xoopsTpl']->assign('form', $form->render());
+
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_TRATEMPLATES, 'link' => 'tratemplates.php?op=list'];
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_TRATEMPLATE_EDIT];
 		break;
 	case 'delete':
 		// Check params
@@ -178,12 +189,13 @@ switch ($op) {
 				\sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $tratemplatesObj->getVar('ttpl_name')));
 			$form = $xoopsconfirm->getFormXoopsConfirm();
 			$GLOBALS['xoopsTpl']->assign('form', $form->render());
+
+            // Breadcrumbs
+            $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_TRATEMPLATES, 'link' => 'tratemplates.php?op=list'];
+            $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_TRATEMPLATE_EDIT];
 		}
 		break;
 }
-
-// Breadcrumbs
-$xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_TRATEMPLATES];
 
 // Keywords
 wgsimpleaccMetaKeywords($helper->getConfig('keywords') . ', ' . \implode(',', $keywords));

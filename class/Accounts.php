@@ -91,7 +91,7 @@ class Accounts extends \XoopsObject
 			$action = $_SERVER['REQUEST_URI'];
 		}
 		// Title
-		$title = $this->isNew() ? \sprintf(\_AM_WGSIMPLEACC_ACCOUNT_ADD) : \sprintf(\_AM_WGSIMPLEACC_ACCOUNT_EDIT);
+		$title = $this->isNew() ? \sprintf(\_MA_WGSIMPLEACC_ACCOUNT_ADD) : \sprintf(\_MA_WGSIMPLEACC_ACCOUNT_EDIT);
 		// Get Theme Form
 		\xoops_load('XoopsFormLoader');
 		$form = new \XoopsThemeForm($title, 'form', $action, 'post', true);

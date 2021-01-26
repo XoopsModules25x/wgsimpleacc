@@ -1,5 +1,5 @@
-<{if $showList}>
-	<{if $outtemplatesCount > 0}>
+<{if $showList|default:''}>
+	<{if $outtemplatesCount|default:0 > 0}>
 		<h3><{$smarty.const._MA_WGSIMPLEACC_OUTTEMPLATES_LIST}></h3>
 		<div class='table-responsive'>
 			<table class='table table-<{$table_type}>'>
@@ -17,9 +17,11 @@
 				</tbody>
 			</table>
 		</div>
+	<{else}>
+		<{$smarty.const._MA_WGSIMPLEACC_THEREARENT_OUTTEMPLATES}>
 	<{/if}>
 <{/if}>
-<{if $outputText}>
+<{if $outputText|default:''}>
 	<div class="wgsa_outtemplate"><{$outputText}></div>
 	<div class="wgsa_outtemplate_footer center">
 		<a href="#" class="btn btn-warning" onclick="history.go(-1);return true;"><{$smarty.const._BACK}></a>

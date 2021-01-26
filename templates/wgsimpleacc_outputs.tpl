@@ -1,11 +1,11 @@
-<{if $formFilter}>
+<{if $formFilter|default:''}>
     <div id="formFilter" class="row" style="display:<{$displayfilter}>">
         <div class="col-sm-12">
             <{$formFilter}>
         </div>
     </div>
 <{/if}>
-<{if $displayBalOutput}>
+<{if $displayBalOutput|default:''}>
     <{if $balancesCount > 0}>
         <h3><{$smarty.const._MA_WGSIMPLEACC_BALANCES_LIST}></h3>
         <div class='table-responsive'>
@@ -48,7 +48,7 @@
             </table>
         </div>
     <{/if}>
-    <{if $accountsCount > 0}>
+    <{if $accountsCount|default:0 > 0}>
         <h3><{$smarty.const._MA_WGSIMPLEACC_ACCOUNTS_LIST}></h3>
         <div class='table-responsive'>
             <table class='table table-<{$table_type}>'>
@@ -79,7 +79,7 @@
             </table>
         </div>
     <{/if}>
-    <{if $allocationsCount > 0}>
+    <{if $allocationsCount|default:0 > 0}>
         <h3><{$smarty.const._MA_WGSIMPLEACC_ALLOCATIONS_LIST}></h3>
         <div class='table-responsive'>
             <table class='table table-<{$table_type}>'>
@@ -99,7 +99,7 @@
                         <td class="col-xs-6 col-sm-2 right"><{$allocation.amountout}></td>
                         <td class="col-xs-6 col-sm-2 right"><{$allocation.total}></td>
                     </tr>
-                    <{/foreach}>
+                <{/foreach}>
                 <tr class="wgsa-output-sum">
                     <td class="col-xs-6 col-sm-4 left"><{$smarty.const._MA_WGSIMPLEACC_BALANCES_OUT_SUMS}></td>
                     <td class="col-xs-6 col-sm-2 right"><{$allocationsAmountIn}></td>
@@ -110,7 +110,7 @@
             </table>
         </div>
     <{/if}>
-    <{if $buttonBalPdf}>
+    <{if $buttonBalPdf|default:0}>
         <a class='btn btn-primary pull-right' href='balances_pdf.php?balIds=<{$balIds}>&amp;level_alloc=<{$level_alloc}>&amp;level_account=<{$level_account}>' title='<{$smarty.const._MA_WGSIMPLEACC_PDF_BUTTON}>'><{$smarty.const._MA_WGSIMPLEACC_PDF_BUTTON}></a>
     <{/if}>
 <{/if}>

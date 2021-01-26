@@ -91,7 +91,7 @@ class Balances extends \XoopsObject
         $dtime = \DateTime::createFromFormat('Y-m-d', (date('Y') - 1) . '-12-31');
         $dateTo = $dtime->getTimestamp();
 		// Title
-		$title = $this->isNew() ? \sprintf(\_AM_WGSIMPLEACC_BALANCE_ADD) : \sprintf(\_AM_WGSIMPLEACC_BALANCE_EDIT);
+		$title = $this->isNew() ? \sprintf(\_MA_WGSIMPLEACC_BALANCE_ADD) : \sprintf(\_MA_WGSIMPLEACC_BALANCE_EDIT);
 		// Get Theme Form
 		\xoops_load('XoopsFormLoader');
 		$form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
@@ -126,8 +126,8 @@ class Balances extends \XoopsObject
             $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_BALANCE_AMOUNTEND, 'bal_amountend', 20, 150, $balAmountEnd), true);
             // Form Select Status
             $balStatusSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_BALANCE_STATUS, 'bal_status', $balStatus);
-            //$balStatusSelect->addOption(Constants::STATUS_CREATED, \_AM_WGSIMPLEACC_STATUS_CREATED);
-            $balStatusSelect->addOption(Constants::STATUS_APPROVED, \_AM_WGSIMPLEACC_STATUS_APPROVED);
+            //$balStatusSelect->addOption(Constants::STATUS_CREATED, \_MA_WGSIMPLEACC_STATUS_CREATED);
+            $balStatusSelect->addOption(Constants::STATUS_APPROVED, \_MA_WGSIMPLEACC_STATUS_APPROVED);
             $form->addElement($balStatusSelect);
             // Form Text Date Select balDatecreated
             $balDatecreated = $this->isNew() ?: $this->getVar('bal_datecreated');

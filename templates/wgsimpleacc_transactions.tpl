@@ -14,8 +14,8 @@
 	});
 </script>
 
-<{if $showList}>
-    <{if $transactionsCount > 0}>
+<{if $showList|default:''}>
+    <{if $transactionsCount|default:0 > 0}>
         <{if $showItem}>
             <{foreach item=transaction from=$transactions}>
                 <{include file='db:wgsimpleacc_transactions_item.tpl' }>
@@ -24,7 +24,7 @@
             <div class="col-sm-12">
                 <a id="toggleFormFilter" class='btn btn-default pull-right' href='#' title='<{$btnfilter}>'><{$btnfilter}></a>
             </div>
-            <{if $formFilter}>
+            <{if $formFilter|default:''}>
             <div id="formFilter" class="row" style="display:<{$displayfilter}>">
                 <div class="col-sm-12">
                     <{$formFilter}>
@@ -43,13 +43,13 @@
                             <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_ALLID}></th>
                             <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_DATE}></th>
                             <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_AMOUNT}></th>
-                            <{if $showAssets}>
+                            <{if $showAssets|default:''}>
                                 <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_ASID}></th>
                             <{/if}>
-                            <{if $useTaxes}>
+                            <{if $useTaxes|default:''}>
                                 <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_TAXID}></th>
                             <{/if}>
-                            <{if $useFiles}>
+                            <{if $useFiles|default:''}>
                                 <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_FILES}></th>
                             <{/if}>
                             <th scope="col"></th>
@@ -68,7 +68,7 @@
     <{/if}>
 <{/if}>
 
-<{if $showHist}>
+<{if $showHist|default:''}>
     <h3><{$smarty.const._MA_WGSIMPLEACC_TRANSACTIONS_LIST}></h3>
     <div class='table-responsive'>
         <table class='table table-striped'>
@@ -83,13 +83,13 @@
                 <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_ALLID}></th>
                 <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_DATE}></th>
                 <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_AMOUNT}></th>
-                <{if $showAssets}>
+                <{if $showAssets|default:''}>
                 <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_ASID}></th>
                 <{/if}>
-                <{if $useTaxes}>
+                <{if $useTaxes|default:''}>
                 <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_TAXID}></th>
                 <{/if}>
-                <{if $useFiles}>
+                <{if $useFiles|default:''}>
                 <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_FILES}></th>
                 <{/if}>
                 <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_STATUS}></th>

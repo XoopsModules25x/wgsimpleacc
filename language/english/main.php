@@ -65,6 +65,9 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_THEREARENT_BALANCES', "There aren't balances at the moment");
 \define('_MA_WGSIMPLEACC_THEREARENT_TRATEMPLATES', "There aren't transaction templates at the moment");
 \define('_MA_WGSIMPLEACC_THEREARENT_OUTTEMPLATES', "There aren't output templates at the moment");
+// Account add/edit
+\define('_MA_WGSIMPLEACC_ACCOUNT_ADD', 'Add Account');
+\define('_MA_WGSIMPLEACC_ACCOUNT_EDIT', 'Edit Account');
 // Account
 \define('_MA_WGSIMPLEACC_ACCOUNT', 'Account');
 \define('_MA_WGSIMPLEACC_ACCOUNTS', 'Accounts');
@@ -130,6 +133,9 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_TRANSACTION_BALID', 'Balance');
 \define('_MA_WGSIMPLEACC_TRANSACTION_HIST', 'History');
 \define('_MA_WGSIMPLEACC_TRANSACTION_TEMPLATE', 'Template');
+// Allocation add/edit
+\define('_MA_WGSIMPLEACC_ALLOCATION_ADD', 'Add Allocation');
+\define('_MA_WGSIMPLEACC_ALLOCATION_EDIT', 'Edit Allocation');
 // Allocation
 \define('_MA_WGSIMPLEACC_ALLOCATION', 'Allocation');
 \define('_MA_WGSIMPLEACC_ALLOCATIONS', 'Allocations');
@@ -150,6 +156,9 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_ALLOCATION_ERR_DELETE1', 'Deleting allocation not possible!<br>Allocation already used for transactions!<br>Please change these transactions first');
 \define('_MA_WGSIMPLEACC_ALLOCATION_ERR_DELETE2', 'Deleting allocation not possible!<br>Allocation has sub allocations!<br>Please delete sub allocations first');
 \define('_MA_WGSIMPLEACC_ALLOCATION_CURRID', 'Current allocation: %s');
+// Asset add/edit
+\define('_MA_WGSIMPLEACC_ASSET_ADD', 'Add Asset');
+\define('_MA_WGSIMPLEACC_ASSET_EDIT', 'Edit Asset');
 // Asset
 \define('_MA_WGSIMPLEACC_ASSET', 'Asset');
 \define('_MA_WGSIMPLEACC_ASSETS', 'Assets');
@@ -213,6 +222,9 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_FILE_DESC', 'Description');
 \define('_MA_WGSIMPLEACC_FILE_IP', 'IP-Address');
 \define('_MA_WGSIMPLEACC_FILE_PREVIEW', 'Preview');
+// Balance add/edit
+\define('_MA_WGSIMPLEACC_BALANCE_ADD', 'Add Balance');
+\define('_MA_WGSIMPLEACC_BALANCE_EDIT', 'Edit Balance');
 // Balance
 \define('_MA_WGSIMPLEACC_BALANCE', 'Balance');
 \define('_MA_WGSIMPLEACC_BALANCES', 'Balances');
@@ -254,11 +266,14 @@ require_once __DIR__ . '/admin.php';
 // Templates general
 \define('_MA_WGSIMPLEACC_TEMPLATES', 'Templates');
 \define('_MA_WGSIMPLEACC_TEMPLATE_NONE', 'None');
+// Template add/edit
+\define('_MA_WGSIMPLEACC_TRATEMPLATE_ADD', 'Add Template');
+\define('_MA_WGSIMPLEACC_TRATEMPLATE_EDIT', 'Edit Template');
 // Tratemplates
 \define('_MA_WGSIMPLEACC_TRATEMPLATES', 'Transaction templates');
 \define('_MA_WGSIMPLEACC_TRATEMPLATES_LIST', 'List of Transaction Templates');
 \define('_MA_WGSIMPLEACC_TRATEMPLATE_SUBMIT', 'Submit Transaction Template');
-// Elements of Template
+// Elements of Tratemplates
 \define('_MA_WGSIMPLEACC_TRATEMPLATE_ID', 'Id');
 \define('_MA_WGSIMPLEACC_TRATEMPLATE_NAME', 'Name');
 \define('_MA_WGSIMPLEACC_TRATEMPLATE_DESC', 'Description');
@@ -268,13 +283,16 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_TRATEMPLATE_AMOUNTIN', 'Amount in');
 \define('_MA_WGSIMPLEACC_TRATEMPLATE_AMOUNTOUT', 'Amount out');
 \define('_MA_WGSIMPLEACC_TRATEMPLATE_ONLINE', 'Online');
+// Outtemplate add/edit
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_ADD', 'Add Template');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_EDIT', 'Edit Template');
 // Outtemplate
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE', 'Output template');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATES', 'Output templates');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATES_TITLE', 'Output templates title');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATES_LIST', 'List of Output templates');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_SUBMIT', 'Submit Output Template');
-// Caption of Outtemplate
+// Elements of Outtemplate
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_ID', 'Id');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_NAME', 'Name');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_CONTENT', 'Content');
@@ -325,6 +343,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_HISTORY_ID', 'History Id');
 \define('_MA_WGSIMPLEACC_HISTORY_TYPE', 'Type');
 \define('_MA_WGSIMPLEACC_HISTORY_DATECREATED', 'Date History');
+\define('_MA_WGSIMPLEACC_HISTORY_DELETED', 'List of deleted transactions');
 // Submit
 \define('_MA_WGSIMPLEACC_SUBMIT', 'Submit');
 // Modal
@@ -341,10 +360,18 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_FORM_UPLOAD_SIZE_MB', 'MB');
 \define('_MA_WGSIMPLEACC_FORM_IMAGE_PATH', 'Files in %s :');
 \define('_MA_WGSIMPLEACC_FORM_UPLOAD_ALLOWEDMIME', 'Allowed mimetypes:');
-//Constants
+//Constants class
 \define('_MA_WGSIMPLEACC_CLASS_EXPENSES', 'Expenses');
 \define('_MA_WGSIMPLEACC_CLASS_INCOME', 'Incomes');
 \define('_MA_WGSIMPLEACC_CLASS_BOTH', 'Both');
+// Constants Status
+\define('_MA_WGSIMPLEACC_STATUS_NONE', 'No status');
+\define('_MA_WGSIMPLEACC_STATUS_OFFLINE', 'Offline');
+\define('_MA_WGSIMPLEACC_STATUS_SUBMITTED', 'Submitted');
+\define('_MA_WGSIMPLEACC_STATUS_APPROVED', 'Approved');
+\define('_MA_WGSIMPLEACC_STATUS_BROKEN', 'Broken');
+\define('_MA_WGSIMPLEACC_STATUS_CREATED', 'Created');
+\define('_MA_WGSIMPLEACC_STATUS_LOCKED', 'Locked');
 //PDF files
 \define('_MA_WGSIMPLEACC_PDF_BUTTON', 'Output as PDF');
 \define('_MA_WGSIMPLEACC_PDF_TRANAME', 'Transaction_%y_%n');
@@ -361,3 +388,11 @@ require_once __DIR__ . '/admin.php';
 // Admin link
 \define('_MA_WGSIMPLEACC_ADMIN', 'Admin');
 // ---------------- End ----------------
+
+
+
+
+
+
+
+

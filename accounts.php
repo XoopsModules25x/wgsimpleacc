@@ -79,6 +79,9 @@ switch ($op) {
             $GLOBALS['xoopsTpl']->assign('accountlist_sort', $accountlist_sort);
             $GLOBALS['xoopsTpl']->assign('accounts_submit', $permAccountsSubmit);
         }
+
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ACCOUNTS];
 		break;
 	case 'save':
 		// Security Check
@@ -131,6 +134,10 @@ switch ($op) {
 		$accountsObj = $accountsHandler->create();
 		$form = $accountsObj->getFormAccounts();
 		$GLOBALS['xoopsTpl']->assign('form', $form->render());
+
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ACCOUNTS, 'link' => 'accounts.php?op=list'];
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ACCOUNT_ADD];
 		break;
 	case 'edit':
 		// Check params
@@ -145,6 +152,10 @@ switch ($op) {
 		// Get Form
 		$form = $accountsObj->getFormAccounts();
 		$GLOBALS['xoopsTpl']->assign('form', $form->render());
+
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ACCOUNTS, 'link' => 'accounts.php?op=list'];
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ACCOUNT_EDIT];
 		break;
 	case 'delete':
 		// Check params
@@ -210,9 +221,6 @@ switch ($op) {
         }
         break;
 }
-
-// Breadcrumbs
-$xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ACCOUNTS];
 
 // Keywords
 wgsimpleaccMetaKeywords($helper->getConfig('keywords') . ', ' . \implode(',', $keywords));

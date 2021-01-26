@@ -15,7 +15,7 @@
         <{/if}>
         <th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_AMOUNTIN}></th>
         <th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_AMOUNTOUT}></th>
-        <{if $useTaxes}>
+        <{if $useTaxes|default:''}>
             <th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_TAXID}></th>
         <{/if}>
         <th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_STATUS}></th>
@@ -35,7 +35,7 @@
             <{/if}>
             <td class='center'><{$transaction.amountin}></td>
             <td class='center'><{$transaction.amountout}></td>
-            <{if $useTaxes}>
+            <{if $useTaxes|default:''}>
                 <td class='center'><{$transaction.taxid}></td>
             <{/if}>
             <td class='center'><{$transaction.status_text}></td>

@@ -60,7 +60,6 @@ $GLOBALS['xoopsTpl']->assign('allocationsCount', $allocationsCount);
 switch ($op) {
 	case 'list':
 	default:
-
 		if ($allocationsCount > 0) {
             $GLOBALS['xoTheme']->addStylesheet(WGSIMPLEACC_URL . '/assets/css/nestedsortable.css');
 		    if ($permAllocationsSubmit) {
@@ -79,7 +78,10 @@ switch ($op) {
             $GLOBALS['xoopsTpl']->assign('allocationlist_sort', $allocationlist_sort);
             $GLOBALS['xoopsTpl']->assign('allocations_submit', $permAllocationsSubmit);
 		}
-    break;
+
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ALLOCATIONS];
+        break;
     case 'save':
         // Security Check
         if (!$GLOBALS['xoopsSecurity']->check()) {
@@ -128,6 +130,10 @@ switch ($op) {
         $allocationsObj = $allocationsHandler->create();
         $form = $allocationsObj->getFormAllocations();
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
+
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ALLOCATIONS, 'link' => 'allocations.php?op=list'];
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ALLOCATION_ADD];
         break;
     case 'edit':
         // Check params
@@ -143,6 +149,10 @@ switch ($op) {
 
         $form = $allocationsObj->getFormAllocations();
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
+
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ALLOCATIONS, 'link' => 'allocations.php?op=list'];
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ALLOCATION_EDIT];
         break;
     case 'delete':
         // Check params
@@ -188,6 +198,10 @@ switch ($op) {
                 \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $allocationsObj->getVar('all_name')));
             $form = $xoopsconfirm->getFormXoopsConfirm();
             $GLOBALS['xoopsTpl']->assign('form', $form->render());
+
+            // Breadcrumbs
+            $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ALLOCATIONS, 'link' => 'allocations.php?op=list'];
+            $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ALLOCATION_EDIT];
         }
         break;
     case 'order':
@@ -216,9 +230,6 @@ switch ($op) {
         }
         break;
 }
-
-// Breadcrumbs
-$xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ALLOCATIONS];
 
 // Keywords
 wgsimpleaccMetaKeywords($helper->getConfig('keywords') . ', ' . \implode(',', $keywords));

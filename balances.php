@@ -106,6 +106,10 @@ switch ($op) {
             $strFilter = "&amp;balanceFrom=$balanceFrom&amp;balanceTo=$balanceTo";
             $GLOBALS['xoopsTpl']->assign('balfilter', $strFilter);
         }
+
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_BALANCES, 'link' => 'balances.php?op=list'];
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_BALANCE_PRECALC];
         break;
 
 	case 'list':
@@ -133,6 +137,9 @@ switch ($op) {
 			$GLOBALS['xoopsTpl']->assign('divideby', $helper->getConfig('divideby'));
 			$GLOBALS['xoopsTpl']->assign('numb_col', $helper->getConfig('numb_col'));
 		}
+
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_BALANCES];
 		break;
 	case 'save':
         // Check permissions
@@ -187,7 +194,8 @@ switch ($op) {
                 $crTransactions->add(new \Criteria('tra_date', $balanceFrom, '>='));
                 $crTransactions->add(new \Criteria('tra_date', $balanceTo, '<='));
                 $crTransactions->add(new \Criteria('tra_asid', $asset['id']));
-                $transactionsHandler->updateAll('tra_status', 6, $crTransactions, true);
+                $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_SUBMITTED, '>'));
+                $transactionsHandler->updateAll('tra_status', Constants::STATUS_LOCKED, $crTransactions, true);
                 $transactionsHandler->updateAll('tra_balid', $newBalId, $crTransactions, true);
 
                 unset($crTransactions);
@@ -237,6 +245,10 @@ switch ($op) {
 		$balancesObj = $balancesHandler->create();
 		$form = $balancesObj->getFormBalances('balances.php');
 		$GLOBALS['xoopsTpl']->assign('form', $form->render());
+
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_BALANCES, 'link' => 'balances.php?op=list'];
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_BALANCE_SUBMIT];
 		break;
 	/*
 	case 'edit':
@@ -291,9 +303,6 @@ switch ($op) {
 		break;
 	*/
 }
-
-// Breadcrumbs
-$xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_BALANCES];
 
 // Keywords
 wgsimpleaccMetaKeywords($helper->getConfig('keywords') . ', ' . \implode(',', $keywords));

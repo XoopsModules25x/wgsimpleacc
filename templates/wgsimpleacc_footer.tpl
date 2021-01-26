@@ -1,16 +1,16 @@
 <div class="clear"></div>
-<{if $pagenav != ''}>
+<{if $pagenav|default:''}>
 	<div class='pull-right'><{$pagenav}></div>
 <{/if}>
 <br>
-<{if $xoops_isadmin != ''}>
+<{if $xoops_isadmin|default:''}>
 	<div class='text-center bold'><a href='<{$admin}>'><{$smarty.const._MA_WGSIMPLEACC_ADMIN}></a></div>
 <{/if}>
-<{if $copyright}>
+<{if $copyright|default:''}>
 	<div class="clear"></div>
 	<div class='center'><{$copyright}></div>
 <{/if}>
-<{if $comment_mode}>
+<{if $comment_mode|default:''}>
 	<div class='pad2 marg2'>
 		<{if $comment_mode == "flat"}>
 			<{include file='db:system_comments_flat.tpl' }>
