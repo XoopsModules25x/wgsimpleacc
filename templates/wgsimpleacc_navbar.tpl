@@ -39,7 +39,7 @@
                                 </li>
                                 <{if $permGlobalApprove}>
                                     <li>
-                                        <a href="transactions.php?op=listhist"><i class="fa fa-trash fa-fw"></i> <{$smarty.const._MA_WGSIMPLEACC_HISTORY_DELETED}></a>
+                                        <a href="transactions.php?op=listhist"><i class="fa fa-trash fa-fw"></i> <{$smarty.const._MA_WGSIMPLEACC_TRAHISTORY_DELETED}></a>
                                     </li>
                                 <{/if}>
                             </ul>

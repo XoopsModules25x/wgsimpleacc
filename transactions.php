@@ -523,7 +523,7 @@ switch ($op) {
 
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_TRANSACTIONS, 'link' => 'transactions.php?op=list'];
-        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_HISTORY_DELETED];
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_TRAHISTORY_DELETED];
         break;
 }
 

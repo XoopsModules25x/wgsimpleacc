@@ -96,6 +96,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_TRANSACTION_EDIT_INCOME', 'Transaktion Einnahmen bearbeiten');
 \define('_MA_WGSIMPLEACC_TRANSACTION_EDIT_EXPENSES', 'Transaktion Ausgaben bearbeiten');
 \define('_MA_WGSIMPLEACC_TRANSACTION_STATUS_WAITING', 'Wartet auf Freigabe');
+\define('_MA_WGSIMPLEACC_TRANSACTION_DETAILS', 'Details zu Transaktion');
 // Transaction
 \define('_MA_WGSIMPLEACC_TRANSACTION', 'Transaktion');
 \define('_MA_WGSIMPLEACC_TRANSACTIONS', 'Transaktionen');
@@ -326,7 +327,8 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_HISTORY_ID', 'History Id');
 \define('_MA_WGSIMPLEACC_HISTORY_TYPE', 'Typ');
 \define('_MA_WGSIMPLEACC_HISTORY_DATECREATED', 'Datum Historie');
-\define('_MA_WGSIMPLEACC_HISTORY_DELETED', 'Liste der gelöschten Transaktionen');
+\define('_MA_WGSIMPLEACC_TRAHISTORY_LIST', 'Historie zu Transaktion');
+\define('_MA_WGSIMPLEACC_TRAHISTORY_DELETED', 'Liste der gelöschten Transaktionen');
 // Submit
 \define('_MA_WGSIMPLEACC_SUBMIT', 'Einsenden');
 // Modal

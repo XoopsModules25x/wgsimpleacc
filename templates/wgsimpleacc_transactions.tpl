@@ -16,7 +16,8 @@
 
 <{if $showList|default:''}>
     <{if $transactionsCount|default:0 > 0}>
-        <{if $showItem}>
+        <{if $showItem|default:false}>
+            <h3><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_DETAILS}></h3>
             <{foreach item=transaction from=$transactions}>
                 <{include file='db:wgsimpleacc_transactions_item.tpl' }>
             <{/foreach}>
@@ -69,7 +70,7 @@
 <{/if}>
 
 <{if $showHist|default:''}>
-    <h3><{$smarty.const._MA_WGSIMPLEACC_TRANSACTIONS_LIST}></h3>
+    <h3><{$smarty.const._MA_WGSIMPLEACC_TRAHISTORY_LIST}></h3>
     <div class='table-responsive'>
         <table class='table table-striped'>
             <thead>

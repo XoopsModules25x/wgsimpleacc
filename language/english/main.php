@@ -92,13 +92,14 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_ACCOUNT_IECALC', 'Use in income/expenses calculation');
 \define('_MA_WGSIMPLEACC_ACCOUNT_ERR_DELETE', 'Deleting account not possible!<br>Account already used for transactions!<br>Please change these transactions first');
 // Transaction add/edit
-\define('_MA_WGSIMPLEACC_TRANSACTION_ADD', 'Add Transaction');
-\define('_MA_WGSIMPLEACC_TRANSACTION_ADD_INCOME', 'Add Transaction for income');
-\define('_MA_WGSIMPLEACC_TRANSACTION_ADD_EXPENSES', 'Add Transaction for expenses');
+\define('_MA_WGSIMPLEACC_TRANSACTION_ADD', 'Add transaction');
+\define('_MA_WGSIMPLEACC_TRANSACTION_ADD_INCOME', 'Add transaction for income');
+\define('_MA_WGSIMPLEACC_TRANSACTION_ADD_EXPENSES', 'Add transaction for expenses');
 \define('_MA_WGSIMPLEACC_TRANSACTION_EDIT', 'Edit Transaction');
-\define('_MA_WGSIMPLEACC_TRANSACTION_EDIT_INCOME', 'Edit Transaction for income');
-\define('_MA_WGSIMPLEACC_TRANSACTION_EDIT_EXPENSES', 'Edit Transaction for expenses');
+\define('_MA_WGSIMPLEACC_TRANSACTION_EDIT_INCOME', 'Edit transaction for income');
+\define('_MA_WGSIMPLEACC_TRANSACTION_EDIT_EXPENSES', 'Edit transaction for expenses');
 \define('_MA_WGSIMPLEACC_TRANSACTION_STATUS_WAITING', 'Waiting for approval');
+\define('_MA_WGSIMPLEACC_TRANSACTION_DETAILS', 'Details for transaction');
 // Transaction
 \define('_MA_WGSIMPLEACC_TRANSACTION', 'Transaction');
 \define('_MA_WGSIMPLEACC_TRANSACTIONS', 'Transactions');
@@ -345,7 +346,8 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_HISTORY_ID', 'History Id');
 \define('_MA_WGSIMPLEACC_HISTORY_TYPE', 'Type');
 \define('_MA_WGSIMPLEACC_HISTORY_DATECREATED', 'Date History');
-\define('_MA_WGSIMPLEACC_HISTORY_DELETED', 'List of deleted transactions');
+\define('_MA_WGSIMPLEACC_TRAHISTORY_LIST', 'History for transaction');
+\define('_MA_WGSIMPLEACC_TRAHISTORY_DELETED', 'List of deleted transactions');
 // Submit
 \define('_MA_WGSIMPLEACC_SUBMIT', 'Submit');
 // Modal
