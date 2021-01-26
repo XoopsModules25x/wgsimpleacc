@@ -88,6 +88,7 @@ switch ($op) {
 	case 'list':
 	default:
         $GLOBALS['xoopsTpl']->assign('showList', true);
+        $GLOBALS['xoopsTpl']->assign('permDelete', true);
         if (0 == $traId) {
             //get first and last year
             $transactionsHandler = $helper->getHandler('Transactions');
@@ -183,6 +184,10 @@ switch ($op) {
             $GLOBALS['xoopsTpl']->assign('useFiles', $helper->getConfig('use_files'));
 		}
         $GLOBALS['xoopsTpl']->assign('traOp',$traOp);
+
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_TRANSACTIONS];
+
 		break;
 	case 'save':
 		// Security Check
@@ -293,6 +298,11 @@ switch ($op) {
 		$transactionsObj = $transactionsHandler->create();
 		$form = $transactionsObj->getFormTransactions(false, false, $traType, $start, $limit);
 		$GLOBALS['xoopsTpl']->assign('form', $form->render());
+
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_TRANSACTIONS, 'link' => 'transactions.php?op=list'];
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_TRANSACTION_ADD];
+
 		break;
     case 'history':
         $GLOBALS['xoopsTpl']->assign('showHist', true);
@@ -327,6 +337,10 @@ switch ($op) {
         unset($crTransactions, $crHistory, $transactions);
 
         $GLOBALS['xoopsTpl']->assign('traOp',$traOp);
+
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_TRANSACTIONS, 'link' => 'transactions.php?op=list'];
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_TRANSACTION_HIST];
         break;
 	case 'edit':
     case 'approve':
@@ -347,6 +361,10 @@ switch ($op) {
 		$transactionsObj = $transactionsHandler->get($traId);
 		$form = $transactionsObj->getFormTransactions(false, false, 0, $start, $limit, $approve);
 		$GLOBALS['xoopsTpl']->assign('form', $form->render());
+
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_TRANSACTIONS, 'link' => 'transactions.php?op=list'];
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_TRANSACTION_EDIT];
 		break;
 	case 'delete':
 		// Check permissions
@@ -383,12 +401,115 @@ switch ($op) {
 				\sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $transactionsObj->getVar('tra_desc')));
 			$form = $xoopsconfirm->getFormXoopsConfirm();
 			$GLOBALS['xoopsTpl']->assign('form', $form->render());
+
+            // Breadcrumbs
+            $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_TRANSACTIONS, 'link' => 'transactions.php?op=list'];
+            $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_TRANSACTION_EDIT];
 		}
 		break;
-}
+    case 'listhist':
+        $GLOBALS['xoopsTpl']->assign('showList', true);
+        $GLOBALS['xoopsTpl']->assign('permDelete', false);
+        if (0 == $traId) {
+            //get first and last year
+            $transactionsHandler = $helper->getHandler('Transactions');
+            $yearMin = date('Y');
+            $yearMax = date('Y');
+            $crTransactions = new \CriteriaCompo();
+            $crTransactions->setSort('tra_date');
+            $crTransactions->setOrder('ASC');
+            $crTransactions->setStart(0);
+            $crTransactions->setLimit(1);
+            $transactionsAll = $transactionsHandler->getAll($crTransactions);
+            foreach (\array_keys($transactionsAll) as $i) {
+                $yearMin = date('Y', $transactionsAll[$i]->getVar('tra_date'));
+            }
+            $crTransactions->setSort('tra_date');
+            $crTransactions->setOrder('DESC');
+            $crTransactions->setStart(0);
+            $crTransactions->setLimit(1);
+            $transactionsAll = $transactionsHandler->getAll($crTransactions);
+            foreach (\array_keys($transactionsAll) as $i) {
+                $yearMax = date('Y', $transactionsAll[$i]->getVar('tra_date'));
+            }
+            $formFilter = $transactionsHandler::getFormFilterTransactions($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId);
+            $GLOBALS['xoopsTpl']->assign('formFilter', $formFilter->render());
+        }
+        $crTransactions = new \CriteriaCompo();
+        $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_OFFLINE));
+        if ($traId > 0) {
+            $crTransactions->add(new \Criteria('tra_id', $traId));
+        } else {
+            $tradateFrom = 0;
+            $tradateTo = \time() + (10 * 365 * 24 * 60 * 60);;
+            if (Constants::FILTER_PYEARLY == $period_type) {
+                //filter data based on form select year
+                if ($filterYear > Constants::FILTER_TYPEALL) {
+                    $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYear-1-1");
+                    $tradateFrom = $dtime->getTimestamp();
+                    $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYear-12-31");
+                    $tradateTo = $dtime->getTimestamp();
+                }
+            } else {
+                //filter data based on form select month and year from/to
+                $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYearFrom-$filterMonthFrom-1");
+                $tradateFrom = $dtime->getTimestamp();
+                $last = \DateTime::createFromFormat('Y-m-d', "$filterYearTo-$filterMonthTo-1")->format('Y-m-t');
+                $dtime = \DateTime::createFromFormat('Y-m-d', $last);
+                $tradateTo= $dtime->getTimestamp();
+            }
+            $crTransactions->add(new \Criteria('tra_date', $tradateFrom, '>='));
+            $crTransactions->add(new \Criteria('tra_date', $tradateTo, '<='));
+        }
+        if ($allId > 0) {
+            $crTransactions->add(new \Criteria('tra_allid', $allId));
+        }
+        if ($asId > 0) {
+            $crTransactions->add(new \Criteria('tra_asid', $asId));
+        }
+        if ($accId > 0) {
+            $crTransactions->add(new \Criteria('tra_accid', $accId));
+        }
+        $transactionsCount = $transactionsHandler->getCount($crTransactions);
+        $GLOBALS['xoopsTpl']->assign('transactionsCount', $transactionsCount);
+        if (0 == $traId) {
+            $crTransactions->setStart($start);
+            $crTransactions->setLimit($limit);
+        }
+        $crTransactions->setSort('tra_id');
+        $crTransactions->setOrder('DESC');
+        $transactionsAll = $transactionsHandler->getAll($crTransactions);
+        if ($transactionsCount > 0) {
+            $transactions = [];
+            // Get All Transactions
+            foreach (\array_keys($transactionsAll) as $i) {
+                $transactions[$i] = $transactionsAll[$i]->getValuesTransactions();
+                $transactions[$i]['editable'] = $permissionsHandler->getPermTransactionsEdit($transactions[$i]['tra_submitter'], $transactions[$i]['tra_status']);
+                if ('' !== (string)$transactions[$i]['tra_remarks']) {
+                    $transactions[$i]['modaltitle'] = str_replace('%s', $transactions[$i]['year_nb'], \_MA_WGSIMPLEACC_MODAL_TRATITLE);
+                }
+                $keywords[$i] = $transactionsAll[$i]->getVar('tra_desc');
+            }
+            $GLOBALS['xoopsTpl']->assign('transactions', $transactions);
+            unset($transactions);
+            // Display Navigation
+            if ($transactionsCount > $limit) {
+                require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
+                $pagenav = new \XoopsPageNav($transactionsCount, $limit, $start, 'start', 'op=list&limit=' . $limit . '&amp;all_id=' . $allId);
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
+            }
+            $GLOBALS['xoopsTpl']->assign('showAssets', 0 == $asId);
+            $GLOBALS['xoopsTpl']->assign('useCurrencies', $helper->getConfig('use_currencies'));
+            $GLOBALS['xoopsTpl']->assign('useTaxes', $helper->getConfig('use_taxes'));
+            $GLOBALS['xoopsTpl']->assign('useFiles', $helper->getConfig('use_files'));
+        }
+        $GLOBALS['xoopsTpl']->assign('traOp',$traOp);
 
-// Breadcrumbs
-$xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_TRANSACTIONS];
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_TRANSACTIONS, 'link' => 'transactions.php?op=list'];
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_HISTORY_DELETED];
+        break;
+}
 
 // Keywords
 wgsimpleaccMetaKeywords($helper->getConfig('keywords') . ', ' . \implode(',', $keywords));

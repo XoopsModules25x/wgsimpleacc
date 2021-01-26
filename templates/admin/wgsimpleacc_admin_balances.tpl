@@ -1,7 +1,7 @@
 <!-- Header -->
 <{include file='db:wgsimpleacc_admin_header.tpl' }>
 
-<{if $balances_list}>
+<{if $balances_list|default:''}>
 	<table class='table table-bordered'>
 		<thead>
 			<tr class='head'>
@@ -18,39 +18,39 @@
 				<th class="center width5"><{$smarty.const._MA_WGSIMPLEACC_FORM_ACTION}></th>
 			</tr>
 		</thead>
-		<{if $balances_count}>
-		<tbody>
-			<{foreach item=balance from=$balances_list}>
-			<tr class='<{cycle values='odd, even'}>'>
-				<td class='center'><{$balance.id}></td>
-				<td class='center'><{$balance.from}></td>
-				<td class='center'><{$balance.to}></td>
-				<td class='center'><{$balance.asset}></td>
-				<td class='center'><{$balance.curid}></td>
-				<td class='center'><{$balance.amountstart}></td>
-				<td class='center'><{$balance.amountend}></td>
-				<td class='center'><img src="<{$modPathIcon16}>status<{$balance.status}>.png" alt="<{$balance.status_text}>" title="<{$balance.status_text}>" /></td>
-				<td class='center'><{$balance.datecreated}></td>
-				<td class='center'><{$balance.submitter}></td>
-				<td class="center  width5">
-					<a href="balances.php?op=edit&amp;bal_id=<{$balance.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="<{$smarty.const._EDIT}> balances" /></a>
-					<a href="balances.php?op=delete&amp;bal_id=<{$balance.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> balances" /></a>
-				</td>
-			</tr>
-			<{/foreach}>
-		</tbody>
+		<{if $balances_count|default:0}>
+			<tbody>
+				<{foreach item=balance from=$balances_list}>
+					<tr class='<{cycle values='odd, even'}>'>
+						<td class='center'><{$balance.id}></td>
+						<td class='center'><{$balance.from}></td>
+						<td class='center'><{$balance.to}></td>
+						<td class='center'><{$balance.asset}></td>
+						<td class='center'><{$balance.curid}></td>
+						<td class='center'><{$balance.amountstart}></td>
+						<td class='center'><{$balance.amountend}></td>
+						<td class='center'><img src="<{$modPathIcon16}>status<{$balance.status}>.png" alt="<{$balance.status_text}>" title="<{$balance.status_text}>" /></td>
+						<td class='center'><{$balance.datecreated}></td>
+						<td class='center'><{$balance.submitter}></td>
+						<td class="center  width5">
+							<a href="balances.php?op=edit&amp;bal_id=<{$balance.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="<{$smarty.const._EDIT}> balances" /></a>
+							<a href="balances.php?op=delete&amp;bal_id=<{$balance.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> balances" /></a>
+						</td>
+					</tr>
+				<{/foreach}>
+			</tbody>
 		<{/if}>
 	</table>
 	<div class="clear">&nbsp;</div>
-	<{if $pagenav}>
+	<{if $pagenav|default:''}>
 		<div class="xo-pagenav floatright"><{$pagenav}></div>
 		<div class="clear spacer"></div>
 	<{/if}>
 <{/if}>
-<{if $form}>
+<{if $form|default:''}>
 	<{$form}>
 <{/if}>
-<{if $error}>
+<{if $error|default:''}>
 	<div class="errorMsg"><strong><{$error}></strong></div>
 <{/if}>
 

@@ -1,7 +1,7 @@
 <!-- Header -->
 <{include file='db:wgsimpleacc_admin_header.tpl' }>
 
-<{if $taxes_list}>
+<{if $taxes_list|default:''}>
 	<table class='table table-bordered'>
 		<thead>
 			<tr class='head'>
@@ -15,7 +15,7 @@
 				<th class="center width5"><{$smarty.const._MA_WGSIMPLEACC_FORM_ACTION}></th>
 			</tr>
 		</thead>
-		<{if $taxes_count}>
+		<{if $taxes_count|default:0}>
 		<tbody>
 			<{foreach item=tax from=$taxes_list}>
 			<tr class='<{cycle values='odd, even'}>'>
@@ -36,15 +36,15 @@
 		<{/if}>
 	</table>
 	<div class="clear">&nbsp;</div>
-	<{if $pagenav}>
+	<{if $pagenav|default:''}>
 		<div class="xo-pagenav floatright"><{$pagenav}></div>
 		<div class="clear spacer"></div>
 	<{/if}>
 <{/if}>
-<{if $form}>
+<{if $form|default:''}>
 	<{$form}>
 <{/if}>
-<{if $error}>
+<{if $error|default:''}>
 	<div class="errorMsg"><strong><{$error}></strong></div>
 <{/if}>
 

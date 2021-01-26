@@ -91,6 +91,8 @@ switch ($op) {
 				$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
 			}
 		}
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ASSETS];
 		break;
 	case 'save':
 		// Security Check
@@ -138,6 +140,10 @@ switch ($op) {
 		$assetsObj = $assetsHandler->create();
 		$form = $assetsObj->getFormAssets();
 		$GLOBALS['xoopsTpl']->assign('form', $form->render());
+
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ASSETS, 'link' => 'assets.php?op=list'];
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ASSET_ADD];
 		break;
 	case 'edit':
 		// Check params
@@ -153,6 +159,9 @@ switch ($op) {
 		$assetsObj = $assetsHandler->get($asId);
 		$form = $assetsObj->getFormAssets();
 		$GLOBALS['xoopsTpl']->assign('form', $form->render());
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ASSETS, 'link' => 'assets.php?op=list'];
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ASSET_EDIT];
 		break;
 	case 'delete':
 		// Check params
@@ -201,12 +210,13 @@ switch ($op) {
 				\sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $assetsObj->getVar('as_name')));
 			$form = $xoopsconfirm->getFormXoopsConfirm();
 			$GLOBALS['xoopsTpl']->assign('form', $form->render());
+
+            // Breadcrumbs
+            $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ASSETS, 'link' => 'assets.php?op=list'];
+            $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ASSET_EDIT];
 		}
 		break;
 }
-
-// Breadcrumbs
-$xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ASSETS];
 
 // Keywords
 wgsimpleaccMetaKeywords($helper->getConfig('keywords') . ', ' . \implode(',', $keywords));

@@ -132,12 +132,10 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
 
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $assetsHandler = $helper->getHandler('Assets');
-        $balancesHandler = $helper->getHandler('Balances');
-
         $ret = [];
-
         $sql = 'SELECT `tra_asid`, Sum(`tra_amountin`) AS Sum_tra_amountin, Sum(`tra_amountout`) AS Sum_tra_amountout ';
         $sql .= 'FROM ' . $xoopsDB->prefix('wgsimpleacc_transactions') . ' ';
+        $sql .= 'WHERE `tra_status` > ' . Constants::STATUS_SUBMITTED . ' ';
         $sql .= 'GROUP BY ' . $xoopsDB->prefix('wgsimpleacc_transactions') . '.tra_asid ';
         $sql .= 'ORDER BY ' . $xoopsDB->prefix('wgsimpleacc_transactions') . '.tra_asid;';
         $result = $xoopsDB->query($sql);

@@ -65,6 +65,10 @@ switch ($op) {
     case 'balances':
         $formFilter = $outputsHandler::getFormBalancesSelect();
         $GLOBALS['xoopsTpl']->assign('formFilter', $formFilter->render());
+
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_OUTPUTS];
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_BALANCES];
         break;
     case 'bal_output':
         $GLOBALS['xoopsTpl']->assign('displayBalOutput', 1);
@@ -161,6 +165,10 @@ switch ($op) {
         }
         $formFilter = $transactionsHandler::getFormFilterTransactions($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, 'tra_output');
         $GLOBALS['xoopsTpl']->assign('formFilter', $formFilter->render());
+
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_OUTPUTS];
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_TRANSACTIONS];
         break;
     case 'tra_output';
         switch ($outType) {

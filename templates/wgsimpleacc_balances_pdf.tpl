@@ -9,7 +9,7 @@
     </tr>
 </table>
 
-<{if $balancesCount > 0}>
+<{if $balancesCount|default:0 > 0}>
     <h3><{$smarty.const._MA_WGSIMPLEACC_BALANCES_LIST}></h3>
     <div>
         <table style="width:100%;" cellspacing="2" cellpadding="5">
@@ -49,7 +49,7 @@
         </table>
     </div>
 <{/if}>
-<{if $accountsCount > 0}>
+<{if $accountsCount|default:0 > 0}>
     <h3><{$smarty.const._MA_WGSIMPLEACC_ACCOUNTS_LIST}></h3>
     <div>
         <table style="width:100%;" cellspacing="2" cellpadding="5">
@@ -80,7 +80,7 @@
         </table>
     </div>
 <{/if}>
-<{if $allocationsCount > 0}>
+<{if $allocationsCount|default:0 > 0}>
     <h3><{$smarty.const._MA_WGSIMPLEACC_ALLOCATIONS_LIST}></h3>
     <div>
         <table style="width:100%;" cellspacing="2" cellpadding="5">

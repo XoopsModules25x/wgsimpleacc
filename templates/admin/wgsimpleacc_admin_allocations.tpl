@@ -1,7 +1,7 @@
 <!-- Header -->
 <{include file='db:wgsimpleacc_admin_header.tpl' }>
 
-<{if $allocations_list}>
+<{if $allocations_list|default:''}>
 	<table class='table table-bordered'>
 		<thead>
 			<tr class='head'>
@@ -40,15 +40,15 @@
 		<{/if}>
 	</table>
 	<div class="clear">&nbsp;</div>
-	<{if $pagenav}>
+	<{if $pagenav|default:''}>
 		<div class="xo-pagenav floatright"><{$pagenav}></div>
 		<div class="clear spacer"></div>
 	<{/if}>
 <{/if}>
-<{if $form}>
+<{if $form|default:''}>
 	<{$form}>
 <{/if}>
-<{if $error}>
+<{if $error|default:''}>
 	<div class="errorMsg"><strong><{$error}></strong></div>
 <{/if}>
 

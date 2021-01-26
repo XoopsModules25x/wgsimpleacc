@@ -9,7 +9,7 @@
 	<td><{$template.online}></td>
 	<td class="center">
 		<{if $permSubmit && $template.edit}>
-		<a class='btn btn-primary right' href='tratemplates.php?op=edit&amp;ttpl_id=<{$template.ttpl_id}><{$tplOp}>' title='<{$smarty.const._EDIT}>'><i class="fa fa-edit fa-fw"></i></a>
+		<a class='btn btn-primary right' href='tratemplates.php?op=edit&amp;ttpl_id=<{$template.ttpl_id}><{$tplOp|default:''}>' title='<{$smarty.const._EDIT}>'><i class="fa fa-edit fa-fw"></i></a>
 		<a class='btn btn-danger right' href='tratemplates.php?op=delete&amp;ttpl_id=<{$template.ttpl_id}>' title='<{$smarty.const._DELETE}>'><i class="fa fa-trash fa-fw"></i></a>
 		<{/if}>
 	</td>

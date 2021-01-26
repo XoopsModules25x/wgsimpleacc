@@ -58,7 +58,7 @@
         <td style="border-bottom:1px solid #ccc;"><{$transaction.amountout}></td>
     </tr>
     <{/if}>
-    <{if $useTaxes}>
+    <{if $useTaxes|default:''}>
     <tr>
         <td><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_TAXID}>:</td>
         <td style="border-bottom:1px solid #ccc;"><{$transaction.taxid}></td>

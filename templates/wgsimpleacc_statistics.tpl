@@ -7,12 +7,12 @@
     };
 </script>
 
-<{if $transactionsCount > 0}>
+<{if $transactionsCount|default:0 > 0}>
     <div class="col-xs-12 col-sm-12">
         <{include file='db:wgsimpleacc_chart_transactions_hbar.tpl'}>
     </div>
 <{/if}>
-<{if $assetsCount > 0}>
+<{if $assetsCount|default:0 > 0}>
     <h3><{$header_assets_pie}></h3>
     <div class="wgsa-statistics-assets">
         <div class="col-xs-12 col-sm-5 wgsa-statistics-assets">
@@ -34,12 +34,12 @@
         <{include file='db:wgsimpleacc_chart_assets_line.tpl'}>
     </div>
 <{/if}>
-<{if $accountsCount > 0}>
+<{if $accountsCount|default:0 > 0}>
     <div class="col-xs-12 col-sm-12">
         <{include file='db:wgsimpleacc_chart_accounts_line.tpl'}>
     </div>
 <{/if}>
-<{if $balancesCount > 0}>
+<{if $balancesCount|default:0 > 0}>
 <div class="col-xs-12 col-sm-12">
     <{include file='db:wgsimpleacc_chart_balances_line.tpl'}>
 </div>

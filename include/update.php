@@ -35,6 +35,9 @@ function xoops_module_update_wgsimpleacc($module, $prev_version = null)
     if ($prev_version < 10) {
         $ret = update_wgsimpleacc_v10($module);
     }
+    if ($prev_version < 120) {
+        $ret = update_wgsimpleacc_v120($module);
+    }
 
     $ret = wgsimpleacc_check_db($module);
 
@@ -103,7 +106,6 @@ function update_wgsimpleacc_v10($module)
     return true;
 }
 
-// irmtfan bug fix: solve templates duplicate issue
 
 /**
  * @param $module
@@ -181,4 +183,29 @@ function wgsimpleacc_check_db($module)
     }
 
     return $ret;
+}
+
+/**
+ * Update data of table wgsimpleacc_transactions because of changes in status
+ * @param $module
+ *
+ * @return bool
+ */
+function update_wgsimpleacc_v120($module)
+{
+    $table = $GLOBALS['xoopsDB']->prefix('wgsimpleacc_transactions');
+    $sql = "UPDATE `$table` SET `tra_status` = '9' WHERE `$table`.`tra_status` = 6;";
+    $sql .= "UPDATE `$table` SET `tra_status` = '7' WHERE `$table`.`tra_status` = 3;";
+    $sql .= "UPDATE `$table` SET `tra_status` = '3' WHERE `$table`.`tra_status` = 1;";
+    $sql .= "UPDATE `$table` SET `tra_status` = '1' WHERE `$table`.`tra_status` = 5;";
+    $sql .= "UPDATE `$table` SET `tra_status` = '22' WHERE `$table`.`tra_status` = 2;";
+    $sql .= "UPDATE `$table` SET `tra_status` = '2' WHERE `$table`.`tra_status` = 4;";
+    $sql .= "UPDATE `$table` SET `tra_status` = '4' WHERE `$table`.`tra_status` = 22;";
+    if (!$result = $GLOBALS['xoopsDB']->queryF($sql)) {
+        xoops_error($GLOBALS['xoopsDB']->error() . '<br>' . $sql);
+        $module->setErrors("Error when updating table '$table'.");
+        return false;
+    }
+
+    return true;
 }

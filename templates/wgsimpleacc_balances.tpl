@@ -1,8 +1,8 @@
-<{if $balancesList}>
-    <{if $balancesCount > 0}>
+<{if $balancesList|default:''}>
+    <{if $balancesCount|default:0 > 0}>
         <h3><{$smarty.const._MA_WGSIMPLEACC_BALANCES_LIST}></h3>
         <div class='table-responsive'>
-            <table class='table table-<{$table_type}>'>
+            <table class='table table-<{$table_type|default:''}>'>
                 <thead>
                     <tr class='head'>
                         <th><{$smarty.const._MA_WGSIMPLEACC_BALANCE_FROM}></th>
@@ -35,7 +35,7 @@
         <{$smarty.const._MA_WGSIMPLEACC_THEREARENT_BALANCES}>
     <{/if}>
 <{/if}>
-<{if $balancesCalc}>
+<{if $balancesCalc|default:''}>
     <h3><{$calc_info}></h3>
     <table class='table table-<{$table_type}>'>
         <thead>

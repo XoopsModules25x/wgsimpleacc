@@ -7,13 +7,13 @@
     };
 </script>
 
-<{if $transactionsCount > 0}>
+<{if $transactionsCount|default:0 > 0}>
     <div class="col-sm-12 col-md-12 col-lg-6">
         <{include file='db:wgsimpleacc_chart_transactions_hbar.tpl'}>
     </div>
 <{/if}>
 
-<{if $assetsCount > 0}>
+<{if $assetsCount|default:0 > 0}>
     <div class="col-sm-12 col-md-12 col-lg-6">
         <h3><{$header_assets_pie}></h3>
         <{include file='db:wgsimpleacc_chart_assets_pie.tpl'}>
@@ -30,7 +30,7 @@
         </div>
     </div>
 <{/if}>
-<{if $error}>
+<{if $error|default:''}>
     <div class="errorMsg"><strong><{$error}></strong></div>
 <{/if}>
 

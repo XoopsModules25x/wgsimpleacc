@@ -101,10 +101,10 @@ switch ($op) {
 		$transactionDateObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('tra_date'));
 		$transactionsObj->setVar('tra_date', $transactionDateObj->getTimestamp());
 		$transactionsObj->setVar('tra_curid', Request::getInt('tra_curid', 0));
-        $traAmountin = Request::getString('tra_amountin');
-        $transactionsObj->setVar('tra_amountin', Utility::StringToFloat($traAmountin));
-        $traAmountout = Request::getString('tra_amountout');
-        $transactionsObj->setVar('tra_amountout', Utility::StringToFloat($traAmountout));
+        $traAmountin = Utility::StringToFloat(Request::getString('tra_amountin'));
+        $transactionsObj->setVar('tra_amountin', $traAmountin);
+        $traAmountout = Utility::StringToFloat(Request::getString('tra_amountout'));
+        $transactionsObj->setVar('tra_amountout', $traAmountout);
 		$transactionsObj->setVar('tra_taxid', Request::getInt('tra_taxid', 0));
 		$transactionsObj->setVar('tra_status', Request::getInt('tra_status', 0));
 		$transactionsObj->setVar('tra_comments', Request::getInt('tra_comments', 0));

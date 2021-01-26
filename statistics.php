@@ -125,6 +125,7 @@ switch ($op) {
                     $crTransactions->add(new \Criteria('tra_allid', $allPid));
                     $crTransactions->add(new \Criteria('tra_date', $tradateFrom, '>='));
                     $crTransactions->add(new \Criteria('tra_date', $tradateTo, '<='));
+                    $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_SUBMITTED, '>'));
                     $transactionsAll   = $transactionsHandler->getAll($crTransactions);
                     foreach (\array_keys($transactionsAll) as $i) {
                         $sumAmountin += $transactionsAll[$i]->getVar('tra_amountin');
@@ -196,6 +197,7 @@ switch ($op) {
                         $crTransactions->add(new \Criteria('tra_allid', $subAllId));
                         $crTransactions->add(new \Criteria('tra_date', $tradateFrom, '>='));
                         $crTransactions->add(new \Criteria('tra_date', $tradateTo, '<='));
+                        $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_SUBMITTED, '>'));
                         $transactionsCount = $transactionsHandler->getCount($crTransactions);
                         $transactionsAll   = $transactionsHandler->getAll($crTransactions);
                         if ($transactionsCount > 0) {
@@ -225,6 +227,10 @@ switch ($op) {
             $formFilter = Utility::getFormFilterPeriod($filterYear, $filterType, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, 'allocations');
             $GLOBALS['xoopsTpl']->assign('formTraFilter', $formFilter->render());
         }
+
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_STATISTICS];
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ALLOCATIONS];
         break;
     case 'assets':
         $GLOBALS['xoopsTpl']->assign('header_assets_pie', \_MA_WGSIMPLEACC_ASSETS_CURRENT);
@@ -263,6 +269,7 @@ switch ($op) {
         $minYear = 0;
         $maxYear = 0;
         $crTransactions = new \CriteriaCompo();
+        $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_SUBMITTED, '>'));
         $crTransactions->setSort('tra_year');
         $crTransactions->setOrder('ASC');
         $crTransactions->setStart(0);
@@ -308,6 +315,10 @@ switch ($op) {
         }
         $GLOBALS['xoopsTpl']->assign('line_assets', $line_assets);
         $GLOBALS['xoopsTpl']->assign('line_labels', $line_labels);
+
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_STATISTICS];
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ASSETS];
         break;
     case 'balances':
         $GLOBALS['xoopsTpl']->assign('header_balances_line', \_MA_WGSIMPLEACC_BALANCES_TIMELINE);
@@ -318,7 +329,6 @@ switch ($op) {
         $labels = [];
         // get all balances in balances
         $result = $xoopsDB->query('SELECT `bal_asid` FROM ' . $xoopsDB->prefix('wgsimpleacc_balances') . ' GROUP BY `bal_asid`');
-        $GLOBALS['xoopsTpl']->assign('balancesCount', \count($result));
         while (list($balAsid) = $xoopsDB->fetchRow($result)) {
             $balAmounts = '';
             $assetsObj = $assetsHandler->get($balAsid);
@@ -335,12 +345,17 @@ switch ($op) {
             unset($crBalances);
             $line_balances[] = ['name' => $asName, 'color' => $asColor, 'data' => $balAmounts];
         }
+        $GLOBALS['xoopsTpl']->assign('balancesCount', \count($line_balances));
         $line_labels = '';
         foreach($labels as $label) {
             $line_labels .= "'" . $label . "', ";
         }
         $GLOBALS['xoopsTpl']->assign('line_balances', $line_balances);
         $GLOBALS['xoopsTpl']->assign('line_labels', $line_labels);
+
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_STATISTICS];
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_BALANCES];
         break;
     case 'accounts':
         $GLOBALS['xoopsTpl']->assign('header_accounts_line', \_MA_WGSIMPLEACC_ACCOUNTS_TIMELINE);
@@ -353,6 +368,7 @@ switch ($op) {
         $minYearFrom = date('Y') - 5;
         $minDateFrom = \DateTime::createFromFormat('Y-m-d', (date('Y') - 5) . '-1-1')->getTimestamp();
         $crTransactions = new \CriteriaCompo();
+        $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_SUBMITTED, '>'));
         $crTransactions->setSort('tra_date');
         $crTransactions->setOrder('ASC');
         $crTransactions->setStart(0);
@@ -387,6 +403,7 @@ switch ($op) {
         }
         $crTransactions = new \CriteriaCompo();
         $crTransactions->add(new \Criteria('tra_date', $minDateFrom, '>='));
+        $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_SUBMITTED, '>'));
         $crTransactions->setSort('tra_accid ASC, tra_date');
         $crTransactions->setOrder('ASC');
         $transactionsCount = $transactionsHandler->getCount($crTransactions);
@@ -411,6 +428,10 @@ switch ($op) {
 
         $GLOBALS['xoopsTpl']->assign('line_accounts', $line_accounts);
         $GLOBALS['xoopsTpl']->assign('line_labels', $line_labels);
+
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_STATISTICS];
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ACCOUNTS];
         break;
     case 'list':
     default:
@@ -419,8 +440,6 @@ switch ($op) {
 
 }
 
-// Breadcrumbs
-$xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_INDEX];
 // Keywords
 wgsimpleaccMetaKeywords($helper->getConfig('keywords') . ', ' . \implode(',', $keywords));
 unset($keywords);
