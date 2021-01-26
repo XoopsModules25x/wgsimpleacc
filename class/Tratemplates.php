@@ -45,6 +45,7 @@ class Tratemplates extends \XoopsObject
 		$this->initVar('ttpl_accid', \XOBJ_DTYPE_INT);
 		$this->initVar('ttpl_allid', \XOBJ_DTYPE_INT);
 		$this->initVar('ttpl_asid', \XOBJ_DTYPE_INT);
+        $this->initVar('ttpl_class', \XOBJ_DTYPE_INT);
 		$this->initVar('ttpl_amountin', \XOBJ_DTYPE_DECIMAL);
         $this->initVar('ttpl_amountout', \XOBJ_DTYPE_DECIMAL);
         $this->initVar('ttpl_online', \XOBJ_DTYPE_INT);
@@ -118,6 +119,13 @@ class Tratemplates extends \XoopsObject
 		$ttplAsidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRATEMPLATE_ASID, 'ttpl_asid', $this->getVar('ttpl_asid'));
 		$ttplAsidSelect->addOptionArray($assetsHandler->getList());
 		$form->addElement($ttplAsidSelect);
+        // Form Select ttplClass
+        $ttplClass = $this->isNew() ? Constants::CLASS_BOTH : $this->getVar('ttpl_class');
+        $traClassSelect = new \XoopsFormRadio(\_MA_WGSIMPLEACC_TRANSACTION_CLASS, 'ttpl_class', $ttplClass);
+        $traClassSelect->addOption(Constants::CLASS_BOTH, \_MA_WGSIMPLEACC_CLASS_BOTH);
+        $traClassSelect->addOption(Constants::CLASS_EXPENSES, \_MA_WGSIMPLEACC_CLASS_EXPENSES);
+        $traClassSelect->addOption(Constants::CLASS_INCOME, \_MA_WGSIMPLEACC_CLASS_INCOME);
+        $form->addElement($traClassSelect);
 		// Form Text tplAmountin
         $default0 = '0' . $helper->getConfig('sep_comma') . '00';
         $ttplAmountin = $this->isNew() ? $default0 : Utility::FloatToString($this->getVar('ttpl_amountin'));
@@ -162,6 +170,21 @@ class Tratemplates extends \XoopsObject
 		$assetsHandler = $helper->getHandler('Assets');
 		$assetsObj = $assetsHandler->get($this->getVar('ttpl_asid'));
 		$ret['asid']        = $assetsObj->getVar('as_name');
+        $ttplClass           = $this->getVar('ttpl_class');
+        $ret['class']       = $ttplClass;
+        switch ($ttplClass) {
+            case Constants::CLASS_BOTH:
+            default:
+                $class_text = \_MA_WGSIMPLEACC_CLASS_BOTH;
+                break;
+            case Constants::CLASS_EXPENSES:
+                $class_text = \_MA_WGSIMPLEACC_CLASS_EXPENSES;
+                break;
+            case Constants::CLASS_INCOME:
+                $class_text = \_MA_WGSIMPLEACC_CLASS_INCOME;
+                break;
+        }
+        $ret['class_text']  = $class_text;
         $ret['amountin']    =  Utility::FloatToString($this->getVar('ttpl_amountin'));
         $ret['amountout']   =  Utility::FloatToString($this->getVar('ttpl_amountout'));
         $ret['online']      = (int)$this->getVar('ttpl_online') > 0 ? _YES : _NO;

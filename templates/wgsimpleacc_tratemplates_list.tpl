@@ -4,6 +4,7 @@
 	<td><{$template.accid}></td>
 	<td><{$template.allid}></td>
 	<td><{$template.asid}></td>
+	<td><{$template.class_text}></td>
 	<td><{$template.amountin}></td>
 	<td><{$template.amountout}></td>
 	<td><{$template.online}></td>

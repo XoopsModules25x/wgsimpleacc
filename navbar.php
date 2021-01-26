@@ -65,3 +65,10 @@ unset($outtemplates);
 
 //$GLOBALS['xoopsTpl']->assign('pathIcons32', WGSIMPLEACC_ICONS_URL . '/32/');
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_icon_url_32', WGSIMPLEACC_ICONS_URL . '/32/');
+
+$currentUser = '';
+$uid = isset($GLOBALS['xoopsUser']) && \is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getVar('uid') : 0;
+if ($uid > 0) {
+    $currentUser = $GLOBALS['xoopsUser']::getUnameFromId($uid);
+}
+$GLOBALS['xoopsTpl']->assign('currentUser', $currentUser);

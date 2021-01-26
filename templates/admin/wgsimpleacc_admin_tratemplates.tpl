@@ -11,6 +11,7 @@
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRATEMPLATE_ACCID}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRATEMPLATE_ALLID}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRATEMPLATE_ASID}></th>
+				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRATEMPLATE_CLASS}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRATEMPLATE_AMOUNTIN}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRATEMPLATE_AMOUNTOUT}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRATEMPLATE_ONLINE}></th>
@@ -29,6 +30,7 @@
 						<td class='center'><{$template.accid}></td>
 						<td class='center'><{$template.allid}></td>
 						<td class='center'><{$template.asid}></td>
+						<td class='center'><{$template.class_text}></td>
 						<td class='center'><{$template.amountin}></td>
 						<td class='center'><{$template.amountout}></td>
 						<td class='center'><{$template.online}></td>

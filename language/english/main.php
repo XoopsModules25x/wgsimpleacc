@@ -52,6 +52,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_APPROVE', 'Approve');
 \define('_MA_WGSIMPLEACC_DASHBOARD', 'Dashboard');
 \define('_MA_WGSIMPLEACC_DOWNLOAD', 'Download');
+\define('_MA_WGSIMPLEACC_REACTIVATE', 'Reactivate (add transaction to list of valid transactions again');
 // ---------------- Contents ----------------
 // There aren't
 \define('_MA_WGSIMPLEACC_THEREARENT_ACCOUNTS', "There aren't accounts at the moment");
@@ -280,6 +281,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_TRATEMPLATE_ACCID', 'Accounts');
 \define('_MA_WGSIMPLEACC_TRATEMPLATE_ALLID', 'Allocations');
 \define('_MA_WGSIMPLEACC_TRATEMPLATE_ASID', 'Assets');
+\define('_MA_WGSIMPLEACC_TRATEMPLATE_CLASS', 'Class');
 \define('_MA_WGSIMPLEACC_TRATEMPLATE_AMOUNTIN', 'Amount in');
 \define('_MA_WGSIMPLEACC_TRATEMPLATE_AMOUNTOUT', 'Amount out');
 \define('_MA_WGSIMPLEACC_TRATEMPLATE_ONLINE', 'Online');

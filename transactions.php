@@ -241,15 +241,22 @@ switch ($op) {
 		$transactionDateObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('tra_date'));
 		$transactionsObj->setVar('tra_date', $traDate);
 		$transactionsObj->setVar('tra_curid', Request::getInt('tra_curid', 0));
-        $traAmountin = Utility::StringToFloat(Request::getString('tra_amountin'));
-        $transactionsObj->setVar('tra_amountin', $traAmountin);
-        $traAmountout = Utility::StringToFloat(Request::getString('tra_amountout'));
-        $transactionsObj->setVar('tra_amountout', $traAmountout);
+        $traClass = Request::getInt('tra_class', 0);
+        $traAmount = Utility::StringToFloat(Request::getString('tra_amount'));
+        if (Constants::CLASS_INCOME == $traClass) {
+            $transactionsObj->setVar('tra_amountin', $traAmount);
+            $transactionsObj->setVar('tra_amountout', 0);
+        } elseif (Constants::CLASS_EXPENSES == $traClass) {
+            $transactionsObj->setVar('tra_amountout', $traAmount);
+            $transactionsObj->setVar('tra_amountin', 0);
+        } else {
+            $transactionsObj->setVar('tra_amountin', 0);
+            $transactionsObj->setVar('tra_amountout', 0);
+        }
 		$transactionsObj->setVar('tra_taxid', Request::getInt('tra_taxid', 0));
 		$transactionsObj->setVar('tra_asid', Request::getInt('tra_asid', 0));
 		$transactionsObj->setVar('tra_status', Request::getInt('tra_status', 0));
 		$transactionsObj->setVar('tra_comments', Request::getInt('tra_comments', 0));
-        $traClass = $traAmountin > 0 ? Constants::CLASS_INCOME : Constants::CLASS_EXPENSES;;
         $transactionsObj->setVar('tra_class', $traClass);
         $transactionsObj->setVar('tra_hist', $traHist);
 		$transactionsObj->setVar('tra_datecreated', Request::getInt('tra_datecreated', 0));
@@ -344,21 +351,24 @@ switch ($op) {
         break;
 	case 'edit':
     case 'approve':
+        // Check params
+        if (0 == $traId) {
+            \redirect_header('transactions.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
+        }
         $approve = (bool)('approve' == $op);
-        $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/forms.js');
+
 		// Check permissions
-		if (!$permissionsHandler->getPermTransactionsSubmit()) {
-			\redirect_header('transactions.php?op=list', 3, _NOPERM);
-		}
         if ($approve && !$permissionsHandler->getPermTransactionsApprove()) {
             \redirect_header('transactions.php?op=list', 3, _NOPERM);
         }
-		// Check params
-		if (0 == $traId) {
-			\redirect_header('transactions.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
-		}
+        $transactionsObj = $transactionsHandler->get($traId);
+        $traSubmitter = $transactionsObj->getVar('tra_submitter');
+        $traStatus = $transactionsObj->getVar('tra_status');
+        if (!$permissionsHandler->getPermTransactionsEdit($traSubmitter, $traStatus)) {
+            \redirect_header('transactions.php?op=list', 3, _NOPERM);
+        }
 		// Get Form
-		$transactionsObj = $transactionsHandler->get($traId);
+        $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/forms.js');
 		$form = $transactionsObj->getFormTransactions(false, false, 0, $start, $limit, $approve);
 		$GLOBALS['xoopsTpl']->assign('form', $form->render());
 
@@ -367,15 +377,21 @@ switch ($op) {
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_TRANSACTION_EDIT];
 		break;
 	case 'delete':
-		// Check permissions
+        // Check params
+        if (0 == $traId) {
+            \redirect_header('transactions.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
+        }
+	    // Check permissions
 		if (!$permissionsHandler->getPermTransactionsSubmit()) {
 			\redirect_header('transactions.php?op=list', 3, _NOPERM);
 		}
-		// Check params
-		if (0 == $traId) {
-			\redirect_header('transactions.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
-		}
-		$transactionsObj = $transactionsHandler->get($traId);
+        $transactionsObj = $transactionsHandler->get($traId);
+        $traSubmitter = $transactionsObj->getVar('tra_submitter');
+        $traStatus = $transactionsObj->getVar('tra_status');
+        if (!$permissionsHandler->getPermTransactionsEdit($traSubmitter, $traStatus)) {
+            \redirect_header('transactions.php?op=list', 3, _NOPERM);
+        }
+        //create history
         $transactionsHandler->saveHistoryTransactions($traId, 'delete');
 		$traDesc = $transactionsObj->getVar('tra_desc');
 		if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {

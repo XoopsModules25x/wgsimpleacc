@@ -188,7 +188,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     {
         global $xoopsUser, $xoopsModule;
 
-        if ($this->getPermGlobalSubmit()) {
+        if ($this->getPermGlobalApprove()) {
             return true;
         }
         if (Constants::STATUS_LOCKED == $traStatus) {
