@@ -101,14 +101,22 @@ switch ($op) {
 		$transactionDateObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('tra_date'));
 		$transactionsObj->setVar('tra_date', $transactionDateObj->getTimestamp());
 		$transactionsObj->setVar('tra_curid', Request::getInt('tra_curid', 0));
-        $traAmountin = Utility::StringToFloat(Request::getString('tra_amountin'));
-        $transactionsObj->setVar('tra_amountin', $traAmountin);
-        $traAmountout = Utility::StringToFloat(Request::getString('tra_amountout'));
-        $transactionsObj->setVar('tra_amountout', $traAmountout);
+        $traClass = Request::getInt('tra_class', 0);
+        $traAmount = Utility::StringToFloat(Request::getString('tra_amount'));
+        if (Constants::CLASS_INCOME == $traClass) {
+            $transactionsObj->setVar('tra_amountin', $traAmount);
+            $transactionsObj->setVar('tra_amountout', 0);
+        } elseif (Constants::CLASS_EXPENSES == $traClass) {
+            $transactionsObj->setVar('tra_amountout', $traAmount);
+            $transactionsObj->setVar('tra_amountin', 0);
+        } else {
+            $transactionsObj->setVar('tra_amountin', 0);
+            $transactionsObj->setVar('tra_amountout', 0);
+        }
 		$transactionsObj->setVar('tra_taxid', Request::getInt('tra_taxid', 0));
 		$transactionsObj->setVar('tra_status', Request::getInt('tra_status', 0));
 		$transactionsObj->setVar('tra_comments', Request::getInt('tra_comments', 0));
-        $transactionsObj->setVar('tra_class', Request::getInt('tra_class', 0));
+        $transactionsObj->setVar('tra_class', $traClass);
         $transactionsObj->setVar('tra_asid', Request::getString('tra_asid', ''));
         $transactionsObj->setVar('tra_balid', Request::getString('tra_balid', ''));
         $transactionsObj->setVar('tra_hist', $traHist);
@@ -133,7 +141,7 @@ switch ($op) {
 		$GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
 		// Get Form
 		$transactionsObj = $transactionsHandler->get($traId);
-		$form = $transactionsObj->getFormTransactions(false, true, Constants::CLASS_BOTH, $start, $limit);
+		$form = $transactionsObj->getFormTransactions(false, true, 0, $start, $limit);
 		$GLOBALS['xoopsTpl']->assign('form', $form->render());
 		break;
 	case 'delete':

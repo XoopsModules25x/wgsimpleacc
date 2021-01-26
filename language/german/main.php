@@ -52,6 +52,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_APPROVE', 'Freigeben');
 \define('_MA_WGSIMPLEACC_DASHBOARD', 'Dashboard');
 \define('_MA_WGSIMPLEACC_DOWNLOAD', 'Download');
+\define('_MA_WGSIMPLEACC_REACTIVATE', 'Reaktivieren (Transaktion wieder zu gültigen Transaktionen hinzufügen');
 // ---------------- Contents ----------------
 // There aren't
 \define('_MA_WGSIMPLEACC_THEREARENT_ACCOUNTS', 'Es gibt derzeit keine Konten in der Datenbank');
@@ -264,6 +265,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_TRATEMPLATE_ACCID', 'Konto');
 \define('_MA_WGSIMPLEACC_TRATEMPLATE_ALLID', 'Zuordnung');
 \define('_MA_WGSIMPLEACC_TRATEMPLATE_ASID', 'Vermögenswert');
+\define('_MA_WGSIMPLEACC_TRATEMPLATE_CLASS', 'Klasse');
 \define('_MA_WGSIMPLEACC_TRATEMPLATE_AMOUNTIN', 'Betrag Eingang');
 \define('_MA_WGSIMPLEACC_TRATEMPLATE_AMOUNTOUT', 'Betrag Ausgang');
 \define('_MA_WGSIMPLEACC_TRATEMPLATE_ONLINE', 'Online');

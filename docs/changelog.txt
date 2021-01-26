@@ -4,6 +4,8 @@
  - changes in status (goffy)
  - cleaned missing smarty defaults (goffy)
  - updated breadcrumbs (goffy)
+ - added class to transaction templates (goffy)
+ - fixed problems in permissions (goffy)
 
 ==============================================================
 1.1 [2020/12/31 10:10]

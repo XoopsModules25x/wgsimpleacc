@@ -52,6 +52,7 @@ $GLOBALS['xoTheme']->addStylesheet($style, null);
 if (!$permissionsHandler->getPermGlobalView()) {
     $GLOBALS['xoopsTpl']->assign('error', _NOPERM);
     require __DIR__ . '/footer.php';
+    exit;
 }
 
 $keywords = [];

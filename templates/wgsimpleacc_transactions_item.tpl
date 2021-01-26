@@ -1,4 +1,3 @@
-
 <div class='table-responsive'>
 	<table class='table table-striped'>
 		<tbody>
@@ -29,6 +28,10 @@
 			<tr>
 				<th><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_DATE}></th>
 				<td><{$transaction.date}></td>
+			</tr>
+			<tr>
+				<th><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_CLASS}></th>
+				<td><{$transaction.curid}> <{$transaction.class_text}></td>
 			</tr>
 			<tr>
 				<th><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_AMOUNT}></th>

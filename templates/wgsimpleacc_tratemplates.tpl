@@ -10,6 +10,7 @@
                     <th><{$smarty.const._MA_WGSIMPLEACC_TRATEMPLATE_ACCID}></th>
                     <th><{$smarty.const._MA_WGSIMPLEACC_TRATEMPLATE_ALLID}></th>
                     <th><{$smarty.const._MA_WGSIMPLEACC_TRATEMPLATE_ASID}></th>
+                    <th><{$smarty.const._MA_WGSIMPLEACC_TRATEMPLATE_CLASS}></th>
                     <th><{$smarty.const._MA_WGSIMPLEACC_TRATEMPLATE_AMOUNTIN}></th>
                     <th><{$smarty.const._MA_WGSIMPLEACC_TRATEMPLATE_AMOUNTOUT}></th>
                     <th><{$smarty.const._MA_WGSIMPLEACC_TRATEMPLATE_ONLINE}></th>

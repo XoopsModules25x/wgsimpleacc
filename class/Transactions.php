@@ -128,6 +128,8 @@ class Transactions extends \XoopsObject
             $form->addElement(new \XoopsFormHidden('ttpl_amountout[0]', '0'));
             $crTratemplates = new \CriteriaCompo();
             $crTratemplates->add(new \Criteria('ttpl_online', 1));
+            $crTratemplates->add(new \Criteria('ttpl_class', Constants::CLASS_BOTH));
+            $crTratemplates->add(new \Criteria('ttpl_class', $traClass), 'OR');
             $tratemplatesAll = $helper->getHandler('Tratemplates')->getAll($crTratemplates);
             foreach ($tratemplatesAll as $tratemplate) {
                 $tplId = $tratemplate->getVar('ttpl_id');
@@ -140,7 +142,7 @@ class Transactions extends \XoopsObject
             }
             $tratemplatesSelect = new \XoopsFormRadio(\_MA_WGSIMPLEACC_TRANSACTION_TEMPLATE, 'tra_template', 0);
             $tratemplatesSelect->addOption(0, \_MA_WGSIMPLEACC_TEMPLATE_NONE);
-            $tratemplatesSelect->addOptionArray($tratemplatesHandler->getList());
+            $tratemplatesSelect->addOptionArray($tratemplatesHandler->getList($crTratemplates));
             $tratemplatesSelect->setExtra(" onchange='presetTraField()' ");
             $form->addElement($tratemplatesSelect, true);
         }
@@ -177,11 +179,6 @@ class Transactions extends \XoopsObject
         $form->addElement($traDesc);
         // Form Editor DhtmlTextArea traRemarks
         $editorConfigs = [];
-        if ($isAdmin) {
-            $editor = $helper->getConfig('editor_admin');
-        } else {
-            $editor = $helper->getConfig('editor_user');
-        }
         $editorConfigs['name'] = 'tra_remarks';
         $editorConfigs['value'] = $this->getVar('tra_remarks', 'e');
         $editorConfigs['rows'] = 5;
@@ -222,19 +219,20 @@ class Transactions extends \XoopsObject
         $traAmountin = $this->isNew() ? $default0 : Utility::FloatToString($this->getVar('tra_amountin'));
         // Form Text traAmountout
         $traAmountout = $this->isNew() ? $default0 : Utility::FloatToString($this->getVar('tra_amountout'));
-        if ($admin) {
-            $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_TRANSACTION_AMOUNTIN, 'tra_amountin', 20, 150, $traAmountin));
-            $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_TRANSACTION_AMOUNTOUT, 'tra_amountout', 20, 150, $traAmountout));
-        } else {
-            if (Constants::CLASS_INCOME == $type || Constants::CLASS_INCOME == $traClass || Constants::CLASS_BOTH == $type) {
-                $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_TRANSACTION_AMOUNTIN, 'tra_amountin', 20, 150, $traAmountin));
-                $form->addElement(new \XoopsFormHidden('tra_amountout', 0));
-            }
-            if (Constants::CLASS_EXPENSES == $type || Constants::CLASS_EXPENSES == $traClass || Constants::CLASS_BOTH == $type) {
-                $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_TRANSACTION_AMOUNTOUT, 'tra_amountout', 20, 150, $traAmountout));
-                $form->addElement(new \XoopsFormHidden('tra_amountin', 0));
-            }
+        // Form Select traClass
+        $traClassSelect = new \XoopsFormRadio(\_MA_WGSIMPLEACC_TRANSACTION_CLASS, 'tra_class', $traClass);
+        $traClassSelect->addOption(Constants::CLASS_EXPENSES, \_MA_WGSIMPLEACC_CLASS_EXPENSES);
+        $traClassSelect->addOption(Constants::CLASS_INCOME, \_MA_WGSIMPLEACC_CLASS_INCOME);
+        $form->addElement($traClassSelect);
+        // Form Text traAmount
+        $traAmount = 0;
+        if (Constants::CLASS_INCOME == $type || Constants::CLASS_INCOME == $traClass || Constants::CLASS_BOTH == $type) {
+            $traAmount = $traAmountin;
         }
+        if (Constants::CLASS_EXPENSES == $type || Constants::CLASS_EXPENSES == $traClass || Constants::CLASS_BOTH == $type) {
+            $traAmount = $traAmountout;
+        }
+        $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_TRANSACTION_AMOUNT, 'tra_amount', 20, 150, $traAmount));
         if ($helper->getConfig('use_taxes')) {
             // Form Table taxes
             $taxesHandler = $helper->getHandler('Taxes');
@@ -249,8 +247,6 @@ class Transactions extends \XoopsObject
 		$traAsidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_ASID, 'tra_asid', $traAsid);
 		$traAsidSelect->addOptionArray($assetsHandler->getList());
 		$form->addElement($traAsidSelect);
-        // Form Text traClass
-        $traClass = $this->isNew() ? 0 : $this->getVar('tra_class');
 		// Form Text traComments
         $traComments = $this->isNew() ? 0 : $this->getVar('tra_comments');
         // Form Text traBalid
@@ -272,13 +268,7 @@ class Transactions extends \XoopsObject
             $traStatusSelect->addOption(Constants::STATUS_APPROVED, \_MA_WGSIMPLEACC_STATUS_APPROVED);
             $traStatusSelect->addOption(Constants::STATUS_LOCKED, \_MA_WGSIMPLEACC_STATUS_LOCKED);
             $form->addElement($traStatusSelect);
-            // Form Select traClass
-            $traClassSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_CLASS, 'tra_class', $traClass);
-            $traClassSelect->addOption(Constants::CLASS_BOTH, \_MA_WGSIMPLEACC_CLASS_BOTH);
-            $traClassSelect->addOption(Constants::CLASS_EXPENSES, \_MA_WGSIMPLEACC_CLASS_EXPENSES);
-            $traClassSelect->addOption(Constants::CLASS_INCOME, \_MA_WGSIMPLEACC_CLASS_INCOME);
-            $form->addElement($traClassSelect);
-            // Form Select traClass
+            // Form Select traBalid
             $traBalidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_BALID, 'tra_balid', $traBalid);
             $balancesHandler = $helper->getHandler('Balances');
             $traBalidSelect->addOption(0, '');
@@ -300,7 +290,6 @@ class Transactions extends \XoopsObject
                 $form->addElement(new \XoopsFormLabel(_MA_WGSIMPLEACC_TRANSACTION_STATUS, Utility::getStatusText($traStatus)));
             }
             $form->addElement(new \XoopsFormHidden('tra_status', $traStatusNew));
-            $form->addElement(new \XoopsFormHidden('tra_class', $traClass));
             $form->addElement(new \XoopsFormHidden('tra_balid', $traBalid));
             $form->addElement(new \XoopsFormHidden('tra_comments', $traComments));
             $form->addElement(new \XoopsFormHidden('tra_hist', $traHist));
@@ -312,6 +301,8 @@ class Transactions extends \XoopsObject
 		$form->addElement(new \XoopsFormHidden('op', 'save'));
 		if ($approve) {
             $form->addElement(new \XoopsFormButtonTray('', \_MA_WGSIMPLEACC_APPROVE, 'submit', '', false));
+        } elseif (Constants::STATUS_OFFLINE == $traStatus) {
+                $form->addElement(new \XoopsFormButtonTray('', \_MA_WGSIMPLEACC_REACTIVATE, 'submit', '', false));
         } else {
             $form->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
         }

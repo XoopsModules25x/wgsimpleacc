@@ -13,7 +13,7 @@
                         <{if $xoops_isadmin|default:false}>
                             <a class="wgsa-startminheader-link" href="<{$xoops_url}>/admin.php"><span class="glyphicon glyphicon-wrench" alt="<{$smarty.const._MA_WGSIMPLEACC_MENUADMIN}>" title="<{$smarty.const._MA_WGSIMPLEACC_MENUADMIN}>"></span></a>
                         <{/if}>
-                        <a class="wgsa-startminheader-link" href="<{$xoops_url}>/user.php"><span class="glyphicon glyphicon-user" alt="<{$smarty.const._MA_WGSIMPLEACC_MENUUSER}>" title="<{$smarty.const._MA_WGSIMPLEACC_MENUUSER}>"></span></a>
+                        <a class="wgsa-startminheader-link" href="<{$xoops_url}>/user.php"><span class="glyphicon glyphicon-user" alt="<{$smarty.const._MA_WGSIMPLEACC_MENUUSER}>" title="<{$smarty.const._MA_WGSIMPLEACC_MENUUSER}>"> <{$currentUser}></span></a>
                         <a class="wgsa-startminheader-link" href="<{$xoops_url}>/notifications.php"><span class="glyphicon glyphicon-info-sign" alt="<{$smarty.const._MA_WGSIMPLEACC_MENUNOTIF}>" title="<{$smarty.const._MA_WGSIMPLEACC_MENUNOTIF}>"></span></a>
                         <{xoInboxCount assign="unreadCount"}> <a class="wgsa-startminheader-link <{if $unreadCount > 0}>wgsa-startminheader-link-important<{/if}>" href="<{$xoops_url}>/viewpmsg.php"><span class="glyphicon glyphicon-envelope" alt="<{$smarty.const._MA_WGSIMPLEACC_MENUINBOX}>" title="<{$smarty.const._MA_WGSIMPLEACC_MENUINBOX}>"></span> <{if $unreadCount > 0}><span class="badge wgsa-startminheader-bagde"><{$unreadCount}></span><{/if}></a>
                         <a class="wgsa-startminheader-link" href="<{$xoops_url}>/user.php?op=logout"><span class="glyphicon glyphicon-off" alt="<{$smarty.const._LOGOUT}>" title="<{$smarty.const._LOGOUT}>"></span></a>

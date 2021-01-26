@@ -112,6 +112,7 @@ switch ($op) {
 		$tratemplatesObj->setVar('ttpl_accid', Request::getInt('ttpl_accid', 0));
 		$tratemplatesObj->setVar('ttpl_allid', Request::getInt('ttpl_allid', 0));
 		$tratemplatesObj->setVar('ttpl_asid', Request::getInt('ttpl_asid', 0));
+        $tratemplatesObj->setVar('ttpl_class', Request::getInt('ttpl_class', 0));
         $tplAmountin = Request::getString('ttpl_amountin');
         $tratemplatesObj->setVar('ttpl_amountin', Utility::StringToFloat($tplAmountin));
         $tplAmountout = Request::getString('ttpl_amountout');
