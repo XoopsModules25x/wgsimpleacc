@@ -36,6 +36,10 @@ $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/startmin.js');
 /* wgSimpleAcc */
 $GLOBALS['xoTheme']->addStylesheet(WGSIMPLEACC_URL . '/assets/css/style.css', null);
 
+// get configs
+$GLOBALS['xoopsTpl']->assign('useClients', $helper->getConfig('use_clients'));
+
+// get permissions
 $GLOBALS['xoopsTpl']->assign('permGlobalView', $permissionsHandler->getPermGlobalView());
 $GLOBALS['xoopsTpl']->assign('permGlobalApprove', $permissionsHandler->getPermGlobalApprove());
 $GLOBALS['xoopsTpl']->assign('permTransactionsSubmit', $permissionsHandler->getPermTransactionsSubmit());
@@ -52,6 +56,8 @@ $GLOBALS['xoopsTpl']->assign('permTratemplatesSubmit', $permissionsHandler->getP
 $GLOBALS['xoopsTpl']->assign('permTratemplatesView', $permissionsHandler->getPermTratemplatesView());
 $GLOBALS['xoopsTpl']->assign('permOuttemplatesSubmit', $permissionsHandler->getPermOuttemplatesSubmit());
 $GLOBALS['xoopsTpl']->assign('permOuttemplatesView', $permissionsHandler->getPermOuttemplatesView());
+$GLOBALS['xoopsTpl']->assign('permClientsSubmit', $permissionsHandler->getPermClientsSubmit());
+$GLOBALS['xoopsTpl']->assign('permClientsView', $permissionsHandler->getPermClientsView());
 
 $outtemplates = [];
 $crOuttemplates = new \CriteriaCompo();

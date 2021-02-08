@@ -51,7 +51,7 @@ $GLOBALS['xoopsTpl']->assign('permTratemplatesView', $permissionsHandler->getPer
 $GLOBALS['xoopsTpl']->assign('permOuttemplatesSubmit', $permissionsHandler->getPermOuttemplatesSubmit());
 $GLOBALS['xoopsTpl']->assign('permOuttemplatesView', $permissionsHandler->getPermOuttemplatesView());
 
-
+echo "ok";
 
 $nav_items1 = [];
 $nav_items1[] = ['href' => 'index.php', 'aclass' => 'active',  'icon' => '<i class="fa fa-dashboard fa-fw fa-lg"></i>', 'label' => _MA_WGSIMPLEACC_DASHBOARD];

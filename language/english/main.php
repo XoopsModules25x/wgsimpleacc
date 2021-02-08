@@ -23,7 +23,7 @@
 require_once __DIR__ . '/admin.php';
 
 // ---------------- Main ----------------
-\define('_MA_WGSIMPLEACC_INDEX', 'Home');
+\define('_MA_WGSIMPLEACC_INDEX', 'Ovwerview');
 \define('_MA_WGSIMPLEACC_TITLE', 'wgSimpleAcc');
 \define('_MA_WGSIMPLEACC_DESC', 'This module is for doing following...');
 \define('_MA_WGSIMPLEACC_INDEX_DESC', 'Welcome to the homepage of your new module wgSimpleAcc!');
@@ -53,6 +53,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_DASHBOARD', 'Dashboard');
 \define('_MA_WGSIMPLEACC_DOWNLOAD', 'Download');
 \define('_MA_WGSIMPLEACC_REACTIVATE', 'Reactivate (add transaction to list of valid transactions again');
+\define('_MA_WGSIMPLEACC_SUMS', 'Sums');
 // ---------------- Contents ----------------
 // There aren't
 \define('_MA_WGSIMPLEACC_THEREARENT_ACCOUNTS', "There aren't accounts at the moment");
@@ -66,6 +67,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_THEREARENT_BALANCES', "There aren't balances at the moment");
 \define('_MA_WGSIMPLEACC_THEREARENT_TRATEMPLATES', "There aren't transaction templates at the moment");
 \define('_MA_WGSIMPLEACC_THEREARENT_OUTTEMPLATES', "There aren't output templates at the moment");
+\define('_MA_WGSIMPLEACC_THEREARENT_CLIENTS', "There aren't clients at the moment");
 // Account add/edit
 \define('_MA_WGSIMPLEACC_ACCOUNT_ADD', 'Add Account');
 \define('_MA_WGSIMPLEACC_ACCOUNT_EDIT', 'Edit Account');
@@ -92,13 +94,14 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_ACCOUNT_IECALC', 'Use in income/expenses calculation');
 \define('_MA_WGSIMPLEACC_ACCOUNT_ERR_DELETE', 'Deleting account not possible!<br>Account already used for transactions!<br>Please change these transactions first');
 // Transaction add/edit
-\define('_MA_WGSIMPLEACC_TRANSACTION_ADD', 'Add Transaction');
-\define('_MA_WGSIMPLEACC_TRANSACTION_ADD_INCOME', 'Add Transaction for income');
-\define('_MA_WGSIMPLEACC_TRANSACTION_ADD_EXPENSES', 'Add Transaction for expenses');
+\define('_MA_WGSIMPLEACC_TRANSACTION_ADD', 'Add transaction');
+\define('_MA_WGSIMPLEACC_TRANSACTION_ADD_INCOME', 'Add transaction for income');
+\define('_MA_WGSIMPLEACC_TRANSACTION_ADD_EXPENSES', 'Add transaction for expenses');
 \define('_MA_WGSIMPLEACC_TRANSACTION_EDIT', 'Edit Transaction');
-\define('_MA_WGSIMPLEACC_TRANSACTION_EDIT_INCOME', 'Edit Transaction for income');
-\define('_MA_WGSIMPLEACC_TRANSACTION_EDIT_EXPENSES', 'Edit Transaction for expenses');
+\define('_MA_WGSIMPLEACC_TRANSACTION_EDIT_INCOME', 'Edit transaction for income');
+\define('_MA_WGSIMPLEACC_TRANSACTION_EDIT_EXPENSES', 'Edit transaction for expenses');
 \define('_MA_WGSIMPLEACC_TRANSACTION_STATUS_WAITING', 'Waiting for approval');
+\define('_MA_WGSIMPLEACC_TRANSACTION_DETAILS', 'Details for transaction');
 // Transaction
 \define('_MA_WGSIMPLEACC_TRANSACTION', 'Transaction');
 \define('_MA_WGSIMPLEACC_TRANSACTIONS', 'Transactions');
@@ -127,6 +130,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_TRANSACTION_AMOUNTOUT', 'Amount expense');
 \define('_MA_WGSIMPLEACC_TRANSACTION_TAXID', 'Tax rate');
 \define('_MA_WGSIMPLEACC_TRANSACTION_ASID', 'Asset');
+\define('_MA_WGSIMPLEACC_TRANSACTION_CLIID', 'Client');
 \define('_MA_WGSIMPLEACC_TRANSACTION_STATUS', 'Status');
 \define('_MA_WGSIMPLEACC_TRANSACTION_COMMENTS', 'Comments');
 \define('_MA_WGSIMPLEACC_TRANSACTION_CLASS', 'Class');
@@ -168,6 +172,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_ASSETS_LIST', 'List of Assets');
 \define('_MA_WGSIMPLEACC_ASSETS_OVERVIEW', 'Overview of Assets');
 \define('_MA_WGSIMPLEACC_ASSETS_CURRENT', 'Current values of assets');
+\define('_MA_WGSIMPLEACC_ASSETSTOTAL_CURRENT', 'Current values of assets in total');
 \define('_MA_WGSIMPLEACC_ASSETS_TIMELINE', 'Development of assets');
 \define('_MA_WGSIMPLEACC_ASSET_SUBMIT', 'Submit Asset');
 // Caption of Asset
@@ -182,20 +187,28 @@ require_once __DIR__ . '/admin.php';
 //Charts
 \define('_MA_WGSIMPLEACC_CHART_AMOUNT', 'Amount');
 \define('_MA_WGSIMPLEACC_CHART_PERIOD', 'Period');
+\define('_MA_WGSIMPLEACC_CHART_BALANCE', 'Balance');
 //Color
+\define('_MA_WGSIMPLEACC_COLOR_LIGHTRED', 'Light Red');
 \define('_MA_WGSIMPLEACC_COLOR_RED', 'Red');
 \define('_MA_WGSIMPLEACC_COLOR_DARKRED', 'Dark red');
+\define('_MA_WGSIMPLEACC_COLOR_LIGHTORANGE', 'Light Orange');
 \define('_MA_WGSIMPLEACC_COLOR_ORANGE', 'Orange');
 \define('_MA_WGSIMPLEACC_COLOR_DARKORANGE', 'Dark orange');
+\define('_MA_WGSIMPLEACC_COLOR_LIGHTYELLOW', 'Light Yellow');
 \define('_MA_WGSIMPLEACC_COLOR_YELLOW', 'Yellow');
 \define('_MA_WGSIMPLEACC_COLOR_DARKYELLOW', 'Dark yellow');
+\define('_MA_WGSIMPLEACC_COLOR_LIGHTGREEN', 'Light Green');
 \define('_MA_WGSIMPLEACC_COLOR_GREEN', 'Green');
 \define('_MA_WGSIMPLEACC_COLOR_DARKGREEN', 'Dark green');
+\define('_MA_WGSIMPLEACC_COLOR_LIGHTBLUE', 'Light Blue');
 \define('_MA_WGSIMPLEACC_COLOR_BLUE', 'Blue');
 \define('_MA_WGSIMPLEACC_COLOR_DARKBLUE', 'Dark blue');
+\define('_MA_WGSIMPLEACC_COLOR_LIGHTPURPLE', 'Light Purple');
 \define('_MA_WGSIMPLEACC_COLOR_PURPLE', 'Purple');
 \define('_MA_WGSIMPLEACC_COLOR_DARKPURPLE', 'Dark Purple');
 \define('_MA_WGSIMPLEACC_COLOR_GREY', 'Grey');
+\define('_MA_WGSIMPLEACC_COLOR_LIGHTBROWN', 'Light Brown');
 \define('_MA_WGSIMPLEACC_COLOR_BROWN', 'Brown');
 \define('_MA_WGSIMPLEACC_COLOR_DARKBROWN', 'Dark brown');
 // File add/edit
@@ -214,6 +227,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_FILES_TEMP', 'Uploaded files');
 \define('_MA_WGSIMPLEACC_FILES_TEMP_DESC', 'Uploaded files in folder: %f');
 \define('_MA_WGSIMPLEACC_FILES_TEMP_DESC_NO', 'There are no uploaded files in folder: %f');
+\define('_MA_WGSIMPLEACC_FILE_DETAILS', 'Details for file');
 // Caption of File
 \define('_MA_WGSIMPLEACC_FILE_ID', 'Id');
 \define('_MA_WGSIMPLEACC_FILE_TRAID', 'Transaction');
@@ -235,6 +249,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_BALANCE_SUBMIT_FINAL', 'Create balance finally');
 \define('_MA_WGSIMPLEACC_BALANCE_PRECALC', 'Pre-Calculate');
 \define('_MA_WGSIMPLEACC_BALANCES_TIMELINE', 'Development of assets per balance');
+\define('_MA_WGSIMPLEACC_BALANCE_DETAILS', 'Details of balance');
 // Caption of Balance
 \define('_MA_WGSIMPLEACC_BALANCE_ID', 'Id');
 \define('_MA_WGSIMPLEACC_BALANCE_FROM', 'From');
@@ -335,6 +350,25 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_TARGET_SHOW', 'Show only');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_TARGET_PDF', 'Output as PDF');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_PDF_SUCCESS', 'Output Data successfullx as PDF');
+// Client
+\define('_MA_WGSIMPLEACC_CLIENTS', 'Clients');
+\define('_MA_WGSIMPLEACC_CLIENTS_LIST', 'List of Clients');
+\define('_MA_WGSIMPLEACC_CLIENT_SUBMIT', 'Send Client');
+// Client add/edit
+\define('_MA_WGSIMPLEACC_CLIENT_ADD', 'Add Client');
+\define('_MA_WGSIMPLEACC_CLIENT_EDIT', 'Edit Client');
+// Elements of Client
+\define('_MA_WGSIMPLEACC_CLIENT_ID', 'Id');
+\define('_MA_WGSIMPLEACC_CLIENT_NAME', 'Name');
+\define('_MA_WGSIMPLEACC_CLIENT_FULLADDRESS', 'Address');
+\define('_MA_WGSIMPLEACC_CLIENT_POSTAL', 'Postal');
+\define('_MA_WGSIMPLEACC_CLIENT_CITY', 'City');
+\define('_MA_WGSIMPLEACC_CLIENT_ADDRESS', 'Address');
+\define('_MA_WGSIMPLEACC_CLIENT_CTRY', 'Country');
+\define('_MA_WGSIMPLEACC_CLIENT_PHONE', 'Phone');
+\define('_MA_WGSIMPLEACC_CLIENT_VAT', 'Vat number');
+\define('_MA_WGSIMPLEACC_CLIENT_CREDITOR', 'Creditor (vendor)');
+\define('_MA_WGSIMPLEACC_CLIENT_DEBTOR', 'Debtor');
 // Statistics
 \define('_MA_WGSIMPLEACC_STATISTICS', 'Statistics');
 // Outputs
@@ -345,7 +379,8 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_HISTORY_ID', 'History Id');
 \define('_MA_WGSIMPLEACC_HISTORY_TYPE', 'Type');
 \define('_MA_WGSIMPLEACC_HISTORY_DATECREATED', 'Date History');
-\define('_MA_WGSIMPLEACC_HISTORY_DELETED', 'List of deleted transactions');
+\define('_MA_WGSIMPLEACC_TRAHISTORY_LIST', 'History for transaction');
+\define('_MA_WGSIMPLEACC_TRAHISTORY_DELETED', 'List of deleted transactions');
 // Submit
 \define('_MA_WGSIMPLEACC_SUBMIT', 'Submit');
 // Modal
@@ -368,7 +403,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_CLASS_BOTH', 'Both');
 // Constants Status
 \define('_MA_WGSIMPLEACC_STATUS_NONE', 'No status');
-\define('_MA_WGSIMPLEACC_STATUS_OFFLINE', 'Offline');
+\define('_MA_WGSIMPLEACC_STATUS_OFFLINE', 'Deleted');
 \define('_MA_WGSIMPLEACC_STATUS_SUBMITTED', 'Submitted');
 \define('_MA_WGSIMPLEACC_STATUS_APPROVED', 'Approved');
 \define('_MA_WGSIMPLEACC_STATUS_BROKEN', 'Broken');

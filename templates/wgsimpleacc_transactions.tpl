@@ -16,7 +16,8 @@
 
 <{if $showList|default:''}>
     <{if $transactionsCount|default:0 > 0}>
-        <{if $showItem}>
+        <{if $showItem|default:false}>
+            <h3><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_DETAILS}></h3>
             <{foreach item=transaction from=$transactions}>
                 <{include file='db:wgsimpleacc_transactions_item.tpl' }>
             <{/foreach}>
@@ -31,12 +32,15 @@
                 </div>
             </div>
             <{/if}>
-            <h3><{$smarty.const._MA_WGSIMPLEACC_TRANSACTIONS_LIST}></h3>
+            <h3><{$listHead|default:''}></h3>
             <div class='table-responsive'>
                 <table class='table table-striped'>
                     <thead>
                         <tr>
                             <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_YEARNB}></th>
+                            <{if $useClients|default:''}>
+                            <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_CLIID}></th>
+                            <{/if}>
                             <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_DESC}></th>
                             <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_REFERENCE}></th>
                             <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_ACCID}></th>
@@ -52,7 +56,7 @@
                             <{if $useFiles|default:''}>
                                 <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_FILES}></th>
                             <{/if}>
-                            <th scope="col"></th>
+                            <th scope="col" style="min-width:210px"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,18 +68,21 @@
             </div>
         <{/if}>
     <{else}>
-        <{$smarty.const._MA_WGSIMPLEACC_THEREARENT_TRANSACTIONS}>
+        <{$noData|default:''}>
     <{/if}>
 <{/if}>
 
 <{if $showHist|default:''}>
-    <h3><{$smarty.const._MA_WGSIMPLEACC_TRANSACTIONS_LIST}></h3>
+    <h3><{$smarty.const._MA_WGSIMPLEACC_TRAHISTORY_LIST}></h3>
     <div class='table-responsive'>
         <table class='table table-striped'>
             <thead>
             <tr>
                 <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_HIST}></th>
                 <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_YEARNB}></th>
+                <{if $useClients|default:''}>
+                <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_CLIID}></th>
+                <{/if}>
                 <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_DESC}></th>
                 <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_REMARKS}></th>
                 <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_REFERENCE}></th>

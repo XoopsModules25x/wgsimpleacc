@@ -37,6 +37,7 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_THEREARE_BALANCES', "Es gibt <span class='bold'>%s</span> Abschlüsse in der Datenbank");
 \define('_AM_WGSIMPLEACC_THEREARE_TRATEMPLATES', "Es gibt <span class='bold'>%s</span> Transaktionsvorlagen in der Datenbank");
 \define('_AM_WGSIMPLEACC_THEREARE_OUTTEMPLATES', "Es gibt <span class='bold'>%s</span> Ausgabevorlagen in der Datenbank");
+\define('_AM_WGSIMPLEACC_THEREARE_CLIENTS', "Es gibt <span class='bold'>%s</span> Klienten in der Datenbank");
 // ---------------- Admin Files ----------------
 // Buttons
 \define('_AM_WGSIMPLEACC_ADD_ACCOUNT', 'Neues Konto hinzufügen');
@@ -49,6 +50,7 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_ADD_BALANCE', 'Neuen Abschluss hinzufügen');
 \define('_AM_WGSIMPLEACC_ADD_TRATEMPLATE', 'Neue Transaktionsvorlage hinzufügen');
 \define('_AM_WGSIMPLEACC_ADD_OUTTEMPLATE', 'Neue Ausgabevorlage hinzufügen');
+\define('_AM_WGSIMPLEACC_ADD_CLIENT', 'Neuen Klienten hinzufügen');
 // Lists
 \define('_AM_WGSIMPLEACC_LIST_ACCOUNTS', 'Liste der Konten');
 \define('_AM_WGSIMPLEACC_LIST_TRANSACTIONS', 'Liste der Transaktionen');
@@ -60,6 +62,7 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_LIST_BALANCES', 'Liste der Abschlüsse');
 \define('_AM_WGSIMPLEACC_LIST_TRATEMPLATES', 'Liste der Transaktionsvorlagen');
 \define('_AM_WGSIMPLEACC_LIST_OUTTEMPLATES', 'Liste der Ausgabevorlagen');
+\define('_AM_WGSIMPLEACC_LIST_CLIENTS', 'Liste der Klienten');
 // ---------------- Admin Classes ----------------
 // Currency add/edit
 \define('_AM_WGSIMPLEACC_CURRENCY_ADD', 'Währung hinzufügen');
@@ -90,8 +93,8 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_PERMISSIONS_GLOBAL', 'Globale Berechtigungen');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_GLOBAL_DESC', 'Setzt die Berechtigungen <br>- global (für alle) oder <br>- für Transaktionen, Vermögenswerte, Zuordnungen und Konten separat');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_GLOBAL_VIEW', 'Globale Berechtigungen zum Ansehen');
-\define('_AM_WGSIMPLEACC_PERMISSIONS_GLOBAL_SUBMIT', 'Globale Berechtigungen zum Einsenden');
-\define('_AM_WGSIMPLEACC_PERMISSIONS_GLOBAL_APPROVE', 'Globale Berechtigungen zum Bestätigen');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_GLOBAL_SUBMIT', 'Globale Berechtigungen zum Einsenden (nur für Webmaster empfohlen)');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_GLOBAL_APPROVE', 'Globale Berechtigungen zum Bestätigen (nur für Webmaster empfohlen)');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_TRANSACTION_SUBMIT', 'Berechtigungen zum Einsenden von Transaktionen');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_TRANSACTION_APPROVE', 'Berechtigungen zum Bestätigen von Transaktionen');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_TRANSACTION_VIEW', 'Berechtigungen zum Ansehen der Transaktionen');
@@ -107,6 +110,8 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_PERMISSIONS_TRATEMPLATE_VIEW', 'Berechtigungen zum Ansehen der Transaktionensvorlagen');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_OUTTEMPLATE_SUBMIT', 'Berechtigungen zum Erstellen von Ausgabevorlagen');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_OUTTEMPLATE_VIEW', 'Berechtigungen zum Ansehen der Ausgabevorlagen');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_CLIENT_SUBMIT', 'Berechtigungen zum Erstellen von Klienten');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_CLIENT_VIEW', 'Berechtigungen zum Ansehen der Klienten');
 // ---------------- Admin Others ----------------
 \define('_AM_WGSIMPLEACC_ABOUT_MAKE_DONATION', 'Senden');
 \define('_AM_WGSIMPLEACC_SUPPORT_FORUM', 'Support Forum');

@@ -40,6 +40,7 @@ require_once 'common.php';
 \define('_MI_WGSIMPLEACC_ADMENU12', 'Berechtigungen');
 \define('_MI_WGSIMPLEACC_ADMENU13', 'Feedback');
 \define('_MI_WGSIMPLEACC_ADMENU14', 'Transaktionen Historie');
+\define('_MI_WGSIMPLEACC_ADMENU15', 'Klienten');
 \define('_MI_WGSIMPLEACC_ABOUT', 'Über');
 // ---------------- Admin Nav ----------------
 \define('_MI_WGSIMPLEACC_ADMIN_PAGER', 'Listen Admin');
@@ -48,6 +49,14 @@ require_once 'common.php';
 \define('_MI_WGSIMPLEACC_USER_PAGER', 'Listen User');
 \define('_MI_WGSIMPLEACC_USER_PAGER_DESC', 'Anzahl Einträge in Listen im Userbereich');
 // Config
+\define('_MI_WGSIMPLEACC_GROUP_GENERAL', 'Generelle Optionen');
+\define('_MI_WGSIMPLEACC_GROUP_UPLOAD', 'Uploads');
+\define('_MI_WGSIMPLEACC_GROUP_DISPLAY', 'Anzeige');
+\define('_MI_WGSIMPLEACC_GROUP_FORMATS', 'Formate');
+\define('_MI_WGSIMPLEACC_GROUP_INDEX', 'Index-Seite');
+\define('_MI_WGSIMPLEACC_GROUP_BALANCE', 'Optionen Abschluss');
+\define('_MI_WGSIMPLEACC_GROUP_OPTCOMP', 'Optionale Komponenten');
+\define('_MI_WGSIMPLEACC_GROUP_MISC', 'Verschiedenes');
 \define('_MI_WGSIMPLEACC_EDITOR_ADMIN', 'Editor Admin');
 \define('_MI_WGSIMPLEACC_EDITOR_ADMIN_DESC', 'Bitte den zu verwendenden Editor für den Admin-Bereich wählen');
 \define('_MI_WGSIMPLEACC_EDITOR_USER', 'Editor User');
@@ -81,6 +90,8 @@ require_once 'common.php';
 \define('_MI_WGSIMPLEACC_USE_TAXES_DESC', 'Bitte definieren Sie, ob Sie Steuerarten verwenden wollen');
 \define('_MI_WGSIMPLEACC_USE_FILES', 'Dateisystem verwenden');
 \define('_MI_WGSIMPLEACC_USE_FILES_DESC', 'Bitte definieren Sie, ob Sie die Möglichkeit zum Hinzufügen von Dateien zu Transaktionen verwenden wollen');
+\define('_MI_WGSIMPLEACC_USE_CLIENTS', 'Klientensystem verwenden');
+\define('_MI_WGSIMPLEACC_USE_CLIENTS_DESC', 'Bitte definieren Sie, ob Sie die Möglichkeit zum Verwendung von Klienten verwenden wollen');
 \define('_MI_WGSIMPLEACC_BALANCE_PERIOD', 'Zeitraum Abschlüsse');
 \define('_MI_WGSIMPLEACC_BALANCE_PERIOD_DESC', 'Definieren Sie den Zeitraum für die Durchführung von Abschlüssen');
 \define('_MI_WGSIMPLEACC_BALANCE_FILTER_PYEARLY', 'Jahr');
@@ -102,10 +113,21 @@ require_once 'common.php';
 \define('_MI_WGSIMPLEACC_DECEMBER', 'Dezember');
 \define('_MI_WGSIMPLEACC_INDEXHEADER', 'Index Kopfzeile');
 \define('_MI_WGSIMPLEACC_INDEXHEADER_DESC', 'Diesen Text als Überschrift in der Indexseite anzeigen');
+
+
+\define('_MI_WGSIMPLEACC_INDEX_TRAHBAR', 'Index Transaction Bar');
+\define('_MI_WGSIMPLEACC_INDEX_TRAHBAR_DESC', 'Show transaction bar (horizontal) with amounts of current period on index page');
+\define('_MI_WGSIMPLEACC_INDEX_ASSETSPIE', 'Index Transaction Pie Chart');
+\define('_MI_WGSIMPLEACC_INDEX_ASSETSPIE_DESC', 'Show transaction pie chart with amounts of current period on index page');
+\define('_MI_WGSIMPLEACC_INDEX_ASSETSPIETOTAL', 'Index Transaction Pie Chart Totals');
+\define('_MI_WGSIMPLEACC_INDEX_ASSETSPIETOTAL_DESC', 'Show transaction pie chart with total amounts on index page');
+
 \define('_MI_WGSIMPLEACC_OTPL_SENDER', 'Standardabsender für Ausgabe');
 \define('_MI_WGSIMPLEACC_OTPL_SENDER_DESC', 'Absender, der bei Ausgabevorlagen standardmäßig verwendet werden soll');
 \define('_MI_WGSIMPLEACC_SHOWBCRUMBS', 'Brotkrumen-Navigation (breadcrumbs) anzeigen');
 \define('_MI_WGSIMPLEACC_SHOWBCRUMBS_DESC', 'Eine Brotkrumen-Navigation zeigt den aktuellen Seitenstand innerhalb der Websitestruktur');
+\define('_MI_WGSIMPLEACC_MNAMEBCRUMBS', 'Modulname in Breadcrumbs');
+\define('_MI_WGSIMPLEACC_MNAMEBCRUMBS_DESC', 'Sie können hier den Modulname definieren, der in der Brotkrumen-Navigation verwendet werden soll. Wenn kein Name angezeigt werden soll dann bitte leer lassen.');
 \define('_MI_WGSIMPLEACC_SHOWCOPYRIGHT', 'Copyright anzeigen');
 \define('_MI_WGSIMPLEACC_SHOWCOPYRIGHT_DESC', 'Sie können das Copyright bei der wgSimpleAcc-Ansicht entfernen, jedoch wird ersucht, an einer beliebigen Stelle einen Backlink auf www.wedega.com anzubringen');
 // Global notifications

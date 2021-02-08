@@ -1,5 +1,8 @@
 <tr class="row-class-<{$transaction.tra_class}>" id='traId_<{$transaction.tra_id}>'>
 	<td><{$transaction.year}>/<{$transaction.nb}></td>
+	<{if $useClients|default:''}>
+		<td><{$transaction.client}></td>
+	<{/if}>
 	<td>
 		<{if $transaction.remarks}>
 		<span class="wgsa-modal" data-toggle="modal" data-target="#infoModal" data-title="<{$transaction.modaltitle}>" data-info="<{$transaction.remarks}>">

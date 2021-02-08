@@ -28,7 +28,7 @@ $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 // ------------------- Informations ------------------- //
 $modversion = [
 	'name'                => \_MI_WGSIMPLEACC_NAME,
-	'version'             => 1.20,
+	'version'             => 1.21,
 	'description'         => \_MI_WGSIMPLEACC_DESC,
 	'author'              => 'Goffy - XOOPS Development Team',
 	'author_mail'         => 'webmaster@wedega.com',
@@ -90,6 +90,7 @@ $modversion['templates'] = [
     ['file' => 'wgsimpleacc_admin_transactions.tpl', 'description' => '', 'type' => 'admin'],
     ['file' => 'wgsimpleacc_admin_trahistories.tpl', 'description' => '', 'type' => 'admin'],
     ['file' => 'wgsimpleacc_admin_tratemplates.tpl', 'description' => '', 'type' => 'admin'],
+    ['file' => 'wgsimpleacc_admin_clients.tpl', 'description' => '', 'type' => 'admin'],
 	// User templates
     ['file' => 'wgsimpleacc_main_startmin.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_accounts.tpl', 'description' => ''],
@@ -99,12 +100,14 @@ $modversion['templates'] = [
     ['file' => 'wgsimpleacc_balances.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_breadcrumbs.tpl', 'description' => ''],  
     ['file' => 'wgsimpleacc_chart_assets_pie.tpl', 'description' => ''],
+    ['file' => 'wgsimpleacc_chart_assets_pietotal.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_chart_assets_line.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_chart_accounts_line.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_chart_balances_line.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_chart_transactions_hbar.tpl', 'description' => ''],
 	['file' => 'wgsimpleacc_files.tpl', 'description' => ''],
 	['file' => 'wgsimpleacc_files_item.tpl', 'description' => ''],
+    ['file' => 'wgsimpleacc_files_list.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_footer.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_header.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_index.tpl', 'description' => ''],
@@ -121,6 +124,9 @@ $modversion['templates'] = [
 	['file' => 'wgsimpleacc_transactions_item.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_transactions_pdf.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_transactions_print.tpl', 'description' => ''],
+    ['file' => 'wgsimpleacc_clients.tpl', 'description' => ''],
+    ['file' => 'wgsimpleacc_clients_list.tpl', 'description' => ''],
+    ['file' => 'wgsimpleacc_clients_item.tpl', 'description' => ''],
 ];
 // ------------------- Mysql ------------------- //
 $modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
@@ -137,6 +143,7 @@ $modversion['tables'] = [
     'wgsimpleacc_balances',
     'wgsimpleacc_outtemplates',
     'wgsimpleacc_tratemplates',
+    'wgsimpleacc_clients',
 ];
 // ------------------- Search ------------------- //
 $modversion['hasSearch'] = 1;
@@ -155,47 +162,57 @@ $modversion['comments']['callback'] = [
 	'update'  => 'wgsimpleaccCommentsUpdate',
 ];
 // ------------------- Config ------------------- //
+// ------------------- Group header: General ------------------- //
+$modversion['config'][] = [
+    'name'        => 'group_general',
+    'title'       => '_MI_WGSIMPLEACC_GROUP_GENERAL',
+    'formtype'    => 'line_break',
+    'valuetype'   => 'textbox',
+    'default'     => 'even',
+    'category'    => 'group_header',
+];
 // Editor Admin
 \xoops_load('xoopseditorhandler');
 $editorHandler = XoopsEditorHandler::getInstance();
 $modversion['config'][] = [
-	'name'        => 'editor_admin',
-	'title'       => '_MI_WGSIMPLEACC_EDITOR_ADMIN',
-	'description' => '_MI_WGSIMPLEACC_EDITOR_ADMIN_DESC',
-	'formtype'    => 'select',
-	'valuetype'   => 'text',
-	'default'     => 'dhtml',
-	'options'     => \array_flip($editorHandler->getList()),
+    'name'        => 'editor_admin',
+    'title'       => '_MI_WGSIMPLEACC_EDITOR_ADMIN',
+    'description' => '_MI_WGSIMPLEACC_EDITOR_ADMIN_DESC',
+    'formtype'    => 'select',
+    'valuetype'   => 'text',
+    'default'     => 'dhtml',
+    'options'     => \array_flip($editorHandler->getList()),
 ];
 // Editor User
 \xoops_load('xoopseditorhandler');
 $editorHandler = XoopsEditorHandler::getInstance();
 $modversion['config'][] = [
-	'name'        => 'editor_user',
-	'title'       => '_MI_WGSIMPLEACC_EDITOR_USER',
-	'description' => '_MI_WGSIMPLEACC_EDITOR_USER_DESC',
-	'formtype'    => 'select',
-	'valuetype'   => 'text',
-	'default'     => 'dhtml',
-	'options'     => \array_flip($editorHandler->getList()),
+    'name'        => 'editor_user',
+    'title'       => '_MI_WGSIMPLEACC_EDITOR_USER',
+    'description' => '_MI_WGSIMPLEACC_EDITOR_USER_DESC',
+    'formtype'    => 'select',
+    'valuetype'   => 'text',
+    'default'     => 'dhtml',
+    'options'     => \array_flip($editorHandler->getList()),
 ];
 // Editor : max characters admin area
 $modversion['config'][] = [
-	'name'        => 'editor_maxchar',
-	'title'       => '_MI_WGSIMPLEACC_EDITOR_MAXCHAR',
-	'description' => '_MI_WGSIMPLEACC_EDITOR_MAXCHAR_DESC',
-	'formtype'    => 'textbox',
-	'valuetype'   => 'int',
-	'default'     => 50,
+    'name'        => 'editor_maxchar',
+    'title'       => '_MI_WGSIMPLEACC_EDITOR_MAXCHAR',
+    'description' => '_MI_WGSIMPLEACC_EDITOR_MAXCHAR_DESC',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+    'default'     => 50,
 ];
-// Keywords
+// ------------------- Group header: Uploads ------------------- //
 $modversion['config'][] = [
-	'name'        => 'keywords',
-	'title'       => '_MI_WGSIMPLEACC_KEYWORDS',
-	'description' => '_MI_WGSIMPLEACC_KEYWORDS_DESC',
-	'formtype'    => 'textbox',
-	'valuetype'   => 'text',
-	'default'     => 'wgsimpleacc, accounts, transactions, allocations, assets, currencies, taxes, files, images',
+    'name'        => 'group_upload',
+    'title'       => '_MI_WGSIMPLEACC_GROUP_UPLOAD',
+    'description' => '',
+    'formtype'    => 'line_break',
+    'valuetype'   => 'textbox',
+    'default'     => 'even',
+    'category'    => 'group_header',
 ];
 // create increment steps for file size
 require_once __DIR__ . '/include/xoops_version.inc.php';
@@ -203,57 +220,57 @@ $iniPostMaxSize       = wgsimpleaccReturnBytes(\ini_get('post_max_size'));
 $iniUploadMaxFileSize = wgsimpleaccReturnBytes(\ini_get('upload_max_filesize'));
 $maxSize              = min($iniPostMaxSize, $iniUploadMaxFileSize);
 if ($maxSize > 10000 * 1048576) {
-	$increment = 500;
+    $increment = 500;
 }
 if ($maxSize <= 10000 * 1048576) {
-	$increment = 200;
+    $increment = 200;
 }
 if ($maxSize <= 5000 * 1048576) {
-	$increment = 100;
+    $increment = 100;
 }
 if ($maxSize <= 2500 * 1048576) {
-	$increment = 50;
+    $increment = 50;
 }
 if ($maxSize <= 1000 * 1048576) {
-	$increment = 10;
+    $increment = 10;
 }
 if ($maxSize <= 500 * 1048576) {
-	$increment = 5;
+    $increment = 5;
 }
 if ($maxSize <= 100 * 1048576) {
-	$increment = 2;
+    $increment = 2;
 }
 if ($maxSize <= 50 * 1048576) {
-	$increment = 1;
+    $increment = 1;
 }
 if ($maxSize <= 25 * 1048576) {
-	$increment = 0.5;
+    $increment = 0.5;
 }
 $optionMaxsize = [];
 $i = $increment;
 while ($i * 1048576 <= $maxSize) {
-	$optionMaxsize[$i . ' ' . \_MI_WGSIMPLEACC_SIZE_MB] = $i * 1048576;
-	$i += $increment;
+    $optionMaxsize[$i . ' ' . \_MI_WGSIMPLEACC_SIZE_MB] = $i * 1048576;
+    $i += $increment;
 }
 // Uploads : maxsize of file
 $modversion['config'][] = [
-	'name'        => 'maxsize_file',
-	'title'       => '_MI_WGSIMPLEACC_MAXSIZE_FILE',
-	'description' => '_MI_WGSIMPLEACC_MAXSIZE_FILE_DESC',
-	'formtype'    => 'select',
-	'valuetype'   => 'int',
-	'default'     => 3145728,
-	'options'     => $optionMaxsize,
+    'name'        => 'maxsize_file',
+    'title'       => '_MI_WGSIMPLEACC_MAXSIZE_FILE',
+    'description' => '_MI_WGSIMPLEACC_MAXSIZE_FILE_DESC',
+    'formtype'    => 'select',
+    'valuetype'   => 'int',
+    'default'     => 3145728,
+    'options'     => $optionMaxsize,
 ];
 // Uploads : mimetypes of file
 $modversion['config'][] = [
-	'name'        => 'mimetypes_file',
-	'title'       => '_MI_WGSIMPLEACC_MIMETYPES_FILE',
-	'description' => '_MI_WGSIMPLEACC_MIMETYPES_FILE_DESC',
-	'formtype'    => 'select_multi',
-	'valuetype'   => 'array',
-	'default'     => ['image/gif', 'image/jpeg', 'image/jpg', 'image/jpe', 'image/png', 'application/pdf', 'application/zip', 'text/comma-separated-values', 'text/plain', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
-	'options'     => ['gif' => 'image/gif','jpeg' => 'image/jpeg','pjpeg' => 'image/pjpeg','jpg' => 'image/jpg','jpe' => 'image/jpe', 'png' => 'image/png', 'pdf' => 'application/pdf','zip' => 'application/zip','csv' => 'text/comma-separated-values', 'txt' => 'text/plain', 'xml' => 'application/xml', 'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
+    'name'        => 'mimetypes_file',
+    'title'       => '_MI_WGSIMPLEACC_MIMETYPES_FILE',
+    'description' => '_MI_WGSIMPLEACC_MIMETYPES_FILE_DESC',
+    'formtype'    => 'select_multi',
+    'valuetype'   => 'array',
+    'default'     => ['image/gif', 'image/jpeg', 'image/jpg', 'image/jpe', 'image/png', 'application/pdf', 'application/zip', 'text/comma-separated-values', 'text/plain', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
+    'options'     => ['gif' => 'image/gif','jpeg' => 'image/jpeg','pjpeg' => 'image/pjpeg','jpg' => 'image/jpg','jpe' => 'image/jpe', 'png' => 'image/png', 'pdf' => 'application/pdf','zip' => 'application/zip','csv' => 'text/comma-separated-values', 'txt' => 'text/plain', 'xml' => 'application/xml', 'xls' => 'application/msexcel', 'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'doc' => 'application/msword', 'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
 ];
 $modversion['config'][] = [
     'name'        => 'maxwidth_image',
@@ -280,23 +297,150 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'default'     => 0,
 ];
+// ------------------- Group header: Display ------------------- //
+$modversion['config'][] = [
+    'name'        => 'group_display',
+    'title'       => '_MI_WGSIMPLEACC_GROUP_DISPLAY',
+    'description' => '',
+    'formtype'    => 'line_break',
+    'valuetype'   => 'textbox',
+    'default'     => 'even',
+    'category'    => 'group_header',
+];
 // Admin pager
 $modversion['config'][] = [
-	'name'        => 'adminpager',
-	'title'       => '_MI_WGSIMPLEACC_ADMIN_PAGER',
-	'description' => '_MI_WGSIMPLEACC_ADMIN_PAGER_DESC',
-	'formtype'    => 'textbox',
-	'valuetype'   => 'int',
-	'default'     => 10,
+    'name'        => 'adminpager',
+    'title'       => '_MI_WGSIMPLEACC_ADMIN_PAGER',
+    'description' => '_MI_WGSIMPLEACC_ADMIN_PAGER_DESC',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+    'default'     => 10,
 ];
 // User pager
 $modversion['config'][] = [
-	'name'        => 'userpager',
-	'title'       => '_MI_WGSIMPLEACC_USER_PAGER',
-	'description' => '_MI_WGSIMPLEACC_USER_PAGER_DESC',
-	'formtype'    => 'textbox',
-	'valuetype'   => 'int',
-	'default'     => 10,
+    'name'        => 'userpager',
+    'title'       => '_MI_WGSIMPLEACC_USER_PAGER',
+    'description' => '_MI_WGSIMPLEACC_USER_PAGER_DESC',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'int',
+    'default'     => 10,
+];
+// Show breadcrumb
+$modversion['config'][] = [
+    'name'        => 'show_breadcrumbs',
+    'title'       => '_MI_WGSIMPLEACC_SHOWBCRUMBS',
+    'description' => '_MI_WGSIMPLEACC_SHOWBCRUMBS_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+// Module name in breadcrumb
+$modversion['config'][] = [
+    'name'        => 'mname_breadcrumbs',
+    'title'       => '_MI_WGSIMPLEACC_MNAMEBCRUMBS',
+    'description' => '_MI_WGSIMPLEACC_MNAMEBCRUMBS_DESC',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'text',
+    'default'     => \_MI_WGSIMPLEACC_NAME,
+];
+// Show copyright
+$modversion['config'][] = [
+    'name'        => 'show_copyright',
+    'title'       => '_MI_WGSIMPLEACC_SHOWCOPYRIGHT',
+    'description' => '_MI_WGSIMPLEACC_SHOWCOPYRIGHT_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+// Make Sample button visible?
+$modversion['config'][] = [
+    'name'        => 'displaySampleButton',
+    'title'       => 'CO_' . $moduleDirNameUpper . '_' . 'SHOW_SAMPLE_BUTTON',
+    'description' => 'CO_' . $moduleDirNameUpper . '_' . 'SHOW_SAMPLE_BUTTON_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+// ------------------- Group header: Formats ------------------- //
+$modversion['config'][] = [
+    'name'        => 'group_formats',
+    'title'       => '_MI_WGSIMPLEACC_GROUP_FORMATS',
+    'description' => '',
+    'formtype'    => 'line_break',
+    'valuetype'   => 'textbox',
+    'default'     => 'even',
+    'category'    => 'group_header',
+];
+// Comma separator
+$modversion['config'][] = [
+    'name'        => 'sep_comma',
+    'title'       => '_MI_WGSIMPLEACC_SEP_COMMA',
+    'description' => '_MI_WGSIMPLEACC_SEP_COMMA_DESC',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'text',
+    'default'     => '.',
+];
+// Thousands separator
+$modversion['config'][] = [
+    'name'        => 'sep_thousand',
+    'title'       => '_MI_WGSIMPLEACC_SEP_THSD',
+    'description' => '_MI_WGSIMPLEACC_SEP_THSD_DESC',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'text',
+    'default'     => ',',
+];
+// ------------------- Group header: Index page ------------------- //
+$modversion['config'][] = [
+    'name'        => 'group_index',
+    'title'       => '_MI_WGSIMPLEACC_GROUP_INDEX',
+    'description' => '',
+    'formtype'    => 'line_break',
+    'valuetype'   => 'textbox',
+    'default'     => 'even',
+    'category'    => 'group_header',
+];
+// Show module description
+$modversion['config'][] = [
+    'name'        => 'index_header',
+    'title'       => '_MI_WGSIMPLEACC_INDEXHEADER',
+    'description' => '_MI_WGSIMPLEACC_INDEXHEADER_DESC',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'text',
+    'default'     => \_MI_WGSIMPLEACC_DESC,
+];
+$modversion['config'][] = [
+    'name'        => 'index_trahbar',
+    'title'       => '_MI_WGSIMPLEACC_INDEX_TRAHBAR',
+    'description' => '_MI_WGSIMPLEACC_INDEX_TRAHBAR_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+$modversion['config'][] = [
+    'name'        => 'index_assetspie',
+    'title'       => '_MI_WGSIMPLEACC_INDEX_ASSETSPIE',
+    'description' => '_MI_WGSIMPLEACC_INDEX_ASSETSPIE_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+$modversion['config'][] = [
+    'name'        => 'index_assetspietotal',
+    'title'       => '_MI_WGSIMPLEACC_INDEX_ASSETSPIETOTAL',
+    'description' => '_MI_WGSIMPLEACC_INDEX_ASSETSPIETOTAL_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+// ------------------- Group header: Balance ------------------- //
+$modversion['config'][] = [
+    'name'        => 'group_balance',
+    'title'       => '_MI_WGSIMPLEACC_GROUP_BALANCE',
+    'description' => '',
+    'formtype'    => 'line_break',
+    'valuetype'   => 'textbox',
+    'default'     => 'even',
+    'category'    => 'group_header',
 ];
 // Balance : types
 $modversion['config'][] = [
@@ -328,23 +472,15 @@ $modversion['config'][] = [
     'default'     => 12,
     'options'     => ['_MI_WGSIMPLEACC_JANUARY' => 1, '_MI_WGSIMPLEACC_FEBRUARY' => 2, '_MI_WGSIMPLEACC_MARCH' => 3, '_MI_WGSIMPLEACC_APRIL' => 4, '_MI_WGSIMPLEACC_MAY' => 5, '_MI_WGSIMPLEACC_JUNE' => 6, '_MI_WGSIMPLEACC_JULY' => 7, '_MI_WGSIMPLEACC_AUGUST' => 8, '_MI_WGSIMPLEACC_SEPTEMBER' => 9, '_MI_WGSIMPLEACC_OCTOBER' => 10, '_MI_WGSIMPLEACC_NOVEMBER' => 11, '_MI_WGSIMPLEACC_DECEMBER' => 12],
 ];
-// Comma separator
+// ------------------- Group header: optional components ------------------- //
 $modversion['config'][] = [
-    'name'        => 'sep_comma',
-    'title'       => '_MI_WGSIMPLEACC_SEP_COMMA',
-    'description' => '_MI_WGSIMPLEACC_SEP_COMMA_DESC',
-    'formtype'    => 'textbox',
-    'valuetype'   => 'text',
-    'default'     => '.',
-];
-// Thousands separator
-$modversion['config'][] = [
-    'name'        => 'sep_thousand',
-    'title'       => '_MI_WGSIMPLEACC_SEP_THSD',
-    'description' => '_MI_WGSIMPLEACC_SEP_THSD_DESC',
-    'formtype'    => 'textbox',
-    'valuetype'   => 'text',
-    'default'     => ',',
+    'name'        => 'group_optcomp',
+    'title'       => '_MI_WGSIMPLEACC_GROUP_OPTCOMP',
+    'description' => '',
+    'formtype'    => 'line_break',
+    'valuetype'   => 'textbox',
+    'default'     => 'even',
+    'category'    => 'group_header',
 ];
 // use currencies
 $modversion['config'][] = [
@@ -373,6 +509,25 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'default'     => 0,
 ];
+// use clients
+$modversion['config'][] = [
+    'name'        => 'use_clients',
+    'title'       => '_MI_WGSIMPLEACC_USE_CLIENTS',
+    'description' => '_MI_WGSIMPLEACC_USE_CLIENTS_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0,
+];
+// ------------------- Group header: misc ------------------- //
+$modversion['config'][] = [
+    'name'        => 'group_misc',
+    'title'       => '_MI_WGSIMPLEACC_GROUP_MISC',
+    'description' => '',
+    'formtype'    => 'line_break',
+    'valuetype'   => 'textbox',
+    'default'     => 'even',
+    'category'    => 'group_header',
+];
 // Default sender for output templates
 $modversion['config'][] = [
     'name'        => 'otpl_sender',
@@ -382,59 +537,32 @@ $modversion['config'][] = [
     'valuetype'   => 'text',
     'default'     => 'Wedega - Webdesign Gabor<br>Goffy<br>somewhere in Austria',
 ];
-// Advertise
+// Keywords
 $modversion['config'][] = [
-	'name'        => 'advertise',
-	'title'       => '_MI_WGSIMPLEACC_ADVERTISE',
-	'description' => '_MI_WGSIMPLEACC_ADVERTISE_DESC',
-	'formtype'    => 'textarea',
-	'valuetype'   => 'text',
-	'default'     => '',
-];
-// Show module description
-$modversion['config'][] = [
-    'name'        => 'index_header',
-    'title'       => '_MI_WGSIMPLEACC_INDEXHEADER',
-    'description' => '_MI_WGSIMPLEACC_INDEXHEADER_DESC',
+    'name'        => 'keywords',
+    'title'       => '_MI_WGSIMPLEACC_KEYWORDS',
+    'description' => '_MI_WGSIMPLEACC_KEYWORDS_DESC',
     'formtype'    => 'textbox',
     'valuetype'   => 'text',
-    'default'     => \_MI_WGSIMPLEACC_DESC,
+    'default'     => 'wgsimpleacc, accounts, transactions, allocations, assets, currencies, taxes, files, images',
 ];
-// Show breadcrumb
+// Advertise
 $modversion['config'][] = [
-    'name'        => 'show_breadcrumbs',
-    'title'       => '_MI_WGSIMPLEACC_SHOWBCRUMBS',
-    'description' => '_MI_WGSIMPLEACC_SHOWBCRUMBS_DESC',
-    'formtype'    => 'yesno',
-    'valuetype'   => 'int',
-    'default'     => 1,
-];
-// Show copyright
-$modversion['config'][] = [
-    'name'        => 'show_copyright',
-    'title'       => '_MI_WGSIMPLEACC_SHOWCOPYRIGHT',
-    'description' => '_MI_WGSIMPLEACC_SHOWCOPYRIGHT_DESC',
-    'formtype'    => 'yesno',
-    'valuetype'   => 'int',
-    'default'     => 1,
-];
-// Make Sample button visible?
-$modversion['config'][] = [
-	'name'        => 'displaySampleButton',
-	'title'       => 'CO_' . $moduleDirNameUpper . '_' . 'SHOW_SAMPLE_BUTTON',
-	'description' => 'CO_' . $moduleDirNameUpper . '_' . 'SHOW_SAMPLE_BUTTON_DESC',
-	'formtype'    => 'yesno',
-	'valuetype'   => 'int',
-	'default'     => 1,
+    'name'        => 'advertise',
+    'title'       => '_MI_WGSIMPLEACC_ADVERTISE',
+    'description' => '_MI_WGSIMPLEACC_ADVERTISE_DESC',
+    'formtype'    => 'textarea',
+    'valuetype'   => 'text',
+    'default'     => '',
 ];
 // Maintained by
 $modversion['config'][] = [
-	'name'        => 'maintainedby',
-	'title'       => '_MI_WGSIMPLEACC_MAINTAINEDBY',
-	'description' => '_MI_WGSIMPLEACC_MAINTAINEDBY_DESC',
-	'formtype'    => 'textbox',
-	'valuetype'   => 'text',
-	'default'     => 'https://xoops.org/modules/newbb',
+    'name'        => 'maintainedby',
+    'title'       => '_MI_WGSIMPLEACC_MAINTAINEDBY',
+    'description' => '_MI_WGSIMPLEACC_MAINTAINEDBY_DESC',
+    'formtype'    => 'textbox',
+    'valuetype'   => 'text',
+    'default'     => 'https://xoops.org/modules/newbb',
 ];
 // ------------------- Notifications ------------------- //
 $modversion['hasNotification'] = 1;

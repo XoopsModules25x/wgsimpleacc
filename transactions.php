@@ -88,6 +88,7 @@ switch ($op) {
 	case 'list':
 	default:
         $GLOBALS['xoopsTpl']->assign('showList', true);
+        $GLOBALS['xoopsTpl']->assign('listHead', _MA_WGSIMPLEACC_TRANSACTIONS_LIST);
         $GLOBALS['xoopsTpl']->assign('permDelete', true);
         if (0 == $traId) {
             //get first and last year
@@ -115,10 +116,10 @@ switch ($op) {
             $GLOBALS['xoopsTpl']->assign('formFilter', $formFilter->render());
         }
 	    $crTransactions = new \CriteriaCompo();
-        $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_OFFLINE, '>'));
 		if ($traId > 0) {
 			$crTransactions->add(new \Criteria('tra_id', $traId));
 		} else {
+            $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_OFFLINE, '>'));
             $tradateFrom = 0;
             $tradateTo = \time() + (10 * 365 * 24 * 60 * 60);;
             if (Constants::FILTER_PYEARLY == $period_type) {
@@ -182,7 +183,10 @@ switch ($op) {
 			$GLOBALS['xoopsTpl']->assign('useCurrencies', $helper->getConfig('use_currencies'));
 			$GLOBALS['xoopsTpl']->assign('useTaxes', $helper->getConfig('use_taxes'));
             $GLOBALS['xoopsTpl']->assign('useFiles', $helper->getConfig('use_files'));
-		}
+            $GLOBALS['xoopsTpl']->assign('useClients', $helper->getConfig('use_clients'));
+		} else {
+            $GLOBALS['xoopsTpl']->assign('noData', _MA_WGSIMPLEACC_THEREARENT_TRANSACTIONS);
+        }
         $GLOBALS['xoopsTpl']->assign('traOp',$traOp);
 
         // Breadcrumbs
@@ -253,8 +257,10 @@ switch ($op) {
             $transactionsObj->setVar('tra_amountin', 0);
             $transactionsObj->setVar('tra_amountout', 0);
         }
-		$transactionsObj->setVar('tra_taxid', Request::getInt('tra_taxid', 0));
-		$transactionsObj->setVar('tra_asid', Request::getInt('tra_asid', 0));
+        $transactionsObj->setVar('tra_taxid', Request::getInt('tra_taxid', 0));
+        $transactionsObj->setVar('tra_asid', Request::getInt('tra_asid', 0));
+        $transactionsObj->setVar('tra_balid', Request::getInt('tra_balid', 0));
+        $transactionsObj->setVar('tra_cliid', Request::getInt('tra_cliid', 0));
 		$transactionsObj->setVar('tra_status', Request::getInt('tra_status', 0));
 		$transactionsObj->setVar('tra_comments', Request::getInt('tra_comments', 0));
         $transactionsObj->setVar('tra_class', $traClass);
@@ -425,6 +431,8 @@ switch ($op) {
 		break;
     case 'listhist':
         $GLOBALS['xoopsTpl']->assign('showList', true);
+        $GLOBALS['xoopsTpl']->assign('listHist', true);
+        $GLOBALS['xoopsTpl']->assign('listHead', _MA_WGSIMPLEACC_TRAHISTORY_DELETED);
         $GLOBALS['xoopsTpl']->assign('permDelete', false);
         if (0 == $traId) {
             //get first and last year
@@ -518,12 +526,15 @@ switch ($op) {
             $GLOBALS['xoopsTpl']->assign('useCurrencies', $helper->getConfig('use_currencies'));
             $GLOBALS['xoopsTpl']->assign('useTaxes', $helper->getConfig('use_taxes'));
             $GLOBALS['xoopsTpl']->assign('useFiles', $helper->getConfig('use_files'));
+            $GLOBALS['xoopsTpl']->assign('useClients', $helper->getConfig('use_clients'));
+        } else {
+            $GLOBALS['xoopsTpl']->assign('noData', _MA_WGSIMPLEACC_THEREARENT_TRAHISTORIES);
         }
         $GLOBALS['xoopsTpl']->assign('traOp',$traOp);
 
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_TRANSACTIONS, 'link' => 'transactions.php?op=list'];
-        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_HISTORY_DELETED];
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_TRAHISTORY_DELETED];
         break;
 }
 

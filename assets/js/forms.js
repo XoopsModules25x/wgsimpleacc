@@ -28,8 +28,7 @@ function presetTraField() {
     xoopsGetElementById('tra_accid').value = xoopsGetElementById('ttpl_accid[' + vselected +  ']').value;
     xoopsGetElementById('tra_allid').value = xoopsGetElementById('ttpl_allid[' + vselected +  ']').value;
     xoopsGetElementById('tra_asid').value = xoopsGetElementById('ttpl_asid[' + vselected +  ']').value;
-    xoopsGetElementById('tra_amountin').value = xoopsGetElementById('ttpl_amountin[' + vselected +  ']').value;
-    xoopsGetElementById('tra_amountout').value = xoopsGetElementById('ttpl_amountout[' + vselected +  ']').value;
+    xoopsGetElementById('tra_amount').value = xoopsGetElementById('ttpl_amount[' + vselected +  ']').value;
+    xoopsGetElementById('tra_cliid').value = xoopsGetElementById('ttpl_cliid[' + vselected +  ']').value;
 
 }
-// ]]>

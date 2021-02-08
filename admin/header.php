@@ -45,6 +45,7 @@ $balancesHandler = $helper->getHandler('Balances');
 $tratemplatesHandler = $helper->getHandler('Tratemplates');
 $outtemplatesHandler = $helper->getHandler('Outtemplates');
 $trahistoriesHandler = $helper->getHandler('Trahistories');
+$clientsHandler = $helper->getHandler('Clients');
 $myts = MyTextSanitizer::getInstance();
 // 
 if (!isset($xoopsTpl) || !\is_object($xoopsTpl)) {

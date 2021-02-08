@@ -1,10 +1,10 @@
-<h3><{$header_fileslist}></h3>
-<{if $formFilesUpload}>
+<h3><{$header_fileslist|default:''}></h3>
+<{if $formFilesUpload|default:''}>
     <div id='filehandler' class='col-xs-12 col-sm-12'>
         <ul class='nav nav-tabs'>
             <li class='active'><a id='navtab_main' href='#1' data-toggle='tab'><{$smarty.const._MA_WGSIMPLEACC_FILES_CURRENT}></a></li>
             <li><a id='navtab_upload_file' href='#2' data-toggle='tab'><{$smarty.const._MA_WGSIMPLEACC_FILES_UPLOAD}></a></li>
-            <{if $upload_by_app}>
+            <{if $upload_by_app|default:''}>
                 <li><a id='navtab_upload_temp' href='#3' data-toggle='tab'><{$smarty.const._MA_WGSIMPLEACC_FILES_TEMP}></a></li>
             <{/if}>
         </ul>
@@ -26,8 +26,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <{foreach item=file from=$files}>
-                                <{include file='db:wgsimpleacc_files_list.tpl' }>
+                                <{foreach item=file from=$files}>
+                                    <{include file='db:wgsimpleacc_files_list.tpl' }>
                                 <{/foreach}>
                             </tbody>
                         </table>
@@ -39,14 +39,14 @@
             </div>
             <!-- *************** Tab for upload files ***************-->
             <div class='tab-pane' id='2'>
-                <{if $formFilesUpload}>
+                <{if $formFilesUpload|default:''}>
                     <{$formFilesUpload}>
                 <{/if}>
             </div>
             <{if $upload_by_app}>
                 <!-- ***************Tab for select uploaded files ***************-->
                 <div class='tab-pane' id='3' >
-                    <{if $formFilesTemp}>
+                    <{if $formFilesTemp|default:''}>
                         <{$formFilesTemp}>
                     <{/if}>
                 </div>
@@ -54,7 +54,7 @@
         </div>
     </div>
 <{/if}>
-<{if $formFilesEdit}>
+<{if $formFilesEdit|default:''}>
     <{$formFilesEdit}>
 <{/if}>
 

@@ -50,7 +50,25 @@
 	height:20px;
 	margin:0 5px 0 0;
 }
-
+.wgsa-index-tratotal{
+	margin-top:50px;
+	padding:20px;
+	font-size:120%;
+	border: 1px solid #ccc;
+}
+.wgsa-index-tratotal > table > tbody > tr > td {
+	padding:5px;
+}
+#incomes1, #incomes2, #expenses1, #expenses2 {
+	padding:0 5px;
+}
+.wgsa-index-tratotal-amount {
+	padding-left:50px !important;
+	text-align: right;
+}
+.wgsa-index-tratotal-sum > td {
+	border-top: 1px solid #ccc;
+}
 .wgsa-index-assets {
 	margin-top:50px;
 	font-size:120%;

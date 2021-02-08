@@ -63,7 +63,7 @@
                 <tbody>
                 <{foreach item=account from=$accounts}>
                     <tr>
-                        <td class="col-xs-6 col-sm-4 left"><span style="margin-right:10px;padding:5px 10px;width:20px;background-color:<{$account.color}>"></span><{$account.name}></td>
+                        <td class="col-xs-6 col-sm-4 left"><span style="margin-right:10px;padding:5px 10px;width:20px;background-color:<{$account.color}>"></span><{$allocation.level_symbol}><{$account.name}></td>
                         <td class="col-xs-6 col-sm-2 right"><{$account.amountin}></td>
                         <td class="col-xs-6 col-sm-2 right"><{$account.amountout}></td>
                         <td class="col-xs-6 col-sm-2 right"><{$account.total}></td>
@@ -94,7 +94,7 @@
                 <tbody>
                 <{foreach item=allocation from=$allocations}>
                     <tr>
-                        <td class="col-xs-6 col-sm-4 left"><{$allocation.name}></td>
+                        <td class="col-xs-6 col-sm-4 left"><{$allocation.level_symbol}><{$allocation.name}></td>
                         <td class="col-xs-6 col-sm-2 right"><{$allocation.amountin}></td>
                         <td class="col-xs-6 col-sm-2 right"><{$allocation.amountout}></td>
                         <td class="col-xs-6 col-sm-2 right"><{$allocation.total}></td>

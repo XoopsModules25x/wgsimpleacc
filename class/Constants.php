@@ -67,6 +67,9 @@ interface Constants
     public const PERM_TRATEMPLATES_VIEW    = 16;
     public const PERM_OUTTEMPLATES_SUBMIT  = 17;
     public const PERM_OUTTEMPLATES_VIEW    = 18;
+    public const PERM_CLIENTS_SUBMIT       = 19;
+    public const PERM_CLIENTS_VIEW         = 20;
+
     // Constants for account class
     public const CLASS_BOTH   = 1;
     public const CLASS_EXPENSES  = 2;

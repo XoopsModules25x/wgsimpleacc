@@ -45,6 +45,7 @@ class Tratemplates extends \XoopsObject
 		$this->initVar('ttpl_accid', \XOBJ_DTYPE_INT);
 		$this->initVar('ttpl_allid', \XOBJ_DTYPE_INT);
 		$this->initVar('ttpl_asid', \XOBJ_DTYPE_INT);
+        $this->initVar('ttpl_cliid', \XOBJ_DTYPE_INT);
         $this->initVar('ttpl_class', \XOBJ_DTYPE_INT);
 		$this->initVar('ttpl_amountin', \XOBJ_DTYPE_DECIMAL);
         $this->initVar('ttpl_amountout', \XOBJ_DTYPE_DECIMAL);
@@ -119,6 +120,16 @@ class Tratemplates extends \XoopsObject
 		$ttplAsidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRATEMPLATE_ASID, 'ttpl_asid', $this->getVar('ttpl_asid'));
 		$ttplAsidSelect->addOptionArray($assetsHandler->getList());
 		$form->addElement($ttplAsidSelect);
+        // Form Table clients
+        if ($helper->getConfig('use_clients')) {
+            $ttplClient = $this->isNew() ? 0 : $this->getVar('ttpl_cliid');
+            $clientsHandler = $helper->getHandler('Clients');
+            $crClients = new \CriteriaCompo();
+            $ttplCliidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_CLIID, 'ttpl_cliid', $ttplClient);
+            $ttplCliidSelect->addOption(0, ' ');
+            $ttplCliidSelect->addOptionArray($clientsHandler->getList($crClients));
+            $form->addElement($ttplCliidSelect);
+        }
         // Form Select ttplClass
         $ttplClass = $this->isNew() ? Constants::CLASS_BOTH : $this->getVar('ttpl_class');
         $traClassSelect = new \XoopsFormRadio(\_MA_WGSIMPLEACC_TRANSACTION_CLASS, 'ttpl_class', $ttplClass);
@@ -144,6 +155,7 @@ class Tratemplates extends \XoopsObject
 		// To Save
 		$form->addElement(new \XoopsFormHidden('op', 'save'));
 		$form->addElement(new \XoopsFormButtonTray('', _SUBMIT, 'submit', '', false));
+
 		return $form;
 	}
 
@@ -161,15 +173,39 @@ class Tratemplates extends \XoopsObject
 		$ret['id']          = $this->getVar('ttpl_id');
 		$ret['name']        = $this->getVar('ttpl_name');
 		$ret['desc']        = $this->getVar('ttpl_desc');
+
 		$accountsHandler = $helper->getHandler('Accounts');
 		$accountsObj = $accountsHandler->get($this->getVar('ttpl_accid'));
-		$ret['accid']       = $accountsObj->getVar('acc_key');
+        $accKey = '';
+        if (\is_object($accountsObj)) {
+            $accKey = $accountsObj->getVar('acc_key');
+        }
+        $ret['accid'] = $accKey;
+
 		$allocationsHandler = $helper->getHandler('Allocations');
 		$allocationsObj = $allocationsHandler->get($this->getVar('ttpl_allid'));
-		$ret['allid']       = $allocationsObj->getVar('all_name');
+        $allName = '';
+        if (\is_object($allocationsObj)) {
+            $allName = $allocationsObj->getVar('all_name');
+        }
+		$ret['allid'] = $allName;
+
 		$assetsHandler = $helper->getHandler('Assets');
 		$assetsObj = $assetsHandler->get($this->getVar('ttpl_asid'));
-		$ret['asid']        = $assetsObj->getVar('as_name');
+        $asName = '';
+        if (\is_object($assetsObj)) {
+            $asName = $assetsObj->getVar('as_name');
+        }
+        $ret['asid'] = $asName;
+
+        $clientsHandler = $helper->getHandler('Clients');
+        $clientsObj = $clientsHandler->get($this->getVar('ttpl_cliid'));
+        $cliName = '';
+        if (\is_object($clientsObj)) {
+            $cliName = $clientsObj->getVar('cli_name');
+        }
+        $ret['cliid']        = $cliName;
+
         $ttplClass           = $this->getVar('ttpl_class');
         $ret['class']       = $ttplClass;
         switch ($ttplClass) {
@@ -190,6 +226,7 @@ class Tratemplates extends \XoopsObject
         $ret['online']      = (int)$this->getVar('ttpl_online') > 0 ? _YES : _NO;
 		$ret['datecreated'] = \formatTimestamp($this->getVar('ttpl_datecreated'), 's');
 		$ret['submitter']   = \XoopsUser::getUnameFromId($this->getVar('ttpl_submitter'));
+
 		return $ret;
 	}
 
@@ -205,6 +242,7 @@ class Tratemplates extends \XoopsObject
 		foreach (\array_keys($vars) as $var) {
 			$ret[$var] = $this->getVar('"{$var}"');
 		}
+
 		return $ret;
 	}
 }

@@ -5,6 +5,9 @@
 		<{/if}>
 	</td>
 	<td><{$transaction.year}>/<{$transaction.nb}></td>
+	<{if $useClients|default:''}>
+	<td><{$transaction.client}></td>
+	<{/if}>
 	<td><{$transaction.desc}></td>
 	<td><{$transaction.remarks}></td>
 	<td><{$transaction.reference}></td>

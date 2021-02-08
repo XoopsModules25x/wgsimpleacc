@@ -1,5 +1,15 @@
 ==============================================================
-1.20 [2020/12/31 10:10]
+1.21 [2021/02/03]
+==============================================================
+ - added usage of clients (goffy)
+ - updated balances (goffy)
+ - fixed several problems in templates (goffy)
+ - fixed several problems with file up/download (goffy)
+ - splitted horizontal bar into submitted/approved (goffy)
+ - added summary to transaction hbar (goffy)
+
+ ==============================================================
+1.20 [2020/12/31]
 ==============================================================
  - changes in status (goffy)
  - cleaned missing smarty defaults (goffy)
@@ -8,7 +18,7 @@
  - fixed problems in permissions (goffy)
 
 ==============================================================
-1.1 [2020/12/31 10:10]
+1.1 [2020/12/31]
 ==============================================================
  - added show file (goffy)
  - added history of transactions (goffy)
@@ -18,7 +28,7 @@
  - changed color selection into radio (goffy)
 
 ==============================================================
-1.0 [2020/09/18 7:38]
+1.0 [2020/09/18]
 ==============================================================
  - Original release wgsimpleacc (Goffy - Wedega.com)
  - rebuilt tpl (Goffy)

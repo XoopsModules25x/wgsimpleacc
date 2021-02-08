@@ -40,6 +40,7 @@ require_once 'common.php';
 \define('_MI_WGSIMPLEACC_ADMENU12', 'Permissions');
 \define('_MI_WGSIMPLEACC_ADMENU13', 'Feedback');
 \define('_MI_WGSIMPLEACC_ADMENU14', 'Transactions History');
+\define('_MI_WGSIMPLEACC_ADMENU15', 'Clients');
 \define('_MI_WGSIMPLEACC_ABOUT', 'About');
 // ---------------- Admin Nav ----------------
 \define('_MI_WGSIMPLEACC_ADMIN_PAGER', 'Admin pager');
@@ -48,6 +49,14 @@ require_once 'common.php';
 \define('_MI_WGSIMPLEACC_USER_PAGER', 'User pager');
 \define('_MI_WGSIMPLEACC_USER_PAGER_DESC', 'User per page list');
 // Config
+\define('_MI_WGSIMPLEACC_GROUP_GENERAL', 'General options');
+\define('_MI_WGSIMPLEACC_GROUP_UPLOAD', 'Uploads');
+\define('_MI_WGSIMPLEACC_GROUP_DISPLAY', 'Display');
+\define('_MI_WGSIMPLEACC_GROUP_FORMATS', 'Formats');
+\define('_MI_WGSIMPLEACC_GROUP_INDEX', 'Index page');
+\define('_MI_WGSIMPLEACC_GROUP_BALANCE', 'Balance options');
+\define('_MI_WGSIMPLEACC_GROUP_OPTCOMP', 'Optional components');
+\define('_MI_WGSIMPLEACC_GROUP_MISC', 'Misc');
 \define('_MI_WGSIMPLEACC_EDITOR_ADMIN', 'Editor admin');
 \define('_MI_WGSIMPLEACC_EDITOR_ADMIN_DESC', 'Select the editor which should be used in admin area for text area fields');
 \define('_MI_WGSIMPLEACC_EDITOR_USER', 'Editor user');
@@ -81,6 +90,8 @@ require_once 'common.php';
 \define('_MI_WGSIMPLEACC_USE_TAXES_DESC', 'Please define whether you want use taxes');
 \define('_MI_WGSIMPLEACC_USE_FILES', 'Use file system');
 \define('_MI_WGSIMPLEACC_USE_FILES_DESC', 'Please define whether you want use the possibility to add files to your transactions');
+\define('_MI_WGSIMPLEACC_USE_CLIENTS', 'Use clients system');
+\define('_MI_WGSIMPLEACC_USE_CLIENTS_DESC', 'Please define whether you want use the possibility to handle client data');
 \define('_MI_WGSIMPLEACC_BALANCE_PERIOD', 'Balancing period');
 \define('_MI_WGSIMPLEACC_BALANCE_PERIOD_DESC', 'Define period how balancing should be done');
 \define('_MI_WGSIMPLEACC_BALANCE_FILTER_PYEARLY', 'Yearly');
@@ -102,10 +113,22 @@ require_once 'common.php';
 \define('_MI_WGSIMPLEACC_DECEMBER', 'December');
 \define('_MI_WGSIMPLEACC_INDEXHEADER', 'Index header');
 \define('_MI_WGSIMPLEACC_INDEXHEADER_DESC', 'Show this text as header on index page');
+
+
+\define('_MI_WGSIMPLEACC_INDEX_TRAHBAR', 'Index Transaction Bar');
+\define('_MI_WGSIMPLEACC_INDEX_TRAHBAR_DESC', 'Show transaction bar (horizontal) with amounts of current period on index page');
+\define('_MI_WGSIMPLEACC_INDEX_ASSETSPIE', 'Index Transaction Pie Chart');
+\define('_MI_WGSIMPLEACC_INDEX_ASSETSPIE_DESC', 'Show transaction pie chart with amounts of current period on index page');
+\define('_MI_WGSIMPLEACC_INDEX_ASSETSPIETOTAL', 'Index Transaction Pie Chart Totals');
+\define('_MI_WGSIMPLEACC_INDEX_ASSETSPIETOTAL_DESC', 'Show transaction pie chart with total amounts on index page');
+
+
 \define('_MI_WGSIMPLEACC_OTPL_SENDER', 'Default sender for output');
 \define('_MI_WGSIMPLEACC_OTPL_SENDER_DESC', 'Default sender which should be used for output templates');
 \define('_MI_WGSIMPLEACC_SHOWBCRUMBS', 'Show breadcrumb navigation');
 \define('_MI_WGSIMPLEACC_SHOWBCRUMBS_DESC', "Breadcrumb navigation displays the current page's context within the site structure.");
+\define('_MI_WGSIMPLEACC_MNAMEBCRUMBS', 'Module name in breadcrumb');
+\define('_MI_WGSIMPLEACC_MNAMEBCRUMBS_DESC', 'You can define the module name in breadcrumb here. If module name should be not shown then keep it blank.');
 \define('_MI_WGSIMPLEACC_SHOWCOPYRIGHT', 'Show copyright');
 \define('_MI_WGSIMPLEACC_SHOWCOPYRIGHT_DESC', 'You can remove the copyright from the wgSimpleAcc, but a backlinks to www.wedega.com is expected, anywhere on your site');
 // Global notifications

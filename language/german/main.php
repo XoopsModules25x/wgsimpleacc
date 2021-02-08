@@ -23,7 +23,7 @@
 require_once __DIR__ . '/admin.php';
 
 // ---------------- Main ----------------
-\define('_MA_WGSIMPLEACC_INDEX', 'Home');
+\define('_MA_WGSIMPLEACC_INDEX', 'Übersicht');
 \define('_MA_WGSIMPLEACC_TITLE', 'wgSimpleAcc');
 \define('_MA_WGSIMPLEACC_DESC', 'wgSimpleAcc ist ein Tool für die Einnahmen-Ausgaben-Rechnung von Vereinen');
 \define('_MA_WGSIMPLEACC_INDEX_DESC', 'Willkommmen auf der Startseite des neuen Modules wgSimpleAcc!');
@@ -53,6 +53,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_DASHBOARD', 'Dashboard');
 \define('_MA_WGSIMPLEACC_DOWNLOAD', 'Download');
 \define('_MA_WGSIMPLEACC_REACTIVATE', 'Reaktivieren (Transaktion wieder zu gültigen Transaktionen hinzufügen');
+\define('_MA_WGSIMPLEACC_SUMS', 'Summen');
 // ---------------- Contents ----------------
 // There aren't
 \define('_MA_WGSIMPLEACC_THEREARENT_ACCOUNTS', 'Es gibt derzeit keine Konten in der Datenbank');
@@ -66,6 +67,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_THEREARENT_BALANCES', 'Es gibt derzeit keine Abschlüsse in der Datenbank');
 \define('_MA_WGSIMPLEACC_THEREARENT_TRATEMPLATES', 'Es gibt derzeit keine Transaktionsvorlagen in der Datenbank');
 \define('_MA_WGSIMPLEACC_THEREARENT_OUTTEMPLATES', 'Es gibt derzeit keine Ausgabevorlagen in der Datenbank');
+\define('_MA_WGSIMPLEACC_THEREARENT_CLIENTS', 'Es gibt derzeit keine Klienten in der Datenbank');
 // Account
 \define('_MA_WGSIMPLEACC_ACCOUNT', 'Konto');
 \define('_MA_WGSIMPLEACC_ACCOUNTS', 'Buchungskonten');
@@ -96,6 +98,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_TRANSACTION_EDIT_INCOME', 'Transaktion Einnahmen bearbeiten');
 \define('_MA_WGSIMPLEACC_TRANSACTION_EDIT_EXPENSES', 'Transaktion Ausgaben bearbeiten');
 \define('_MA_WGSIMPLEACC_TRANSACTION_STATUS_WAITING', 'Wartet auf Freigabe');
+\define('_MA_WGSIMPLEACC_TRANSACTION_DETAILS', 'Details zu Transaktion');
 // Transaction
 \define('_MA_WGSIMPLEACC_TRANSACTION', 'Transaktion');
 \define('_MA_WGSIMPLEACC_TRANSACTIONS', 'Transaktionen');
@@ -124,6 +127,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_TRANSACTION_AMOUNTOUT', 'Betrag Ausgabe');
 \define('_MA_WGSIMPLEACC_TRANSACTION_TAXID', 'Steuerart');
 \define('_MA_WGSIMPLEACC_TRANSACTION_ASID', 'Vermögenswert');
+\define('_MA_WGSIMPLEACC_TRANSACTION_CLIID', 'Klient');
 \define('_MA_WGSIMPLEACC_TRANSACTION_STATUS', 'Status');
 \define('_MA_WGSIMPLEACC_TRANSACTION_COMMENTS', 'Kommentare');
 \define('_MA_WGSIMPLEACC_TRANSACTION_CLASS', 'Klasse');
@@ -159,6 +163,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_ASSETS_LIST', 'Liste der Vermögenswerte');
 \define('_MA_WGSIMPLEACC_ASSETS_OVERVIEW', 'Übersicht über Vermögenswerte');
 \define('_MA_WGSIMPLEACC_ASSETS_CURRENT', 'Aktuelle Werte der Vermögenswerte');
+\define('_MA_WGSIMPLEACC_ASSETSTOTAL_CURRENT', 'Aktuelle Werte der Vermögenswerte gesamt');
 \define('_MA_WGSIMPLEACC_ASSETS_TIMELINE', 'Entwicklung der Vermögenswerte');
 \define('_MA_WGSIMPLEACC_ASSET_SUBMIT', 'Vermögenswert einsenden');
 // Caption of Asset
@@ -173,25 +178,33 @@ require_once __DIR__ . '/admin.php';
 //Charts
 \define('_MA_WGSIMPLEACC_CHART_AMOUNT', 'Betrag');
 \define('_MA_WGSIMPLEACC_CHART_PERIOD', 'Zeitraum');
+\define('_MA_WGSIMPLEACC_CHART_BALANCE', 'Saldo');
 //Color
+\define('_MA_WGSIMPLEACC_COLOR_LIGHTRED', 'Hellrot');
 \define('_MA_WGSIMPLEACC_COLOR_RED', 'Rot');
 \define('_MA_WGSIMPLEACC_COLOR_DARKRED', 'Dunkelrot');
+\define('_MA_WGSIMPLEACC_COLOR_LIGHTORANGE', 'Hellorange');
 \define('_MA_WGSIMPLEACC_COLOR_ORANGE', 'Orange');
 \define('_MA_WGSIMPLEACC_COLOR_DARKORANGE', 'Dunkelorange');
+\define('_MA_WGSIMPLEACC_COLOR_LIGHTYELLOW', 'Hellgelb');
 \define('_MA_WGSIMPLEACC_COLOR_YELLOW', 'Gelb');
 \define('_MA_WGSIMPLEACC_COLOR_DARKYELLOW', 'Dunkelgelb');
+\define('_MA_WGSIMPLEACC_COLOR_LIGHTGREEN', 'Hellgrün');
 \define('_MA_WGSIMPLEACC_COLOR_GREEN', 'Grün');
 \define('_MA_WGSIMPLEACC_COLOR_DARKGREEN', 'Dunkelgrün');
+\define('_MA_WGSIMPLEACC_COLOR_LIGHTBLUE', 'Hellblau');
 \define('_MA_WGSIMPLEACC_COLOR_BLUE', 'Blau');
 \define('_MA_WGSIMPLEACC_COLOR_DARKBLUE', 'Dunkelblau');
+\define('_MA_WGSIMPLEACC_COLOR_LIGHTPURPLE', 'Hellviolett');
 \define('_MA_WGSIMPLEACC_COLOR_PURPLE', 'Violett');
 \define('_MA_WGSIMPLEACC_COLOR_DARKPURPLE', 'Dunkelviolett');
 \define('_MA_WGSIMPLEACC_COLOR_GREY', 'Grau');
+\define('_MA_WGSIMPLEACC_COLOR_LIGHTBROWN', 'Hellbraun');
 \define('_MA_WGSIMPLEACC_COLOR_BROWN', 'Braun');
 \define('_MA_WGSIMPLEACC_COLOR_DARKBROWN', 'Dunkelbraun');
 // File add/edit
 \define('_MA_WGSIMPLEACC_FILE_ADD', 'Datei hinzufügen');
-\define('_MA_WGSIMPLEACC_FILE_EDIT', 'Edit File');
+\define('_MA_WGSIMPLEACC_FILE_EDIT', 'Datei bearbeiten');
 // File
 \define('_MA_WGSIMPLEACC_FILE', 'Datei');
 \define('_MA_WGSIMPLEACC_FILES', 'Dateien');
@@ -205,6 +218,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_FILES_TEMP', 'Hochgeladene Dateien');
 \define('_MA_WGSIMPLEACC_FILES_TEMP_DESC', 'Hochgeladene Dateien im Verzeichnis: %f');
 \define('_MA_WGSIMPLEACC_FILES_TEMP_DESC_NO', 'Es gibt keine hochgeladenen Dateien im Verzeichnis: %f');
+\define('_MA_WGSIMPLEACC_FILE_DETAILS', 'Details zu Datei');
 // Caption of File
 \define('_MA_WGSIMPLEACC_FILE_ID', 'Id');
 \define('_MA_WGSIMPLEACC_FILE_TRAID', 'Transaktion');
@@ -223,6 +237,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_BALANCE_SUBMIT_FINAL', 'Abschluss endgültig erstellen');
 \define('_MA_WGSIMPLEACC_BALANCE_PRECALC', 'Vorausberechnung');
 \define('_MA_WGSIMPLEACC_BALANCES_TIMELINE', 'Entwicklung der Vermögenswerte je Abschluss');
+\define('_MA_WGSIMPLEACC_BALANCE_DETAILS', 'Details zum Abschluss');
 // Caption of Balance
 \define('_MA_WGSIMPLEACC_BALANCE_ID', 'Id');
 \define('_MA_WGSIMPLEACC_BALANCE_FROM', 'Von');
@@ -316,6 +331,25 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_TARGET_SHOW', 'Nur anzeigen');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_TARGET_PDF', 'Als PDF ausgeben');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_PDF_SUCCESS', 'Daten erfolgreich als PDF ausgegeben');
+// Client
+\define('_MA_WGSIMPLEACC_CLIENTS', 'Klienten');
+\define('_MA_WGSIMPLEACC_CLIENTS_LIST', 'Liste der Klienten');
+\define('_MA_WGSIMPLEACC_CLIENT_SUBMIT', 'Klient einsenden');
+// Client add/edit
+\define('_MA_WGSIMPLEACC_CLIENT_ADD', 'Klient hinzufügen');
+\define('_MA_WGSIMPLEACC_CLIENT_EDIT', 'Klient bearbeiten');
+// Elements of Client
+\define('_MA_WGSIMPLEACC_CLIENT_ID', 'Id');
+\define('_MA_WGSIMPLEACC_CLIENT_NAME', 'Name');
+\define('_MA_WGSIMPLEACC_CLIENT_FULLADDRESS', 'Adresse');
+\define('_MA_WGSIMPLEACC_CLIENT_POSTAL', 'PLZ');
+\define('_MA_WGSIMPLEACC_CLIENT_CITY', 'Ort');
+\define('_MA_WGSIMPLEACC_CLIENT_ADDRESS', 'Adresse');
+\define('_MA_WGSIMPLEACC_CLIENT_CTRY', 'Land');
+\define('_MA_WGSIMPLEACC_CLIENT_PHONE', 'Telefon');
+\define('_MA_WGSIMPLEACC_CLIENT_VAT', 'UID');
+\define('_MA_WGSIMPLEACC_CLIENT_CREDITOR', 'Kreditor (Verkäufer)');
+\define('_MA_WGSIMPLEACC_CLIENT_DEBTOR', 'Debitor (Käufer)');
 // Statistics
 \define('_MA_WGSIMPLEACC_STATISTICS', 'Statistiken');
 // Outputs
@@ -326,7 +360,8 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_HISTORY_ID', 'History Id');
 \define('_MA_WGSIMPLEACC_HISTORY_TYPE', 'Typ');
 \define('_MA_WGSIMPLEACC_HISTORY_DATECREATED', 'Datum Historie');
-\define('_MA_WGSIMPLEACC_HISTORY_DELETED', 'Liste der gelöschten Transaktionen');
+\define('_MA_WGSIMPLEACC_TRAHISTORY_LIST', 'Historie zu Transaktion');
+\define('_MA_WGSIMPLEACC_TRAHISTORY_DELETED', 'Liste der gelöschten Transaktionen');
 // Submit
 \define('_MA_WGSIMPLEACC_SUBMIT', 'Einsenden');
 // Modal
@@ -383,7 +418,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_EDIT', 'Vorlage bearbeiten');
 // Status
 \define('_MA_WGSIMPLEACC_STATUS_NONE', 'Kein Status');
-\define('_MA_WGSIMPLEACC_STATUS_OFFLINE', 'Offline');
+\define('_MA_WGSIMPLEACC_STATUS_OFFLINE', 'Gelöscht');
 \define('_MA_WGSIMPLEACC_STATUS_SUBMITTED', 'Eingesendet');
 \define('_MA_WGSIMPLEACC_STATUS_APPROVED', 'Bestätigt');
 \define('_MA_WGSIMPLEACC_STATUS_BROKEN', 'Fehlerhaft');

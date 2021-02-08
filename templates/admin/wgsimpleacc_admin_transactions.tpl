@@ -18,6 +18,7 @@
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_AMOUNTOUT}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_TAXID}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_ASID}></th>
+				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_CLIID}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_STATUS}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_COMMENTS}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_CLASS}></th>
@@ -45,6 +46,7 @@
 						<td class='center'><{$transaction.amountout}></td>
 						<td class='center'><{$transaction.taxid}></td>
 						<td class='center'><{$transaction.asset}></td>
+						<td class='center'><{$transaction.client}></td>
 						<td class='center'><img src="<{$modPathIcon16}>status<{$transaction.status}>.png" alt="<{$transaction.status_text}>" title="<{$transaction.status_text}>" /></td>
 						<td class='center'><{$transaction.comments}></td>
 						<td class='center'><{$transaction.class_text}></td>
