@@ -86,7 +86,6 @@ class Clients extends \XoopsObject
 	 */
 	public function getFormClients($action = false)
 	{
-		$helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
 		if (!$action) {
 			$action = $_SERVER['REQUEST_URI'];
 		}

@@ -114,8 +114,8 @@ switch ($op) {
             $transactionsObj->setVar('tra_amountout', 0);
         }
 		$transactionsObj->setVar('tra_taxid', Request::getInt('tra_taxid', 0));
-        $transactionsObj->setVar('tra_asid', Request::getInt('tra_asid', ''));
-        $transactionsObj->setVar('tra_balid', Request::getInt('tra_balid', ''));
+        $transactionsObj->setVar('tra_asid', Request::getInt('tra_asid', 0));
+        $transactionsObj->setVar('tra_balid', Request::getInt('tra_balid', 0));
         $transactionsObj->setVar('tra_cliid', Request::getInt('tra_cliid', 0));
 		$transactionsObj->setVar('tra_status', Request::getInt('tra_status', 0));
 		$transactionsObj->setVar('tra_comments', Request::getInt('tra_comments', 0));

@@ -90,6 +90,7 @@ class Utility
      */
     public static function getColors()
     {
+        $colors = [];
         $colors[] = ['name' => 'lightred',    'code' => '#ff9999', 'descr' => \_MA_WGSIMPLEACC_COLOR_LIGHTRED];
         $colors[] = ['name' => 'red',         'code' => '#ff3333', 'descr' => \_MA_WGSIMPLEACC_COLOR_RED];
         $colors[] = ['name' => 'darkred',     'code' => '#990000', 'descr' => \_MA_WGSIMPLEACC_COLOR_DARKRED];
