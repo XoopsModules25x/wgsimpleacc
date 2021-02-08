@@ -37,6 +37,7 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_THEREARE_BALANCES', "There are <span class='bold'>%s</span> balances in the database");
 \define('_AM_WGSIMPLEACC_THEREARE_TRATEMPLATES', "There are <span class='bold'>%s</span> transaction templates in the database");
 \define('_AM_WGSIMPLEACC_THEREARE_OUTTEMPLATES', "There are <span class='bold'>%s</span> output templates in the database");
+\define('_AM_WGSIMPLEACC_THEREARE_CLIENTS', "There are <span class='bold'>%s</span> clients in the database");
 // ---------------- Admin Files ----------------
 // Buttons
 \define('_AM_WGSIMPLEACC_ADD_ACCOUNT', 'Add New Account');
@@ -49,6 +50,7 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_ADD_BALANCE', 'Add New Balance');
 \define('_AM_WGSIMPLEACC_ADD_TRATEMPLATE', 'Add New Transaction Template');
 \define('_AM_WGSIMPLEACC_ADD_OUTTEMPLATE', 'Add New Output Template');
+\define('_AM_WGSIMPLEACC_ADD_CLIENT', 'Add New Client');
 // Lists
 \define('_AM_WGSIMPLEACC_LIST_ACCOUNTS', 'List of Accounts');
 \define('_AM_WGSIMPLEACC_LIST_TRANSACTIONS', 'List of Transactions');
@@ -60,6 +62,7 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_LIST_BALANCES', 'List of Balances');
 \define('_AM_WGSIMPLEACC_LIST_TRATEMPLATES', 'List of Transaction Templates');
 \define('_AM_WGSIMPLEACC_LIST_OUTTEMPLATES', 'List of Output Templates');
+\define('_AM_WGSIMPLEACC_LIST_CLIENTS', 'List of clients');
 // ---------------- Admin Classes ----------------
 // Currency add/edit
 \define('_AM_WGSIMPLEACC_CURRENCY_ADD', 'Add Currency');
@@ -90,8 +93,8 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_PERMISSIONS_GLOBAL', 'Permissions global');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_GLOBAL_DESC', 'Set permissions <br>- global (for all) or <br>- for transactions, assets, allocations and account separately');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_GLOBAL_VIEW', 'Permissions global to view');
-\define('_AM_WGSIMPLEACC_PERMISSIONS_GLOBAL_SUBMIT', 'Permissions global to submit');
-\define('_AM_WGSIMPLEACC_PERMISSIONS_GLOBAL_APPROVE', 'Permissions global to approve');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_GLOBAL_SUBMIT', 'Permissions global to submit (only recommended for webmaster)');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_GLOBAL_APPROVE', 'Permissions global to approve (only recommended for webmaster)');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_TRANSACTION_SUBMIT', 'Permissions to submit transaction');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_TRANSACTION_APPROVE', 'Permissions to approve submitted transaction');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_TRANSACTION_VIEW', 'Permissions to view transactions');
@@ -107,6 +110,8 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_PERMISSIONS_TRATEMPLATE_VIEW', 'Permissions to view templates');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_OUTTEMPLATE_SUBMIT', 'Permissions to submit output templates');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_OUTTEMPLATE_VIEW', 'Permissions to view output templates');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_CLIENT_SUBMIT', 'Permissions to submit clients');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_CLIENT_VIEW', 'Permissions to view clients');
 // ---------------- Admin Others ----------------
 \define('_AM_WGSIMPLEACC_ABOUT_MAKE_DONATION', 'Submit');
 \define('_AM_WGSIMPLEACC_SUPPORT_FORUM', 'Support Forum');

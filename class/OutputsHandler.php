@@ -144,17 +144,21 @@ class OutputsHandler extends \XoopsPersistableObjectHandler
             $accColor = $accountsObj->getVar('acc_color');
             $amountTotal = ($sumIn - $sumOut);
             $ret[] = [
-                'name' => $accName,
-                'total_val' => $amountTotal,
-                'total' => Utility::FloatToString($amountTotal),
-                'amountin_val' => $sumIn,
-                'amountin' => Utility::FloatToString($sumIn),
+                'weight'        => $accountsObj->getVar('acc_weight'),
+                'level'         =>  $accountsObj->getVar('acc_level'),
+                'level_symbol'  => \str_repeat( '- ' , $accountsObj->getVar('acc_level')),
+                'name'          => $accName,
+                'total_val'     => $amountTotal,
+                'total'         => Utility::FloatToString($amountTotal),
+                'amountin_val'  => $sumIn,
+                'amountin'      => Utility::FloatToString($sumIn),
                 'amountout_val' => $sumOut,
-                'amountout' => Utility::FloatToString($sumOut),
-                'date' => \time(),
-                'color' => $accColor
+                'amountout'     => Utility::FloatToString($sumOut),
+                'date'          => \time(),
+                'color'         => $accColor
             ];
         }
+        sort($ret);
 
         return $ret;
 
@@ -182,19 +186,22 @@ class OutputsHandler extends \XoopsPersistableObjectHandler
         $result = $xoopsDB->query($sql);
         while (list($balAllid, $sumIn, $sumOut) = $xoopsDB->fetchRow($result)) {
             $allocationsObj = $allocationsHandler->get($balAllid);
-            $allName = $allocationsObj->getVar('all_name');
             $amountTotal = ($sumIn - $sumOut);
             $ret[] = [
-                'name' => $allName,
-                'total_val' => $amountTotal,
-                'total' => Utility::FloatToString($amountTotal),
-                'amountin_val' => $sumIn,
-                'amountin' => Utility::FloatToString($sumIn),
+                'weight'        => $allocationsObj->getVar('all_weight'),
+                'level'         => $allocationsObj->getVar('all_level'),
+                'level_symbol'  => \str_repeat( '- ' , $allocationsObj->getVar('all_level')),
+                'name'          => $allocationsObj->getVar('all_name'),
+                'total_val'     => $amountTotal,
+                'total'         => Utility::FloatToString($amountTotal),
+                'amountin_val'  => $sumIn,
+                'amountin'      => Utility::FloatToString($sumIn),
                 'amountout_val' => $sumOut,
-                'amountout' => Utility::FloatToString($sumOut),
-                'date' => \time()
+                'amountout'     => Utility::FloatToString($sumOut),
+                'date'          => \time()
             ];
         }
+        sort($ret);
 
         return $ret;
 
@@ -227,6 +234,8 @@ class OutputsHandler extends \XoopsPersistableObjectHandler
             foreach (\array_keys($allocationsAll) as $i) {
                 $allId = $allocationsAll[$i]->getVar('all_id');
                 $allName = $allocationsAll[$i]->getVar('all_name');
+                $allWeight = $allocationsAll[$i]->getVar('all_weight');
+                $allLevel = $allocationsAll[$i]->getVar('all_level');
                 $allocations_list[] = ['all_id' => $allId, 'all_name' => $allName];
                 $sumAmountin = 0;
                 $sumAmountout = 0;
@@ -244,21 +253,23 @@ class OutputsHandler extends \XoopsPersistableObjectHandler
                     unset($crTransactions);
                 }
                 $ret[] = [
-                    'name' => $allName,
-                    'total_val' => ($sumAmountin - $sumAmountout),
-                    'total' => Utility::FloatToString(($sumAmountin - $sumAmountout)),
-                    'amountin_val' => $sumAmountin,
-                    'amountin' => Utility::FloatToString($sumAmountin),
+                    'weight'        => $allWeight,
+                    'level'         =>  $allLevel,
+                    'level_symbol'  => \str_repeat( '- ' , $allLevel),
+                    'name'          => $allName,
+                    'total_val'     => ($sumAmountin - $sumAmountout),
+                    'total'         => Utility::FloatToString(($sumAmountin - $sumAmountout)),
+                    'amountin_val'  => $sumAmountin,
+                    'amountin'      => Utility::FloatToString($sumAmountin),
                     'amountout_val' => $sumAmountout,
-                    'amountout' => Utility::FloatToString($sumAmountout),
-                    'date' => \time()
+                    'amountout'     => Utility::FloatToString($sumAmountout),
+                    'date'          => \time()
                 ];
             }
         }
         unset($crAllocations);
+        sort($ret);
 
         return $ret;
     }
-
-
 }

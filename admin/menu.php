@@ -94,6 +94,13 @@ $adminmenu[] = [
     'link' => 'admin/outtemplates.php',
     'icon' => 'assets/icons/32/outtemplates.png',
 ];
+if ($helper->getConfig('use_clients')) {
+    $adminmenu[] = [
+        'title' => \_MI_WGSIMPLEACC_ADMENU15,
+        'link' => 'admin/clients.php',
+        'icon' => 'assets/icons/32/clients.png',
+    ];
+}
 $adminmenu[] = [
     'title' => \_MI_WGSIMPLEACC_ADMENU12,
     'link' => 'admin/permissions.php',

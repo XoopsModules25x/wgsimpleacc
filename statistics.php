@@ -75,7 +75,7 @@ switch ($op) {
         if ($transactionsCount > 0) {
             $GLOBALS['xoopsTpl']->assign('header_transactions', \_MA_WGSIMPLEACC_TRANSACTIONS_OVERVIEW );
             //get all allocations
-            $crAllocations           = new \CriteriaCompo();
+            $crAllocations = new \CriteriaCompo();
             if ($allPid > 0) {
                 $crAllocations->add(new \Criteria('all_pid', $allPid));
             }
@@ -88,6 +88,8 @@ switch ($op) {
             $transactions_datain = '';
             $transactions_dataout = '';
             $transactions_labels = '';
+            $transactions_total_in = 0;
+            $transactions_total_out = 0;
             $tra_allocs_list = [];
             $strFilter = "&amp;filterYear=$filterYear&amp;filterType=$filterType";
             $strFilter .= "&amp;filterMonthFrom=$filterMonthFrom&amp;filterYearFrom=$filterYearFrom";
@@ -130,6 +132,8 @@ switch ($op) {
                     foreach (\array_keys($transactionsAll) as $i) {
                         $sumAmountin += $transactionsAll[$i]->getVar('tra_amountin');
                         $sumAmountout += $transactionsAll[$i]->getVar('tra_amountout');
+                        $transactions_total_in += $transactionsAll[$i]->getVar('tra_amountin');
+                        $transactions_total_out += $transactionsAll[$i]->getVar('tra_amountout');
                     }
 
                     if ((float)$sumAmountin > 0 || (float)$sumAmountout > 0) {
@@ -204,6 +208,8 @@ switch ($op) {
                             foreach (\array_keys($transactionsAll) as $i) {
                                 $sumAmountin += $transactionsAll[$i]->getVar('tra_amountin');
                                 $sumAmountout += $transactionsAll[$i]->getVar('tra_amountout');
+                                $transactions_total_in += $transactionsAll[$i]->getVar('tra_amountin');
+                                $transactions_total_out += $transactionsAll[$i]->getVar('tra_amountout');
                             }
                         }
                         unset($crTransactions);
@@ -215,10 +221,16 @@ switch ($op) {
                 }
             }
             unset($crAllocations);
+
             $GLOBALS['xoopsTpl']->assign('tra_allocs_list', $tra_allocs_list);
-            $GLOBALS['xoopsTpl']->assign('transactions_datain', $transactions_datain);
-            $GLOBALS['xoopsTpl']->assign('transactions_dataout', $transactions_dataout);
+            $GLOBALS['xoopsTpl']->assign('transactions_datain1', $transactions_datain);
+            $GLOBALS['xoopsTpl']->assign('transactions_dataout1', $transactions_dataout);
             $GLOBALS['xoopsTpl']->assign('transactions_labels', $transactions_labels);
+            $GLOBALS['xoopsTpl']->assign('transactions_total_in', Utility::FloatToString($transactions_total_in));
+            $GLOBALS['xoopsTpl']->assign('transactions_total_out', Utility::FloatToString($transactions_total_out));
+            $GLOBALS['xoopsTpl']->assign('transactions_total', Utility::FloatToString($transactions_total_in - $transactions_total_out));
+            $GLOBALS['xoopsTpl']->assign('label_datain1', _MA_WGSIMPLEACC_TRANSACTIONS_INCOMES . ' (' . _MA_WGSIMPLEACC_STATUS_APPROVED .')');
+            $GLOBALS['xoopsTpl']->assign('label_dataout1', _MA_WGSIMPLEACC_TRANSACTIONS_EXPENSES . ' (' . _MA_WGSIMPLEACC_STATUS_APPROVED .')');
         }
         unset($count);
 
@@ -233,7 +245,7 @@ switch ($op) {
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ALLOCATIONS];
         break;
     case 'assets':
-        $GLOBALS['xoopsTpl']->assign('header_assets_pie', \_MA_WGSIMPLEACC_ASSETS_CURRENT);
+        $GLOBALS['xoopsTpl']->assign('header_assets_pie', \_MA_WGSIMPLEACC_ASSETSTOTAL_CURRENT);
         $GLOBALS['xoopsTpl']->assign('header_assets_line', \_MA_WGSIMPLEACC_ASSETS_TIMELINE);
         //****************************
         // handle assets chart current

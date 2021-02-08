@@ -73,17 +73,17 @@ switch ($op) {
             default:
                 //zip, csv, txt, xlsx, docx
                 header("Content-Type: $fileMimetype");
-                header('Content-Disposition: attachment; filename="' . $filePath . '"');
-                $result = @readfile($dir . $file);
+                header('Content-Disposition: attachment; filename="' . $filName . '"');
+                $result = @readfile($filePath);
                 if ($result === FALSE) {
-                    throw new Exception('Cannot access ' . $dir . $file .' to read.');
+                    throw new Exception('Cannot access ' . $filePath .' to read.');
                 }
                 exit;
                 break;
             case 'application/pdf':
                 // Header content type
                 header('Content-type: application/pdf');
-                header('Content-Disposition: inline; filename="' . $filePath . '"');
+                header('Content-Disposition: inline; filename="' . $filName . '"');
                 header('Content-Transfer-Encoding: binary');
                 header('Accept-Ranges: bytes');
                 // Read the file
@@ -184,29 +184,16 @@ switch ($op) {
             require_once \XOOPS_ROOT_PATH . '/class/uploader.php';
             $filename    = $_FILES['fil_name']['name'];
             $imgMimetype = $_FILES['fil_name']['type'];
-            /*
-            if (!\file_exists($_FILES['fil_name']['tmp_name'])) {
-                // Get Form Error
-                $GLOBALS['xoopsTpl']->assign('error', \_MA_WGSIMPLEACC_FILES_UPLOAD_ERROR);
-                $formFiles = $filesObj->getFormFiles($filTraid);
-                $GLOBALS['xoopsTpl']->assign('formFiles', $formFiles->render());
-                if ($uploadByApp) {
-                    $filesObj = $filesHandler->create();
-                    $formFilesTemp = $filesObj->getFormTemp($filTraid);
-                    $GLOBALS['xoopsTpl']->assign('formFilesTemp', $formFilesTemp->render());
-                }
-                break;
-            }*/
             $uploader = new \XoopsMediaUploader(WGSIMPLEACC_UPLOAD_FILES_PATH . '/',
                 $helper->getConfig('mimetypes_file'),
                 $helper->getConfig('maxsize_file'), null, null);
             if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
-                $extension = \preg_replace('/^.+\.([^.]+)$/sU', '', $filename);
-                $imgName = \str_replace(' ', '', $filename) . '.' . $extension;
-                $uploader->setPrefix($imgName);
+                $imgName = substr($filename, 0, strrpos($filename, '.'));
+                $imgName = \preg_replace('/[^A-Za-z0-9\-]/', '_', $imgName);
+                $uploader->setPrefix($imgName . '_');
                 $uploader->fetchMedia($_POST['xoops_upload_file'][0]);
                 if (!$uploader->upload()) {
-                    $errors = $uploader->getErrors();
+                    $uploaderErrors = $uploader->getErrors();
                 } else {
                     $savedFilename = $uploader->getSavedFileName();
                     $maxwidth  = (int)$helper->getConfig('maxwidth_image');
@@ -252,7 +239,7 @@ switch ($op) {
 			if ('' !== $uploaderErrors) {
 				\redirect_header('files.php?op=edit&fil_id=' . $newFilId, 5, $uploaderErrors);
 			} else {
-				\redirect_header('transactions.php?op=list', 2, \_MA_WGSIMPLEACC_FORM_OK);
+				\redirect_header('files.php?op=list&amp;fil_traid=' . $filTraid, 2, \_MA_WGSIMPLEACC_FORM_OK);
 			}
 		}
 		// Get Form Error
@@ -265,18 +252,7 @@ switch ($op) {
             $GLOBALS['xoopsTpl']->assign('formFilesTemp', $formFilesTemp->render());
         }
 		break;
-	/*
-	case 'new':
-		// Check permissions
-		if (!$permissionsHandler->getPermGlobalSubmit()) {
-			\redirect_header('files.php?op=list', 3, _NOPERM);
-		}
-		// Form Create
-		$filesObj = $filesHandler->create();
-		$form = $filesObj->getFormFiles();
-		$GLOBALS['xoopsTpl']->assign('form', $form->render());
-		break;
-	*/
+
 	case 'edit':
 		// Check permissions
 		if (!$permissionsHandler->getPermTransactionsSubmit()) {
@@ -303,12 +279,14 @@ switch ($op) {
             \redirect_header('files.php?op=list', 3, _NOPERM);
         }
 		$filName = $filesObj->getVar('fil_name');
+        $filTraid = $filesObj->getVar('fil_traid');
 		if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
 			if (!$GLOBALS['xoopsSecurity']->check()) {
 				\redirect_header('files.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
 			}
+            \unlink(\XOOPS_ROOT_PATH . '/uploads/wgsimpleacc/files/' . $filName);
 			if ($filesHandler->delete($filesObj)) {
-				\redirect_header('files.php', 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
+				\redirect_header('files.php?op=list&amp;fil_traid=' . $filTraid, 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
 			} else {
 				$GLOBALS['xoopsTpl']->assign('error', $filesObj->getHtmlErrors());
 			}

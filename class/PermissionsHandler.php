@@ -590,4 +590,59 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
         }
         return false;
     }
+
+    /**
+     * @public function getPermClientsSubmit
+     * returns right for submit Clients
+     * @param null
+     * @return bool
+     */
+    public function getPermClientsSubmit()
+    {
+
+        if ($this->getPermGlobalApprove()) {
+            return true;
+        }
+
+        return $this->getPermSubmit(Constants::PERM_CLIENTS_SUBMIT);
+    }
+
+    /**
+     * @public function getPermClientsEdit
+     * returns right for edit/delete Clients
+     *  - User must have perm to submit and must be owner
+     * @param $cliSubmitter
+     * @return bool
+     */
+    public function getPermClientsEdit($cliSubmitter)
+    {
+        global $xoopsUser, $xoopsModule;
+
+        if ($this->getPermGlobalApprove()) {
+            return true;
+        }
+        $currentuid = 0;
+        if (isset($xoopsUser) && \is_object($xoopsUser)) {
+            if ($xoopsUser->isAdmin($xoopsModule->mid())) {
+                return true;
+            }
+            $currentuid = $xoopsUser->uid();
+        }
+        if ($this->getPermClientsSubmit() && $currentuid == $cliSubmitter) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @public function getPermClientsView
+     * returns right for view Clients
+     * @param null
+     * @return bool
+     */
+    public function getPermClientsView()
+    {
+        return $this->getPermView(Constants::PERM_TRANSACTIONS_VIEW);
+    }
 }

@@ -4,6 +4,9 @@
 	<td><{$template.accid}></td>
 	<td><{$template.allid}></td>
 	<td><{$template.asid}></td>
+	<{if $useClients|default:''}>
+		<td><{$template.cliid}></td>
+	<{/if}>
 	<td><{$template.class_text}></td>
 	<td><{$template.amountin}></td>
 	<td><{$template.amountout}></td>

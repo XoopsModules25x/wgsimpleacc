@@ -114,11 +114,12 @@ switch ($op) {
             $transactionsObj->setVar('tra_amountout', 0);
         }
 		$transactionsObj->setVar('tra_taxid', Request::getInt('tra_taxid', 0));
+        $transactionsObj->setVar('tra_asid', Request::getInt('tra_asid', ''));
+        $transactionsObj->setVar('tra_balid', Request::getInt('tra_balid', ''));
+        $transactionsObj->setVar('tra_cliid', Request::getInt('tra_cliid', 0));
 		$transactionsObj->setVar('tra_status', Request::getInt('tra_status', 0));
 		$transactionsObj->setVar('tra_comments', Request::getInt('tra_comments', 0));
         $transactionsObj->setVar('tra_class', $traClass);
-        $transactionsObj->setVar('tra_asid', Request::getString('tra_asid', ''));
-        $transactionsObj->setVar('tra_balid', Request::getString('tra_balid', ''));
         $transactionsObj->setVar('tra_hist', $traHist);
 		$transactionDatecreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('tra_datecreated'));
 		$transactionsObj->setVar('tra_datecreated', $transactionDatecreatedObj->getTimestamp());

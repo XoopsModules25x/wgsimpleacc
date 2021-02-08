@@ -27,11 +27,16 @@ require dirname(__DIR__, 2) . '/mainfile.php';
 require __DIR__ . '/include/common.php';
 
 $moduleDirName = \basename(__DIR__);
+
+$helper = Helper::getInstance();
+
 // Breadcrumbs
 $xoBreadcrumbs = [];
-$xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_TITLE, 'link' => WGSIMPLEACC_URL . '/'];
+$mname = $helper->getConfig('mname_breadcrumbs');
+if ('' !== $mname) {
+    $xoBreadcrumbs[] = ['title' => $mname, 'link' => WGSIMPLEACC_URL . '/'];
+}
 // Get instance of module
-$helper = Helper::getInstance();
 $accountsHandler = $helper->getHandler('Accounts');
 $transactionsHandler = $helper->getHandler('Transactions');
 $allocationsHandler = $helper->getHandler('Allocations');
@@ -45,6 +50,7 @@ $tratemplatesHandler = $helper->getHandler('Tratemplates');
 $outtemplatesHandler = $helper->getHandler('Outtemplates');
 $outputsHandler = $helper->getHandler('Outputs');
 $trahistoriesHandler = $helper->getHandler('Trahistories');
+$clientsHandler = $helper->getHandler('Clients');
 // 
 $myts = MyTextSanitizer::getInstance();
 // Default Css Style

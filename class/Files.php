@@ -32,7 +32,7 @@ use XoopsModules\Wgsimpleacc;
  */
 class Files extends \XoopsObject
 {
-	/**
+    /**
 	 * Constructor
 	 *
 	 * @param null

@@ -82,6 +82,14 @@
 					</td>
 				</tr>
 			<{/if}>
+			<tr>
+				<th class="col-sm-2"><{$smarty.const._MA_WGSIMPLEACC_DATECREATED}></th>
+				<td class="col-sm-10"><{$transaction.datecreated}></td>
+			</tr>
+			<tr>
+				<th class="col-sm-2"><{$smarty.const._MA_WGSIMPLEACC_SUBMITTER}></th>
+				<td class="col-sm-10"><{$transaction.submitter}></td>
+			</tr>
 		</tbody>
 		<tfoot>
 			<tr>

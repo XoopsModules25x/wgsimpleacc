@@ -88,7 +88,7 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('balancesCalc', true);
 
         //get all assets
-        $assetsCurrent = $assetsHandler->getAssetsValues($balanceFrom, $balanceTo);
+        $assetsCurrent = $assetsHandler->getAssetsValues($balanceFrom, $balanceTo, true);
         $assetsCount = \count($assetsCurrent);
         if ($assetsCount > 0) {
             $info = \str_replace('%f', $balFrom, \_MA_WGSIMPLEACC_BALANCE_CALC_PERIOD);
@@ -114,17 +114,61 @@ switch ($op) {
 
 	case 'list':
 	default:
+
         $GLOBALS['xoopsTpl']->assign('balancesList', true);
+        $balances = [];
+        $sql = 'SELECT `bal_from`, `bal_to`, Sum(`bal_amountstart`) AS Sum_bal_amountstart, Sum(`bal_amountend`) AS Sum_bal_amountend, bal_datecreated, bal_submitter ';
+        $sql .= 'FROM ' . $GLOBALS['xoopsDB']->prefix('wgsimpleacc_balances') . ' ';
+        $sql .= 'GROUP BY ' . $GLOBALS['xoopsDB']->prefix('wgsimpleacc_balances') . '.bal_from, ';
+        $sql .= $GLOBALS['xoopsDB']->prefix('wgsimpleacc_balances') . '.bal_to, ';
+        $sql .= $GLOBALS['xoopsDB']->prefix('wgsimpleacc_balances') . '.bal_datecreated, ';
+        $sql .= $GLOBALS['xoopsDB']->prefix('wgsimpleacc_balances') . '.bal_submitter ';
+        $sql .= 'ORDER BY ' . $GLOBALS['xoopsDB']->prefix('wgsimpleacc_balances') . '.bal_from DESC;';
+        $result = $GLOBALS['xoopsDB']->query($sql);
+        while (list($balFrom, $balTo, $balAmountStart, $balAmountEnd, $balDatecreated, $balSubmitter) = $GLOBALS['xoopsDB']->fetchRow($result)) {
+            $balFromText = \formatTimestamp($balFrom, 's');
+            $balToText   = \formatTimestamp($balTo, 's');
+            $balances[] = [
+                'bal_from' => $balFrom,
+                'from' => $balFromText,
+                'bal_to' => $balTo,
+                'to' => $balToText,
+                'amountstart' => Utility::FloatToString($balAmountStart),
+                'amountend' => Utility::FloatToString($balAmountEnd),
+                'datecreated' => \formatTimestamp($balDatecreated, 's'),
+                'submitter' => \XoopsUser::getUnameFromId($balSubmitter)
+            ];
+        }
+        $balancesCount = \count($balances);
+        $GLOBALS['xoopsTpl']->assign('balancesCount', $balancesCount);
+        $GLOBALS['xoopsTpl']->assign('balances', $balances);
+        break;
+
+    case 'details':
+        $GLOBALS['xoopsTpl']->assign('balanceDetails', true);
 	    $crBalances = new \CriteriaCompo();
+        $balanceFrom = Request::getInt('balanceFrom');
+        $balanceTo   = Request::getInt('balanceTo');
+        $crBalances->add(new \Criteria('bal_from', $balanceFrom));
+        $crBalances->add(new \Criteria('bal_to', $balanceTo));
 		$balancesCount = $balancesHandler->getCount($crBalances);
 		$GLOBALS['xoopsTpl']->assign('balancesCount', $balancesCount);
-		$balancesAll = $balancesHandler->getAllBalances($start, $limit);
+		$balancesAll = $balancesHandler->getAll($crBalances);
 		if ($balancesCount > 0) {
 			$balances = [];
 			// Get All Balances
+            $amountStartTotal = 0;
+            $amountEndTotal = 0;
 			foreach (\array_keys($balancesAll) as $i) {
 				$balances[$i] = $balancesAll[$i]->getValuesBalances();
+                $amountStartTotal += $balances[$i]['bal_amountstart'];
+                $amountEndTotal += $balances[$i]['bal_amountend'];
 			}
+            $balances[$i + 1] = [
+                'from' => \_MA_WGSIMPLEACC_SUMS,
+                'amountstart' => Utility::FloatToString($amountStartTotal),
+                'amountend' => Utility::FloatToString($amountEndTotal)
+                ];
 			$GLOBALS['xoopsTpl']->assign('balances', $balances);
 			unset($balances);
 			// Display Navigation
@@ -141,6 +185,7 @@ switch ($op) {
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_BALANCES];
 		break;
+
 	case 'save':
         // Check permissions
         if (!$permissionsHandler->getPermBalancesSubmit()) {
@@ -174,6 +219,7 @@ switch ($op) {
         //get all assets
         $assetsCurrent = $assetsHandler->getAssetsValues($balanceFrom, $balanceTo);
         $assetsCount = \count($assetsCurrent);
+        $balDatecreated = \time(); //all balances made at once must have same time
         foreach ($assetsCurrent as $asset) {
             $balancesObj = $balancesHandler->create();
             $balancesObj->setVar('bal_from', $balanceFrom);
@@ -183,7 +229,7 @@ switch ($op) {
             $balancesObj->setVar('bal_amountstart', $asset['amount_start_val']);
             $balancesObj->setVar('bal_amountend', $asset['amount_end_val']);
             $balancesObj->setVar('bal_status', Request::getInt('bal_status', Constants::STATUS_APPROVED));
-            $balancesObj->setVar('bal_datecreated', \time());
+            $balancesObj->setVar('bal_datecreated', $balDatecreated);
             $balancesObj->setVar('bal_submitter', $submitter);
             // Insert Data
             if ($balancesHandler->insert($balancesObj)) {
@@ -226,16 +272,15 @@ switch ($op) {
             }
 		}
         // redirect after insert
-        if ($errors > 0) {
-            \redirect_header('balances.php', 2, \_MA_WGSIMPLEACC_BALANCE_ERRORS);
-        } else {
+        if (0 === $errors) {
             \redirect_header('balances.php', 2, \_MA_WGSIMPLEACC_FORM_OK);
         }
 		// Get Form Error
-		$GLOBALS['xoopsTpl']->assign('error', $balancesObj->getHtmlErrors());
+		$GLOBALS['xoopsTpl']->assign('error', \_MA_WGSIMPLEACC_BALANCE_ERRORS . $balancesObj->getHtmlErrors());
 		$form = $balancesObj->getFormBalances();
 		$GLOBALS['xoopsTpl']->assign('form', $form->render());
 		break;
+
 	case 'new':
         // Check permissions
         if (!$permissionsHandler->getPermBalancesSubmit()) {
@@ -250,58 +295,6 @@ switch ($op) {
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_BALANCES, 'link' => 'balances.php?op=list'];
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_BALANCE_SUBMIT];
 		break;
-	/*
-	case 'edit':
-		// Check permissions
-		if (!$permissionsHandler->getPermGlobalSubmit()) {
-			\redirect_header('balances.php?op=list', 3, _NOPERM);
-		}
-		// Check params
-		if (0 == $balId) {
-			\redirect_header('balances.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
-		}
-		// Get Form
-		$balancesObj = $balancesHandler->get($balId);
-		$form = $balancesObj->getFormBalances();
-		$GLOBALS['xoopsTpl']->assign('form', $form->render());
-		break;
-
-	case 'delete':
-		// Check permissions
-		if (!$permissionsHandler->getPermGlobalSubmit()) {
-			\redirect_header('balances.php?op=list', 3, _NOPERM);
-		}
-		// Check params
-		if (0 == $balId) {
-			\redirect_header('balances.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
-		}
-		$balancesObj = $balancesHandler->get($balId);
-		$balFrom = $balancesObj->getVar('bal_from');
-		if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
-			if (!$GLOBALS['xoopsSecurity']->check()) {
-				\redirect_header('balances.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
-			}
-			if ($balancesHandler->delete($balancesObj)) {
-				// Event delete notification
-				$tags = [];
-				$tags['ITEM_NAME'] = $balFrom;
-				$notificationHandler = \xoops_getHandler('notification');
-				$notificationHandler->triggerEvent('global', 0, 'global_delete', $tags);
-				$notificationHandler->triggerEvent('balances', $balId, 'balance_delete', $tags);
-				\redirect_header('balances.php', 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
-			} else {
-				$GLOBALS['xoopsTpl']->assign('error', $balancesObj->getHtmlErrors());
-			}
-		} else {
-			$xoopsconfirm = new Common\XoopsConfirm(
-				['ok' => 1, 'bal_id' => $balId, 'op' => 'delete'],
-				$_SERVER['REQUEST_URI'],
-				\sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $balancesObj->getVar('bal_from')));
-			$form = $xoopsconfirm->getFormXoopsConfirm();
-			$GLOBALS['xoopsTpl']->assign('form', $form->render());
-		}
-		break;
-	*/
 }
 
 // Keywords

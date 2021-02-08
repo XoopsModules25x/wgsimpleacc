@@ -41,6 +41,7 @@ $countTaxes = $taxesHandler->getCount();
 $countBalances = $balancesHandler->getCount();
 $countTratemplates = $tratemplatesHandler->getCount();
 $countOuttemplates = $outtemplatesHandler->getCount();
+$countClients = $clientsHandler->getCount();
 
 // InfoBox Statistics
 $adminObject->addInfoBox(\_AM_WGSIMPLEACC_STATISTICS);
@@ -56,6 +57,7 @@ $adminObject->addInfoBoxLine(\sprintf( '<label>' . \_AM_WGSIMPLEACC_THEREARE_TAX
 $adminObject->addInfoBoxLine(\sprintf( '<label>' . \_AM_WGSIMPLEACC_THEREARE_BALANCES . '</label>', $countBalances));
 $adminObject->addInfoBoxLine(\sprintf( '<label>' . \_AM_WGSIMPLEACC_THEREARE_TRATEMPLATES . '</label>', $countTratemplates));
 $adminObject->addInfoBoxLine(\sprintf( '<label>' . \_AM_WGSIMPLEACC_THEREARE_OUTTEMPLATES . '</label>', $countOuttemplates));
+$adminObject->addInfoBoxLine(\sprintf( '<label>' . \_AM_WGSIMPLEACC_THEREARE_CLIENTS . '</label>', $countClients));
 // Upload Folders
 $configurator = new Common\Configurator();
 if ($configurator->uploadFolders && \is_array($configurator->uploadFolders)) {

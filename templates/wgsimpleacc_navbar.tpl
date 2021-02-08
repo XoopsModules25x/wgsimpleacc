@@ -48,6 +48,24 @@
                             <{/if}>
                         </li>
                     <{/if}>
+                    <!-- Clients -->
+                    <{if $useClients && $permClientsView}>
+                        <li>
+                            <{if $permClientsSubmit}>
+                            <a href="#"><i class="fa fa-users fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_CLIENTS}><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="clients.php?op=list"><i class="fa fa-list-ol fa-fw"></i> <{$smarty.const._MA_WGSIMPLEACC_CLIENTS_LIST}></a>
+                                </li>
+                                <li>
+                                    <a href="clients.php?op=new"><i class="fa fa-plus-square fa-fw"></i> <{$smarty.const._MA_WGSIMPLEACC_CLIENT_SUBMIT}></a>
+                                </li>
+                            </ul>
+                            <{else}>
+                            <a href="clients.php?op=list"><i class="fa fa-users fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_CLIENTS_LIST}></a>
+                            <{/if}>
+                        </li>
+                    <{/if}>
                     <!-- Allocations -->
                     <{if $permAllocationsView}>
                         <li>

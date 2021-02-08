@@ -1,6 +1,5 @@
 <i id='filId_<{$file.fil_id}>'></i>
-<div class='panel-heading'>
-</div>
+<h3><{$smarty.const._MA_WGSIMPLEACC_FILE_DETAILS}></h3>
 <div class='panel-body'>
     <{foreach item=file from=$files}>                              
         <div class='col-sm-3 left'><{$smarty.const._MA_WGSIMPLEACC_FILE_TRAID}></div><div class='col-sm-9'><{$file.traid}></div>

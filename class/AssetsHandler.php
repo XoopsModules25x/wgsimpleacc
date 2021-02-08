@@ -191,11 +191,12 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get value of all assets for a period
-     * @param $dateFrom
-     * @param $dateTo
+     * @param      $dateFrom
+     * @param      $dateTo
+     * @param bool $includeSum
      * @return array
      */
-    public function getAssetsValues($dateFrom, $dateTo)
+    public function getAssetsValues($dateFrom, $dateTo, $includeSum = false, $onlyApproved = false)
     {
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $transactionsHandler = $helper->getHandler('Transactions');
@@ -204,12 +205,15 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
         $currenciesHandler = $helper->getHandler('Currencies');
 
         $ret = [];
+        $sumAmountStartTotal = (float)0;
+        $sumAmountEndTotal   = (float)0;
         $balCurid = $currenciesHandler->getPrimaryCurrency() > 0 ? $currenciesHandler->getPrimaryCurrency() : 0;
 
         $assetsAll = $assetsHandler->getAll();
         foreach (\array_keys($assetsAll) as $i) {
             $asId = $assetsAll[$i]->getVar('as_id');
             $asName = $assetsAll[$i]->getVar('as_name');
+            $asColor = $assetsAll[$i]->getVar('as_color');
             $crBalances = new \CriteriaCompo();
             $crBalances->add(new \Criteria('bal_asid', $asId));
             $crBalances->setSort('bal_datecreated');
@@ -229,6 +233,9 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
             $crTransactions->add(new \Criteria('tra_asid', $asId));
             $crTransactions->add(new \Criteria('tra_date', $dateFrom, '>='));
             $crTransactions->add(new \Criteria('tra_date', $dateTo, '<='));
+            if ($onlyApproved) {
+                $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_APPROVED, '>='));
+            }
             $transactionsCount = $transactionsHandler->getCount($crTransactions);
             $transactionsAll   = $transactionsHandler->getAll($crTransactions);
             if ($transactionsCount > 0) {
@@ -241,6 +248,8 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
             unset($crTransactions);
             unset($crBalances);
             $balAmountEnd = $balAmountStart - $sumAmountout + $sumAmountin;
+            $sumAmountStartTotal += $balAmountStart;
+            $sumAmountEndTotal += $balAmountEnd;
             $ret[] = [
                 'id' => $asId,
                 'name' => $asName,
@@ -249,10 +258,23 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
                 'amount_start' => Utility::FloatToString($balAmountStart),
                 'amount_end_val' => $balAmountEnd,
                 'amount_end' => Utility::FloatToString($balAmountEnd),
+                'amount_diff' => $balAmountEnd - $balAmountStart,
                 'curid' => $balCurid,
+                'color' => $asColor,
             ];
         }
-
+        if ($includeSum) {
+            $ret[] = [
+                'id' => 0,
+                'name' => _MA_WGSIMPLEACC_SUMS,
+                'date' => 0,
+                'amount_start_val' => $sumAmountStartTotal,
+                'amount_start' => Utility::FloatToString($sumAmountStartTotal),
+                'amount_end_val' => $sumAmountEndTotal,
+                'amount_end' => Utility::FloatToString($sumAmountEndTotal),
+                'curid' => 0,
+            ];
+        }
         return $ret;
     }
 
