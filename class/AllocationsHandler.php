@@ -106,11 +106,11 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
 
 	/**
 	 * Get Criteria Allocations
-	 * @param        $crAllocations
-	 * @param int    $start
-	 * @param int    $limit
-	 * @param string $sort
-	 * @param string $order
+	 * @param $crAllocations
+	 * @param $start
+	 * @param $limit
+	 * @param $sort
+	 * @param $order
 	 * @return int
 	 */
 	private function getAllocationsCriteria($crAllocations, $start, $limit, $sort, $order)
@@ -124,7 +124,7 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get all allocations for selectbox
-     * @return array
+     * @return array|false
      */
     public function getSelectTreeOfAllocations()
     {
@@ -305,7 +305,7 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
     /**
     * Get all sub allocations for given allocation
     * @param $allId
-    * @return array
+    * @return array|false
     */
     public function getSubsOfAllocations($allId)
     {

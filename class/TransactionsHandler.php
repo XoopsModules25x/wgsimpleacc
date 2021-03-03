@@ -276,13 +276,16 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
      */
     public static function saveHistoryTransactions($traId, $type = "update")
     {
+        global $xoopsUser;
+        $uid = \is_object($xoopsUser) ? $xoopsUser->uid() : 0;
+
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $transactionsHandler = $helper->getHandler('Transactions');
         $transactionsObj = $transactionsHandler->get($traId);
         $traVars = $transactionsObj->getVars();
 
-        $insert = 'INSERT INTO ' . $GLOBALS['xoopsDB']->prefix('wgsimpleacc_trahistories') . ' (hist_datecreated, hist_type';
-        $select = 'SELECT ' . time() . " AS histdatecreated, '$type' AS histtype";
+        $insert = 'INSERT INTO ' . $GLOBALS['xoopsDB']->prefix('wgsimpleacc_trahistories') . ' (hist_datecreated, hist_type, hist_submitter';
+        $select = 'SELECT ' . \time() . " AS histdatecreated, '$type' AS histtype, '$uid' AS histsubmitter";
         $from = ' FROM '. $GLOBALS['xoopsDB']->prefix('wgsimpleacc_transactions');
         $where = " WHERE (tra_id=$traId)";
 

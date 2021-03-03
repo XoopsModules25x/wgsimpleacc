@@ -58,7 +58,7 @@ switch ($op) {
 	default:
         $GLOBALS['xoopsTpl']->assign('showList', true);
         // Breadcrumbs
-        $xoBreadcrumbs[] = ['title' => _MA_WGSIMPLEACC_CLIENTS];
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_CLIENTS];
 
 		$crClients = new \CriteriaCompo();
 		if ($cliId > 0) {
@@ -83,7 +83,7 @@ switch ($op) {
 			unset($clients);
 			// Display Navigation
 			if ($clientsCount > $limit) {
-				include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+				include_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
 				$pagenav = new \XoopsPageNav($clientsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
 				$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
 			}
@@ -125,7 +125,7 @@ switch ($op) {
 		// Insert Data
 		if ($clientsHandler->insert($clientsObj)) {
 			// redirect after insert
-			\redirect_header('clients.php', 2, _MA_WGSIMPLEACC_FORM_OK);
+			\redirect_header('clients.php', 2, \_MA_WGSIMPLEACC_FORM_OK);
 		}
 		// Get Form Error
 		$GLOBALS['xoopsTpl']->assign('error', $clientsObj->getHtmlErrors());
@@ -149,7 +149,7 @@ switch ($op) {
 	case 'edit':
         // Check params
         if (0 == $cliId) {
-            \redirect_header('clients.php?op=list', 3, _MA_WGSIMPLEACC_INVALID_PARAM);
+            \redirect_header('clients.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
         }
         // Get Form
         $clientsObj = $clientsHandler->get($cliId);
@@ -168,7 +168,7 @@ switch ($op) {
 	case 'delete':
         // Check params
         if (0 == $cliId) {
-            \redirect_header('clients.php?op=list', 3, _MA_WGSIMPLEACC_INVALID_PARAM);
+            \redirect_header('clients.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
         }
         // Get Form
         $clientsObj = $clientsHandler->get($cliId);
@@ -183,7 +183,7 @@ switch ($op) {
 				\redirect_header('clients.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
 			}
 			if ($clientsHandler->delete($clientsObj)) {
-				\redirect_header('clients.php', 3, _MA_WGSIMPLEACC_FORM_DELETE_OK);
+				\redirect_header('clients.php', 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
 			} else {
 				$GLOBALS['xoopsTpl']->assign('error', $clientsObj->getHtmlErrors());
 			}
@@ -191,7 +191,7 @@ switch ($op) {
 			$xoopsconfirm = new Common\XoopsConfirm(
 				['ok' => 1, 'cli_id' => $cliId, 'op' => 'delete'],
 				$_SERVER['REQUEST_URI'],
-				\sprintf(_MA_WGSIMPLEACC_FORM_SURE_DELETE, $clientsObj->getVar('cli_name')));
+				\sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $clientsObj->getVar('cli_name')));
 			$form = $xoopsconfirm->getFormXoopsConfirm();
 			$GLOBALS['xoopsTpl']->assign('form', $form->render());
 		}

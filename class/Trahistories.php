@@ -43,6 +43,8 @@ class Trahistories extends \XoopsObject
 		$this->initVar('hist_id', \XOBJ_DTYPE_INT);
         $this->initVar('hist_type', \XOBJ_DTYPE_TXTBOX);
         $this->initVar('hist_datecreated', \XOBJ_DTYPE_INT);
+        $this->initVar('hist_submitter', \XOBJ_DTYPE_INT);
+        $this->initVar('tra_id', \XOBJ_DTYPE_INT);
         $this->initVar('tra_year', \XOBJ_DTYPE_INT);
         $this->initVar('tra_nb', \XOBJ_DTYPE_INT);
 		$this->initVar('tra_desc', \XOBJ_DTYPE_OTHER);
@@ -95,6 +97,7 @@ class Trahistories extends \XoopsObject
         $ret['histid']        = $this->getVar('hist_id');
         $ret['histdate']      = \formatTimestamp($this->getVar('hist_datecreated'), 'm');
         $ret['histtype']      = $this->getVar('hist_type');
+        $ret['histsubmitter'] = \XoopsUser::getUnameFromId($this->getVar('hist_submitter'));
 		$ret['id']            = $this->getVar('tra_id');
         $ret['year']          = $this->getVar('tra_year');
         $ret['nb']            = $this->getVar('tra_nb');

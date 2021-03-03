@@ -23,7 +23,7 @@
 use Xmf\Module\Admin;
 use XoopsModules\Wgsimpleacc\Helper;
 
-include dirname(__DIR__, 3) . '/include/cp_header.php';
+include \dirname(__DIR__, 3) . '/include/cp_header.php';
 require_once \dirname(__DIR__) . '/include/common.php';
 
 $sysPathIcon16   = '../' . $GLOBALS['xoopsModule']->getInfo('sysicons16');
@@ -46,6 +46,7 @@ $tratemplatesHandler = $helper->getHandler('Tratemplates');
 $outtemplatesHandler = $helper->getHandler('Outtemplates');
 $trahistoriesHandler = $helper->getHandler('Trahistories');
 $clientsHandler = $helper->getHandler('Clients');
+$filhistoriesHandler = $helper->getHandler('Filhistories');
 $myts = MyTextSanitizer::getInstance();
 // 
 if (!isset($xoopsTpl) || !\is_object($xoopsTpl)) {

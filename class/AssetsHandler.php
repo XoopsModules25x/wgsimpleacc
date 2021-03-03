@@ -106,11 +106,11 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
 
 	/**
 	 * Get Criteria Assets
-	 * @param        $crAssets
-	 * @param int    $start
-	 * @param int    $limit
-	 * @param string $sort
-	 * @param string $order
+	 * @param $crAssets
+	 * @param $start
+	 * @param $limit
+	 * @param $sort
+	 * @param $order
 	 * @return int
 	 */
 	private function getAssetsCriteria($crAssets, $start, $limit, $sort, $order)
@@ -143,8 +143,9 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
             $assetsObj = $assetsHandler->get($balAsid);
             $asName = $assetsObj->getVar('as_name');
             $asColor = $assetsObj->getVar('as_color');
+            $asIecalc = $assetsObj->getVar('as_iecalc');
             $amountTotal = ($sumIn - $sumOut);
-            $ret[] = ['name' => $asName, 'amount_val' => $amountTotal, 'amount' => Utility::FloatToString($amountTotal), 'date' => \time(), 'color' => $asColor];
+            $ret[] = ['name' => $asName, 'amount_val' => $amountTotal, 'amount' => Utility::FloatToString($amountTotal), 'date' => \time(), 'color' => $asColor, 'iecalc' => $asIecalc];
         }
 
         return $ret;
@@ -194,6 +195,7 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
      * @param      $dateFrom
      * @param      $dateTo
      * @param bool $includeSum
+     * @param bool $onlyApproved
      * @return array
      */
     public function getAssetsValues($dateFrom, $dateTo, $includeSum = false, $onlyApproved = false)
@@ -214,6 +216,7 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
             $asId = $assetsAll[$i]->getVar('as_id');
             $asName = $assetsAll[$i]->getVar('as_name');
             $asColor = $assetsAll[$i]->getVar('as_color');
+            $asIecalc = $assetsAll[$i]->getVar('as_iecalc');
             $crBalances = new \CriteriaCompo();
             $crBalances->add(new \Criteria('bal_asid', $asId));
             $crBalances->setSort('bal_datecreated');
@@ -261,12 +264,13 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
                 'amount_diff' => $balAmountEnd - $balAmountStart,
                 'curid' => $balCurid,
                 'color' => $asColor,
+                'iecalc' => $asIecalc,
             ];
         }
         if ($includeSum) {
             $ret[] = [
                 'id' => 0,
-                'name' => _MA_WGSIMPLEACC_SUMS,
+                'name' => \_MA_WGSIMPLEACC_SUMS,
                 'date' => 0,
                 'amount_start_val' => $sumAmountStartTotal,
                 'amount_start' => Utility::FloatToString($sumAmountStartTotal),

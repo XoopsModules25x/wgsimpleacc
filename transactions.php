@@ -88,7 +88,7 @@ switch ($op) {
 	case 'list':
 	default:
         $GLOBALS['xoopsTpl']->assign('showList', true);
-        $GLOBALS['xoopsTpl']->assign('listHead', _MA_WGSIMPLEACC_TRANSACTIONS_LIST);
+        $GLOBALS['xoopsTpl']->assign('listHead', \_MA_WGSIMPLEACC_TRANSACTIONS_LIST);
         $GLOBALS['xoopsTpl']->assign('permDelete', true);
         if (0 == $traId) {
             //get first and last year
@@ -167,7 +167,7 @@ switch ($op) {
                 $transactions[$i]['editable'] = $permissionsHandler->getPermTransactionsEdit($transactions[$i]['tra_submitter'], $transactions[$i]['tra_status']);
                 $transactions[$i]['waiting'] = (Constants::STATUS_SUBMITTED == $transactions[$i]['tra_status']);
                 if ('' !== (string)$transactions[$i]['tra_remarks']) {
-                    $transactions[$i]['modaltitle'] = str_replace('%s', $transactions[$i]['year_nb'], \_MA_WGSIMPLEACC_MODAL_TRATITLE);
+                    $transactions[$i]['modaltitle'] = \str_replace('%s', $transactions[$i]['year_nb'], \_MA_WGSIMPLEACC_MODAL_TRATITLE);
                 }
 				$keywords[$i] = $transactionsAll[$i]->getVar('tra_desc');
 			}
@@ -185,7 +185,7 @@ switch ($op) {
             $GLOBALS['xoopsTpl']->assign('useFiles', $helper->getConfig('use_files'));
             $GLOBALS['xoopsTpl']->assign('useClients', $helper->getConfig('use_clients'));
 		} else {
-            $GLOBALS['xoopsTpl']->assign('noData', _MA_WGSIMPLEACC_THEREARENT_TRANSACTIONS);
+            $GLOBALS['xoopsTpl']->assign('noData', \_MA_WGSIMPLEACC_THEREARENT_TRANSACTIONS);
         }
         $GLOBALS['xoopsTpl']->assign('traOp',$traOp);
 
@@ -196,7 +196,7 @@ switch ($op) {
 	case 'save':
 		// Security Check
 		if (!$GLOBALS['xoopsSecurity']->check()) {
-			//\redirect_header('transactions.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
+			\redirect_header('transactions.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
 		}
 		// Check permissions
 		if (!$permissionsHandler->getPermTransactionsSubmit()) {
@@ -208,7 +208,9 @@ switch ($op) {
         $createYearNb = false;
 		if ($traId > 0) {
 			$transactionsObj = $transactionsHandler->get($traId);
-            $traHist = $transactionsHandler->saveHistoryTransactions($traId);
+            if ($helper->getConfig('use_trahistories')) {
+                $traHist = $transactionsHandler->saveHistoryTransactions($traId);
+            }
 			if (date('Y', $traDate) != $traYear) {
                 $createYearNb = true;
             }
@@ -397,8 +399,10 @@ switch ($op) {
         if (!$permissionsHandler->getPermTransactionsEdit($traSubmitter, $traStatus)) {
             \redirect_header('transactions.php?op=list', 3, _NOPERM);
         }
-        //create history
-        $transactionsHandler->saveHistoryTransactions($traId, 'delete');
+        if ($helper->getConfig('use_trahistories')) {
+            //create history
+            $transactionsHandler->saveHistoryTransactions($traId, 'delete');
+        }
 		$traDesc = $transactionsObj->getVar('tra_desc');
 		if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
 			if (!$GLOBALS['xoopsSecurity']->check()) {
@@ -432,7 +436,7 @@ switch ($op) {
     case 'listhist':
         $GLOBALS['xoopsTpl']->assign('showList', true);
         $GLOBALS['xoopsTpl']->assign('listHist', true);
-        $GLOBALS['xoopsTpl']->assign('listHead', _MA_WGSIMPLEACC_TRAHISTORY_DELETED);
+        $GLOBALS['xoopsTpl']->assign('listHead', \_MA_WGSIMPLEACC_TRAHISTORY_DELETED);
         $GLOBALS['xoopsTpl']->assign('permDelete', false);
         if (0 == $traId) {
             //get first and last year
@@ -510,7 +514,7 @@ switch ($op) {
                 $transactions[$i] = $transactionsAll[$i]->getValuesTransactions();
                 $transactions[$i]['editable'] = $permissionsHandler->getPermTransactionsEdit($transactions[$i]['tra_submitter'], $transactions[$i]['tra_status']);
                 if ('' !== (string)$transactions[$i]['tra_remarks']) {
-                    $transactions[$i]['modaltitle'] = str_replace('%s', $transactions[$i]['year_nb'], \_MA_WGSIMPLEACC_MODAL_TRATITLE);
+                    $transactions[$i]['modaltitle'] = \str_replace('%s', $transactions[$i]['year_nb'], \_MA_WGSIMPLEACC_MODAL_TRATITLE);
                 }
                 $keywords[$i] = $transactionsAll[$i]->getVar('tra_desc');
             }
@@ -528,7 +532,7 @@ switch ($op) {
             $GLOBALS['xoopsTpl']->assign('useFiles', $helper->getConfig('use_files'));
             $GLOBALS['xoopsTpl']->assign('useClients', $helper->getConfig('use_clients'));
         } else {
-            $GLOBALS['xoopsTpl']->assign('noData', _MA_WGSIMPLEACC_THEREARENT_TRAHISTORIES);
+            $GLOBALS['xoopsTpl']->assign('noData', \_MA_WGSIMPLEACC_THEREARENT_TRAHISTORIES);
         }
         $GLOBALS['xoopsTpl']->assign('traOp',$traOp);
 

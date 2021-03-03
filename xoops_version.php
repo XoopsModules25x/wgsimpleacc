@@ -28,7 +28,7 @@ $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 // ------------------- Informations ------------------- //
 $modversion = [
 	'name'                => \_MI_WGSIMPLEACC_NAME,
-	'version'             => 1.21,
+	'version'             => 1.22,
 	'description'         => \_MI_WGSIMPLEACC_DESC,
 	'author'              => 'Goffy - XOOPS Development Team',
 	'author_mail'         => 'webmaster@wedega.com',
@@ -81,6 +81,7 @@ $modversion['templates'] = [
     ['file' => 'wgsimpleacc_admin_balances.tpl', 'description' => '', 'type' => 'admin'],
     ['file' => 'wgsimpleacc_admin_currencies.tpl', 'description' => '', 'type' => 'admin'],
     ['file' => 'wgsimpleacc_admin_files.tpl', 'description' => '', 'type' => 'admin'],
+    ['file' => 'wgsimpleacc_admin_filhistories.tpl', 'description' => '', 'type' => 'admin'],
     ['file' => 'wgsimpleacc_admin_footer.tpl', 'description' => '', 'type' => 'admin'],
 	['file' => 'wgsimpleacc_admin_header.tpl', 'description' => '', 'type' => 'admin'],
 	['file' => 'wgsimpleacc_admin_index.tpl', 'description' => '', 'type' => 'admin'],
@@ -105,6 +106,8 @@ $modversion['templates'] = [
     ['file' => 'wgsimpleacc_chart_accounts_line.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_chart_balances_line.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_chart_transactions_hbar.tpl', 'description' => ''],
+    ['file' => 'wgsimpleacc_chart_transactions_inexpie.tpl', 'description' => ''],
+    ['file' => 'wgsimpleacc_chart_transactions_inexsums.tpl', 'description' => ''],
 	['file' => 'wgsimpleacc_files.tpl', 'description' => ''],
 	['file' => 'wgsimpleacc_files_item.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_files_list.tpl', 'description' => ''],
@@ -432,6 +435,22 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'default'     => 1,
 ];
+$modversion['config'][] = [
+    'name'        => 'index_trainexsums',
+    'title'       => '_MI_WGSIMPLEACC_INDEX_TRAINEXSUMS',
+    'description' => '_MI_WGSIMPLEACC_INDEX_TRAINEXSUMS_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+$modversion['config'][] = [
+    'name'        => 'index_trainexpie',
+    'title'       => '_MI_WGSIMPLEACC_INDEX_TRAINEXPIE',
+    'description' => '_MI_WGSIMPLEACC_INDEX_TRAINEXPIE_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
 // ------------------- Group header: Balance ------------------- //
 $modversion['config'][] = [
     'name'        => 'group_balance',
@@ -514,6 +533,24 @@ $modversion['config'][] = [
     'name'        => 'use_clients',
     'title'       => '_MI_WGSIMPLEACC_USE_CLIENTS',
     'description' => '_MI_WGSIMPLEACC_USE_CLIENTS_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0,
+];
+// use clients
+$modversion['config'][] = [
+    'name'        => 'use_trahistories',
+    'title'       => '_MI_WGSIMPLEACC_USE_TRAHISTORY',
+    'description' => '_MI_WGSIMPLEACC_USE_TRAHISTORY_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0,
+];
+// use clients
+$modversion['config'][] = [
+    'name'        => 'use_filhistories',
+    'title'       => '_MI_WGSIMPLEACC_USE_FILHISTORY',
+    'description' => '_MI_WGSIMPLEACC_USE_FILHISTORY_DESC',
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
     'default'     => 0,

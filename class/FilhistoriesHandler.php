@@ -30,9 +30,9 @@ use XoopsModules\Wgsimpleacc;
 
 
 /**
- * Class Object Handler Clients
+ * Class Object Handler Filhistories
  */
-class ClientsHandler extends \XoopsPersistableObjectHandler
+class FilhistoriesHandler extends \XoopsPersistableObjectHandler
 {
 	/**
 	 * Constructor
@@ -41,7 +41,7 @@ class ClientsHandler extends \XoopsPersistableObjectHandler
 	 */
 	public function __construct(\XoopsDatabase $db)
 	{
-		parent::__construct($db, 'wgsimpleacc_clients', Clients::class, 'cli_id', 'cli_name');
+		parent::__construct($db, 'wgsimpleacc_filhistories', Filhistories::class, 'hist_id', 'fil_name');
 	}
 
 	/**
@@ -78,50 +78,50 @@ class ClientsHandler extends \XoopsPersistableObjectHandler
 	}
 
 	/**
-	 * Get Count Clients in the database
+	 * Get Count Filhistories in the database
 	 * @param int    $start
 	 * @param int    $limit
 	 * @param string $sort
 	 * @param string $order
 	 * @return int
 	 */
-	public function getCountClients($start = 0, $limit = 0, $sort = 'cli_id ASC, cli_name', $order = 'ASC')
+	public function getCountFilhistories($start = 0, $limit = 0, $sort = 'hist_id ASC, fil_name', $order = 'ASC')
 	{
-		$crCountClients = new \CriteriaCompo();
-		$crCountClients = $this->getClientsCriteria($crCountClients, $start, $limit, $sort, $order);
-		return $this->getCount($crCountClients);
+		$crCountFilhistories = new \CriteriaCompo();
+		$crCountFilhistories = $this->getFilhistoriesCriteria($crCountFilhistories, $start, $limit, $sort, $order);
+		return $this->getCount($crCountFilhistories);
 	}
 
 	/**
-	 * Get All Clients in the database
+	 * Get All Filhistories in the database
 	 * @param int    $start
 	 * @param int    $limit
 	 * @param string $sort
 	 * @param string $order
 	 * @return array
 	 */
-	public function getAllClients($start = 0, $limit = 0, $sort = 'cli_id ASC, cli_name', $order = 'ASC')
+	public function getAllFilhistories($start = 0, $limit = 0, $sort = 'hist_id ASC, fil_name', $order = 'ASC')
 	{
-		$crAllClients = new \CriteriaCompo();
-		$crAllClients = $this->getClientsCriteria($crAllClients, $start, $limit, $sort, $order);
-		return $this->getAll($crAllClients);
+		$crAllFilhistories = new \CriteriaCompo();
+		$crAllFilhistories = $this->getFilhistoriesCriteria($crAllFilhistories, $start, $limit, $sort, $order);
+		return $this->getAll($crAllFilhistories);
 	}
 
 	/**
-	 * Get Criteria Clients
-	 * @param $crClients
-	 * @param $start
-	 * @param $limit
-	 * @param $sort
-	 * @param $order
+	 * Get Criteria Filhistories
+	 * @param        $crFilhistories
+	 * @param int    $start
+	 * @param int    $limit
+	 * @param string $sort
+	 * @param string $order
 	 * @return int
 	 */
-	private function getClientsCriteria($crClients, $start, $limit, $sort, $order)
+	private function getFilhistoriesCriteria($crFilhistories, $start, $limit, $sort, $order)
 	{
-		$crClients->setStart($start);
-		$crClients->setLimit($limit);
-		$crClients->setSort($sort);
-		$crClients->setOrder($order);
-		return $crClients;
+		$crFilhistories->setStart($start);
+		$crFilhistories->setLimit($limit);
+		$crFilhistories->setSort($sort);
+		$crFilhistories->setOrder($order);
+		return $crFilhistories;
 	}
 }

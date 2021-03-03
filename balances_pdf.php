@@ -40,7 +40,7 @@ require_once $tcpdf . 'config/tcpdf_config.php';
 require_once \XOOPS_ROOT_PATH . '/class/template.php';
 $pdfTpl = new $xoopsTpl();
 
-$balIds       = explode(',',Request::getString('balIds'));
+$balIds       = \explode(',',Request::getString('balIds'));
 $levelAlloc   = Request::getInt('level_alloc');
 $levelAccount = Request::getInt('level_account');
 
@@ -121,7 +121,7 @@ $myts = MyTextSanitizer::getInstance();
 // Set defaults
 $pdfFilename = \_MA_WGSIMPLEACC_PDF_BALNAME . '.pdf';
 $title       = $GLOBALS['xoopsConfig']['sitename'];
-$subject     = 'aaaa'._MA_WGSIMPLEACC_PDF_BALHEADER;
+$subject     = \_MA_WGSIMPLEACC_PDF_BALHEADER;
 $content     = '';
 
 $author = '';
@@ -132,7 +132,7 @@ if (isset($GLOBALS['xoopsUser']) && \is_object($GLOBALS['xoopsUser'])) {
 // Read data from table and create pdfData
 //$pdfData['content']  = $myts->undoHtmlSpecialChars($content);
 //$content = \strip_tags($transactionsObj->getVar('tra_desc'));
-$pdfData['date']     = \formatTimestamp(time(), 's');
+$pdfData['date']     = \formatTimestamp(\time(), 's');
 $pdfData['author']   = $author;
 $pdfData['title']    = $title;
 $pdfData['subject']   = $subject;

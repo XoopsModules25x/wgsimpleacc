@@ -103,8 +103,8 @@ class SimpleCSV {
 		$r[$k][$n] = '';
 		
 		while ($i < $cnt) { 
-			$ch = $this->_csv{$i};
-			$chch = ($i < $cnt-1) ? $ch.$this->_csv{$i+1} : $ch;
+			$ch = $this->_csv[$i];
+			$chch = ($i < $cnt-1) ? $ch.$this->_csv[$i+1] : $ch;
 
 			if ($ch === $CSV_LINEBREAK) {
 				if ($esc) {
@@ -165,8 +165,8 @@ class SimpleCSV {
 			foreach ($i as $v) { 
 				if (\strpos($v, $CSV_ENCLOSURE) !== false) { 
 					$v = \str_replace($CSV_ENCLOSURE, $CSV_ENCLOSURE . $CSV_ENCLOSURE, $v); 
-				} 
-			
+				}
+
 				if ((\strpos($v, $CSV_DELIMITER) !== false) 
 					|| (\strpos($v, $CSV_ENCLOSURE) !== false) 
 					|| (\strpos($v, $CSV_LINEBREAK) !== false))

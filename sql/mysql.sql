@@ -45,6 +45,7 @@ CREATE TABLE `wgsimpleacc_trahistories` (
   `hist_id`          INT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `hist_type`        VARCHAR(25)     NOT NULL DEFAULT '',
   `hist_datecreated` INT(10)         NOT NULL DEFAULT '0',
+  `hist_submitter`   INT(11)         NOT NULL DEFAULT '0',
   `tra_id`           INT(8)          NOT NULL DEFAULT '0',
   `tra_year`         INT(10)         NOT NULL DEFAULT '0',
   `tra_nb`           INT(10)         NOT NULL DEFAULT '0',
@@ -121,6 +122,27 @@ CREATE TABLE `wgsimpleacc_files` (
   `fil_submitter`   INT(10)         NOT NULL DEFAULT '0',
   PRIMARY KEY (`fil_id`)
 ) ENGINE=InnoDB;
+
+#
+# Structure table for `wgsimpleacc_filhistories` 12
+#
+
+CREATE TABLE `wgsimpleacc_filhistories` (
+  `hist_id`          INT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `hist_type`        VARCHAR(255)    NOT NULL DEFAULT '',
+  `hist_datecreated` INT(10)         NOT NULL DEFAULT '0',
+  `hist_submitter`   INT(11)         NOT NULL DEFAULT '0',
+  `fil_id`           INT(8)          NOT NULL DEFAULT '0',
+  `fil_traid`        INT(10)         NOT NULL DEFAULT '0',
+  `fil_name`         VARCHAR(255)    NOT NULL DEFAULT '',
+  `fil_type`         VARCHAR(100)    NOT NULL DEFAULT '0',
+  `fil_desc`         TEXT            NOT NULL ,
+  `fil_ip`           VARCHAR(16)     NOT NULL DEFAULT '',
+  `fil_datecreated`  INT(10)         NOT NULL DEFAULT '0',
+  `fil_submitter`    INT(10)         NOT NULL DEFAULT '0',
+  PRIMARY KEY (`hist_id`)
+) ENGINE=InnoDB;
+
 
 #
 # Structure table for `wgsimpleacc_accounts` 11

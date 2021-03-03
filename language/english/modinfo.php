@@ -41,6 +41,7 @@ require_once 'common.php';
 \define('_MI_WGSIMPLEACC_ADMENU13', 'Feedback');
 \define('_MI_WGSIMPLEACC_ADMENU14', 'Transactions History');
 \define('_MI_WGSIMPLEACC_ADMENU15', 'Clients');
+\define('_MI_WGSIMPLEACC_ADMENU16', 'Files History');
 \define('_MI_WGSIMPLEACC_ABOUT', 'About');
 // ---------------- Admin Nav ----------------
 \define('_MI_WGSIMPLEACC_ADMIN_PAGER', 'Admin pager');
@@ -92,6 +93,10 @@ require_once 'common.php';
 \define('_MI_WGSIMPLEACC_USE_FILES_DESC', 'Please define whether you want use the possibility to add files to your transactions');
 \define('_MI_WGSIMPLEACC_USE_CLIENTS', 'Use clients system');
 \define('_MI_WGSIMPLEACC_USE_CLIENTS_DESC', 'Please define whether you want use the possibility to handle client data');
+\define('_MI_WGSIMPLEACC_USE_TRAHISTORY', 'Use transaction histories');
+\define('_MI_WGSIMPLEACC_USE_TRAHISTORY_DESC', 'If you are using histories then original data will be stored in history table before deleting or updating');
+\define('_MI_WGSIMPLEACC_USE_FILHISTORY', 'Use files histories');
+\define('_MI_WGSIMPLEACC_USE_FILHISTORY_DESC', 'If you are using histories then original data will be stored in history table before deleting or updating. Then files itself will be not deleted');
 \define('_MI_WGSIMPLEACC_BALANCE_PERIOD', 'Balancing period');
 \define('_MI_WGSIMPLEACC_BALANCE_PERIOD_DESC', 'Define period how balancing should be done');
 \define('_MI_WGSIMPLEACC_BALANCE_FILTER_PYEARLY', 'Yearly');
@@ -113,16 +118,16 @@ require_once 'common.php';
 \define('_MI_WGSIMPLEACC_DECEMBER', 'December');
 \define('_MI_WGSIMPLEACC_INDEXHEADER', 'Index header');
 \define('_MI_WGSIMPLEACC_INDEXHEADER_DESC', 'Show this text as header on index page');
-
-
 \define('_MI_WGSIMPLEACC_INDEX_TRAHBAR', 'Index Transaction Bar');
 \define('_MI_WGSIMPLEACC_INDEX_TRAHBAR_DESC', 'Show transaction bar (horizontal) with amounts of current period on index page');
-\define('_MI_WGSIMPLEACC_INDEX_ASSETSPIE', 'Index Transaction Pie Chart');
-\define('_MI_WGSIMPLEACC_INDEX_ASSETSPIE_DESC', 'Show transaction pie chart with amounts of current period on index page');
-\define('_MI_WGSIMPLEACC_INDEX_ASSETSPIETOTAL', 'Index Transaction Pie Chart Totals');
-\define('_MI_WGSIMPLEACC_INDEX_ASSETSPIETOTAL_DESC', 'Show transaction pie chart with total amounts on index page');
-
-
+\define('_MI_WGSIMPLEACC_INDEX_ASSETSPIE', 'Index Assets Pie Chart Period');
+\define('_MI_WGSIMPLEACC_INDEX_ASSETSPIE_DESC', 'Show assets pie chart with amounts of current period on index page');
+\define('_MI_WGSIMPLEACC_INDEX_ASSETSPIETOTAL', 'Index Assets Pie Chart Totals');
+\define('_MI_WGSIMPLEACC_INDEX_ASSETSPIETOTAL_DESC', 'Show assets pie chart with total amounts on index page');
+\define('_MI_WGSIMPLEACC_INDEX_TRAINEXSUMS', 'Index Transaction Sums Period');
+\define('_MI_WGSIMPLEACC_INDEX_TRAINEXSUMS_DESC', 'Show transaction sums income/expenses with amounts of current period on index page');
+\define('_MI_WGSIMPLEACC_INDEX_TRAINEXPIE', 'Index Transaction Pie Chart Period');
+\define('_MI_WGSIMPLEACC_INDEX_TRAINEXPIE_DESC', 'Show transaction pie chart with amounts of current period on index page');
 \define('_MI_WGSIMPLEACC_OTPL_SENDER', 'Default sender for output');
 \define('_MI_WGSIMPLEACC_OTPL_SENDER_DESC', 'Default sender which should be used for output templates');
 \define('_MI_WGSIMPLEACC_SHOWBCRUMBS', 'Show breadcrumb navigation');

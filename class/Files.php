@@ -74,7 +74,7 @@ class Files extends \XoopsObject
 
     /**
      * @public function getForm
-     * @param int $traId
+     * @param      $traId
      * @param bool $action
      * @return \XoopsThemeForm
      */
@@ -292,7 +292,7 @@ class Files extends \XoopsObject
                 $ret['image'] = 0;
                 break;
         }
-		$ret['desc']        = \strip_tags($this->getVar('fil_desc', 'e'));
+		$ret['desc']        = $this->getVar('fil_desc', 'e');
 		$editorMaxchar = $helper->getConfig('editor_maxchar');
 		$ret['desc_short']  = $utility::truncateHtml($ret['desc'], $editorMaxchar);
 		$ret['ip']          = $this->getVar('fil_ip');

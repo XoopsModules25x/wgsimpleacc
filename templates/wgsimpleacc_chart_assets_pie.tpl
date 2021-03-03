@@ -1,12 +1,4 @@
 
-<style>
-	canvas {
-		-moz-user-select: none;
-		-webkit-user-select: none;
-		-ms-user-select: none;
-	}
-</style>
-
 <div id="canvas-holder" class="canvas-assets" style="width:100%">
 	<canvas id="chart-assets-pie"></canvas>
 </div>

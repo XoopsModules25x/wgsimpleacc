@@ -8,6 +8,7 @@
 				<th class="center"><{$smarty.const._AM_WGSIMPLEACC_TRANSACTION_HISTID}></th>
                 <th class="center"><{$smarty.const._AM_WGSIMPLEACC_TRANSACTION_HISTTYPE}></th>
                 <th class="center"><{$smarty.const._AM_WGSIMPLEACC_TRANSACTION_HISTDATE}></th>
+				<th class="center"><{$smarty.const._AM_WGSIMPLEACC_TRANSACTION_HISTSUBMITTER}></th>
                 <th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_ID}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_YEARNB}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_DESC}></th>
@@ -38,6 +39,7 @@
 					<td class='center'><{$transaction.histid}></td>
 					<td class='center'><{$transaction.histtype}></td>
 					<td class='center'><{$transaction.histdate}></td>
+					<td class='center'><{$transaction.histsubmitter}></td>
 					<td class='center'><{$transaction.id}></td>
 					<td class='center'><{$transaction.year}>/<{$transaction.nb}></td>
 					<td class='center'><{$transaction.desc_short}></td>

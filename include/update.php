@@ -274,6 +274,47 @@ function wgsimpleacc_check_db($module)
         }
     }
 
+    // create new table
+    $table   = $GLOBALS['xoopsDB']->prefix('wgsimpleacc_filhistories');
+    $check   = $GLOBALS['xoopsDB']->queryF("SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME='$table'");
+    $numRows = $GLOBALS['xoopsDB']->getRowsNum($check);
+    if (!$numRows) {
+        // create new table 'wgsimpleacc_filhistories'
+        $sql = "CREATE TABLE `$table` (
+                  `hist_id`          INT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
+                  `hist_type`        VARCHAR(255)    NOT NULL DEFAULT '',
+                  `hist_datecreated` INT(10)         NOT NULL DEFAULT '0',
+                  `hist_submitter`   INT(11)         NOT NULL DEFAULT '0',
+                  `fil_id`           INT(8)          NOT NULL DEFAULT '0',
+                  `fil_traid`        INT(10)         NOT NULL DEFAULT '0',
+                  `fil_name`         VARCHAR(255)    NOT NULL DEFAULT '',
+                  `fil_type`         VARCHAR(100)    NOT NULL DEFAULT '0',
+                  `fil_desc`         TEXT            NOT NULL ,
+                  `fil_ip`           VARCHAR(16)     NOT NULL DEFAULT '',
+                  `fil_datecreated`  INT(10)         NOT NULL DEFAULT '0',
+                  `fil_submitter`    INT(10)         NOT NULL DEFAULT '0',
+                  PRIMARY KEY (`hist_id`)
+                ) ENGINE=InnoDB;";
+        if (!$result = $GLOBALS['xoopsDB']->queryF($sql)) {
+            xoops_error($GLOBALS['xoopsDB']->error() . '<br>' . $sql);
+            $module->setErrors("Error when creating table '$table'.");
+            $ret = false;
+        }
+    }
+
+    $table   = $GLOBALS['xoopsDB']->prefix('wgsimpleacc_trahistories');
+    $field   = 'hist_submitter';
+    $check   = $GLOBALS['xoopsDB']->queryF('SHOW COLUMNS FROM `' . $table . "` LIKE '" . $field . "'");
+    $numRows = $GLOBALS['xoopsDB']->getRowsNum($check);
+    if (!$numRows) {
+        $sql = "ALTER TABLE `$table` ADD `$field` INT(11) NOT NULL DEFAULT '0' AFTER `hist_datecreated`;";
+        if (!$result = $GLOBALS['xoopsDB']->queryF($sql)) {
+            xoops_error($GLOBALS['xoopsDB']->error() . '<br>' . $sql);
+            $module->setErrors("Error when adding '$field' to table '$table'.");
+            $ret = false;
+        }
+    }
+
     return $ret;
 }
 

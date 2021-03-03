@@ -34,6 +34,7 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_THEREARE_CURRENCIES', "Es gibt <span class='bold'>%s</span> Währungen in der Datenbank");
 \define('_AM_WGSIMPLEACC_THEREARE_TAXES', "Es gibt <span class='bold'>%s</span> Steuerarten in der Datenbank");
 \define('_AM_WGSIMPLEACC_THEREARE_FILES', "Es gibt <span class='bold'>%s</span> Dateien in der Datenbank");
+\define('_AM_WGSIMPLEACC_THEREARE_FILHISTORIES', "Es gibt <span class='bold'>%s</span> historische Dateien in der Datenbank");
 \define('_AM_WGSIMPLEACC_THEREARE_BALANCES', "Es gibt <span class='bold'>%s</span> Abschlüsse in der Datenbank");
 \define('_AM_WGSIMPLEACC_THEREARE_TRATEMPLATES', "Es gibt <span class='bold'>%s</span> Transaktionsvorlagen in der Datenbank");
 \define('_AM_WGSIMPLEACC_THEREARE_OUTTEMPLATES', "Es gibt <span class='bold'>%s</span> Ausgabevorlagen in der Datenbank");
@@ -83,10 +84,16 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_TAX_RATE', 'Rate');
 \define('_AM_WGSIMPLEACC_TAX_ONLINE', 'Online');
 \define('_AM_WGSIMPLEACC_TAX_PRIMARY', 'Primär');
-// Caption of Transaction
+// Caption of Transaction histories
 \define('_AM_WGSIMPLEACC_TRANSACTION_HISTID', 'Historie Id');
 \define('_AM_WGSIMPLEACC_TRANSACTION_HISTTYPE', 'Historie Typ');
 \define('_AM_WGSIMPLEACC_TRANSACTION_HISTDATE', 'Historie Datum');
+\define('_AM_WGSIMPLEACC_TRANSACTION_HISTSUBMITTER', 'Historie Einsender');
+// Caption of Files histories
+\define('_AM_WGSIMPLEACC_FILES_HISTID', 'Historie Id');
+\define('_AM_WGSIMPLEACC_FILES_HISTTYPE', 'Historie Typ');
+\define('_AM_WGSIMPLEACC_FILES_HISTDATE', 'Historie Datum');
+\define('_AM_WGSIMPLEACC_FILES_HISTSUBMITTER', 'Historie Einsender');
 // ---------------- Admin Permissions ----------------
 // Permissions
 \define('_AM_WGSIMPLEACC_NO_PERMISSIONS_SET', 'Keine Berechtigung gesetzt');
@@ -117,5 +124,4 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_SUPPORT_FORUM', 'Support Forum');
 \define('_AM_WGSIMPLEACC_DONATION_AMOUNT', 'Spendenbetrag Amount');
 \define('_AM_WGSIMPLEACC_MAINTAINEDBY', ' wird unterstützt von ');
-\define('_AM_WGSIMPLEACC_ERROR_NO_WGPHPOFFICE', "Dieses Modul benötigt das Modul 'wgPhpOffice' für die Ausgabe als MS-Excel-Datei. Bitte installieren!");
 // ---------------- End ----------------

@@ -41,6 +41,7 @@ require_once 'common.php';
 \define('_MI_WGSIMPLEACC_ADMENU13', 'Feedback');
 \define('_MI_WGSIMPLEACC_ADMENU14', 'Transaktionen Historie');
 \define('_MI_WGSIMPLEACC_ADMENU15', 'Klienten');
+\define('_MI_WGSIMPLEACC_ADMENU16', 'Dateien Historie');
 \define('_MI_WGSIMPLEACC_ABOUT', 'Über');
 // ---------------- Admin Nav ----------------
 \define('_MI_WGSIMPLEACC_ADMIN_PAGER', 'Listen Admin');
@@ -92,6 +93,10 @@ require_once 'common.php';
 \define('_MI_WGSIMPLEACC_USE_FILES_DESC', 'Bitte definieren Sie, ob Sie die Möglichkeit zum Hinzufügen von Dateien zu Transaktionen verwenden wollen');
 \define('_MI_WGSIMPLEACC_USE_CLIENTS', 'Klientensystem verwenden');
 \define('_MI_WGSIMPLEACC_USE_CLIENTS_DESC', 'Bitte definieren Sie, ob Sie die Möglichkeit zum Verwendung von Klienten verwenden wollen');
+\define('_MI_WGSIMPLEACC_USE_TRAHISTORY', 'Historie Transaktionen verwenden');
+\define('_MI_WGSIMPLEACC_USE_TRAHISTORY_DESC', 'Wenn Sie die Historisierung verwenden, dann werden die Originaldaten vor dem Löschen oder Ändern in einer History-Tabelle gespeichert');
+\define('_MI_WGSIMPLEACC_USE_FILHISTORY', 'Historie Dateien verwenden');
+\define('_MI_WGSIMPLEACC_USE_FILHISTORY_DESC', 'Wenn Sie die Historisierung verwenden, dann werden die Originaldaten vor dem Löschen oder Ändern in einer History-Tabelle gespeichert. Die Dateien selbst werden dann nicht mehr gelöscht');
 \define('_MI_WGSIMPLEACC_BALANCE_PERIOD', 'Zeitraum Abschlüsse');
 \define('_MI_WGSIMPLEACC_BALANCE_PERIOD_DESC', 'Definieren Sie den Zeitraum für die Durchführung von Abschlüssen');
 \define('_MI_WGSIMPLEACC_BALANCE_FILTER_PYEARLY', 'Jahr');
@@ -113,15 +118,16 @@ require_once 'common.php';
 \define('_MI_WGSIMPLEACC_DECEMBER', 'Dezember');
 \define('_MI_WGSIMPLEACC_INDEXHEADER', 'Index Kopfzeile');
 \define('_MI_WGSIMPLEACC_INDEXHEADER_DESC', 'Diesen Text als Überschrift in der Indexseite anzeigen');
-
-
-\define('_MI_WGSIMPLEACC_INDEX_TRAHBAR', 'Index Transaction Bar');
-\define('_MI_WGSIMPLEACC_INDEX_TRAHBAR_DESC', 'Show transaction bar (horizontal) with amounts of current period on index page');
-\define('_MI_WGSIMPLEACC_INDEX_ASSETSPIE', 'Index Transaction Pie Chart');
-\define('_MI_WGSIMPLEACC_INDEX_ASSETSPIE_DESC', 'Show transaction pie chart with amounts of current period on index page');
-\define('_MI_WGSIMPLEACC_INDEX_ASSETSPIETOTAL', 'Index Transaction Pie Chart Totals');
-\define('_MI_WGSIMPLEACC_INDEX_ASSETSPIETOTAL_DESC', 'Show transaction pie chart with total amounts on index page');
-
+\define('_MI_WGSIMPLEACC_INDEX_TRAHBAR', 'Index Balkendiagramm Transaktionen');
+\define('_MI_WGSIMPLEACC_INDEX_TRAHBAR_DESC', 'Zeige Balkendiagramm (horizontal) mit Beträgen für die Transaktionen der aktuellen Periode auf der Indexseite');
+\define('_MI_WGSIMPLEACC_INDEX_ASSETSPIE', 'Index Tortendiagramm Vermögenswerte Zeitraum');
+\define('_MI_WGSIMPLEACC_INDEX_ASSETSPIE_DESC', 'Zeige Tortendiagramm mit Beträgen für die Vermögenswerte der aktuellen Periode auf der Indexseite');
+\define('_MI_WGSIMPLEACC_INDEX_ASSETSPIETOTAL', 'Index Tortendiagramm Vermögenswerte gesamt');
+\define('_MI_WGSIMPLEACC_INDEX_ASSETSPIETOTAL_DESC', 'Zeige Tortendiagramm mit Gesamtbeträgen für alle Vermögenswerte');
+\define('_MI_WGSIMPLEACC_INDEX_TRAINEXSUMS', 'Index Summe Vermögenswerte Zeitraum');
+\define('_MI_WGSIMPLEACC_INDEX_TRAINEXSUMS_DESC', 'Zeige Summen für die Transaktionen Eingang/Ausgaben der aktuellen Periode auf der Indexseite');
+\define('_MI_WGSIMPLEACC_INDEX_TRAINEXPIE', 'Index Tortendiagramm Transaktionen Zeitraum');
+\define('_MI_WGSIMPLEACC_INDEX_TRAINEXPIE_DESC', 'Zeige Tortendiagramm mit Summen für die Transaktionen Eingang/Ausgaben der aktuellen Periode auf der Indexseite');
 \define('_MI_WGSIMPLEACC_OTPL_SENDER', 'Standardabsender für Ausgabe');
 \define('_MI_WGSIMPLEACC_OTPL_SENDER_DESC', 'Absender, der bei Ausgabevorlagen standardmäßig verwendet werden soll');
 \define('_MI_WGSIMPLEACC_SHOWBCRUMBS', 'Brotkrumen-Navigation (breadcrumbs) anzeigen');

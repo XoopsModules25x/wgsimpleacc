@@ -23,7 +23,7 @@
 use XoopsModules\Wgsimpleacc;
 use XoopsModules\Wgsimpleacc\Helper;
 
-require dirname(__DIR__, 2) . '/mainfile.php';
+require \dirname(__DIR__, 2) . '/mainfile.php';
 require __DIR__ . '/include/common.php';
 
 $moduleDirName = \basename(__DIR__);

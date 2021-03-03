@@ -43,7 +43,7 @@ $op     = Request::getCmd('op', 'list');
 $allId  = Request::getInt('all_id', 0);
 $allPid = Request::getInt('all_pid', 0);
 $level  = Request::getInt('level', 1);
-$filterYear      = Request::getInt('filterYear', 0);
+$filterYear      = Request::getInt('filterYear', date('Y'));
 $filterMonthFrom = Request::getInt('filterMonthFrom', 0);
 $filterYearFrom  = Request::getInt('filterYearFrom', date('Y'));
 $filterMonthTo   = Request::getInt('filterMonthTo', 0);
@@ -140,7 +140,7 @@ switch ($op) {
                         $transactions_datain .= $sumAmountin . ',';
                         $transactions_dataout .= $sumAmountout . ',';
                         $allocations_list[] = ['all_id' => $allId, 'all_name' => $allName];
-                        $transactions_labels .= "'" . str_replace('%s', $allName, \_MA_WGSIMPLEACC_ALLOCATION_CURRID) . "',";
+                        $transactions_labels .= "'" . \str_replace('%s', $allName, \_MA_WGSIMPLEACC_ALLOCATION_CURRID) . "',";
                     }
 
                     unset($crAllocCur, $allocCurObj, $crTransactions);
@@ -229,8 +229,8 @@ switch ($op) {
             $GLOBALS['xoopsTpl']->assign('transactions_total_in', Utility::FloatToString($transactions_total_in));
             $GLOBALS['xoopsTpl']->assign('transactions_total_out', Utility::FloatToString($transactions_total_out));
             $GLOBALS['xoopsTpl']->assign('transactions_total', Utility::FloatToString($transactions_total_in - $transactions_total_out));
-            $GLOBALS['xoopsTpl']->assign('label_datain1', _MA_WGSIMPLEACC_TRANSACTIONS_INCOMES . ' (' . _MA_WGSIMPLEACC_STATUS_APPROVED .')');
-            $GLOBALS['xoopsTpl']->assign('label_dataout1', _MA_WGSIMPLEACC_TRANSACTIONS_EXPENSES . ' (' . _MA_WGSIMPLEACC_STATUS_APPROVED .')');
+            $GLOBALS['xoopsTpl']->assign('label_datain1', \_MA_WGSIMPLEACC_TRANSACTIONS_INCOMES . ' (' . \_MA_WGSIMPLEACC_STATUS_APPROVED .')');
+            $GLOBALS['xoopsTpl']->assign('label_dataout1', \_MA_WGSIMPLEACC_TRANSACTIONS_EXPENSES . ' (' . \_MA_WGSIMPLEACC_STATUS_APPROVED .')');
         }
         unset($count);
 
