@@ -74,7 +74,7 @@ switch ($op) {
 				\redirect_header('filhistories.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
 			}
 			if ($filhistoriesHandler->delete($filhistoriesObj)) {
-				\redirect_header('filhistories.php', 3, _AM_WGSIMPLEACC_FORM_DELETE_OK);
+				\redirect_header('filhistories.php', 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
 			} else {
 				$GLOBALS['xoopsTpl']->assign('error', $filhistoriesObj->getHtmlErrors());
 			}
@@ -82,7 +82,7 @@ switch ($op) {
 			$xoopsconfirm = new Common\XoopsConfirm(
 				['ok' => 1, 'hist_id' => $histId, 'op' => 'delete'],
 				$_SERVER['REQUEST_URI'],
-				\sprintf(_AM_WGSIMPLEACC_FORM_SURE_DELETE, $filhistoriesObj->getVar('fil_name')));
+				\sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $filhistoriesObj->getVar('fil_name')));
 			$form = $xoopsconfirm->getFormXoopsConfirm();
 			$GLOBALS['xoopsTpl']->assign('form', $form->render());
 		}
