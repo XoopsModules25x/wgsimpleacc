@@ -244,9 +244,11 @@ class Files extends \XoopsObject
         $imageSelect = new \XoopsFormSelect(\str_replace('%f', ".{$imageDirectory}/", \_MA_WGSIMPLEACC_FILES_TEMP_DESC), 'fil_temp', $filTemp, 5);
         $imageArray = \XoopsLists::getImgListAsArray( \XOOPS_ROOT_PATH . $imageDirectory );
         foreach ($imageArray as $image1) {
-            $imageSelect->addOption((string)($image1), $image1);
+            if ('blank.gif' !== $image1 && 'blank.png' !== $image1) {
+                $imageSelect->addOption((string)($image1), $image1);
+            }
         }
-        $imageSelect->setExtra("onchange='showImgSelected(\"imglabel_fil_temp\", \"fil_temp\", \"" . $imageDirectory . '", "", "' . \XOOPS_URL . "\")'");
+        $imageSelect->setExtra("onchange='showBtnDel();showImgSelected(\"imglabel_fil_temp\", \"fil_temp\", \"" . $imageDirectory . '", "", "' . \XOOPS_URL . "\")'");
         $imageTray->addElement($imageSelect, false);
         $imageTray->addElement(new \XoopsFormLabel('', "<br><img src='" . \XOOPS_URL . '/' . $imageDirectory . '/' . $filTemp . "' id='imglabel_fil_temp' alt='' style='max-width:100px' />"));
         $form->addElement($imageTray);
@@ -256,7 +258,10 @@ class Files extends \XoopsObject
         // To Save
         $form->addElement(new \XoopsFormHidden('op', 'save_temp'));
         $form->addElement(new \XoopsFormHidden('fil_traid', $traId));
-        $form->addElement(new \XoopsFormButtonTray('', _SUBMIT, 'submit', '', false));
+        $btnTray = new \XoopsFormElementTray('', '');
+        $btnTray->addElement(new \XoopsFormButtonTray('', _SUBMIT, 'submit', '', false));
+        $btnTray->addElement(new \XoopsFormButton('', 'delete_filtemp', \_MA_WGSIMPLEACC_FILES_TEMP_DELETE, 'submit', false));
+        $form->addElement($btnTray);
         return $form;
     }
 

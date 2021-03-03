@@ -223,6 +223,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_FILES_TEMP_DESC', 'Hochgeladene Dateien im Verzeichnis: %f');
 \define('_MA_WGSIMPLEACC_FILES_TEMP_DESC_NO', 'Es gibt keine hochgeladenen Dateien im Verzeichnis: %f');
 \define('_MA_WGSIMPLEACC_FILE_DETAILS', 'Details zu Datei');
+\define('_MA_WGSIMPLEACC_FILES_TEMP_DELETE', 'Die angezeigte Dateien löschen');
 // Caption of File
 \define('_MA_WGSIMPLEACC_FILE_ID', 'Id');
 \define('_MA_WGSIMPLEACC_FILE_TRAID', 'Transaktion');

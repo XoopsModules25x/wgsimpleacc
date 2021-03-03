@@ -33,7 +33,7 @@
                         </table>
                     </div>
                 <{else}>
-                    <{$smarty.const._MA_WGSIMPLEACC_THEREARENT_FILES}>
+                    <div style="padding:20px"><{$smarty.const._MA_WGSIMPLEACC_THEREARENT_FILES}></div>
                 <{/if}>
                 <a class='btn btn-danger right' href='transactions.php?op=list&amp;start=<{$start}>&amp;limit=<{$limit}>' title='<{$smarty.const._CANCEL}>'><{$smarty.const._CANCEL}></a>
             </div>
@@ -89,5 +89,14 @@
         modalimg.src = info;
         var width = modalimg.naturalWidth;
         modal.find(".modal-dialog").css("width", width + 100);
-    })
+    });
+    window.onload = function() {
+        var btnDel = document.getElementById('delete_filtemp');
+        btnDel.classList.add("btn-danger");
+        btnDel.classList.add("hidden");
+    };
+    function showBtnDel() {
+        var btnDel = document.getElementById('delete_filtemp');
+        btnDel.classList.remove("hidden");
+    }
 </script>
