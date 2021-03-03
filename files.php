@@ -39,11 +39,16 @@ if (!$permissionsHandler->getPermGlobalView()) {
     require __DIR__ . '/footer.php';
 }
 
-$op    = Request::getCmd('op', 'list');
-$start = Request::getInt('start', 0);
-$limit = Request::getInt('limit', $helper->getConfig('userpager'));
-$filId = Request::getInt('fil_id', 0);
-$filTraid = Request::getInt('fil_traid', 0);
+$op            = Request::getCmd('op', 'list');
+$deleteFiltemp = Request::getString('delete_filtemp', '');
+$start         = Request::getInt('start', 0);
+$limit         = Request::getInt('limit', $helper->getConfig('userpager'));
+$filId         = Request::getInt('fil_id', 0);
+$filTraid      = Request::getInt('fil_traid', 0);
+if ('save_temp' == $op && '' != $deleteFiltemp) {
+    $op = 'delete_filtemp';
+}
+
 $uploadByApp = $helper->getConfig('upload_by_app');
 
 // Define Stylesheet
@@ -306,6 +311,16 @@ switch ($op) {
 			$GLOBALS['xoopsTpl']->assign('form', $form->render());
 		}
 		break;
+    case 'delete_filtemp':
+        // Security Check
+        if (!$GLOBALS['xoopsSecurity']->check()) {
+            \redirect_header('files.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
+        }
+        $fileName = Request::getString('fil_temp', '');
+        $filePath = \XOOPS_ROOT_PATH . '/uploads/wgsimpleacc/temp/' . $fileName;
+        \unlink($filePath);
+        \redirect_header('files.php?op=list&amp;fil_traid=' . $filTraid, 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
+        break;
 }
 
 // Breadcrumbs
