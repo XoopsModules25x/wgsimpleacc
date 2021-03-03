@@ -146,6 +146,9 @@ switch ($op) {
         }
         if ($filId > 0) {
             $filesObj = $filesHandler->get($filId);
+            if ($helper->getConfig('use_filhistories')) {
+                $filesHandler->saveHistoryFiles($filId);
+            }
         } else {
             \redirect_header('files.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
         }
@@ -284,7 +287,11 @@ switch ($op) {
 			if (!$GLOBALS['xoopsSecurity']->check()) {
 				\redirect_header('files.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
 			}
-            \unlink(\XOOPS_ROOT_PATH . '/uploads/wgsimpleacc/files/' . $filName);
+            if ($helper->getConfig('use_filhistories')) {
+                $filesHandler->saveHistoryFiles($filId);
+            } else {
+                \unlink(\XOOPS_ROOT_PATH . '/uploads/wgsimpleacc/files/' . $filName);
+            }
 			if ($filesHandler->delete($filesObj)) {
 				\redirect_header('files.php?op=list&amp;fil_traid=' . $filTraid, 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
 			} else {

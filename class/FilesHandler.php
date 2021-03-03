@@ -106,11 +106,11 @@ class FilesHandler extends \XoopsPersistableObjectHandler
 
 	/**
 	 * Get Criteria Files
-	 * @param        $crFiles
-	 * @param int    $start
-	 * @param int    $limit
-	 * @param string $sort
-	 * @param string $order
+	 * @param $crFiles
+	 * @param $start
+	 * @param $limit
+	 * @param $sort
+	 * @param $order
 	 * @return int
 	 */
 	private function getFilesCriteria($crFiles, $start, $limit, $sort, $order)
@@ -121,4 +121,35 @@ class FilesHandler extends \XoopsPersistableObjectHandler
 		$crFiles->setOrder($order);
 		return $crFiles;
 	}
+
+    /**
+     * @public function to save old files as history before updating or deleting
+     * @param int    $filId
+     * @param string $type
+     * @return bool
+     */
+    public static function saveHistoryFiles($filId, $type = "update")
+    {
+        global $xoopsUser;
+        $uid = \is_object($xoopsUser) ? $xoopsUser->uid() : 0;
+
+        $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+        $filesHandler = $helper->getHandler('Files');
+        $filesObj = $filesHandler->get($filId);
+        $traVars = $filesObj->getVars();
+
+        $insert = 'INSERT INTO ' . $GLOBALS['xoopsDB']->prefix('wgsimpleacc_filhistories') . ' (hist_datecreated, hist_type, hist_submitter';
+        $select = 'SELECT ' . time() . " AS histdatecreated, '$type' AS histtype, '$uid' AS histsubmitter";
+        $from = ' FROM '. $GLOBALS['xoopsDB']->prefix('wgsimpleacc_files');
+        $where = " WHERE (fil_id=$filId)";
+
+        foreach (\array_keys($traVars) as $var) {
+            $insert .= ', ' . $var;
+            $select .= ', ' . $var;
+        }
+        $insert .= ') ';
+        $GLOBALS['xoopsDB']->queryF($insert . $select . $from . $where) or die ("MySQL-Error: " . mysqli_error());
+
+        return true;
+    }
 }

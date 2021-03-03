@@ -34,6 +34,7 @@ $countTransactions = $transactionsHandler->getCount();
 $countTrahistories = $trahistoriesHandler->getCount();
 $countAssets = $assetsHandler->getCount();
 $countFiles = $filesHandler->getCount();
+$countFilhistories = $filhistoriesHandler->getCount();
 $countAccounts = $accountsHandler->getCount();
 $countAllocations = $allocationsHandler->getCount();
 $countCurrencies = $currenciesHandler->getCount();
@@ -50,6 +51,7 @@ $adminObject->addInfoBoxLine(\sprintf( '<label>' . \_AM_WGSIMPLEACC_THEREARE_TRA
 $adminObject->addInfoBoxLine(\sprintf( '<label>' . \_AM_WGSIMPLEACC_THEREARE_TRAHISTORIES . '</label>', $countTrahistories));
 $adminObject->addInfoBoxLine(\sprintf( '<label>' . \_AM_WGSIMPLEACC_THEREARE_ASSETS . '</label>', $countAssets));
 $adminObject->addInfoBoxLine(\sprintf( '<label>' . \_AM_WGSIMPLEACC_THEREARE_FILES . '</label>', $countFiles));
+$adminObject->addInfoBoxLine(\sprintf( '<label>' . \_AM_WGSIMPLEACC_THEREARE_FILHISTORIES . '</label>', $countFilhistories));
 $adminObject->addInfoBoxLine(\sprintf( '<label>' . \_AM_WGSIMPLEACC_THEREARE_ACCOUNTS . '</label>', $countAccounts));
 $adminObject->addInfoBoxLine(\sprintf( '<label>' . \_AM_WGSIMPLEACC_THEREARE_ALLOCATIONS . '</label>', $countAllocations));
 $adminObject->addInfoBoxLine(\sprintf( '<label>' . \_AM_WGSIMPLEACC_THEREARE_CURRENCIES . '</label>', $countCurrencies));

@@ -104,15 +104,15 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
 		return $this->getAll($crAllAccounts);
 	}
 
-	/**
-	 * Get Criteria Accounts
-	 * @param        $crAccounts
-	 * @param int    $start
-	 * @param int    $limit
-	 * @param string $sort
-	 * @param string $order
-	 * @return int
-	 */
+    /**
+     * Get Criteria Accounts
+     * @param $crAccounts
+     * @param $start
+     * @param $limit
+     * @param $sort
+     * @param $order
+     * @return int
+     */
 	private function getAccountsCriteria($crAccounts, $start, $limit, $sort, $order)
 	{
 		$crAccounts->setStart($start);
@@ -125,7 +125,7 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
     /**
      * Get all accounts for selectbox
      * @param $class
-     * @return array
+     * @return array|false
      */
     public function getSelectTreeOfAccounts($class)
     {

@@ -46,6 +46,7 @@ class Assets extends \XoopsObject
 		$this->initVar('as_descr', \XOBJ_DTYPE_TXTAREA);
         $this->initVar('as_color', \XOBJ_DTYPE_TXTBOX);
         $this->initVar('as_online', \XOBJ_DTYPE_INT);
+        $this->initVar('as_iecalc', \XOBJ_DTYPE_INT);
         $this->initVar('as_primary', \XOBJ_DTYPE_INT);
 		$this->initVar('as_datecreated', \XOBJ_DTYPE_INT);
 		$this->initVar('as_submitter', \XOBJ_DTYPE_INT);
@@ -112,7 +113,11 @@ class Assets extends \XoopsObject
             $asColorRadio->addOption($color['code'], $desc);
         }
         $form->addElement($asColorRadio);
-
+        // Form Radio Yes/No asPrimary
+        $asIecalc = $this->isNew() ?: $this->getVar('as_iecalc');
+        $asIecalcYn = new \XoopsFormRadioYN(\_MA_WGSIMPLEACC_ASSET_IECALC, 'as_iecalc', $asIecalc);
+        $asIecalcYn->setDescription(\_MA_WGSIMPLEACC_ASSET_IECALC_DESC);
+        $form->addElement($asIecalcYn);
         // Form Radio Yes/No asOnline
         $asOnline = $this->isNew() ?: $this->getVar('as_online');
         $form->addElement(new \XoopsFormRadioYN(\_MA_WGSIMPLEACC_ASSET_ONLINE, 'as_online', $asOnline));
@@ -157,6 +162,7 @@ class Assets extends \XoopsObject
         $editorMaxchar = $helper->getConfig('editor_maxchar');
         $ret['descr_short'] = $utility::truncateHtml($ret['descr'], $editorMaxchar);
         $ret['online']      = (int)$this->getVar('as_online') > 0 ? _YES : _NO;
+        $ret['iecalc']      = (int)$this->getVar('as_iecalc') > 0 ? _YES : _NO;
         $ret['primary']     = (int)$this->getVar('as_primary') > 0 ? _YES : _NO;
         $ret['datecreated'] = \formatTimestamp($this->getVar('as_datecreated'), 's');
         $ret['submitter']   = \XoopsUser::getUnameFromId($this->getVar('as_submitter'));

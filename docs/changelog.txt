@@ -1,4 +1,9 @@
 ==============================================================
+1.22 [2021/02/28]
+==============================================================
+ - added files histories (goffy)
+
+==============================================================
 1.21 [2021/02/03]
 ==============================================================
  - added usage of clients (goffy)
@@ -7,6 +12,8 @@
  - fixed several problems with file up/download (goffy)
  - splitted horizontal bar into submitted/approved (goffy)
  - added summary to transaction hbar (goffy)
+ - added possibility to exclude assets from calc in index.php (goffy)
+ - added utf8 convertion for output csv (goffy)
 
  ==============================================================
 1.20 [2020/12/31]

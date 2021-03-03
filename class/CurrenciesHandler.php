@@ -106,11 +106,11 @@ class CurrenciesHandler extends \XoopsPersistableObjectHandler
 
 	/**
 	 * Get Criteria Currencies
-	 * @param        $crCurrencies
-	 * @param int    $start
-	 * @param int    $limit
-	 * @param string $sort
-	 * @param string $order
+	 * @param $crCurrencies
+	 * @param $start
+	 * @param $limit
+	 * @param $sort
+	 * @param $order
 	 * @return int
 	 */
 	private function getCurrenciesCriteria($crCurrencies, $start, $limit, $sort, $order)

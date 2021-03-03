@@ -40,16 +40,25 @@ $adminmenu[] = [
     'link' => 'admin/transactions.php',
     'icon' => 'assets/icons/32/transactions.png',
 ];
-$adminmenu[] = [
-    'title' => \_MI_WGSIMPLEACC_ADMENU14,
-    'link' => 'admin/trahistories.php',
-    'icon' => 'assets/icons/32/trahistories.png',
-];
+if ($helper->getConfig('use_trahistories')) {
+    $adminmenu[] = [
+        'title' => \_MI_WGSIMPLEACC_ADMENU14,
+        'link' => 'admin/trahistories.php',
+        'icon' => 'assets/icons/32/trahistories.png',
+    ];
+}
 $adminmenu[] = [
     'title' => \_MI_WGSIMPLEACC_ADMENU3,
     'link' => 'admin/files.php',
     'icon' => 'assets/icons/32/files.png',
 ];
+if ($helper->getConfig('use_filhistories')) {
+    $adminmenu[] = [
+        'title' => \_MI_WGSIMPLEACC_ADMENU16,
+        'link' => 'admin/filhistories.php',
+        'icon' => 'assets/icons/32/filhistories.png',
+    ];
+}
 $adminmenu[] = [
     'title' => \_MI_WGSIMPLEACC_ADMENU4,
     'link' => 'admin/assets.php',

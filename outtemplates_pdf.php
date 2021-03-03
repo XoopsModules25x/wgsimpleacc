@@ -21,8 +21,17 @@ use XoopsModules\Wgsimpleacc\Helper;
  * @since          1.0
  * @min_xoops      2.5.10
  * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
+ * @param $template
+ * @param $outParams
+ * @return string
  */
 
+/**
+ * function to execute output
+ * @param $template
+ * @param $outParams
+ * @return string
+ */
 function execute_output ($template, $outParams)
 {
     if (\file_exists($tcpdf = \XOOPS_ROOT_PATH . '/Frameworks/tcpdf/')) {
@@ -105,5 +114,6 @@ function execute_output ($template, $outParams)
     $pdf->AddPage();
     // Output
     $pdf->writeHTML($pdfData['content'], true, false, true, false, '');
+
     return $pdf->Output($pdfFilename, 'D');
 }

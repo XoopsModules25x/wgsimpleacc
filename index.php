@@ -65,16 +65,23 @@ $colors = Utility::getColors();
 $GLOBALS['xoopsTpl']->assign('colors', $colors);
 $GLOBALS['xoopsTpl']->assign('indexHeader', $helper->getConfig('index_header'));
 
-$indexTrahbar = $helper->getConfig('index_trahbar');
-$indexAssetsPie = $helper->getConfig('index_assetspie');
+$indexTrahbar        = $helper->getConfig('index_trahbar');
+$indexTraInExSums    = $helper->getConfig('index_trainexsums');
+$indexTraInExPie     = $helper->getConfig('index_trainexpie');
+$indexAssetsPie      = $helper->getConfig('index_assetspie');
 $indexAssetsPieTotal = $helper->getConfig('index_assetspietotal');
+$GLOBALS['xoopsTpl']->assign('indexTrahbar', $indexTrahbar);
+$GLOBALS['xoopsTpl']->assign('indexTraInExSums', $indexTraInExSums);
+$GLOBALS['xoopsTpl']->assign('indexTraInExPie', $indexTraInExPie);
+$GLOBALS['xoopsTpl']->assign('indexAssetsPie', $indexAssetsPie);
+$GLOBALS['xoopsTpl']->assign('indexAssetsPieTotal', $indexAssetsPieTotal);
 
 //create filter for
 // - transaction hbar chart
 // - assets pie chart
 $tradateFrom = 0;
 $tradateTo = \time();
-if ($indexAssetsPie || $indexTrahbar) {
+if ($indexAssetsPie || $indexTrahbar || $indexTraInExSums || $indexAssetsPie) {
     if (Constants::FILTER_PYEARLY == $period_type) {
         //filter data based on form select year
         if ($filterYear > Constants::FILTER_TYPEALL) {
@@ -95,7 +102,7 @@ if ($indexAssetsPie || $indexTrahbar) {
     }
 }
 
-if ($indexTrahbar) {
+if ($indexTrahbar || $indexTraInExSums || $indexAssetsPie) {
 //******************************
 // handle transaction hbar chart
 //******************************
@@ -105,6 +112,7 @@ if ($indexTrahbar) {
     $filter = '';
     if ($transactionsCount > 0) {
         $GLOBALS['xoopsTpl']->assign('header_transactions', \_MA_WGSIMPLEACC_TRANSACTIONS_OVERVIEW . ': ' . $filterYear);
+        $GLOBALS['xoopsTpl']->assign('header_transactions_sums', \_MA_WGSIMPLEACC_CHART_TRAINEXSUMS . ': ' . $filterYear);
         //get all allocations
         $crAllocations = new \CriteriaCompo();
         if ($allPid > 0) {
@@ -236,7 +244,9 @@ if ($indexTrahbar) {
         $GLOBALS['xoopsTpl']->assign('transactions_dataout2', $transactions_dataout2);
         $GLOBALS['xoopsTpl']->assign('transactions_labels', $transactions_labels);
         $GLOBALS['xoopsTpl']->assign('transactions_total_in', Utility::FloatToString($transactions_total_in));
+        $GLOBALS['xoopsTpl']->assign('transactions_total_in_val', $transactions_total_in);
         $GLOBALS['xoopsTpl']->assign('transactions_total_out', Utility::FloatToString($transactions_total_out));
+        $GLOBALS['xoopsTpl']->assign('transactions_total_out_val', $transactions_total_out);
         $GLOBALS['xoopsTpl']->assign('transactions_total', Utility::FloatToString($transactions_total_in - $transactions_total_out));
         $GLOBALS['xoopsTpl']->assign('label_datain1', _MA_WGSIMPLEACC_TRANSACTIONS_INCOMES . ' (' . _MA_WGSIMPLEACC_STATUS_APPROVED .')');
         $GLOBALS['xoopsTpl']->assign('label_datain2', _MA_WGSIMPLEACC_TRANSACTIONS_INCOMES . ' (' . _MA_WGSIMPLEACC_STATUS_SUBMITTED .')');
@@ -261,12 +271,14 @@ if ($indexAssetsPie) {
         $pcolors = [];
         $assetList = [];
         foreach ($assetsCurrent as $asset) {
-            $amountVal = $asset['amount_end'] - $asset['amount_start'];
-            $assets_data .= $amountVal . ',';
-            $assets_labels .= "'" . $asset['name'] . "',";
-            $assets_total += $amountVal;
-            $pcolors[] = Utility::getColorName($colors, $asset['color']);
-            $assetList[] = $asset;
+            if (1 == (int)$asset['iecalc']) {
+                $amountVal = $asset['amount_end'] - $asset['amount_start'];
+                $assets_data .= $amountVal . ',';
+                $assets_labels .= "'" . $asset['name'] . "',";
+                $assets_total += $amountVal;
+                $pcolors[] = Utility::getColorName($colors, $asset['color']);
+                $assetList[] = $asset;
+            }
         }
 
         $GLOBALS['xoopsTpl']->assign('assets_displaylegend', 'false');
@@ -293,11 +305,13 @@ if ($indexAssetsPieTotal) {
         $pcolors = [];
         $assetList = [];
         foreach ($assetsCurrent as $asset) {
-            $assets_data .= $asset['amount_val'] . ',';
-            $assets_labels .= "'" . $asset['name'] . "',";
-            $assets_total += $asset['amount_val'];
-            $pcolors[] = Utility::getColorName($colors, $asset['color']);
-            $assetList[] = $asset;
+            if (1 == (int)$asset['iecalc']) {
+                $assets_data .= $asset['amount_val'] . ',';
+                $assets_labels .= "'" . $asset['name'] . "',";
+                $assets_total += $asset['amount_val'];
+                $pcolors[] = Utility::getColorName($colors, $asset['color']);
+                $assetList[] = $asset;
+            }
         }
 
         $GLOBALS['xoopsTpl']->assign('assetsTotal_displaylegend', 'false');

@@ -106,11 +106,11 @@ class BalancesHandler extends \XoopsPersistableObjectHandler
 
 	/**
 	 * Get Criteria Balances
-	 * @param        $crBalances
-	 * @param int    $start
-	 * @param int    $limit
-	 * @param string $sort
-	 * @param string $order
+	 * @param $crBalances
+	 * @param $start
+	 * @param $limit
+	 * @param $sort
+	 * @param $order
 	 * @return int
 	 */
 	private function getBalancesCriteria($crBalances, $start, $limit, $sort, $order)

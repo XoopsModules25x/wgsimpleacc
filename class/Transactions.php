@@ -231,8 +231,10 @@ class Transactions extends \XoopsObject
         if ($helper->getConfig('useCurrencies')) {
             // Form Table currencies
             $currenciesHandler = $helper->getHandler('Currencies');
+            $crCurrencies = new \CriteriaCompo();
+            $crCurrencies->add(new \Criteria('cur_online', 1));
             $traCuridSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_CURID, 'tra_curid', $this->getVar('tra_curid'));
-            $traCuridSelect->addOptionArray($currenciesHandler->getList());
+            $traCuridSelect->addOptionArray($currenciesHandler->getList($crCurrencies));
             $form->addElement($traCuridSelect);
         }
         // Form Text traAmountin
@@ -257,16 +259,21 @@ class Transactions extends \XoopsObject
         if ($helper->getConfig('use_taxes')) {
             // Form Table taxes
             $taxesHandler = $helper->getHandler('Taxes');
+            $crTaxes = new \CriteriaCompo();
+            $crTaxes->add(new \Criteria('tax_online', 1));
             $traTaxid = $this->isNew() ? $taxesHandler->getPrimaryTax() : $this->getVar('tra_taxid');
             $traTaxidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_TAXID, 'tra_taxid', $traTaxid);
-            $traTaxidSelect->addOptionArray($taxesHandler->getList());
+            $traTaxidSelect->addOptionArray($taxesHandler->getList($crTaxes));
             $form->addElement($traTaxidSelect);
         }
         // Form Table assets
         $assetsHandler = $helper->getHandler('Assets');
+        $crAssets = new \CriteriaCompo();
+        $crAssets->add(new \Criteria('as_online', 1));
+        $crAssets->add(new \Criteria('as_iecalc', 1));
         $traAsid = $this->isNew() ? $assetsHandler->getPrimaryAsset() : $this->getVar('tra_asid');
 		$traAsidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_ASID, 'tra_asid', $traAsid);
-		$traAsidSelect->addOptionArray($assetsHandler->getList());
+		$traAsidSelect->addOptionArray($assetsHandler->getList($crAssets));
 		$form->addElement($traAsidSelect);
         // Form Text traComments
         $traComments = $this->isNew() ? 0 : $this->getVar('tra_comments');

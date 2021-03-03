@@ -225,9 +225,24 @@ switch ($op) {
                 $transactionsAll = $transactionsHandler->getAll($crTransactions);
                 if ($transactionsCount > 0) {
                     //add field names
-                    $data[] = [\_MA_WGSIMPLEACC_TRANSACTION_YEARNB, \_MA_WGSIMPLEACC_TRANSACTION_DESC, \_MA_WGSIMPLEACC_TRANSACTION_REFERENCE,
-                        \_MA_WGSIMPLEACC_TRANSACTION_ACCID, \_MA_WGSIMPLEACC_TRANSACTION_ALLID, \_MA_WGSIMPLEACC_TRANSACTION_DATE,
-                        \_MA_WGSIMPLEACC_TRANSACTION_AMOUNTIN, \_MA_WGSIMPLEACC_TRANSACTION_AMOUNTOUT, \_MA_WGSIMPLEACC_TRANSACTION_ASID];
+                    if ('xlsx' == $outType) {
+                        $data[] = [\_MA_WGSIMPLEACC_TRANSACTION_YEARNB, \_MA_WGSIMPLEACC_TRANSACTION_DESC, \_MA_WGSIMPLEACC_TRANSACTION_REFERENCE,
+                            \_MA_WGSIMPLEACC_TRANSACTION_ACCID, \_MA_WGSIMPLEACC_TRANSACTION_ALLID, \_MA_WGSIMPLEACC_TRANSACTION_DATE,
+                            \_MA_WGSIMPLEACC_TRANSACTION_AMOUNTIN, \_MA_WGSIMPLEACC_TRANSACTION_AMOUNTOUT, \_MA_WGSIMPLEACC_TRANSACTION_ASID];
+                    } else {
+                        $data[] = [
+                            '"' . \_MA_WGSIMPLEACC_TRANSACTION_YEARNB . '"',
+                            '"' . \_MA_WGSIMPLEACC_TRANSACTION_DESC . '"',
+                            '"' . \_MA_WGSIMPLEACC_TRANSACTION_REFERENCE . '"',
+                            '"' . \_MA_WGSIMPLEACC_TRANSACTION_ACCID . '"',
+                            '"' . \_MA_WGSIMPLEACC_TRANSACTION_ALLID . '"',
+                            '"' . \_MA_WGSIMPLEACC_TRANSACTION_DATE . '"',
+                            '"' . \_MA_WGSIMPLEACC_TRANSACTION_AMOUNTIN . '"',
+                            '"' . \_MA_WGSIMPLEACC_TRANSACTION_AMOUNTOUT . '"',
+                            '"' . \_MA_WGSIMPLEACC_TRANSACTION_ASID . '"'
+                        ];
+                    }
+
                     $transactions = [];
                     // Get All Transactions
                     foreach (\array_keys($transactionsAll) as $i) {
@@ -247,8 +262,8 @@ switch ($op) {
                         } else {
                             $data[] = [
                                 '"' . $transactions[$i]['year'] . '/' . $transactions[$i]['nb'] . '"',
-                                '"' . $transactions[$i]['desc'] . '"',
-                                '"' . $transactions[$i]['reference'] . '"',
+                                '"' . cleanOutputCsv($transactions[$i]['desc']) . '"',
+                                '"' . cleanOutputCsv($transactions[$i]['reference']) . '"',
                                 '"' . $transactions[$i]['account'] . '"',
                                 '"' . $transactions[$i]['allocation'] . '"',
                                 $transactions[$i]['date'],
@@ -265,7 +280,7 @@ switch ($op) {
                     $xlsx = Simplexlsxgen\SimpleXLSXGen::fromArray($data);
                     $xlsx->downloadAs($filename);
                 } else {
-                    $csv = Simplecsv\SimpleCSV::downloadAs( $data, $filename );
+                    $csv = Simplecsv\SimpleCSV::downloadAs( $data, $filename);
                 }
                 break;
             case 'none':
@@ -276,3 +291,22 @@ switch ($op) {
 }
 
 require __DIR__ . '/footer.php';
+
+/**
+ * function to clean output for csv
+ *
+ * @param $text
+ * @return string
+ */
+function cleanOutputCsv ($text) {
+    //replace possible column break in output
+    $cleanText = str_replace(';', ',', $text);
+
+    //convert o utf8
+    mb_convert_encoding($cleanText, 'UTF-8');
+    foreach(mb_list_encodings() as $chr){
+        $cleanText = mb_convert_encoding($cleanText, 'UTF-8', $chr);
+    }
+
+    return $cleanText;
+}

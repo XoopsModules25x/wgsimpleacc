@@ -10,6 +10,7 @@
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_ASSET_REFERENCE}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_ASSET_DESCR}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_ASSET_COLOR}></th>
+				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_ASSET_IECALC}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_ASSET_ONLINE}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_ASSET_PRIMARY}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_DATECREATED}></th>
@@ -36,6 +37,7 @@
 								<{/if}>
 							<{/foreach}>
 						</td>
+						<td class='center'><{$asset.iecalc}></td>
 						<td class='center'><{$asset.online}></td>
 						<td class='center'><{$asset.primary}></td>
 						<td class='center'><{$asset.datecreated}></td>

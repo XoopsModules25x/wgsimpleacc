@@ -34,6 +34,7 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_THEREARE_CURRENCIES', "There are <span class='bold'>%s</span> currencies in the database");
 \define('_AM_WGSIMPLEACC_THEREARE_TAXES', "There are <span class='bold'>%s</span> taxes in the database");
 \define('_AM_WGSIMPLEACC_THEREARE_FILES', "There are <span class='bold'>%s</span> files in the database");
+\define('_AM_WGSIMPLEACC_THEREARE_FILHISTORIES', "There are <span class='bold'>%s</span> files histories in the database");
 \define('_AM_WGSIMPLEACC_THEREARE_BALANCES', "There are <span class='bold'>%s</span> balances in the database");
 \define('_AM_WGSIMPLEACC_THEREARE_TRATEMPLATES', "There are <span class='bold'>%s</span> transaction templates in the database");
 \define('_AM_WGSIMPLEACC_THEREARE_OUTTEMPLATES', "There are <span class='bold'>%s</span> output templates in the database");
@@ -83,10 +84,16 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_TAX_RATE', 'Rate');
 \define('_AM_WGSIMPLEACC_TAX_ONLINE', 'Online');
 \define('_AM_WGSIMPLEACC_TAX_PRIMARY', 'Primary');
-// Caption of Transaction
+// Caption of Transaction histories
 \define('_AM_WGSIMPLEACC_TRANSACTION_HISTID', 'History Id');
 \define('_AM_WGSIMPLEACC_TRANSACTION_HISTTYPE', 'History Type');
 \define('_AM_WGSIMPLEACC_TRANSACTION_HISTDATE', 'History date');
+\define('_AM_WGSIMPLEACC_TRANSACTION_HISTSUBMITTER', 'History submitter');
+// Caption of Transaction histories
+\define('_AM_WGSIMPLEACC_FILES_HISTID', 'History Id');
+\define('_AM_WGSIMPLEACC_FILES_HISTTYPE', 'History Type');
+\define('_AM_WGSIMPLEACC_FILES_HISTDATE', 'History date');
+\define('_AM_WGSIMPLEACC_FILES_HISTSUBMITTER', 'History submitter');
 // ---------------- Admin Permissions ----------------
 // Permissions
 \define('_AM_WGSIMPLEACC_NO_PERMISSIONS_SET', 'No permission set');
@@ -117,5 +124,4 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_SUPPORT_FORUM', 'Support Forum');
 \define('_AM_WGSIMPLEACC_DONATION_AMOUNT', 'Donation Amount');
 \define('_AM_WGSIMPLEACC_MAINTAINEDBY', ' is maintained by ');
-\define('_AM_WGSIMPLEACC_ERROR_NO_WGPHPOFFICE', "This module needs module 'wgPhpOffice' for output data as MS Excel file. Please install first!");
 // ---------------- End ----------------

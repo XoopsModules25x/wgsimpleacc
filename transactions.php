@@ -196,7 +196,7 @@ switch ($op) {
 	case 'save':
 		// Security Check
 		if (!$GLOBALS['xoopsSecurity']->check()) {
-			//\redirect_header('transactions.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
+			\redirect_header('transactions.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
 		}
 		// Check permissions
 		if (!$permissionsHandler->getPermTransactionsSubmit()) {
@@ -208,7 +208,9 @@ switch ($op) {
         $createYearNb = false;
 		if ($traId > 0) {
 			$transactionsObj = $transactionsHandler->get($traId);
-            $traHist = $transactionsHandler->saveHistoryTransactions($traId);
+            if ($helper->getConfig('use_trahistories')) {
+                $traHist = $transactionsHandler->saveHistoryTransactions($traId);
+            }
 			if (date('Y', $traDate) != $traYear) {
                 $createYearNb = true;
             }
@@ -397,8 +399,10 @@ switch ($op) {
         if (!$permissionsHandler->getPermTransactionsEdit($traSubmitter, $traStatus)) {
             \redirect_header('transactions.php?op=list', 3, _NOPERM);
         }
-        //create history
-        $transactionsHandler->saveHistoryTransactions($traId, 'delete');
+        if ($helper->getConfig('use_trahistories')) {
+            //create history
+            $transactionsHandler->saveHistoryTransactions($traId, 'delete');
+        }
 		$traDesc = $transactionsObj->getVar('tra_desc');
 		if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
 			if (!$GLOBALS['xoopsSecurity']->check()) {
