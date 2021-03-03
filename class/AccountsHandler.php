@@ -290,7 +290,7 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
         $balAmountStart = 0;
         $sumAmountin = 0;
         $sumAmountout = 0;
-        $crBalIds = implode(',', $bal_ids);
+        $crBalIds = \implode(',', $bal_ids);
         $balCurid = $currenciesHandler->getPrimaryCurrency() > 0 ? $currenciesHandler->getPrimaryCurrency() : 0;
 
         $accountsAll = $accountsHandler->getAll();

@@ -76,7 +76,7 @@ switch ($op) {
         $levelAlloc   = Request::getInt('level_alloc');
         $levelAccount = Request::getInt('level_account');
         $GLOBALS['xoopsTpl']->assign('buttonBalPdf', true);
-        $GLOBALS['xoopsTpl']->assign('balIds', implode(',', $balIds));
+        $GLOBALS['xoopsTpl']->assign('balIds', \implode(',', $balIds));
         $GLOBALS['xoopsTpl']->assign('level_alloc', $levelAlloc);
         $GLOBALS['xoopsTpl']->assign('level_account', $levelAccount);
 
@@ -300,7 +300,7 @@ require __DIR__ . '/footer.php';
  */
 function cleanOutputCsv ($text) {
     //replace possible column break in output
-    $cleanText = str_replace(';', ',', $text);
+    $cleanText = \str_replace(';', ',', $text);
 
     //convert o utf8
     mb_convert_encoding($cleanText, 'UTF-8');

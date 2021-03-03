@@ -56,12 +56,12 @@ switch ($op) {
 			}
 			// Display Navigation
 			if ($filhistoriesCount > $limit) {
-				include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+				include_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
 				$pagenav = new \XoopsPageNav($filhistoriesCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
 				$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
 			}
 		} else {
-			$GLOBALS['xoopsTpl']->assign('error', _MA_WGSIMPLEACC_THEREARENT_FILHISTORIES);
+			$GLOBALS['xoopsTpl']->assign('error', \_MA_WGSIMPLEACC_THEREARENT_FILHISTORIES);
 		}
 		break;
 	case 'delete':
@@ -82,7 +82,7 @@ switch ($op) {
 			$xoopsconfirm = new Common\XoopsConfirm(
 				['ok' => 1, 'hist_id' => $histId, 'op' => 'delete'],
 				$_SERVER['REQUEST_URI'],
-				\sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $filhistoriesObj->getVar('fil_name')));
+				\sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $filName));
 			$form = $xoopsconfirm->getFormXoopsConfirm();
 			$GLOBALS['xoopsTpl']->assign('form', $form->render());
 		}

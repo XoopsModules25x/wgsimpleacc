@@ -101,7 +101,7 @@ class OutputsHandler extends \XoopsPersistableObjectHandler
         $balancesHandler = $helper->getHandler('Balances');
         $assetsHandler = $helper->getHandler('Assets');
 
-        $crBalIds = implode(',', $bal_ids);
+        $crBalIds = \implode(',', $bal_ids);
         $crBalances = new \CriteriaCompo();
         $crBalances->add(new \Criteria('bal_id', "($crBalIds)", 'IN'));
         $balancesCount = $balancesHandler->getCount($crBalances);
@@ -131,7 +131,7 @@ class OutputsHandler extends \XoopsPersistableObjectHandler
         $accountsHandler = $helper->getHandler('Accounts');
 
         $ret = [];
-        $crBalIds = implode(',', $bal_ids);
+        $crBalIds = \implode(',', $bal_ids);
         $sql = 'SELECT `tra_accid`, Sum(`tra_amountin`) AS Sum_tra_amountin, Sum(`tra_amountout`) AS Sum_tra_amountout ';
         $sql .= 'FROM ' . $xoopsDB->prefix('wgsimpleacc_transactions') . ' ';
         $sql .= 'WHERE ' . $xoopsDB->prefix('wgsimpleacc_transactions') . '.tra_balid IN(' . $crBalIds. ')';
@@ -177,7 +177,7 @@ class OutputsHandler extends \XoopsPersistableObjectHandler
         $allocationsHandler = $helper->getHandler('Allocations');
 
         $ret = [];
-        $crBalIds = implode(',', $bal_ids);
+        $crBalIds = \implode(',', $bal_ids);
         $sql = 'SELECT `tra_allid`, Sum(`tra_amountin`) AS Sum_tra_amountin, Sum(`tra_amountout`) AS Sum_tra_amountout ';
         $sql .= 'FROM ' . $xoopsDB->prefix('wgsimpleacc_transactions') . ' ';
         $sql .= 'WHERE ' . $xoopsDB->prefix('wgsimpleacc_transactions') . '.tra_balid IN(' . $crBalIds. ')';
@@ -219,7 +219,7 @@ class OutputsHandler extends \XoopsPersistableObjectHandler
         $allocationsHandler = $helper->getHandler('Allocations');
         $transactionsHandler = $helper->getHandler('Transactions');
 
-        $crBalIds = implode(',', $bal_ids);
+        $crBalIds = \implode(',', $bal_ids);
         $ret = [];
 
         //get all allocations

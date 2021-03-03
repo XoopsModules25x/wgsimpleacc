@@ -285,7 +285,7 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
         $traVars = $transactionsObj->getVars();
 
         $insert = 'INSERT INTO ' . $GLOBALS['xoopsDB']->prefix('wgsimpleacc_trahistories') . ' (hist_datecreated, hist_type, hist_submitter';
-        $select = 'SELECT ' . time() . " AS histdatecreated, '$type' AS histtype, '$uid' AS histsubmitter";
+        $select = 'SELECT ' . \time() . " AS histdatecreated, '$type' AS histtype, '$uid' AS histsubmitter";
         $from = ' FROM '. $GLOBALS['xoopsDB']->prefix('wgsimpleacc_transactions');
         $where = " WHERE (tra_id=$traId)";
 

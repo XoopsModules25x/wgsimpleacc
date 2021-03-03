@@ -49,8 +49,8 @@ class Utility
 
         // $customDateFormat: fix problem that XoopsFormTextDateSelect use _SHORTDATESTRING and _DATESTRING can differ
         // e.g. english:
-        // define('_DATESTRING',      'Y/n/j G:i:s');
-        // define('_SHORTDATESTRING', 'm/d/Y');
+        // \define('_DATESTRING',      'Y/n/j G:i:s');
+        // \define('_SHORTDATESTRING', 'm/d/Y');
         return _SHORTDATESTRING . ' H:i';
 
     }

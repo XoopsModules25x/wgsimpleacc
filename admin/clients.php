@@ -42,7 +42,7 @@ switch ($op) {
 		$limit = Request::getInt('limit', $helper->getConfig('adminpager'));
 		$templateMain = 'wgsimpleacc_admin_clients.tpl';
 		$GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('clients.php'));
-		$adminObject->addItemButton(_AM_WGSIMPLEACC_ADD_CLIENT, 'clients.php?op=new', 'add');
+		$adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_CLIENT, 'clients.php?op=new', 'add');
 		$GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
 		$clientsCount = $clientsHandler->getCountClients();
 		$clientsAll = $clientsHandler->getAllClients($start, $limit);
@@ -58,7 +58,7 @@ switch ($op) {
 			}
 			// Display Navigation
 			if ($clientsCount > $limit) {
-				include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+				include_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
 				$pagenav = new \XoopsPageNav($clientsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
 				$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
 			}
@@ -69,7 +69,7 @@ switch ($op) {
 	case 'new':
 		$templateMain = 'wgsimpleacc_admin_clients.tpl';
 		$GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('clients.php'));
-		$adminObject->addItemButton(_AM_WGSIMPLEACC_LIST_CLIENTS, 'clients.php', 'list');
+		$adminObject->addItemButton(\_AM_WGSIMPLEACC_LIST_CLIENTS, 'clients.php', 'list');
 		$GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
 		// Form Create
 		$clientsObj = $clientsHandler->create();
@@ -101,7 +101,7 @@ switch ($op) {
 		$clientsObj->setVar('cli_submitter', Request::getInt('cli_submitter', 0));
 		// Insert Data
 		if ($clientsHandler->insert($clientsObj)) {
-			\redirect_header('clients.php?op=list', 2, _AM_WGSIMPLEACC_FORM_OK);
+			\redirect_header('clients.php?op=list', 2, \_AM_WGSIMPLEACC_FORM_OK);
 		}
 		// Get Form
 		$GLOBALS['xoopsTpl']->assign('error', $clientsObj->getHtmlErrors());
@@ -111,8 +111,8 @@ switch ($op) {
 	case 'edit':
 		$templateMain = 'wgsimpleacc_admin_clients.tpl';
 		$GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('clients.php'));
-		$adminObject->addItemButton(_AM_WGSIMPLEACC_ADD_CLIENT, 'clients.php?op=new', 'add');
-		$adminObject->addItemButton(_AM_WGSIMPLEACC_LIST_CLIENTS, 'clients.php', 'list');
+		$adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_CLIENT, 'clients.php?op=new', 'add');
+		$adminObject->addItemButton(\_AM_WGSIMPLEACC_LIST_CLIENTS, 'clients.php', 'list');
 		$GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
 		// Get Form
 		$clientsObj = $clientsHandler->get($cliId);
@@ -129,7 +129,7 @@ switch ($op) {
 				\redirect_header('clients.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
 			}
 			if ($clientsHandler->delete($clientsObj)) {
-				\redirect_header('clients.php', 3, _AM_WGSIMPLEACC_FORM_DELETE_OK);
+				\redirect_header('clients.php', 3, \_AM_WGSIMPLEACC_FORM_DELETE_OK);
 			} else {
 				$GLOBALS['xoopsTpl']->assign('error', $clientsObj->getHtmlErrors());
 			}
@@ -137,7 +137,7 @@ switch ($op) {
 			$xoopsconfirm = new Common\XoopsConfirm(
 				['ok' => 1, 'cli_id' => $cliId, 'op' => 'delete'],
 				$_SERVER['REQUEST_URI'],
-				\sprintf(_MA_WGSIMPLEACC_FORM_SURE_DELETE, $clientsObj->getVar('cli_name')));
+				\sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $clientsObj->getVar('cli_name')));
 			$form = $xoopsconfirm->getFormXoopsConfirm();
 			$GLOBALS['xoopsTpl']->assign('form', $form->render());
 		}

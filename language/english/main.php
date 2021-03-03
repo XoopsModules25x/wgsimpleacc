@@ -282,7 +282,6 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ACC', 'Level of account');
 \define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ACC1', 'Aggregate all account');
 \define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ACC2', 'Aggregate accounts on first level');
-\define('_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ACC3', 'Output detailed accounts');
 // Templates general
 \define('_MA_WGSIMPLEACC_TEMPLATES', 'Templates');
 \define('_MA_WGSIMPLEACC_TEMPLATE_NONE', 'None');

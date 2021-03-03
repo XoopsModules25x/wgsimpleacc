@@ -28,7 +28,7 @@ namespace XoopsModules\Wgsimpleacc;
 
 use XoopsModules\Wgsimpleacc;
 
-\defined('XOOPS_ROOT_PATH') || die('Restricted access');
+\defined('\XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * Class Object Filhistories
@@ -42,18 +42,18 @@ class Filhistories extends \XoopsObject
 	 */
 	public function __construct()
 	{
-		$this->initVar('hist_id', XOBJ_DTYPE_INT);
-		$this->initVar('hist_type', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('hist_datecreated', XOBJ_DTYPE_INT);
-		$this->initVar('hist_submitter', XOBJ_DTYPE_INT);
-		$this->initVar('fil_id', XOBJ_DTYPE_INT);
-		$this->initVar('fil_traid', XOBJ_DTYPE_INT);
-		$this->initVar('fil_name', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('fil_type', XOBJ_DTYPE_INT);
-		$this->initVar('fil_desc', XOBJ_DTYPE_TXTAREA);
-		$this->initVar('fil_ip', XOBJ_DTYPE_TXTBOX);
-		$this->initVar('fil_datecreated', XOBJ_DTYPE_INT);
-		$this->initVar('fil_submitter', XOBJ_DTYPE_INT);
+		$this->initVar('hist_id', \XOBJ_DTYPE_INT);
+		$this->initVar('hist_type', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('hist_datecreated', \XOBJ_DTYPE_INT);
+		$this->initVar('hist_submitter', \XOBJ_DTYPE_INT);
+		$this->initVar('fil_id', \XOBJ_DTYPE_INT);
+		$this->initVar('fil_traid', \XOBJ_DTYPE_INT);
+		$this->initVar('fil_name', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('fil_type', \XOBJ_DTYPE_INT);
+		$this->initVar('fil_desc', \XOBJ_DTYPE_TXTAREA);
+		$this->initVar('fil_ip', \XOBJ_DTYPE_TXTBOX);
+		$this->initVar('fil_datecreated', \XOBJ_DTYPE_INT);
+		$this->initVar('fil_submitter', \XOBJ_DTYPE_INT);
 	}
 
 	/**
@@ -88,7 +88,11 @@ class Filhistories extends \XoopsObject
 		$ret['id']            = $this->getVar('fil_id');
 		$transactionsHandler = $helper->getHandler('Transactions');
 		$transactionsObj = $transactionsHandler->get($this->getVar('fil_traid'));
-		$ret['traid']         = $transactionsObj->getVar('tra_desc');
+		if (\is_object($transactionsObj)) {
+            $ret['traid'] = $transactionsObj->getVar('tra_desc');
+        } else {
+            $ret['traid'] = '';
+        }
 		$ret['name']          = $this->getVar('fil_name');
 		$ret['type']          = $this->getVar('fil_type');
 		$ret['desc']          = \strip_tags($this->getVar('fil_desc', 'e'));

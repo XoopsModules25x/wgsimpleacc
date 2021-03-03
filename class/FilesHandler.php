@@ -139,7 +139,7 @@ class FilesHandler extends \XoopsPersistableObjectHandler
         $traVars = $filesObj->getVars();
 
         $insert = 'INSERT INTO ' . $GLOBALS['xoopsDB']->prefix('wgsimpleacc_filhistories') . ' (hist_datecreated, hist_type, hist_submitter';
-        $select = 'SELECT ' . time() . " AS histdatecreated, '$type' AS histtype, '$uid' AS histsubmitter";
+        $select = 'SELECT ' . \time() . " AS histdatecreated, '$type' AS histtype, '$uid' AS histsubmitter";
         $from = ' FROM '. $GLOBALS['xoopsDB']->prefix('wgsimpleacc_files');
         $where = " WHERE (fil_id=$filId)";
 

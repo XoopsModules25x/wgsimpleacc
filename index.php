@@ -171,7 +171,7 @@ if ($indexTrahbar || $indexTraInExSums || $indexAssetsPie) {
                     $transactions_datain2 .= $sumAmountin2 . ',';
                     $transactions_dataout1 .= $sumAmountout1 . ',';
                     $transactions_dataout2 .= $sumAmountout2 . ',';
-                    $transactions_labels .= "'" . str_replace('%s', $allName, \_MA_WGSIMPLEACC_ALLOCATION_CURRID) . "',";
+                    $transactions_labels .= "'" . \str_replace('%s', $allName, \_MA_WGSIMPLEACC_ALLOCATION_CURRID) . "',";
                 }
 
                 unset($crAllocCur, $allocCurObj, $crTransactions);
@@ -248,10 +248,10 @@ if ($indexTrahbar || $indexTraInExSums || $indexAssetsPie) {
         $GLOBALS['xoopsTpl']->assign('transactions_total_out', Utility::FloatToString($transactions_total_out));
         $GLOBALS['xoopsTpl']->assign('transactions_total_out_val', $transactions_total_out);
         $GLOBALS['xoopsTpl']->assign('transactions_total', Utility::FloatToString($transactions_total_in - $transactions_total_out));
-        $GLOBALS['xoopsTpl']->assign('label_datain1', _MA_WGSIMPLEACC_TRANSACTIONS_INCOMES . ' (' . _MA_WGSIMPLEACC_STATUS_APPROVED .')');
-        $GLOBALS['xoopsTpl']->assign('label_datain2', _MA_WGSIMPLEACC_TRANSACTIONS_INCOMES . ' (' . _MA_WGSIMPLEACC_STATUS_SUBMITTED .')');
-        $GLOBALS['xoopsTpl']->assign('label_dataout1', _MA_WGSIMPLEACC_TRANSACTIONS_EXPENSES . ' (' . _MA_WGSIMPLEACC_STATUS_APPROVED .')');
-        $GLOBALS['xoopsTpl']->assign('label_dataout2', _MA_WGSIMPLEACC_TRANSACTIONS_EXPENSES . ' (' . _MA_WGSIMPLEACC_STATUS_SUBMITTED .')');
+        $GLOBALS['xoopsTpl']->assign('label_datain1', \_MA_WGSIMPLEACC_TRANSACTIONS_INCOMES . ' (' . \_MA_WGSIMPLEACC_STATUS_APPROVED .')');
+        $GLOBALS['xoopsTpl']->assign('label_datain2', \_MA_WGSIMPLEACC_TRANSACTIONS_INCOMES . ' (' . \_MA_WGSIMPLEACC_STATUS_SUBMITTED .')');
+        $GLOBALS['xoopsTpl']->assign('label_dataout1', \_MA_WGSIMPLEACC_TRANSACTIONS_EXPENSES . ' (' . \_MA_WGSIMPLEACC_STATUS_APPROVED .')');
+        $GLOBALS['xoopsTpl']->assign('label_dataout2', \_MA_WGSIMPLEACC_TRANSACTIONS_EXPENSES . ' (' . \_MA_WGSIMPLEACC_STATUS_SUBMITTED .')');
     }
     unset($count);
 }

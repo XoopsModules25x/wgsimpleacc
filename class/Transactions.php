@@ -54,7 +54,7 @@ class Transactions extends \XoopsObject
 		$this->initVar('tra_amountout', \XOBJ_DTYPE_DECIMAL);
 		$this->initVar('tra_taxid', \XOBJ_DTYPE_INT);
         $this->initVar('tra_asid', \XOBJ_DTYPE_INT);
-        $this->initVar('tra_cliid', XOBJ_DTYPE_INT);
+        $this->initVar('tra_cliid', \XOBJ_DTYPE_INT);
 		$this->initVar('tra_status', \XOBJ_DTYPE_INT);
 		$this->initVar('tra_comments', \XOBJ_DTYPE_INT);
         $this->initVar('tra_class', \XOBJ_DTYPE_INT);
@@ -322,9 +322,9 @@ class Transactions extends \XoopsObject
             } else {
                 $traStatusNew = Constants::STATUS_SUBMITTED;
                 if ($this->isNew()) {
-                    $form->addElement(new \XoopsFormLabel(_MA_WGSIMPLEACC_TRANSACTION_STATUS, Utility::getStatusText($traStatusNew)));
+                    $form->addElement(new \XoopsFormLabel(\_MA_WGSIMPLEACC_TRANSACTION_STATUS, Utility::getStatusText($traStatusNew)));
                 } else {
-                    $form->addElement(new \XoopsFormLabel(_MA_WGSIMPLEACC_TRANSACTION_STATUS, Utility::getStatusText($traStatus)));
+                    $form->addElement(new \XoopsFormLabel(\_MA_WGSIMPLEACC_TRANSACTION_STATUS, Utility::getStatusText($traStatus)));
                 }
                 $form->addElement(new \XoopsFormHidden('tra_status', $traStatusNew));
             }
