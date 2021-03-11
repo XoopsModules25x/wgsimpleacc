@@ -32,20 +32,51 @@ use XoopsModules\Wgsimpleacc\Helper;
  * @param $outParams
  * @return string
  */
+
+if (\file_exists($tcpdf = \XOOPS_ROOT_PATH . '/Frameworks/tcpdf/')) {
+    require_once $tcpdf . 'tcpdf.php';
+} else {
+    \redirect_header('transactions.php', 2, \_MA_WGSIMPLEACC_NO_PDF_LIBRARY);
+}
+
+// Extend the TCPDF class to create custom Header and Footer
+class MYPDF extends TCPDF {
+
+    /**
+     * @var mixed
+     */
+    public $htmlHeader = '';
+
+    /**
+     * @var mixed
+     */
+    public $htmlFooter = '';
+
+    //Page header
+    public function Header() {
+        //add my custom header
+        $this->writeHTMLCell(0, 0, '', '', $this->htmlHeader, 0, 1, 0, true, 'top', true);
+    }
+
+    // Page footer
+    public function Footer() {
+        // Position at 15 mm from bottom
+        $this->SetY(-15);
+        //add my custom footer
+        $this->MultiCell(0,0, $this->htmlFooter,0,'J', false, 1, '', '', true, 0, true);
+    }
+}
+
 function execute_output ($template, $outParams)
 {
+    $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+
     if (\file_exists($tcpdf = \XOOPS_ROOT_PATH . '/Frameworks/tcpdf/')) {
         require_once $tcpdf . 'tcpdf.php';
     } else {
         \redirect_header('transactions.php', 2, \_MA_WGSIMPLEACC_NO_PDF_LIBRARY);
     }
     require_once $tcpdf . 'config/tcpdf_config.php';
-
-    $helper = Helper::getInstance();
-
-    // Get Instance of Handler
-    $transactionsHandler = $helper->getHandler('Transactions');
-    $transactionsObj = $transactionsHandler->get($template['tra_id']);
 
     $myts = MyTextSanitizer::getInstance();
 
@@ -55,8 +86,8 @@ function execute_output ($template, $outParams)
     $subject = 'Pdf Subject';
 
     // Read data from table and create pdfData
-    $pdfData['date'] = \formatTimestamp($transactionsObj->getVar('tra_date'), 's');
-    $pdfData['author'] = \XoopsUser::getUnameFromId($transactionsObj->getVar('tra_submitter'));
+    $pdfData['date'] = $outParams['date'];
+    $pdfData['author'] = $outParams['submitter'];
     $pdfData['title'] = \strip_tags($myts->undoHtmlSpecialChars($title));
     $pdfData['content'] = $myts->undoHtmlSpecialChars($template['body']);
     $pdfData['fontname'] = PDF_FONT_NAME_MAIN;
@@ -70,15 +101,17 @@ function execute_output ($template, $outParams)
     // Defines
     \define('WGSIMPLEACC_CREATOR', $pdfData['creator']);
     \define('WGSIMPLEACC_AUTHOR', $pdfData['author']);
-    \define('WGSIMPLEACC_HEADER_TITLE', $pdfData['title']);
-    \define('WGSIMPLEACC_HEADER_STRING', $pdfData['subject']);
-    \define('WGSIMPLEACC_HEADER_LOGO', 'logo.gif');
-    \define('WGSIMPLEACC_IMAGES_PATH', \XOOPS_ROOT_PATH . '/images/');
+    \define('WGSIMPLEACC_HEADER_TITLE', '');
+    \define('WGSIMPLEACC_HEADER_STRING', '');
+    \define('WGSIMPLEACC_HEADER_LOGO', '');
+    \define('WGSIMPLEACC_IMAGES_PATH', '');
 
     // Create pdf
-    $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, _CHARSET, false);
+    $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, _CHARSET, false);
     // Remove/add default header/footer
-    $pdf->setPrintHeader(false);
+    $pdf->htmlHeader = $template['header'];
+    $pdf->htmlFooter = $template['footer'];
+    $pdf->setPrintHeader(true);
     $pdf->setPrintFooter(true);
     // Set document information
     $pdf->SetCreator($pdfData['creator']);
@@ -86,7 +119,7 @@ function execute_output ($template, $outParams)
     $pdf->SetTitle($title);
     $pdf->SetKeywords($pdfData['keywords']);
     // Set default header data
-    $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, WGSIMPLEACC_HEADER_TITLE, WGSIMPLEACC_HEADER_STRING);
+    $pdf->SetHeaderData('', PDF_HEADER_LOGO_WIDTH, WGSIMPLEACC_HEADER_TITLE, WGSIMPLEACC_HEADER_STRING);
     // Set margins
     $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP + 10, PDF_MARGIN_RIGHT);
     // Set auto page breaks

@@ -59,16 +59,6 @@ $GLOBALS['xoopsTpl']->assign('permOuttemplatesView', $permissionsHandler->getPer
 $GLOBALS['xoopsTpl']->assign('permClientsSubmit', $permissionsHandler->getPermClientsSubmit());
 $GLOBALS['xoopsTpl']->assign('permClientsView', $permissionsHandler->getPermClientsView());
 
-$outtemplates = [];
-$crOuttemplates = new \CriteriaCompo();
-$crOuttemplates->add(new \Criteria('otpl_online', 1));
-$outtemplatesAll = $outtemplatesHandler->getAll($crOuttemplates);
-foreach (\array_keys($outtemplatesAll) as $i) {
-    $outtemplates[$i] = $outtemplatesAll[$i]->getValuesOuttemplates();
-}
-$GLOBALS['xoopsTpl']->assign('outtemplates', $outtemplates);
-unset($outtemplates);
-
 //$GLOBALS['xoopsTpl']->assign('pathIcons32', WGSIMPLEACC_ICONS_URL . '/32/');
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_icon_url_32', WGSIMPLEACC_ICONS_URL . '/32/');
 

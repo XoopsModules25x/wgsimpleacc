@@ -44,7 +44,7 @@ $modversion = [
 	'manual'              => 'link to manual file',
 	'manual_file'         => \XOOPS_URL . '/modules/wgsimpleacc/docs/install.txt',
 	'min_php'             => '7.3',
-	'min_xoops'           => '2.5.10',
+	'min_xoops'           => '2.5.11',
 	'min_admin'           => '1.2',
 	'min_db'              => ['mysql' => '5.5', 'mysqli' => '5.5'],
 	'image'               => 'assets/images/logoModule.png',

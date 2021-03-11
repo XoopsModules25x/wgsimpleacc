@@ -109,6 +109,7 @@
 .wgsa_outtemplate {}
 .wgsa_outtemplate_footer {
 	margin-top:50px;
+	padding-top:20px;
 	border-top: 1px solid #000;
 }
 
@@ -152,4 +153,13 @@ ul.menu > li + li:before {
 }
 .row-class-3 > td {
 	border-top:1px solid green !important;
+}
+.wgsa-output-table-default {
+	border:0;
+}
+.wgsa-output-table-default tr {
+	border-bottom:1px solid #cccccc;
+}
+.wgsa-output-table-default tr td {
+	padding:5px;
 }

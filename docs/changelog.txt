@@ -2,7 +2,8 @@
 1.22 [2021/02/28]
 ==============================================================
  - added files histories (goffy)
- - added possibility to delete temp uploaded files  (goffy)
+ - added possibility to delete temp uploaded files (goffy)
+ - improved template based output (goffy)
 
 ==============================================================
 1.21 [2021/02/03]

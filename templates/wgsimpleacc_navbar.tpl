@@ -210,11 +210,6 @@
                                 <li>
                                     <a href="outputs.php?op=transactions"><i class="fa fa-files-o fa-fw fa-lg"></i> <{$smarty.const._MA_WGSIMPLEACC_TRANSACTIONS_LIST}></a>
                                 </li>
-                                <{foreach item=template from=$outtemplates}>
-                                <li>
-                                    <a href="outtemplates.php?op=select&amp;otpl_id=<{$template.id}>"><i class="fa fa-files-o fa-fw fa-lg"></i> <{$template.name}></a>
-                                </li>
-                                <{/foreach}>
                             <{/if}>
                             <{if $permBalancesView}>
                                 <li>

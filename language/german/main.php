@@ -298,16 +298,23 @@ require_once __DIR__ . '/admin.php';
 // Caption of Outtemplate
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_ID', 'Id');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_NAME', 'Name');
-\define('_MA_WGSIMPLEACC_OUTTEMPLATE_CONTENT', 'Inhalt');
-\define('_MA_WGSIMPLEACC_OUTTEMPLATE_CONTENT_DESC','
-    Html format:
-    <br>
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_TYPE', 'Typ');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_TYPE_READY', 'Fertig für Direktausgabe');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_TYPE_BROWSER', 'Anzeige im Browser');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_TYPE_FORM', 'Bearbeiten in Formular');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_TYPE_DESC', '- Fertig für Ausgabe: die Vorlage wird ausgefüllt und sofort als Pdf heruntergeladen<br>
+- Bearbeiten in Formular: die Daten werden in ein Formular geladen und können vor der Ausgabe überprüft werden');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_HEADER', 'Seitenkopf');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_BODY', 'Inhalt');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_FOOTER', 'Seitenfuss');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_SMARTY', 'Smarty Variable');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_SMARTY_DESC', '
     Dieses Modul verwendet die Xoops <a href="http://www.smarty.net/">Smarty template engine</a> zum Rendern von Ausgaben.
     <br><br>
     Verfügbare Smarty-Variable sind:
     <ul>
-    <li><{$sender}>: Absender</li>
-    <li><{$recipient}>: Empfänger</li>
+    <li><{$sender}>: Standardabsender für Ausgabe</li>
+    <li><{$recipient}>: Empfänger/Klient</li>
     <li><{$year}>: GZ-Jahr der Transaktion</li>
     <li><{$nb}>: GZ-Nummer der Transaktion</li>
     <li><{$year_nb}>: GZ-Jahr/GZ-Nummer der Transaktion (Format: JJJJ/00000)</li>
@@ -316,26 +323,35 @@ require_once __DIR__ . '/admin.php';
     <li><{$account}>: Konto</li>
     <li><{$allocation}>: Zuordnung</li>
     <li><{$asset}>: Vermögenswert</li>
-    <li><{$amount}>: Betrag</li>
     <li><{$date}>: Transaktionsdatum</li>
     <li><{$amount}>: Betrag</li>
+    <li><{$status_text}>: Status</li>
+    <li><{$datecreated}>: Erstelldatum</li>
+    <li><{$submitter}>: Einsender</li>
     </ul>
+    Allgemeine Smarty-Variable sind:
     <ul>
+    <li><{$xoops_sitename}>: Name Ihrer Webseite</li>
+    <li><{xoops_slogan}>: Slogan Ihrer Webseite</li>
+    <li><{$xoops_pagetitle}>: Titel Ihrer Webseite</li>
     <li><{$xoops_url}>: Url Ihrer Webseite (z.B. http://localhost/)</li>
     <li><{$output_date}>: Ausgabedatum</li>
     <li><{$output_user}>: Aktueller Benutzername</li>
     </ul>');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_ALLID', 'Zuordnungen');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_ALLID_ALL', 'Alle');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_ONLINE', 'Online');
 // Output Form
-\define('_MA_WGSIMPLEACC_OUTTEMPLATE_SELECT', 'Transaktion und Ausgabevorlage auswählen');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_FORM', 'Transaktion ausgeben');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_YEAR', 'Jahr');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_NB', 'Nummer');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_SENDER', 'Absender');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_RECIPIENT', 'Empfänger');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_TARGET', 'Art der Ausgabe');
-\define('_MA_WGSIMPLEACC_OUTTEMPLATE_TARGET_SHOW', 'Nur anzeigen');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_TARGET_BROWSER', 'Nur anzeigen');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_TARGET_PDF', 'Als PDF ausgeben');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_PDF_SUCCESS', 'Daten erfolgreich als PDF ausgegeben');
+//\define('_MA_WGSIMPLEACC_OUTTEMPLATE_DEFAULT', 'Standardbeleg');
 // Client
 \define('_MA_WGSIMPLEACC_CLIENTS', 'Klienten');
 \define('_MA_WGSIMPLEACC_CLIENTS_LIST', 'Liste der Klienten');

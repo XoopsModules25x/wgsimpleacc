@@ -5,9 +5,11 @@
 			<table class='table table-<{$table_type}>'>
 				<thead>
 				<tr class='head'>
-					<th class="col-sm-8 center"><{$smarty.const._MA_WGSIMPLEACC_OUTTEMPLATE_NAME}></th>
-					<th class="col-sm-1 center"><{$smarty.const._MA_WGSIMPLEACC_OUTTEMPLATE_ONLINE}></th>
-					<th class="col-sm-3 center"><{$smarty.const._MA_WGSIMPLEACC_FORM_ACTION}></th>
+					<th class="center"><{$smarty.const._MA_WGSIMPLEACC_OUTTEMPLATE_NAME}></th>
+					<th class="center"><{$smarty.const._MA_WGSIMPLEACC_OUTTEMPLATE_TYPE}></th>
+					<th class="center"><{$smarty.const._MA_WGSIMPLEACC_OUTTEMPLATE_ALLID}></th>
+					<th class="center"><{$smarty.const._MA_WGSIMPLEACC_OUTTEMPLATE_ONLINE}></th>
+					<th class="center"><{$smarty.const._MA_WGSIMPLEACC_FORM_ACTION}></th>
 				</tr>
 				</thead>
 				<tbody>

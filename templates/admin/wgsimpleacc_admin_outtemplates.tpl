@@ -7,7 +7,8 @@
 			<tr class='head'>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_OUTTEMPLATE_ID}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_OUTTEMPLATE_NAME}></th>
-				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_OUTTEMPLATE_CONTENT}></th>
+				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_OUTTEMPLATE_TYPE}></th>
+				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_OUTTEMPLATE_ALLID}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_OUTTEMPLATE_ONLINE}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_DATECREATED}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_SUBMITTER}></th>
@@ -20,7 +21,8 @@
 					<tr class='<{cycle values='odd, even'}>'>
 						<td class='center'><{$outtemplate.id}></td>
 						<td class='center'><{$outtemplate.name}></td>
-						<td class='center'><{$outtemplate.content_short}></td>
+						<td class='center'><{$outtemplate.type_text}></td>
+						<td class="center"><{$outtemplate.allid}></td>
 						<td class='center'><{$outtemplate.online}></td>
 						<td class='center'><{$outtemplate.datecreated}></td>
 						<td class='center'><{$outtemplate.submitter}></td>

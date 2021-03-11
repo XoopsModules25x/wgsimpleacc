@@ -124,4 +124,35 @@ class ClientsHandler extends \XoopsPersistableObjectHandler
 		$crClients->setOrder($order);
 		return $crClients;
 	}
+
+    /**
+     * Get All Clients in the database
+     * @param  $cliId
+     * @return string
+     */
+    public function getClientFullAddress($cliId)
+    {
+        $clientsObj = $this->get($cliId);
+        $line1 = '';
+        $line2 = '';
+        if (\is_object($clientsObj)) {
+            if ('' !== $clientsObj->getVar('cli_address')) {
+                $line1 = $clientsObj->getVar('cli_address');
+            }
+            if ('' !== $clientsObj->getVar('cli_postal')) {
+                $line2 .= $clientsObj->getVar('cli_postal');
+            }
+            if ('' !== $clientsObj->getVar('cli_city')) {
+                if ('' !== $line2) {
+                    $line2 .= '-';
+                }
+                $line2 .= $clientsObj->getVar('cli_city');
+            }
+            if ('' !== $line1 && '' !== $line2) {
+                $line1 .= '<br>';
+            }
+        }
+        $fullAddress = $line1 . $line2;
+        return $fullAddress;
+    }
 }
