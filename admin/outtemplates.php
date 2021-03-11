@@ -64,12 +64,23 @@ switch ($op) {
 		}
 		break;
 	case 'new':
+    case 'clone':
 		$templateMain = 'wgsimpleacc_admin_outtemplates.tpl';
 		$GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('outtemplates.php'));
 		$adminObject->addItemButton(\_AM_WGSIMPLEACC_LIST_OUTTEMPLATES, 'outtemplates.php', 'list');
 		$GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
 		// Form Create
-		$outtemplatesObj = $outtemplatesHandler->create();
+        $outtemplatesObj = $outtemplatesHandler->create();
+		if ('clone' === $op) {
+            $otplId = Request::getInt('otpl_id_clone');
+            $outtemplatesObjOld = $outtemplatesHandler->get($otplId);
+            foreach ($outtemplatesObjOld->vars as $k => $v) {
+                if ('otpl_id' !== $k) {
+                    $outtemplatesObj->setVar($k, $v['value']);
+                }
+            }
+            unset($outtemplatesObjOld);
+        }
 		$form = $outtemplatesObj->getFormOuttemplates();
 		$GLOBALS['xoopsTpl']->assign('form', $form->render());
 		break;

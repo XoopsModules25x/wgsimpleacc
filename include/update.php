@@ -333,7 +333,7 @@ function wgsimpleacc_check_db($module)
     $check   = $GLOBALS['xoopsDB']->queryF('SHOW COLUMNS FROM `' . $table . "` LIKE '" . $field . "'");
     $numRows = $GLOBALS['xoopsDB']->getRowsNum($check);
     if (!$numRows) {
-        $sql = "ALTER TABLE `$table` ADD `$field` VARCHAR(255) NOT NULL DEFAULT '' AFTER `otpl_body`;";
+        $sql = "ALTER TABLE `$table` ADD `$field` VARCHAR(255) NOT NULL DEFAULT '' AFTER `otpl_content`;";
         if (!$result = $GLOBALS['xoopsDB']->queryF($sql)) {
             xoops_error($GLOBALS['xoopsDB']->error() . '<br>' . $sql);
             $module->setErrors("Error when adding '$field' to table '$table'.");
@@ -342,11 +342,11 @@ function wgsimpleacc_check_db($module)
     }
 
     $table   = $GLOBALS['xoopsDB']->prefix('wgsimpleacc_outtemplates');
-    $field   = 'otpl_body';
+    $field   = 'otpl_content';
     $check   = $GLOBALS['xoopsDB']->queryF('SHOW COLUMNS FROM `' . $table . "` LIKE '" . $field . "'");
     $numRows = $GLOBALS['xoopsDB']->getRowsNum($check);
     if ($numRows) {
-        $sql = "ALTER TABLE `$table` CHANGE `otpl_body` `otpl_body` TEXT NOT NULL;";
+        $sql = "ALTER TABLE `$table` CHANGE `otpl_content` `otpl_body` TEXT NOT NULL;";
         if (!$result = $GLOBALS['xoopsDB']->queryF($sql)) {
             xoops_error($GLOBALS['xoopsDB']->error() . '<br>' . $sql);
             $module->setErrors("Error when adding '$field' to table '$table'.");

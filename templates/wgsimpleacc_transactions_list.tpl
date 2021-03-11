@@ -68,7 +68,7 @@
 			</div>
 		<{elseif $transaction.outputTpls|@count > 0}>
 			<{foreach item=outputTpl from=$transaction.outputTpls}>
-				<a class='btn dropdown-link' href='<{$outputTpl.href}>' title='<{$outputTpl.title}>'><img src="<{$modPathIcon32}>otpltype<{$outputTpl.type}>.png" style="height:16px"></img></a>
+				<a class='btn btn-default dropdown-link' href='<{$outputTpl.href}>' title='<{$outputTpl.title}>'><img src="<{$modPathIcon32}>otpltype<{$outputTpl.type}>.png" style="height:16px"></img></a>
 			<{/foreach}>
 		<{/if}>
 	</td>

@@ -176,7 +176,6 @@ class Outtemplates extends \XoopsObject
 	public function getValuesOuttemplates($keys = null, $format = null, $maxDepth = null)
 	{
 		$helper  = \XoopsModules\Wgsimpleacc\Helper::getInstance();
-		$utility = new \XoopsModules\Wgsimpleacc\Utility();
 		$ret = $this->getValues($keys, $format, $maxDepth);
 		$ret['id']   = $this->getVar('otpl_id');
 		$ret['name'] = $this->getVar('otpl_name');

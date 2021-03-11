@@ -4,6 +4,7 @@
  - added files histories (goffy)
  - added possibility to delete temp uploaded files (goffy)
  - improved template based output (goffy)
+ - added clone feature for output template (goffy)
 
 ==============================================================
 1.21 [2021/02/03]

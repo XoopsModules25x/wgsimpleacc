@@ -144,6 +144,7 @@ class OuttemplatesHandler extends \XoopsPersistableObjectHandler
         } else {
             $editor = $helper->getConfig('editor_user');
         }
+        $editorConfigs1 = [];
         $editorConfigs1['name'] = 'otpl_header';
         $editorConfigs1['value'] = $template['header'];
         $editorConfigs1['rows'] = 2;
@@ -154,6 +155,7 @@ class OuttemplatesHandler extends \XoopsPersistableObjectHandler
         $outHeader = new \XoopsFormEditor(\_MA_WGSIMPLEACC_OUTTEMPLATE_HEADER, 'otpl_header', $editorConfigs1);
         $form->addElement($outHeader);
 
+        $editorConfigs2 = [];
         $editorConfigs2['name'] = 'otpl_body';
         $editorConfigs2['value'] = $template['body'];
         $editorConfigs2['rows'] = 5;
@@ -164,6 +166,7 @@ class OuttemplatesHandler extends \XoopsPersistableObjectHandler
         $outBody = new \XoopsFormEditor(\_MA_WGSIMPLEACC_OUTTEMPLATE_BODY, 'otpl_body', $editorConfigs2);
         $form->addElement($outBody);
 
+        $editorConfigs3 = [];
         $editorConfigs3['name'] = 'otpl_footer';
         $editorConfigs3['value'] = $template['footer'];
         $editorConfigs3['rows'] = 5;
