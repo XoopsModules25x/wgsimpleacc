@@ -105,7 +105,17 @@ switch ($op) {
 			$outtemplatesObj = $outtemplatesHandler->create();
 		}
 		$outtemplatesObj->setVar('otpl_name', Request::getString('otpl_name', ''));
-		$outtemplatesObj->setVar('otpl_content', Request::getText('otpl_content', ''));
+        $outtemplatesObj->setVar('otpl_type', Request::getInt('otpl_type', 0));
+        $outtemplatesObj->setVar('otpl_header', Request::getText('otpl_header', ''));
+        $outtemplatesObj->setVar('otpl_body', Request::getText('otpl_body', ''));
+		$outtemplatesObj->setVar('otpl_footer', Request::getText('otpl_footer', ''));
+        $arrAllid = Request::getArray('otpl_allid');
+        if (0 == (int)$arrAllid[0]) {
+            $otpl_allid = serialize([0]);
+        } else {
+            $otpl_allid = serialize($arrAllid);
+        }
+        $outtemplatesObj->setVar('otpl_allid', $otpl_allid);
 		$outtemplatesObj->setVar('otpl_online', Request::getInt('otpl_online', 0));
 		$outtemplateDatecreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('otpl_datecreated'));
 		$outtemplatesObj->setVar('otpl_datecreated', $outtemplateDatecreatedObj->getTimestamp());
@@ -185,41 +195,55 @@ switch ($op) {
             $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_OUTTEMPLATE_EDIT];
 		}
 		break;
-    case 'select':
+/*
+    case 'editpdf':
         // Check permissions
         if (!$permSubmit) {
             \redirect_header('outtemplates.php?op=list', 3, _NOPERM);
         }
         // Form Create
-        $form = $outtemplatesHandler::getFormSelectOutput($otplId);
+        $form = $outtemplatesHandler::getFormEditTraOutput($otplId);
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
+        */
     case 'exec_output':
         // Check permissions
         if (!$permSubmit) {
             \redirect_header('outtemplates.php?op=list', 3, _NOPERM);
         }
         $outParams = [];
-        $outParams['otpl_id'] = Request::getInt('otpl_id', 0);
-        $outParams['tra_id']  = Request::getInt('tra_id', 0);
-        $outParams['tra_year']  = Request::getInt('tra_year', 0);
-        $outParams['tra_nb']  = Request::getInt('tra_nb', 0);
-        $outParams['sender']  = Request::getText('sender', '');
-        $outParams['recipient']  = Request::getText('recipient', '');
-        $outTarget = Request::getString('target', 'show');
+        $template  = [];
+        $outTarget = Request::getString('target', '');
 
-        // Form Create
-        $template = $outtemplatesHandler::getFetchedOutput($outParams);
+        $outParams = $outtemplatesHandler->getOutParams($traId);
+        $outParams['otpl_id'] = $otplId;
+
+        if ('form_browser' == $outTarget || 'form_pdf' == $outTarget) {
+            //data from form
+            $template['header'] = Request::getText('otpl_header', '');
+            $template['body'] = Request::getText('otpl_body', '');
+            $template['footer'] = Request::getText('otpl_footer', '');
+        } else {
+            $template = $outtemplatesHandler::getFetchedOutput($outParams);
+        }
+
         switch ($outTarget) {
-            case 'show':
+            case 'browser':
+            case 'form_browser':
             default:
-                $GLOBALS['xoopsTpl']->assign('outputText', $template['body']);
+                $GLOBALS['xoopsTpl']->assign('outputText', $template['header'] . $template['body'] . $template['footer']);
+                break;
+            case 'editoutput':
+                // Form Create
+                $form = $outtemplatesHandler::getFormEditTraOutput($template);
+                $GLOBALS['xoopsTpl']->assign('form', $form->render());
                 break;
             case 'pdf':
+            case 'form_pdf':
                 require_once 'outtemplates_pdf.php';
                 $result = execute_output($template, $outParams);
                 exit;
-                //\redirect_header('index.php?op=list', 3, \_MA_WGSIMPLEACC_OUTTEMPLATE_PDF_SUCCESS);
+                //\redirect_header('transactions.php?op=list', 3, \_MA_WGSIMPLEACC_OUTTEMPLATE_PDF_SUCCESS);
                 break;
         }
         break;

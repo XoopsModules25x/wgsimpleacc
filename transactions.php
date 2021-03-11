@@ -169,6 +169,39 @@ switch ($op) {
                 if ('' !== (string)$transactions[$i]['tra_remarks']) {
                     $transactions[$i]['modaltitle'] = \str_replace('%s', $transactions[$i]['year_nb'], \_MA_WGSIMPLEACC_MODAL_TRATITLE);
                 }
+                $outputTpls = [];
+                //$outputTpls[] = ['href' => 'transactions_pdf.php?tra_id=', 'title' => \_MA_WGSIMPLEACC_DOWNLOAD, 'class' => 'fa fa-file-pdf-o fa-fw', 'caption' => \_MA_WGSIMPLEACC_OUTTEMPLATE_DEFAULT];
+                $crOuttemplates = new \CriteriaCompo();
+                $crOuttemplates->add(new \Criteria('otpl_online', 1));
+                $outtemplatesAll = $outtemplatesHandler->getAll($crOuttemplates);
+                foreach (\array_keys($outtemplatesAll) as $j) {
+                    $arrAllid  = unserialize($outtemplatesAll[$j]->getVar('otpl_allid'));
+                    $otplType = $outtemplatesAll[$j]->getVar('otpl_type');
+                    if (0 == (int)$arrAllid[0] || \in_array($transactionsAll[$i]->getVar('tra_allid'), $arrAllid)) {
+                        switch ($otplType) {
+                            case Constants::OUTTEMPLATE_TYPE_READY:
+                                $outputOp = 'exec_output&amp;target=pdf';
+                                break;
+                            case Constants::OUTTEMPLATE_TYPE_FORM:
+                                $outputOp = 'exec_output&amp;target=editoutput';
+                                break;
+                            case 0:
+                            default:
+                                $outputOp = 'exec_output&amp;target=browser';
+                                break;
+                        }
+                        $outputTpls[] = [
+                            'href' => 'outtemplates.php?op=' . $outputOp . '&amp;otpl_id=' . $outtemplatesAll[$j]->getVar('otpl_id') . '&amp;tra_id=' . $transactions[$i]['tra_id'],
+                            'title' => $outtemplatesAll[$j]->getVar('otpl_name'),
+                            'type' => $otplType,
+                            'caption' => $outtemplatesAll[$j]->getVar('otpl_name')
+                        ];
+                    }
+                }
+                if (\count($outputTpls) > 0){
+                    $transactions[$i]['outputTpls'] = $outputTpls;
+                }
+                unset($crOuttemplates, $outtemplates);
 				$keywords[$i] = $transactionsAll[$i]->getVar('tra_desc');
 			}
 			$GLOBALS['xoopsTpl']->assign('transactions', $transactions);
@@ -184,6 +217,8 @@ switch ($op) {
 			$GLOBALS['xoopsTpl']->assign('useTaxes', $helper->getConfig('use_taxes'));
             $GLOBALS['xoopsTpl']->assign('useFiles', $helper->getConfig('use_files'));
             $GLOBALS['xoopsTpl']->assign('useClients', $helper->getConfig('use_clients'));
+            $GLOBALS['xoopsTpl']->assign('modPathIcon32', WGSIMPLEACC_URL . '/' . $GLOBALS['xoopsModule']->getInfo('modicons32') . '/');
+
 		} else {
             $GLOBALS['xoopsTpl']->assign('noData', \_MA_WGSIMPLEACC_THEREARENT_TRANSACTIONS);
         }

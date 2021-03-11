@@ -91,4 +91,12 @@ interface Constants
     public const BALANCES_OUT_LEVEL_ACC2 = 2;
     //public const BALANCES_OUT_LEVEL_ACC3 = 3;
 
+    // Constants for output templates
+    public const OUTTEMPLATE_TYPE_READY   = 1;
+    public const OUTTEMPLATE_TYPE_BROWSER = 2;
+    public const OUTTEMPLATE_TYPE_FORM    = 3;
+
+    // Constants for output templates allocations
+    public const OUTTEMPLATE_ALLID_ALL = 0;
+
 }

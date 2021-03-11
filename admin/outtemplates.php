@@ -64,12 +64,23 @@ switch ($op) {
 		}
 		break;
 	case 'new':
+    case 'clone':
 		$templateMain = 'wgsimpleacc_admin_outtemplates.tpl';
 		$GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('outtemplates.php'));
 		$adminObject->addItemButton(\_AM_WGSIMPLEACC_LIST_OUTTEMPLATES, 'outtemplates.php', 'list');
 		$GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
 		// Form Create
-		$outtemplatesObj = $outtemplatesHandler->create();
+        $outtemplatesObj = $outtemplatesHandler->create();
+		if ('clone' === $op) {
+            $otplId = Request::getInt('otpl_id_clone');
+            $outtemplatesObjOld = $outtemplatesHandler->get($otplId);
+            foreach ($outtemplatesObjOld->vars as $k => $v) {
+                if ('otpl_id' !== $k) {
+                    $outtemplatesObj->setVar($k, $v['value']);
+                }
+            }
+            unset($outtemplatesObjOld);
+        }
 		$form = $outtemplatesObj->getFormOuttemplates();
 		$GLOBALS['xoopsTpl']->assign('form', $form->render());
 		break;
@@ -85,7 +96,17 @@ switch ($op) {
 		}
 		// Set Vars
 		$outtemplatesObj->setVar('otpl_name', Request::getString('otpl_name', ''));
-		$outtemplatesObj->setVar('otpl_content', Request::getText('otpl_content', ''));
+        $outtemplatesObj->setVar('otpl_type', Request::getInt('otpl_type', 0));
+        $outtemplatesObj->setVar('otpl_header', Request::getText('otpl_header', ''));
+        $outtemplatesObj->setVar('otpl_body', Request::getText('otpl_body', ''));
+        $outtemplatesObj->setVar('otpl_footer', Request::getText('otpl_footer', ''));
+        $arrAllid = Request::getArray('otpl_allid');
+        if (0 == (int)$arrAllid[0]) {
+            $otpl_allid = serialize([0]);
+        } else {
+            $otpl_allid = serialize($arrAllid);
+        }
+        $outtemplatesObj->setVar('otpl_allid', $otpl_allid);
 		$outtemplatesObj->setVar('otpl_online', Request::getInt('otpl_online', 0));
 		$outtemplateDatecreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('otpl_datecreated'));
 		$outtemplatesObj->setVar('otpl_datecreated', $outtemplateDatecreatedObj->getTimestamp());

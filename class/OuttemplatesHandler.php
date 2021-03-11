@@ -122,13 +122,11 @@ class OuttemplatesHandler extends \XoopsPersistableObjectHandler
 		return $crOuttemplates;
 	}
     /**
-     * @public function to select transactions/template for output
-     * @param int $otplId
-     * @param int $traYear
-     * @param int $traNb
-     * @return \XoopsThemeFormForm
+     * @public function to edit output
+     * @param array $template
+     * @return \XoopsThemeForm
      */
-    public static function getFormSelectOutput($otplId = 0, $traYear = 0, $traNb = 0)
+    public static function getFormEditTraOutput($template = [])
     {
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $action = $_SERVER['REQUEST_URI'];
@@ -137,51 +135,51 @@ class OuttemplatesHandler extends \XoopsPersistableObjectHandler
 
         // Get Theme Form
         \xoops_load('XoopsFormLoader');
-        $form = new \XoopsThemeForm(\_MA_WGSIMPLEACC_OUTTEMPLATE_SELECT, 'formSelectOtpl', $action, 'post', true);
+        $form = new \XoopsThemeForm(\_MA_WGSIMPLEACC_OUTTEMPLATE_FORM, 'formSelectOtpl', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
         $form->setExtra('class="wgsa-form-inline"');
-        // Form Table outtemplates
-        $outtemplatesHandler = $helper->getHandler('Outtemplates');
-        $otplSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_OUTTEMPLATE, 'otpl_id', $otplId);
-        $otplSelect->addOptionArray($outtemplatesHandler->getList());
-        $form->addElement($otplSelect);
-        //traYear
-        $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_OUTTEMPLATE_YEAR, 'tra_year', 50, 255, $traYear));
-        //traNb
-        $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_OUTTEMPLATE_NB, 'tra_nb', 50, 255, $traNb));
 
         if ($isAdmin) {
             $editor = $helper->getConfig('editor_admin');
         } else {
             $editor = $helper->getConfig('editor_user');
         }
-        $sender = $helper->getConfig('otpl_sender');
-        if ('tinymce' == $editor) {
-            $sender = \nl2br($sender);
-        }
-        $editorConfigs1['name'] = 'sender';
-        $editorConfigs1['value'] = $sender;
+        $editorConfigs1 = [];
+        $editorConfigs1['name'] = 'otpl_header';
+        $editorConfigs1['value'] = $template['header'];
         $editorConfigs1['rows'] = 2;
         $editorConfigs1['cols'] = 40;
         $editorConfigs1['width'] = '100%';
-        $editorConfigs1['height'] = '100px';
+        $editorConfigs1['height'] = '400px';
         $editorConfigs1['editor'] = $editor;
-        $outSender = new \XoopsFormEditor(\_MA_WGSIMPLEACC_OUTTEMPLATE_SENDER, 'sender', $editorConfigs1);
-        $form->addElement($outSender);
+        $outHeader = new \XoopsFormEditor(\_MA_WGSIMPLEACC_OUTTEMPLATE_HEADER, 'otpl_header', $editorConfigs1);
+        $form->addElement($outHeader);
 
-        $editorConfigs2['name'] = 'recipient';
-        $editorConfigs2['value'] = '';
+        $editorConfigs2 = [];
+        $editorConfigs2['name'] = 'otpl_body';
+        $editorConfigs2['value'] = $template['body'];
         $editorConfigs2['rows'] = 5;
         $editorConfigs2['cols'] = 40;
         $editorConfigs2['width'] = '100%';
         $editorConfigs2['height'] = '400px';
         $editorConfigs2['editor'] = $editor;
-        $outRecipient = new \XoopsFormEditor(\_MA_WGSIMPLEACC_OUTTEMPLATE_RECIPIENT, 'recipient', $editorConfigs2);
-        $form->addElement($outRecipient);
+        $outBody = new \XoopsFormEditor(\_MA_WGSIMPLEACC_OUTTEMPLATE_BODY, 'otpl_body', $editorConfigs2);
+        $form->addElement($outBody);
 
-        $targetSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_OUTTEMPLATE_TARGET, 'target', 'show', 5);
-        $targetSelect->addOption('show', \_MA_WGSIMPLEACC_OUTTEMPLATE_TARGET_SHOW);
-        $targetSelect->addOption('pdf', \_MA_WGSIMPLEACC_OUTTEMPLATE_TARGET_PDF);
+        $editorConfigs3 = [];
+        $editorConfigs3['name'] = 'otpl_footer';
+        $editorConfigs3['value'] = $template['footer'];
+        $editorConfigs3['rows'] = 5;
+        $editorConfigs3['cols'] = 40;
+        $editorConfigs3['width'] = '100%';
+        $editorConfigs3['height'] = '400px';
+        $editorConfigs3['editor'] = $editor;
+        $outFooter = new \XoopsFormEditor(\_MA_WGSIMPLEACC_OUTTEMPLATE_FOOTER, 'otpl_footer', $editorConfigs3);
+        $form->addElement($outFooter);
+
+        $targetSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_OUTTEMPLATE_TARGET, 'target', 'form_browser', 5);
+        $targetSelect->addOption('form_browser', \_MA_WGSIMPLEACC_OUTTEMPLATE_TARGET_BROWSER);
+        $targetSelect->addOption('form_pdf', \_MA_WGSIMPLEACC_OUTTEMPLATE_TARGET_PDF);
         $form->addElement($targetSelect);
 
         // To Save
@@ -207,48 +205,58 @@ class OuttemplatesHandler extends \XoopsPersistableObjectHandler
         if (!\is_object($outtemplateObj)) {
             \redirect_header('index.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
         }
-        $otplContent = \str_replace(['&lt;', '&gt;'], ['<', '>'], $outtemplateObj->getVar('otpl_content', 'n'));
+        $otplBody = \str_replace(['&lt;', '&gt;'], ['<', '>'], $outtemplateObj->getVar('otpl_body', 'n'));
 
-        $transactionsHandler = $helper->getHandler('Transactions');
-        $traId = (int)$outParams['tra_id'];
-        if (0 == $traId) {
-            $crTransactions = new \CriteriaCompo();
-            $crTransactions->add(new \Criteria('tra_year', $outParams['tra_year']));
-            $crTransactions->add(new \Criteria('tra_nb', $outParams['tra_nb']));
-            $crTransactions->setStart(0);
-            $crTransactions->setLimit(1);
-            $transactionsAll = $transactionsHandler->getAll($crTransactions);
-            foreach (\array_keys($transactionsAll) as $i) {
-                $traId = $transactionsAll[$i]->getVar('tra_id');
-            }
+        // assign data of transaction
+        foreach ($outParams as $key => $value) {
+            $letterTpl->assign($key, $outParams[$key]);
         }
-        $transactionsObj = $transactionsHandler->get($traId);
-        if (!\is_object($transactionsObj)) {
-            \redirect_header('index.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
-        }
-        $transaction = $transactionsObj->getValuesTransactions();
-        $letterTpl->assign('sender', $outParams['sender']);
-        $letterTpl->assign('recipient', $outParams['recipient']);
-        $letterTpl->assign('year', $transaction['year']);
-        $letterTpl->assign('nb', $transaction['nb']);
-        $letterTpl->assign('year_nb', $transaction['year_nb']);
-        $letterTpl->assign('desc', $transaction['tra_desc']);
-        $letterTpl->assign('reference', $transaction['tra_reference']);
-        $letterTpl->assign('account', $transaction['account']);
-        $letterTpl->assign('allocation', $transaction['allocation']);
-        $letterTpl->assign('asset', $transaction['asset']);
-        $letterTpl->assign('amount', $transaction['amount']);
-        $letterTpl->assign('date', $transaction['date']);
-
-
-        // extra data
+        // assign extra data
+        $letterTpl->assign('sender', $helper->getConfig('otpl_sender'));
         $letterTpl->assign('output_date', date(_SHORTDATESTRING));
         $user = ('' != $GLOBALS['xoopsUser']->getVar('name')) ? $GLOBALS['xoopsUser']->getVar('name') : $GLOBALS['xoopsUser']->getVar('uname');
         $letterTpl->assign('output_user', $user);
         $letterTpl->assign('xoops_url', \XOOPS_URL);
+        $letterTpl->assign('xoops_sitename', htmlspecialchars($GLOBALS['xoopsConfig']['sitename'], ENT_QUOTES));
+        $letterTpl->assign('xoops_slogan', htmlspecialchars($GLOBALS['xoopsConfig']['slogan'], ENT_QUOTES));
+        $letterTpl->assign('xoops_pagetitle', isset($GLOBALS['xoopsModule']) && is_object($GLOBALS['xoopsModule'])
+            ? $GLOBALS['xoopsModule']->getVar('name')
+            : htmlspecialchars($GLOBALS['xoopsConfig']['slogan'], ENT_QUOTES));
 
-        $template['body'] = $letterTpl->fetchFromData($otplContent);
-        $template['tra_id'] = $traId;
+        // fetch templates
+        $template['body'] = $letterTpl->fetchFromData($otplBody);
+
+        $otplHeader = \str_replace(['&lt;', '&gt;'], ['<', '>'], $outtemplateObj->getVar('otpl_header', 'n'));
+        $template['header'] = $letterTpl->fetchFromData($otplHeader);
+
+        $otplFooter= \str_replace(['&lt;', '&gt;'], ['<', '>'], $outtemplateObj->getVar('otpl_footer', 'n'));
+        $template['footer'] = $letterTpl->fetchFromData($otplFooter);
+
         return $template;
+    }
+
+    /**
+     * @public function to get output
+     * @param $traId
+     * @return array
+     */
+    public static function getOutParams($traId) {
+        $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+        $transactionsHandler = $helper->getHandler('Transactions');
+        $clientsHandler = $helper->getHandler('Clients');
+
+        //get data from transactions
+        $transactionsObj = $transactionsHandler->get($traId);
+        $outParams = $transactionsObj->getValuesTransactions();
+        //additional output params must be after call of transaction values
+        //$outParams['otpl_id'] = $otplId;
+        $client         = $outParams['client'];
+        $clientsAddress = $clientsHandler->getClientFullAddress($transactionsObj->getVar('tra_cliid'));
+        if ('' !== $clientsAddress) {
+            $client .= '<br>' . $clientsAddress;
+        }
+        $outParams['recipient']  = $client;
+
+        return $outParams;
     }
 }

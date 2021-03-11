@@ -41,7 +41,11 @@ class Outtemplates extends \XoopsObject
 	{
 		$this->initVar('otpl_id', \XOBJ_DTYPE_INT);
 		$this->initVar('otpl_name', \XOBJ_DTYPE_TXTBOX);
-		$this->initVar('otpl_content', \XOBJ_DTYPE_OTHER);
+		$this->initVar('otpl_header', \XOBJ_DTYPE_OTHER);
+        $this->initVar('otpl_body', \XOBJ_DTYPE_OTHER);
+        $this->initVar('otpl_footer', \XOBJ_DTYPE_OTHER);
+        $this->initVar('otpl_type', \XOBJ_DTYPE_INT);
+        $this->initVar('otpl_allid', \XOBJ_DTYPE_OTHER);
 		$this->initVar('otpl_online', \XOBJ_DTYPE_INT);
 		$this->initVar('otpl_datecreated', \XOBJ_DTYPE_INT);
 		$this->initVar('otpl_submitter', \XOBJ_DTYPE_INT);
@@ -90,25 +94,64 @@ class Outtemplates extends \XoopsObject
 		$form->setExtra('enctype="multipart/form-data"');
 		// Form Text otplName
 		$form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_OUTTEMPLATE_NAME, 'otpl_name', 50, 255, $this->getVar('otpl_name')), true);
-		// Form Editor DhtmlTextArea otplContent
-		$editorConfigs = [];
-		if ($isAdmin) {
-			$editor = $helper->getConfig('editor_admin');
-		} else {
-			$editor = $helper->getConfig('editor_user');
-		}
-		$editorConfigs['name'] = 'otpl_content';
-		$test1=$this->getVar('otpl_content', 'e');
-        $test2=$this->getVar('otpl_content', 'n');
-		$editorConfigs['value'] = $this->getVar('otpl_content', 'e');
-		$editorConfigs['rows'] = 5;
-		$editorConfigs['cols'] = 40;
-		$editorConfigs['width'] = '100%';
-		$editorConfigs['height'] = '400px';
-		$editorConfigs['editor'] = $editor;
-        $otplContent = new \XoopsFormEditor(\_MA_WGSIMPLEACC_OUTTEMPLATE_CONTENT, 'otpl_content', $editorConfigs);
-        $otplContent->setDescription(\_MA_WGSIMPLEACC_OUTTEMPLATE_CONTENT_DESC);
-        $form->addElement($otplContent);
+        // Form Select otplType
+		$otplTypeSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_OUTTEMPLATE_TYPE, 'otpl_type', $this->getVar('otpl_type'));
+        $otplTypeSelect->addOption(Constants::OUTTEMPLATE_TYPE_READY, \_MA_WGSIMPLEACC_OUTTEMPLATE_TYPE_READY);
+        $otplTypeSelect->addOption(Constants::OUTTEMPLATE_TYPE_BROWSER, \_MA_WGSIMPLEACC_OUTTEMPLATE_TYPE_BROWSER);
+        $otplTypeSelect->addOption(Constants::OUTTEMPLATE_TYPE_FORM, \_MA_WGSIMPLEACC_OUTTEMPLATE_TYPE_FORM);
+        $otplTypeSelect->setDescription(\_MA_WGSIMPLEACC_OUTTEMPLATE_TYPE_DESC);
+        $form->addElement($otplTypeSelect);
+        if ($isAdmin) {
+            $editor = $helper->getConfig('editor_admin');
+        } else {
+            $editor = $helper->getConfig('editor_user');
+        }
+        // Form Editor DhtmlTextArea otplHeader
+        $editorConfigs1 = [];
+        $editorConfigs1['name'] = 'otpl_header';
+        $editorConfigs1['value'] = $this->getVar('otpl_header', 'e');
+        $editorConfigs1['rows'] = 5;
+        $editorConfigs1['cols'] = 40;
+        $editorConfigs1['width'] = '100%';
+        $editorConfigs1['height'] = '400px';
+        $editorConfigs1['editor'] = $editor;
+        $otplHeader = new \XoopsFormEditor(\_MA_WGSIMPLEACC_OUTTEMPLATE_HEADER, 'otpl_header', $editorConfigs1);
+        $form->addElement($otplHeader);
+        // Form Editor DhtmlTextArea otplBody
+        $editorConfigs2 = [];
+        $editorConfigs2['name'] = 'otpl_body';
+        $editorConfigs2['value'] = $this->getVar('otpl_body', 'e');
+        $editorConfigs2['rows'] = 5;
+        $editorConfigs2['cols'] = 40;
+        $editorConfigs2['width'] = '100%';
+        $editorConfigs2['height'] = '400px';
+        $editorConfigs2['editor'] = $editor;
+        $otplBody = new \XoopsFormEditor(\_MA_WGSIMPLEACC_OUTTEMPLATE_BODY, 'otpl_body', $editorConfigs2);
+        $form->addElement($otplBody);
+		// Form Editor DhtmlTextArea $otplFooter
+		$editorConfigs3 = [];
+		$editorConfigs3['name'] = 'otpl_footer';
+		$editorConfigs3['value'] = $this->getVar('otpl_footer', 'e');
+		$editorConfigs3['rows'] = 5;
+		$editorConfigs3['cols'] = 40;
+		$editorConfigs3['width'] = '100%';
+		$editorConfigs3['height'] = '400px';
+		$editorConfigs3['editor'] = $editor;
+        $otplFooter = new \XoopsFormEditor(\_MA_WGSIMPLEACC_OUTTEMPLATE_FOOTER, 'otpl_footer', $editorConfigs3);
+        $form->addElement($otplFooter);
+        //smarty description
+        $form->addElement(new \XoopsFormLabel(\_MA_WGSIMPLEACC_OUTTEMPLATE_SMARTY, _MA_WGSIMPLEACC_OUTTEMPLATE_SMARTY_DESC));
+        // Form Select otplAllid
+        $otplAllid = $this->isNew() ? 0 : unserialize($this->getVar('otpl_allid'));
+        $allocationsHandler = $helper->getHandler('Allocations');
+        $otplAllidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_OUTTEMPLATE_ALLID, 'otpl_allid', $otplAllid, 10, true);
+        $otplAllidSelect->addOption(Constants::OUTTEMPLATE_ALLID_ALL, \_MA_WGSIMPLEACC_OUTTEMPLATE_ALLID_ALL);
+        //$otplAllidSelect->addOptionArray($allocationsHandler->getList());
+        $allocations = $allocationsHandler->getSelectTreeOfAllocations();
+        foreach ($allocations as $allocation) {
+            $otplAllidSelect->addOption($allocation['id'], $allocation['text']);
+        }
+        $form->addElement($otplAllidSelect);
 		// Form Radio Yes/No otplOnline
 		$otplOnline = $this->isNew() ?: $this->getVar('otpl_online');
 		$form->addElement(new \XoopsFormRadioYN(\_MA_WGSIMPLEACC_OUTTEMPLATE_ONLINE, 'otpl_online', $otplOnline));
@@ -133,16 +176,48 @@ class Outtemplates extends \XoopsObject
 	public function getValuesOuttemplates($keys = null, $format = null, $maxDepth = null)
 	{
 		$helper  = \XoopsModules\Wgsimpleacc\Helper::getInstance();
-		$utility = new \XoopsModules\Wgsimpleacc\Utility();
 		$ret = $this->getValues($keys, $format, $maxDepth);
-		$ret['id']            = $this->getVar('otpl_id');
-		$ret['name']          = $this->getVar('otpl_name');
-		$ret['content']       = $this->getVar('otpl_content', 'e');
-		$editorMaxchar = $helper->getConfig('editor_maxchar');
-		$ret['content_short'] = $utility::truncateHtml($ret['content'], $editorMaxchar);
-		$ret['online']        = (int)$this->getVar('otpl_online') > 0 ? _YES : _NO;
-		$ret['datecreated']   = \formatTimestamp($this->getVar('otpl_datecreated'), 's');
-		$ret['submitter']     = \XoopsUser::getUnameFromId($this->getVar('otpl_submitter'));
+		$ret['id']   = $this->getVar('otpl_id');
+		$ret['name'] = $this->getVar('otpl_name');
+        $ret['type'] = $this->getVar('otpl_type');
+        switch ($ret['type']) {
+            case 'default':
+            default:
+                $typeText = '';
+            break;
+            case Constants::OUTTEMPLATE_TYPE_FORM;
+                $typeText = _MA_WGSIMPLEACC_OUTTEMPLATE_TYPE_FORM;
+            break;
+            case Constants::OUTTEMPLATE_TYPE_READY;
+                $typeText = _MA_WGSIMPLEACC_OUTTEMPLATE_TYPE_READY;
+            break;
+            case Constants::OUTTEMPLATE_TYPE_BROWSER;
+                $typeText = _MA_WGSIMPLEACC_OUTTEMPLATE_TYPE_BROWSER;
+                break;
+        }
+        $ret['type_text'] = $typeText;
+        $ret['header']    = $this->getVar('otpl_header', 'e');
+		$ret['body']      = $this->getVar('otpl_body', 'e');
+		$ret['footer']    = $this->getVar('otpl_footer', 'e');
+        $arrAllid  = unserialize($this->getVar('otpl_allid'));
+        $otplAllid = '';
+        if (0 == (int)$arrAllid[0]) {
+            $otplAllid .= \_MA_WGSIMPLEACC_OUTTEMPLATE_ALLID_ALL;
+        } else {
+            $otplAllid .= '<ul>';
+            $allocationsHandler = $helper->getHandler('Allocations');
+            $allocationsAll     = $allocationsHandler->getAllAllocations();
+            foreach (\array_keys($allocationsAll) as $i) {
+                if(\in_array($allocationsAll[$i]->getVar('all_id'),$arrAllid)) {
+                    $otplAllid .= '<li>' . $allocationsAll[$i]->getVar('all_name') . '</li>';
+                };
+            }
+            $otplAllid .= '</ul>';
+        }
+        $ret['allid']       = $otplAllid;
+		$ret['online']      = (int)$this->getVar('otpl_online') > 0 ? _YES : _NO;
+		$ret['datecreated'] = \formatTimestamp($this->getVar('otpl_datecreated'), 's');
+		$ret['submitter']   = \XoopsUser::getUnameFromId($this->getVar('otpl_submitter'));
 		return $ret;
 	}
 

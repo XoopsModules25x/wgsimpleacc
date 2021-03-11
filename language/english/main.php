@@ -316,16 +316,23 @@ require_once __DIR__ . '/admin.php';
 // Elements of Outtemplate
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_ID', 'Id');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_NAME', 'Name');
-\define('_MA_WGSIMPLEACC_OUTTEMPLATE_CONTENT', 'Content');
-\define('_MA_WGSIMPLEACC_OUTTEMPLATE_CONTENT_DESC', '
-    Html format:
-    <br>
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_TYPE', 'Type');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_TYPE_READY', 'Ready to use');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_TYPE_BROWSER', 'Show in Browser');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_TYPE_FORM', 'Edit with form');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_TYPE_DESC', '- Ready to use: the template will be filled in and downloaded as pdf immediately<br>
+- Edit with form: the data will be loaded into a form and you can check result before output');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_HEADER', 'Page header');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_BODY', 'Content');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_FOOTER', 'Page footer');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_SMARTY', 'Smarty variables');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_SMARTY_DESC', '
     This module uses the Xoops <a href="http://www.smarty.net/">Smarty template engine</a> to render the output.
     <br><br>
-    Available smarty-vars are:
+    Available smarty-vars for transactions are:
     <ul>
-    <li><{$sender}>: Sender</li>
-    <li><{$recipient}>: Recipient</li>
+    <li><{$sender}>: Default sender for output</li>
+    <li><{$recipient}>: Recipient/Client</li>
     <li><{year}>: transaction registration year</li>
     <li><{nb}>: transaction registration year</li>
     <li><{$year_nb}>: Registration year/number of transaction (Format: YYYY/00000)</li>
@@ -334,26 +341,35 @@ require_once __DIR__ . '/admin.php';
     <li><{$account}>: Account</li>
     <li><{$allocation}>: Allocation</li>
     <li><{$asset}>: Asset</li>
-    <li><{$amount}>: Amount</li>
     <li><{$date}>: Transaction date</li>
     <li><{$amount}>: Amount</li>
+    <li><{$status_text}>: Status</li>
+    <li><{$datecreated}>: Date created</li>
+    <li><{$submitter}>: Submitter</li>
     </ul>
+    General smarty-vars are:
     <ul>
-    <li><{$xoops_url}>: the site main url (e.g. http://localhost/)</li>
+    <li><{$xoops_sitename}>: The website name</li>
+    <li><{xoops_slogan}>: Slogan of website</li>
+    <li><{$xoops_pagetitle}>: The page title</li>
+    <li><{$xoops_url}>: The site main url (e.g. http://localhost/)</li>
     <li><{$output_date}>: Date output</li>
     <li><{$output_user}>: Current user name</li>
     </ul>');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_ALLID', 'Allocations');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_ALLID_ALL', 'All');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_ONLINE', 'Online');
 // Output Form
-\define('_MA_WGSIMPLEACC_OUTTEMPLATE_SELECT', 'Select Transaction and Output Template');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_FORM', 'Output Transaction');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_YEAR', 'Year');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_NB', 'Number');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_SENDER', 'Sender');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_RECIPIENT', 'Recipient');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_TARGET', 'Type of output');
-\define('_MA_WGSIMPLEACC_OUTTEMPLATE_TARGET_SHOW', 'Show only');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_TARGET_BROWSER', 'Show only');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_TARGET_PDF', 'Output as PDF');
-\define('_MA_WGSIMPLEACC_OUTTEMPLATE_PDF_SUCCESS', 'Output Data successfullx as PDF');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_PDF_SUCCESS', 'Output data as PDF successfully');
+//\define('_MA_WGSIMPLEACC_OUTTEMPLATE_DEFAULT', 'Default document');
 // Client
 \define('_MA_WGSIMPLEACC_CLIENTS', 'Clients');
 \define('_MA_WGSIMPLEACC_CLIENTS_LIST', 'List of Clients');

@@ -59,6 +59,17 @@
 				<a class='btn btn-danger right' href='transactions.php?op=delete&amp;tra_id=<{$transaction.tra_id}>' title='<{$smarty.const._DELETE}>'><i class="fa fa-trash fa-fw"></i></a>
 			<{/if}>
 		<{/if}>
-		<a class='btn btn-default right' href='transactions_pdf.php?tra_id=<{$transaction.tra_id}>' title='<{$smarty.const._MA_WGSIMPLEACC_DOWNLOAD}>'><i class="fa fa-download fa-fw"></i></a>
+		<{if $transaction.outputTpls|@count > 1}>
+			<a class='btn btn-default right' id="dropdown<{$transaction.tra_id}>" onClick="myDDToggle('myDD<{$transaction.tra_id}>')" title='<{$smarty.const._MA_WGSIMPLEACC_DOWNLOAD}>'><i class="fa fa-download fa-fw dd-down-1"></i><i class="fa fa-sort-down fa-fw dd-down-2"></i></a>
+			<div id="myDD<{$transaction.tra_id}>" class="dropdown-content">
+				<{foreach item=outputTpl from=$transaction.outputTpls}>
+					<a href='<{$outputTpl.href}>' title='<{$outputTpl.title}>'><img src="<{$modPathIcon32}>otpltype<{$outputTpl.type}>.png" style="height:16px"></img>&nbsp;<{$outputTpl.caption}></a>
+				<{/foreach}>
+			</div>
+		<{elseif $transaction.outputTpls|@count > 0}>
+			<{foreach item=outputTpl from=$transaction.outputTpls}>
+				<a class='btn btn-default dropdown-link' href='<{$outputTpl.href}>' title='<{$outputTpl.title}>'><img src="<{$modPathIcon32}>otpltype<{$outputTpl.type}>.png" style="height:16px"></img></a>
+			<{/foreach}>
+		<{/if}>
 	</td>
 </tr>
