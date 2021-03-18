@@ -46,6 +46,7 @@ class Outtemplates extends \XoopsObject
         $this->initVar('otpl_footer', \XOBJ_DTYPE_OTHER);
         $this->initVar('otpl_type', \XOBJ_DTYPE_INT);
         $this->initVar('otpl_allid', \XOBJ_DTYPE_OTHER);
+        $this->initVar('otpl_accid', \XOBJ_DTYPE_OTHER);
 		$this->initVar('otpl_online', \XOBJ_DTYPE_INT);
 		$this->initVar('otpl_datecreated', \XOBJ_DTYPE_INT);
 		$this->initVar('otpl_submitter', \XOBJ_DTYPE_INT);
@@ -142,16 +143,27 @@ class Outtemplates extends \XoopsObject
         //smarty description
         $form->addElement(new \XoopsFormLabel(\_MA_WGSIMPLEACC_OUTTEMPLATE_SMARTY, _MA_WGSIMPLEACC_OUTTEMPLATE_SMARTY_DESC));
         // Form Select otplAllid
+
         $otplAllid = $this->isNew() ? 0 : unserialize($this->getVar('otpl_allid'));
         $allocationsHandler = $helper->getHandler('Allocations');
         $otplAllidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_OUTTEMPLATE_ALLID, 'otpl_allid', $otplAllid, 10, true);
-        $otplAllidSelect->addOption(Constants::OUTTEMPLATE_ALLID_ALL, \_MA_WGSIMPLEACC_OUTTEMPLATE_ALLID_ALL);
+        $otplAllidSelect->addOption(Constants::OUTTEMPLATE_ALL, \_MA_WGSIMPLEACC_OUTTEMPLATE_ALL);
         //$otplAllidSelect->addOptionArray($allocationsHandler->getList());
         $allocations = $allocationsHandler->getSelectTreeOfAllocations();
         foreach ($allocations as $allocation) {
             $otplAllidSelect->addOption($allocation['id'], $allocation['text']);
         }
         $form->addElement($otplAllidSelect);
+        // Form Select otplAccid
+        $otplAccid = $this->isNew() ? 0 : unserialize($this->getVar('otpl_accid'));
+        $accountsHandler = $helper->getHandler('Accounts');
+        $otplAccidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_OUTTEMPLATE_ACCID, 'otpl_accid', $otplAccid, 10, true);
+        $otplAccidSelect->addOption(Constants::OUTTEMPLATE_ALL, \_MA_WGSIMPLEACC_OUTTEMPLATE_ALL);
+        $accounts = $accountsHandler->getSelectTreeOfAccounts(Constants::CLASS_BOTH);
+        foreach ($accounts as $account) {
+            $otplAccidSelect->addOption($account['id'], $account['text']);
+        }
+        $form->addElement($otplAccidSelect);
 		// Form Radio Yes/No otplOnline
 		$otplOnline = $this->isNew() ?: $this->getVar('otpl_online');
 		$form->addElement(new \XoopsFormRadioYN(\_MA_WGSIMPLEACC_OUTTEMPLATE_ONLINE, 'otpl_online', $otplOnline));
@@ -202,7 +214,7 @@ class Outtemplates extends \XoopsObject
         $arrAllid  = unserialize($this->getVar('otpl_allid'));
         $otplAllid = '';
         if (0 == (int)$arrAllid[0]) {
-            $otplAllid .= \_MA_WGSIMPLEACC_OUTTEMPLATE_ALLID_ALL;
+            $otplAllid .= \_MA_WGSIMPLEACC_OUTTEMPLATE_ALL;
         } else {
             $otplAllid .= '<ul>';
             $allocationsHandler = $helper->getHandler('Allocations');
@@ -215,6 +227,22 @@ class Outtemplates extends \XoopsObject
             $otplAllid .= '</ul>';
         }
         $ret['allid']       = $otplAllid;
+        $arrAccid  = unserialize($this->getVar('otpl_accid'));
+        $otplAccid = '';
+        if (0 == (int)$arrAccid[0]) {
+            $otplAccid .= \_MA_WGSIMPLEACC_OUTTEMPLATE_ALL;
+        } else {
+            $otplAccid .= '<ul>';
+            $accountsHandler = $helper->getHandler('Accounts');
+            $accountsAll     = $accountsHandler->getAllAccounts();
+            foreach (\array_keys($accountsAll) as $i) {
+                if(\in_array($accountsAll[$i]->getVar('acc_id'),$arrAccid)) {
+                    $otplAccid .= '<li>' . $accountsAll[$i]->getVar('acc_name') . '</li>';
+                };
+            }
+            $otplAccid .= '</ul>';
+        }
+        $ret['accid']       = $otplAccid;
 		$ret['online']      = (int)$this->getVar('otpl_online') > 0 ? _YES : _NO;
 		$ret['datecreated'] = \formatTimestamp($this->getVar('otpl_datecreated'), 's');
 		$ret['submitter']   = \XoopsUser::getUnameFromId($this->getVar('otpl_submitter'));

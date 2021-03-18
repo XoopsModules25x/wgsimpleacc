@@ -8,6 +8,7 @@
 					<th class="center"><{$smarty.const._MA_WGSIMPLEACC_OUTTEMPLATE_NAME}></th>
 					<th class="center"><{$smarty.const._MA_WGSIMPLEACC_OUTTEMPLATE_TYPE}></th>
 					<th class="center"><{$smarty.const._MA_WGSIMPLEACC_OUTTEMPLATE_ALLID}></th>
+					<th class="center"><{$smarty.const._MA_WGSIMPLEACC_OUTTEMPLATE_ACCID}></th>
 					<th class="center"><{$smarty.const._MA_WGSIMPLEACC_OUTTEMPLATE_ONLINE}></th>
 					<th class="center"><{$smarty.const._MA_WGSIMPLEACC_FORM_ACTION}></th>
 				</tr>

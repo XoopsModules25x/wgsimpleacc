@@ -191,7 +191,21 @@ class Accounts extends \XoopsObject
         $ret['desc']           = \strip_tags($this->getVar('acc_desc', 'e'));
         $editorMaxchar = $helper->getConfig('editor_maxchar');
         $ret['desc_short']     = $utility::truncateHtml($ret['desc'], $editorMaxchar);
-        $ret['classification'] = $this->getVar('acc_classification');
+        $classification        = $this->getVar('acc_classification');
+        $ret['classification'] = $classification;
+        switch ($classification) {
+            case Constants::CLASS_BOTH:
+            default:
+                $class_text = \_MA_WGSIMPLEACC_CLASS_BOTH;
+                break;
+            case Constants::CLASS_EXPENSES:
+                $class_text = \_MA_WGSIMPLEACC_CLASS_EXPENSES;
+                break;
+            case Constants::CLASS_INCOME:
+                $class_text = \_MA_WGSIMPLEACC_CLASS_INCOME;
+                break;
+        }
+        $ret['class_text']  = $class_text;
         $ret['color']          = $this->getVar('acc_color');
         $ret['iecalc']         = (int)$this->getVar('acc_iecalc') > 0 ? _YES : _NO;
         $ret['online']         = (int)$this->getVar('acc_online') > 0 ? _YES : _NO;

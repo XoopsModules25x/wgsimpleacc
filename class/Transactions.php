@@ -212,7 +212,7 @@ class Transactions extends \XoopsObject
 		// Form Table accounts
 		$accountsHandler = $helper->getHandler('Accounts');
 		$traAccidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_ACCID, 'tra_accid', $this->getVar('tra_accid'), 5);
-		$accounts = $accountsHandler->getSelectTreeOfAccounts(Constants::CLASS_INCOME);
+		$accounts = $accountsHandler->getSelectTreeOfAccounts($traClass);
 		foreach ($accounts as $account) {
             $traAccidSelect->addOption($account['id'], $account['text']);
         }

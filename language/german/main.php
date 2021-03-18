@@ -339,7 +339,8 @@ require_once __DIR__ . '/admin.php';
     <li><{$output_user}>: Aktueller Benutzername</li>
     </ul>');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_ALLID', 'Zuordnungen');
-\define('_MA_WGSIMPLEACC_OUTTEMPLATE_ALLID_ALL', 'Alle');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_ACCID', 'Konten');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_ALL', 'Alle');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_ONLINE', 'Online');
 // Output Form
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_FORM', 'Transaktion ausgeben');

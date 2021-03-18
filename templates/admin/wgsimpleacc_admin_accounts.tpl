@@ -30,7 +30,7 @@
 				<td class='center'><{$account.key}></td>
 				<td class='center'><{$account.name}></td>
 				<td class='center'><{$account.desc_short}></td>
-				<td class='center'><{$account.classification}></td>
+				<td class='center'><{$account.class_text}></td>
 				<td class='center'>
                     <{foreach item=color from=$colors}>
                         <{if $color.code == $account.color}>

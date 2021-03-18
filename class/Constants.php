@@ -97,6 +97,6 @@ interface Constants
     public const OUTTEMPLATE_TYPE_FORM    = 3;
 
     // Constants for output templates allocations
-    public const OUTTEMPLATE_ALLID_ALL = 0;
+    public const OUTTEMPLATE_ALL = 0;
 
 }
