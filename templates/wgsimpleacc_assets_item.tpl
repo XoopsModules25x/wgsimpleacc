@@ -8,6 +8,9 @@
 			<img src="<{$wgsimpleacc_icon_url_16}><{$asset.as_primary}>.png" alt="<{$smarty.const._MA_WGSIMPLEACC_ASSET_PRIMARY}>" />
 		<{/if}>
 	</td>
+	<{if $permSubmit}>
+		<td class="center"><{$asset.online}></td>
+	<{/if}>
 	<td>
 		<{if $showItem}>
 			<a class='btn btn-success right' href='assets.php?op=list&amp;#asId_<{$asset.as_id}>' title='<{$smarty.const._MA_WGSIMPLEACC_ASSETS_LIST}>'><{$smarty.const._MA_WGSIMPLEACC_ASSETS_LIST}></a>

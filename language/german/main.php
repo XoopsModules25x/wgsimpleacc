@@ -70,6 +70,8 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_THEREARENT_OUTTEMPLATES', 'Es gibt derzeit keine Ausgabevorlagen in der Datenbank');
 \define('_MA_WGSIMPLEACC_THEREARENT_CLIENTS', 'Es gibt derzeit keine Klienten in der Datenbank');
 // Account
+\define('_MA_WGSIMPLEACC_ACCOUNT_ADD', 'Konto hinzufügen');
+\define('_MA_WGSIMPLEACC_ACCOUNT_EDIT', 'Konto bearbeiten');
 \define('_MA_WGSIMPLEACC_ACCOUNT', 'Konto');
 \define('_MA_WGSIMPLEACC_ACCOUNTS', 'Buchungskonten');
 \define('_MA_WGSIMPLEACC_ACCOUNTS_TITLE', 'Kontentitel');
@@ -77,7 +79,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_ACCOUNTS_LIST', 'Liste der Buchungskonten');
 \define('_MA_WGSIMPLEACC_ACCOUNTS_TIMELINE', 'Entwicklung nach Konten');
 \define('_MA_WGSIMPLEACC_ACCOUNT_SUBMIT', 'Konto einsenden');
-// Caption of Konto
+// Caption of Account
 \define('_MA_WGSIMPLEACC_ACCOUNT_ID', 'Id');
 \define('_MA_WGSIMPLEACC_ACCOUNT_PID', 'Übergeordnetes Konto');
 \define('_MA_WGSIMPLEACC_ACCOUNT_KEY', 'Schlüssel');
@@ -137,6 +139,8 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_TRANSACTION_HIST', 'Historie');
 \define('_MA_WGSIMPLEACC_TRANSACTION_TEMPLATE', 'Vorlage');
 // Allocation
+\define('_MA_WGSIMPLEACC_ALLOCATION_ADD', 'Zuordnung hinzufügen');
+\define('_MA_WGSIMPLEACC_ALLOCATION_EDIT', 'Zuordnung bearbeiten');
 \define('_MA_WGSIMPLEACC_ALLOCATION', 'Zuordnung');
 \define('_MA_WGSIMPLEACC_ALLOCATIONS', 'Zuordnungen');
 \define('_MA_WGSIMPLEACC_ALLOCATIONS_TITLE', 'Titel Zuordnungen');
@@ -157,6 +161,8 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_ALLOCATION_ERR_DELETE2', 'Löschen der Zuordnung nicht zulässig!<br>Die Zuordnung besitzt Unterkategorien!<br>Bitte zuerst Unterkategorien löschen');
 \define('_MA_WGSIMPLEACC_ALLOCATION_CURRID', 'Diese Zuordnung: %s');
 // Asset
+\define('_MA_WGSIMPLEACC_ASSET_ADD', 'Vermögenswert hinzufügen');
+\define('_MA_WGSIMPLEACC_ASSET_EDIT', 'Vermögenswert bearbeiten');
 \define('_MA_WGSIMPLEACC_ASSET', 'Vermögenswert');
 \define('_MA_WGSIMPLEACC_ASSETS', 'Vermögenswerte');
 \define('_MA_WGSIMPLEACC_ASSETS_TITLE', 'Vermögenswerte Titel');
@@ -206,10 +212,9 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_COLOR_LIGHTBROWN', 'Hellbraun');
 \define('_MA_WGSIMPLEACC_COLOR_BROWN', 'Braun');
 \define('_MA_WGSIMPLEACC_COLOR_DARKBROWN', 'Dunkelbraun');
-// File add/edit
+// File
 \define('_MA_WGSIMPLEACC_FILE_ADD', 'Datei hinzufügen');
 \define('_MA_WGSIMPLEACC_FILE_EDIT', 'Datei bearbeiten');
-// File
 \define('_MA_WGSIMPLEACC_FILE', 'Datei');
 \define('_MA_WGSIMPLEACC_FILES', 'Dateien');
 \define('_MA_WGSIMPLEACC_FILES_TITLE', 'Dateien Titel');
@@ -234,6 +239,8 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_FILE_IP', 'Ip');
 \define('_MA_WGSIMPLEACC_FILE_PREVIEW', 'Vorschau');
 // Balance
+\define('_MA_WGSIMPLEACC_BALANCE_ADD', 'Abschluss hinzufügen');
+\define('_MA_WGSIMPLEACC_BALANCE_EDIT', 'Abschluss bearbeiten');
 \define('_MA_WGSIMPLEACC_BALANCE', 'Abschluss');
 \define('_MA_WGSIMPLEACC_BALANCES', 'Abschlüsse');
 \define('_MA_WGSIMPLEACC_BALANCES_TITLE', 'Abschlüsse Titel');
@@ -275,10 +282,12 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_TEMPLATES', 'Vorlagen');
 \define('_MA_WGSIMPLEACC_TEMPLATE_NONE', 'Keine');
 // Tratemplates
+\define('_MA_WGSIMPLEACC_TRATEMPLATE_ADD', 'Vorlage hinzufügen');
+\define('_MA_WGSIMPLEACC_TRATEMPLATE_EDIT', 'Vorlage bearbeiten');
 \define('_MA_WGSIMPLEACC_TRATEMPLATES', 'Transaktionsvorlagen');
 \define('_MA_WGSIMPLEACC_TRATEMPLATES_LIST', 'Liste der Transaktionsvorlagen');
 \define('_MA_WGSIMPLEACC_TRATEMPLATE_SUBMIT', 'Transaktionsvorlage einsenden');
-// Elements of Template
+// Elements of Tratemplates
 \define('_MA_WGSIMPLEACC_TRATEMPLATE_ID', 'Id');
 \define('_MA_WGSIMPLEACC_TRATEMPLATE_NAME', 'Name');
 \define('_MA_WGSIMPLEACC_TRATEMPLATE_DESC', 'Beschreibung');
@@ -290,12 +299,14 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_TRATEMPLATE_AMOUNTOUT', 'Betrag Ausgang');
 \define('_MA_WGSIMPLEACC_TRATEMPLATE_ONLINE', 'Online');
 // Outtemplate
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_ADD', 'Vorlage hinzufügen');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_EDIT', 'Vorlage bearbeiten');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE', 'Ausgabevorlage');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATES', 'Ausgabevorlagen');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATES_TITLE', 'Titel Ausgabevorlage');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATES_LIST', 'Liste der Ausgabevorlage');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_SUBMIT', 'Ausgabevorlage einsenden');
-// Caption of Outtemplate
+// Elements of Outtemplate
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_ID', 'Id');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_NAME', 'Name');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_TYPE', 'Typ');
@@ -352,7 +363,6 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_TARGET_BROWSER', 'Nur anzeigen');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_TARGET_PDF', 'Als PDF ausgeben');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_PDF_SUCCESS', 'Daten erfolgreich als PDF ausgegeben');
-//\define('_MA_WGSIMPLEACC_OUTTEMPLATE_DEFAULT', 'Standardbeleg');
 // Client
 \define('_MA_WGSIMPLEACC_CLIENTS', 'Klienten');
 \define('_MA_WGSIMPLEACC_CLIENTS_LIST', 'Liste der Klienten');
@@ -400,45 +410,11 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_FORM_UPLOAD_SIZE_MB', 'MB');
 \define('_MA_WGSIMPLEACC_FORM_IMAGE_PATH', 'Dateien in %s :');
 \define('_MA_WGSIMPLEACC_FORM_UPLOAD_ALLOWEDMIME', 'Erlaubte Dateitypen:');
-//Constants
+//Constants class
 \define('_MA_WGSIMPLEACC_CLASS_EXPENSES', 'Ausgaben');
 \define('_MA_WGSIMPLEACC_CLASS_INCOME', 'Einnahmen');
 \define('_MA_WGSIMPLEACC_CLASS_BOTH', 'Beides');
-//PDF files
-\define('_MA_WGSIMPLEACC_PDF_BUTTON', 'Als PDF ausgeben');
-\define('_MA_WGSIMPLEACC_PDF_TRANAME', 'Beleg_%y_%n');
-\define('_MA_WGSIMPLEACC_PDF_TRAHEADER', 'Beleg %y / %n');
-\define('_MA_WGSIMPLEACC_PDF_BALNAME', 'Ausgabe_Abschluesse');
-\define('_MA_WGSIMPLEACC_PDF_BALHEADER', 'Ausgabe Abschlüsse');
-// ---------------- Print ----------------
-\define('_MA_WGSIMPLEACC_PRINT', 'Print');
-// ---------------- Menu ----------------
-\define('_MA_WGSIMPLEACC_MENUADMIN', 'Administration');
-\define('_MA_WGSIMPLEACC_MENUUSER', 'Benutzer');
-\define('_MA_WGSIMPLEACC_MENUNOTIF', 'Benachrichtigungen');
-\define('_MA_WGSIMPLEACC_MENUINBOX', 'Posteingang');
-// Admin link
-\define('_MA_WGSIMPLEACC_ADMIN', 'Admin');
-// ---------------- End ----------------
-// Konto add/edit
-\define('_MA_WGSIMPLEACC_ACCOUNT_ADD', 'Konto hinzufügen');
-\define('_MA_WGSIMPLEACC_ACCOUNT_EDIT', 'Konto bearbeiten');
-// Allocation add/edit
-\define('_MA_WGSIMPLEACC_ALLOCATION_ADD', 'Zuordnung hinzufügen');
-\define('_MA_WGSIMPLEACC_ALLOCATION_EDIT', 'Zuordnung bearbeiten');
-// Asset add/edit
-\define('_MA_WGSIMPLEACC_ASSET_ADD', 'Vermögenswert hinzufügen');
-\define('_MA_WGSIMPLEACC_ASSET_EDIT', 'Vermögenswert bearbeiten');
-// Balance add/edit
-\define('_MA_WGSIMPLEACC_BALANCE_ADD', 'Abschluss hinzufügen');
-\define('_MA_WGSIMPLEACC_BALANCE_EDIT', 'Abschluss bearbeiten');
-// Template add/edit
-\define('_MA_WGSIMPLEACC_TRATEMPLATE_ADD', 'Vorlage hinzufügen');
-\define('_MA_WGSIMPLEACC_TRATEMPLATE_EDIT', 'Vorlage bearbeiten');
-// Template add/edit
-\define('_MA_WGSIMPLEACC_OUTTEMPLATE_ADD', 'Vorlage hinzufügen');
-\define('_MA_WGSIMPLEACC_OUTTEMPLATE_EDIT', 'Vorlage bearbeiten');
-// Status
+// Constants Status
 \define('_MA_WGSIMPLEACC_STATUS_NONE', 'Kein Status');
 \define('_MA_WGSIMPLEACC_STATUS_OFFLINE', 'Gelöscht');
 \define('_MA_WGSIMPLEACC_STATUS_SUBMITTED', 'Eingesendet');
@@ -446,4 +422,22 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_STATUS_BROKEN', 'Fehlerhaft');
 \define('_MA_WGSIMPLEACC_STATUS_CREATED', 'Erstellt');
 \define('_MA_WGSIMPLEACC_STATUS_LOCKED', 'Gesperrt');
-
+//PDF files
+\define('_MA_WGSIMPLEACC_PDF_BUTTON', 'Output as PDF');
+\define('_MA_WGSIMPLEACC_PDF_TRANAME', 'Transaction_%y_%n');
+\define('_MA_WGSIMPLEACC_PDF_TRAHEADER', 'Transaction %y / %n');
+\define('_MA_WGSIMPLEACC_PDF_BALNAME', 'Output_Balances');
+\define('_MA_WGSIMPLEACC_PDF_BALHEADER', 'Output Balances');
+// ---------------- Print ----------------
+\define('_MA_WGSIMPLEACC_PRINT', 'Print');
+// ---------------- Menu ----------------
+\define('_MA_WGSIMPLEACC_MENUADMIN', 'Administration');
+\define('_MA_WGSIMPLEACC_MENUUSER', 'User');
+\define('_MA_WGSIMPLEACC_MENUNOTIF', 'Notification');
+\define('_MA_WGSIMPLEACC_MENUINBOX', 'Inbox');
+// ---------------- Online ----------------
+\define('_MA_WGSIMPLEACC_ONLINE', 'Online');
+\define('_MA_WGSIMPLEACC_OFFLINE', 'Offline');
+// Admin link
+\define('_MA_WGSIMPLEACC_ADMIN', 'Admin');
+// ---------------- End ----------------

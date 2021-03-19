@@ -206,13 +206,13 @@ class Accounts extends \XoopsObject
                 break;
         }
         $ret['class_text']  = $class_text;
-        $ret['color']          = $this->getVar('acc_color');
-        $ret['iecalc']         = (int)$this->getVar('acc_iecalc') > 0 ? _YES : _NO;
-        $ret['online']         = (int)$this->getVar('acc_online') > 0 ? _YES : _NO;
-        $ret['level']          = $this->getVar('acc_level');
-        $ret['weight']         = $this->getVar('acc_weight');
-        $ret['datecreated']    = \formatTimestamp($this->getVar('acc_datecreated'), 's');
-        $ret['submitter']      = \XoopsUser::getUnameFromId($this->getVar('acc_submitter'));
+        $ret['color']       = $this->getVar('acc_color');
+        $ret['iecalc']      = (int)$this->getVar('acc_iecalc') > 0 ? _YES : _NO;
+        $ret['online']      = (int)$this->getVar('acc_online') > 0 ? _YES : _NO;
+        $ret['level']       = $this->getVar('acc_level');
+        $ret['weight']      = $this->getVar('acc_weight');
+        $ret['datecreated'] = \formatTimestamp($this->getVar('acc_datecreated'), 's');
+        $ret['submitter']   = \XoopsUser::getUnameFromId($this->getVar('acc_submitter'));
         return $ret;
 	}
 

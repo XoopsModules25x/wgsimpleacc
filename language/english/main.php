@@ -69,10 +69,9 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_THEREARENT_TRATEMPLATES', "There aren't transaction templates at the moment");
 \define('_MA_WGSIMPLEACC_THEREARENT_OUTTEMPLATES', "There aren't output templates at the moment");
 \define('_MA_WGSIMPLEACC_THEREARENT_CLIENTS', "There aren't clients at the moment");
-// Account add/edit
+// Account
 \define('_MA_WGSIMPLEACC_ACCOUNT_ADD', 'Add Account');
 \define('_MA_WGSIMPLEACC_ACCOUNT_EDIT', 'Edit Account');
-// Account
 \define('_MA_WGSIMPLEACC_ACCOUNT', 'Account');
 \define('_MA_WGSIMPLEACC_ACCOUNTS', 'Accounts');
 \define('_MA_WGSIMPLEACC_ACCOUNTS_TITLE', 'Accounts title');
@@ -139,10 +138,9 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_TRANSACTION_BALID', 'Balance');
 \define('_MA_WGSIMPLEACC_TRANSACTION_HIST', 'History');
 \define('_MA_WGSIMPLEACC_TRANSACTION_TEMPLATE', 'Template');
-// Allocation add/edit
+// Allocation
 \define('_MA_WGSIMPLEACC_ALLOCATION_ADD', 'Add Allocation');
 \define('_MA_WGSIMPLEACC_ALLOCATION_EDIT', 'Edit Allocation');
-// Allocation
 \define('_MA_WGSIMPLEACC_ALLOCATION', 'Allocation');
 \define('_MA_WGSIMPLEACC_ALLOCATIONS', 'Allocations');
 \define('_MA_WGSIMPLEACC_ALLOCATIONS_TITLE', 'Allocations title');
@@ -162,10 +160,9 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_ALLOCATION_ERR_DELETE1', 'Deleting allocation not possible!<br>Allocation already used for transactions!<br>Please change these transactions first');
 \define('_MA_WGSIMPLEACC_ALLOCATION_ERR_DELETE2', 'Deleting allocation not possible!<br>Allocation has sub allocations!<br>Please delete sub allocations first');
 \define('_MA_WGSIMPLEACC_ALLOCATION_CURRID', 'Current allocation: %s');
-// Asset add/edit
+// Asset
 \define('_MA_WGSIMPLEACC_ASSET_ADD', 'Add Asset');
 \define('_MA_WGSIMPLEACC_ASSET_EDIT', 'Edit Asset');
-// Asset
 \define('_MA_WGSIMPLEACC_ASSET', 'Asset');
 \define('_MA_WGSIMPLEACC_ASSETS', 'Assets');
 \define('_MA_WGSIMPLEACC_ASSETS_TITLE', 'Assets title');
@@ -215,10 +212,9 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_COLOR_LIGHTBROWN', 'Light Brown');
 \define('_MA_WGSIMPLEACC_COLOR_BROWN', 'Brown');
 \define('_MA_WGSIMPLEACC_COLOR_DARKBROWN', 'Dark brown');
-// File add/edit
+// File
 \define('_MA_WGSIMPLEACC_FILE_ADD', 'Add File');
 \define('_MA_WGSIMPLEACC_FILE_EDIT', 'Edit File');
-// File
 \define('_MA_WGSIMPLEACC_FILE', 'File');
 \define('_MA_WGSIMPLEACC_FILES', 'Files');
 \define('_MA_WGSIMPLEACC_FILES_TITLE', 'Files title');
@@ -242,10 +238,9 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_FILE_DESC', 'Description');
 \define('_MA_WGSIMPLEACC_FILE_IP', 'IP-Address');
 \define('_MA_WGSIMPLEACC_FILE_PREVIEW', 'Preview');
-// Balance add/edit
+// Balance
 \define('_MA_WGSIMPLEACC_BALANCE_ADD', 'Add Balance');
 \define('_MA_WGSIMPLEACC_BALANCE_EDIT', 'Edit Balance');
-// Balance
 \define('_MA_WGSIMPLEACC_BALANCE', 'Balance');
 \define('_MA_WGSIMPLEACC_BALANCES', 'Balances');
 \define('_MA_WGSIMPLEACC_BALANCES_TITLE', 'Balances title');
@@ -286,10 +281,9 @@ require_once __DIR__ . '/admin.php';
 // Templates general
 \define('_MA_WGSIMPLEACC_TEMPLATES', 'Templates');
 \define('_MA_WGSIMPLEACC_TEMPLATE_NONE', 'None');
-// Template add/edit
+// Tratemplates
 \define('_MA_WGSIMPLEACC_TRATEMPLATE_ADD', 'Add Template');
 \define('_MA_WGSIMPLEACC_TRATEMPLATE_EDIT', 'Edit Template');
-// Tratemplates
 \define('_MA_WGSIMPLEACC_TRATEMPLATES', 'Transaction templates');
 \define('_MA_WGSIMPLEACC_TRATEMPLATES_LIST', 'List of Transaction Templates');
 \define('_MA_WGSIMPLEACC_TRATEMPLATE_SUBMIT', 'Submit Transaction Template');
@@ -304,10 +298,9 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_TRATEMPLATE_AMOUNTIN', 'Amount in');
 \define('_MA_WGSIMPLEACC_TRATEMPLATE_AMOUNTOUT', 'Amount out');
 \define('_MA_WGSIMPLEACC_TRATEMPLATE_ONLINE', 'Online');
-// Outtemplate add/edit
+// Outtemplate
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_ADD', 'Add Template');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_EDIT', 'Edit Template');
-// Outtemplate
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE', 'Output template');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATES', 'Output templates');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATES_TITLE', 'Output templates title');
@@ -370,7 +363,6 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_TARGET_BROWSER', 'Show only');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_TARGET_PDF', 'Output as PDF');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_PDF_SUCCESS', 'Output data as PDF successfully');
-//\define('_MA_WGSIMPLEACC_OUTTEMPLATE_DEFAULT', 'Default document');
 // Client
 \define('_MA_WGSIMPLEACC_CLIENTS', 'Clients');
 \define('_MA_WGSIMPLEACC_CLIENTS_LIST', 'List of Clients');
@@ -443,14 +435,9 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_MENUUSER', 'User');
 \define('_MA_WGSIMPLEACC_MENUNOTIF', 'Notification');
 \define('_MA_WGSIMPLEACC_MENUINBOX', 'Inbox');
+// ---------------- Online ----------------
+\define('_MA_WGSIMPLEACC_ONLINE', 'Online');
+\define('_MA_WGSIMPLEACC_OFFLINE', 'Offline');
 // Admin link
 \define('_MA_WGSIMPLEACC_ADMIN', 'Admin');
 // ---------------- End ----------------
-
-
-
-
-
-
-
-
