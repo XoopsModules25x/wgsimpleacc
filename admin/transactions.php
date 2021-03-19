@@ -85,10 +85,8 @@ switch ($op) {
 		}
 		if ($traId > 0) {
 			$transactionsObj = $transactionsHandler->get($traId);
-            $traHist = $transactionsHandler->saveHistoryTransactions($traId);
 		} else {
 			$transactionsObj = $transactionsHandler->create();
-            $traHist = 0;
 		}
 		// Set Vars
         $transactionsObj->setVar('tra_year', Request::getInt('tra_year', 0));
@@ -120,7 +118,7 @@ switch ($op) {
 		$transactionsObj->setVar('tra_status', Request::getInt('tra_status', 0));
 		$transactionsObj->setVar('tra_comments', Request::getInt('tra_comments', 0));
         $transactionsObj->setVar('tra_class', $traClass);
-        $transactionsObj->setVar('tra_hist', $traHist);
+        $transactionsObj->setVar('tra_hist', Request::getInt('tra_hist', 0));
 		$transactionDatecreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('tra_datecreated'));
 		$transactionsObj->setVar('tra_datecreated', $transactionDatecreatedObj->getTimestamp());
 		$transactionsObj->setVar('tra_submitter', Request::getInt('tra_submitter', 0));

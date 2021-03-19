@@ -175,9 +175,16 @@ switch ($op) {
                 $crOuttemplates->add(new \Criteria('otpl_online', 1));
                 $outtemplatesAll = $outtemplatesHandler->getAll($crOuttemplates);
                 foreach (\array_keys($outtemplatesAll) as $j) {
-                    $arrAllid  = unserialize($outtemplatesAll[$j]->getVar('otpl_allid'));
                     $otplType = $outtemplatesAll[$j]->getVar('otpl_type');
+                    $showOtpl = false;
+                    $arrAllid  = unserialize($outtemplatesAll[$j]->getVar('otpl_allid'));
                     if (0 == (int)$arrAllid[0] || \in_array($transactionsAll[$i]->getVar('tra_allid'), $arrAllid)) {
+                        $arrAccid  = unserialize($outtemplatesAll[$j]->getVar('otpl_accid'));
+                        if (0 == (int)$arrAccid[0] || \in_array($transactionsAll[$i]->getVar('tra_accid'), $arrAccid)) {
+                            $showOtpl = true;
+                        }
+                    }
+                    if ($showOtpl) {
                         switch ($otplType) {
                             case Constants::OUTTEMPLATE_TYPE_READY:
                                 $outputOp = 'exec_output&amp;target=pdf';

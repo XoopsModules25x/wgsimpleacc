@@ -2,6 +2,7 @@
 	<td><{$template.name}></td>
 	<td class="center"><{$template.type_text}></td>
 	<td class="center"><{$template.allid}></td>
+	<td class="center"><{$template.accid}></td>
 	<td class="center"><{$template.online}></td>
 	<td class="center">
 		<{if $permSubmit && $template.edit}>

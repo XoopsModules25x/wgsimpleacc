@@ -171,12 +171,13 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
             $childsAll = '';
         }
 
-        $helper             = \XoopsModules\Wgsimpleacc\Helper::getInstance();
-        $itemsHandler      = $helper->getHandler('Accounts');
-        $itemId        = 'acc_id';
-        $itemKey       = 'acc_key';
-        $itemName      = 'acc_name';
-        $itemColor     = 'acc_color';
+        $helper       = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+        $itemsHandler = $helper->getHandler('Accounts');
+        $itemId       = 'acc_id';
+        $itemKey      = 'acc_key';
+        $itemName     = 'acc_name';
+        $itemColor    = 'acc_color';
+        $itemOnline   = 'acc_online';
 
         $crItems           = new \CriteriaCompo();
         $crItems->add(new \Criteria('acc_pid', $itemPid));
@@ -197,6 +198,8 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
                 $childsAll .= '<span>';
                 $childsAll .= '<span data-id="' . $itemsAll[$i]->getVar($itemId) . '" class="itemTitle"><span style="background-color:' . $itemsAll[$i]->getVar($itemColor) . '">&nbsp;&nbsp;&nbsp;</span> ' . $itemsAll[$i]->getVar($itemKey) . ' ' . $itemsAll[$i]->getVar($itemName) . '</span>';
                 $childsAll .= '<span class="pull-right">';
+                $onlineText = (1 == (int)$itemsAll[$i]->getVar($itemOnline)) ? \_MA_WGSIMPLEACC_ONLINE : _MA_WGSIMPLEACC_OFFLINE;
+                $childsAll .= '<img class="wgsa-img-online" src="' . \WGSIMPLEACC_ICONS_URL . '/16/online' . $itemsAll[$i]->getVar($itemOnline) . '.png" title="' . $onlineText . '" alt="' . $onlineText . '">';
                 $childsAll .= '<a class="btn btn-sm btn-default wgsa-btn-list" href="transactions.php?op=list&displayfilter=1&amp;' . $itemId . '=' . $itemsAll[$i]->getVar($itemId) . '" title="' . \_MA_WGSIMPLEACC_TRANSACTIONS . '">' . \_MA_WGSIMPLEACC_TRANSACTIONS . '</a>';
                 $childsAll .= '<a class="btn btn-sm btn-primary wgsa-btn-list" href="accounts.php?op=edit&amp;' . $itemId . '=' . $itemsAll[$i]->getVar($itemId) . '" title="' . _EDIT . '">' . _EDIT . '</a>';
                 $childsAll .= '<a class="btn btn-sm btn-danger wgsa-btn-list" href="accounts.php?op=delete&amp;' . $itemId . '=' . $itemsAll[$i]->getVar($itemId) . '" title="' . _DELETE . '">' . _DELETE . '</a>';

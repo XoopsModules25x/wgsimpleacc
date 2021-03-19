@@ -107,6 +107,13 @@ switch ($op) {
             $otpl_allid = serialize($arrAllid);
         }
         $outtemplatesObj->setVar('otpl_allid', $otpl_allid);
+        $arrAccid = Request::getArray('otpl_accid');
+        if (0 == (int)$arrAccid[0]) {
+            $otpl_accid = serialize([0]);
+        } else {
+            $otpl_accid = serialize($arrAccid);
+        }
+        $outtemplatesObj->setVar('otpl_accid', $otpl_accid);
 		$outtemplatesObj->setVar('otpl_online', Request::getInt('otpl_online', 0));
 		$outtemplateDatecreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('otpl_datecreated'));
 		$outtemplatesObj->setVar('otpl_datecreated', $outtemplateDatecreatedObj->getTimestamp());

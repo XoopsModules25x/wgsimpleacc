@@ -246,6 +246,7 @@ CREATE TABLE `wgsimpleacc_outtemplates` (
   `otpl_body`        TEXT            NOT NULL ,
   `otpl_footer`      TEXT            NOT NULL ,
   `otpl_allid`       VARCHAR(255)    NOT NULL DEFAULT '',
+  `otpl_accid`       VARCHAR(255)    NOT NULL DEFAULT '',
   `otpl_online`      INT(1)          NOT NULL DEFAULT '0',
   `otpl_datecreated` INT(10)         NOT NULL DEFAULT '0',
   `otpl_submitter`   INT(10)         NOT NULL DEFAULT '0',

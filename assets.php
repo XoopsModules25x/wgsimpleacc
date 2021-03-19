@@ -61,7 +61,9 @@ $crAssets = new \CriteriaCompo();
 if ($asId > 0) {
     $crAssets->add(new \Criteria('as_id', $asId));
 }
-$crAssets->add(new \Criteria('as_online', 1));
+if (!$permSubmit) {
+    $crAssets->add(new \Criteria('as_online', 1));
+}
 $assetsCount = $assetsHandler->getCount($crAssets);
 $GLOBALS['xoopsTpl']->assign('assetsCount', $assetsCount);
 
