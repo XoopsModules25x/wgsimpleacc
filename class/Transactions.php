@@ -175,9 +175,14 @@ class Transactions extends \XoopsObject
             } else {
                 $crClients->add(new \Criteria('cli_creditor', 1));
             }
+            $crClients->setSort('cli_name');
+            $crClients->setOrder('ASC');
             $traCliidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_CLIID, 'tra_cliid', $traClient);
             $traCliidSelect->addOption(0, ' ');
-            $traCliidSelect->addOptionArray($clientsHandler->getList($crClients));
+            $clientsAll = $clientsHandler->getAll($crClients);
+            foreach ($clientsAll as $client) {
+                $traCliidSelect->addOption($client->getVar('cli_id'), strip_tags($client->getVar('cli_name')));
+            }
             $form->addElement($traCliidSelect);
         }
         // Form Text traReference

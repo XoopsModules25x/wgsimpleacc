@@ -85,7 +85,7 @@ class ClientsHandler extends \XoopsPersistableObjectHandler
 	 * @param string $order
 	 * @return int
 	 */
-	public function getCountClients($start = 0, $limit = 0, $sort = 'cli_id ASC, cli_name', $order = 'ASC')
+	public function getCountClients($start = 0, $limit = 0, $sort = 'cli_name', $order = 'ASC')
 	{
 		$crCountClients = new \CriteriaCompo();
 		$crCountClients = $this->getClientsCriteria($crCountClients, $start, $limit, $sort, $order);
@@ -100,7 +100,7 @@ class ClientsHandler extends \XoopsPersistableObjectHandler
 	 * @param string $order
 	 * @return array
 	 */
-	public function getAllClients($start = 0, $limit = 0, $sort = 'cli_id ASC, cli_name', $order = 'ASC')
+	public function getAllClients($start = 0, $limit = 0, $sort = 'cli_name', $order = 'ASC')
 	{
 		$crAllClients = new \CriteriaCompo();
 		$crAllClients = $this->getClientsCriteria($crAllClients, $start, $limit, $sort, $order);
@@ -148,8 +148,8 @@ class ClientsHandler extends \XoopsPersistableObjectHandler
                 }
                 $line2 .= $clientsObj->getVar('cli_city');
             }
-            if ('' !== $line1 && '' !== $line2) {
-                $line1 .= '<br>';
+            if ('' !== $line2) {
+                $line2 = '<p>' . $line2 . '</p>';
             }
         }
         $fullAddress = $line1 . $line2;

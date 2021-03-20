@@ -87,10 +87,10 @@ switch ($op) {
 			$clientsObj = $clientsHandler->create();
 		}
 		// Set Vars
-		$clientsObj->setVar('cli_name', Request::getString('cli_name', ''));
+		$clientsObj->setVar('cli_name', Request::getText('cli_name', ''));
 		$clientsObj->setVar('cli_postal', Request::getString('cli_postal', ''));
 		$clientsObj->setVar('cli_city', Request::getString('cli_city', ''));
-		$clientsObj->setVar('cli_address', Request::getString('cli_address', ''));
+		$clientsObj->setVar('cli_address', Request::getText('cli_address', ''));
 		$clientsObj->setVar('cli_ctry', Request::getString('cli_ctry', ''));
 		$clientsObj->setVar('cli_phone', Request::getString('cli_phone', ''));
 		$clientsObj->setVar('cli_vat', Request::getString('cli_vat', ''));
@@ -101,7 +101,7 @@ switch ($op) {
 		$clientsObj->setVar('cli_submitter', Request::getInt('cli_submitter', 0));
 		// Insert Data
 		if ($clientsHandler->insert($clientsObj)) {
-			\redirect_header('clients.php?op=list', 2, \_AM_WGSIMPLEACC_FORM_OK);
+			\redirect_header('clients.php?op=list', 2, \_MA_WGSIMPLEACC_FORM_OK);
 		}
 		// Get Form
 		$GLOBALS['xoopsTpl']->assign('error', $clientsObj->getHtmlErrors());
@@ -129,7 +129,7 @@ switch ($op) {
 				\redirect_header('clients.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
 			}
 			if ($clientsHandler->delete($clientsObj)) {
-				\redirect_header('clients.php', 3, \_AM_WGSIMPLEACC_FORM_DELETE_OK);
+				\redirect_header('clients.php', 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
 			} else {
 				$GLOBALS['xoopsTpl']->assign('error', $clientsObj->getHtmlErrors());
 			}

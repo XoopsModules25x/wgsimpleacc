@@ -87,6 +87,12 @@ class Outtemplates extends \XoopsObject
 			$action = $_SERVER['REQUEST_URI'];
 		}
 		$isAdmin = $GLOBALS['xoopsUser']->isAdmin($GLOBALS['xoopsModule']->mid());
+        if ($isAdmin) {
+            $editor = $helper->getConfig('editor_admin');
+        } else {
+            $editor = $helper->getConfig('editor_user');
+        }
+
 		// Title
 		$title = $this->isNew() ? \sprintf(\_MA_WGSIMPLEACC_OUTTEMPLATE_ADD) : \sprintf(\_MA_WGSIMPLEACC_OUTTEMPLATE_EDIT);
 		// Get Theme Form
@@ -102,11 +108,6 @@ class Outtemplates extends \XoopsObject
         $otplTypeSelect->addOption(Constants::OUTTEMPLATE_TYPE_FORM, \_MA_WGSIMPLEACC_OUTTEMPLATE_TYPE_FORM);
         $otplTypeSelect->setDescription(\_MA_WGSIMPLEACC_OUTTEMPLATE_TYPE_DESC);
         $form->addElement($otplTypeSelect);
-        if ($isAdmin) {
-            $editor = $helper->getConfig('editor_admin');
-        } else {
-            $editor = $helper->getConfig('editor_user');
-        }
         // Form Editor DhtmlTextArea otplHeader
         $editorConfigs1 = [];
         $editorConfigs1['name'] = 'otpl_header';

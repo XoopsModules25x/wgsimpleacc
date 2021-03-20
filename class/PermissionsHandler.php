@@ -401,6 +401,17 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
+     * @public function getPermAssetsView
+     * returns right for view assets
+     * @param null
+     * @return bool
+     */
+    public function getPermFilesView()
+    {
+        return $this->getPermView(Constants::PERM_TRANSACTIONS_VIEW);
+    }
+
+    /**
      * @public function getPermBalancesSubmit
      * returns right for create balances
      * @param null

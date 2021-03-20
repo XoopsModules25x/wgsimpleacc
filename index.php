@@ -28,7 +28,6 @@ use XoopsModules\Wgsimpleacc\{
 };
 
 require __DIR__ . '/header.php';
-$GLOBALS['xoopsOption']['template_main'] = 'wgsimpleacc_main_startmin.tpl';
 require_once \XOOPS_ROOT_PATH . '/header.php';
 $GLOBALS['xoopsTpl']->assign('template_sub', 'db:wgsimpleacc_index.tpl');
 require __DIR__ . '/navbar.php';
@@ -45,12 +44,10 @@ $filterType      = Request::getInt('filterType', Constants::FILTER_TYPEALL);
 
 $period_type = $helper->getConfig('balance_period');
 
-// Define Stylesheet
-$GLOBALS['xoTheme']->addStylesheet($style, null);
-
 // Permissions
 if (!$permissionsHandler->getPermGlobalView()) {
-    $GLOBALS['xoopsTpl']->assign('error', _NOPERM);
+    $GLOBALS['xoopsTpl']->assign('errorPerm', _NOPERM);
+    showLogin();
     require __DIR__ . '/footer.php';
     exit;
 }
@@ -63,7 +60,6 @@ $GLOBALS['xoopsTpl']->assign('refer', 'index');
 $GLOBALS['xoopsTpl']->assign('op', $op);
 $colors = Utility::getColors();
 $GLOBALS['xoopsTpl']->assign('colors', $colors);
-$GLOBALS['xoopsTpl']->assign('indexHeader', $helper->getConfig('index_header'));
 
 $indexTrahbar        = $helper->getConfig('index_trahbar');
 $indexTraInExSums    = $helper->getConfig('index_trainexsums');
@@ -272,7 +268,7 @@ if ($indexAssetsPie) {
         $assetList = [];
         foreach ($assetsCurrent as $asset) {
             if (1 == (int)$asset['iecalc']) {
-                $amountVal = $asset['amount_end'] - $asset['amount_start'];
+                $amountVal = $asset['amount_end_val'] - $asset['amount_start_val'];
                 $assets_data .= $amountVal . ',';
                 $assets_labels .= "'" . $asset['name'] . "',";
                 $assets_total += $amountVal;
@@ -333,3 +329,23 @@ wgsimpleaccMetaDescription(\_MA_WGSIMPLEACC_INDEX_DESC);
 $GLOBALS['xoopsTpl']->assign('xoops_mpageurl', WGSIMPLEACC_URL.'/index.php');
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', WGSIMPLEACC_UPLOAD_URL);
 require __DIR__ . '/footer.php';
+
+function showLogin() {
+    global $xoopsConfig;
+    xoops_loadLanguage('blocks', 'system');
+    $GLOBALS['xoopsTpl']->assign('formLogin', true);
+    $block                     = array();
+    $block['lang_username']    = _USERNAME;
+    $block['unamevalue']       = '';
+    $block['lang_password']    = _PASSWORD;
+    $block['lang_login']       = _LOGIN;
+    $block['lang_lostpass']    = _MB_SYSTEM_LPASS;
+    $block['lang_registernow'] = _MB_SYSTEM_RNOW;
+    //$block['lang_rememberme'] = _MB_SYSTEM_REMEMBERME;
+    if ($xoopsConfig['use_ssl'] == 1 && $xoopsConfig['sslloginlink'] != '') {
+        $block['sslloginlink'] = "<a href=\"javascript:openWithSelfMain('" . $xoopsConfig['sslloginlink'] . "', 'ssllogin', 300, 200);\">" . _MB_SYSTEM_SECURE . '</a>';
+    } elseif ($GLOBALS['xoopsConfig']['usercookie']) {
+        $block['lang_rememberme'] = _MB_SYSTEM_REMEMBERME;
+    }
+    $GLOBALS['xoopsTpl']->assign('block', $block);
+}

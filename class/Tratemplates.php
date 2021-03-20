@@ -125,9 +125,14 @@ class Tratemplates extends \XoopsObject
             $ttplClient = $this->isNew() ? 0 : $this->getVar('ttpl_cliid');
             $clientsHandler = $helper->getHandler('Clients');
             $crClients = new \CriteriaCompo();
+            $crClients->setSort('cli_name');
+            $crClients->setOrder('ASC');
             $ttplCliidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_CLIID, 'ttpl_cliid', $ttplClient);
             $ttplCliidSelect->addOption(0, ' ');
-            $ttplCliidSelect->addOptionArray($clientsHandler->getList($crClients));
+            $clientsAll = $clientsHandler->getAll($crClients);
+            foreach ($clientsAll as $client) {
+                $ttplCliidSelect->addOption($client->getVar('cli_id'), strip_tags($client->getVar('cli_name')));
+            }
             $form->addElement($ttplCliidSelect);
         }
         // Form Select ttplClass

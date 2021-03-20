@@ -10,7 +10,13 @@
 	<td><{$template.class_text}></td>
 	<td><{$template.amountin}></td>
 	<td><{$template.amountout}></td>
-	<td><{$template.online}></td>
+	<td class="center">
+		<{if $template.ttpl_online|default:0 == 1}>
+			<img src="<{$wgsimpleacc_icons_url_32}>/1.png" alt="<{$template.online}>" />
+		<{else}>
+			<img src="<{$wgsimpleacc_icons_url_32}>/0.png" alt="<{$template.online}>" />
+		<{/if}>
+	</td>
 	<td class="center">
 		<{if $permSubmit && $template.edit}>
 		<a class='btn btn-primary right' href='tratemplates.php?op=edit&amp;ttpl_id=<{$template.ttpl_id}><{$tplOp|default:''}>' title='<{$smarty.const._EDIT}>'><i class="fa fa-edit fa-fw"></i></a>

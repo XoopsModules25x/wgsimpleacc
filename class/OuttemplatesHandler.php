@@ -253,7 +253,7 @@ class OuttemplatesHandler extends \XoopsPersistableObjectHandler
         $client         = $outParams['client'];
         $clientsAddress = $clientsHandler->getClientFullAddress($transactionsObj->getVar('tra_cliid'));
         if ('' !== $clientsAddress) {
-            $client .= '<br>' . $clientsAddress;
+            $client .= $clientsAddress;
         }
         $outParams['recipient']  = $client;
 

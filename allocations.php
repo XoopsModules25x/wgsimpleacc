@@ -26,15 +26,13 @@ use XoopsModules\Wgsimpleacc\Constants;
 use XoopsModules\Wgsimpleacc\Common;
 
 require __DIR__ . '/header.php';
-$GLOBALS['xoopsOption']['template_main'] = 'wgsimpleacc_main_startmin.tpl';
 require_once \XOOPS_ROOT_PATH . '/header.php';
 $GLOBALS['xoopsTpl']->assign('template_sub', 'db:wgsimpleacc_allocations.tpl');
 require __DIR__ . '/navbar.php';
 
 // Permissions
-if (!$permissionsHandler->getPermGlobalView()) {
-    $GLOBALS['xoopsTpl']->assign('error', _NOPERM);
-    require __DIR__ . '/footer.php';
+if (!$permissionsHandler->getPermAllocationsView()) {
+    \redirect_header('index.php', 0, '');
 }
 
 $op    = Request::getCmd('op', 'list');
@@ -42,8 +40,6 @@ $start = Request::getInt('start', 0);
 $limit = Request::getInt('limit', $helper->getConfig('userpager'));
 $allId = Request::getInt('all_id', 0);
 
-// Define Stylesheet
-$GLOBALS['xoTheme']->addStylesheet($style, null);
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_icon_url_16', WGSIMPLEACC_ICONS_URL . '/16/');
 $GLOBALS['xoopsTpl']->assign('xoops_icons32_url', XOOPS_ICONS32_URL);
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);

@@ -35,6 +35,11 @@ if (\file_exists($tcpdf = \XOOPS_ROOT_PATH.'/Frameworks/tcpdf/')) {
     \redirect_header('index.php', 2, \_MA_WGSIMPLEACC_NO_PDF_LIBRARY);
 }
 
+// Permissions
+if (!$permissionsHandler->getPermBalancesView()) {
+    \redirect_header('index.php', 0, '');
+}
+
 require_once $tcpdf . 'config/tcpdf_config.php';
 // Get new template
 require_once \XOOPS_ROOT_PATH . '/class/template.php';

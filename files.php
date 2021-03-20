@@ -28,15 +28,13 @@ use XoopsModules\Wgsimpleacc\{
 };
 
 require __DIR__ . '/header.php';
-$GLOBALS['xoopsOption']['template_main'] = 'wgsimpleacc_main_startmin.tpl';
 require_once \XOOPS_ROOT_PATH . '/header.php';
 $GLOBALS['xoopsTpl']->assign('template_sub', 'db:wgsimpleacc_files.tpl');
 require __DIR__ . '/navbar.php';
 
 // Permissions
-if (!$permissionsHandler->getPermGlobalView()) {
-    $GLOBALS['xoopsTpl']->assign('error', _NOPERM);
-    require __DIR__ . '/footer.php';
+if (!$permissionsHandler->getPermFilesView()) {
+    \redirect_header('index.php', 0, '');
 }
 
 $op            = Request::getCmd('op', 'list');
@@ -51,20 +49,15 @@ if ('save_temp' == $op && '' != $deleteFiltemp) {
 
 $uploadByApp = $helper->getConfig('upload_by_app');
 
-// Define Stylesheet
-$GLOBALS['xoTheme']->addStylesheet($style, null);
-
 $GLOBALS['xoopsTpl']->assign('xoops_icons32_url', XOOPS_ICONS32_URL);
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_files_url', WGSIMPLEACC_UPLOAD_FILES_URL);
-
-$keywords = [];
-
 $GLOBALS['xoopsTpl']->assign('upload_by_app', $uploadByApp);
 $GLOBALS['xoopsTpl']->assign('start', $start);
 $GLOBALS['xoopsTpl']->assign('limit', $limit);
 $GLOBALS['xoopsTpl']->assign('fil_traid', $filTraid);
 
+$keywords = [];
 
 switch ($op) {
     case 'showfile':

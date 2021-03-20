@@ -29,15 +29,13 @@ use XoopsModules\Wgsimpleacc\{
 };
 
 require __DIR__ . '/header.php';
-$GLOBALS['xoopsOption']['template_main'] = 'wgsimpleacc_main_startmin.tpl';
 require_once \XOOPS_ROOT_PATH . '/header.php';
 $GLOBALS['xoopsTpl']->assign('template_sub', 'db:wgsimpleacc_transactions.tpl');
 require_once __DIR__ . '/navbar.php';
 
 // Permissions
-if (!$permissionsHandler->getPermGlobalView()) {
-    $GLOBALS['xoopsTpl']->assign('error', _NOPERM);
-    require __DIR__ . '/footer.php';
+if (!$permissionsHandler->getPermTransactionsView()) {
+    \redirect_header('index.php', 0, '');
 }
 
 $op              = Request::getCmd('op', 'list');
@@ -56,15 +54,10 @@ $filterYearTo    = Request::getInt('filterYearTo', date('Y'));
 
 $period_type = $helper->getConfig('balance_period');
 
-// Define Stylesheet
-$GLOBALS['xoTheme']->addStylesheet($style, null);
-
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_icon_url_16', WGSIMPLEACC_ICONS_URL . '/16/');
 $GLOBALS['xoopsTpl']->assign('xoops_icons32_url', XOOPS_ICONS32_URL);
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_files_url', WGSIMPLEACC_UPLOAD_FILES_URL);
-
-$keywords = [];
 
 $permSubmit = $permissionsHandler->getPermTransactionsSubmit();
 $GLOBALS['xoopsTpl']->assign('permSubmit', $permSubmit);
@@ -82,6 +75,8 @@ if (0 == $displayfilter || $traId > 0) {
 $traOp = '&amp;start=' . $start . '&amp;limit=' . $limit . '&amp;all_id=' . $allId . '&amp;acc_id=' . $accId . '&amp;as_id=' . $asId;
 $traOp .= '&amp;filterYear=' . $filterYear . '&amp;filterMonthFrom=' . $filterMonthFrom . '&amp;filterYearFrom=' . $filterYearFrom . '&amp;filterMonthTo=' . $filterMonthTo . '&amp;filterYearTo=' . $filterYearTo;
 $traOp .= '&amp;displayfilter=' . $displayfilter;
+
+$keywords = [];
 
 switch ($op) {
 	case 'show':
@@ -346,7 +341,9 @@ switch ($op) {
 		$GLOBALS['xoopsTpl']->assign('form', $form->render());
 		break;
 	case 'new':
-        $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/forms.js');
+
+	    $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/forms.js');
+
 		// Check permissions
 		if (!$permissionsHandler->getPermTransactionsSubmit()) {
 			\redirect_header('transactions.php?op=list', 3, _NOPERM);
