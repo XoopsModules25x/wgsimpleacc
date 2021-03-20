@@ -39,6 +39,11 @@ if (\file_exists($tcpdf = \XOOPS_ROOT_PATH . '/Frameworks/tcpdf/')) {
     \redirect_header('transactions.php', 2, \_MA_WGSIMPLEACC_NO_PDF_LIBRARY);
 }
 
+// Permissions
+if (!$permissionsHandler->getPermOuttemplatesView()) {
+    \redirect_header('index.php', 0, '');
+}
+
 // Extend the TCPDF class to create custom Header and Footer
 class MYPDF extends TCPDF {
 

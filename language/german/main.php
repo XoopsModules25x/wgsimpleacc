@@ -423,21 +423,24 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_STATUS_CREATED', 'Erstellt');
 \define('_MA_WGSIMPLEACC_STATUS_LOCKED', 'Gesperrt');
 //PDF files
-\define('_MA_WGSIMPLEACC_PDF_BUTTON', 'Output as PDF');
-\define('_MA_WGSIMPLEACC_PDF_TRANAME', 'Transaction_%y_%n');
-\define('_MA_WGSIMPLEACC_PDF_TRAHEADER', 'Transaction %y / %n');
-\define('_MA_WGSIMPLEACC_PDF_BALNAME', 'Output_Balances');
-\define('_MA_WGSIMPLEACC_PDF_BALHEADER', 'Output Balances');
+\define('_MA_WGSIMPLEACC_PDF_BUTTON', 'Ausgabe als PDF');
+\define('_MA_WGSIMPLEACC_PDF_TRANAME', 'Transaktion_%y_%n');
+\define('_MA_WGSIMPLEACC_PDF_TRAHEADER', 'Transaktion_ %y / %n');
+\define('_MA_WGSIMPLEACC_PDF_BALNAME', 'Ausgabe_Abschluss');
+\define('_MA_WGSIMPLEACC_PDF_BALHEADER', 'Ausgabe Abschluss');
 // ---------------- Print ----------------
-\define('_MA_WGSIMPLEACC_PRINT', 'Print');
+\define('_MA_WGSIMPLEACC_PRINT', 'Drucken');
 // ---------------- Menu ----------------
 \define('_MA_WGSIMPLEACC_MENUADMIN', 'Administration');
-\define('_MA_WGSIMPLEACC_MENUUSER', 'User');
-\define('_MA_WGSIMPLEACC_MENUNOTIF', 'Notification');
-\define('_MA_WGSIMPLEACC_MENUINBOX', 'Inbox');
+\define('_MA_WGSIMPLEACC_MENUUSER', 'Benutzer');
+\define('_MA_WGSIMPLEACC_MENUNOTIF', 'Benachrichtigung');
+\define('_MA_WGSIMPLEACC_MENUINBOX', 'Posteingang');
 // ---------------- Online ----------------
 \define('_MA_WGSIMPLEACC_ONLINE', 'Online');
 \define('_MA_WGSIMPLEACC_OFFLINE', 'Offline');
+// ---------------- Activate ----------------
+\define('_MA_WGSIMPLEACC_ACTIVE', 'Aktiv (klicke zum Deaktivieren)');
+\define('_MA_WGSIMPLEACC_NONACTIVE', 'Nicht aktiv (klicke zum Aktivieren)');
 // Admin link
 \define('_MA_WGSIMPLEACC_ADMIN', 'Admin');
 // ---------------- End ----------------

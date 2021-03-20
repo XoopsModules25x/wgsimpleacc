@@ -29,15 +29,13 @@ use XoopsModules\Wgsimpleacc\{
 };
 
 require __DIR__ . '/header.php';
-$GLOBALS['xoopsOption']['template_main'] = 'wgsimpleacc_main_startmin.tpl';
 require_once \XOOPS_ROOT_PATH . '/header.php';
 $GLOBALS['xoopsTpl']->assign('template_sub', 'db:wgsimpleacc_tratemplates.tpl');
 require __DIR__ . '/navbar.php';
 
 // Permissions
-if (!$permissionsHandler->getPermGlobalView()) {
-    $GLOBALS['xoopsTpl']->assign('error', _NOPERM);
-    require __DIR__ . '/footer.php';
+if (!$permissionsHandler->getPermTratemplatesView()) {
+    \redirect_header('index.php', 0, '');
 }
 
 $op    = Request::getCmd('op', 'list');
@@ -45,17 +43,14 @@ $start = Request::getInt('start', 0);
 $limit = Request::getInt('limit', $helper->getConfig('userpager'));
 $tplId = Request::getInt('ttpl_id', 0);
 
-// Define Stylesheet
-$GLOBALS['xoTheme']->addStylesheet($style, null);
-
 $GLOBALS['xoopsTpl']->assign('xoops_icons32_url', XOOPS_ICONS32_URL);
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
-
-$keywords = [];
-
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icons_url_32', WGSIMPLEACC_ICONS_URL . '/32/');
 $GLOBALS['xoopsTpl']->assign('showItem', $tplId > 0);
 
 $permSubmit = $permissionsHandler->getPermTratemplatesSubmit();
+
+$keywords = [];
 
 switch ($op) {
 	case 'show':

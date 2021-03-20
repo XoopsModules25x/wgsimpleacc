@@ -29,22 +29,25 @@ use XoopsModules\Wgsimpleacc\Constants;
 use XoopsModules\Wgsimpleacc\Common;
 
 require __DIR__ . '/header.php';
-$GLOBALS['xoopsOption']['template_main'] = 'wgsimpleacc_main_startmin.tpl';
 require_once \XOOPS_ROOT_PATH . '/header.php';
 $GLOBALS['xoopsTpl']->assign('template_sub', 'db:wgsimpleacc_clients.tpl');
 require __DIR__ . '/navbar.php';
+
+// Permissions
+if (!$permissionsHandler->getPermClientsView()) {
+    \redirect_header('index.php', 0, '');
+}
 
 $op    = Request::getCmd('op', 'list');
 $start = Request::getInt('start', 0);
 $limit = Request::getInt('limit', $helper->getConfig('userpager'));
 $cliId = Request::getInt('cli_id', 0);
 
-// Define Stylesheet
-$GLOBALS['xoTheme']->addStylesheet($style, null);
-
+$GLOBALS['xoopsTpl']->assign('start', $start);
+$GLOBALS['xoopsTpl']->assign('limit', $limit);
 $GLOBALS['xoopsTpl']->assign('xoops_icons32_url', XOOPS_ICONS32_URL);
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icon_url_32', WGSIMPLEACC_ICONS_URL . '/32/');
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icons_url_32', WGSIMPLEACC_ICONS_URL . '/32/');
 
 $keywords = [];
 
@@ -68,6 +71,8 @@ switch ($op) {
 		$GLOBALS['xoopsTpl']->assign('clientsCount', $clientsCount);
 		$crClients->setStart($start);
 		$crClients->setLimit($limit);
+        $crClients->setSort('cli_name');
+        $crClients->setOrder('ASC');
 		$clientsAll = $clientsHandler->getAll($crClients);
 		if ($clientsCount > 0) {
 			$clients = [];
@@ -110,10 +115,10 @@ switch ($op) {
 		} else {
 			$clientsObj = $clientsHandler->create();
 		}
-		$clientsObj->setVar('cli_name', Request::getString('cli_name', ''));
+		$clientsObj->setVar('cli_name', Request::getText('cli_name', ''));
 		$clientsObj->setVar('cli_postal', Request::getString('cli_postal', ''));
 		$clientsObj->setVar('cli_city', Request::getString('cli_city', ''));
-		$clientsObj->setVar('cli_address', Request::getString('cli_address', ''));
+		$clientsObj->setVar('cli_address', Request::getText('cli_address', ''));
 		$clientsObj->setVar('cli_ctry', Request::getString('cli_ctry', ''));
 		$clientsObj->setVar('cli_phone', Request::getString('cli_phone', ''));
 		$clientsObj->setVar('cli_vat', Request::getString('cli_vat', ''));
@@ -200,6 +205,16 @@ switch ($op) {
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_CLIENTS, 'link' => 'clients.php?op=list'];
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_CLIENT_EDIT];
 		break;
+    case 'change_yn':
+        if ($cliId > 0) {
+            $clientsObj = $clientsHandler->get($cliId);
+            $clientsObj->setVar(Request::getString('field'), Request::getInt('value', 0));
+            // Insert Data
+            if ($clientsHandler->insert($clientsObj, true)) {
+                \redirect_header('clients.php?op=list&amp;start=' . $start . '&amp;limit=' . $limit, 2, \_MA_WGSIMPLEACC_FORM_OK);
+            }
+        }
+        break;
 }
 
 // Keywords

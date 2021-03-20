@@ -70,9 +70,3 @@
         </div>
     </div>
 <{/if}>
-
-<{if $error|default:''}>
-    <div class="errorMsg"><strong><{$error}></strong></div>
-<{/if}>
-
-

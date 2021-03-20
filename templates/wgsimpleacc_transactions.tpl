@@ -1,94 +1,3 @@
-<script>
-	$(document).ready(function(){
-		$("#toggleFormFilter").click(function(){
-			$("#formFilter").toggle(1000);
-			if (document.getElementById("toggleFormFilter").innerText == "<{$smarty.const._MA_WGSIMPLEACC_FILTER_HIDE}>")
-			{
-				document.getElementById("toggleFormFilter").innerText = "<{$smarty.const._MA_WGSIMPLEACC_FILTER_SHOW}>";
-			}
-			else
-			{
-				document.getElementById("toggleFormFilter").innerText = "<{$smarty.const._MA_WGSIMPLEACC_FILTER_HIDE}>";
-			}
-		});
-	});
-
-    function myDDToggle(id) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if ( dropdowns[i] != document.getElementById(id) ) {
-                openDropdown.classList.remove('show');
-            }
-        }
-        document.getElementById(id).classList.toggle("show");
-    }
-
-</script>
-<style>
-
-
-
-
-
-
-
-
-    /*
-    .dropdown {
-        position: absolute;
-        right:5%;
-        overflow: hidden;
-    }
-
-    .dropdown .dropbtn {
-        font-size: 16px;
-        border: none;
-        outline: none;
-        background-color: inherit;
-        font-family: inherit;
-        margin: 0;
-    }
-    */
-
-    .dropdown-content {
-        display: none;
-        background-color: #f9f9f9;
-        min-width: 50px;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        z-index: 1;
-    }
-
-    .dropdown-content a {
-        float: none;
-        color: black;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-        text-align: left;
-        border-bottom: 1px solid #cccccc;
-    }
-    .dropdown-content a:hover {
-        background-color: #eeeeee;
-    }
-
-    .show {
-        display: block;
-    }
-
-    .dd-down-1 {
-        margin:1px 10px 1px 1px;
-    }
-    .dd-down-2 {
-        border-left:1px solid #cccccc;
-        margin:0;
-        padding:0 10px;
-    }
-</style>
-
-
-
 <{if $showList|default:''}>
     <{if $transactionsCount|default:0 > 0}>
         <{if $showItem|default:false}>
@@ -195,6 +104,68 @@
     </div>
 <{/if}>
 
+<!-- Start code for dropdown output -->
+<script>
+    $(document).ready(function(){
+        $("#toggleFormFilter").click(function(){
+            $("#formFilter").toggle(1000);
+            if (document.getElementById("toggleFormFilter").innerText == "<{$smarty.const._MA_WGSIMPLEACC_FILTER_HIDE}>")
+            {
+                document.getElementById("toggleFormFilter").innerText = "<{$smarty.const._MA_WGSIMPLEACC_FILTER_SHOW}>";
+            }
+            else
+            {
+                document.getElementById("toggleFormFilter").innerText = "<{$smarty.const._MA_WGSIMPLEACC_FILTER_HIDE}>";
+            }
+        });
+    });
+    function myDDToggle(id) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if ( dropdowns[i] != document.getElementById(id) ) {
+                openDropdown.classList.remove('show');
+            }
+        }
+        document.getElementById(id).classList.toggle("show");
+    }
+</script>
+<style>
+    .dropdown-content {
+        display: none;
+        background-color: #f9f9f9;
+        min-width: 50px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+    .dropdown-content a {
+        float: none;
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+        border-bottom: 1px solid #cccccc;
+    }
+    .dropdown-content a:hover {
+        background-color: #eeeeee;
+    }
+    .show {
+        display: block;
+    }
+    .dd-down-1 {
+        margin:1px 10px 1px 1px;
+    }
+    .dd-down-2 {
+        border-left:1px solid #cccccc;
+        margin:0;
+        padding:0 10px;
+    }
+</style>
+<!-- End code for dropdown output -->
+
+<!-- Start code for info modal -->
 <div class="clear"></div>
 <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -212,7 +183,6 @@
         </div>
     </div>
 </div>
-
 <script>
     $('#infoModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
@@ -223,7 +193,9 @@
         modal.find('.modal-body').html(info);
     })
 </script>
+<!-- End code for info modal -->
 
+<!-- Start code for image modal -->
 <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-labelledby="imgModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -242,7 +214,6 @@
         </div>
     </div>
 </div>
-
 <script>
     $('#imgModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
@@ -256,3 +227,4 @@
         modal.find(".modal-dialog").css("width", width + 100);
     })
 </script>
+<!-- End code for image modal -->

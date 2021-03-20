@@ -33,19 +33,14 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 require __DIR__ . '/header.php';
-$GLOBALS['xoopsOption']['template_main'] = 'wgsimpleacc_main_startmin.tpl';
 require_once \XOOPS_ROOT_PATH . '/header.php';
 $GLOBALS['xoopsTpl']->assign('template_sub', 'db:wgsimpleacc_outputs.tpl');
 require_once __DIR__ . '/navbar.php';
 
 // Permissions
 if (!$permissionsHandler->getPermGlobalView()) {
-    $GLOBALS['xoopsTpl']->assign('error', _NOPERM);
-    require __DIR__ . '/footer.php';
+    \redirect_header('index.php', 0, '');
 }
-
-// Define Stylesheet
-$GLOBALS['xoTheme']->addStylesheet($style, null);
 
 $op      = Request::getCmd('op', 'none');
 $traId   = Request::getInt('tra_id', 0);

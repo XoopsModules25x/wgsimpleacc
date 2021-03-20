@@ -438,6 +438,9 @@ require_once __DIR__ . '/admin.php';
 // ---------------- Online ----------------
 \define('_MA_WGSIMPLEACC_ONLINE', 'Online');
 \define('_MA_WGSIMPLEACC_OFFLINE', 'Offline');
+// ---------------- Activate ----------------
+\define('_MA_WGSIMPLEACC_ACTIVE', 'Activated (click to deactivate)');
+\define('_MA_WGSIMPLEACC_NONACTIVE', 'Deactivated (click to activate)');
 // Admin link
 \define('_MA_WGSIMPLEACC_ADMIN', 'Admin');
 // ---------------- End ----------------

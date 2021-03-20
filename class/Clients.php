@@ -43,10 +43,10 @@ class Clients extends \XoopsObject
 	public function __construct()
 	{
 		$this->initVar('cli_id', \XOBJ_DTYPE_INT);
-		$this->initVar('cli_name', \XOBJ_DTYPE_TXTAREA);
+		$this->initVar('cli_name', \XOBJ_DTYPE_OTHER);
 		$this->initVar('cli_postal', \XOBJ_DTYPE_TXTBOX);
 		$this->initVar('cli_city', \XOBJ_DTYPE_TXTBOX);
-		$this->initVar('cli_address', \XOBJ_DTYPE_TXTAREA);
+		$this->initVar('cli_address', \XOBJ_DTYPE_OTHER);
 		$this->initVar('cli_ctry', \XOBJ_DTYPE_TXTBOX);
 		$this->initVar('cli_phone', \XOBJ_DTYPE_TXTBOX);
 		$this->initVar('cli_vat', \XOBJ_DTYPE_TXTBOX);
@@ -86,24 +86,49 @@ class Clients extends \XoopsObject
 	 */
 	public function getFormClients($action = false)
 	{
-		if (!$action) {
+        $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+	    if (!$action) {
 			$action = $_SERVER['REQUEST_URI'];
 		}
-		//$isAdmin = $GLOBALS['xoopsUser']->isAdmin($GLOBALS['xoopsModule']->mid());
+        $isAdmin = $GLOBALS['xoopsUser']->isAdmin($GLOBALS['xoopsModule']->mid());
+        if ($isAdmin) {
+            $editor = $helper->getConfig('editor_admin');
+        } else {
+            $editor = $helper->getConfig('editor_user');
+        }
+
 		// Title
 		$title = $this->isNew() ? \sprintf(\_MA_WGSIMPLEACC_CLIENT_ADD) : \sprintf(\_MA_WGSIMPLEACC_CLIENT_EDIT);
 		// Get Theme Form
 		\xoops_load('XoopsFormLoader');
 		$form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
 		$form->setExtra('enctype="multipart/form-data"');
-		// Form Editor TextArea cliName
-		$form->addElement(new \XoopsFormTextArea(\_MA_WGSIMPLEACC_CLIENT_NAME, 'cli_name', $this->getVar('cli_name', 'e'), 4, 47), true);
-		// Form Text cliPostal
+        // Form Editor DhtmlTextArea cliName
+        $editorConfigs1 = [];
+        $editorConfigs1['name'] = 'cli_name';
+        $editorConfigs1['value'] = $this->getVar('cli_name', 'e');
+        $editorConfigs1['rows'] = 5;
+        $editorConfigs1['cols'] = 40;
+        $editorConfigs1['width'] = '100%';
+        $editorConfigs1['height'] = '400px';
+        $editorConfigs1['editor'] = $editor;
+        $cliName = new \XoopsFormEditor(\_MA_WGSIMPLEACC_CLIENT_NAME, 'cli_name', $editorConfigs1);
+        $form->addElement($cliName);
+        // Form Text cliPostal
 		$form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_CLIENT_POSTAL, 'cli_postal', 50, 255, $this->getVar('cli_postal')));
 		// Form Text cliCity
 		$form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_CLIENT_CITY, 'cli_city', 50, 255, $this->getVar('cli_city')));
-		// Form Editor TextArea cliAddress
-		$form->addElement(new \XoopsFormTextArea(\_MA_WGSIMPLEACC_CLIENT_ADDRESS, 'cli_address', $this->getVar('cli_address', 'e'), 4, 47));
+        // Form Editor DhtmlTextArea cliAddress
+        $editorConfigs2 = [];
+        $editorConfigs2['name'] = 'cli_address';
+        $editorConfigs2['value'] = $this->getVar('cli_address', 'e');
+        $editorConfigs2['rows'] = 5;
+        $editorConfigs2['cols'] = 40;
+        $editorConfigs2['width'] = '100%';
+        $editorConfigs2['height'] = '400px';
+        $editorConfigs2['editor'] = $editor;
+        $cliAddress = new \XoopsFormEditor(\_MA_WGSIMPLEACC_CLIENT_ADDRESS, 'cli_address', $editorConfigs2);
+        $form->addElement($cliAddress);
 		// Form Select Country cliCtry
 		$cliCtrySelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_CLIENT_CTRY, 'cli_ctry', $this->getVar('cli_ctry'));
 		$cliCtrySelect->addOption('', _NONE);
@@ -168,10 +193,10 @@ class Clients extends \XoopsObject
             $fullAddress .= $this->getVar('cli_city');
         }
 		$ret['address'] = $this->getVar('cli_address', 'e');
+        if ('' !== $fullAddress) {
+            $fullAddress = '<p>' . $fullAddress . '</p>';
+        }
         if ('' !== $this->getVar('cli_address')) {
-            if ('' !== $fullAddress) {
-                $fullAddress .= ', ';
-            }
             $fullAddress .= $ret['address'];
         }
         $ret['fulladdress']   = $fullAddress;

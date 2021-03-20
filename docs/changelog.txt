@@ -6,6 +6,9 @@
  - improved template based output (goffy)
  - added clone feature for output template (goffy)
  - added account to output template (goffy)
+ - prepared for template changer (goffy)
+ - changed handling of no perm (goffy)
+ - added theme for wgsimpleacc startmin (goffy)
 
 ==============================================================
 1.21 [2021/02/03]

@@ -55,12 +55,24 @@ $clientsHandler = $helper->getHandler('Clients');
 $myts = MyTextSanitizer::getInstance();
 // Default Css Style
 $style = WGSIMPLEACC_URL . '/assets/css/style.css';
+
 // Smarty Default
-$sysPathIcon16 = $GLOBALS['xoopsModule']->getInfo('sysicons16');
-$sysPathIcon32 = $GLOBALS['xoopsModule']->getInfo('sysicons32');
+$sysPathIcon16   = $GLOBALS['xoopsModule']->getInfo('sysicons16');
+$sysPathIcon32   = $GLOBALS['xoopsModule']->getInfo('sysicons32');
 $pathModuleAdmin = $GLOBALS['xoopsModule']->getInfo('dirmoduleadmin');
-$modPathIcon16 = $GLOBALS['xoopsModule']->getInfo('modicons16');
-$modPathIcon32 = $GLOBALS['xoopsModule']->getInfo('modicons16');
+$modPathIcon16   = $GLOBALS['xoopsModule']->getInfo('modicons16');
+$modPathIcon32   = $GLOBALS['xoopsModule']->getInfo('modicons16');
 // Load Languages
 \xoops_loadLanguage('main');
 \xoops_loadLanguage('modinfo');
+
+$styles  = [];
+$scripts = [];
+$styles[] = WGSIMPLEACC_URL . '/assets/css/style.css';
+
+// assets for startmin
+$GLOBALS['xoopsOption']['template_main'] = 'wgsimpleacc_main_startmin.tpl';
+$styles[]  = WGSIMPLEACC_URL . '/assets/css/startmin.css';
+$styles[]  = WGSIMPLEACC_URL . '/assets/css/wgsa_startmin.css';
+$scripts[] = WGSIMPLEACC_URL . '/assets/js/metisMenu.min.js';
+$scripts[] = WGSIMPLEACC_URL . '/assets/js/startmin.js';
