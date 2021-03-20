@@ -66,26 +66,26 @@ $moduleId = $xoopsModule->getVar('mid');
 $permForm = new \XoopsGroupPermForm($formTitle, $moduleId, $permName, $permDesc, 'admin/permissions.php');
 $permFound = false;
 if ('global' === $op) {
-	foreach ($globalPerms as $gPermId => $gPermName) {
-		$permForm->addItem($gPermId, $gPermName);
-	}
-	$GLOBALS['xoopsTpl']->assign('form', $permForm->render());
-	$permFound = true;
+    foreach ($globalPerms as $gPermId => $gPermName) {
+        $permForm->addItem($gPermId, $gPermName);
+    }
+    $GLOBALS['xoopsTpl']->assign('form', $permForm->render());
+    $permFound = true;
 }
 if ($op === 'approve_transactions' || $op === 'submit_transactions' || $op === 'view_transactions') {
-	$transactionsCount = $transactionsHandler->getCountTransactions();
-	if ($transactionsCount > 0) {
-		$transactionsAll = $transactionsHandler->getAllTransactions(0, 'tra_desc');
-		foreach (\array_keys($transactionsAll) as $i) {
-			$permForm->addItem($transactionsAll[$i]->getVar('tra_id'), $transactionsAll[$i]->getVar('tra_desc'));
-		}
-		$GLOBALS['xoopsTpl']->assign('form', $permForm->render());
-	}
-	$permFound = true;
+    $transactionsCount = $transactionsHandler->getCountTransactions();
+    if ($transactionsCount > 0) {
+        $transactionsAll = $transactionsHandler->getAllTransactions(0, 'tra_desc');
+        foreach (\array_keys($transactionsAll) as $i) {
+            $permForm->addItem($transactionsAll[$i]->getVar('tra_id'), $transactionsAll[$i]->getVar('tra_desc'));
+        }
+        $GLOBALS['xoopsTpl']->assign('form', $permForm->render());
+    }
+    $permFound = true;
 }
 unset($permForm);
 if (true !== $permFound) {
-	\redirect_header('permissions.php', 3, \_AM_WGSIMPLEACC_NO_PERMISSIONS_SET);
-	exit();
+    \redirect_header('permissions.php', 3, \_AM_WGSIMPLEACC_NO_PERMISSIONS_SET);
+    exit();
 }
 require __DIR__ . '/footer.php';

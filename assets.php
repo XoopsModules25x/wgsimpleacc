@@ -65,108 +65,108 @@ $assetsCount = $assetsHandler->getCount($crAssets);
 $GLOBALS['xoopsTpl']->assign('assetsCount', $assetsCount);
 
 switch ($op) {
-	case 'show':
-	case 'list':
-	default:
+    case 'show':
+    case 'list':
+    default:
         $GLOBALS['xoopsTpl']->assign('assetsList', true);
-		$GLOBALS['xoopsTpl']->assign('assetsCount', $assetsCount);
-		$crAssets->setStart($start);
-		$crAssets->setLimit($limit);
-		$assetsAll = $assetsHandler->getAll($crAssets);
-		if ($assetsCount > 0) {
-			$assets = [];
-			// Get All Assets
-			foreach (\array_keys($assetsAll) as $i) {
-				$assets[$i] = $assetsAll[$i]->getValuesAssets();
-				$keywords[$i] = $assetsAll[$i]->getVar('as_name');
-			}
-			$GLOBALS['xoopsTpl']->assign('assets', $assets);
+        $GLOBALS['xoopsTpl']->assign('assetsCount', $assetsCount);
+        $crAssets->setStart($start);
+        $crAssets->setLimit($limit);
+        $assetsAll = $assetsHandler->getAll($crAssets);
+        if ($assetsCount > 0) {
+            $assets = [];
+            // Get All Assets
+            foreach (\array_keys($assetsAll) as $i) {
+                $assets[$i] = $assetsAll[$i]->getValuesAssets();
+                $keywords[$i] = $assetsAll[$i]->getVar('as_name');
+            }
+            $GLOBALS['xoopsTpl']->assign('assets', $assets);
             $GLOBALS['xoopsTpl']->assign('permSubmit', $permSubmit);
-			unset($assets);
-			// Display Navigation
-			if ($assetsCount > $limit) {
-				require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
-				$pagenav = new \XoopsPageNav($assetsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
-				$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
-			}
-		}
+            unset($assets);
+            // Display Navigation
+            if ($assetsCount > $limit) {
+                require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
+                $pagenav = new \XoopsPageNav($assetsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
+            }
+        }
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ASSETS];
-		break;
-	case 'save':
-		// Security Check
-		if (!$GLOBALS['xoopsSecurity']->check()) {
-			\redirect_header('assets.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
-		}
-		// Check permissions
-		if (!$permSubmit) {
-			\redirect_header('assets.php?op=list', 3, _NOPERM);
-		}
-		if ($asId > 0) {
-			$assetsObj = $assetsHandler->get($asId);
-		} else {
-			$assetsObj = $assetsHandler->create();
-		}
-		$assetsObj->setVar('as_name', Request::getString('as_name', ''));
-		$assetsObj->setVar('as_descr', Request::getString('as_descr', ''));
+        break;
+    case 'save':
+        // Security Check
+        if (!$GLOBALS['xoopsSecurity']->check()) {
+            \redirect_header('assets.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
+        }
+        // Check permissions
+        if (!$permSubmit) {
+            \redirect_header('assets.php?op=list', 3, _NOPERM);
+        }
+        if ($asId > 0) {
+            $assetsObj = $assetsHandler->get($asId);
+        } else {
+            $assetsObj = $assetsHandler->create();
+        }
+        $assetsObj->setVar('as_name', Request::getString('as_name', ''));
+        $assetsObj->setVar('as_descr', Request::getString('as_descr', ''));
         $assetsObj->setVar('as_reference', Request::getString('as_reference', ''));
         $assetsObj->setVar('as_color', Request::getString('as_color', ''));
         $assetsObj->setVar('as_iecalc', Request::getInt('as_iecalc', 0));
         $assetsObj->setVar('as_online', Request::getInt('as_online', 0));
-		$assetsObj->setVar('as_datecreated', Request::getInt('as_datecreated'));
-		$assetsObj->setVar('as_submitter', Request::getInt('as_submitter', 0));
-		// Insert Data
-		if ($assetsHandler->insert($assetsObj)) {
+        $assetsObj->setVar('as_datecreated', Request::getInt('as_datecreated'));
+        $assetsObj->setVar('as_submitter', Request::getInt('as_submitter', 0));
+        // Insert Data
+        if ($assetsHandler->insert($assetsObj)) {
             if (Request::getInt('as_primary', 0) > 0) {
                 $newAsId = $assetsObj->getNewInsertedIdAssets();
                 $asId = $asId > 0 ? $asId : $newAsId;
                 $assetsHandler->setPrimaryAssets($asId);
             }
-		    // redirect after insert
-			\redirect_header('assets.php?op=list', 2, \_MA_WGSIMPLEACC_FORM_OK);
-		}
-		// Get Form Error
-		$GLOBALS['xoopsTpl']->assign('error', $assetsObj->getHtmlErrors());
-		$form = $assetsObj->getFormAssets();
-		$GLOBALS['xoopsTpl']->assign('form', $form->render());
-		break;
-	case 'new':
-		// Check permissions
-		if (!$permSubmit) {
-			\redirect_header('assets.php?op=list', 3, _NOPERM);
-		}
-		// Form Create
-		$assetsObj = $assetsHandler->create();
-		$form = $assetsObj->getFormAssets();
-		$GLOBALS['xoopsTpl']->assign('form', $form->render());
+            // redirect after insert
+            \redirect_header('assets.php?op=list', 2, \_MA_WGSIMPLEACC_FORM_OK);
+        }
+        // Get Form Error
+        $GLOBALS['xoopsTpl']->assign('error', $assetsObj->getHtmlErrors());
+        $form = $assetsObj->getFormAssets();
+        $GLOBALS['xoopsTpl']->assign('form', $form->render());
+        break;
+    case 'new':
+        // Check permissions
+        if (!$permSubmit) {
+            \redirect_header('assets.php?op=list', 3, _NOPERM);
+        }
+        // Form Create
+        $assetsObj = $assetsHandler->create();
+        $form = $assetsObj->getFormAssets();
+        $GLOBALS['xoopsTpl']->assign('form', $form->render());
 
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ASSETS, 'link' => 'assets.php?op=list'];
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ASSET_ADD];
-		break;
-	case 'edit':
-		// Check params
-		if (0 == $asId) {
-			\redirect_header('assets.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
-		}
+        break;
+    case 'edit':
+        // Check params
+        if (0 == $asId) {
+            \redirect_header('assets.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
+        }
         // Check permissions
         $assetsObj = $assetsHandler->get($asId);
         if (!$permissionsHandler->getPermAssetsEdit($assetsObj->getVar('as_submitter'))) {
             \redirect_header('assets.php?op=list', 3, _NOPERM);
         }
-		// Get Form
-		$assetsObj = $assetsHandler->get($asId);
-		$form = $assetsObj->getFormAssets();
-		$GLOBALS['xoopsTpl']->assign('form', $form->render());
+        // Get Form
+        $assetsObj = $assetsHandler->get($asId);
+        $form = $assetsObj->getFormAssets();
+        $GLOBALS['xoopsTpl']->assign('form', $form->render());
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ASSETS, 'link' => 'assets.php?op=list'];
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ASSET_EDIT];
-		break;
-	case 'delete':
-		// Check params
-		if (0 == $asId) {
-			\redirect_header('assets.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
-		}
+        break;
+    case 'delete':
+        // Check params
+        if (0 == $asId) {
+            \redirect_header('assets.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
+        }
         // Check permissions
         $assetsObj = $assetsHandler->get($asId);
         if (!$permissionsHandler->getPermAssetsEdit($accountsObj->getVar('as_submitter'))) {
@@ -176,11 +176,11 @@ switch ($op) {
         if ($assetsObj->getVar('as_primary') > 0) {
             \redirect_header('assets.php?op=list', 3, \_MA_WGSIMPLEACC_ASSET_ERR_DELETE);
         }
-		$asName = $assetsObj->getVar('as_name');
-		if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
-			if (!$GLOBALS['xoopsSecurity']->check()) {
-				\redirect_header('assets.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
-			}
+        $asName = $assetsObj->getVar('as_name');
+        if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
+            if (!$GLOBALS['xoopsSecurity']->check()) {
+                \redirect_header('assets.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
+            }
             // Check whether asset is already used
             $crTransactions = new \CriteriaCompo();
             $crTransactions->add(new \Criteria('tra_asid', $asId));
@@ -202,19 +202,19 @@ switch ($op) {
                 }
             }
             unset($crTransactions);
-		} else {
-			$xoopsconfirm = new Common\XoopsConfirm(
-				['ok' => 1, 'as_id' => $asId, 'op' => 'delete'],
-				$_SERVER['REQUEST_URI'],
-				\sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $assetsObj->getVar('as_name')));
-			$form = $xoopsconfirm->getFormXoopsConfirm();
-			$GLOBALS['xoopsTpl']->assign('form', $form->render());
+        } else {
+            $xoopsconfirm = new Common\XoopsConfirm(
+                ['ok' => 1, 'as_id' => $asId, 'op' => 'delete'],
+                $_SERVER['REQUEST_URI'],
+                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $assetsObj->getVar('as_name')));
+            $form = $xoopsconfirm->getFormXoopsConfirm();
+            $GLOBALS['xoopsTpl']->assign('form', $form->render());
 
             // Breadcrumbs
             $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ASSETS, 'link' => 'assets.php?op=list'];
             $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ASSET_EDIT];
-		}
-		break;
+        }
+        break;
 }
 
 // Keywords

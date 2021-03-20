@@ -34,61 +34,61 @@ $op = Request::getCmd('op', 'list');
 // Request acc_id
 $accId = Request::getInt('acc_id');
 switch ($op) {
-	case 'list':
-	default:
-		// Define Stylesheet
-		$GLOBALS['xoTheme']->addStylesheet($style, null);
-		$start = Request::getInt('start', 0);
-		$limit = Request::getInt('limit', $helper->getConfig('adminpager'));
-		$templateMain = 'wgsimpleacc_admin_accounts.tpl';
-		$GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('accounts.php'));
-		$adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_ACCOUNT, 'accounts.php?op=new', 'add');
-		$GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
-		$accountsCount = $accountsHandler->getCountAccounts();
-		$accountsAll = $accountsHandler->getAllAccounts($start, $limit);
-		$GLOBALS['xoopsTpl']->assign('accounts_count', $accountsCount);
-		$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
-		$GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', WGSIMPLEACC_UPLOAD_URL);
-		// Table view accounts
-		if ($accountsCount > 0) {
-			foreach (\array_keys($accountsAll) as $i) {
-				$account = $accountsAll[$i]->getValuesAccounts();
-				$GLOBALS['xoopsTpl']->append('accounts_list', $account);
-				unset($account);
-			}
-			// Display Navigation
-			if ($accountsCount > $limit) {
-				require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
-				$pagenav = new \XoopsPageNav($accountsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
-				$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
-			}
-		} else {
-			$GLOBALS['xoopsTpl']->assign('error', \_MA_WGSIMPLEACC_THEREARENT_ACCOUNTS);
-		}
+    case 'list':
+    default:
+        // Define Stylesheet
+        $GLOBALS['xoTheme']->addStylesheet($style, null);
+        $start = Request::getInt('start', 0);
+        $limit = Request::getInt('limit', $helper->getConfig('adminpager'));
+        $templateMain = 'wgsimpleacc_admin_accounts.tpl';
+        $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('accounts.php'));
+        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_ACCOUNT, 'accounts.php?op=new', 'add');
+        $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
+        $accountsCount = $accountsHandler->getCountAccounts();
+        $accountsAll = $accountsHandler->getAllAccounts($start, $limit);
+        $GLOBALS['xoopsTpl']->assign('accounts_count', $accountsCount);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', WGSIMPLEACC_UPLOAD_URL);
+        // Table view accounts
+        if ($accountsCount > 0) {
+            foreach (\array_keys($accountsAll) as $i) {
+                $account = $accountsAll[$i]->getValuesAccounts();
+                $GLOBALS['xoopsTpl']->append('accounts_list', $account);
+                unset($account);
+            }
+            // Display Navigation
+            if ($accountsCount > $limit) {
+                require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
+                $pagenav = new \XoopsPageNav($accountsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
+            }
+        } else {
+            $GLOBALS['xoopsTpl']->assign('error', \_MA_WGSIMPLEACC_THEREARENT_ACCOUNTS);
+        }
         $GLOBALS['xoopsTpl']->assign('colors', Utility::getColors());
 
-		break;
-	case 'new':
-		$templateMain = 'wgsimpleacc_admin_accounts.tpl';
-		$GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('accounts.php'));
-		$adminObject->addItemButton(\_AM_WGSIMPLEACC_LIST_ACCOUNTS, 'accounts.php', 'list');
-		$GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
-		// Form Create
-		$accountsObj = $accountsHandler->create();
-		$form = $accountsObj->getFormAccounts(false, true);
-		$GLOBALS['xoopsTpl']->assign('form', $form->render());
-		break;
-	case 'save':
-		// Security Check
-		if (!$GLOBALS['xoopsSecurity']->check()) {
-			\redirect_header('accounts.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
-		}
-		if ($accId > 0) {
-			$accountsObj = $accountsHandler->get($accId);
-		} else {
-			$accountsObj = $accountsHandler->create();
-		}
-		// Set Vars
+        break;
+    case 'new':
+        $templateMain = 'wgsimpleacc_admin_accounts.tpl';
+        $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('accounts.php'));
+        $adminObject->addItemButton(\_AM_WGSIMPLEACC_LIST_ACCOUNTS, 'accounts.php', 'list');
+        $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
+        // Form Create
+        $accountsObj = $accountsHandler->create();
+        $form = $accountsObj->getFormAccounts(false, true);
+        $GLOBALS['xoopsTpl']->assign('form', $form->render());
+        break;
+    case 'save':
+        // Security Check
+        if (!$GLOBALS['xoopsSecurity']->check()) {
+            \redirect_header('accounts.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
+        }
+        if ($accId > 0) {
+            $accountsObj = $accountsHandler->get($accId);
+        } else {
+            $accountsObj = $accountsHandler->create();
+        }
+        // Set Vars
         $accPid = Request::getInt('acc_pid', 0);
         $accountsObj->setVar('acc_pid', $accPid);
         $accountsObj->setVar('acc_key', Request::getString('acc_key', ''));
@@ -109,15 +109,15 @@ switch ($op) {
         $accountDatecreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('acc_datecreated'));
         $accountsObj->setVar('acc_datecreated', $accountDatecreatedObj->getTimestamp());
         $accountsObj->setVar('acc_submitter', Request::getInt('acc_submitter', 0));
-		// Insert Data
-		if ($accountsHandler->insert($accountsObj)) {
-			\redirect_header('accounts.php?op=list', 2, \_MA_WGSIMPLEACC_FORM_OK);
-		}
-		// Get Form
-		$GLOBALS['xoopsTpl']->assign('error', $accountsObj->getHtmlErrors());
-		$form = $accountsObj->getFormAccounts();
-		$GLOBALS['xoopsTpl']->assign('form', $form->render());
-		break;
+        // Insert Data
+        if ($accountsHandler->insert($accountsObj)) {
+            \redirect_header('accounts.php?op=list', 2, \_MA_WGSIMPLEACC_FORM_OK);
+        }
+        // Get Form
+        $GLOBALS['xoopsTpl']->assign('error', $accountsObj->getHtmlErrors());
+        $form = $accountsObj->getFormAccounts();
+        $GLOBALS['xoopsTpl']->assign('form', $form->render());
+        break;
     case 'savecolor':
         if ($accId > 0) {
             $accountsObj = $accountsHandler->get($accId);
@@ -131,39 +131,39 @@ switch ($op) {
             \redirect_header('accounts.php?op=list', 2, \_MA_WGSIMPLEACC_FORM_OK);
         }
         break;
-	case 'edit':
-		$templateMain = 'wgsimpleacc_admin_accounts.tpl';
-		$GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('accounts.php'));
-		$adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_ACCOUNT, 'accounts.php?op=new', 'add');
-		$adminObject->addItemButton(\_AM_WGSIMPLEACC_LIST_ACCOUNTS, 'accounts.php', 'list');
-		$GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
-		// Get Form
-		$accountsObj = $accountsHandler->get($accId);
-		$form = $accountsObj->getFormAccounts(false, true);
-		$GLOBALS['xoopsTpl']->assign('form', $form->render());
-		break;
-	case 'delete':
-		$templateMain = 'wgsimpleacc_admin_accounts.tpl';
-		$GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('accounts.php'));
-		$accountsObj = $accountsHandler->get($accId);
-		$accKey = $accountsObj->getVar('acc_key');
-		if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
-			if (!$GLOBALS['xoopsSecurity']->check()) {
-				\redirect_header('accounts.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
-			}
-			if ($accountsHandler->delete($accountsObj)) {
-				\redirect_header('accounts.php', 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
-			} else {
-				$GLOBALS['xoopsTpl']->assign('error', $accountsObj->getHtmlErrors());
-			}
-		} else {
-			$xoopsconfirm = new Common\XoopsConfirm(
-				['ok' => 1, 'acc_id' => $accId, 'op' => 'delete'],
-				$_SERVER['REQUEST_URI'],
-				\sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $accountsObj->getVar('acc_key')));
-			$form = $xoopsconfirm->getFormXoopsConfirm();
-			$GLOBALS['xoopsTpl']->assign('form', $form->render());
-		}
-		break;
+    case 'edit':
+        $templateMain = 'wgsimpleacc_admin_accounts.tpl';
+        $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('accounts.php'));
+        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_ACCOUNT, 'accounts.php?op=new', 'add');
+        $adminObject->addItemButton(\_AM_WGSIMPLEACC_LIST_ACCOUNTS, 'accounts.php', 'list');
+        $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
+        // Get Form
+        $accountsObj = $accountsHandler->get($accId);
+        $form = $accountsObj->getFormAccounts(false, true);
+        $GLOBALS['xoopsTpl']->assign('form', $form->render());
+        break;
+    case 'delete':
+        $templateMain = 'wgsimpleacc_admin_accounts.tpl';
+        $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('accounts.php'));
+        $accountsObj = $accountsHandler->get($accId);
+        $accKey = $accountsObj->getVar('acc_key');
+        if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
+            if (!$GLOBALS['xoopsSecurity']->check()) {
+                \redirect_header('accounts.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
+            }
+            if ($accountsHandler->delete($accountsObj)) {
+                \redirect_header('accounts.php', 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
+            } else {
+                $GLOBALS['xoopsTpl']->assign('error', $accountsObj->getHtmlErrors());
+            }
+        } else {
+            $xoopsconfirm = new Common\XoopsConfirm(
+                ['ok' => 1, 'acc_id' => $accId, 'op' => 'delete'],
+                $_SERVER['REQUEST_URI'],
+                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $accountsObj->getVar('acc_key')));
+            $form = $xoopsconfirm->getFormXoopsConfirm();
+            $GLOBALS['xoopsTpl']->assign('form', $form->render());
+        }
+        break;
 }
 require __DIR__ . '/footer.php';

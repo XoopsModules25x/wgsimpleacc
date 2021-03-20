@@ -314,6 +314,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_TYPE_BROWSER', 'Anzeige im Browser');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_TYPE_FORM', 'Bearbeiten in Formular');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_TYPE_DESC', '- Fertig für Ausgabe: die Vorlage wird ausgefüllt und sofort als Pdf heruntergeladen<br>
+- Anzeige im Browser: die Daten werden geladen und das Ergebnis wird in Ihrem Browser angezeigt<br>
 - Bearbeiten in Formular: die Daten werden in ein Formular geladen und können vor der Ausgabe überprüft werden');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_HEADER', 'Seitenkopf');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_BODY', 'Inhalt');

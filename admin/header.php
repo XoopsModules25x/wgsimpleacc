@@ -50,8 +50,8 @@ $filhistoriesHandler = $helper->getHandler('Filhistories');
 $myts = MyTextSanitizer::getInstance();
 // 
 if (!isset($xoopsTpl) || !\is_object($xoopsTpl)) {
-	require_once \XOOPS_ROOT_PATH . '/class/template.php';
-	$xoopsTpl = new \XoopsTpl();
+    require_once \XOOPS_ROOT_PATH . '/class/template.php';
+    $xoopsTpl = new \XoopsTpl();
 }
 
 // Load languages
@@ -61,9 +61,9 @@ if (!isset($xoopsTpl) || !\is_object($xoopsTpl)) {
 
 // Local admin menu class
 if (\file_exists($GLOBALS['xoops']->path($pathModuleAdmin.'/moduleadmin.php'))) {
-	require_once $GLOBALS['xoops']->path($pathModuleAdmin.'/moduleadmin.php');
+    require_once $GLOBALS['xoops']->path($pathModuleAdmin.'/moduleadmin.php');
 } else {
-	\redirect_header('../../../admin.php', 5, _AM_MODULEADMIN_MISSING);
+    \redirect_header('../../../admin.php', 5, _AM_MODULEADMIN_MISSING);
 }
 
 xoops_cp_header();

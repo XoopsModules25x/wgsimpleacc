@@ -31,94 +31,94 @@ use XoopsModules\Wgsimpleacc;
  */
 class TratemplatesHandler extends \XoopsPersistableObjectHandler
 {
-	/**
-	 * Constructor
-	 *
-	 * @param \XoopsDatabase $db
-	 */
-	public function __construct(\XoopsDatabase $db)
-	{
-		parent::__construct($db, 'wgsimpleacc_tratemplates', Tratemplates::class, 'ttpl_id', 'ttpl_name');
-	}
+    /**
+     * Constructor
+     *
+     * @param \XoopsDatabase $db
+     */
+    public function __construct(\XoopsDatabase $db)
+    {
+        parent::__construct($db, 'wgsimpleacc_tratemplates', Tratemplates::class, 'ttpl_id', 'ttpl_name');
+    }
 
-	/**
-	 * @param bool $isNew
-	 *
-	 * @return object
-	 */
-	public function create($isNew = true)
-	{
-		return parent::create($isNew);
-	}
+    /**
+     * @param bool $isNew
+     *
+     * @return object
+     */
+    public function create($isNew = true)
+    {
+        return parent::create($isNew);
+    }
 
-	/**
-	 * retrieve a field
-	 *
-	 * @param int $i field id
-	 * @param null fields
-	 * @return mixed reference to the {@link Get} object
-	 */
-	public function get($i = null, $fields = null)
-	{
-		return parent::get($i, $fields);
-	}
+    /**
+     * retrieve a field
+     *
+     * @param int $i field id
+     * @param null fields
+     * @return mixed reference to the {@link Get} object
+     */
+    public function get($i = null, $fields = null)
+    {
+        return parent::get($i, $fields);
+    }
 
-	/**
-	 * get inserted id
-	 *
-	 * @param null
-	 * @return int reference to the {@link Get} object
-	 */
-	public function getInsertId()
-	{
-		return $this->db->getInsertId();
-	}
+    /**
+     * get inserted id
+     *
+     * @param null
+     * @return int reference to the {@link Get} object
+     */
+    public function getInsertId()
+    {
+        return $this->db->getInsertId();
+    }
 
-	/**
-	 * Get Count Templates in the database
-	 * @param int    $start
-	 * @param int    $limit
-	 * @param string $sort
-	 * @param string $order
-	 * @return int
-	 */
-	public function getCountTratemplates($start = 0, $limit = 0, $sort = 'ttpl_id ASC, ttpl_name', $order = 'ASC')
-	{
-		$crCountTratemplates = new \CriteriaCompo();
-		$crCountTratemplates = $this->getTratemplatesCriteria($crCountTratemplates, $start, $limit, $sort, $order);
-		return $this->getCount($crCountTratemplates);
-	}
+    /**
+     * Get Count Templates in the database
+     * @param int    $start
+     * @param int    $limit
+     * @param string $sort
+     * @param string $order
+     * @return int
+     */
+    public function getCountTratemplates($start = 0, $limit = 0, $sort = 'ttpl_id ASC, ttpl_name', $order = 'ASC')
+    {
+        $crCountTratemplates = new \CriteriaCompo();
+        $crCountTratemplates = $this->getTratemplatesCriteria($crCountTratemplates, $start, $limit, $sort, $order);
+        return $this->getCount($crCountTratemplates);
+    }
 
-	/**
-	 * Get All Templates in the database
-	 * @param int    $start
-	 * @param int    $limit
-	 * @param string $sort
-	 * @param string $order
-	 * @return array
-	 */
-	public function getAllTratemplates($start = 0, $limit = 0, $sort = 'ttpl_id ASC, ttpl_name', $order = 'ASC')
-	{
-		$crAllTratemplates = new \CriteriaCompo();
-		$crAllTratemplates = $this->getTratemplatesCriteria($crAllTratemplates, $start, $limit, $sort, $order);
-		return $this->getAll($crAllTratemplates);
-	}
+    /**
+     * Get All Templates in the database
+     * @param int    $start
+     * @param int    $limit
+     * @param string $sort
+     * @param string $order
+     * @return array
+     */
+    public function getAllTratemplates($start = 0, $limit = 0, $sort = 'ttpl_id ASC, ttpl_name', $order = 'ASC')
+    {
+        $crAllTratemplates = new \CriteriaCompo();
+        $crAllTratemplates = $this->getTratemplatesCriteria($crAllTratemplates, $start, $limit, $sort, $order);
+        return $this->getAll($crAllTratemplates);
+    }
 
-	/**
-	 * Get Criteria Templates
-	 * @param        $crTratemplates
-	 * @param int    $start
-	 * @param int    $limit
-	 * @param string $sort
-	 * @param string $order
-	 * @return int
-	 */
-	private function getTratemplatesCriteria($crTratemplates, $start, $limit, $sort, $order)
-	{
-		$crTratemplates->setStart($start);
-		$crTratemplates->setLimit($limit);
-		$crTratemplates->setSort($sort);
-		$crTratemplates->setOrder($order);
-		return $crTratemplates;
-	}
+    /**
+     * Get Criteria Templates
+     * @param        $crTratemplates
+     * @param int    $start
+     * @param int    $limit
+     * @param string $sort
+     * @param string $order
+     * @return int
+     */
+    private function getTratemplatesCriteria($crTratemplates, $start, $limit, $sort, $order)
+    {
+        $crTratemplates->setStart($start);
+        $crTratemplates->setLimit($limit);
+        $crTratemplates->setSort($sort);
+        $crTratemplates->setOrder($order);
+        return $crTratemplates;
+    }
 }

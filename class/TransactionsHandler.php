@@ -31,96 +31,96 @@ use XoopsModules\Wgsimpleacc;
  */
 class TransactionsHandler extends \XoopsPersistableObjectHandler
 {
-	/**
-	 * Constructor
-	 *
-	 * @param \XoopsDatabase $db
-	 */
-	public function __construct(\XoopsDatabase $db)
-	{
-		parent::__construct($db, 'wgsimpleacc_transactions', Transactions::class, 'tra_id', 'tra_desc');
-	}
+    /**
+     * Constructor
+     *
+     * @param \XoopsDatabase $db
+     */
+    public function __construct(\XoopsDatabase $db)
+    {
+        parent::__construct($db, 'wgsimpleacc_transactions', Transactions::class, 'tra_id', 'tra_desc');
+    }
 
-	/**
-	 * @param bool $isNew
-	 *
-	 * @return object
-	 */
-	public function create($isNew = true)
-	{
-		return parent::create($isNew);
-	}
+    /**
+     * @param bool $isNew
+     *
+     * @return object
+     */
+    public function create($isNew = true)
+    {
+        return parent::create($isNew);
+    }
 
-	/**
-	 * retrieve a field
-	 *
-	 * @param int $i field id
-	 * @param null fields
-	 * @return mixed reference to the {@link Get} object
-	 */
-	public function get($i = null, $fields = null)
-	{
-		return parent::get($i, $fields);
-	}
+    /**
+     * retrieve a field
+     *
+     * @param int $i field id
+     * @param null fields
+     * @return mixed reference to the {@link Get} object
+     */
+    public function get($i = null, $fields = null)
+    {
+        return parent::get($i, $fields);
+    }
 
-	/**
-	 * get inserted id
-	 *
-	 * @param null
-	 * @return int reference to the {@link Get} object
-	 */
-	public function getInsertId()
-	{
-		return $this->db->getInsertId();
-	}
+    /**
+     * get inserted id
+     *
+     * @param null
+     * @return int reference to the {@link Get} object
+     */
+    public function getInsertId()
+    {
+        return $this->db->getInsertId();
+    }
 
-	/**
-	 * Get Count Transactions in the database
-	 * @param int    $start
-	 * @param int    $limit
-	 * @param string $sort
-	 * @param string $order
-	 * @return int
-	 */
-	public function getCountTransactions($start = 0, $limit = 0, $sort = 'tra_id ASC, tra_desc', $order = 'ASC')
-	{
-		$crCountTransactions = new \CriteriaCompo();
-		$crCountTransactions = $this->getTransactionsCriteria($crCountTransactions, $start, $limit, $sort, $order);
-		return $this->getCount($crCountTransactions);
-	}
+    /**
+     * Get Count Transactions in the database
+     * @param int    $start
+     * @param int    $limit
+     * @param string $sort
+     * @param string $order
+     * @return int
+     */
+    public function getCountTransactions($start = 0, $limit = 0, $sort = 'tra_id ASC, tra_desc', $order = 'ASC')
+    {
+        $crCountTransactions = new \CriteriaCompo();
+        $crCountTransactions = $this->getTransactionsCriteria($crCountTransactions, $start, $limit, $sort, $order);
+        return $this->getCount($crCountTransactions);
+    }
 
-	/**
-	 * Get All Transactions in the database
-	 * @param int    $start
-	 * @param int    $limit
-	 * @param string $sort
-	 * @param string $order
-	 * @return array
-	 */
-	public function getAllTransactions($start = 0, $limit = 0, $sort = 'tra_id ASC, tra_desc', $order = 'ASC')
-	{
-		$crAllTransactions = new \CriteriaCompo();
-		$crAllTransactions = $this->getTransactionsCriteria($crAllTransactions, $start, $limit, $sort, $order);
-		return $this->getAll($crAllTransactions);
-	}
+    /**
+     * Get All Transactions in the database
+     * @param int    $start
+     * @param int    $limit
+     * @param string $sort
+     * @param string $order
+     * @return array
+     */
+    public function getAllTransactions($start = 0, $limit = 0, $sort = 'tra_id ASC, tra_desc', $order = 'ASC')
+    {
+        $crAllTransactions = new \CriteriaCompo();
+        $crAllTransactions = $this->getTransactionsCriteria($crAllTransactions, $start, $limit, $sort, $order);
+        return $this->getAll($crAllTransactions);
+    }
 
-	/**
-	 * Get Criteria Transactions
-	 * @param        $crTransactions
-	 * @param int    $start
-	 * @param int    $limit
-	 * @param string $sort
-	 * @param string $order
-	 * @return int
-	 */
-	private function getTransactionsCriteria($crTransactions, $start, $limit, $sort, $order)
-	{
-		$crTransactions->setStart($start);
-		$crTransactions->setLimit($limit);
-		$crTransactions->setSort($sort);
-		$crTransactions->setOrder($order);
-		return $crTransactions;
-	}
+    /**
+     * Get Criteria Transactions
+     * @param        $crTransactions
+     * @param int    $start
+     * @param int    $limit
+     * @param string $sort
+     * @param string $order
+     * @return int
+     */
+    private function getTransactionsCriteria($crTransactions, $start, $limit, $sort, $order)
+    {
+        $crTransactions->setStart($start);
+        $crTransactions->setLimit($limit);
+        $crTransactions->setSort($sort);
+        $crTransactions->setOrder($order);
+        return $crTransactions;
+    }
 
     /**
      * @public function to get form for filter Transactions

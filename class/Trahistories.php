@@ -33,111 +33,111 @@ use XoopsModules\Wgsimpleacc\Constants;
  */
 class Trahistories extends \XoopsObject
 {
-	/**
-	 * Constructor
-	 *
-	 * @param null
-	 */
-	public function __construct()
-	{
-		$this->initVar('hist_id', \XOBJ_DTYPE_INT);
+    /**
+     * Constructor
+     *
+     * @param null
+     */
+    public function __construct()
+    {
+        $this->initVar('hist_id', \XOBJ_DTYPE_INT);
         $this->initVar('hist_type', \XOBJ_DTYPE_TXTBOX);
         $this->initVar('hist_datecreated', \XOBJ_DTYPE_INT);
         $this->initVar('hist_submitter', \XOBJ_DTYPE_INT);
         $this->initVar('tra_id', \XOBJ_DTYPE_INT);
         $this->initVar('tra_year', \XOBJ_DTYPE_INT);
         $this->initVar('tra_nb', \XOBJ_DTYPE_INT);
-		$this->initVar('tra_desc', \XOBJ_DTYPE_OTHER);
-		$this->initVar('tra_reference', \XOBJ_DTYPE_TXTBOX);
+        $this->initVar('tra_desc', \XOBJ_DTYPE_OTHER);
+        $this->initVar('tra_reference', \XOBJ_DTYPE_TXTBOX);
         $this->initVar('tra_remarks', \XOBJ_DTYPE_OTHER);
-		$this->initVar('tra_accid', \XOBJ_DTYPE_INT);
-		$this->initVar('tra_allid', \XOBJ_DTYPE_INT);
-		$this->initVar('tra_date', \XOBJ_DTYPE_INT);
-		$this->initVar('tra_curid', \XOBJ_DTYPE_INT);
-		$this->initVar('tra_amountin', \XOBJ_DTYPE_DECIMAL);
-		$this->initVar('tra_amountout', \XOBJ_DTYPE_DECIMAL);
-		$this->initVar('tra_taxid', \XOBJ_DTYPE_INT);
+        $this->initVar('tra_accid', \XOBJ_DTYPE_INT);
+        $this->initVar('tra_allid', \XOBJ_DTYPE_INT);
+        $this->initVar('tra_date', \XOBJ_DTYPE_INT);
+        $this->initVar('tra_curid', \XOBJ_DTYPE_INT);
+        $this->initVar('tra_amountin', \XOBJ_DTYPE_DECIMAL);
+        $this->initVar('tra_amountout', \XOBJ_DTYPE_DECIMAL);
+        $this->initVar('tra_taxid', \XOBJ_DTYPE_INT);
         $this->initVar('tra_asid', \XOBJ_DTYPE_INT);
-		$this->initVar('tra_status', \XOBJ_DTYPE_INT);
-		$this->initVar('tra_comments', \XOBJ_DTYPE_INT);
+        $this->initVar('tra_status', \XOBJ_DTYPE_INT);
+        $this->initVar('tra_comments', \XOBJ_DTYPE_INT);
         $this->initVar('tra_class', \XOBJ_DTYPE_INT);
         $this->initVar('tra_balid', \XOBJ_DTYPE_INT);
         $this->initVar('tra_hist', \XOBJ_DTYPE_TXTBOX);
-		$this->initVar('tra_datecreated', \XOBJ_DTYPE_INT);
-		$this->initVar('tra_submitter', \XOBJ_DTYPE_INT);
-	}
+        $this->initVar('tra_datecreated', \XOBJ_DTYPE_INT);
+        $this->initVar('tra_submitter', \XOBJ_DTYPE_INT);
+    }
 
-	/**
-	 * @static function &getInstance
-	 *
-	 * @param null
-	 */
-	public static function getInstance()
-	{
-		static $instance = false;
-		if (!$instance) {
-			$instance = new self();
-		}
-	}
+    /**
+     * @static function &getInstance
+     *
+     * @param null
+     */
+    public static function getInstance()
+    {
+        static $instance = false;
+        if (!$instance) {
+            $instance = new self();
+        }
+    }
 
-	/**
-	 * Get Values
-	 * @param null $keys
-	 * @param null $format
-	 * @param null $maxDepth
-	 * @return array
-	 */
-	public function getValuesTrahistories($keys = null, $format = null, $maxDepth = null)
-	{
-		$helper  = \XoopsModules\Wgsimpleacc\Helper::getInstance();
-		$utility = new \XoopsModules\Wgsimpleacc\Utility();
+    /**
+     * Get Values
+     * @param null $keys
+     * @param null $format
+     * @param null $maxDepth
+     * @return array
+     */
+    public function getValuesTrahistories($keys = null, $format = null, $maxDepth = null)
+    {
+        $helper  = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+        $utility = new \XoopsModules\Wgsimpleacc\Utility();
         $editorMaxchar = $helper->getConfig('editor_maxchar');
 
-		$ret = $this->getValues($keys, $format, $maxDepth);
+        $ret = $this->getValues($keys, $format, $maxDepth);
         $ret['histid']        = $this->getVar('hist_id');
         $ret['histdate']      = \formatTimestamp($this->getVar('hist_datecreated'), 'm');
         $ret['histtype']      = $this->getVar('hist_type');
         $ret['histsubmitter'] = \XoopsUser::getUnameFromId($this->getVar('hist_submitter'));
-		$ret['id']            = $this->getVar('tra_id');
+        $ret['id']            = $this->getVar('tra_id');
         $ret['year']          = $this->getVar('tra_year');
         $ret['nb']            = $this->getVar('tra_nb');
         $ret['year_nb']       = $this->getVar('tra_year') . '/' . \substr('00000' . $this->getVar('tra_nb'), -5);
-		$ret['desc']          = $this->getVar('tra_desc', 'e');
-		$ret['desc_short']    = $utility::truncateHtml($ret['desc'], $editorMaxchar);
-		$ret['reference']     = $this->getVar('tra_reference');
+        $ret['desc']          = $this->getVar('tra_desc', 'e');
+        $ret['desc_short']    = $utility::truncateHtml($ret['desc'], $editorMaxchar);
+        $ret['reference']     = $this->getVar('tra_reference');
         $ret['remarks']       = $this->getVar('tra_remarks', 'e');
         $ret['remarks_short'] = $utility::truncateHtml($ret['remarks'], $editorMaxchar);
-		$accountsHandler      = $helper->getHandler('Accounts');
-		$accountsObj          = $accountsHandler->get($this->getVar('tra_accid'));
-		$ret['accid']         = $accountsObj->getVar('acc_key');
+        $accountsHandler      = $helper->getHandler('Accounts');
+        $accountsObj          = $accountsHandler->get($this->getVar('tra_accid'));
+        $ret['accid']         = $accountsObj->getVar('acc_key');
         $ret['account']       = $accountsObj->getVar('acc_key') . ' ' . $accountsObj->getVar('acc_name');
-		$allocationsHandler   = $helper->getHandler('Allocations');
-		$allocationsObj       = $allocationsHandler->get($this->getVar('tra_allid'));
-		$ret['allocation']    = $allocationsObj->getVar('all_name');
-		$ret['date']          = \formatTimestamp($this->getVar('tra_date'), 's');
-		$currenciesHandler    = $helper->getHandler('Currencies');
-		$currenciesObj        = $currenciesHandler->get($this->getVar('tra_curid'));
+        $allocationsHandler   = $helper->getHandler('Allocations');
+        $allocationsObj       = $allocationsHandler->get($this->getVar('tra_allid'));
+        $ret['allocation']    = $allocationsObj->getVar('all_name');
+        $ret['date']          = \formatTimestamp($this->getVar('tra_date'), 's');
+        $currenciesHandler    = $helper->getHandler('Currencies');
+        $currenciesObj        = $currenciesHandler->get($this->getVar('tra_curid'));
         if (\is_object($currenciesObj)) {
             $ret['curid'] = $currenciesObj->getVar('cur_code');
         }
-		$ret['amountin']      =  Utility::FloatToString($this->getVar('tra_amountin'));
-		$ret['amountout']     =  Utility::FloatToString($this->getVar('tra_amountout'));
-		if ($this->getVar('tra_amountin') > 0) {
+        $ret['amountin']      =  Utility::FloatToString($this->getVar('tra_amountin'));
+        $ret['amountout']     =  Utility::FloatToString($this->getVar('tra_amountout'));
+        if ($this->getVar('tra_amountin') > 0) {
             $ret['amount'] = $ret['amountin'];
         } else {
             $ret['amount'] = $ret['amountout'];
         }
         $taxesHandler       = $helper->getHandler('Taxes');
-		$taxesObj           = $taxesHandler->get($this->getVar('tra_taxid'));
-		$ret['taxid']       = $taxesObj->getVar('tax_name');
+        $taxesObj           = $taxesHandler->get($this->getVar('tra_taxid'));
+        $ret['taxid']       = $taxesObj->getVar('tax_name');
         $ret['taxrate']     = $taxesObj->getVar('tax_rate');
         $assetsHandler      = $helper->getHandler('Assets');
         $assetsObj          = $assetsHandler->get($this->getVar('tra_asid'));
         $ret['asset']       = $assetsObj->getVar('as_name');
-		$status             = $this->getVar('tra_status');
-		$ret['status']      = $status;
-		$ret['status_text'] = Utility::getStatusText($status);
-		$ret['comments']    = $this->getVar('tra_comments');
+        $status             = $this->getVar('tra_status');
+        $ret['status']      = $status;
+        $ret['status_text'] = Utility::getStatusText($status);
+        $ret['comments']    = $this->getVar('tra_comments');
         $traClass           = $this->getVar('tra_class');
         $ret['class']       = $traClass;
         switch ($traClass) {
@@ -155,8 +155,8 @@ class Trahistories extends \XoopsObject
         $ret['class_text']  = $class_text;
         $ret['balid']       = $this->getVar('tra_balid');
         $ret['hist']        = $this->getVar('tra_hist');
-		$ret['datecreated'] = \formatTimestamp($this->getVar('tra_datecreated'), 's');
-		$ret['submitter']   = \XoopsUser::getUnameFromId($this->getVar('tra_submitter'));
+        $ret['datecreated'] = \formatTimestamp($this->getVar('tra_datecreated'), 's');
+        $ret['submitter']   = \XoopsUser::getUnameFromId($this->getVar('tra_submitter'));
         $filesHandler = $helper->getHandler('Files');
         $crFiles = new \CriteriaCompo();
         $crFiles->add(new \Criteria('fil_traid', $this->getVar('tra_id')));
@@ -173,6 +173,6 @@ class Trahistories extends \XoopsObject
             }
             $ret['files'] = $files;
         }
-		return $ret;
-	}
+        return $ret;
+    }
 }

@@ -33,47 +33,47 @@ use XoopsModules\Wgsimpleacc\Utility;
  */
 class Assets extends \XoopsObject
 {
-	/**
-	 * Constructor
-	 *
-	 * @param null
-	 */
-	public function __construct()
-	{
-		$this->initVar('as_id', \XOBJ_DTYPE_INT);
-		$this->initVar('as_name', \XOBJ_DTYPE_TXTBOX);
+    /**
+     * Constructor
+     *
+     * @param null
+     */
+    public function __construct()
+    {
+        $this->initVar('as_id', \XOBJ_DTYPE_INT);
+        $this->initVar('as_name', \XOBJ_DTYPE_TXTBOX);
         $this->initVar('as_reference', \XOBJ_DTYPE_TXTBOX);
-		$this->initVar('as_descr', \XOBJ_DTYPE_TXTAREA);
+        $this->initVar('as_descr', \XOBJ_DTYPE_TXTAREA);
         $this->initVar('as_color', \XOBJ_DTYPE_TXTBOX);
         $this->initVar('as_online', \XOBJ_DTYPE_INT);
         $this->initVar('as_iecalc', \XOBJ_DTYPE_INT);
         $this->initVar('as_primary', \XOBJ_DTYPE_INT);
-		$this->initVar('as_datecreated', \XOBJ_DTYPE_INT);
-		$this->initVar('as_submitter', \XOBJ_DTYPE_INT);
-	}
+        $this->initVar('as_datecreated', \XOBJ_DTYPE_INT);
+        $this->initVar('as_submitter', \XOBJ_DTYPE_INT);
+    }
 
-	/**
-	 * @static function &getInstance
-	 *
-	 * @param null
-	 */
-	public static function getInstance()
-	{
-		static $instance = false;
-		if (!$instance) {
-			$instance = new self();
-		}
-	}
+    /**
+     * @static function &getInstance
+     *
+     * @param null
+     */
+    public static function getInstance()
+    {
+        static $instance = false;
+        if (!$instance) {
+            $instance = new self();
+        }
+    }
 
-	/**
-	 * The new inserted $Id
-	 * @return inserted id
-	 */
-	public function getNewInsertedIdAssets()
-	{
-		$newInsertedId = $GLOBALS['xoopsDB']->getInsertId();
-		return $newInsertedId;
-	}
+    /**
+     * The new inserted $Id
+     * @return inserted id
+     */
+    public function getNewInsertedIdAssets()
+    {
+        $newInsertedId = $GLOBALS['xoopsDB']->getInsertId();
+        return $newInsertedId;
+    }
 
     /**
      * @public function getForm
@@ -81,7 +81,7 @@ class Assets extends \XoopsObject
      * @param bool $admin
      * @return \XoopsThemeForm
      */
-	public function getFormAssets($action = false, $admin = false)
+    public function getFormAssets($action = false, $admin = false)
     {
         if (!$action) {
             $action = $_SERVER['REQUEST_URI'];
@@ -136,21 +136,21 @@ class Assets extends \XoopsObject
             $form->addElement(new \XoopsFormHidden('as_submitter', $asSubmitter));
         }
 
-		// To Save
-		$form->addElement(new \XoopsFormHidden('op', 'save'));
-		$form->addElement(new \XoopsFormButtonTray('', _SUBMIT, 'submit', '', false));
-		return $form;
-	}
+        // To Save
+        $form->addElement(new \XoopsFormHidden('op', 'save'));
+        $form->addElement(new \XoopsFormButtonTray('', _SUBMIT, 'submit', '', false));
+        return $form;
+    }
 
-	/**
-	 * Get Values
-	 * @param null $keys
-	 * @param null $format
-	 * @param null $maxDepth
-	 * @return array
-	 */
-	public function getValuesAssets($keys = null, $format = null, $maxDepth = null)
-	{
+    /**
+     * Get Values
+     * @param null $keys
+     * @param null $format
+     * @param null $maxDepth
+     * @return array
+     */
+    public function getValuesAssets($keys = null, $format = null, $maxDepth = null)
+    {
         $helper  = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $utility = new \XoopsModules\Wgsimpleacc\Utility();
         $ret = $this->getValues($keys, $format, $maxDepth);
@@ -167,21 +167,21 @@ class Assets extends \XoopsObject
         $ret['datecreated'] = \formatTimestamp($this->getVar('as_datecreated'), 's');
         $ret['submitter']   = \XoopsUser::getUnameFromId($this->getVar('as_submitter'));
 
-		return $ret;
-	}
+        return $ret;
+    }
 
-	/**
-	 * Returns an array representation of the object
-	 *
-	 * @return array
-	 */
-	public function toArrayAssets()
-	{
-		$ret = [];
-		$vars = $this->getVars();
-		foreach (\array_keys($vars) as $var) {
-			$ret[$var] = $this->getVar('"{$var}"');
-		}
-		return $ret;
-	}
+    /**
+     * Returns an array representation of the object
+     *
+     * @return array
+     */
+    public function toArrayAssets()
+    {
+        $ret = [];
+        $vars = $this->getVars();
+        foreach (\array_keys($vars) as $var) {
+            $ret[$var] = $this->getVar('"{$var}"');
+        }
+        return $ret;
+    }
 }

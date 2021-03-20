@@ -63,14 +63,14 @@ $adminObject->addInfoBoxLine(\sprintf( '<label>' . \_AM_WGSIMPLEACC_THEREARE_CLI
 // Upload Folders
 $configurator = new Common\Configurator();
 if ($configurator->uploadFolders && \is_array($configurator->uploadFolders)) {
-	foreach (\array_keys($configurator->uploadFolders) as $i) {
-		$folder[] = $configurator->uploadFolders[$i];
-	}
+    foreach (\array_keys($configurator->uploadFolders) as $i) {
+        $folder[] = $configurator->uploadFolders[$i];
+    }
 }
 // Uploads Folders Created
 foreach (\array_keys($folder) as $i) {
-	$adminObject->addConfigBoxLine($folder[$i], 'folder');
-	$adminObject->addConfigBoxLine([$folder[$i], '777'], 'chmod');
+    $adminObject->addConfigBoxLine($folder[$i], 'folder');
+    $adminObject->addConfigBoxLine([$folder[$i], '777'], 'chmod');
 }
 
 /*
@@ -84,12 +84,12 @@ $adminObject->addConfigBoxLine('wgphpoffice', 'module');
 $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('index.php'));
 // Test Data
 if ($helper->getConfig('displaySampleButton')) {
-	\xoops_loadLanguage('admin/modulesadmin', 'system');
-	require_once \dirname(__DIR__) . '/testdata/index.php';
-	$adminObject->addItemButton(\constant('CO_' . $moduleDirNameUpper . '_ADD_SAMPLEDATA'), '__DIR__ . /../../testdata/index.php?op=load', 'add');
-	$adminObject->addItemButton(\constant('CO_' . $moduleDirNameUpper . '_SAVE_SAMPLEDATA'), '__DIR__ . /../../testdata/index.php?op=save', 'add');
-//	$adminObject->addItemButton(\constant('CO_' . $moduleDirNameUpper . '_EXPORT_SCHEMA'), '__DIR__ . /../../testdata/index.php?op=exportschema', 'add');
-	$adminObject->displayButton('left');
+    \xoops_loadLanguage('admin/modulesadmin', 'system');
+    require_once \dirname(__DIR__) . '/testdata/index.php';
+    $adminObject->addItemButton(\constant('CO_' . $moduleDirNameUpper . '_ADD_SAMPLEDATA'), '__DIR__ . /../../testdata/index.php?op=load', 'add');
+    $adminObject->addItemButton(\constant('CO_' . $moduleDirNameUpper . '_SAVE_SAMPLEDATA'), '__DIR__ . /../../testdata/index.php?op=save', 'add');
+//    $adminObject->addItemButton(\constant('CO_' . $moduleDirNameUpper . '_EXPORT_SCHEMA'), '__DIR__ . /../../testdata/index.php?op=exportschema', 'add');
+    $adminObject->displayButton('left');
 }
 $GLOBALS['xoopsTpl']->assign('index', $adminObject->displayIndex());
 // End Test Data

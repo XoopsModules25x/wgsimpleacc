@@ -314,6 +314,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_TYPE_BROWSER', 'Show in Browser');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_TYPE_FORM', 'Edit with form');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_TYPE_DESC', '- Ready to use: the template will be filled in and downloaded as pdf immediately<br>
+- Show in Browser form: the data will be loaded and the output will be shown in your browser<br>
 - Edit with form: the data will be loaded into a form and you can check result before output');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_HEADER', 'Page header');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_BODY', 'Content');

@@ -51,59 +51,59 @@ $GLOBALS['xoopsTpl']->assign('permSubmit', $permSubmit);
 $keywords = [];
 
 switch ($op) {
-	case 'show':
-	case 'list':
-	default:
+    case 'show':
+    case 'list':
+    default:
         $GLOBALS['xoopsTpl']->assign('showList', true);
-		$crOuttemplates = new \CriteriaCompo();
-		if ($otplId > 0) {
-			$crOuttemplates->add(new \Criteria('otpl_id', $otplId));
-		}
-		$outtemplatesCount = $outtemplatesHandler->getCount($crOuttemplates);
-		$GLOBALS['xoopsTpl']->assign('outtemplatesCount', $outtemplatesCount);
-		$crOuttemplates->setStart($start);
-		$crOuttemplates->setLimit($limit);
-		$outtemplatesAll = $outtemplatesHandler->getAll($crOuttemplates);
-		if ($outtemplatesCount > 0) {
-			$outtemplates = [];
-			// Get All Outtemplates
-			foreach (\array_keys($outtemplatesAll) as $i) {
-				$outtemplates[$i] = $outtemplatesAll[$i]->getValuesOuttemplates();
+        $crOuttemplates = new \CriteriaCompo();
+        if ($otplId > 0) {
+            $crOuttemplates->add(new \Criteria('otpl_id', $otplId));
+        }
+        $outtemplatesCount = $outtemplatesHandler->getCount($crOuttemplates);
+        $GLOBALS['xoopsTpl']->assign('outtemplatesCount', $outtemplatesCount);
+        $crOuttemplates->setStart($start);
+        $crOuttemplates->setLimit($limit);
+        $outtemplatesAll = $outtemplatesHandler->getAll($crOuttemplates);
+        if ($outtemplatesCount > 0) {
+            $outtemplates = [];
+            // Get All Outtemplates
+            foreach (\array_keys($outtemplatesAll) as $i) {
+                $outtemplates[$i] = $outtemplatesAll[$i]->getValuesOuttemplates();
                 $outtemplates[$i]['edit'] = $permissionsHandler->getPermOuttemplatesEdit($outtemplates[$i]['otpl_submitter']);
-				$keywords[$i] = $outtemplatesAll[$i]->getVar('otpl_name');
-			}
-			$GLOBALS['xoopsTpl']->assign('outtemplates', $outtemplates);
-			unset($outtemplates);
-			// Display Navigation
-			if ($outtemplatesCount > $limit) {
-				include_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
-				$pagenav = new \XoopsPageNav($outtemplatesCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
-				$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
-			}
-		}
+                $keywords[$i] = $outtemplatesAll[$i]->getVar('otpl_name');
+            }
+            $GLOBALS['xoopsTpl']->assign('outtemplates', $outtemplates);
+            unset($outtemplates);
+            // Display Navigation
+            if ($outtemplatesCount > $limit) {
+                include_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
+                $pagenav = new \XoopsPageNav($outtemplatesCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
+            }
+        }
 
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_OUTTEMPLATES];
-		break;
-	case 'save':
-		// Security Check
-		if (!$GLOBALS['xoopsSecurity']->check()) {
-			\redirect_header('outtemplates.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
-		}
-		// Check permissions
-		if (!$permSubmit) {
-			\redirect_header('outtemplates.php?op=list', 3, _NOPERM);
-		}
-		if ($otplId > 0) {
-			$outtemplatesObj = $outtemplatesHandler->get($otplId);
-		} else {
-			$outtemplatesObj = $outtemplatesHandler->create();
-		}
-		$outtemplatesObj->setVar('otpl_name', Request::getString('otpl_name', ''));
+        break;
+    case 'save':
+        // Security Check
+        if (!$GLOBALS['xoopsSecurity']->check()) {
+            \redirect_header('outtemplates.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
+        }
+        // Check permissions
+        if (!$permSubmit) {
+            \redirect_header('outtemplates.php?op=list', 3, _NOPERM);
+        }
+        if ($otplId > 0) {
+            $outtemplatesObj = $outtemplatesHandler->get($otplId);
+        } else {
+            $outtemplatesObj = $outtemplatesHandler->create();
+        }
+        $outtemplatesObj->setVar('otpl_name', Request::getString('otpl_name', ''));
         $outtemplatesObj->setVar('otpl_type', Request::getInt('otpl_type', 0));
         $outtemplatesObj->setVar('otpl_header', Request::getText('otpl_header', ''));
         $outtemplatesObj->setVar('otpl_body', Request::getText('otpl_body', ''));
-		$outtemplatesObj->setVar('otpl_footer', Request::getText('otpl_footer', ''));
+        $outtemplatesObj->setVar('otpl_footer', Request::getText('otpl_footer', ''));
         $arrAllid = Request::getArray('otpl_allid');
         if (0 == (int)$arrAllid[0]) {
             $otpl_allid = serialize([0]);
@@ -118,85 +118,85 @@ switch ($op) {
             $otpl_accid = serialize($arrAccid);
         }
         $outtemplatesObj->setVar('otpl_accid', $otpl_accid);
-		$outtemplatesObj->setVar('otpl_online', Request::getInt('otpl_online', 0));
-		$outtemplateDatecreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('otpl_datecreated'));
-		$outtemplatesObj->setVar('otpl_datecreated', $outtemplateDatecreatedObj->getTimestamp());
-		$outtemplatesObj->setVar('otpl_submitter', Request::getInt('otpl_submitter', 0));
-		// Insert Data
-		if ($outtemplatesHandler->insert($outtemplatesObj)) {
-			// redirect after insert
-			\redirect_header('outtemplates.php', 2, \_MA_WGSIMPLEACC_FORM_OK);
-		}
-		// Get Form Error
-		$GLOBALS['xoopsTpl']->assign('error', $outtemplatesObj->getHtmlErrors());
-		$form = $outtemplatesObj->getFormOuttemplates();
-		$GLOBALS['xoopsTpl']->assign('form', $form->render());
-		break;
-	case 'new':
-		// Check permissions
-		if (!$permSubmit) {
-			\redirect_header('outtemplates.php?op=list', 3, _NOPERM);
-		}
-		// Form Create
-		$outtemplatesObj = $outtemplatesHandler->create();
-		$form = $outtemplatesObj->getFormOuttemplates();
-		$GLOBALS['xoopsTpl']->assign('form', $form->render());
+        $outtemplatesObj->setVar('otpl_online', Request::getInt('otpl_online', 0));
+        $outtemplateDatecreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('otpl_datecreated'));
+        $outtemplatesObj->setVar('otpl_datecreated', $outtemplateDatecreatedObj->getTimestamp());
+        $outtemplatesObj->setVar('otpl_submitter', Request::getInt('otpl_submitter', 0));
+        // Insert Data
+        if ($outtemplatesHandler->insert($outtemplatesObj)) {
+            // redirect after insert
+            \redirect_header('outtemplates.php', 2, \_MA_WGSIMPLEACC_FORM_OK);
+        }
+        // Get Form Error
+        $GLOBALS['xoopsTpl']->assign('error', $outtemplatesObj->getHtmlErrors());
+        $form = $outtemplatesObj->getFormOuttemplates();
+        $GLOBALS['xoopsTpl']->assign('form', $form->render());
+        break;
+    case 'new':
+        // Check permissions
+        if (!$permSubmit) {
+            \redirect_header('outtemplates.php?op=list', 3, _NOPERM);
+        }
+        // Form Create
+        $outtemplatesObj = $outtemplatesHandler->create();
+        $form = $outtemplatesObj->getFormOuttemplates();
+        $GLOBALS['xoopsTpl']->assign('form', $form->render());
 
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_OUTTEMPLATES, 'link' => 'outtemplates.php?op=list'];
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_OUTTEMPLATE_ADD];
-		break;
-	case 'edit':
-		// Check permissions
-		if (!$permSubmit) {
-			\redirect_header('outtemplates.php?op=list', 3, _NOPERM);
-		}
-		// Check params
-		if (0 == $otplId) {
-			\redirect_header('outtemplates.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
-		}
-		// Get Form
-		$outtemplatesObj = $outtemplatesHandler->get($otplId);
-		$form = $outtemplatesObj->getFormOuttemplates();
-		$GLOBALS['xoopsTpl']->assign('form', $form->render());
+        break;
+    case 'edit':
+        // Check permissions
+        if (!$permSubmit) {
+            \redirect_header('outtemplates.php?op=list', 3, _NOPERM);
+        }
+        // Check params
+        if (0 == $otplId) {
+            \redirect_header('outtemplates.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
+        }
+        // Get Form
+        $outtemplatesObj = $outtemplatesHandler->get($otplId);
+        $form = $outtemplatesObj->getFormOuttemplates();
+        $GLOBALS['xoopsTpl']->assign('form', $form->render());
 
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_OUTTEMPLATES, 'link' => 'outtemplates.php?op=list'];
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_OUTTEMPLATE_EDIT];
-		break;
-	case 'delete':
-		// Check permissions
-		if (!$permSubmit) {
-			\redirect_header('outtemplates.php?op=list', 3, _NOPERM);
-		}
-		// Check params
-		if (0 == $otplId) {
-			\redirect_header('outtemplates.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
-		}
-		$outtemplatesObj = $outtemplatesHandler->get($otplId);
-		$otplName = $outtemplatesObj->getVar('otpl_name');
-		if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
-			if (!$GLOBALS['xoopsSecurity']->check()) {
-				\redirect_header('outtemplates.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
-			}
-			if ($outtemplatesHandler->delete($outtemplatesObj)) {
-				\redirect_header('outtemplates.php', 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
-			} else {
-				$GLOBALS['xoopsTpl']->assign('error', $outtemplatesObj->getHtmlErrors());
-			}
-		} else {
-			$xoopsconfirm = new Common\XoopsConfirm(
-				['ok' => 1, 'otpl_id' => $otplId, 'op' => 'delete'],
-				$_SERVER['REQUEST_URI'],
-				\sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $outtemplatesObj->getVar('otpl_name')));
-			$form = $xoopsconfirm->getFormXoopsConfirm();
-			$GLOBALS['xoopsTpl']->assign('form', $form->render());
+        break;
+    case 'delete':
+        // Check permissions
+        if (!$permSubmit) {
+            \redirect_header('outtemplates.php?op=list', 3, _NOPERM);
+        }
+        // Check params
+        if (0 == $otplId) {
+            \redirect_header('outtemplates.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
+        }
+        $outtemplatesObj = $outtemplatesHandler->get($otplId);
+        $otplName = $outtemplatesObj->getVar('otpl_name');
+        if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
+            if (!$GLOBALS['xoopsSecurity']->check()) {
+                \redirect_header('outtemplates.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
+            }
+            if ($outtemplatesHandler->delete($outtemplatesObj)) {
+                \redirect_header('outtemplates.php', 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
+            } else {
+                $GLOBALS['xoopsTpl']->assign('error', $outtemplatesObj->getHtmlErrors());
+            }
+        } else {
+            $xoopsconfirm = new Common\XoopsConfirm(
+                ['ok' => 1, 'otpl_id' => $otplId, 'op' => 'delete'],
+                $_SERVER['REQUEST_URI'],
+                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $outtemplatesObj->getVar('otpl_name')));
+            $form = $xoopsconfirm->getFormXoopsConfirm();
+            $GLOBALS['xoopsTpl']->assign('form', $form->render());
 
             // Breadcrumbs
             $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_OUTTEMPLATES, 'link' => 'outtemplates.php?op=list'];
             $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_OUTTEMPLATE_EDIT];
-		}
-		break;
+        }
+        break;
 /*
     case 'editpdf':
         // Check permissions

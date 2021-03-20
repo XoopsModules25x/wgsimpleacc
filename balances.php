@@ -107,8 +107,8 @@ switch ($op) {
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_BALANCE_PRECALC];
         break;
 
-	case 'list':
-	default:
+    case 'list':
+    default:
 
         $GLOBALS['xoopsTpl']->assign('balancesList', true);
         $balances = [];
@@ -141,47 +141,47 @@ switch ($op) {
 
     case 'details':
         $GLOBALS['xoopsTpl']->assign('balanceDetails', true);
-	    $crBalances = new \CriteriaCompo();
+        $crBalances = new \CriteriaCompo();
         $balanceFrom = Request::getInt('balanceFrom');
         $balanceTo   = Request::getInt('balanceTo');
         $crBalances->add(new \Criteria('bal_from', $balanceFrom));
         $crBalances->add(new \Criteria('bal_to', $balanceTo));
-		$balancesCount = $balancesHandler->getCount($crBalances);
-		$GLOBALS['xoopsTpl']->assign('balancesCount', $balancesCount);
-		$balancesAll = $balancesHandler->getAll($crBalances);
-		if ($balancesCount > 0) {
-			$balances = [];
-			// Get All Balances
+        $balancesCount = $balancesHandler->getCount($crBalances);
+        $GLOBALS['xoopsTpl']->assign('balancesCount', $balancesCount);
+        $balancesAll = $balancesHandler->getAll($crBalances);
+        if ($balancesCount > 0) {
+            $balances = [];
+            // Get All Balances
             $amountStartTotal = 0;
             $amountEndTotal = 0;
-			foreach (\array_keys($balancesAll) as $i) {
-				$balances[$i] = $balancesAll[$i]->getValuesBalances();
+            foreach (\array_keys($balancesAll) as $i) {
+                $balances[$i] = $balancesAll[$i]->getValuesBalances();
                 $amountStartTotal += $balances[$i]['bal_amountstart'];
                 $amountEndTotal += $balances[$i]['bal_amountend'];
-			}
+            }
             $balances[$i + 1] = [
                 'from' => \_MA_WGSIMPLEACC_SUMS,
                 'amountstart' => Utility::FloatToString($amountStartTotal),
                 'amountend' => Utility::FloatToString($amountEndTotal)
                 ];
-			$GLOBALS['xoopsTpl']->assign('balances', $balances);
-			unset($balances);
-			// Display Navigation
-			if ($balancesCount > $limit) {
-				require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
-				$pagenav = new \XoopsPageNav($balancesCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
-				$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
-			}
-			$GLOBALS['xoopsTpl']->assign('type', $helper->getConfig('table_type'));
-			$GLOBALS['xoopsTpl']->assign('divideby', $helper->getConfig('divideby'));
-			$GLOBALS['xoopsTpl']->assign('numb_col', $helper->getConfig('numb_col'));
-		}
+            $GLOBALS['xoopsTpl']->assign('balances', $balances);
+            unset($balances);
+            // Display Navigation
+            if ($balancesCount > $limit) {
+                require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
+                $pagenav = new \XoopsPageNav($balancesCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
+            }
+            $GLOBALS['xoopsTpl']->assign('type', $helper->getConfig('table_type'));
+            $GLOBALS['xoopsTpl']->assign('divideby', $helper->getConfig('divideby'));
+            $GLOBALS['xoopsTpl']->assign('numb_col', $helper->getConfig('numb_col'));
+        }
 
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_BALANCES];
-		break;
+        break;
 
-	case 'save':
+    case 'save':
         // Check permissions
         if (!$permissionsHandler->getPermBalancesSubmit()) {
             \redirect_header('balances.php?op=list', 3, _NOPERM);
@@ -265,31 +265,31 @@ switch ($op) {
             } else {
                 $errors++;
             }
-		}
+        }
         // redirect after insert
         if (0 === $errors) {
             \redirect_header('balances.php', 2, \_MA_WGSIMPLEACC_FORM_OK);
         }
-		// Get Form Error
-		$GLOBALS['xoopsTpl']->assign('error', \_MA_WGSIMPLEACC_BALANCE_ERRORS . $balancesObj->getHtmlErrors());
-		$form = $balancesObj->getFormBalances();
-		$GLOBALS['xoopsTpl']->assign('form', $form->render());
-		break;
+        // Get Form Error
+        $GLOBALS['xoopsTpl']->assign('error', \_MA_WGSIMPLEACC_BALANCE_ERRORS . $balancesObj->getHtmlErrors());
+        $form = $balancesObj->getFormBalances();
+        $GLOBALS['xoopsTpl']->assign('form', $form->render());
+        break;
 
-	case 'new':
+    case 'new':
         // Check permissions
         if (!$permissionsHandler->getPermBalancesSubmit()) {
             \redirect_header('balances.php?op=list', 3, _NOPERM);
         }
-		// Form Create
-		$balancesObj = $balancesHandler->create();
-		$form = $balancesObj->getFormBalances('balances.php');
-		$GLOBALS['xoopsTpl']->assign('form', $form->render());
+        // Form Create
+        $balancesObj = $balancesHandler->create();
+        $form = $balancesObj->getFormBalances('balances.php');
+        $GLOBALS['xoopsTpl']->assign('form', $form->render());
 
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_BALANCES, 'link' => 'balances.php?op=list'];
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_BALANCE_SUBMIT];
-		break;
+        break;
 }
 
 // Keywords

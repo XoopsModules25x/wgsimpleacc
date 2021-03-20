@@ -54,11 +54,11 @@ $allocationsCount = $allocationsHandler->getCount();
 $GLOBALS['xoopsTpl']->assign('allocationsCount', $allocationsCount);
 
 switch ($op) {
-	case 'list':
-	default:
-		if ($allocationsCount > 0) {
+    case 'list':
+    default:
+        if ($allocationsCount > 0) {
             $GLOBALS['xoTheme']->addStylesheet(WGSIMPLEACC_URL . '/assets/css/nestedsortable.css');
-		    if ($permAllocationsSubmit) {
+            if ($permAllocationsSubmit) {
                 // add scripts
                 $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/jquery-ui.min.js');
                 $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/sortable-allocations.js');
@@ -73,7 +73,7 @@ switch ($op) {
             // var_dump($allocationlist_sort);
             $GLOBALS['xoopsTpl']->assign('allocationlist_sort', $allocationlist_sort);
             $GLOBALS['xoopsTpl']->assign('allocations_submit', $permAllocationsSubmit);
-		}
+        }
 
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ALLOCATIONS];

@@ -31,17 +31,17 @@ use XoopsModules\Wgsimpleacc\Helper;
  */
 function wgsimpleaccGetMyItemIds($permtype, $dirname)
 {
-	global $xoopsUser;
-	static $permissions = [];
-	if (\is_array($permissions) && \array_key_exists($permtype, $permissions)) {
-		return $permissions[$permtype];
-	}
-	$moduleHandler = \xoops_getHandler('module');
-	$wgsimpleaccModule = $moduleHandler->getByDirname($dirname);
-	$groups = \is_object($xoopsUser) ? $xoopsUser->getGroups() : \XOOPS_GROUP_ANONYMOUS;
-	$grouppermHandler = \xoops_getHandler('groupperm');
-	$itemIds = $grouppermHandler->getItemIds($permtype, $groups, $wgsimpleaccModule->getVar('mid'));
-	return $itemIds;
+    global $xoopsUser;
+    static $permissions = [];
+    if (\is_array($permissions) && \array_key_exists($permtype, $permissions)) {
+        return $permissions[$permtype];
+    }
+    $moduleHandler = \xoops_getHandler('module');
+    $wgsimpleaccModule = $moduleHandler->getByDirname($dirname);
+    $groups = \is_object($xoopsUser) ? $xoopsUser->getGroups() : \XOOPS_GROUP_ANONYMOUS;
+    $grouppermHandler = \xoops_getHandler('groupperm');
+    $itemIds = $grouppermHandler->getItemIds($permtype, $groups, $wgsimpleaccModule->getVar('mid'));
+    return $itemIds;
 }
 
 /**

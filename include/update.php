@@ -42,7 +42,7 @@ function xoops_module_update_wgsimpleacc($module, $prev_version = null)
     $ret = wgsimpleacc_check_db($module);
 
     //check upload directory
-	require_once __DIR__ . '/install.php';
+    require_once __DIR__ . '/install.php';
     $ret = xoops_module_install_wgsimpleacc($module);
 
     $errors = $module->getErrors();

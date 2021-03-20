@@ -28,7 +28,7 @@ namespace XoopsModules\Wgsimpleacc;
  */
 interface Constants
 {
-	// Constants for tables
+    // Constants for tables
     public const TABLE_ACCOUNTS = 0;
     public const TABLE_TRANSACTIONS = 1;
     public const TABLE_ALLOCATIONS = 2;
@@ -38,20 +38,20 @@ interface Constants
     public const TABLE_FILES = 6;
     public const TABLE_IMAGES = 7;
 
-	// Constants for status
-	public const STATUS_NONE      = 0;
+    // Constants for status
+    public const STATUS_NONE      = 0;
     public const STATUS_CREATED   = 1;
     public const STATUS_BROKEN    = 2;
-	public const STATUS_OFFLINE   = 3;
-	public const STATUS_SUBMITTED = 4;
+    public const STATUS_OFFLINE   = 3;
+    public const STATUS_SUBMITTED = 4;
     public const STATUS_APPROVED  = 7;
     public const STATUS_LOCKED    = 9;
 
-	// Constants for permissions
-	public const PERM_GLOBAL_NONE          = 0;
-	public const PERM_GLOBAL_VIEW          = 1;
-	public const PERM_GLOBAL_SUBMIT        = 2;
-	public const PERM_GLOBAL_APPROVE       = 3;
+    // Constants for permissions
+    public const PERM_GLOBAL_NONE          = 0;
+    public const PERM_GLOBAL_VIEW          = 1;
+    public const PERM_GLOBAL_SUBMIT        = 2;
+    public const PERM_GLOBAL_APPROVE       = 3;
     public const PERM_TRANSACTIONS_APPROVE = 4;
     public const PERM_TRANSACTIONS_SUBMIT  = 5;
     public const PERM_TRANSACTIONS_VIEW    = 6;

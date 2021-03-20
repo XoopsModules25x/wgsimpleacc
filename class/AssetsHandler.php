@@ -31,96 +31,96 @@ use XoopsModules\Wgsimpleacc\Utility;
  */
 class AssetsHandler extends \XoopsPersistableObjectHandler
 {
-	/**
-	 * Constructor
-	 *
-	 * @param \XoopsDatabase $db
-	 */
-	public function __construct(\XoopsDatabase $db)
-	{
-		parent::__construct($db, 'wgsimpleacc_assets', Assets::class, 'as_id', 'as_name');
-	}
+    /**
+     * Constructor
+     *
+     * @param \XoopsDatabase $db
+     */
+    public function __construct(\XoopsDatabase $db)
+    {
+        parent::__construct($db, 'wgsimpleacc_assets', Assets::class, 'as_id', 'as_name');
+    }
 
-	/**
-	 * @param bool $isNew
-	 *
-	 * @return object
-	 */
-	public function create($isNew = true)
-	{
-		return parent::create($isNew);
-	}
+    /**
+     * @param bool $isNew
+     *
+     * @return object
+     */
+    public function create($isNew = true)
+    {
+        return parent::create($isNew);
+    }
 
-	/**
-	 * retrieve a field
-	 *
-	 * @param int $i field id
-	 * @param null fields
-	 * @return mixed reference to the {@link Get} object
-	 */
-	public function get($i = null, $fields = null)
-	{
-		return parent::get($i, $fields);
-	}
+    /**
+     * retrieve a field
+     *
+     * @param int $i field id
+     * @param null fields
+     * @return mixed reference to the {@link Get} object
+     */
+    public function get($i = null, $fields = null)
+    {
+        return parent::get($i, $fields);
+    }
 
-	/**
-	 * get inserted id
-	 *
-	 * @param null
-	 * @return int reference to the {@link Get} object
-	 */
-	public function getInsertId()
-	{
-		return $this->db->getInsertId();
-	}
+    /**
+     * get inserted id
+     *
+     * @param null
+     * @return int reference to the {@link Get} object
+     */
+    public function getInsertId()
+    {
+        return $this->db->getInsertId();
+    }
 
-	/**
-	 * Get Count Assets in the database
-	 * @param int    $start
-	 * @param int    $limit
-	 * @param string $sort
-	 * @param string $order
-	 * @return int
-	 */
-	public function getCountAssets($start = 0, $limit = 0, $sort = 'as_id ASC, as_name', $order = 'ASC')
-	{
-		$crCountAssets = new \CriteriaCompo();
-		$crCountAssets = $this->getAssetsCriteria($crCountAssets, $start, $limit, $sort, $order);
-		return $this->getCount($crCountAssets);
-	}
+    /**
+     * Get Count Assets in the database
+     * @param int    $start
+     * @param int    $limit
+     * @param string $sort
+     * @param string $order
+     * @return int
+     */
+    public function getCountAssets($start = 0, $limit = 0, $sort = 'as_id ASC, as_name', $order = 'ASC')
+    {
+        $crCountAssets = new \CriteriaCompo();
+        $crCountAssets = $this->getAssetsCriteria($crCountAssets, $start, $limit, $sort, $order);
+        return $this->getCount($crCountAssets);
+    }
 
-	/**
-	 * Get All Assets in the database
-	 * @param int    $start
-	 * @param int    $limit
-	 * @param string $sort
-	 * @param string $order
-	 * @return array
-	 */
-	public function getAllAssets($start = 0, $limit = 0, $sort = 'as_id ASC, as_name', $order = 'ASC')
-	{
-		$crAllAssets = new \CriteriaCompo();
-		$crAllAssets = $this->getAssetsCriteria($crAllAssets, $start, $limit, $sort, $order);
-		return $this->getAll($crAllAssets);
-	}
+    /**
+     * Get All Assets in the database
+     * @param int    $start
+     * @param int    $limit
+     * @param string $sort
+     * @param string $order
+     * @return array
+     */
+    public function getAllAssets($start = 0, $limit = 0, $sort = 'as_id ASC, as_name', $order = 'ASC')
+    {
+        $crAllAssets = new \CriteriaCompo();
+        $crAllAssets = $this->getAssetsCriteria($crAllAssets, $start, $limit, $sort, $order);
+        return $this->getAll($crAllAssets);
+    }
 
-	/**
-	 * Get Criteria Assets
-	 * @param $crAssets
-	 * @param $start
-	 * @param $limit
-	 * @param $sort
-	 * @param $order
-	 * @return int
-	 */
-	private function getAssetsCriteria($crAssets, $start, $limit, $sort, $order)
-	{
-		$crAssets->setStart($start);
-		$crAssets->setLimit($limit);
-		$crAssets->setSort($sort);
-		$crAssets->setOrder($order);
-		return $crAssets;
-	}
+    /**
+     * Get Criteria Assets
+     * @param $crAssets
+     * @param $start
+     * @param $limit
+     * @param $sort
+     * @param $order
+     * @return int
+     */
+    private function getAssetsCriteria($crAssets, $start, $limit, $sort, $order)
+    {
+        $crAssets->setStart($start);
+        $crAssets->setLimit($limit);
+        $crAssets->setSort($sort);
+        $crAssets->setOrder($order);
+        return $crAssets;
+    }
 
     /**
      * Get current value of all assets

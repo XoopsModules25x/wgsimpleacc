@@ -33,44 +33,44 @@ use XoopsModules\Wgsimpleacc;
 class Files extends \XoopsObject
 {
     /**
-	 * Constructor
-	 *
-	 * @param null
-	 */
-	public function __construct()
-	{
-		$this->initVar('fil_id', \XOBJ_DTYPE_INT);
-		$this->initVar('fil_traid', \XOBJ_DTYPE_INT);
-		$this->initVar('fil_name', \XOBJ_DTYPE_TXTBOX);
-		$this->initVar('fil_type', \XOBJ_DTYPE_TXTBOX);
-		$this->initVar('fil_desc', \XOBJ_DTYPE_TXTAREA);
-		$this->initVar('fil_ip', \XOBJ_DTYPE_TXTBOX);
-		$this->initVar('fil_datecreated', \XOBJ_DTYPE_INT);
-		$this->initVar('fil_submitter', \XOBJ_DTYPE_INT);
-	}
+     * Constructor
+     *
+     * @param null
+     */
+    public function __construct()
+    {
+        $this->initVar('fil_id', \XOBJ_DTYPE_INT);
+        $this->initVar('fil_traid', \XOBJ_DTYPE_INT);
+        $this->initVar('fil_name', \XOBJ_DTYPE_TXTBOX);
+        $this->initVar('fil_type', \XOBJ_DTYPE_TXTBOX);
+        $this->initVar('fil_desc', \XOBJ_DTYPE_TXTAREA);
+        $this->initVar('fil_ip', \XOBJ_DTYPE_TXTBOX);
+        $this->initVar('fil_datecreated', \XOBJ_DTYPE_INT);
+        $this->initVar('fil_submitter', \XOBJ_DTYPE_INT);
+    }
 
-	/**
-	 * @static function &getInstance
-	 *
-	 * @param null
-	 */
-	public static function getInstance()
-	{
-		static $instance = false;
-		if (!$instance) {
-			$instance = new self();
-		}
-	}
+    /**
+     * @static function &getInstance
+     *
+     * @param null
+     */
+    public static function getInstance()
+    {
+        static $instance = false;
+        if (!$instance) {
+            $instance = new self();
+        }
+    }
 
-	/**
-	 * The new inserted $Id
-	 * @return inserted id
-	 */
-	public function getNewInsertedIdFiles()
-	{
-		$newInsertedId = $GLOBALS['xoopsDB']->getInsertId();
-		return $newInsertedId;
-	}
+    /**
+     * The new inserted $Id
+     * @return inserted id
+     */
+    public function getNewInsertedIdFiles()
+    {
+        $newInsertedId = $GLOBALS['xoopsDB']->getInsertId();
+        return $newInsertedId;
+    }
 
     /**
      * @public function getForm
@@ -78,30 +78,30 @@ class Files extends \XoopsObject
      * @param bool $action
      * @return \XoopsThemeForm
      */
-	public function getFormFilesAdmin($traId, $action = false)
-	{
-		if (!$GLOBALS['xoopsUser']->isAdmin($GLOBALS['xoopsModule']->mid())) {
+    public function getFormFilesAdmin($traId, $action = false)
+    {
+        if (!$GLOBALS['xoopsUser']->isAdmin($GLOBALS['xoopsModule']->mid())) {
             \redirect_header('accounts.php?op=list', 3, _NOPERM);
         }
-	    $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
-		if (!$action) {
-			$action = $_SERVER['REQUEST_URI'];
-		}
-		// Title
-		$title = $this->isNew() ? \sprintf(\_MA_WGSIMPLEACC_FILE_ADD) : \sprintf(\_MA_WGSIMPLEACC_FILE_EDIT);
-		// Get Theme Form
-		\xoops_load('XoopsFormLoader');
-		$form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
-		$form->setExtra('enctype="multipart/form-data"');
-		// Form Table transactions
-		$transactionsHandler = $helper->getHandler('Transactions');
-		$filTraid = $this->isNew() ? $traId : $this->getVar('fil_traid');
+        $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+        if (!$action) {
+            $action = $_SERVER['REQUEST_URI'];
+        }
+        // Title
+        $title = $this->isNew() ? \sprintf(\_MA_WGSIMPLEACC_FILE_ADD) : \sprintf(\_MA_WGSIMPLEACC_FILE_EDIT);
+        // Get Theme Form
+        \xoops_load('XoopsFormLoader');
+        $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
+        $form->setExtra('enctype="multipart/form-data"');
+        // Form Table transactions
+        $transactionsHandler = $helper->getHandler('Transactions');
+        $filTraid = $this->isNew() ? $traId : $this->getVar('fil_traid');
         $filTraidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_FILE_TRAID, 'fil_traid', $filTraid);
         $filTraidSelect->addOptionArray($transactionsHandler->getList());
         $form->addElement($filTraidSelect);
 
-		// Form File: Upload filName
-		$filName = $this->isNew() ? '' : $this->getVar('fil_name');
+        // Form File: Upload filName
+        $filName = $this->isNew() ? '' : $this->getVar('fil_name');
 
         $fileUploadTray = new \XoopsFormElementTray(\_MA_WGSIMPLEACC_FILE_NAME, '<br>');
         $fileDirectory = '/uploads/wgsimpleacc/files';
@@ -112,23 +112,23 @@ class Files extends \XoopsObject
         $fileUploadTray->addElement(new \XoopsFormFile('', 'fil_name', $maxsize));
         $fileUploadTray->addElement(new \XoopsFormLabel(\_MA_WGSIMPLEACC_FORM_UPLOAD_SIZE, ($maxsize / 1048576) . ' '  . \_MA_WGSIMPLEACC_FORM_UPLOAD_SIZE_MB));
         $form->addElement($fileUploadTray, true);
-		// Form Select filType
+        // Form Select filType
         $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_FILE_TYPE, 'fil_type', 20, 150, $this->getVar('fil_type')));
-		// Form Editor TextArea filDesc
-		$form->addElement(new \XoopsFormTextArea(\_MA_WGSIMPLEACC_FILE_DESC, 'fil_desc', $this->getVar('fil_desc', 'e'), 4, 47));
-		// Form Text IP filIp
-		$filIp = $_SERVER['REMOTE_ADDR'];
-		$form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_FILE_IP, 'fil_ip', 20, 150, $filIp));
-		// Form Text Date Select filDatecreated
-		$filDatecreated = $this->isNew() ?: $this->getVar('fil_datecreated');
-		$form->addElement(new \XoopsFormTextDateSelect(\_MA_WGSIMPLEACC_DATECREATED, 'fil_datecreated', '', $filDatecreated));
-		// Form Select User filSubmitter
-		$form->addElement(new \XoopsFormSelectUser(\_MA_WGSIMPLEACC_SUBMITTER, 'fil_submitter', false, $this->getVar('fil_submitter')));
-		// To Save
-		$form->addElement(new \XoopsFormHidden('op', 'save'));
-		$form->addElement(new \XoopsFormButtonTray('', _SUBMIT, 'submit', '', false));
-		return $form;
-	}
+        // Form Editor TextArea filDesc
+        $form->addElement(new \XoopsFormTextArea(\_MA_WGSIMPLEACC_FILE_DESC, 'fil_desc', $this->getVar('fil_desc', 'e'), 4, 47));
+        // Form Text IP filIp
+        $filIp = $_SERVER['REMOTE_ADDR'];
+        $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_FILE_IP, 'fil_ip', 20, 150, $filIp));
+        // Form Text Date Select filDatecreated
+        $filDatecreated = $this->isNew() ?: $this->getVar('fil_datecreated');
+        $form->addElement(new \XoopsFormTextDateSelect(\_MA_WGSIMPLEACC_DATECREATED, 'fil_datecreated', '', $filDatecreated));
+        // Form Select User filSubmitter
+        $form->addElement(new \XoopsFormSelectUser(\_MA_WGSIMPLEACC_SUBMITTER, 'fil_submitter', false, $this->getVar('fil_submitter')));
+        // To Save
+        $form->addElement(new \XoopsFormHidden('op', 'save'));
+        $form->addElement(new \XoopsFormButtonTray('', _SUBMIT, 'submit', '', false));
+        return $form;
+    }
 
     /**
      * @public function getForm
@@ -266,24 +266,24 @@ class Files extends \XoopsObject
     }
 
     /**
-	 * Get Values
-	 * @param null $keys
-	 * @param null $format
-	 * @param null $maxDepth
-	 * @return array
-	 */
-	public function getValuesFiles($keys = null, $format = null, $maxDepth = null)
-	{
-		$helper  = \XoopsModules\Wgsimpleacc\Helper::getInstance();
-		$utility = new \XoopsModules\Wgsimpleacc\Utility();
-		$ret = $this->getValues($keys, $format, $maxDepth);
-		$ret['id']          = $this->getVar('fil_id');
-		$transactionsHandler = $helper->getHandler('Transactions');
-		$transactionsObj = $transactionsHandler->get($this->getVar('fil_traid'));
-		$ret['traid']       = $transactionsObj->getVar('tra_desc');
-		$ret['name']        = $this->getVar('fil_name');
-		$ret['type']        = $this->getVar('fil_type');
-		switch ($ret['type']) {
+     * Get Values
+     * @param null $keys
+     * @param null $format
+     * @param null $maxDepth
+     * @return array
+     */
+    public function getValuesFiles($keys = null, $format = null, $maxDepth = null)
+    {
+        $helper  = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+        $utility = new \XoopsModules\Wgsimpleacc\Utility();
+        $ret = $this->getValues($keys, $format, $maxDepth);
+        $ret['id']          = $this->getVar('fil_id');
+        $transactionsHandler = $helper->getHandler('Transactions');
+        $transactionsObj = $transactionsHandler->get($this->getVar('fil_traid'));
+        $ret['traid']       = $transactionsObj->getVar('tra_desc');
+        $ret['name']        = $this->getVar('fil_name');
+        $ret['type']        = $this->getVar('fil_type');
+        switch ($ret['type']) {
             case 'image/gif':
             case 'image/jpeg':
             case 'image/pjpeg':
@@ -297,27 +297,27 @@ class Files extends \XoopsObject
                 $ret['image'] = 0;
                 break;
         }
-		$ret['desc']        = $this->getVar('fil_desc', 'e');
-		$editorMaxchar = $helper->getConfig('editor_maxchar');
-		$ret['desc_short']  = $utility::truncateHtml($ret['desc'], $editorMaxchar);
-		$ret['ip']          = $this->getVar('fil_ip');
-		$ret['datecreated'] = \formatTimestamp($this->getVar('fil_datecreated'), 's');
-		$ret['submitter']   = \XoopsUser::getUnameFromId($this->getVar('fil_submitter'));
-		return $ret;
-	}
+        $ret['desc']        = $this->getVar('fil_desc', 'e');
+        $editorMaxchar = $helper->getConfig('editor_maxchar');
+        $ret['desc_short']  = $utility::truncateHtml($ret['desc'], $editorMaxchar);
+        $ret['ip']          = $this->getVar('fil_ip');
+        $ret['datecreated'] = \formatTimestamp($this->getVar('fil_datecreated'), 's');
+        $ret['submitter']   = \XoopsUser::getUnameFromId($this->getVar('fil_submitter'));
+        return $ret;
+    }
 
-	/**
-	 * Returns an array representation of the object
-	 *
-	 * @return array
-	 */
-	public function toArrayFiles()
-	{
-		$ret = [];
-		$vars = $this->getVars();
-		foreach (\array_keys($vars) as $var) {
-			$ret[$var] = $this->getVar('"{$var}"');
-		}
-		return $ret;
-	}
+    /**
+     * Returns an array representation of the object
+     *
+     * @return array
+     */
+    public function toArrayFiles()
+    {
+        $ret = [];
+        $vars = $this->getVars();
+        foreach (\array_keys($vars) as $var) {
+            $ret[$var] = $this->getVar('"{$var}"');
+        }
+        return $ret;
+    }
 }

@@ -37,68 +37,68 @@ $start = Request::getInt('start', 0);
 $limit = Request::getInt('limit', $helper->getConfig('adminpager'));
 
 switch ($op) {
-	case 'list':
-	default:
-		// Define Stylesheet
-		$GLOBALS['xoTheme']->addStylesheet($style, null);
-		$templateMain = 'wgsimpleacc_admin_transactions.tpl';
-		$GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('transactions.php'));
-		$adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_TRANSACTION, 'transactions.php?op=new', 'add');
-		$GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
-		$transactionsCount = $transactionsHandler->getCountTransactions();
-		$transactionsAll = $transactionsHandler->getAllTransactions($start, $limit, 'tra_id', 'DESC');
-		$GLOBALS['xoopsTpl']->assign('transactions_count', $transactionsCount);
-		$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
-		$GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', WGSIMPLEACC_UPLOAD_URL);
-		// Table view transactions
-		if ($transactionsCount > 0) {
-			foreach (\array_keys($transactionsAll) as $i) {
-				$transaction = $transactionsAll[$i]->getValuesTransactions();
-				$GLOBALS['xoopsTpl']->append('transactions_list', $transaction);
-				unset($transaction);
-			}
-			// Display Navigation
-			if ($transactionsCount > $limit) {
-				require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
-				$pagenav = new \XoopsPageNav($transactionsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
-				$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
-			}
-		} else {
-			$GLOBALS['xoopsTpl']->assign('error', \_MA_WGSIMPLEACC_THEREARENT_TRANSACTIONS);
-		}
-		break;
-	case 'new':
-		$templateMain = 'wgsimpleacc_admin_transactions.tpl';
+    case 'list':
+    default:
+        // Define Stylesheet
+        $GLOBALS['xoTheme']->addStylesheet($style, null);
+        $templateMain = 'wgsimpleacc_admin_transactions.tpl';
+        $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('transactions.php'));
+        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_TRANSACTION, 'transactions.php?op=new', 'add');
+        $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
+        $transactionsCount = $transactionsHandler->getCountTransactions();
+        $transactionsAll = $transactionsHandler->getAllTransactions($start, $limit, 'tra_id', 'DESC');
+        $GLOBALS['xoopsTpl']->assign('transactions_count', $transactionsCount);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', WGSIMPLEACC_UPLOAD_URL);
+        // Table view transactions
+        if ($transactionsCount > 0) {
+            foreach (\array_keys($transactionsAll) as $i) {
+                $transaction = $transactionsAll[$i]->getValuesTransactions();
+                $GLOBALS['xoopsTpl']->append('transactions_list', $transaction);
+                unset($transaction);
+            }
+            // Display Navigation
+            if ($transactionsCount > $limit) {
+                require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
+                $pagenav = new \XoopsPageNav($transactionsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
+            }
+        } else {
+            $GLOBALS['xoopsTpl']->assign('error', \_MA_WGSIMPLEACC_THEREARENT_TRANSACTIONS);
+        }
+        break;
+    case 'new':
+        $templateMain = 'wgsimpleacc_admin_transactions.tpl';
         $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/forms.js');
-		$GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('transactions.php'));
-		$adminObject->addItemButton(\_AM_WGSIMPLEACC_LIST_TRANSACTIONS, 'transactions.php', 'list');
-		$GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
-		// Form Create
-		$transactionsObj = $transactionsHandler->create();
-		$form = $transactionsObj->getFormTransactions(false, true, Constants::CLASS_BOTH, $start, $limit);
-		$GLOBALS['xoopsTpl']->assign('form', $form->render());
-		break;
-	case 'save':
-		// Security Check
-		if (!$GLOBALS['xoopsSecurity']->check()) {
-			\redirect_header('transactions.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
-		}
-		if ($traId > 0) {
-			$transactionsObj = $transactionsHandler->get($traId);
-		} else {
-			$transactionsObj = $transactionsHandler->create();
-		}
-		// Set Vars
+        $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('transactions.php'));
+        $adminObject->addItemButton(\_AM_WGSIMPLEACC_LIST_TRANSACTIONS, 'transactions.php', 'list');
+        $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
+        // Form Create
+        $transactionsObj = $transactionsHandler->create();
+        $form = $transactionsObj->getFormTransactions(false, true, Constants::CLASS_BOTH, $start, $limit);
+        $GLOBALS['xoopsTpl']->assign('form', $form->render());
+        break;
+    case 'save':
+        // Security Check
+        if (!$GLOBALS['xoopsSecurity']->check()) {
+            \redirect_header('transactions.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
+        }
+        if ($traId > 0) {
+            $transactionsObj = $transactionsHandler->get($traId);
+        } else {
+            $transactionsObj = $transactionsHandler->create();
+        }
+        // Set Vars
         $transactionsObj->setVar('tra_year', Request::getInt('tra_year', 0));
         $transactionsObj->setVar('tra_nb', Request::getInt('tra_nb', 0));
-		$transactionsObj->setVar('tra_desc', Request::getText('tra_desc', ''));
-		$transactionsObj->setVar('tra_reference', Request::getString('tra_reference', ''));
+        $transactionsObj->setVar('tra_desc', Request::getText('tra_desc', ''));
+        $transactionsObj->setVar('tra_reference', Request::getString('tra_reference', ''));
         $transactionsObj->setVar('tra_remarks', Request::getText('tra_remarks', ''));
-		$transactionsObj->setVar('tra_accid', Request::getInt('tra_accid', 0));
-		$transactionsObj->setVar('tra_allid', Request::getInt('tra_allid', 0));
-		$transactionDateObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('tra_date'));
-		$transactionsObj->setVar('tra_date', $transactionDateObj->getTimestamp());
-		$transactionsObj->setVar('tra_curid', Request::getInt('tra_curid', 0));
+        $transactionsObj->setVar('tra_accid', Request::getInt('tra_accid', 0));
+        $transactionsObj->setVar('tra_allid', Request::getInt('tra_allid', 0));
+        $transactionDateObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('tra_date'));
+        $transactionsObj->setVar('tra_date', $transactionDateObj->getTimestamp());
+        $transactionsObj->setVar('tra_curid', Request::getInt('tra_curid', 0));
         $traClass = Request::getInt('tra_class', 0);
         $traAmount = Utility::StringToFloat(Request::getString('tra_amount'));
         if (Constants::CLASS_INCOME == $traClass) {
@@ -111,61 +111,61 @@ switch ($op) {
             $transactionsObj->setVar('tra_amountin', 0);
             $transactionsObj->setVar('tra_amountout', 0);
         }
-		$transactionsObj->setVar('tra_taxid', Request::getInt('tra_taxid', 0));
+        $transactionsObj->setVar('tra_taxid', Request::getInt('tra_taxid', 0));
         $transactionsObj->setVar('tra_asid', Request::getInt('tra_asid', 0));
         $transactionsObj->setVar('tra_balid', Request::getInt('tra_balid', 0));
         $transactionsObj->setVar('tra_cliid', Request::getInt('tra_cliid', 0));
-		$transactionsObj->setVar('tra_status', Request::getInt('tra_status', 0));
-		$transactionsObj->setVar('tra_comments', Request::getInt('tra_comments', 0));
+        $transactionsObj->setVar('tra_status', Request::getInt('tra_status', 0));
+        $transactionsObj->setVar('tra_comments', Request::getInt('tra_comments', 0));
         $transactionsObj->setVar('tra_class', $traClass);
         $transactionsObj->setVar('tra_hist', Request::getInt('tra_hist', 0));
-		$transactionDatecreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('tra_datecreated'));
-		$transactionsObj->setVar('tra_datecreated', $transactionDatecreatedObj->getTimestamp());
-		$transactionsObj->setVar('tra_submitter', Request::getInt('tra_submitter', 0));
-		// Insert Data
-		if ($transactionsHandler->insert($transactionsObj)) {
-			\redirect_header('transactions.php?op=list', 2, \_MA_WGSIMPLEACC_FORM_OK);
-		}
-		// Get Form
-		$GLOBALS['xoopsTpl']->assign('error', $transactionsObj->getHtmlErrors());
-		$form = $transactionsObj->getFormTransactions();
-		$GLOBALS['xoopsTpl']->assign('form', $form->render());
-		break;
-	case 'edit':
-		$templateMain = 'wgsimpleacc_admin_transactions.tpl';
+        $transactionDatecreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('tra_datecreated'));
+        $transactionsObj->setVar('tra_datecreated', $transactionDatecreatedObj->getTimestamp());
+        $transactionsObj->setVar('tra_submitter', Request::getInt('tra_submitter', 0));
+        // Insert Data
+        if ($transactionsHandler->insert($transactionsObj)) {
+            \redirect_header('transactions.php?op=list', 2, \_MA_WGSIMPLEACC_FORM_OK);
+        }
+        // Get Form
+        $GLOBALS['xoopsTpl']->assign('error', $transactionsObj->getHtmlErrors());
+        $form = $transactionsObj->getFormTransactions();
+        $GLOBALS['xoopsTpl']->assign('form', $form->render());
+        break;
+    case 'edit':
+        $templateMain = 'wgsimpleacc_admin_transactions.tpl';
         $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/forms.js');
-		$GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('transactions.php'));
-		$adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_TRANSACTION, 'transactions.php?op=new', 'add');
-		$adminObject->addItemButton(\_AM_WGSIMPLEACC_LIST_TRANSACTIONS, 'transactions.php', 'list');
-		$GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
-		// Get Form
-		$transactionsObj = $transactionsHandler->get($traId);
-		$form = $transactionsObj->getFormTransactions(false, true, 0, $start, $limit);
-		$GLOBALS['xoopsTpl']->assign('form', $form->render());
-		break;
-	case 'delete':
-		$templateMain = 'wgsimpleacc_admin_transactions.tpl';
-		$GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('transactions.php'));
-		$transactionsObj = $transactionsHandler->get($traId);
+        $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('transactions.php'));
+        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_TRANSACTION, 'transactions.php?op=new', 'add');
+        $adminObject->addItemButton(\_AM_WGSIMPLEACC_LIST_TRANSACTIONS, 'transactions.php', 'list');
+        $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
+        // Get Form
+        $transactionsObj = $transactionsHandler->get($traId);
+        $form = $transactionsObj->getFormTransactions(false, true, 0, $start, $limit);
+        $GLOBALS['xoopsTpl']->assign('form', $form->render());
+        break;
+    case 'delete':
+        $templateMain = 'wgsimpleacc_admin_transactions.tpl';
+        $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('transactions.php'));
+        $transactionsObj = $transactionsHandler->get($traId);
         $transactionsHandler->saveHistoryTransactions($traId, 'delete Admin');
-		$traDesc = $transactionsObj->getVar('tra_desc');
-		if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
-			if (!$GLOBALS['xoopsSecurity']->check()) {
-				\redirect_header('transactions.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
-			}
-			if ($transactionsHandler->delete($transactionsObj)) {
-				\redirect_header('transactions.php', 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
-			} else {
-				$GLOBALS['xoopsTpl']->assign('error', $transactionsObj->getHtmlErrors());
-			}
-		} else {
-			$xoopsconfirm = new Common\XoopsConfirm(
-				['ok' => 1, 'tra_id' => $traId, 'op' => 'delete'],
-				$_SERVER['REQUEST_URI'],
-				\sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $transactionsObj->getVar('tra_desc')));
-			$form = $xoopsconfirm->getFormXoopsConfirm();
-			$GLOBALS['xoopsTpl']->assign('form', $form->render());
-		}
-		break;
+        $traDesc = $transactionsObj->getVar('tra_desc');
+        if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
+            if (!$GLOBALS['xoopsSecurity']->check()) {
+                \redirect_header('transactions.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
+            }
+            if ($transactionsHandler->delete($transactionsObj)) {
+                \redirect_header('transactions.php', 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
+            } else {
+                $GLOBALS['xoopsTpl']->assign('error', $transactionsObj->getHtmlErrors());
+            }
+        } else {
+            $xoopsconfirm = new Common\XoopsConfirm(
+                ['ok' => 1, 'tra_id' => $traId, 'op' => 'delete'],
+                $_SERVER['REQUEST_URI'],
+                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $transactionsObj->getVar('tra_desc')));
+            $form = $xoopsconfirm->getFormXoopsConfirm();
+            $GLOBALS['xoopsTpl']->assign('form', $form->render());
+        }
+        break;
 }
 require __DIR__ . '/footer.php';

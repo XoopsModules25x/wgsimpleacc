@@ -33,13 +33,13 @@ use XoopsModules\Wgsimpleacc\Constants;
  */
 class Accounts extends \XoopsObject
 {
-	/**
-	 * Constructor
-	 *
-	 * @param null
-	 */
-	public function __construct()
-	{
+    /**
+     * Constructor
+     *
+     * @param null
+     */
+    public function __construct()
+    {
         $this->initVar('acc_id', \XOBJ_DTYPE_INT);
         $this->initVar('acc_pid', \XOBJ_DTYPE_INT);
         $this->initVar('acc_key', \XOBJ_DTYPE_TXTBOX);
@@ -53,52 +53,52 @@ class Accounts extends \XoopsObject
         $this->initVar('acc_weight', \XOBJ_DTYPE_INT);
         $this->initVar('acc_datecreated', \XOBJ_DTYPE_INT);
         $this->initVar('acc_submitter', \XOBJ_DTYPE_INT);
-	}
+    }
 
-	/**
-	 * @static function &getInstance
-	 *
-	 * @param null
-	 */
-	public static function getInstance()
-	{
-		static $instance = false;
-		if (!$instance) {
-			$instance = new self();
-		}
-	}
+    /**
+     * @static function &getInstance
+     *
+     * @param null
+     */
+    public static function getInstance()
+    {
+        static $instance = false;
+        if (!$instance) {
+            $instance = new self();
+        }
+    }
 
-	/**
-	 * The new inserted $Id
-	 * @return inserted id
-	 */
-	public function getNewInsertedIdAccounts()
-	{
-		$newInsertedId = $GLOBALS['xoopsDB']->getInsertId();
-		return $newInsertedId;
-	}
+    /**
+     * The new inserted $Id
+     * @return inserted id
+     */
+    public function getNewInsertedIdAccounts()
+    {
+        $newInsertedId = $GLOBALS['xoopsDB']->getInsertId();
+        return $newInsertedId;
+    }
 
-	/**
-	 * @public function getForm
-	 * @param bool $action
+    /**
+     * @public function getForm
+     * @param bool $action
      * @param bool $admin
-	 * @return \XoopsThemeForm
-	 */
-	public function getFormAccounts($action = false, $admin = false)
-	{
-		$helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
-		if (!$action) {
-			$action = $_SERVER['REQUEST_URI'];
-		}
-		// Title
-		$title = $this->isNew() ? \sprintf(\_MA_WGSIMPLEACC_ACCOUNT_ADD) : \sprintf(\_MA_WGSIMPLEACC_ACCOUNT_EDIT);
-		// Get Theme Form
-		\xoops_load('XoopsFormLoader');
-		$form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
-		$form->setExtra('enctype="multipart/form-data"');
-		// Form Table accounts
-		$accountsHandler = $helper->getHandler('Accounts');
-		$accPidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_ACCOUNT_PID, 'acc_pid', $this->getVar('acc_pid'));
+     * @return \XoopsThemeForm
+     */
+    public function getFormAccounts($action = false, $admin = false)
+    {
+        $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+        if (!$action) {
+            $action = $_SERVER['REQUEST_URI'];
+        }
+        // Title
+        $title = $this->isNew() ? \sprintf(\_MA_WGSIMPLEACC_ACCOUNT_ADD) : \sprintf(\_MA_WGSIMPLEACC_ACCOUNT_EDIT);
+        // Get Theme Form
+        \xoops_load('XoopsFormLoader');
+        $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
+        $form->setExtra('enctype="multipart/form-data"');
+        // Form Table accounts
+        $accountsHandler = $helper->getHandler('Accounts');
+        $accPidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_ACCOUNT_PID, 'acc_pid', $this->getVar('acc_pid'));
         $accPidSelect->addOption(0, ' ');
         $accountsCount = $accountsHandler->getCountAccounts();
         if ($accountsCount > 0) {
@@ -107,20 +107,20 @@ class Accounts extends \XoopsObject
                 $accPidSelect->addOption($accountsAll[$i]->getVar('acc_id'), $accountsAll[$i]->getVar('acc_key') . ' ' . $accountsAll[$i]->getVar('acc_name'));
             }
         }
-		$form->addElement($accPidSelect);
-		// Form Text accKey
-		$form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_ACCOUNT_KEY, 'acc_key', 50, 255, $this->getVar('acc_key')), true);
-		// Form Text accName
-		$form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_ACCOUNT_NAME, 'acc_name', 50, 255, $this->getVar('acc_name')));
-		// Form Editor TextArea accDesc
-		$form->addElement(new \XoopsFormTextArea(\_MA_WGSIMPLEACC_ACCOUNT_DESC, 'acc_desc', $this->getVar('acc_desc', 'e'), 4, 47));
-		// Form Select accClassification
+        $form->addElement($accPidSelect);
+        // Form Text accKey
+        $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_ACCOUNT_KEY, 'acc_key', 50, 255, $this->getVar('acc_key')), true);
+        // Form Text accName
+        $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_ACCOUNT_NAME, 'acc_name', 50, 255, $this->getVar('acc_name')));
+        // Form Editor TextArea accDesc
+        $form->addElement(new \XoopsFormTextArea(\_MA_WGSIMPLEACC_ACCOUNT_DESC, 'acc_desc', $this->getVar('acc_desc', 'e'), 4, 47));
+        // Form Select accClassification
         $accClassification = $this->isNew() ? Constants::CLASS_BOTH : $this->getVar('acc_classification');
-		$accClassificationSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_ACCOUNT_CLASSIFICATION, 'acc_classification', $accClassification, 3);
-		$accClassificationSelect->addOption(Constants::CLASS_EXPENSES, \_MA_WGSIMPLEACC_CLASS_EXPENSES);
-		$accClassificationSelect->addOption(Constants::CLASS_INCOME, \_MA_WGSIMPLEACC_CLASS_INCOME);
+        $accClassificationSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_ACCOUNT_CLASSIFICATION, 'acc_classification', $accClassification, 3);
+        $accClassificationSelect->addOption(Constants::CLASS_EXPENSES, \_MA_WGSIMPLEACC_CLASS_EXPENSES);
+        $accClassificationSelect->addOption(Constants::CLASS_INCOME, \_MA_WGSIMPLEACC_CLASS_INCOME);
         $accClassificationSelect->addOption(Constants::CLASS_BOTH, \_MA_WGSIMPLEACC_CLASS_BOTH);
-		$form->addElement($accClassificationSelect);
+        $form->addElement($accClassificationSelect);
         // Form Select accColor
         $colors = Utility::getColors();
         $accColor = $this->getVar('acc_color');
@@ -139,9 +139,9 @@ class Accounts extends \XoopsObject
         // Form Radio Yes/No accIecalc
         $accIecalc = $this->isNew() ? 1 : $this->getVar('acc_iecalc');
         $form->addElement(new \XoopsFormRadioYN(\_MA_WGSIMPLEACC_ACCOUNT_IECALC, 'acc_iecalc', $accIecalc));
-		// Form Radio Yes/No accOnline
-		$accOnline = $this->isNew() ?: $this->getVar('acc_online');
-		$form->addElement(new \XoopsFormRadioYN(\_MA_WGSIMPLEACC_ACCOUNT_ONLINE, 'acc_online', $accOnline));
+        // Form Radio Yes/No accOnline
+        $accOnline = $this->isNew() ?: $this->getVar('acc_online');
+        $form->addElement(new \XoopsFormRadioYN(\_MA_WGSIMPLEACC_ACCOUNT_ONLINE, 'acc_online', $accOnline));
         // Form Text accLevel
         $accLevel = $this->isNew() ? 1 : $this->getVar('acc_level');
         if ($admin) {
@@ -149,7 +149,7 @@ class Accounts extends \XoopsObject
         } else {
             $form->addElement(new \XoopsFormHidden('acc_level', $accLevel));
         }
-		// Form Text accWeight
+        // Form Text accWeight
         $accWeight = $this->isNew() ? 99 : $this->getVar('acc_weight');
         // Form Text Date Select accDatecreated
         $accDatecreated = $this->isNew() ? \time() : $this->getVar('acc_datecreated');
@@ -164,21 +164,21 @@ class Accounts extends \XoopsObject
             $form->addElement(new \XoopsFormHidden('acc_datecreated', $accDatecreated));
             $form->addElement(new \XoopsFormHidden('acc_submitter', $accSubmitter));
         }
-		// To Save
-		$form->addElement(new \XoopsFormHidden('op', 'save'));
-		$form->addElement(new \XoopsFormButtonTray('', _SUBMIT, 'submit', '', false));
-		return $form;
-	}
+        // To Save
+        $form->addElement(new \XoopsFormHidden('op', 'save'));
+        $form->addElement(new \XoopsFormButtonTray('', _SUBMIT, 'submit', '', false));
+        return $form;
+    }
 
-	/**
-	 * Get Values
-	 * @param null $keys
-	 * @param null $format
-	 * @param null $maxDepth
-	 * @return array
-	 */
-	public function getValuesAccounts($keys = null, $format = null, $maxDepth = null)
-	{
+    /**
+     * Get Values
+     * @param null $keys
+     * @param null $format
+     * @param null $maxDepth
+     * @return array
+     */
+    public function getValuesAccounts($keys = null, $format = null, $maxDepth = null)
+    {
         $helper  = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $utility = new \XoopsModules\Wgsimpleacc\Utility();
         $ret = $this->getValues($keys, $format, $maxDepth);
@@ -214,20 +214,20 @@ class Accounts extends \XoopsObject
         $ret['datecreated'] = \formatTimestamp($this->getVar('acc_datecreated'), 's');
         $ret['submitter']   = \XoopsUser::getUnameFromId($this->getVar('acc_submitter'));
         return $ret;
-	}
+    }
 
-	/**
-	 * Returns an array representation of the object
-	 *
-	 * @return array
-	 */
-	public function toArrayAccounts()
-	{
-		$ret = [];
-		$vars = $this->getVars();
-		foreach (\array_keys($vars) as $var) {
-			$ret[$var] = $this->getVar('"{$var}"');
-		}
-		return $ret;
-	}
+    /**
+     * Returns an array representation of the object
+     *
+     * @return array
+     */
+    public function toArrayAccounts()
+    {
+        $ret = [];
+        $vars = $this->getVars();
+        foreach (\array_keys($vars) as $var) {
+            $ret[$var] = $this->getVar('"{$var}"');
+        }
+        return $ret;
+    }
 }
