@@ -34,113 +34,113 @@ $op = Request::getCmd('op', 'list');
 // Request cli_id
 $cliId = Request::getInt('cli_id');
 switch ($op) {
-	case 'list':
-	default:
-		// Define Stylesheet
-		$GLOBALS['xoTheme']->addStylesheet($style, null);
-		$start = Request::getInt('start', 0);
-		$limit = Request::getInt('limit', $helper->getConfig('adminpager'));
-		$templateMain = 'wgsimpleacc_admin_clients.tpl';
-		$GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('clients.php'));
-		$adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_CLIENT, 'clients.php?op=new', 'add');
-		$GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
-		$clientsCount = $clientsHandler->getCountClients();
-		$clientsAll = $clientsHandler->getAllClients($start, $limit);
-		$GLOBALS['xoopsTpl']->assign('clients_count', $clientsCount);
-		$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
-		$GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', WGSIMPLEACC_UPLOAD_URL);
-		// Table view clients
-		if ($clientsCount > 0) {
-			foreach (\array_keys($clientsAll) as $i) {
-				$client = $clientsAll[$i]->getValuesClients();
-				$GLOBALS['xoopsTpl']->append('clients_list', $client);
-				unset($client);
-			}
-			// Display Navigation
-			if ($clientsCount > $limit) {
-				include_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
-				$pagenav = new \XoopsPageNav($clientsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
-				$GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
-			}
-		} else {
-			$GLOBALS['xoopsTpl']->assign('error', \_MA_WGSIMPLEACC_THEREARENT_CLIENTS);
-		}
-		break;
-	case 'new':
-		$templateMain = 'wgsimpleacc_admin_clients.tpl';
-		$GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('clients.php'));
-		$adminObject->addItemButton(\_AM_WGSIMPLEACC_LIST_CLIENTS, 'clients.php', 'list');
-		$GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
-		// Form Create
-		$clientsObj = $clientsHandler->create();
-		$form = $clientsObj->getFormClients();
-		$GLOBALS['xoopsTpl']->assign('form', $form->render());
-		break;
-	case 'save':
-		// Security Check
-		if (!$GLOBALS['xoopsSecurity']->check()) {
-			\redirect_header('clients.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
-		}
-		if ($cliId > 0) {
-			$clientsObj = $clientsHandler->get($cliId);
-		} else {
-			$clientsObj = $clientsHandler->create();
-		}
-		// Set Vars
-		$clientsObj->setVar('cli_name', Request::getText('cli_name', ''));
-		$clientsObj->setVar('cli_postal', Request::getString('cli_postal', ''));
-		$clientsObj->setVar('cli_city', Request::getString('cli_city', ''));
-		$clientsObj->setVar('cli_address', Request::getText('cli_address', ''));
-		$clientsObj->setVar('cli_ctry', Request::getString('cli_ctry', ''));
-		$clientsObj->setVar('cli_phone', Request::getString('cli_phone', ''));
-		$clientsObj->setVar('cli_vat', Request::getString('cli_vat', ''));
-		$clientsObj->setVar('cli_creditor', Request::getInt('cli_creditor', 0));
-		$clientsObj->setVar('cli_debtor', Request::getInt('cli_debtor', 0));
-		$clientDatecreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('cli_datecreated'));
-		$clientsObj->setVar('cli_datecreated', $clientDatecreatedObj->getTimestamp());
-		$clientsObj->setVar('cli_submitter', Request::getInt('cli_submitter', 0));
-		// Insert Data
-		if ($clientsHandler->insert($clientsObj)) {
-			\redirect_header('clients.php?op=list', 2, \_MA_WGSIMPLEACC_FORM_OK);
-		}
-		// Get Form
-		$GLOBALS['xoopsTpl']->assign('error', $clientsObj->getHtmlErrors());
-		$form = $clientsObj->getFormClients();
-		$GLOBALS['xoopsTpl']->assign('form', $form->render());
-		break;
-	case 'edit':
-		$templateMain = 'wgsimpleacc_admin_clients.tpl';
-		$GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('clients.php'));
-		$adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_CLIENT, 'clients.php?op=new', 'add');
-		$adminObject->addItemButton(\_AM_WGSIMPLEACC_LIST_CLIENTS, 'clients.php', 'list');
-		$GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
-		// Get Form
-		$clientsObj = $clientsHandler->get($cliId);
-		$form = $clientsObj->getFormClients();
-		$GLOBALS['xoopsTpl']->assign('form', $form->render());
-		break;
-	case 'delete':
-		$templateMain = 'wgsimpleacc_admin_clients.tpl';
-		$GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('clients.php'));
-		$clientsObj = $clientsHandler->get($cliId);
-		$cliName = $clientsObj->getVar('cli_name');
-		if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
-			if (!$GLOBALS['xoopsSecurity']->check()) {
-				\redirect_header('clients.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
-			}
-			if ($clientsHandler->delete($clientsObj)) {
-				\redirect_header('clients.php', 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
-			} else {
-				$GLOBALS['xoopsTpl']->assign('error', $clientsObj->getHtmlErrors());
-			}
-		} else {
-			$xoopsconfirm = new Common\XoopsConfirm(
-				['ok' => 1, 'cli_id' => $cliId, 'op' => 'delete'],
-				$_SERVER['REQUEST_URI'],
-				\sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $clientsObj->getVar('cli_name')));
-			$form = $xoopsconfirm->getFormXoopsConfirm();
-			$GLOBALS['xoopsTpl']->assign('form', $form->render());
-		}
-		break;
+    case 'list':
+    default:
+        // Define Stylesheet
+        $GLOBALS['xoTheme']->addStylesheet($style, null);
+        $start = Request::getInt('start', 0);
+        $limit = Request::getInt('limit', $helper->getConfig('adminpager'));
+        $templateMain = 'wgsimpleacc_admin_clients.tpl';
+        $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('clients.php'));
+        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_CLIENT, 'clients.php?op=new', 'add');
+        $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
+        $clientsCount = $clientsHandler->getCountClients();
+        $clientsAll = $clientsHandler->getAllClients($start, $limit);
+        $GLOBALS['xoopsTpl']->assign('clients_count', $clientsCount);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', WGSIMPLEACC_UPLOAD_URL);
+        // Table view clients
+        if ($clientsCount > 0) {
+            foreach (\array_keys($clientsAll) as $i) {
+                $client = $clientsAll[$i]->getValuesClients();
+                $GLOBALS['xoopsTpl']->append('clients_list', $client);
+                unset($client);
+            }
+            // Display Navigation
+            if ($clientsCount > $limit) {
+                include_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
+                $pagenav = new \XoopsPageNav($clientsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
+            }
+        } else {
+            $GLOBALS['xoopsTpl']->assign('error', \_MA_WGSIMPLEACC_THEREARENT_CLIENTS);
+        }
+        break;
+    case 'new':
+        $templateMain = 'wgsimpleacc_admin_clients.tpl';
+        $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('clients.php'));
+        $adminObject->addItemButton(\_AM_WGSIMPLEACC_LIST_CLIENTS, 'clients.php', 'list');
+        $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
+        // Form Create
+        $clientsObj = $clientsHandler->create();
+        $form = $clientsObj->getFormClients();
+        $GLOBALS['xoopsTpl']->assign('form', $form->render());
+        break;
+    case 'save':
+        // Security Check
+        if (!$GLOBALS['xoopsSecurity']->check()) {
+            \redirect_header('clients.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
+        }
+        if ($cliId > 0) {
+            $clientsObj = $clientsHandler->get($cliId);
+        } else {
+            $clientsObj = $clientsHandler->create();
+        }
+        // Set Vars
+        $clientsObj->setVar('cli_name', Request::getText('cli_name', ''));
+        $clientsObj->setVar('cli_postal', Request::getString('cli_postal', ''));
+        $clientsObj->setVar('cli_city', Request::getString('cli_city', ''));
+        $clientsObj->setVar('cli_address', Request::getText('cli_address', ''));
+        $clientsObj->setVar('cli_ctry', Request::getString('cli_ctry', ''));
+        $clientsObj->setVar('cli_phone', Request::getString('cli_phone', ''));
+        $clientsObj->setVar('cli_vat', Request::getString('cli_vat', ''));
+        $clientsObj->setVar('cli_creditor', Request::getInt('cli_creditor', 0));
+        $clientsObj->setVar('cli_debtor', Request::getInt('cli_debtor', 0));
+        $clientDatecreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('cli_datecreated'));
+        $clientsObj->setVar('cli_datecreated', $clientDatecreatedObj->getTimestamp());
+        $clientsObj->setVar('cli_submitter', Request::getInt('cli_submitter', 0));
+        // Insert Data
+        if ($clientsHandler->insert($clientsObj)) {
+            \redirect_header('clients.php?op=list', 2, \_MA_WGSIMPLEACC_FORM_OK);
+        }
+        // Get Form
+        $GLOBALS['xoopsTpl']->assign('error', $clientsObj->getHtmlErrors());
+        $form = $clientsObj->getFormClients();
+        $GLOBALS['xoopsTpl']->assign('form', $form->render());
+        break;
+    case 'edit':
+        $templateMain = 'wgsimpleacc_admin_clients.tpl';
+        $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('clients.php'));
+        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_CLIENT, 'clients.php?op=new', 'add');
+        $adminObject->addItemButton(\_AM_WGSIMPLEACC_LIST_CLIENTS, 'clients.php', 'list');
+        $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
+        // Get Form
+        $clientsObj = $clientsHandler->get($cliId);
+        $form = $clientsObj->getFormClients();
+        $GLOBALS['xoopsTpl']->assign('form', $form->render());
+        break;
+    case 'delete':
+        $templateMain = 'wgsimpleacc_admin_clients.tpl';
+        $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('clients.php'));
+        $clientsObj = $clientsHandler->get($cliId);
+        $cliName = $clientsObj->getVar('cli_name');
+        if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
+            if (!$GLOBALS['xoopsSecurity']->check()) {
+                \redirect_header('clients.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
+            }
+            if ($clientsHandler->delete($clientsObj)) {
+                \redirect_header('clients.php', 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
+            } else {
+                $GLOBALS['xoopsTpl']->assign('error', $clientsObj->getHtmlErrors());
+            }
+        } else {
+            $xoopsconfirm = new Common\XoopsConfirm(
+                ['ok' => 1, 'cli_id' => $cliId, 'op' => 'delete'],
+                $_SERVER['REQUEST_URI'],
+                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $clientsObj->getVar('cli_name')));
+            $form = $xoopsconfirm->getFormXoopsConfirm();
+            $GLOBALS['xoopsTpl']->assign('form', $form->render());
+        }
+        break;
 }
 require __DIR__ . '/footer.php';

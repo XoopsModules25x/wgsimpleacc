@@ -31,14 +31,14 @@ use XoopsModules\Wgsimpleacc;
  */
 class OutputsHandler extends \XoopsPersistableObjectHandler
 {
-	/**
-	 * Constructor
-	 *
-	 * @param \XoopsDatabase $db
-	 */
-	public function __construct(\XoopsDatabase $db)
-	{
-	}
+    /**
+     * Constructor
+     *
+     * @param \XoopsDatabase $db
+     */
+    public function __construct(\XoopsDatabase $db)
+    {
+    }
 
     /**
      * @public function getForm

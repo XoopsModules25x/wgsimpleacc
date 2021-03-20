@@ -31,96 +31,96 @@ use XoopsModules\Wgsimpleacc;
  */
 class CurrenciesHandler extends \XoopsPersistableObjectHandler
 {
-	/**
-	 * Constructor
-	 *
-	 * @param \XoopsDatabase $db
-	 */
-	public function __construct(\XoopsDatabase $db)
-	{
-		parent::__construct($db, 'wgsimpleacc_currencies', Currencies::class, 'cur_id', 'cur_code');
-	}
+    /**
+     * Constructor
+     *
+     * @param \XoopsDatabase $db
+     */
+    public function __construct(\XoopsDatabase $db)
+    {
+        parent::__construct($db, 'wgsimpleacc_currencies', Currencies::class, 'cur_id', 'cur_code');
+    }
 
-	/**
-	 * @param bool $isNew
-	 *
-	 * @return object
-	 */
-	public function create($isNew = true)
-	{
-		return parent::create($isNew);
-	}
+    /**
+     * @param bool $isNew
+     *
+     * @return object
+     */
+    public function create($isNew = true)
+    {
+        return parent::create($isNew);
+    }
 
-	/**
-	 * retrieve a field
-	 *
-	 * @param int $i field id
-	 * @param null fields
-	 * @return mixed reference to the {@link Get} object
-	 */
-	public function get($i = null, $fields = null)
-	{
-		return parent::get($i, $fields);
-	}
+    /**
+     * retrieve a field
+     *
+     * @param int $i field id
+     * @param null fields
+     * @return mixed reference to the {@link Get} object
+     */
+    public function get($i = null, $fields = null)
+    {
+        return parent::get($i, $fields);
+    }
 
-	/**
-	 * get inserted id
-	 *
-	 * @param null
-	 * @return int reference to the {@link Get} object
-	 */
-	public function getInsertId()
-	{
-		return $this->db->getInsertId();
-	}
+    /**
+     * get inserted id
+     *
+     * @param null
+     * @return int reference to the {@link Get} object
+     */
+    public function getInsertId()
+    {
+        return $this->db->getInsertId();
+    }
 
-	/**
-	 * Get Count Currencies in the database
-	 * @param int    $start
-	 * @param int    $limit
-	 * @param string $sort
-	 * @param string $order
-	 * @return int
-	 */
-	public function getCountCurrencies($start = 0, $limit = 0, $sort = 'cur_id ASC, cur_code', $order = 'ASC')
-	{
-		$crCountCurrencies = new \CriteriaCompo();
-		$crCountCurrencies = $this->getCurrenciesCriteria($crCountCurrencies, $start, $limit, $sort, $order);
-		return $this->getCount($crCountCurrencies);
-	}
+    /**
+     * Get Count Currencies in the database
+     * @param int    $start
+     * @param int    $limit
+     * @param string $sort
+     * @param string $order
+     * @return int
+     */
+    public function getCountCurrencies($start = 0, $limit = 0, $sort = 'cur_id ASC, cur_code', $order = 'ASC')
+    {
+        $crCountCurrencies = new \CriteriaCompo();
+        $crCountCurrencies = $this->getCurrenciesCriteria($crCountCurrencies, $start, $limit, $sort, $order);
+        return $this->getCount($crCountCurrencies);
+    }
 
-	/**
-	 * Get All Currencies in the database
-	 * @param int    $start
-	 * @param int    $limit
-	 * @param string $sort
-	 * @param string $order
-	 * @return array
-	 */
-	public function getAllCurrencies($start = 0, $limit = 0, $sort = 'cur_id ASC, cur_code', $order = 'ASC')
-	{
-		$crAllCurrencies = new \CriteriaCompo();
-		$crAllCurrencies = $this->getCurrenciesCriteria($crAllCurrencies, $start, $limit, $sort, $order);
-		return $this->getAll($crAllCurrencies);
-	}
+    /**
+     * Get All Currencies in the database
+     * @param int    $start
+     * @param int    $limit
+     * @param string $sort
+     * @param string $order
+     * @return array
+     */
+    public function getAllCurrencies($start = 0, $limit = 0, $sort = 'cur_id ASC, cur_code', $order = 'ASC')
+    {
+        $crAllCurrencies = new \CriteriaCompo();
+        $crAllCurrencies = $this->getCurrenciesCriteria($crAllCurrencies, $start, $limit, $sort, $order);
+        return $this->getAll($crAllCurrencies);
+    }
 
-	/**
-	 * Get Criteria Currencies
-	 * @param $crCurrencies
-	 * @param $start
-	 * @param $limit
-	 * @param $sort
-	 * @param $order
-	 * @return int
-	 */
-	private function getCurrenciesCriteria($crCurrencies, $start, $limit, $sort, $order)
-	{
-		$crCurrencies->setStart($start);
-		$crCurrencies->setLimit($limit);
-		$crCurrencies->setSort($sort);
-		$crCurrencies->setOrder($order);
-		return $crCurrencies;
-	}
+    /**
+     * Get Criteria Currencies
+     * @param $crCurrencies
+     * @param $start
+     * @param $limit
+     * @param $sort
+     * @param $order
+     * @return int
+     */
+    private function getCurrenciesCriteria($crCurrencies, $start, $limit, $sort, $order)
+    {
+        $crCurrencies->setStart($start);
+        $crCurrencies->setLimit($limit);
+        $crCurrencies->setSort($sort);
+        $crCurrencies->setOrder($order);
+        return $crCurrencies;
+    }
 
     /**
      * Set given currency as primary

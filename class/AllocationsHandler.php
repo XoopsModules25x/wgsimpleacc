@@ -31,96 +31,96 @@ use XoopsModules\Wgsimpleacc;
  */
 class AllocationsHandler extends \XoopsPersistableObjectHandler
 {
-	/**
-	 * Constructor
-	 *
-	 * @param \XoopsDatabase $db
-	 */
-	public function __construct(\XoopsDatabase $db)
-	{
-		parent::__construct($db, 'wgsimpleacc_allocations', Allocations::class, 'all_id', 'all_name');
-	}
+    /**
+     * Constructor
+     *
+     * @param \XoopsDatabase $db
+     */
+    public function __construct(\XoopsDatabase $db)
+    {
+        parent::__construct($db, 'wgsimpleacc_allocations', Allocations::class, 'all_id', 'all_name');
+    }
 
-	/**
-	 * @param bool $isNew
-	 *
-	 * @return object
-	 */
-	public function create($isNew = true)
-	{
-		return parent::create($isNew);
-	}
+    /**
+     * @param bool $isNew
+     *
+     * @return object
+     */
+    public function create($isNew = true)
+    {
+        return parent::create($isNew);
+    }
 
-	/**
-	 * retrieve a field
-	 *
-	 * @param int $i field id
-	 * @param null fields
-	 * @return mixed reference to the {@link Get} object
-	 */
-	public function get($i = null, $fields = null)
-	{
-		return parent::get($i, $fields);
-	}
+    /**
+     * retrieve a field
+     *
+     * @param int $i field id
+     * @param null fields
+     * @return mixed reference to the {@link Get} object
+     */
+    public function get($i = null, $fields = null)
+    {
+        return parent::get($i, $fields);
+    }
 
-	/**
-	 * get inserted id
-	 *
-	 * @param null
-	 * @return int reference to the {@link Get} object
-	 */
-	public function getInsertId()
-	{
-		return $this->db->getInsertId();
-	}
+    /**
+     * get inserted id
+     *
+     * @param null
+     * @return int reference to the {@link Get} object
+     */
+    public function getInsertId()
+    {
+        return $this->db->getInsertId();
+    }
 
-	/**
-	 * Get Count Allocations in the database
-	 * @param int    $start
-	 * @param int    $limit
-	 * @param string $sort
-	 * @param string $order
-	 * @return int
-	 */
-	public function getCountAllocations($start = 0, $limit = 0, $sort = 'all_id ASC, all_name', $order = 'ASC')
-	{
-		$crCountAllocations = new \CriteriaCompo();
-		$crCountAllocations = $this->getAllocationsCriteria($crCountAllocations, $start, $limit, $sort, $order);
-		return $this->getCount($crCountAllocations);
-	}
+    /**
+     * Get Count Allocations in the database
+     * @param int    $start
+     * @param int    $limit
+     * @param string $sort
+     * @param string $order
+     * @return int
+     */
+    public function getCountAllocations($start = 0, $limit = 0, $sort = 'all_id ASC, all_name', $order = 'ASC')
+    {
+        $crCountAllocations = new \CriteriaCompo();
+        $crCountAllocations = $this->getAllocationsCriteria($crCountAllocations, $start, $limit, $sort, $order);
+        return $this->getCount($crCountAllocations);
+    }
 
-	/**
-	 * Get All Allocations in the database
-	 * @param int    $start
-	 * @param int    $limit
-	 * @param string $sort
-	 * @param string $order
-	 * @return array
-	 */
-	public function getAllAllocations($start = 0, $limit = 0, $sort = 'all_weight ASC, all_id', $order = 'ASC')
-	{
-		$crAllAllocations = new \CriteriaCompo();
-		$crAllAllocations = $this->getAllocationsCriteria($crAllAllocations, $start, $limit, $sort, $order);
-		return $this->getAll($crAllAllocations);
-	}
+    /**
+     * Get All Allocations in the database
+     * @param int    $start
+     * @param int    $limit
+     * @param string $sort
+     * @param string $order
+     * @return array
+     */
+    public function getAllAllocations($start = 0, $limit = 0, $sort = 'all_weight ASC, all_id', $order = 'ASC')
+    {
+        $crAllAllocations = new \CriteriaCompo();
+        $crAllAllocations = $this->getAllocationsCriteria($crAllAllocations, $start, $limit, $sort, $order);
+        return $this->getAll($crAllAllocations);
+    }
 
-	/**
-	 * Get Criteria Allocations
-	 * @param $crAllocations
-	 * @param $start
-	 * @param $limit
-	 * @param $sort
-	 * @param $order
-	 * @return int
-	 */
-	private function getAllocationsCriteria($crAllocations, $start, $limit, $sort, $order)
-	{
-		$crAllocations->setStart($start);
-		$crAllocations->setLimit($limit);
-		$crAllocations->setSort($sort);
-		$crAllocations->setOrder($order);
-		return $crAllocations;
-	}
+    /**
+     * Get Criteria Allocations
+     * @param $crAllocations
+     * @param $start
+     * @param $limit
+     * @param $sort
+     * @param $order
+     * @return int
+     */
+    private function getAllocationsCriteria($crAllocations, $start, $limit, $sort, $order)
+    {
+        $crAllocations->setStart($start);
+        $crAllocations->setLimit($limit);
+        $crAllocations->setSort($sort);
+        $crAllocations->setOrder($order);
+        return $crAllocations;
+    }
 
     /**
      * Get all allocations for selectbox

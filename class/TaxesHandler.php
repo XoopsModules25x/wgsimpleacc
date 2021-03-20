@@ -31,96 +31,96 @@ use XoopsModules\Wgsimpleacc;
  */
 class TaxesHandler extends \XoopsPersistableObjectHandler
 {
-	/**
-	 * Constructor
-	 *
-	 * @param \XoopsDatabase $db
-	 */
-	public function __construct(\XoopsDatabase $db)
-	{
-		parent::__construct($db, 'wgsimpleacc_taxes', Taxes::class, 'tax_id', 'tax_name');
-	}
+    /**
+     * Constructor
+     *
+     * @param \XoopsDatabase $db
+     */
+    public function __construct(\XoopsDatabase $db)
+    {
+        parent::__construct($db, 'wgsimpleacc_taxes', Taxes::class, 'tax_id', 'tax_name');
+    }
 
-	/**
-	 * @param bool $isNew
-	 *
-	 * @return object
-	 */
-	public function create($isNew = true)
-	{
-		return parent::create($isNew);
-	}
+    /**
+     * @param bool $isNew
+     *
+     * @return object
+     */
+    public function create($isNew = true)
+    {
+        return parent::create($isNew);
+    }
 
-	/**
-	 * retrieve a field
-	 *
-	 * @param int $i field id
-	 * @param null fields
-	 * @return mixed reference to the {@link Get} object
-	 */
-	public function get($i = null, $fields = null)
-	{
-		return parent::get($i, $fields);
-	}
+    /**
+     * retrieve a field
+     *
+     * @param int $i field id
+     * @param null fields
+     * @return mixed reference to the {@link Get} object
+     */
+    public function get($i = null, $fields = null)
+    {
+        return parent::get($i, $fields);
+    }
 
-	/**
-	 * get inserted id
-	 *
-	 * @param null
-	 * @return int reference to the {@link Get} object
-	 */
-	public function getInsertId()
-	{
-		return $this->db->getInsertId();
-	}
+    /**
+     * get inserted id
+     *
+     * @param null
+     * @return int reference to the {@link Get} object
+     */
+    public function getInsertId()
+    {
+        return $this->db->getInsertId();
+    }
 
-	/**
-	 * Get Count Taxes in the database
-	 * @param int    $start
-	 * @param int    $limit
-	 * @param string $sort
-	 * @param string $order
-	 * @return int
-	 */
-	public function getCountTaxes($start = 0, $limit = 0, $sort = 'tax_id ASC, tax_name', $order = 'ASC')
-	{
-		$crCountTaxes = new \CriteriaCompo();
-		$crCountTaxes = $this->getTaxesCriteria($crCountTaxes, $start, $limit, $sort, $order);
-		return $this->getCount($crCountTaxes);
-	}
+    /**
+     * Get Count Taxes in the database
+     * @param int    $start
+     * @param int    $limit
+     * @param string $sort
+     * @param string $order
+     * @return int
+     */
+    public function getCountTaxes($start = 0, $limit = 0, $sort = 'tax_id ASC, tax_name', $order = 'ASC')
+    {
+        $crCountTaxes = new \CriteriaCompo();
+        $crCountTaxes = $this->getTaxesCriteria($crCountTaxes, $start, $limit, $sort, $order);
+        return $this->getCount($crCountTaxes);
+    }
 
-	/**
-	 * Get All Taxes in the database
-	 * @param int    $start
-	 * @param int    $limit
-	 * @param string $sort
-	 * @param string $order
-	 * @return array
-	 */
-	public function getAllTaxes($start = 0, $limit = 0, $sort = 'tax_id ASC, tax_name', $order = 'ASC')
-	{
-		$crAllTaxes = new \CriteriaCompo();
-		$crAllTaxes = $this->getTaxesCriteria($crAllTaxes, $start, $limit, $sort, $order);
-		return $this->getAll($crAllTaxes);
-	}
+    /**
+     * Get All Taxes in the database
+     * @param int    $start
+     * @param int    $limit
+     * @param string $sort
+     * @param string $order
+     * @return array
+     */
+    public function getAllTaxes($start = 0, $limit = 0, $sort = 'tax_id ASC, tax_name', $order = 'ASC')
+    {
+        $crAllTaxes = new \CriteriaCompo();
+        $crAllTaxes = $this->getTaxesCriteria($crAllTaxes, $start, $limit, $sort, $order);
+        return $this->getAll($crAllTaxes);
+    }
 
-	/**
-	 * Get Criteria Taxes
-	 * @param        $crTaxes
-	 * @param int    $start
-	 * @param int    $limit
-	 * @param string $sort
-	 * @param string $order
-	 * @return int
-	 */
-	private function getTaxesCriteria($crTaxes, $start, $limit, $sort, $order)
-	{
-		$crTaxes->setStart($start);
-		$crTaxes->setLimit($limit);
-		$crTaxes->setSort($sort);
-		$crTaxes->setOrder($order);
-		return $crTaxes;
-	}
+    /**
+     * Get Criteria Taxes
+     * @param        $crTaxes
+     * @param int    $start
+     * @param int    $limit
+     * @param string $sort
+     * @param string $order
+     * @return int
+     */
+    private function getTaxesCriteria($crTaxes, $start, $limit, $sort, $order)
+    {
+        $crTaxes->setStart($start);
+        $crTaxes->setLimit($limit);
+        $crTaxes->setSort($sort);
+        $crTaxes->setOrder($order);
+        return $crTaxes;
+    }
 
     /**
      * Set given tax as primary

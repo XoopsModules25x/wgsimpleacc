@@ -31,78 +31,78 @@ use XoopsModules\Wgsimpleacc\Constants;
  */
 class AccountsHandler extends \XoopsPersistableObjectHandler
 {
-	/**
-	 * Constructor
-	 *
-	 * @param \XoopsDatabase $db
-	 */
-	public function __construct(\XoopsDatabase $db)
-	{
-		parent::__construct($db, 'wgsimpleacc_accounts', Accounts::class, 'acc_id', 'acc_key');
-	}
+    /**
+     * Constructor
+     *
+     * @param \XoopsDatabase $db
+     */
+    public function __construct(\XoopsDatabase $db)
+    {
+        parent::__construct($db, 'wgsimpleacc_accounts', Accounts::class, 'acc_id', 'acc_key');
+    }
 
-	/**
-	 * @param bool $isNew
-	 *
-	 * @return object
-	 */
-	public function create($isNew = true)
-	{
-		return parent::create($isNew);
-	}
+    /**
+     * @param bool $isNew
+     *
+     * @return object
+     */
+    public function create($isNew = true)
+    {
+        return parent::create($isNew);
+    }
 
-	/**
-	 * retrieve a field
-	 *
-	 * @param int $i field id
-	 * @param null fields
-	 * @return mixed reference to the {@link Get} object
-	 */
-	public function get($i = null, $fields = null)
-	{
-		return parent::get($i, $fields);
-	}
+    /**
+     * retrieve a field
+     *
+     * @param int $i field id
+     * @param null fields
+     * @return mixed reference to the {@link Get} object
+     */
+    public function get($i = null, $fields = null)
+    {
+        return parent::get($i, $fields);
+    }
 
-	/**
-	 * get inserted id
-	 *
-	 * @param null
-	 * @return int reference to the {@link Get} object
-	 */
-	public function getInsertId()
-	{
-		return $this->db->getInsertId();
-	}
+    /**
+     * get inserted id
+     *
+     * @param null
+     * @return int reference to the {@link Get} object
+     */
+    public function getInsertId()
+    {
+        return $this->db->getInsertId();
+    }
 
-	/**
-	 * Get Count Accounts in the database
-	 * @param int    $start
-	 * @param int    $limit
-	 * @param string $sort
-	 * @param string $order
-	 * @return int
-	 */
-	public function getCountAccounts($start = 0, $limit = 0, $sort = 'acc_key ASC, acc_id', $order = 'ASC')
-	{
-		$crCountAccounts = new \CriteriaCompo();
-		$crCountAccounts = $this->getAccountsCriteria($crCountAccounts, $start, $limit, $sort, $order);
-		return $this->getCount($crCountAccounts);
-	}
+    /**
+     * Get Count Accounts in the database
+     * @param int    $start
+     * @param int    $limit
+     * @param string $sort
+     * @param string $order
+     * @return int
+     */
+    public function getCountAccounts($start = 0, $limit = 0, $sort = 'acc_key ASC, acc_id', $order = 'ASC')
+    {
+        $crCountAccounts = new \CriteriaCompo();
+        $crCountAccounts = $this->getAccountsCriteria($crCountAccounts, $start, $limit, $sort, $order);
+        return $this->getCount($crCountAccounts);
+    }
 
-	/**
-	 * Get All Accounts in the database
-	 * @param int    $start
-	 * @param int    $limit
-	 * @param string $sort
-	 * @param string $order
-	 * @return array
-	 */
-	public function getAllAccounts($start = 0, $limit = 0, $sort = 'acc_weight ASC, acc_key ASC, acc_id', $order = 'ASC')
-	{
-		$crAllAccounts = new \CriteriaCompo();
-		$crAllAccounts = $this->getAccountsCriteria($crAllAccounts, $start, $limit, $sort, $order);
-		return $this->getAll($crAllAccounts);
-	}
+    /**
+     * Get All Accounts in the database
+     * @param int    $start
+     * @param int    $limit
+     * @param string $sort
+     * @param string $order
+     * @return array
+     */
+    public function getAllAccounts($start = 0, $limit = 0, $sort = 'acc_weight ASC, acc_key ASC, acc_id', $order = 'ASC')
+    {
+        $crAllAccounts = new \CriteriaCompo();
+        $crAllAccounts = $this->getAccountsCriteria($crAllAccounts, $start, $limit, $sort, $order);
+        return $this->getAll($crAllAccounts);
+    }
 
     /**
      * Get Criteria Accounts
@@ -113,14 +113,14 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
      * @param $order
      * @return int
      */
-	private function getAccountsCriteria($crAccounts, $start, $limit, $sort, $order)
-	{
-		$crAccounts->setStart($start);
-		$crAccounts->setLimit($limit);
-		$crAccounts->setSort($sort);
-		$crAccounts->setOrder($order);
-		return $crAccounts;
-	}
+    private function getAccountsCriteria($crAccounts, $start, $limit, $sort, $order)
+    {
+        $crAccounts->setStart($start);
+        $crAccounts->setLimit($limit);
+        $crAccounts->setSort($sort);
+        $crAccounts->setOrder($order);
+        return $crAccounts;
+    }
 
     /**
      * Get all accounts for selectbox

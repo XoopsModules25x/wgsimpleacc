@@ -32,25 +32,25 @@ use XoopsModules\Wgsimpleacc;
  */
 class Permissions extends \XoopsObject
 {
-	/**
-	 * Constructor
-	 *
-	 * @param null
-	 */
-	public function __construct()
-	{
-	}
+    /**
+     * Constructor
+     *
+     * @param null
+     */
+    public function __construct()
+    {
+    }
 
-	/**
-	 * @static function &getInstance
-	 *
-	 * @param null
-	 */
-	public static function getInstance()
-	{
-		static $instance = false;
-		if (!$instance) {
-			$instance = new self();
-		}
-	}
+    /**
+     * @static function &getInstance
+     *
+     * @param null
+     */
+    public static function getInstance()
+    {
+        static $instance = false;
+        if (!$instance) {
+            $instance = new self();
+        }
+    }
 }

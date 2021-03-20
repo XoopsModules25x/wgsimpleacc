@@ -33,59 +33,59 @@ use XoopsModules\Wgsimpleacc\Constants;
  */
 class Transactions extends \XoopsObject
 {
-	/**
-	 * Constructor
-	 *
-	 * @param null
-	 */
-	public function __construct()
-	{
-		$this->initVar('tra_id', \XOBJ_DTYPE_INT);
+    /**
+     * Constructor
+     *
+     * @param null
+     */
+    public function __construct()
+    {
+        $this->initVar('tra_id', \XOBJ_DTYPE_INT);
         $this->initVar('tra_year', \XOBJ_DTYPE_INT);
         $this->initVar('tra_nb', \XOBJ_DTYPE_INT);
-		$this->initVar('tra_desc', \XOBJ_DTYPE_OTHER);
-		$this->initVar('tra_reference', \XOBJ_DTYPE_TXTBOX);
+        $this->initVar('tra_desc', \XOBJ_DTYPE_OTHER);
+        $this->initVar('tra_reference', \XOBJ_DTYPE_TXTBOX);
         $this->initVar('tra_remarks', \XOBJ_DTYPE_OTHER);
-		$this->initVar('tra_accid', \XOBJ_DTYPE_INT);
-		$this->initVar('tra_allid', \XOBJ_DTYPE_INT);
-		$this->initVar('tra_date', \XOBJ_DTYPE_INT);
-		$this->initVar('tra_curid', \XOBJ_DTYPE_INT);
-		$this->initVar('tra_amountin', \XOBJ_DTYPE_DECIMAL);
-		$this->initVar('tra_amountout', \XOBJ_DTYPE_DECIMAL);
-		$this->initVar('tra_taxid', \XOBJ_DTYPE_INT);
+        $this->initVar('tra_accid', \XOBJ_DTYPE_INT);
+        $this->initVar('tra_allid', \XOBJ_DTYPE_INT);
+        $this->initVar('tra_date', \XOBJ_DTYPE_INT);
+        $this->initVar('tra_curid', \XOBJ_DTYPE_INT);
+        $this->initVar('tra_amountin', \XOBJ_DTYPE_DECIMAL);
+        $this->initVar('tra_amountout', \XOBJ_DTYPE_DECIMAL);
+        $this->initVar('tra_taxid', \XOBJ_DTYPE_INT);
         $this->initVar('tra_asid', \XOBJ_DTYPE_INT);
         $this->initVar('tra_cliid', \XOBJ_DTYPE_INT);
-		$this->initVar('tra_status', \XOBJ_DTYPE_INT);
-		$this->initVar('tra_comments', \XOBJ_DTYPE_INT);
+        $this->initVar('tra_status', \XOBJ_DTYPE_INT);
+        $this->initVar('tra_comments', \XOBJ_DTYPE_INT);
         $this->initVar('tra_class', \XOBJ_DTYPE_INT);
         $this->initVar('tra_balid', \XOBJ_DTYPE_INT);
         $this->initVar('tra_hist', \XOBJ_DTYPE_TXTBOX);
-		$this->initVar('tra_datecreated', \XOBJ_DTYPE_INT);
-		$this->initVar('tra_submitter', \XOBJ_DTYPE_INT);
-	}
+        $this->initVar('tra_datecreated', \XOBJ_DTYPE_INT);
+        $this->initVar('tra_submitter', \XOBJ_DTYPE_INT);
+    }
 
-	/**
-	 * @static function &getInstance
-	 *
-	 * @param null
-	 */
-	public static function getInstance()
-	{
-		static $instance = false;
-		if (!$instance) {
-			$instance = new self();
-		}
-	}
+    /**
+     * @static function &getInstance
+     *
+     * @param null
+     */
+    public static function getInstance()
+    {
+        static $instance = false;
+        if (!$instance) {
+            $instance = new self();
+        }
+    }
 
-	/**
-	 * The new inserted $Id
-	 * @return inserted id
-	 */
-	public function getNewInsertedIdTransactions()
-	{
-		$newInsertedId = $GLOBALS['xoopsDB']->getInsertId();
-		return $newInsertedId;
-	}
+    /**
+     * The new inserted $Id
+     * @return inserted id
+     */
+    public function getNewInsertedIdTransactions()
+    {
+        $newInsertedId = $GLOBALS['xoopsDB']->getInsertId();
+        return $newInsertedId;
+    }
 
     /**
      * @public function getForm
@@ -97,12 +97,12 @@ class Transactions extends \XoopsObject
      * @param bool $approve
      * @return \XoopsThemeForm
      */
-	public function getFormTransactions($action = false, $admin = false, $type = 0, $start = 0, $limit = 0, $approve = false)
-	{
-		$helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
-		if (!$action) {
-			$action = $_SERVER['REQUEST_URI'];
-		}
+    public function getFormTransactions($action = false, $admin = false, $type = 0, $start = 0, $limit = 0, $approve = false)
+    {
+        $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+        if (!$action) {
+            $action = $_SERVER['REQUEST_URI'];
+        }
         $isAdmin = $GLOBALS['xoopsUser']->isAdmin($GLOBALS['xoopsModule']->mid());
         $traClass = $this->isNew() ? $type : $this->getVar('tra_class');
         // Title
@@ -113,12 +113,12 @@ class Transactions extends \XoopsObject
         if (Constants::CLASS_EXPENSES == $traClass || Constants::CLASS_BOTH == $traClass) {
             $title = $this->isNew() ? \sprintf(\_MA_WGSIMPLEACC_TRANSACTION_ADD_EXPENSES) : \sprintf(\_MA_WGSIMPLEACC_TRANSACTION_EDIT_EXPENSES);
         }
-		// Get Theme Form
-		\xoops_load('XoopsFormLoader');
-		$form = new \XoopsThemeForm($title, 'formTransaction', $action, 'post', true);
-		$form->setExtra('enctype="multipart/form-data"');
+        // Get Theme Form
+        \xoops_load('XoopsFormLoader');
+        $form = new \XoopsThemeForm($title, 'formTransaction', $action, 'post', true);
+        $form->setExtra('enctype="multipart/form-data"');
         $permissionsHandler = $helper->getHandler('Permissions');
-		if ($permissionsHandler->getPermTratemplatesView()) {
+        if ($permissionsHandler->getPermTratemplatesView()) {
             // Form Table Tratemplates
             $tratemplatesHandler = $helper->getHandler('Tratemplates');
             $form->addElement(new \XoopsFormHidden('ttpl_desc[0]', ''));
@@ -152,8 +152,8 @@ class Transactions extends \XoopsObject
             $tratemplatesSelect->setExtra(" onchange='presetTraField()' ");
             $form->addElement($tratemplatesSelect, true);
         }
-		if (!$this->isNew()) {
-		    if ($admin) {
+        if (!$this->isNew()) {
+            if ($admin) {
                 // Form Text traYear
                 $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_TRANSACTION_YEAR, 'tra_year', 50, 255, $this->getVar('tra_year')));
                 // Form Text traNb
@@ -214,25 +214,25 @@ class Transactions extends \XoopsObject
         $editorConfigs['editor'] = $editor;
         $traRemarks = new \XoopsFormEditor(\_MA_WGSIMPLEACC_TRANSACTION_REMARKS, 'tra_remarks', $editorConfigs);
         $form->addElement($traRemarks);
-		// Form Table accounts
-		$accountsHandler = $helper->getHandler('Accounts');
-		$traAccidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_ACCID, 'tra_accid', $this->getVar('tra_accid'), 5);
-		$accounts = $accountsHandler->getSelectTreeOfAccounts($traClass);
-		foreach ($accounts as $account) {
+        // Form Table accounts
+        $accountsHandler = $helper->getHandler('Accounts');
+        $traAccidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_ACCID, 'tra_accid', $this->getVar('tra_accid'), 5);
+        $accounts = $accountsHandler->getSelectTreeOfAccounts($traClass);
+        foreach ($accounts as $account) {
             $traAccidSelect->addOption($account['id'], $account['text']);
         }
-		$form->addElement($traAccidSelect, true);
-		// Form Table allocations
-		$allocationsHandler = $helper->getHandler('Allocations');
-		$traAllocationSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_ALLID, 'tra_allid', $this->getVar('tra_allid'), 5);
+        $form->addElement($traAccidSelect, true);
+        // Form Table allocations
+        $allocationsHandler = $helper->getHandler('Allocations');
+        $traAllocationSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_ALLID, 'tra_allid', $this->getVar('tra_allid'), 5);
         $allocations = $allocationsHandler->getSelectTreeOfAllocations();
         foreach ($allocations as $allocation) {
             $traAllocationSelect->addOption($allocation['id'], $allocation['text']);
         }
-		$form->addElement($traAllocationSelect, true);
-		// Form Text Date Select traDate
-		$traDate = $this->isNew() ?: $this->getVar('tra_date');
-		$form->addElement(new \XoopsFormTextDateSelect(\_MA_WGSIMPLEACC_TRANSACTION_DATE, 'tra_date', '', $traDate), true);
+        $form->addElement($traAllocationSelect, true);
+        // Form Text Date Select traDate
+        $traDate = $this->isNew() ?: $this->getVar('tra_date');
+        $form->addElement(new \XoopsFormTextDateSelect(\_MA_WGSIMPLEACC_TRANSACTION_DATE, 'tra_date', '', $traDate), true);
         if ($helper->getConfig('useCurrencies')) {
             // Form Table currencies
             $currenciesHandler = $helper->getHandler('Currencies');
@@ -277,17 +277,17 @@ class Transactions extends \XoopsObject
         $crAssets->add(new \Criteria('as_online', 1));
         $crAssets->add(new \Criteria('as_iecalc', 1));
         $traAsid = $this->isNew() ? $assetsHandler->getPrimaryAsset() : $this->getVar('tra_asid');
-		$traAsidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_ASID, 'tra_asid', $traAsid);
-		$traAsidSelect->addOptionArray($assetsHandler->getList($crAssets));
-		$form->addElement($traAsidSelect);
+        $traAsidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_ASID, 'tra_asid', $traAsid);
+        $traAsidSelect->addOptionArray($assetsHandler->getList($crAssets));
+        $form->addElement($traAsidSelect);
         // Form Text traComments
         $traComments = $this->isNew() ? 0 : $this->getVar('tra_comments');
         // Form Text traBalid
         $traBalid = $this->isNew() ? 0 : $this->getVar('tra_balid');
         // Form Text traHist
         $traHist = $this->isNew() ? 0 : $this->getVar('tra_hist');
-		// Form Text Date Select traDatecreated
-		$traDatecreated = $this->isNew() ? \time() : $this->getVar('tra_datecreated');
+        // Form Text Date Select traDatecreated
+        $traDatecreated = $this->isNew() ? \time() : $this->getVar('tra_datecreated');
         // Form Select User traSubmitter
         $traSubmitter = $this->isNew() ? $GLOBALS['xoopsUser']->uid() : $this->getVar('tra_submitter');
         $permissionsHandler = $helper->getHandler('Permissions');
@@ -341,8 +341,8 @@ class Transactions extends \XoopsObject
         }
         $form->addElement(new \XoopsFormHidden('start', $start));
         $form->addElement(new \XoopsFormHidden('limit', $limit));
-		$form->addElement(new \XoopsFormHidden('op', 'save'));
-		if ($approve) {
+        $form->addElement(new \XoopsFormHidden('op', 'save'));
+        if ($approve) {
             $form->addElement(new \XoopsFormButtonTray('', \_MA_WGSIMPLEACC_APPROVE, 'submit', '', false));
         //} elseif (Constants::STATUS_OFFLINE == $traStatus) {
                 //$form->addElement(new \XoopsFormButtonTray('', \_MA_WGSIMPLEACC_REACTIVATE, 'submit', '', false));
@@ -350,55 +350,55 @@ class Transactions extends \XoopsObject
             $form->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
         }
 
-		return $form;
-	}
+        return $form;
+    }
 
-	/**
-	 * Get Values
-	 * @param null $keys
-	 * @param null $format
-	 * @param null $maxDepth
-	 * @return array
-	 */
-	public function getValuesTransactions($keys = null, $format = null, $maxDepth = null)
-	{
-		$helper  = \XoopsModules\Wgsimpleacc\Helper::getInstance();
-		$utility = new \XoopsModules\Wgsimpleacc\Utility();
+    /**
+     * Get Values
+     * @param null $keys
+     * @param null $format
+     * @param null $maxDepth
+     * @return array
+     */
+    public function getValuesTransactions($keys = null, $format = null, $maxDepth = null)
+    {
+        $helper  = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+        $utility = new \XoopsModules\Wgsimpleacc\Utility();
         $editorMaxchar = $helper->getConfig('editor_maxchar');
 
-		$ret = $this->getValues($keys, $format, $maxDepth);
-		$ret['id']            = $this->getVar('tra_id');
+        $ret = $this->getValues($keys, $format, $maxDepth);
+        $ret['id']            = $this->getVar('tra_id');
         $ret['year']          = $this->getVar('tra_year');
         $ret['nb']            = $this->getVar('tra_nb');
         $ret['year_nb']       = $this->getVar('tra_year') . '/' . \substr('00000' . $this->getVar('tra_nb'), -5);
-		$ret['desc']          = $this->getVar('tra_desc', 'e');
-		$ret['desc_short']    = $utility::truncateHtml($ret['desc'], $editorMaxchar);
-		$ret['reference']     = $this->getVar('tra_reference');
+        $ret['desc']          = $this->getVar('tra_desc', 'e');
+        $ret['desc_short']    = $utility::truncateHtml($ret['desc'], $editorMaxchar);
+        $ret['reference']     = $this->getVar('tra_reference');
         $ret['remarks']       = $this->getVar('tra_remarks', 'e');
         $ret['remarks_short'] = $utility::truncateHtml($ret['remarks'], $editorMaxchar);
-		$accountsHandler      = $helper->getHandler('Accounts');
-		$accountsObj          = $accountsHandler->get($this->getVar('tra_accid'));
-		$ret['accid']         = $accountsObj->getVar('acc_key');
+        $accountsHandler      = $helper->getHandler('Accounts');
+        $accountsObj          = $accountsHandler->get($this->getVar('tra_accid'));
+        $ret['accid']         = $accountsObj->getVar('acc_key');
         $ret['account']       = $accountsObj->getVar('acc_key') . ' ' . $accountsObj->getVar('acc_name');
-		$allocationsHandler   = $helper->getHandler('Allocations');
-		$allocationsObj       = $allocationsHandler->get($this->getVar('tra_allid'));
-		$ret['allocation']    = $allocationsObj->getVar('all_name');
-		$ret['date']          = \formatTimestamp($this->getVar('tra_date'), 's');
-		$currenciesHandler    = $helper->getHandler('Currencies');
-		$currenciesObj        = $currenciesHandler->get($this->getVar('tra_curid'));
+        $allocationsHandler   = $helper->getHandler('Allocations');
+        $allocationsObj       = $allocationsHandler->get($this->getVar('tra_allid'));
+        $ret['allocation']    = $allocationsObj->getVar('all_name');
+        $ret['date']          = \formatTimestamp($this->getVar('tra_date'), 's');
+        $currenciesHandler    = $helper->getHandler('Currencies');
+        $currenciesObj        = $currenciesHandler->get($this->getVar('tra_curid'));
         if (\is_object($currenciesObj)) {
             $ret['curid'] = $currenciesObj->getVar('cur_code');
         }
-		$ret['amountin']      =  Utility::FloatToString($this->getVar('tra_amountin'));
-		$ret['amountout']     =  Utility::FloatToString($this->getVar('tra_amountout'));
-		if ($this->getVar('tra_amountin') > 0) {
+        $ret['amountin']      =  Utility::FloatToString($this->getVar('tra_amountin'));
+        $ret['amountout']     =  Utility::FloatToString($this->getVar('tra_amountout'));
+        if ($this->getVar('tra_amountin') > 0) {
             $ret['amount'] = $ret['amountin'];
         } else {
             $ret['amount'] = $ret['amountout'];
         }
         $taxesHandler       = $helper->getHandler('Taxes');
-		$taxesObj           = $taxesHandler->get($this->getVar('tra_taxid'));
-		$ret['taxid']       = $taxesObj->getVar('tax_name');
+        $taxesObj           = $taxesHandler->get($this->getVar('tra_taxid'));
+        $ret['taxid']       = $taxesObj->getVar('tax_name');
         $ret['taxrate']     = $taxesObj->getVar('tax_rate');
         $assetsHandler      = $helper->getHandler('Assets');
         $assetsObj          = $assetsHandler->get($this->getVar('tra_asid'));
@@ -411,10 +411,10 @@ class Transactions extends \XoopsObject
             $cliName = $clientsObj->getVar('cli_name');
         }
         $ret['client']      = $cliName;
-		$status             = $this->getVar('tra_status');
-		$ret['status']      = $status;
-		$ret['status_text'] = Utility::getStatusText($status);
-		$ret['comments']    = $this->getVar('tra_comments');
+        $status             = $this->getVar('tra_status');
+        $ret['status']      = $status;
+        $ret['status_text'] = Utility::getStatusText($status);
+        $ret['comments']    = $this->getVar('tra_comments');
         $traClass           = $this->getVar('tra_class');
         $ret['class']       = $traClass;
         switch ($traClass) {
@@ -432,8 +432,8 @@ class Transactions extends \XoopsObject
         $ret['class_text']  = $class_text;
         $ret['balid']       = $this->getVar('tra_balid');
         $ret['hist']        = $this->getVar('tra_hist');
-		$ret['datecreated'] = \formatTimestamp($this->getVar('tra_datecreated'), 's');
-		$ret['submitter']   = \XoopsUser::getUnameFromId($this->getVar('tra_submitter'));
+        $ret['datecreated'] = \formatTimestamp($this->getVar('tra_datecreated'), 's');
+        $ret['submitter']   = \XoopsUser::getUnameFromId($this->getVar('tra_submitter'));
         $filesHandler = $helper->getHandler('Files');
         $crFiles = new \CriteriaCompo();
         $crFiles->add(new \Criteria('fil_traid', $this->getVar('tra_id')));
@@ -450,21 +450,21 @@ class Transactions extends \XoopsObject
             }
             $ret['files'] = $files;
         }
-		return $ret;
-	}
+        return $ret;
+    }
 
-	/**
-	 * Returns an array representation of the object
-	 *
-	 * @return array
-	 */
-	public function toArrayTransactions()
-	{
-		$ret = [];
-		$vars = $this->getVars();
-		foreach (\array_keys($vars) as $var) {
-			$ret[$var] = $this->getVar('"{$var}"');
-		}
-		return $ret;
-	}
+    /**
+     * Returns an array representation of the object
+     *
+     * @return array
+     */
+    public function toArrayTransactions()
+    {
+        $ret = [];
+        $vars = $this->getVars();
+        foreach (\array_keys($vars) as $var) {
+            $ret[$var] = $this->getVar('"{$var}"');
+        }
+        return $ret;
+    }
 }

@@ -75,9 +75,9 @@ $adminmenu[] = [
     'icon' => 'assets/icons/32/allocations.png',
 ];
 $adminmenu[] = [
-	'title' => \_MI_WGSIMPLEACC_ADMENU9,
-	'link' => 'admin/balances.php',
-	'icon' => 'assets/icons/32/balances.png',
+    'title' => \_MI_WGSIMPLEACC_ADMENU9,
+    'link' => 'admin/balances.php',
+    'icon' => 'assets/icons/32/balances.png',
 ];
 if ($helper->getConfig('use_currencies')) {
     $adminmenu[] = [

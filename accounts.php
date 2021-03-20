@@ -56,8 +56,8 @@ $accountsCount = $accountsHandler->getCount();
 $GLOBALS['xoopsTpl']->assign('accountsCount', $accountsCount);
 
 switch ($op) {
-	case 'list':
-	default:
+    case 'list':
+    default:
         $accountsCount = $accountsHandler->getCount();
         if ($accountsCount > 0) {
             $GLOBALS['xoTheme']->addStylesheet(WGSIMPLEACC_URL . '/assets/css/nestedsortable.css');
@@ -78,21 +78,21 @@ switch ($op) {
 
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ACCOUNTS];
-		break;
-	case 'save':
-		// Security Check
-		if (!$GLOBALS['xoopsSecurity']->check()) {
-			\redirect_header('accounts.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
-		}
-		// Check permissions
-		if (!$permAccountsSubmit) {
-			\redirect_header('accounts.php?op=list', 3, _NOPERM);
-		}
-		if ($accId > 0) {
-			$accountsObj = $accountsHandler->get($accId);
-		} else {
-			$accountsObj = $accountsHandler->create();
-		}
+        break;
+    case 'save':
+        // Security Check
+        if (!$GLOBALS['xoopsSecurity']->check()) {
+            \redirect_header('accounts.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
+        }
+        // Check permissions
+        if (!$permAccountsSubmit) {
+            \redirect_header('accounts.php?op=list', 3, _NOPERM);
+        }
+        if ($accId > 0) {
+            $accountsObj = $accountsHandler->get($accId);
+        } else {
+            $accountsObj = $accountsHandler->create();
+        }
         $accPid = Request::getInt('acc_pid', 0);
         $accountsObj->setVar('acc_pid', $accPid);
         $accountsObj->setVar('acc_key', Request::getString('acc_key', ''));
@@ -112,58 +112,58 @@ switch ($op) {
         $accountsObj->setVar('acc_weight', Request::getInt('acc_weight', 0));
         $accountsObj->setVar('acc_datecreated', \time());
         $accountsObj->setVar('acc_submitter', Request::getInt('acc_submitter', 0));
-		// Insert Data
-		if ($accountsHandler->insert($accountsObj)) {
+        // Insert Data
+        if ($accountsHandler->insert($accountsObj)) {
             \redirect_header('accounts.php?op=list', 2, \_MA_WGSIMPLEACC_FORM_OK);
-		}
-		// Get Form Error
-		$GLOBALS['xoopsTpl']->assign('error', $accountsObj->getHtmlErrors());
-		$form = $accountsObj->getFormAccounts();
-		$GLOBALS['xoopsTpl']->assign('form', $form->render());
-		break;
-	case 'new':
-		// Check permissions
-		if (!$permAccountsSubmit) {
-			\redirect_header('accounts.php?op=list', 3, _NOPERM);
-		}
-		// Form Create
-		$accountsObj = $accountsHandler->create();
-		$form = $accountsObj->getFormAccounts();
-		$GLOBALS['xoopsTpl']->assign('form', $form->render());
+        }
+        // Get Form Error
+        $GLOBALS['xoopsTpl']->assign('error', $accountsObj->getHtmlErrors());
+        $form = $accountsObj->getFormAccounts();
+        $GLOBALS['xoopsTpl']->assign('form', $form->render());
+        break;
+    case 'new':
+        // Check permissions
+        if (!$permAccountsSubmit) {
+            \redirect_header('accounts.php?op=list', 3, _NOPERM);
+        }
+        // Form Create
+        $accountsObj = $accountsHandler->create();
+        $form = $accountsObj->getFormAccounts();
+        $GLOBALS['xoopsTpl']->assign('form', $form->render());
 
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ACCOUNTS, 'link' => 'accounts.php?op=list'];
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ACCOUNT_ADD];
-		break;
-	case 'edit':
-		// Check params
-		if (0 == $accId) {
-			\redirect_header('accounts.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
-		}
+        break;
+    case 'edit':
+        // Check params
+        if (0 == $accId) {
+            \redirect_header('accounts.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
+        }
         // Check permissions
         $accountsObj = $accountsHandler->get($accId);
         if (!$permissionsHandler->getPermAccountsEdit($accountsObj->getVar('acc_submitter'))) {
             \redirect_header('accounts.php?op=list', 3, _NOPERM);
         }
-		// Get Form
-		$form = $accountsObj->getFormAccounts();
-		$GLOBALS['xoopsTpl']->assign('form', $form->render());
+        // Get Form
+        $form = $accountsObj->getFormAccounts();
+        $GLOBALS['xoopsTpl']->assign('form', $form->render());
 
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ACCOUNTS, 'link' => 'accounts.php?op=list'];
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ACCOUNT_EDIT];
-		break;
-	case 'delete':
-		// Check params
-		if (0 == $accId) {
-			\redirect_header('accounts.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
-		}
+        break;
+    case 'delete':
+        // Check params
+        if (0 == $accId) {
+            \redirect_header('accounts.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
+        }
         // Check permissions
         $accountsObj = $accountsHandler->get($accId);
         if (!$permissionsHandler->getPermAccountsEdit($accountsObj->getVar('acc_submitter'))) {
             \redirect_header('accounts.php?op=list', 3, _NOPERM);
         }
-		// Check whether account is already used
+        // Check whether account is already used
         $crTransactions = new \CriteriaCompo();
         $crTransactions->add(new \Criteria('tra_accid', $accId));
         $transactionsCount = $transactionsHandler->getCount($crTransactions);
@@ -171,26 +171,26 @@ switch ($op) {
             \redirect_header('accounts.php?op=list', 3, \_MA_WGSIMPLEACC_ACCOUNT_ERR_DELETE);
         }
         unset($crTransactions);
-		$accountsObj = $accountsHandler->get($accId);
-		$accKey = $accountsObj->getVar('acc_key');
-		if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
-			if (!$GLOBALS['xoopsSecurity']->check()) {
-				\redirect_header('accounts.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
-			}
-			if ($accountsHandler->delete($accountsObj)) {
-				\redirect_header('accounts.php', 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
-			} else {
-				$GLOBALS['xoopsTpl']->assign('error', $accountsObj->getHtmlErrors());
-			}
-		} else {
-			$xoopsconfirm = new Common\XoopsConfirm(
-				['ok' => 1, 'acc_id' => $accId, 'op' => 'delete'],
-				$_SERVER['REQUEST_URI'],
-				\sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $accountsObj->getVar('acc_key')));
-			$form = $xoopsconfirm->getFormXoopsConfirm();
-			$GLOBALS['xoopsTpl']->assign('form', $form->render());
-		}
-		break;
+        $accountsObj = $accountsHandler->get($accId);
+        $accKey = $accountsObj->getVar('acc_key');
+        if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
+            if (!$GLOBALS['xoopsSecurity']->check()) {
+                \redirect_header('accounts.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
+            }
+            if ($accountsHandler->delete($accountsObj)) {
+                \redirect_header('accounts.php', 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
+            } else {
+                $GLOBALS['xoopsTpl']->assign('error', $accountsObj->getHtmlErrors());
+            }
+        } else {
+            $xoopsconfirm = new Common\XoopsConfirm(
+                ['ok' => 1, 'acc_id' => $accId, 'op' => 'delete'],
+                $_SERVER['REQUEST_URI'],
+                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $accountsObj->getVar('acc_key')));
+            $form = $xoopsconfirm->getFormXoopsConfirm();
+            $GLOBALS['xoopsTpl']->assign('form', $form->render());
+        }
+        break;
     case 'order':
         $aorder = $_POST['menuItem'];
         $i      = 0;

@@ -32,47 +32,47 @@ use XoopsModules\Wgsimpleacc;
  */
 class Balances extends \XoopsObject
 {
-	/**
-	 * Constructor
-	 *
-	 * @param null
-	 */
-	public function __construct()
-	{
-		$this->initVar('bal_id', \XOBJ_DTYPE_INT);
-		$this->initVar('bal_from', \XOBJ_DTYPE_INT);
-		$this->initVar('bal_to', \XOBJ_DTYPE_INT);
+    /**
+     * Constructor
+     *
+     * @param null
+     */
+    public function __construct()
+    {
+        $this->initVar('bal_id', \XOBJ_DTYPE_INT);
+        $this->initVar('bal_from', \XOBJ_DTYPE_INT);
+        $this->initVar('bal_to', \XOBJ_DTYPE_INT);
         $this->initVar('bal_asid', \XOBJ_DTYPE_INT);
         $this->initVar('bal_curid', \XOBJ_DTYPE_INT);
         $this->initVar('bal_amountstart', \XOBJ_DTYPE_DECIMAL);
         $this->initVar('bal_amountend', \XOBJ_DTYPE_DECIMAL);
-		$this->initVar('bal_status', \XOBJ_DTYPE_INT);
-		$this->initVar('bal_datecreated', \XOBJ_DTYPE_INT);
-		$this->initVar('bal_submitter', \XOBJ_DTYPE_INT);
-	}
+        $this->initVar('bal_status', \XOBJ_DTYPE_INT);
+        $this->initVar('bal_datecreated', \XOBJ_DTYPE_INT);
+        $this->initVar('bal_submitter', \XOBJ_DTYPE_INT);
+    }
 
-	/**
-	 * @static function &getInstance
-	 *
-	 * @param null
-	 */
-	public static function getInstance()
-	{
-		static $instance = false;
-		if (!$instance) {
-			$instance = new self();
-		}
-	}
+    /**
+     * @static function &getInstance
+     *
+     * @param null
+     */
+    public static function getInstance()
+    {
+        static $instance = false;
+        if (!$instance) {
+            $instance = new self();
+        }
+    }
 
-	/**
-	 * The new inserted $Id
-	 * @return inserted id
-	 */
-	public function getNewInsertedIdBalances()
-	{
-		$newInsertedId = $GLOBALS['xoopsDB']->getInsertId();
-		return $newInsertedId;
-	}
+    /**
+     * The new inserted $Id
+     * @return inserted id
+     */
+    public function getNewInsertedIdBalances()
+    {
+        $newInsertedId = $GLOBALS['xoopsDB']->getInsertId();
+        return $newInsertedId;
+    }
 
     /**
      * @public function getForm
@@ -80,29 +80,29 @@ class Balances extends \XoopsObject
      * @param bool $admin
      * @return \XoopsThemeForm
      */
-	public function getFormBalances($action = false, $admin = false)
-	{
-		$helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
-		if (!$action) {
-			$action = $_SERVER['REQUEST_URI'];
-		}
+    public function getFormBalances($action = false, $admin = false)
+    {
+        $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+        if (!$action) {
+            $action = $_SERVER['REQUEST_URI'];
+        }
         $dtime = \DateTime::createFromFormat('Y-m-d', (date('Y') - 1) . '-1-1');
         $dateFrom = $dtime->getTimestamp();
         $dtime = \DateTime::createFromFormat('Y-m-d', (date('Y') - 1) . '-12-31');
         $dateTo = $dtime->getTimestamp();
-		// Title
-		$title = $this->isNew() ? \sprintf(\_MA_WGSIMPLEACC_BALANCE_ADD) : \sprintf(\_MA_WGSIMPLEACC_BALANCE_EDIT);
-		// Get Theme Form
-		\xoops_load('XoopsFormLoader');
-		$form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
-		$form->setExtra('enctype="multipart/form-data"');
-		// Form Text Date Select balFrom
-		$balFrom = $this->isNew() ? $dateFrom : $this->getVar('bal_from');
-		$form->addElement(new \XoopsFormTextDateSelect(\_MA_WGSIMPLEACC_BALANCE_FROM, 'bal_from', '', $balFrom), true);
-		// Form Text Date Select balTo
-		$balTo = $this->isNew() ? $dateTo : $this->getVar('bal_to');
-		$form->addElement(new \XoopsFormTextDateSelect(\_MA_WGSIMPLEACC_BALANCE_TO, 'bal_to', '', $balTo), true);
-		// Form Select Status balStatus
+        // Title
+        $title = $this->isNew() ? \sprintf(\_MA_WGSIMPLEACC_BALANCE_ADD) : \sprintf(\_MA_WGSIMPLEACC_BALANCE_EDIT);
+        // Get Theme Form
+        \xoops_load('XoopsFormLoader');
+        $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
+        $form->setExtra('enctype="multipart/form-data"');
+        // Form Text Date Select balFrom
+        $balFrom = $this->isNew() ? $dateFrom : $this->getVar('bal_from');
+        $form->addElement(new \XoopsFormTextDateSelect(\_MA_WGSIMPLEACC_BALANCE_FROM, 'bal_from', '', $balFrom), true);
+        // Form Text Date Select balTo
+        $balTo = $this->isNew() ? $dateTo : $this->getVar('bal_to');
+        $form->addElement(new \XoopsFormTextDateSelect(\_MA_WGSIMPLEACC_BALANCE_TO, 'bal_to', '', $balTo), true);
+        // Form Select Status balStatus
         $balStatus = $this->isNew() ? Constants::STATUS_APPROVED : $this->getVar('bal_status');
         if ($admin) {
             // Form Table assets
@@ -139,7 +139,7 @@ class Balances extends \XoopsObject
             $form->addElement(new \XoopsFormHidden('bal_status', $balStatus));
         }
 
-		// To Save
+        // To Save
         if ($admin) {
             $form->addElement(new \XoopsFormHidden('op', 'save'));
             $form->addElement(new \XoopsFormButtonTray('', \_MA_WGSIMPLEACC_BALANCE_SUBMIT, 'submit', '', false));
@@ -148,26 +148,26 @@ class Balances extends \XoopsObject
             $form->addElement(new \XoopsFormButtonTray('', \_MA_WGSIMPLEACC_BALANCE_PRECALC, 'submit', '', false));
         }
 
-		return $form;
-	}
+        return $form;
+    }
 
-	/**
-	 * Get Values
-	 * @param null $keys
-	 * @param null $format
-	 * @param null $maxDepth
-	 * @return array
-	 */
-	public function getValuesBalances($keys = null, $format = null, $maxDepth = null)
-	{
+    /**
+     * Get Values
+     * @param null $keys
+     * @param null $format
+     * @param null $maxDepth
+     * @return array
+     */
+    public function getValuesBalances($keys = null, $format = null, $maxDepth = null)
+    {
         $helper  = \XoopsModules\Wgsimpleacc\Helper::getInstance();
-	    $ret = $this->getValues($keys, $format, $maxDepth);
-		$ret['id']         = $this->getVar('bal_id');
+        $ret = $this->getValues($keys, $format, $maxDepth);
+        $ret['id']         = $this->getVar('bal_id');
         $assetsHandler = $helper->getHandler('Assets');
         $assetsObj = $assetsHandler->get($this->getVar('bal_asid'));
         $ret['asset']      = $assetsObj->getVar('as_name');
-		$ret['from']       = \formatTimestamp($this->getVar('bal_from'), 's');
-		$ret['to']         = \formatTimestamp($this->getVar('bal_to'), 's');
+        $ret['from']       = \formatTimestamp($this->getVar('bal_from'), 's');
+        $ret['to']         = \formatTimestamp($this->getVar('bal_to'), 's');
         $currenciesHandler = $helper->getHandler('Currencies');
         $currenciesObj = $currenciesHandler->get($this->getVar('bal_curid'));
         if (\is_object($currenciesObj)) {
@@ -176,26 +176,26 @@ class Balances extends \XoopsObject
         $ret['amountstart'] = Utility::FloatToString($this->getVar('bal_amountstart'));
         $ret['amountend']   = Utility::FloatToString($this->getVar('bal_amountend'));
         $ret['difference']   = Utility::FloatToString($this->getVar('bal_amountend') - $this->getVar('bal_amountstart'));
-		$status             = $this->getVar('bal_status');
-		$ret['status']      = $status;
+        $status             = $this->getVar('bal_status');
+        $ret['status']      = $status;
         $ret['status_text'] = Utility::getStatusText($status);
-		$ret['datecreated'] = \formatTimestamp($this->getVar('bal_datecreated'), 's');
-		$ret['submitter']   = \XoopsUser::getUnameFromId($this->getVar('bal_submitter'));
-		return $ret;
-	}
+        $ret['datecreated'] = \formatTimestamp($this->getVar('bal_datecreated'), 's');
+        $ret['submitter']   = \XoopsUser::getUnameFromId($this->getVar('bal_submitter'));
+        return $ret;
+    }
 
-	/**
-	 * Returns an array representation of the object
-	 *
-	 * @return array
-	 */
-	public function toArrayBalances()
-	{
-		$ret = [];
-		$vars = $this->getVars();
-		foreach (\array_keys($vars) as $var) {
-			$ret[$var] = $this->getVar('"{$var}"');
-		}
-		return $ret;
-	}
+    /**
+     * Returns an array representation of the object
+     *
+     * @return array
+     */
+    public function toArrayBalances()
+    {
+        $ret = [];
+        $vars = $this->getVars();
+        foreach (\array_keys($vars) as $var) {
+            $ret[$var] = $this->getVar('"{$var}"');
+        }
+        return $ret;
+    }
 }

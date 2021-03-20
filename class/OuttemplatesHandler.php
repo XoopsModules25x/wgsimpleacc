@@ -31,96 +31,96 @@ use XoopsModules\Wgsimpleacc;
  */
 class OuttemplatesHandler extends \XoopsPersistableObjectHandler
 {
-	/**
-	 * Constructor
-	 *
-	 * @param \XoopsDatabase $db
-	 */
-	public function __construct(\XoopsDatabase $db)
-	{
-		parent::__construct($db, 'wgsimpleacc_outtemplates', Outtemplates::class, 'otpl_id', 'otpl_name');
-	}
+    /**
+     * Constructor
+     *
+     * @param \XoopsDatabase $db
+     */
+    public function __construct(\XoopsDatabase $db)
+    {
+        parent::__construct($db, 'wgsimpleacc_outtemplates', Outtemplates::class, 'otpl_id', 'otpl_name');
+    }
 
-	/**
-	 * @param bool $isNew
-	 *
-	 * @return object
-	 */
-	public function create($isNew = true)
-	{
-		return parent::create($isNew);
-	}
+    /**
+     * @param bool $isNew
+     *
+     * @return object
+     */
+    public function create($isNew = true)
+    {
+        return parent::create($isNew);
+    }
 
-	/**
-	 * retrieve a field
-	 *
-	 * @param int $i field id
-	 * @param null fields
-	 * @return mixed reference to the {@link Get} object
-	 */
-	public function get($i = null, $fields = null)
-	{
-		return parent::get($i, $fields);
-	}
+    /**
+     * retrieve a field
+     *
+     * @param int $i field id
+     * @param null fields
+     * @return mixed reference to the {@link Get} object
+     */
+    public function get($i = null, $fields = null)
+    {
+        return parent::get($i, $fields);
+    }
 
-	/**
-	 * get inserted id
-	 *
-	 * @param null
-	 * @return int reference to the {@link Get} object
-	 */
-	public function getInsertId()
-	{
-		return $this->db->getInsertId();
-	}
+    /**
+     * get inserted id
+     *
+     * @param null
+     * @return int reference to the {@link Get} object
+     */
+    public function getInsertId()
+    {
+        return $this->db->getInsertId();
+    }
 
-	/**
-	 * Get Count Outtemplates in the database
-	 * @param int    $start
-	 * @param int    $limit
-	 * @param string $sort
-	 * @param string $order
-	 * @return int
-	 */
-	public function getCountOuttemplates($start = 0, $limit = 0, $sort = 'otpl_id ASC, otpl_name', $order = 'ASC')
-	{
-		$crCountOuttemplates = new \CriteriaCompo();
-		$crCountOuttemplates = $this->getOuttemplatesCriteria($crCountOuttemplates, $start, $limit, $sort, $order);
-		return $this->getCount($crCountOuttemplates);
-	}
+    /**
+     * Get Count Outtemplates in the database
+     * @param int    $start
+     * @param int    $limit
+     * @param string $sort
+     * @param string $order
+     * @return int
+     */
+    public function getCountOuttemplates($start = 0, $limit = 0, $sort = 'otpl_id ASC, otpl_name', $order = 'ASC')
+    {
+        $crCountOuttemplates = new \CriteriaCompo();
+        $crCountOuttemplates = $this->getOuttemplatesCriteria($crCountOuttemplates, $start, $limit, $sort, $order);
+        return $this->getCount($crCountOuttemplates);
+    }
 
-	/**
-	 * Get All Outtemplates in the database
-	 * @param int    $start
-	 * @param int    $limit
-	 * @param string $sort
-	 * @param string $order
-	 * @return array
-	 */
-	public function getAllOuttemplates($start = 0, $limit = 0, $sort = 'otpl_id ASC, otpl_name', $order = 'ASC')
-	{
-		$crAllOuttemplates = new \CriteriaCompo();
-		$crAllOuttemplates = $this->getOuttemplatesCriteria($crAllOuttemplates, $start, $limit, $sort, $order);
-		return $this->getAll($crAllOuttemplates);
-	}
+    /**
+     * Get All Outtemplates in the database
+     * @param int    $start
+     * @param int    $limit
+     * @param string $sort
+     * @param string $order
+     * @return array
+     */
+    public function getAllOuttemplates($start = 0, $limit = 0, $sort = 'otpl_id ASC, otpl_name', $order = 'ASC')
+    {
+        $crAllOuttemplates = new \CriteriaCompo();
+        $crAllOuttemplates = $this->getOuttemplatesCriteria($crAllOuttemplates, $start, $limit, $sort, $order);
+        return $this->getAll($crAllOuttemplates);
+    }
 
-	/**
-	 * Get Criteria Outtemplates
-	 * @param        $crOuttemplates
-	 * @param int    $start
-	 * @param int    $limit
-	 * @param string $sort
-	 * @param string $order
-	 * @return int
-	 */
-	private function getOuttemplatesCriteria($crOuttemplates, $start, $limit, $sort, $order)
-	{
-		$crOuttemplates->setStart($start);
-		$crOuttemplates->setLimit($limit);
-		$crOuttemplates->setSort($sort);
-		$crOuttemplates->setOrder($order);
-		return $crOuttemplates;
-	}
+    /**
+     * Get Criteria Outtemplates
+     * @param        $crOuttemplates
+     * @param int    $start
+     * @param int    $limit
+     * @param string $sort
+     * @param string $order
+     * @return int
+     */
+    private function getOuttemplatesCriteria($crOuttemplates, $start, $limit, $sort, $order)
+    {
+        $crOuttemplates->setStart($start);
+        $crOuttemplates->setLimit($limit);
+        $crOuttemplates->setSort($sort);
+        $crOuttemplates->setOrder($order);
+        return $crOuttemplates;
+    }
     /**
      * @public function to edit output
      * @param array $template
@@ -183,8 +183,8 @@ class OuttemplatesHandler extends \XoopsPersistableObjectHandler
         $form->addElement($targetSelect);
 
         // To Save
-		$form->addElement(new \XoopsFormHidden('op', 'exec_output'));
-		$form->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
+        $form->addElement(new \XoopsFormHidden('op', 'exec_output'));
+        $form->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
         return $form;
     }
 
