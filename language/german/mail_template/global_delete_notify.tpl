@@ -6,10 +6,10 @@ Der Eintrag "{ITEM_NAME}" wurde von {X_SITENAME} entfernt.
 
 Du erhältst diese Nachricht weil du dich entschieden hast, dass du über entfernte Einträge auf deiner Webseite informiert werden möchtest.
 
-Wenn du diese Nachricht irrtümlich erhalten hast oder du keine weiteren Benachrichtigungen wünscht, dann ändere deine Abonnements unter folgendem Link:
+Sollte es sich dabei um einen Fehler handeln oder Du kein Interesse mehr daran haben derartige Informationen zu erhalten, ändere die Einstellungen in Deinem Profil in dem Du folgenden URL aufrufst:
 {X_UNSUBSCRIBE_URL}
 
-Bitte antworte nicht auf diese Nachricht
+Auf diese Nachricht bitte nicht antworten, da diese automatisch generiert wurde.
 
 ------------------------------------------------------------------
 
