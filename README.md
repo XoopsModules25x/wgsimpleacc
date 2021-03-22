@@ -18,6 +18,10 @@ Main features:
 
 Most of the templates on user side are fully responsive, but for proper displaying you must use a Bootstrap theme. Depending on the template you can select various options like slideshow type (Lightbox, Jssor,....), autoplay, speed and many more.
 
+wgSimpleAcc Version 1.22 is based on Bootstrap 3. It is recommended to to use theme 'wgsa_startmin' from folder 'extras/themes'
+
+Next versions will be updated to Bootstrap 4.
+
 #### Demo:
 * https://wgsimpleacc.wedega.com/
 

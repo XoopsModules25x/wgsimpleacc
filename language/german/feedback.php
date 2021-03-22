@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -17,12 +14,14 @@ declare(strict_types=1);
  *
  * @copyright      module for xoops
  * @license        GPL 2.0 or later
+ * @package        general
  * @since          1.0
  * @min_xoops      2.5.9
  * @author         XOOPS - Website:<https://xoops.org>
  */
 $moduleDirName = \basename(\dirname(__DIR__, 2));
 $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
+
 \define('CO_' . $moduleDirNameUpper . '_FB_FORM_TITLE', 'Ein Feedback senden');
 \define('CO_' . $moduleDirNameUpper . '_FB_RECIPIENT', 'Empfänger');
 \define('CO_' . $moduleDirNameUpper . '_FB_NAME', 'Name');

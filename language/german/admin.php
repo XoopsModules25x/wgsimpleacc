@@ -89,7 +89,7 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_TRANSACTION_HISTTYPE', 'Historie Typ');
 \define('_AM_WGSIMPLEACC_TRANSACTION_HISTDATE', 'Historie Datum');
 \define('_AM_WGSIMPLEACC_TRANSACTION_HISTSUBMITTER', 'Historie Einsender');
-// Caption of Files histories
+// Caption of Transaction histories
 \define('_AM_WGSIMPLEACC_FILES_HISTID', 'Historie Id');
 \define('_AM_WGSIMPLEACC_FILES_HISTTYPE', 'Historie Typ');
 \define('_AM_WGSIMPLEACC_FILES_HISTDATE', 'Historie Datum');

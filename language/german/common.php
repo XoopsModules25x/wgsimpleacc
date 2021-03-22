@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -17,11 +14,13 @@ declare(strict_types=1);
  *
  * @copyright       XOOPS Project (https://xoops.org)
  * @license         GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
- * @since           1
+ * @package         wgSimpleAcc
+ * @since           1.0
  * @author          Xoops Development Team
  */
 $moduleDirName = \basename(\dirname(__DIR__, 2));
 $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
+
 \define('CO_' . $moduleDirNameUpper . '_GDLIBSTATUS', 'GD library support: ');
 \define('CO_' . $moduleDirNameUpper . '_GDLIBVERSION', 'GD Library version: ');
 \define('CO_' . $moduleDirNameUpper . '_GDOFF', "<span style='font-weight: bold;'>Deaktivieren</span> (Keine Vorschaubilder verfügbar)");
@@ -37,8 +36,10 @@ $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 \define('CO_' . $moduleDirNameUpper . '_SERVERUPLOADSTATUS', 'Server Uploads Status: ');
 \define('CO_' . $moduleDirNameUpper . '_SPHPINI', "<span style='font-weight: bold;'>Aus der Datei PHP.Ini enthaltene Information:</span>");
 \define('CO_' . $moduleDirNameUpper . '_UPLOADPATHDSC', 'Beachte. Der Upload-Pfad *MUSS* den vollständigen Serverpfad zum Upload-Verzeichnis enthalten.');
+
 \define('CO_' . $moduleDirNameUpper . '_PRINT', "<span style='font-weight: bold;'>Drucken</span>");
 \define('CO_' . $moduleDirNameUpper . '_PDF', "<span style='font-weight: bold;'>PDF erstellen</span>");
+
 \define('CO_' . $moduleDirNameUpper . '_UPGRADEFAILED0', "Update fehlgeschlagen - konnte Feld '%s' nicht umbenennen");
 \define('CO_' . $moduleDirNameUpper . '_UPGRADEFAILED1', "Update fehlgeschlagen - konnte neues Feld '%s' nicht hinzufügen");
 \define('CO_' . $moduleDirNameUpper . '_UPGRADEFAILED2', "Update fehlgeschlagen - konnte Tabelle '%s' nicht umbenennen");
@@ -46,21 +47,27 @@ $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 \define('CO_' . $moduleDirNameUpper . '_ERROR_BAD_XOOPS', 'Dieses Modul benötigt XOOPS %s+ (%s installiert)');
 \define('CO_' . $moduleDirNameUpper . '_ERROR_BAD_PHP', 'Dieses Modul benötigt PHP Version %s+ (%s installiert)');
 \define('CO_' . $moduleDirNameUpper . '_ERROR_TAG_REMOVAL', 'Konnte Tags vom Modul Tags nicht entfernen');
+
 \define('CO_' . $moduleDirNameUpper . '_FOLDERS_DELETED_OK', 'Upload-Ordner wurden gelöscht');
+
 // Error Msgs
 \define('CO_' . $moduleDirNameUpper . '_ERROR_BAD_DEL_PATH', 'Konnte Verzeichnis %s nicht löschen');
 \define('CO_' . $moduleDirNameUpper . '_ERROR_BAD_REMOVE', 'Konnte %s nicht löschen');
 \define('CO_' . $moduleDirNameUpper . '_ERROR_NO_PLUGIN', 'Konnte PlugIn nicht laden');
+
 //Hilfe
 \define('CO_' . $moduleDirNameUpper . '_DIRNAME', \basename(\dirname(__DIR__, 2)));
 \define('CO_' . $moduleDirNameUpper . '_HELP_HEADER', __DIR__ . '/help/helpheader.tpl');
 \define('CO_' . $moduleDirNameUpper . '_BACK_2_ADMIN', 'Zurück zur Administration von');
 \define('CO_' . $moduleDirNameUpper . '_OVERVIEW', 'Übersicht');
+
 //\define('CO_' . $moduleDirNameUpper . '_HELP_DIR', __DIR__);
+
 //help multi-page
 \define('CO_' . $moduleDirNameUpper . '_DISCLAIMER', 'Disclaimer');
 \define('CO_' . $moduleDirNameUpper . '_LICENSE', 'License');
 \define('CO_' . $moduleDirNameUpper . '_SUPPORT', 'Support');
+
 //Sample Data
 \define('CO_' . $moduleDirNameUpper . '_' . 'ADD_SAMPLEDATA', 'Importe Beispieldaten (ALLE vorhandenen Daten werden gelöscht)');
 \define('CO_' . $moduleDirNameUpper . '_' . 'SAMPLEDATA_SUCCESS', 'Beispieldaten erfolgreich geladen');
@@ -76,10 +83,12 @@ $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 \define('CO_' . $moduleDirNameUpper . '_' . 'HIDE_SAMPLEDATA_BUTTONS', 'Schaltfläche Import verstecken');
 \define('CO_' . $moduleDirNameUpper . '_' . 'SHOW_SAMPLEDATA_BUTTONS', 'Schaltfläche Import anzeigen');
 \define('CO_' . $moduleDirNameUpper . '_' . 'CONFIRM', 'Bestätigen');
+
 //letter choice
 \define('CO_' . $moduleDirNameUpper . '_' . 'BROWSETOTOPIC', "<span style='font-weight: bold;'>Einträge alphabetisch anzeigen</span>");
 \define('CO_' . $moduleDirNameUpper . '_' . 'OTHER', 'Andere');
 \define('CO_' . $moduleDirNameUpper . '_' . 'ALL', 'Alle');
+
 // block defines
 \define('CO_' . $moduleDirNameUpper . '_' . 'ACCESSRIGHTS', 'Zugriffsberechtigungen');
 \define('CO_' . $moduleDirNameUpper . '_' . 'ACTION', 'Aktion');
@@ -96,21 +105,26 @@ $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 \define('CO_' . $moduleDirNameUpper . '_' . 'VISIBLE', 'Sichtbar');
 \define('CO_' . $moduleDirNameUpper . '_' . 'VISIBLEIN', 'Sichtbar in');
 \define('CO_' . $moduleDirNameUpper . '_' . 'WEIGHT', 'Reihung');
+
 \define('CO_' . $moduleDirNameUpper . '_' . 'PERMISSIONS', 'Berechtigungen');
 \define('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS', 'Blockverwaltung');
 \define('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS_DESC', 'Block- und Gruppenverwaltung');
+
 \define('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS_MANAGMENT', 'Management');
 \define('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS_ADDBLOCK', 'Neuen Block hinzufügen');
 \define('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS_EDITBLOCK', 'Block bearbeiten');
 \define('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS_CLONEBLOCK', 'Block klonen');
+
 //myblocksadmin
 \define('CO_' . $moduleDirNameUpper . '_' . 'AGDS', 'Administration Gruppen');
 \define('CO_' . $moduleDirNameUpper . '_' . 'BCACHETIME', 'Cache Time');
 \define('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS_ADMIN', 'Blockverwaltung');
+
 //Template Admin
 \define('CO_' . $moduleDirNameUpper . '_' . 'TPLSETS', 'Template Management');
 \define('CO_' . $moduleDirNameUpper . '_' . 'GENERATE', 'Generieren');
 \define('CO_' . $moduleDirNameUpper . '_' . 'FILENAME', 'Dateiname');
+
 //Menu
 \define('CO_' . $moduleDirNameUpper . '_' . 'ADMENU_MIGRATE', 'Migirieren');
 \define('CO_' . $moduleDirNameUpper . '_' . 'FOLDER_YES', 'Ordner "%s" existiert');
@@ -118,8 +132,10 @@ $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 \define('CO_' . $moduleDirNameUpper . '_' . 'SHOW_DEV_TOOLS', 'Zeige Schaltfläche Entwicklerwerkzeuge?');
 \define('CO_' . $moduleDirNameUpper . '_' . 'SHOW_DEV_TOOLS_DESC', 'Wenn ja dann wird das Tab "Migration" mit verschiedenen Entwicklertools im Adminbereich anzeigen.');
 \define('CO_' . $moduleDirNameUpper . '_' . 'ADMENU_FEEDBACK', 'Feedback');
+
 //Latest Version Check
 \define('CO_' . $moduleDirNameUpper . '_' . 'NEW_VERSION', 'Neue Version: ');
+
 //DirectoryChecker
 \define('CO_' . $moduleDirNameUpper . '_' . 'AVAILABLE', "<span style='color: green;'>Verfügbar</span>");
 \define('CO_' . $moduleDirNameUpper . '_' . 'NOTAVAILABLE', "<span style='color: red;'>Nicht verfügbar</span>");
@@ -130,6 +146,7 @@ $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 \define('CO_' . $moduleDirNameUpper . '_' . 'DIRNOTCREATED', 'Das Verzeichnis konnte nicht erstellt werden');
 \define('CO_' . $moduleDirNameUpper . '_' . 'PERMSET', 'Berechtigung wurde gesetzt');
 \define('CO_' . $moduleDirNameUpper . '_' . 'PERMNOTSET', 'Berechtigung konnte nicht gesetzt werden');
+
 //FileChecker
 //\define('CO_' . $moduleDirNameUpper . '_' . 'AVAILABLE', "<span style='color: green;'>Available</span>");
 //\define('CO_' . $moduleDirNameUpper . '_' . 'NOTAVAILABLE', "<span style='color: red;'>Not available</span>");
@@ -137,10 +154,13 @@ $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 //\define('CO_' . $moduleDirNameUpper . '_' . 'COPYTHEFILE', 'Copy it');
 //\define('CO_' . $moduleDirNameUpper . '_' . 'CREATETHEFILE', 'Create it');
 //\define('CO_' . $moduleDirNameUpper . '_' . 'SETMPERM', 'Set the permission');
+
 \define('CO_' . $moduleDirNameUpper . '_' . 'FILECOPIED', 'Datei wurde kopiert');
 \define('CO_' . $moduleDirNameUpper . '_' . 'FILENOTCOPIED', 'Datei konnte nicht kopiert werden');
+
 //\define('CO_' . $moduleDirNameUpper . '_' . 'PERMSET', 'The permission has been set');
 //\define('CO_' . $moduleDirNameUpper . '_' . 'PERMNOTSET', 'The permission cannot be set');
+
 //image config
 \define('CO_' . $moduleDirNameUpper . '_' . 'IMAGE_WIDTH', 'Breite Anzeige Bild');
 \define('CO_' . $moduleDirNameUpper . '_' . 'IMAGE_WIDTH_DSC', 'Definiere Breite Anzeige Bild');
@@ -150,9 +170,11 @@ $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 \define('CO_' . $moduleDirNameUpper . '_' . 'IMAGE_CONFIG_DSC', '');
 \define('CO_' . $moduleDirNameUpper . '_' . 'IMAGE_UPLOAD_PATH', 'Pfad Bilder-Upload');
 \define('CO_' . $moduleDirNameUpper . '_' . 'IMAGE_UPLOAD_PATH_DSC', 'Pfad zum Verzeichnis für hochgeladene Bildern');
+
 //Preferences
 \define('CO_' . $moduleDirNameUpper . '_' . 'TRUNCATE_LENGTH', 'Anzahl Zeichen für das verkürzen von langen Texten');
 \define('CO_' . $moduleDirNameUpper . '_' . 'TRUNCATE_LENGTH_DESC', 'Definiere die maximale Anzahl an Zeichen zum Kürzen von langen Texten');
+
 //Module Stats
 \define('CO_' . $moduleDirNameUpper . '_' . 'STATS_SUMMARY', 'Modul-Statistiken');
 \define('CO_' . $moduleDirNameUpper . '_' . 'TOTAL_CATEGORIES', 'Kategorien:');
