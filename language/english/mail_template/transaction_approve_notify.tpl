@@ -1,6 +1,6 @@
 Hello {X_UNAME},
 
-A new transaction "{ITEM_NAME}" is waiting for approval at {X_SITENAME}.
+A transaction "{ITEM_NAME}" is waiting for approval at {X_SITENAME}.
 
 You can view this transaction here:
 {ITEM_URL}

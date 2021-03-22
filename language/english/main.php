@@ -23,9 +23,9 @@
 require_once __DIR__ . '/admin.php';
 
 // ---------------- Main ----------------
-\define('_MA_WGSIMPLEACC_INDEX', 'Ovwerview');
+\define('_MA_WGSIMPLEACC_INDEX', 'Overview');
 \define('_MA_WGSIMPLEACC_TITLE', 'wgSimpleAcc');
-\define('_MA_WGSIMPLEACC_DESC', 'This module is for doing following...');
+\define('_MA_WGSIMPLEACC_DESC', 'The wgSimpleAcc is a XOOPS module to record an income / expense account for clubs or small businesses');
 \define('_MA_WGSIMPLEACC_INDEX_DESC', 'Welcome to the homepage of your new module wgSimpleAcc!');
 \define('_MA_WGSIMPLEACC_NO_PDF_LIBRARY', 'Libraries TCPDF not there yet, upload them in root/Frameworks');
 \define('_MA_WGSIMPLEACC_NO', 'No');

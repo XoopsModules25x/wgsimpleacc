@@ -7,7 +7,7 @@ You can view this comment here:
 
 ------------------------------------------------------------------
 
-You are receiving this message because you selected to be notified when a transaction is modified on our site.
+You are receiving this message because you selected to be notified when a new comment is published for a transaction on our site.
 
 If this is an error or you wish not to receive further such notifications, please update your subscriptions by visiting the link below:
 {X_UNSUBSCRIBE_URL}
