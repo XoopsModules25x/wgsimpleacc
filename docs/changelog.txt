@@ -9,6 +9,7 @@
  - prepared for template changer (goffy)
  - changed handling of no perm (goffy)
  - added theme for wgsimpleacc startmin (goffy)
+ - replaced index.html by index.php (goffy)
 
 ==============================================================
 1.21 [2021/02/03]
