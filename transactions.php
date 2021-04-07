@@ -341,13 +341,18 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
     case 'new':
-
-        $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/forms.js');
-
         // Check permissions
         if (!$permissionsHandler->getPermTransactionsSubmit()) {
             \redirect_header('transactions.php?op=list', 3, _NOPERM);
         }
+
+        $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/forms.js');
+        if ($helper->getConfig('use_clients')) {
+            $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/select-autocomplete/jquery-ui.min.js');
+            $GLOBALS['xoTheme']->addStylesheet(WGSIMPLEACC_URL . '/assets/select-autocomplete/jquery-ui.min.css');
+            $GLOBALS['xoTheme']->addStylesheet(WGSIMPLEACC_URL . '/assets/select-autocomplete/select-autocomplete.css');
+        }
+
         // Form Create
         $transactionsObj = $transactionsHandler->create();
         $form = $transactionsObj->getFormTransactions(false, false, $traType, $start, $limit);
@@ -408,6 +413,14 @@ switch ($op) {
         if ($approve && !$permissionsHandler->getPermTransactionsApprove()) {
             \redirect_header('transactions.php?op=list', 3, _NOPERM);
         }
+
+        $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/forms.js');
+        if ($helper->getConfig('use_clients')) {
+            $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/select-autocomplete/jquery-ui.min.js');
+            $GLOBALS['xoTheme']->addStylesheet(WGSIMPLEACC_URL . '/assets/select-autocomplete/jquery-ui.min.css');
+            $GLOBALS['xoTheme']->addStylesheet(WGSIMPLEACC_URL . '/assets/select-autocomplete/select-autocomplete.css');
+        }
+
         $transactionsObj = $transactionsHandler->get($traId);
         $traSubmitter = $transactionsObj->getVar('tra_submitter');
         $traStatus = $transactionsObj->getVar('tra_status');
