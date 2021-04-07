@@ -178,7 +178,7 @@ class Transactions extends \XoopsObject
             $crClients->setSort('cli_name');
             $crClients->setOrder('ASC');
             $traCliidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_CLIID, 'tra_cliid', $traClient);
-            $traCliidSelect->addOption(0, ' ');
+            $traCliidSelect->addOption('', '');
             $clientsAll = $clientsHandler->getAll($crClients);
             foreach ($clientsAll as $client) {
                 $traCliidSelect->addOption($client->getVar('cli_id'), strip_tags($client->getVar('cli_name')));
