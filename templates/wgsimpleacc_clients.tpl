@@ -11,6 +11,7 @@
 						<th><{$smarty.const._MA_WGSIMPLEACC_CLIENT_VAT}></th>
 						<th class="center"><{$smarty.const._MA_WGSIMPLEACC_CLIENT_CREDITOR}></th>
 						<th class="center"><{$smarty.const._MA_WGSIMPLEACC_CLIENT_DEBTOR}></th>
+						<th class="center"><{$smarty.const._MA_WGSIMPLEACC_CLIENT_ONLINE}></th>
 						<th></th>
 					</tr>
 				</thead>

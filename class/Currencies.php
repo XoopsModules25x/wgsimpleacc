@@ -97,7 +97,7 @@ class Currencies extends \XoopsObject
         $form->addElement(new \XoopsFormText(\_AM_WGSIMPLEACC_CURRENCY_NAME, 'cur_name', 50, 255, $this->getVar('cur_name')));
         // Form Radio Yes/No asPrimary
         $curPrimary = $this->isNew() ?: $this->getVar('cur_primary');
-        $form->addElement(new \XoopsFormRadioYN(\_MA_WGSIMPLEACC_CURRENCY_PRIMARY, 'cur_primary', $curPrimary));
+        $form->addElement(new \XoopsFormRadioYN(\_AM_WGSIMPLEACC_CURRENCY_PRIMARY, 'cur_primary', $curPrimary));
         // Form Radio Yes/No curOnline
         $curOnline = $this->isNew() ?: $this->getVar('cur_online');
         $form->addElement(new \XoopsFormRadioYN(\_AM_WGSIMPLEACC_CURRENCY_ONLINE, 'cur_online', $curOnline));

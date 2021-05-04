@@ -46,6 +46,7 @@ $traType         = Request::getInt('tra_type', 0);
 $allId           = Request::getInt('all_id', 0);
 $accId           = Request::getInt('acc_id', 0);
 $asId            = Request::getInt('as_id', 0);
+$cliId           = Request::getInt('cli_id', 0);
 $filterYear      = Request::getInt('filterYear', 0);
 $filterMonthFrom = Request::getInt('filterMonthFrom', 0);
 $filterYearFrom  = Request::getInt('filterYearFrom', 0);
@@ -107,7 +108,7 @@ switch ($op) {
             foreach (\array_keys($transactionsAll) as $i) {
                 $yearMax = date('Y', $transactionsAll[$i]->getVar('tra_date'));
             }
-            $formFilter = $transactionsHandler::getFormFilterTransactions($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId);
+            $formFilter = $transactionsHandler::getFormFilterTransactions($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, $cliId);
             $GLOBALS['xoopsTpl']->assign('formFilter', $formFilter->render());
         }
         $crTransactions = new \CriteriaCompo();
@@ -144,6 +145,9 @@ switch ($op) {
         }
         if ($accId > 0) {
             $crTransactions->add(new \Criteria('tra_accid', $accId));
+        }
+        if ($cliId > 0) {
+            $crTransactions->add(new \Criteria('tra_cliid', $cliId));
         }
         $transactionsCount = $transactionsHandler->getCount($crTransactions);
         $GLOBALS['xoopsTpl']->assign('transactionsCount', $transactionsCount);
@@ -512,7 +516,7 @@ switch ($op) {
             foreach (\array_keys($transactionsAll) as $i) {
                 $yearMax = date('Y', $transactionsAll[$i]->getVar('tra_date'));
             }
-            $formFilter = $transactionsHandler::getFormFilterTransactions($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId);
+            $formFilter = $transactionsHandler::getFormFilterTransactions($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, $cliId);
             $GLOBALS['xoopsTpl']->assign('formFilter', $formFilter->render());
         }
         $crTransactions = new \CriteriaCompo();

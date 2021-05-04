@@ -104,7 +104,7 @@
 }
 
 .wgsa-files-badge {
-	background-color:#ffc107;
+	background-color:#ffc107 !important;
 }
 
 .wgsa-output-sum td {

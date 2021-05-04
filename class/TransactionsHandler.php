@@ -134,10 +134,11 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
      * @param $yearMax
      * @param $asId
      * @param $accId
+     * @param $cliId
      * @param string $op
      * @return FormInline
      */
-    public static function getFormFilterTransactions($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, $op='list')
+    public static function getFormFilterTransactions($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, $cliId, $op='list')
     {
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $period_type = $helper->getConfig('balance_period');
@@ -245,6 +246,16 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
             }
         }
         $form->addElement($traAccidSelect);
+        if ($helper->getConfig('use_clients')){
+            //linebreak
+            $form->addElement(new \XoopsFormHidden('linebreak', ''));
+            // Form Table clients
+            $clientsHandler = $helper->getHandler('Clients');
+            $traCliidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_FILTERBY_CLIENT, 'cli_id', $cliId);
+            $traCliidSelect->addOption(Constants::FILTER_TYPEALL, \_MA_WGSIMPLEACC_SHOW_ALL);
+            $traCliidSelect->addOptionArray($clientsHandler->getList());
+            $form->addElement($traCliidSelect);
+        }
         if ('tra_output' === $op) {
             //linebreak
             $form->addElement(new \XoopsFormHidden('linebreak', ''));
@@ -253,6 +264,7 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
             $outputSelect->addOption('xlsx', 'xlsx');
             $form->addElement($outputSelect);
         }
+
         //linebreak
         $form->addElement(new \XoopsFormHidden('linebreak', ''));
         //button

@@ -268,6 +268,7 @@ CREATE TABLE `wgsimpleacc_clients` (
   `cli_vat`         VARCHAR(255)    NOT NULL DEFAULT '',
   `cli_creditor`    INT(1)          NOT NULL DEFAULT '0',
   `cli_debtor`      INT(1)          NOT NULL DEFAULT '0',
+  `cli_online`      INT(1)          NOT NULL DEFAULT '0',
   `cli_datecreated` INT(10)         NOT NULL DEFAULT '0',
   `cli_submitter`   INT(10)         NOT NULL DEFAULT '0',
   PRIMARY KEY (`cli_id`)

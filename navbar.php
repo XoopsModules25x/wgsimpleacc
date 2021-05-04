@@ -91,7 +91,7 @@ if ($permissionsHandler->getPermTransactionsView()) {
         $nav_items1[] = ['href' => 'transactions.php', 'icon' => '<i class="fa fa-files-o fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_TRANSACTIONS_LIST];
     }
 }
-if ($permissionsHandler->getPermClientsView()) {
+if ($permissionsHandler->getPermClientsView() && $helper->getConfig('use_clients')) {
     $nav_items2 = [];
     if ($permissionsHandler->getPermClientsSubmit()) {
         $nav_items2[] = ['href' => 'clients.php?op=list', 'icon' => '<i class="fa fa-list-ol fa-fw fa-lg"></i>','label' => \_MA_WGSIMPLEACC_CLIENTS_LIST, 'sub_items2' => []];

@@ -137,6 +137,8 @@ switch ($op) {
         $balancesCount = \count($balances);
         $GLOBALS['xoopsTpl']->assign('balancesCount', $balancesCount);
         $GLOBALS['xoopsTpl']->assign('balances', $balances);
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_BALANCES];
         break;
 
     case 'details':
@@ -178,7 +180,7 @@ switch ($op) {
         }
 
         // Breadcrumbs
-        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_BALANCES];
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_BALANCE_DETAILS];
         break;
 
     case 'save':

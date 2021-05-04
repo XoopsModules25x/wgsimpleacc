@@ -21,7 +21,7 @@
 				<{foreach item=file from=$files_list}>
 					<tr class='<{cycle values='odd, even'}>'>
 						<td class='center'><{$file.id}></td>
-						<td class='center'><{$file.traid}></td>
+						<td class='center'><{$file.tra_number}></td>
 						<td class='center'><{$file.name}></td>
 						<td class='center'><{$file.type}></td>
 						<td class='center'><{$file.desc_short}></td>

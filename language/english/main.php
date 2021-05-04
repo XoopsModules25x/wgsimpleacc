@@ -38,7 +38,8 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_FILTERBY_ASSET', 'Select asset');
 \define('_MA_WGSIMPLEACC_FILTERBY_ALLOC', 'Select allocation');
 \define('_MA_WGSIMPLEACC_FILTERBY_ACCOUNT', 'Select account');
-\define('_MA_WGSIMPLEACC_FILTERBY_PERIOD', 'Select Period');
+\define('_MA_WGSIMPLEACC_FILTERBY_PERIOD', 'Select period');
+\define('_MA_WGSIMPLEACC_FILTERBY_CLIENT', 'Select client');
 \define('_MA_WGSIMPLEACC_FILTER_PERIODFROM', 'From');
 \define('_MA_WGSIMPLEACC_FILTER_PERIODTO', 'To');
 \define('_MA_WGSIMPLEACC_FILTER_APPLY', 'Apply Filter');
@@ -385,6 +386,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_CLIENT_VAT', 'Vat number');
 \define('_MA_WGSIMPLEACC_CLIENT_CREDITOR', 'Creditor (vendor)');
 \define('_MA_WGSIMPLEACC_CLIENT_DEBTOR', 'Debtor');
+\define('_MA_WGSIMPLEACC_CLIENT_ONLINE', 'Online');
 // Statistics
 \define('_MA_WGSIMPLEACC_STATISTICS', 'Statistics');
 // Outputs
