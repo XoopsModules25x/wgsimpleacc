@@ -15,6 +15,7 @@
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_CLIENT_VAT}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_CLIENT_CREDITOR}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_CLIENT_DEBTOR}></th>
+				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_CLIENT_ONLINE}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_DATECREATED}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_SUBMITTER}></th>
 				<th class="center width5"><{$smarty.const._MA_WGSIMPLEACC_FORM_ACTION}></th>
@@ -34,6 +35,7 @@
 				<td class='center'><{$client.vat}></td>
 				<td class='center'><{$client.creditor}></td>
 				<td class='center'><{$client.debtor}></td>
+				<td class='center'><{$client.online}></td>
 				<td class='center'><{$client.datecreated}></td>
 				<td class='center'><{$client.submitter}></td>
 				<td class="center  width5">

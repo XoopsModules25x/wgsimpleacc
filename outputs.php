@@ -48,6 +48,7 @@ $traType = Request::getInt('tra_type', 0);
 $allId   = Request::getInt('all_id', 0);
 $accId   = Request::getInt('acc_id', 0);
 $asId    = Request::getInt('as_id', 0);
+$cliId   = Request::getInt('cli_id', 0);
 $outType = Request::getString('output_type', 'none');
 
 $period_type = $helper->getConfig('balance_period');
@@ -157,7 +158,7 @@ switch ($op) {
         foreach (\array_keys($transactionsAll) as $i) {
             $yearMax = date('Y', $transactionsAll[$i]->getVar('tra_date'));
         }
-        $formFilter = $transactionsHandler::getFormFilterTransactions($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, 'tra_output');
+        $formFilter = $transactionsHandler::getFormFilterTransactions($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, $cliId, 'tra_output');
         $GLOBALS['xoopsTpl']->assign('formFilter', $formFilter->render());
 
         // Breadcrumbs

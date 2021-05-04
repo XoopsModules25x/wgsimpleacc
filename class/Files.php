@@ -97,7 +97,12 @@ class Files extends \XoopsObject
         $transactionsHandler = $helper->getHandler('Transactions');
         $filTraid = $this->isNew() ? $traId : $this->getVar('fil_traid');
         $filTraidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_FILE_TRAID, 'fil_traid', $filTraid);
-        $filTraidSelect->addOptionArray($transactionsHandler->getList());
+        $transactionsAll = $transactionsHandler->getAll();
+        foreach (\array_keys($transactionsAll) as $i) {
+            $yearMin = date('Y', $transactionsAll[$i]->getVar('tra_date'));
+            $year_nb = $transactionsAll[$i]->getVar('tra_year') . '/' . \substr('00000' . $transactionsAll[$i]->getVar('tra_nb'), -5);
+            $filTraidSelect->addOption($transactionsAll[$i]->getVar('tra_id'), $year_nb);
+        }
         $form->addElement($filTraidSelect);
 
         // Form File: Upload filName
@@ -277,12 +282,12 @@ class Files extends \XoopsObject
         $helper  = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $utility = new \XoopsModules\Wgsimpleacc\Utility();
         $ret = $this->getValues($keys, $format, $maxDepth);
-        $ret['id']          = $this->getVar('fil_id');
+        $ret['id']           = $this->getVar('fil_id');
         $transactionsHandler = $helper->getHandler('Transactions');
-        $transactionsObj = $transactionsHandler->get($this->getVar('fil_traid'));
-        $ret['traid']       = $transactionsObj->getVar('tra_desc');
-        $ret['name']        = $this->getVar('fil_name');
-        $ret['type']        = $this->getVar('fil_type');
+        $transactionsObj     = $transactionsHandler->get($this->getVar('fil_traid'));
+        $ret['tra_number']   = $transactionsObj->getVar('tra_year') . '/' . \substr('00000' . $transactionsObj->getVar('tra_nb'), -5);;
+        $ret['name']         = $this->getVar('fil_name');
+        $ret['type']         = $this->getVar('fil_type');
         switch ($ret['type']) {
             case 'image/gif':
             case 'image/jpeg':
@@ -298,7 +303,7 @@ class Files extends \XoopsObject
                 break;
         }
         $ret['desc']        = $this->getVar('fil_desc', 'e');
-        $editorMaxchar = $helper->getConfig('editor_maxchar');
+        $editorMaxchar      = $helper->getConfig('editor_maxchar');
         $ret['desc_short']  = $utility::truncateHtml($ret['desc'], $editorMaxchar);
         $ret['ip']          = $this->getVar('fil_ip');
         $ret['datecreated'] = \formatTimestamp($this->getVar('fil_datecreated'), 's');

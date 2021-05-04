@@ -170,6 +170,7 @@ class Transactions extends \XoopsObject
             $traClient = $this->isNew() ? 0 : $this->getVar('tra_cliid');
             $clientsHandler = $helper->getHandler('Clients');
             $crClients = new \CriteriaCompo();
+            $crClients->add(new \Criteria('cli_online', 1));
             if (Constants::CLASS_INCOME == $type || Constants::CLASS_INCOME == $traClass || Constants::CLASS_BOTH == $type) {
                 $crClients->add(new \Criteria('cli_debtor', 1));
             } else {

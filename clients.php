@@ -81,6 +81,11 @@ switch ($op) {
             foreach (\array_keys($clientsAll) as $i) {
                 $clients[$i] = $clientsAll[$i]->getValuesClients();
                 $clients[$i]['editable'] = $permissionsHandler->getPermClientsEdit($clients[$i]['cli_submitter']);
+                $crTransactions = new \CriteriaCompo();
+                $crTransactions->add(new \Criteria('tra_cliid', $clients[$i]['cli_id']));
+                $transactionsCount = $transactionsHandler->getCount($crTransactions);
+                $clients[$i]['deletable'] = (0 == $transactionsCount);
+                unset($crTransactions);
                 $cliName = $clientsAll[$i]->getVar('cli_name');
                 $keywords[$i] = $cliName;
             }
@@ -100,6 +105,7 @@ switch ($op) {
                 $GLOBALS['xoopsTpl']->assign('xoops_pagetitle', \strip_tags($cliName . ' - ' . $GLOBALS['xoopsModule']->getVar('name')));
             }
         }
+        unset($crClients);
         break;
     case 'save':
         // Security Check
@@ -124,6 +130,7 @@ switch ($op) {
         $clientsObj->setVar('cli_vat', Request::getString('cli_vat', ''));
         $clientsObj->setVar('cli_creditor', Request::getInt('cli_creditor', 0));
         $clientsObj->setVar('cli_debtor', Request::getInt('cli_debtor', 0));
+        $clientsObj->setVar('cli_online', Request::getInt('cli_online', 0));
         $clientDatecreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('cli_datecreated'));
         $clientsObj->setVar('cli_datecreated', $clientDatecreatedObj->getTimestamp());
         $clientsObj->setVar('cli_submitter', Request::getInt('cli_submitter', 0));

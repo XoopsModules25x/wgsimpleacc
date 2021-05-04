@@ -39,6 +39,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_FILTERBY_ALLOC', 'Zuordnung auswählen');
 \define('_MA_WGSIMPLEACC_FILTERBY_ACCOUNT', 'Konto auswählen');
 \define('_MA_WGSIMPLEACC_FILTERBY_PERIOD', 'Zeitraum auswählen');
+\define('_MA_WGSIMPLEACC_FILTERBY_CLIENT', 'Klient auswählen');
 \define('_MA_WGSIMPLEACC_FILTER_PERIODFROM', 'Von');
 \define('_MA_WGSIMPLEACC_FILTER_PERIODTO', 'Bis');
 \define('_MA_WGSIMPLEACC_FILTER_APPLY', 'Filter anwenden');
@@ -385,6 +386,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_CLIENT_VAT', 'UID');
 \define('_MA_WGSIMPLEACC_CLIENT_CREDITOR', 'Kreditor (Verkäufer)');
 \define('_MA_WGSIMPLEACC_CLIENT_DEBTOR', 'Debitor (Käufer)');
+\define('_MA_WGSIMPLEACC_CLIENT_ONLINE', 'Online');
 // Statistics
 \define('_MA_WGSIMPLEACC_STATISTICS', 'Statistiken');
 // Outputs

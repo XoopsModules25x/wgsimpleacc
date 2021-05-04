@@ -52,6 +52,7 @@ class Clients extends \XoopsObject
         $this->initVar('cli_vat', \XOBJ_DTYPE_TXTBOX);
         $this->initVar('cli_creditor', \XOBJ_DTYPE_INT);
         $this->initVar('cli_debtor', \XOBJ_DTYPE_INT);
+        $this->initVar('cli_online', \XOBJ_DTYPE_INT);
         $this->initVar('cli_datecreated', \XOBJ_DTYPE_INT);
         $this->initVar('cli_submitter', \XOBJ_DTYPE_INT);
     }
@@ -145,6 +146,9 @@ class Clients extends \XoopsObject
         // Form Radio Yes/No cliDebtor
         $cliDebtor = $this->isNew() ?: $this->getVar('cli_debtor');
         $form->addElement(new \XoopsFormRadioYN(\_MA_WGSIMPLEACC_CLIENT_DEBTOR, 'cli_debtor', $cliDebtor));
+        // Form Radio Yes/No cliOnline
+        $cliOnline = $this->isNew() ?: $this->getVar('cli_online');
+        $form->addElement(new \XoopsFormRadioYN(\_MA_WGSIMPLEACC_CLIENT_ONLINE, 'cli_online', $cliOnline));
         // Form Text Date Select cliDatecreated
         $cliDatecreated = $this->isNew() ?: $this->getVar('cli_datecreated');
         $form->addElement(new \XoopsFormTextDateSelect(\_MA_WGSIMPLEACC_DATECREATED, 'cli_datecreated', '', $cliDatecreated));
@@ -205,6 +209,7 @@ class Clients extends \XoopsObject
         $ret['vat']           = $this->getVar('cli_vat');
         $ret['creditor']      = (int)$this->getVar('cli_creditor') > 0 ? _YES : _NO;
         $ret['debtor']        = (int)$this->getVar('cli_debtor') > 0 ? _YES : _NO;
+        $ret['online']        = (int)$this->getVar('cli_online') > 0 ? _YES : _NO;
         $ret['datecreated']   = \formatTimestamp($this->getVar('cli_datecreated'), 's');
         $ret['submitter']     = \XoopsUser::getUnameFromId($this->getVar('cli_submitter'));
 

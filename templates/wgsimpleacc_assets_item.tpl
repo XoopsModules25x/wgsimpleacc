@@ -18,15 +18,10 @@
 		</td>
 	<{/if}>
 	<td>
-		<{if $showItem}>
-			<a class='btn btn-success right' href='assets.php?op=list&amp;#asId_<{$asset.as_id}>' title='<{$smarty.const._MA_WGSIMPLEACC_ASSETS_LIST}>'><{$smarty.const._MA_WGSIMPLEACC_ASSETS_LIST}></a>
-		<{else}>
-			<a class='btn btn-success right' href='assets.php?op=show&amp;as_id=<{$asset.as_id}>' title='<{$smarty.const._MA_WGSIMPLEACC_DETAILS}>'><{$smarty.const._MA_WGSIMPLEACC_DETAILS}></a>
-		<{/if}>
 		<{if $permSubmit}>
 			<a class='btn btn-primary right' href='assets.php?op=edit&amp;as_id=<{$asset.as_id}>' title='<{$smarty.const._EDIT}>'><{$smarty.const._EDIT}></a>
 			<a class='btn btn-danger right' href='assets.php?op=delete&amp;as_id=<{$asset.as_id}>' title='<{$smarty.const._DELETE}>'><{$smarty.const._DELETE}></a>
-			<a class="btn btn-sm btn-default wgsa-btn-list" href="transactions.php?op=list&displayfilter=1&amp;as_id=<{$asset.as_id}>" title='<{$smarty.const._MA_WGSIMPLEACC_TRANSACTIONS}>'><{$smarty.const._MA_WGSIMPLEACC_TRANSACTIONS}></a>
 		<{/if}>
+		<a class="btn btn-default wgsa-btn-list" href="transactions.php?op=list&displayfilter=1&amp;as_id=<{$asset.as_id}>" title='<{$smarty.const._MA_WGSIMPLEACC_TRANSACTIONS}>'><{$smarty.const._MA_WGSIMPLEACC_TRANSACTIONS}></a>
 	</td>
 </tr>
