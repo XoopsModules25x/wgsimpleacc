@@ -51,8 +51,8 @@
 <{if $template_sub|default:''}>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-4 col-lg-2 col-xl-2"><{include file='db:wgsimpleacc_navbar.tpl'}></div>
-            <div class="col-8 col-lg-10 col-xl-10">
+            <div class="col-4 col-lg-2 col-xl-2 wgsa-mainnav"><{include file='db:wgsimpleacc_navbar.tpl'}></div>
+            <div class="col-8 col-lg-10 col-xl-10 wgsa-maincontent">
                 <{include file=$template_sub}>
                 <{if $error|default:''}>
                     <div class="errorMsg"><strong><{$error}></strong></div>

@@ -191,6 +191,56 @@ function wgsimpleacc_search($queryarray, $andor, $limit, $offset, $userid)
     unset($crUser);
     unset($crSearch);
 
+    // search in table clients
+    // search keywords
+    $elementCount = 0;
+    $clientsHandler = $helper->getHandler('Clients');
+    if (\is_array($queryarray)) {
+        $elementCount = \count($queryarray);
+    }
+    if ($elementCount > 0) {
+        $crKeywords = new \CriteriaCompo();
+        for ($i = 0; $i  <  $elementCount; $i++) {
+            $crKeyword = new \CriteriaCompo();
+            $crKeyword->add(new \Criteria('cli_name', '%' . $queryarray[$i] . '%', 'LIKE'), 'OR');
+            $crKeywords->add($crKeyword, $andor);
+            unset($crKeyword);
+        }
+    }
+    // search user(s)
+    if ($userid && \is_array($userid)) {
+        $userid = array_map('intval', $userid);
+        $crUser = new \CriteriaCompo();
+        $crUser->add(new \Criteria('cli_submitter', '(' . \implode(',', $userid) . ')', 'IN'), 'OR');
+    } elseif (is_numeric($userid) && $userid > 0) {
+        $crUser = new \CriteriaCompo();
+        $crUser->add(new \Criteria('cli_submitter', $userid), 'OR');
+    }
+    $crSearch = new \CriteriaCompo();
+    if (isset($crKeywords)) {
+        $crSearch->add($crKeywords, 'AND');
+    }
+    if (isset($crUser)) {
+        $crSearch->add($crUser, 'AND');
+    }
+    $crSearch->setStart($offset);
+    $crSearch->setLimit($limit);
+    $crSearch->setSort('cli_datecreated');
+    $crSearch->setOrder('DESC');
+    $clientsAll = $clientsHandler->getAll($crSearch);
+    foreach (\array_keys($clientsAll) as $i) {
+        $ret[] = [
+            'image'  => 'assets/icons/16/clients.png',
+            'link'   => 'clients.php?op=show&amp;cli_id=' . $clientsAll[$i]->getVar('cli_id'),
+            'title'  => $clientsAll[$i]->getVar('cli_name'),
+            'time'   => $clientsAll[$i]->getVar('cli_datecreated')
+        ];
+    }
+    unset($crKeywords);
+    unset($crKeyword);
+    unset($crUser);
+    unset($crSearch);
+
     return $ret;
 
 }

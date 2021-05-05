@@ -4,6 +4,7 @@
  - added filter clients (goffy)
  - various updates/code cleaning (mamba)
  - fixed bug undefined constant (mamba/goffy)
+ - added second filter clients  (goffy)
 
 ==============================================================
 1.22 [2021/02/28]

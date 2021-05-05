@@ -33,13 +33,10 @@
 	<{/if}>
 	<{if $useFiles|default:''}>
 		<td>
-			<{if $transaction.nbfiles > 0}>
-				<span class="badge wgsa-files-badge"><{$transaction.nbfiles}></span>
-			<{/if}>
 			<{if $permSubmit && $transaction.editable}>
 				<a class='btn btn-default btn-sm right' href='files.php?op=list&amp;fil_traid=<{$transaction.tra_id}><{$traOp}>' title='<{$smarty.const._MA_WGSIMPLEACC_FILE_ADD}>' role='button'>
 					<i class="fa fa-plus fa-fw"></i>
-					<{if $transaction.nbfiles > 0}><i class="fa fa-search fa-fw"></i><{/if}>
+					<{if $transaction.nbfiles > 0}><span class="badge wgsa-files-badge"><{$transaction.nbfiles}></span><{/if}>
 				</a>
 			<{/if}>
 		</td>

@@ -368,12 +368,15 @@ require_once __DIR__ . '/admin.php';
 // Client
 \define('_MA_WGSIMPLEACC_CLIENTS', 'Clients');
 \define('_MA_WGSIMPLEACC_CLIENTS_LIST', 'List of Clients');
+\define('_MA_WGSIMPLEACC_CLIENTS_FILTERED', 'Clients (filtered)');
+\define('_MA_WGSIMPLEACC_CLIENTS_FILTEREDNON', 'No clients found for this criteria');
 \define('_MA_WGSIMPLEACC_CLIENT_SUBMIT', 'Send Client');
 \define('_MA_WGSIMPLEACC_CLIENTS_SHOWALL', 'Show all Clients');
 \define('_MA_WGSIMPLEACC_CLIENTS_NOTFOUND', " didn't match any client");
 // Client add/edit
 \define('_MA_WGSIMPLEACC_CLIENT_ADD', 'Add Client');
 \define('_MA_WGSIMPLEACC_CLIENT_EDIT', 'Edit Client');
+\define('_MA_WGSIMPLEACC_CLIENT_DETAILS', 'Details for client');
 // Elements of Client
 \define('_MA_WGSIMPLEACC_CLIENT_ID', 'Id');
 \define('_MA_WGSIMPLEACC_CLIENT_NAME', 'Name');

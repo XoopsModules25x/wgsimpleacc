@@ -43,6 +43,7 @@
         <{/if}>
     </td>
     <td class="wgsa-client-td center">
+        <a class='btn btn-success right' href='clients.php?op=show&amp;cli_id=<{$client.cli_id}><{$cliOp|default:''}>' title='<{$smarty.const._MA_WGSIMPLEACC_DETAILS}>'><i class="fa fa-search fa-fw"></i></a>
         <{if $permSubmit && $client.editable}>
             <a class='btn btn-primary right' href='clients.php?op=edit&amp;cli_id=<{$client.cli_id}><{$cliOp|default:''}>' title='<{$smarty.const._EDIT}>'><i class="fa fa-edit fa-fw"></i></a>
             <{if $client.deletable}>
