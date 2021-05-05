@@ -286,7 +286,7 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
      * @param string $type
      * @return bool
      */
-    public static function saveHistoryTransactions($traId, $type = "update")
+    public static function saveHistoryTransactions($traId, $type = 'update')
     {
         global $xoopsUser;
         $uid = \is_object($xoopsUser) ? $xoopsUser->uid() : 0;
@@ -306,7 +306,7 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
             $select .= ', ' . $var;
         }
         $insert .= ') ';
-        $GLOBALS['xoopsDB']->queryF($insert . $select . $from . $where) or die ("MySQL-Error: " . mysqli_error());
+        $GLOBALS['xoopsDB']->queryF($insert . $select . $from . $where) or die ('MySQL-Error: ' . mysqli_error());
 
         return true;
     }

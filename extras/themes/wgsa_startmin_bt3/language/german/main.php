@@ -39,4 +39,4 @@ define('THEME_LOGIN', 'Ihr Username');
 define('THEME_PASS', 'Ihr Passwort');
 
 //Block User
-define("THEME_USER_WELCOME", "Willkommen");
+define('THEME_USER_WELCOME', 'Willkommen');

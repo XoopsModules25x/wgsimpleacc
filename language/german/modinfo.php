@@ -131,7 +131,7 @@ require_once 'common.php';
 \define('_MI_WGSIMPLEACC_OTPL_SENDER', 'Standardabsender für Ausgabe');
 \define('_MI_WGSIMPLEACC_OTPL_SENDER_DESC', 'Absender, der bei Ausgabevorlagen standardmäßig verwendet werden soll');
 \define('_MI_WGSIMPLEACC_SHOWBCRUMBS', 'Brotkrumen-Navigation (breadcrumbs) anzeigen');
-\define('_MI_WGSIMPLEACC_SHOWBCRUMBS_DESC', "Eine Brotkrumen-Navigation zeigt den aktuellen Seitenstand innerhalb der Websitestruktur");
+\define('_MI_WGSIMPLEACC_SHOWBCRUMBS_DESC', 'Eine Brotkrumen-Navigation zeigt den aktuellen Seitenstand innerhalb der Websitestruktur');
 \define('_MI_WGSIMPLEACC_MNAMEBCRUMBS', 'Modulname in Breadcrumbs');
 \define('_MI_WGSIMPLEACC_MNAMEBCRUMBS_DESC', 'Sie können hier den Modulname definieren, der in der Brotkrumen-Navigation verwendet werden soll. Wenn kein Name angezeigt werden soll dann bitte leer lassen.');
 \define('_MI_WGSIMPLEACC_SHOWCOPYRIGHT', 'Copyright anzeigen');
