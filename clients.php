@@ -38,10 +38,11 @@ if (!$permissionsHandler->getPermClientsView()) {
     \redirect_header('index.php', 0, '');
 }
 
-$op    = Request::getCmd('op', 'list');
-$start = Request::getInt('start', 0);
-$limit = Request::getInt('limit', $helper->getConfig('userpager'));
-$cliId = Request::getInt('cli_id', 0);
+$op      = Request::getCmd('op', 'list');
+$start   = Request::getInt('start', 0);
+$limit   = Request::getInt('limit', $helper->getConfig('userpager'));
+$cliId   = Request::getInt('cli_id', 0);
+$cliName = Request::getString('cli_name', '');
 
 $GLOBALS['xoopsTpl']->assign('start', $start);
 $GLOBALS['xoopsTpl']->assign('limit', $limit);
@@ -59,14 +60,21 @@ switch ($op) {
     case 'show':
     case 'list':
     default:
-        $GLOBALS['xoopsTpl']->assign('showList', true);
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_CLIENTS];
 
+        $showFiltered= false;
         $crClients = new \CriteriaCompo();
         if ($cliId > 0) {
             $crClients->add(new \Criteria('cli_id', $cliId));
+            $showFiltered = true;
         }
+        if ('' !== $cliName) {
+            $crClients->add(new \Criteria('cli_name', '%' . $cliName . '%', 'LIKE'));
+            $showFiltered = true;
+        }
+        $GLOBALS['xoopsTpl']->assign('showFiltered', $showFiltered);
+        $GLOBALS['xoopsTpl']->assign('showList', 'show' !== $op);
         $clientsCount = $clientsHandler->getCount($crClients);
         $GLOBALS['xoopsTpl']->assign('clientsCount', $clientsCount);
         $crClients->setStart($start);
@@ -76,7 +84,7 @@ switch ($op) {
         $clientsAll = $clientsHandler->getAll($crClients);
         if ($clientsCount > 0) {
             $clients = [];
-            $cliName = '';
+            $clientName = '';
             // Get All Clients
             foreach (\array_keys($clientsAll) as $i) {
                 $clients[$i] = $clientsAll[$i]->getValuesClients();
@@ -86,8 +94,8 @@ switch ($op) {
                 $transactionsCount = $transactionsHandler->getCount($crTransactions);
                 $clients[$i]['deletable'] = (0 == $transactionsCount);
                 unset($crTransactions);
-                $cliName = $clientsAll[$i]->getVar('cli_name');
-                $keywords[$i] = $cliName;
+                $clientName = $clientsAll[$i]->getVar('cli_name');
+                $keywords[$i] = $clientName;
             }
             $GLOBALS['xoopsTpl']->assign('clients', $clients);
             unset($clients);
@@ -101,11 +109,13 @@ switch ($op) {
             $GLOBALS['xoopsTpl']->assign('panel_type', $helper->getConfig('panel_type'));
             $GLOBALS['xoopsTpl']->assign('divideby', $helper->getConfig('divideby'));
             $GLOBALS['xoopsTpl']->assign('numb_col', $helper->getConfig('numb_col'));
-            if ('show' == $op && '' != $cliName) {
-                $GLOBALS['xoopsTpl']->assign('xoops_pagetitle', \strip_tags($cliName . ' - ' . $GLOBALS['xoopsModule']->getVar('name')));
+            if ('show' == $op && '' != $clientName) {
+                $GLOBALS['xoopsTpl']->assign('xoops_pagetitle', \strip_tags($clientName . ' - ' . $GLOBALS['xoopsModule']->getVar('name')));
             }
         }
         unset($crClients);
+        $formFilter = $clientsHandler->getFormFilterClients($cliName);
+        $GLOBALS['xoopsTpl']->assign('formFilter', $formFilter->renderSearch());
         break;
     case 'save':
         // Security Check

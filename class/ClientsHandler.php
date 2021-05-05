@@ -28,7 +28,6 @@ namespace XoopsModules\Wgsimpleacc;
 
 use XoopsModules\Wgsimpleacc;
 
-
 /**
  * Class Object Handler Clients
  */
@@ -154,5 +153,26 @@ class ClientsHandler extends \XoopsPersistableObjectHandler
         }
         $fullAddress = $line1 . $line2;
         return $fullAddress;
+    }
+
+    /**
+     * @public function to get form for filter clients
+     * @param string $cliName
+     * @return \XoopsSimpleForm
+     */
+    public static function getFormFilterClients($cliName = '')
+    {
+        $action = $_SERVER['REQUEST_URI'];
+
+        // Get Theme Form
+        \xoops_load('XoopsFormLoader');
+        $form = new \XoopsModules\Wgsimpleacc\FormInline('', 'formFilter', $action, 'post', true);
+        $form->setExtra('enctype="multipart/form-data"');
+        $nameTray = new \XoopsFormElementTray('', '');
+        $nameTray->addElement(new \XoopsFormText('', 'cli_name', 30, 100, $cliName));
+        $nameTray->addElement(new \XoopsFormLabel('', '<button class="btn btn-primary" type="submit"><i class="fa fa-search fa-fw"></i></button>'));
+        $form->addElement($nameTray);
+        $form->addElement(new \XoopsFormHidden('op', 'show'));
+        return $form;
     }
 }
