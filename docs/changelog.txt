@@ -2,6 +2,8 @@
 1.22 RC3 [2021/05/01]
 ==============================================================
  - added filter clients (goffy)
+ - various updates/code cleaning (mamba)
+ - fixed bug undefined constant (mamba/goffy)
 
 ==============================================================
 1.22 [2021/02/28]

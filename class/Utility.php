@@ -197,7 +197,7 @@ class Utility
             //linebreak
             $form->addElement(new \XoopsFormHidden('linebreak', ''));
             //select from/to
-            $selectFromToTray = new \XoopsFormElementTray(\_MA_WGSIMPLEACC_FILTER_PERIOD, '&nbsp;');
+            $selectFromToTray = new \XoopsFormElementTray(\_MA_WGSIMPLEACC_FILTERBY_PERIOD, '&nbsp;');
             //select from
             if (0 == $filterMonthFrom) {
                 $filterMonthFrom = $helper->getConfig('balance_period_from');
