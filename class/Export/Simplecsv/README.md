@@ -57,11 +57,12 @@ print_r( $csv );
 
 ```
 ### Export
+
 ```php
-$items = array(
-	array('ISBN', 'title', 'author'),
-	array('618260307','The Hobbit','J. R. R. Tolkien')
-);
+$items = [
+	['ISBN', 'title', 'author'],
+	['618260307','The Hobbit','J. R. R. Tolkien']
+];
 $csv = SimpleCSV::export( $items );
 echo '<pre>' . $csv . '</pre>';
 /*
