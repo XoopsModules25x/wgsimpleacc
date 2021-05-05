@@ -22,8 +22,8 @@
             </label>
         </div>
 
-        <input type="hidden" name="op" value="login"/>
-        <input type="hidden" name="xoops_redirect" value="<{$redirect_page|default:''}>"/>
+        <input type="hidden" name="op" value="login">
+        <input type="hidden" name="xoops_redirect" value="<{$redirect_page|default:''}>">
         <button type="submit" class="btn btn-default"><{$lang_login}></button>
     </form>
     <br>
@@ -42,8 +42,8 @@
             <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
             <input class="form-control" type="text" name="email" id="profile-lostpass">
         </div>
-        <input type="hidden" name="op" value="mailpasswd"/>
-        <input type="hidden" name="t" value="<{$mailpasswd_token}>"/>
+        <input type="hidden" name="op" value="mailpasswd">
+        <input type="hidden" name="t" value="<{$mailpasswd_token}>">
         <button type="submit" class="btn btn-default"><{$lang_sendpassword}></button>
     </form>
     </div>

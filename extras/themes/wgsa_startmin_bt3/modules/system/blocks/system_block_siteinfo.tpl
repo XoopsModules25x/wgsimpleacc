@@ -11,7 +11,7 @@
             <{foreach item=user from=$group.users}>
                 <tr>
                     <td class="even txtcenter alignmiddle">
-                        <img style="width:48px;" src="<{$user.avatar}>" alt="<{$user.name}>"/><br>
+                        <img style="width:48px;" src="<{$user.avatar}>" alt="<{$user.name}>"><br>
                         <a href="<{$xoops_url}>/userinfo.php?uid=<{$user.id}>" title="<{$user.name}>"><{$user.name}></a>
                     </td>
                     <td class="odd width20 txtright alignmiddle">
@@ -31,5 +31,5 @@
 <br>
 
 <div>
-    <img src="<{$block.logourl}>" alt=""/><br><{$block.recommendlink}>
+    <img src="<{$block.logourl}>" alt=""><br><{$block.recommendlink}>
 </div>

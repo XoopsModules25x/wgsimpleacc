@@ -49,8 +49,8 @@
 				<td class='center'><{$account.datecreated}></td>
 				<td class='center'><{$account.submitter}></td>
 				<td class="center  width5">
-					<a href="accounts.php?op=edit&amp;acc_id=<{$account.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="<{$smarty.const._EDIT}> accounts" /></a>
-					<a href="accounts.php?op=delete&amp;acc_id=<{$account.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> accounts" /></a>
+					<a href="accounts.php?op=edit&amp;acc_id=<{$account.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="<{$smarty.const._EDIT}> accounts"></a>
+					<a href="accounts.php?op=delete&amp;acc_id=<{$account.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> accounts"></a>
 				</td>
 			</tr>
 			<{/foreach}>

@@ -3,7 +3,7 @@
 <{if $old_avatar}>
     <div class="pad10 center">
         <h4 class="bold red"><{$smarty.const._US_OLDDELETED}></h4>
-        <img src="<{$old_avatar}>" alt="" />
+        <img src="<{$old_avatar}>" alt="">
     </div>
 <{/if}>
 

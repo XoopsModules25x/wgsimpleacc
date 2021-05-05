@@ -25,8 +25,8 @@
 			</label>
 		</div>
 
-		<input type="hidden" name="op" value="login"/>
-		<input type="hidden" name="xoops_redirect" value="<{$redirect_page|default:''}>"/>
+		<input type="hidden" name="op" value="login">
+		<input type="hidden" name="xoops_redirect" value="<{$redirect_page|default:''}>">
 		<button type="submit" class="btn btn-secondary"><{$lang_login}></button>
 	</form>
 	<br>
@@ -44,8 +44,8 @@
 				</div>
 				<input class="form-control" type="text" name="email" id="profile-lostpass" placeholder="<{$smarty.const.THEME_EMAIL}>" aria-label="<{$smarty.const.THEME_EMAIL}>" aria-describedby="mail-addon1">
 			</div>
-			<input type="hidden" name="op" value="mailpasswd"/>
-			<input type="hidden" name="t"  value="<{$mailpasswd_token}>"/>
+			<input type="hidden" name="op" value="mailpasswd">
+			<input type="hidden" name="t"  value="<{$mailpasswd_token}>">
 			<button type="submit" class="btn btn-secondary"><{$lang_sendpassword}></button>
 		</div>
 	</form>

@@ -5,9 +5,9 @@
 	<td class="center"><{$template.accid}></td>
 	<td class="center">
 		<{if $template.otpl_online|default:0 == 1}>
-	<img src="<{$wgsimpleacc_icons_url_32}>/1.png" alt="<{$template.online}>" />
+	<img src="<{$wgsimpleacc_icons_url_32}>/1.png" alt="<{$template.online}>">
 		<{else}>
-	<img src="<{$wgsimpleacc_icons_url_32}>/0.png" alt="<{$template.online}>" />
+	<img src="<{$wgsimpleacc_icons_url_32}>/0.png" alt="<{$template.online}>">
 		<{/if}>
 	</td>
 	<td class="center">

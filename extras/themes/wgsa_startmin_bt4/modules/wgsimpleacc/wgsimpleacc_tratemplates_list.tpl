@@ -12,9 +12,9 @@
 	<td><{$template.amountout}></td>
 	<td class="center">
 		<{if $template.ttpl_online|default:0 == 1}>
-			<img src="<{$wgsimpleacc_icons_url_32}>/1.png" alt="<{$template.online}>" />
+			<img src="<{$wgsimpleacc_icons_url_32}>/1.png" alt="<{$template.online}>">
 		<{else}>
-			<img src="<{$wgsimpleacc_icons_url_32}>/0.png" alt="<{$template.online}>" />
+			<img src="<{$wgsimpleacc_icons_url_32}>/0.png" alt="<{$template.online}>">
 		<{/if}>
 	</td>
 	<td class="center">

@@ -27,8 +27,8 @@
 				<td class='center'><{$tax.datecreated}></td>
 				<td class='center'><{$tax.submitter}></td>
 				<td class="center  width5">
-					<a href="taxes.php?op=edit&amp;tax_id=<{$tax.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="<{$smarty.const._EDIT}> taxes" /></a>
-					<a href="taxes.php?op=delete&amp;tax_id=<{$tax.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> taxes" /></a>
+					<a href="taxes.php?op=edit&amp;tax_id=<{$tax.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="<{$smarty.const._EDIT}> taxes"></a>
+					<a href="taxes.php?op=delete&amp;tax_id=<{$tax.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> taxes"></a>
 				</td>
 			</tr>
 			<{/foreach}>

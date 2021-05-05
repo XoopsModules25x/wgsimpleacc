@@ -37,8 +37,8 @@
 				<td class='center'><{$client.datecreated}></td>
 				<td class='center'><{$client.submitter}></td>
 				<td class="center  width5">
-					<a href="clients.php?op=edit&amp;cli_id=<{$client.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="<{$smarty.const._EDIT}> clients" /></a>
-					<a href="clients.php?op=delete&amp;cli_id=<{$client.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> clients" /></a>
+					<a href="clients.php?op=edit&amp;cli_id=<{$client.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="<{$smarty.const._EDIT}> clients"></a>
+					<a href="clients.php?op=delete&amp;cli_id=<{$client.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> clients"></a>
 				</td>
 			</tr>
 			<{/foreach}>
