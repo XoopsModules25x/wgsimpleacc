@@ -37,8 +37,8 @@
 						<td class='center'><{$template.datecreated}></td>
 						<td class='center'><{$template.submitter}></td>
 						<td class="center  width5">
-							<a href="tratemplates.php?op=edit&amp;ttpl_id=<{$template.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="<{$smarty.const._EDIT}> templates" /></a>
-							<a href="tratemplates.php?op=delete&amp;ttpl_id=<{$template.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> templates" /></a>
+							<a href="tratemplates.php?op=edit&amp;ttpl_id=<{$template.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="<{$smarty.const._EDIT}> templates"></a>
+							<a href="tratemplates.php?op=delete&amp;ttpl_id=<{$template.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> templates"></a>
 						</td>
 					</tr>
 				<{/foreach}>

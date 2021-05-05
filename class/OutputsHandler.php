@@ -95,7 +95,7 @@ class OutputsHandler extends \XoopsPersistableObjectHandler
      * @param array $bal_ids
      * @return array
      */
-    public static function getListBalances($bal_ids)
+    public function getListBalances($bal_ids)
     {
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $balancesHandler = $helper->getHandler('Balances');

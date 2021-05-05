@@ -242,7 +242,7 @@ switch ($op) {
                 break;
             case 'pdf':
             case 'form_pdf':
-                require_once 'outtemplates_pdf.php';
+                require_once __DIR__ . '/outtemplates_pdf.php';
                 $result = execute_output($template, $outParams);
                 exit;
                 //\redirect_header('transactions.php?op=list', 3, \_MA_WGSIMPLEACC_OUTTEMPLATE_PDF_SUCCESS);

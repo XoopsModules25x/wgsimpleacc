@@ -20,7 +20,7 @@
     <link rel="stylesheet" type="text/css" href="<{xoImgUrl}>css/reset.css">
     <link rel="stylesheet" type="text/css" media="all" href="<{$xoops_themecss}>">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="<{xoImgUrl}>css/scrollup.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="<{xoImgUrl}>css/scrollup.css">
     <!-- Multi-level Menu -->
     <link rel="stylesheet" type="text/css" href="<{xoImgUrl}>css/multilevelmenu.css">
 

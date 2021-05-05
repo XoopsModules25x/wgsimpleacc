@@ -223,7 +223,7 @@ class Outtemplates extends \XoopsObject
             foreach (\array_keys($allocationsAll) as $i) {
                 if(\in_array($allocationsAll[$i]->getVar('all_id'),$arrAllid)) {
                     $otplAllid .= '<li>' . $allocationsAll[$i]->getVar('all_name') . '</li>';
-                };
+                }
             }
             $otplAllid .= '</ul>';
         }
@@ -239,7 +239,7 @@ class Outtemplates extends \XoopsObject
             foreach (\array_keys($accountsAll) as $i) {
                 if(\in_array($accountsAll[$i]->getVar('acc_id'),$arrAccid)) {
                     $otplAccid .= '<li>' . $accountsAll[$i]->getVar('acc_name') . '</li>';
-                };
+                }
             }
             $otplAccid .= '</ul>';
         }

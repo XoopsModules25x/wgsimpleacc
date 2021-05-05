@@ -53,7 +53,7 @@
 					<td class='center'><{$transaction.amountout}></td>
 					<td class='center'><{$transaction.taxid}></td>
 					<td class='center'><{$transaction.asset}></td>
-					<td class='center'><img src="<{$modPathIcon16}>status<{$transaction.status}>.png" alt="<{$transaction.status_text}>" title="<{$transaction.status_text}>" /></td>
+					<td class='center'><img src="<{$modPathIcon16}>status<{$transaction.status}>.png" alt="<{$transaction.status_text}>" title="<{$transaction.status_text}>"></td>
 					<td class='center'><{$transaction.comments}></td>
 					<td class='center'><{$transaction.class_text}></td>
 					<td class='center'><{$transaction.balid}></td>
@@ -61,7 +61,7 @@
 					<td class='center'><{$transaction.datecreated}></td>
 					<td class='center'><{$transaction.submitter}></td>
 					<td class="center  width5">
-						<a href="trahistories.php?op=delete&amp;hist_id=<{$transaction.histid}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> trahistories" /></a>
+						<a href="trahistories.php?op=delete&amp;hist_id=<{$transaction.histid}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> trahistories"></a>
 					</td>
 				</tr>
 				<{/foreach}>

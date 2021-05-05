@@ -47,7 +47,7 @@
 						<td class='center'><{$transaction.taxid}></td>
 						<td class='center'><{$transaction.asset}></td>
 						<td class='center'><{$transaction.client}></td>
-						<td class='center'><img src="<{$modPathIcon16}>status<{$transaction.status}>.png" alt="<{$transaction.status_text}>" title="<{$transaction.status_text}>" /></td>
+						<td class='center'><img src="<{$modPathIcon16}>status<{$transaction.status}>.png" alt="<{$transaction.status_text}>" title="<{$transaction.status_text}>"></td>
 						<td class='center'><{$transaction.comments}></td>
 						<td class='center'><{$transaction.class_text}></td>
 						<td class='center'><{$transaction.balid}></td>
@@ -55,8 +55,8 @@
 						<td class='center'><{$transaction.datecreated}></td>
 						<td class='center'><{$transaction.submitter}></td>
 						<td class="center  width5">
-							<a href="transactions.php?op=edit&amp;tra_id=<{$transaction.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="<{$smarty.const._EDIT}> transactions" /></a>
-							<a href="transactions.php?op=delete&amp;tra_id=<{$transaction.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> transactions" /></a>
+							<a href="transactions.php?op=edit&amp;tra_id=<{$transaction.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="<{$smarty.const._EDIT}> transactions"></a>
+							<a href="transactions.php?op=delete&amp;tra_id=<{$transaction.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> transactions"></a>
 						</td>
 					</tr>
 				<{/foreach}>

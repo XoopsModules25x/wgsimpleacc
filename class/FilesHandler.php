@@ -128,7 +128,7 @@ class FilesHandler extends \XoopsPersistableObjectHandler
      * @param string $type
      * @return bool
      */
-    public static function saveHistoryFiles($filId, $type = "update")
+    public function saveHistoryFiles($filId, $type = 'update')
     {
         global $xoopsUser;
         $uid = \is_object($xoopsUser) ? $xoopsUser->uid() : 0;
@@ -148,7 +148,7 @@ class FilesHandler extends \XoopsPersistableObjectHandler
             $select .= ', ' . $var;
         }
         $insert .= ') ';
-        $GLOBALS['xoopsDB']->queryF($insert . $select . $from . $where) or die ("MySQL-Error: " . mysqli_error());
+        $GLOBALS['xoopsDB']->queryF($insert . $select . $from . $where) or die ('MySQL-Error: ' . $GLOBALS['xoopsDB']->error());
 
         return true;
     }

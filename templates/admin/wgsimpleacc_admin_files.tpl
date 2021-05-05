@@ -29,8 +29,8 @@
 						<td class='center'><{$file.datecreated}></td>
 						<td class='center'><{$file.submitter}></td>
 						<td class="center  width5">
-							<a href="files.php?op=edit&amp;fil_id=<{$file.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="<{$smarty.const._EDIT}> files" /></a>
-							<a href="files.php?op=delete&amp;fil_id=<{$file.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> files" /></a>
+							<a href="files.php?op=edit&amp;fil_id=<{$file.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="<{$smarty.const._EDIT}> files"></a>
+							<a href="files.php?op=delete&amp;fil_id=<{$file.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> files"></a>
 						</td>
 					</tr>
 				<{/foreach}>

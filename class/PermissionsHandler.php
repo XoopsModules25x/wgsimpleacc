@@ -67,7 +67,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
         if (0 == $currentuid) {
             $my_group_ids = [\XOOPS_GROUP_ANONYMOUS];
         } else {
-            $my_group_ids = $memberHandler->getGroupsByUser($currentuid);;
+            $my_group_ids = $memberHandler->getGroupsByUser($currentuid);
         }
         if ($grouppermHandler->checkRight('wgsimpleacc_ac', Constants::PERM_GLOBAL_APPROVE, $my_group_ids, $mid)) {
             return true;
@@ -101,7 +101,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
         if (0 == $currentuid) {
             $my_group_ids = [\XOOPS_GROUP_ANONYMOUS];
         } else {
-            $my_group_ids = $memberHandler->getGroupsByUser($currentuid);;
+            $my_group_ids = $memberHandler->getGroupsByUser($currentuid);
         }
         if ($grouppermHandler->checkRight('wgsimpleacc_ac', Constants::PERM_GLOBAL_SUBMIT, $my_group_ids, $mid)) {
             return true;
@@ -151,7 +151,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
         if (0 == $currentuid) {
             $my_group_ids = [\XOOPS_GROUP_ANONYMOUS];
         } else {
-            $my_group_ids = $memberHandler->getGroupsByUser($currentuid);;
+            $my_group_ids = $memberHandler->getGroupsByUser($currentuid);
         }
         if ($grouppermHandler->checkRight('wgsimpleacc_ac', Constants::PERM_TRANSACTIONS_APPROVE, $my_group_ids, $mid)) {
             return true;
@@ -558,7 +558,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
         if (0 == $currentuid) {
             $my_group_ids = [\XOOPS_GROUP_ANONYMOUS];
         } else {
-            $my_group_ids = $memberHandler->getGroupsByUser($currentuid);;
+            $my_group_ids = $memberHandler->getGroupsByUser($currentuid);
         }
         if ($grouppermHandler->checkRight('wgsimpleacc_ac', $constantPerm, $my_group_ids, $mid)) {
             return true;
@@ -594,7 +594,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
         if (0 == $currentuid) {
             $my_group_ids = [\XOOPS_GROUP_ANONYMOUS];
         } else {
-            $my_group_ids = $memberHandler->getGroupsByUser($currentuid);;
+            $my_group_ids = $memberHandler->getGroupsByUser($currentuid);
         }
         if ($grouppermHandler->checkRight('wgsimpleacc_ac', $constantPerm, $my_group_ids, $mid)) {
             return true;

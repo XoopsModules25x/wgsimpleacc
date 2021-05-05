@@ -31,8 +31,8 @@
 				<td class='center'><{$allocation.datecreated}></td>
 				<td class='center'><{$allocation.submitter}></td>
 				<td class="center  width5">
-					<a href="allocations.php?op=edit&amp;all_id=<{$allocation.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="<{$smarty.const._EDIT}> allocations" /></a>
-					<a href="allocations.php?op=delete&amp;all_id=<{$allocation.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> allocations" /></a>
+					<a href="allocations.php?op=edit&amp;all_id=<{$allocation.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="<{$smarty.const._EDIT}> allocations"></a>
+					<a href="allocations.php?op=delete&amp;all_id=<{$allocation.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> allocations"></a>
 				</td>
 			</tr>
 			<{/foreach}>

@@ -37,7 +37,7 @@
 				<td class='center'><{$filhistory.datecreated}></td>
 				<td class='center'><{$filhistory.submitter}></td>
 				<td class="center  width5">
-					<a href="filhistories.php?op=delete&amp;hist_id=<{$filhistory.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> filhistories" /></a>
+					<a href="filhistories.php?op=delete&amp;hist_id=<{$filhistory.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> filhistories"></a>
 				</td>
 			</tr>
 			<{/foreach}>

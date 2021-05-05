@@ -244,7 +244,7 @@ class Files extends \XoopsObject
         // Form Frameworks Images filTemp: Select Uploaded Image
 
         $filTemp = '';
-        $imageDirectory = '/uploads/wgsimpleacc/temp';;
+        $imageDirectory = '/uploads/wgsimpleacc/temp';
         $imageTray = new \XoopsFormElementTray(\_MA_WGSIMPLEACC_FILES_TEMP, '<br>');
         $imageSelect = new \XoopsFormSelect(\str_replace('%f', ".{$imageDirectory}/", \_MA_WGSIMPLEACC_FILES_TEMP_DESC), 'fil_temp', $filTemp, 5);
         $imageArray = \XoopsLists::getImgListAsArray( \XOOPS_ROOT_PATH . $imageDirectory );
@@ -255,7 +255,7 @@ class Files extends \XoopsObject
         }
         $imageSelect->setExtra("onchange='showBtnDel();showImgSelected(\"imglabel_fil_temp\", \"fil_temp\", \"" . $imageDirectory . '", "", "' . \XOOPS_URL . "\")'");
         $imageTray->addElement($imageSelect, false);
-        $imageTray->addElement(new \XoopsFormLabel('', "<br><img src='" . \XOOPS_URL . '/' . $imageDirectory . '/' . $filTemp . "' id='imglabel_fil_temp' alt='' style='max-width:100px' />"));
+        $imageTray->addElement(new \XoopsFormLabel('', "<br><img src='" . \XOOPS_URL . '/' . $imageDirectory . '/' . $filTemp . "' id='imglabel_fil_temp' alt='' style='max-width:100px'>"));
         $form->addElement($imageTray);
 
         // Form Editor TextArea filDesc
@@ -285,7 +285,7 @@ class Files extends \XoopsObject
         $ret['id']           = $this->getVar('fil_id');
         $transactionsHandler = $helper->getHandler('Transactions');
         $transactionsObj     = $transactionsHandler->get($this->getVar('fil_traid'));
-        $ret['tra_number']   = $transactionsObj->getVar('tra_year') . '/' . \substr('00000' . $transactionsObj->getVar('tra_nb'), -5);;
+        $ret['tra_number']   = $transactionsObj->getVar('tra_year') . '/' . \substr('00000' . $transactionsObj->getVar('tra_nb'), -5);
         $ret['name']         = $this->getVar('fil_name');
         $ret['type']         = $this->getVar('fil_type');
         switch ($ret['type']) {

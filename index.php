@@ -334,7 +334,7 @@ function showLogin() {
     global $xoopsConfig;
     xoops_loadLanguage('blocks', 'system');
     $GLOBALS['xoopsTpl']->assign('formLogin', true);
-    $block                     = array();
+    $block                     = [];
     $block['lang_username']    = _USERNAME;
     $block['unamevalue']       = '';
     $block['lang_password']    = _PASSWORD;

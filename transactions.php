@@ -117,7 +117,7 @@ switch ($op) {
         } else {
             $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_OFFLINE, '>'));
             $tradateFrom = 0;
-            $tradateTo = \time() + (10 * 365 * 24 * 60 * 60);;
+            $tradateTo = \time() + (10 * 365 * 24 * 60 * 60);
             if (Constants::FILTER_PYEARLY == $period_type) {
                 //filter data based on form select year
                 if ($filterYear > Constants::FILTER_TYPEALL) {
@@ -525,7 +525,7 @@ switch ($op) {
             $crTransactions->add(new \Criteria('tra_id', $traId));
         } else {
             $tradateFrom = 0;
-            $tradateTo = \time() + (10 * 365 * 24 * 60 * 60);;
+            $tradateTo = \time() + (10 * 365 * 24 * 60 * 60);
             if (Constants::FILTER_PYEARLY == $period_type) {
                 //filter data based on form select year
                 if ($filterYear > Constants::FILTER_TYPEALL) {

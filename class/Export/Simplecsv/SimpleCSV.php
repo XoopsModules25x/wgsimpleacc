@@ -95,7 +95,7 @@ class SimpleCSV {
         $CSV_DELIMITER = $this->delimiter();
 
 
-        $r = array();
+        $r = [];
         $cnt = \strlen($this->_csv); 
         
         $esc = $escesc = false; 

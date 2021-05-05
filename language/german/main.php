@@ -57,19 +57,19 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_SUMS', 'Summen');
 // ---------------- Contents ----------------
 // There aren't
-\define('_MA_WGSIMPLEACC_THEREARENT_ACCOUNTS', "Es gibt derzeit keine Konten in der Datenbank");
-\define('_MA_WGSIMPLEACC_THEREARENT_TRANSACTIONS', "Es gibt derzeit keine Transaktionen in der Datenbank");
-\define('_MA_WGSIMPLEACC_THEREARENT_TRAHISTORIES', "Es gibt derzeit keine historischen Transaktionen in der Datenbank");
-\define('_MA_WGSIMPLEACC_THEREARENT_ALLOCATIONS', "Es gibt derzeit keine Zuordnungen in der Datenbank");
-\define('_MA_WGSIMPLEACC_THEREARENT_ASSETS', "Es gibt derzeit keine Vermögenswerte in der Datenbank");
-\define('_MA_WGSIMPLEACC_THEREARENT_CURRENCIES', "Es gibt derzeit keine Währungen in der Datenbank");
-\define('_MA_WGSIMPLEACC_THEREARENT_TAXES', "Es gibt derzeit keine Steuerarten in der Datenbank");
-\define('_MA_WGSIMPLEACC_THEREARENT_FILES', "Es gibt derzeit keine Dateien in der Datenbank");
-\define('_MA_WGSIMPLEACC_THEREARENT_FILHISTORIES', "Es gibt derzeit keine historischen Dateien in der Datenbank");
-\define('_MA_WGSIMPLEACC_THEREARENT_BALANCES', "Es gibt derzeit keine Abschlüsse in der Datenbank");
-\define('_MA_WGSIMPLEACC_THEREARENT_TRATEMPLATES', "Es gibt derzeit keine Transaktionsvorlagen in der Datenbank");
-\define('_MA_WGSIMPLEACC_THEREARENT_OUTTEMPLATES', "Es gibt derzeit keine Ausgabevorlagen in der Datenbank");
-\define('_MA_WGSIMPLEACC_THEREARENT_CLIENTS', "Es gibt derzeit keine Klienten in der Datenbank");
+\define('_MA_WGSIMPLEACC_THEREARENT_ACCOUNTS', 'Es gibt derzeit keine Konten in der Datenbank');
+\define('_MA_WGSIMPLEACC_THEREARENT_TRANSACTIONS', 'Es gibt derzeit keine Transaktionen in der Datenbank');
+\define('_MA_WGSIMPLEACC_THEREARENT_TRAHISTORIES', 'Es gibt derzeit keine historischen Transaktionen in der Datenbank');
+\define('_MA_WGSIMPLEACC_THEREARENT_ALLOCATIONS', 'Es gibt derzeit keine Zuordnungen in der Datenbank');
+\define('_MA_WGSIMPLEACC_THEREARENT_ASSETS', 'Es gibt derzeit keine Vermögenswerte in der Datenbank');
+\define('_MA_WGSIMPLEACC_THEREARENT_CURRENCIES', 'Es gibt derzeit keine Währungen in der Datenbank');
+\define('_MA_WGSIMPLEACC_THEREARENT_TAXES', 'Es gibt derzeit keine Steuerarten in der Datenbank');
+\define('_MA_WGSIMPLEACC_THEREARENT_FILES', 'Es gibt derzeit keine Dateien in der Datenbank');
+\define('_MA_WGSIMPLEACC_THEREARENT_FILHISTORIES', 'Es gibt derzeit keine historischen Dateien in der Datenbank');
+\define('_MA_WGSIMPLEACC_THEREARENT_BALANCES', 'Es gibt derzeit keine Abschlüsse in der Datenbank');
+\define('_MA_WGSIMPLEACC_THEREARENT_TRATEMPLATES', 'Es gibt derzeit keine Transaktionsvorlagen in der Datenbank');
+\define('_MA_WGSIMPLEACC_THEREARENT_OUTTEMPLATES', 'Es gibt derzeit keine Ausgabevorlagen in der Datenbank');
+\define('_MA_WGSIMPLEACC_THEREARENT_CLIENTS', 'Es gibt derzeit keine Klienten in der Datenbank');
 // Account
 \define('_MA_WGSIMPLEACC_ACCOUNT_ADD', 'Konto hinzufügen');
 \define('_MA_WGSIMPLEACC_ACCOUNT_EDIT', 'Konto bearbeiten');
@@ -370,7 +370,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_CLIENTS_LIST', 'Liste der Klienten');
 \define('_MA_WGSIMPLEACC_CLIENT_SUBMIT', 'Klient einsenden');
 \define('_MA_WGSIMPLEACC_CLIENTS_SHOWALL', 'Alle Klienten anzeigen');
-\define('_MA_WGSIMPLEACC_CLIENTS_NOTFOUND', " stimmt mit keinem Klienten überein");
+\define('_MA_WGSIMPLEACC_CLIENTS_NOTFOUND', ' stimmt mit keinem Klienten überein');
 // Client add/edit
 \define('_MA_WGSIMPLEACC_CLIENT_ADD', 'Klient hinzufügen');
 \define('_MA_WGSIMPLEACC_CLIENT_EDIT', 'Klient bearbeiten');

@@ -183,7 +183,7 @@ function wgsimpleacc_Filter($url, $type = '') {
     $regular_expression = $helper->getConfig('regular_expression');
 
     $url = \strip_tags($url);
-    $url .= \preg_replace("`\[.*\]`U", '', $url);
+    $url .= \preg_replace('`\[.*\]`U', '', $url);
     $url .= \preg_replace('`&(amp;)?#?[a-z0-9]+;`i', '-', $url);
     $url .= htmlentities($url, ENT_COMPAT, 'utf-8');
     $url .= \preg_replace('`&([a-z])(acute|uml|circ|grave|ring|cedil|slash|tilde|caron|lig);`i', "\1", $url);
