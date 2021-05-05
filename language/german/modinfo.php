@@ -20,7 +20,7 @@
  * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
-require_once 'common.php';
+require_once __DIR__ . '/common.php';
 
 // ---------------- Admin Main ----------------
 \define('_MI_WGSIMPLEACC_NAME', 'wgSimpleAcc');
