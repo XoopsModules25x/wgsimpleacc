@@ -124,4 +124,7 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_SUPPORT_FORUM', 'Support Forum');
 \define('_AM_WGSIMPLEACC_DONATION_AMOUNT', 'Spendenbetrag Amount');
 \define('_AM_WGSIMPLEACC_MAINTAINEDBY', ' wird unterstützt von ');
+
+\define('_AM_WGSIMPLEACC_FORM_DELETE_OK', 'Erfolgreich gelöscht');
+
 // ---------------- End ----------------
