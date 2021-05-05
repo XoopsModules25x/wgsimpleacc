@@ -240,7 +240,7 @@ class OuttemplatesHandler extends \XoopsPersistableObjectHandler
      * @param $traId
      * @return array
      */
-    public static function getOutParams($traId) {
+    public function getOutParams($traId) {
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $transactionsHandler = $helper->getHandler('Transactions');
         $clientsHandler = $helper->getHandler('Clients');

@@ -286,7 +286,7 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
      * @param string $type
      * @return bool
      */
-    public static function saveHistoryTransactions($traId, $type = 'update')
+    public function saveHistoryTransactions($traId, $type = 'update')
     {
         global $xoopsUser;
         $uid = \is_object($xoopsUser) ? $xoopsUser->uid() : 0;

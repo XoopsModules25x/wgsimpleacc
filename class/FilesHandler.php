@@ -128,7 +128,7 @@ class FilesHandler extends \XoopsPersistableObjectHandler
      * @param string $type
      * @return bool
      */
-    public static function saveHistoryFiles($filId, $type = 'update')
+    public function saveHistoryFiles($filId, $type = 'update')
     {
         global $xoopsUser;
         $uid = \is_object($xoopsUser) ? $xoopsUser->uid() : 0;
