@@ -71,7 +71,6 @@ switch ($op) {
         }
         if ('' !== $cliName) {
             $crClients->add(new \Criteria('cli_name', '%' . $cliName . '%', 'LIKE'));
-            $showFiltered = true;
         }
         $GLOBALS['xoopsTpl']->assign('showFiltered', $showFiltered);
         $GLOBALS['xoopsTpl']->assign('showList', 'show' !== $op);
@@ -102,7 +101,7 @@ switch ($op) {
             // Display Navigation
             if ($clientsCount > $limit) {
                 include_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
-                $pagenav = new \XoopsPageNav($clientsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
+                $pagenav = new \XoopsPageNav($clientsCount, $limit, $start, 'start', 'op=list&amp;limit=' . $limit . '&amp;cli_name=' . $cliName);
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
             $GLOBALS['xoopsTpl']->assign('table_type', $helper->getConfig('table_type'));
