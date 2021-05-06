@@ -169,10 +169,12 @@ class ClientsHandler extends \XoopsPersistableObjectHandler
         $form = new \XoopsModules\Wgsimpleacc\FormInline('', 'formFilter', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
         $nameTray = new \XoopsFormElementTray('', '');
-        $nameTray->addElement(new \XoopsFormText('', 'cli_name', 30, 100, $cliName));
+        $formText = new \XoopsFormText('', 'cli_name', 30, 100, $cliName);
+        $formText->setExtra('placeholder="' . \_MA_WGSIMPLEACC_FORM_PLACEHOLDER_NAME . '"');
+        $nameTray->addElement($formText);
         $nameTray->addElement(new \XoopsFormLabel('', '<button class="btn btn-primary" type="submit"><i class="fa fa-search fa-fw"></i></button>'));
         $form->addElement($nameTray);
-        $form->addElement(new \XoopsFormHidden('op', 'show'));
+        $form->addElement(new \XoopsFormHidden('op', 'list'));
         return $form;
     }
 }
