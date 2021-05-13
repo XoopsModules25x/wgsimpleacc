@@ -21,6 +21,8 @@
                     <a class="wgsa-startminheader-link" href="<{$xoops_url}>/notifications.php"><span class="glyphicon glyphicon-info-sign" alt="<{$smarty.const._MA_WGSIMPLEACC_MENUNOTIF}>" title="<{$smarty.const._MA_WGSIMPLEACC_MENUNOTIF}>"></span></a>
                     <{xoInboxCount assign="unreadCount"}> <a class="wgsa-startminheader-link <{if $unreadCount > 0}>wgsa-startminheader-link-important<{/if}>" href="<{$xoops_url}>/viewpmsg.php"><span class="glyphicon glyphicon-envelope" alt="<{$smarty.const._MA_WGSIMPLEACC_MENUINBOX}>" title="<{$smarty.const._MA_WGSIMPLEACC_MENUINBOX}>"></span> <{if $unreadCount > 0}><span class="badge wgsa-startminheader-bagde"><{$unreadCount}></span><{/if}></a>
                     <a class="wgsa-startminheader-link" href="<{$xoops_url}>/user.php?op=logout"><span class="glyphicon glyphicon-off" alt="<{$smarty.const._LOGOUT}>" title="<{$smarty.const._LOGOUT}>"></span></a>
+                <{else}>
+                    <a class="wgsa-startminheader-link" style="margin-right:50px" href="<{$xoops_url}>/user.php"><span class="fa fa-sign-in" alt="<{$smarty.const._LOGIN}>" title="<{$smarty.const._LOGIN}>"></span></a>
                 <{/if}>
             </div>
         </div>
