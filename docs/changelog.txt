@@ -4,8 +4,9 @@
  - added filter clients (goffy)
  - various updates/code cleaning (mamba)
  - fixed bug undefined constant (mamba/goffy)
- - added second filter clients (goffy)
- - fixed missing link/icon for login in bt3 (goffy)
+ - added second filter clients  (goffy)
+ - added use transaction as template (goffy)
+ - fixed bugs in template for transaction details (goffy)
 
 ==============================================================
 1.22 [2021/02/28]

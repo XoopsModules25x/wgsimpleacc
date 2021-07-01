@@ -133,8 +133,24 @@ switch ($op) {
         if (!$permSubmit) {
             \redirect_header('tratemplates.php?op=list', 3, _NOPERM);
         }
+        $traId = Request::getInt('tra_id', 0);
         // Form Create
         $tratemplatesObj = $tratemplatesHandler->create();
+        if ($traId > 0) {
+            $crTransactions = new \CriteriaCompo();
+            $crTransactions->add(new \Criteria('tra_id', $traId));
+            $transactionsAll = $transactionsHandler->getAll($crTransactions);
+            foreach (\array_keys($transactionsAll) as $i) {
+                $tratemplatesObj->setVar('ttpl_desc', $transactionsAll[$i]->getVar('tra_desc', 'n'));
+                $tratemplatesObj->setVar('ttpl_accid', $transactionsAll[$i]->getVar('tra_accid'));
+                $tratemplatesObj->setVar('ttpl_allid', $transactionsAll[$i]->getVar('tra_allid'));
+                $tratemplatesObj->setVar('ttpl_asid', $transactionsAll[$i]->getVar('tra_asid'));
+                $tratemplatesObj->setVar('ttpl_cliid', $transactionsAll[$i]->getVar('tra_cliid'));
+                $tratemplatesObj->setVar('ttpl_class', $transactionsAll[$i]->getVar('tra_class'));
+                $tratemplatesObj->setVar('ttpl_amountin', $transactionsAll[$i]->getVar('tra_amountin'));
+                $tratemplatesObj->setVar('ttpl_amountout', $transactionsAll[$i]->getVar('tra_amountout'));
+            }
+        }
         $form = $tratemplatesObj->getFormTratemplates();
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
 

@@ -115,6 +115,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_TRANSACTIONS_EXPENSES', 'Expenses');
 \define('_MA_WGSIMPLEACC_TRANSACTION_SUBMIT_INCOME', 'Submit income');
 \define('_MA_WGSIMPLEACC_TRANSACTION_SUBMIT_EXPENSE', 'Submit expense');
+\define('_MA_WGSIMPLEACC_TRANSACTION_TRATEMPLATE', 'Use as template');
 // Caption of Transaction
 \define('_MA_WGSIMPLEACC_TRANSACTION_ID', 'Id');
 \define('_MA_WGSIMPLEACC_TRANSACTION_YEAR', 'Year');
@@ -125,7 +126,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_TRANSACTION_REMARKS', 'Remarks');
 \define('_MA_WGSIMPLEACC_TRANSACTION_ACCID', 'Account');
 \define('_MA_WGSIMPLEACC_TRANSACTION_ALLID', 'Allocation');
-\define('_MA_WGSIMPLEACC_TRANSACTION_DATE', 'Date');
+\define('_MA_WGSIMPLEACC_TRANSACTION_DATE', 'Value Date');
 \define('_MA_WGSIMPLEACC_TRANSACTION_CURID', 'Currency');
 \define('_MA_WGSIMPLEACC_TRANSACTION_AMOUNT', 'Amount');
 \define('_MA_WGSIMPLEACC_TRANSACTION_AMOUNTIN', 'Amount income');

@@ -165,6 +165,9 @@ switch ($op) {
                 $transactions[$i] = $transactionsAll[$i]->getValuesTransactions();
                 $transactions[$i]['editable'] = $permissionsHandler->getPermTransactionsEdit($transactions[$i]['tra_submitter'], $transactions[$i]['tra_status']);
                 $transactions[$i]['waiting'] = (Constants::STATUS_SUBMITTED == $transactions[$i]['tra_status']);
+                if ($traId > 0) {
+                    $transactions[$i]['tratemplate'] = $permissionsHandler->getPermTratemplatesSubmit();
+                }
                 if ('' !== (string)$transactions[$i]['tra_remarks']) {
                     $transactions[$i]['modaltitle'] = \str_replace('%s', $transactions[$i]['year_nb'], \_MA_WGSIMPLEACC_MODAL_TRATITLE);
                 }
