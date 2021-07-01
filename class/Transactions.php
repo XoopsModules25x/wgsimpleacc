@@ -24,7 +24,10 @@ namespace XoopsModules\Wgsimpleacc;
  */
 
 use XoopsModules\Wgsimpleacc;
-use XoopsModules\Wgsimpleacc\Constants;
+use XoopsModules\Wgsimpleacc\{
+    Constants,
+    Utility
+};
 
 \defined('\XOOPS_ROOT_PATH') || die('Restricted access');
 
@@ -141,9 +144,9 @@ class Transactions extends \XoopsObject
                 $form->addElement(new \XoopsFormHidden('ttpl_asid[' . $tplId . ']', $tratemplate->getVar('ttpl_asid')));
                 $form->addElement(new \XoopsFormHidden('ttpl_cliid[' . $tplId . ']', $tratemplate->getVar('ttpl_cliid')));
                 if (Constants::CLASS_INCOME == $traClass) {
-                    $form->addElement(new \XoopsFormHidden('ttpl_amount[' . $tplId . ']', $tratemplate->getVar('ttpl_amountin')));
+                    $form->addElement(new \XoopsFormHidden('ttpl_amount[' . $tplId . ']', Utility::FloatToString($tratemplate->getVar('ttpl_amountin'))));
                 } else {
-                    $form->addElement(new \XoopsFormHidden('ttpl_amount[' . $tplId . ']', $tratemplate->getVar('ttpl_amountout')));
+                    $form->addElement(new \XoopsFormHidden('ttpl_amount[' . $tplId . ']', Utility::FloatToString($tratemplate->getVar('ttpl_amountout'))));
                 }
             }
             $tratemplatesSelect = new \XoopsFormRadio(\_MA_WGSIMPLEACC_TRANSACTION_TEMPLATE, 'tra_template', 0);

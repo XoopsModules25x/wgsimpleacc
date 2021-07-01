@@ -98,7 +98,21 @@ class Tratemplates extends \XoopsObject
         // Form Text tplName
         $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_TRATEMPLATE_NAME, 'ttpl_name', 50, 255, $this->getVar('ttpl_name')));
         // Form Text tplDesc
-        $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_TRATEMPLATE_DESC, 'ttpl_desc', 50, 255, $this->getVar('ttpl_desc')));
+        $editorConfigs = [];
+        if ($isAdmin) {
+            $editor = $helper->getConfig('editor_admin');
+        } else {
+            $editor = $helper->getConfig('editor_user');
+        }
+        $editorConfigs['name'] = 'ttpl_desc';
+        $editorConfigs['value'] = $this->getVar('ttpl_desc', 'e');
+        $editorConfigs['rows'] = 5;
+        $editorConfigs['cols'] = 40;
+        $editorConfigs['width'] = '100%';
+        $editorConfigs['height'] = '400px';
+        $editorConfigs['editor'] = $editor;
+        $traDesc = new \XoopsFormEditor(\_MA_WGSIMPLEACC_TRATEMPLATE_DESC, 'ttpl_desc', $editorConfigs);
+        $form->addElement($traDesc);
         // Form Table accounts
         $accountsHandler = $helper->getHandler('Accounts');
         $tplAccidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRATEMPLATE_ACCID, 'ttpl_accid', $this->getVar('ttpl_accid'));
@@ -143,11 +157,10 @@ class Tratemplates extends \XoopsObject
         $traClassSelect->addOption(Constants::CLASS_INCOME, \_MA_WGSIMPLEACC_CLASS_INCOME);
         $form->addElement($traClassSelect);
         // Form Text tplAmountin
-        $default0 = '0' . $helper->getConfig('sep_comma') . '00';
-        $ttplAmountin = $this->isNew() ? $default0 : Utility::FloatToString($this->getVar('ttpl_amountin'));
+        $ttplAmountin = Utility::FloatToString($this->getVar('ttpl_amountin'));
         $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_TRATEMPLATE_AMOUNTIN, 'ttpl_amountin', 20, 150, $ttplAmountin));
         // Form Text tplAmountout
-        $ttplAmountout = $this->isNew() ? $default0 : Utility::FloatToString($this->getVar('ttpl_amountout'));
+        $ttplAmountout = Utility::FloatToString($this->getVar('ttpl_amountout'));
         $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_TRATEMPLATE_AMOUNTOUT, 'ttpl_amountout', 20, 150, $ttplAmountout));
         // Form Radio Yes/No asOnline
         $ttplOnline = $this->isNew() ?: $this->getVar('ttpl_online');
