@@ -91,8 +91,8 @@ class Balances extends \XoopsObject
         $dtime = \DateTime::createFromFormat('Y-m-d', (date('Y') - 1) . '-12-31');
         $dateToY = $dtime->getTimestamp();
 
-        $dateToM = mktime(0, 0, 0, date("m"), 0);
-        $dateFromM = mktime(0, 0, 0, date("m")-1, 1);
+        $dateToM = mktime(0, 0, 0, date('m'), 0);
+        $dateFromM = mktime(0, 0, 0, date('m')-1, 1);
 
         // Title
         $title = $this->isNew() ? \sprintf(\_MA_WGSIMPLEACC_BALANCE_ADD) : \sprintf(\_MA_WGSIMPLEACC_BALANCE_EDIT);
