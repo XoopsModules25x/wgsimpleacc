@@ -139,6 +139,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_TRANSACTION_CLASS', 'Klasse');
 \define('_MA_WGSIMPLEACC_TRANSACTION_FILES', 'Dateien');
 \define('_MA_WGSIMPLEACC_TRANSACTION_BALID', 'Abschluss');
+\define('_MA_WGSIMPLEACC_TRANSACTION_BALIDT', 'Temporärer Abschluss');
 \define('_MA_WGSIMPLEACC_TRANSACTION_HIST', 'Historie');
 \define('_MA_WGSIMPLEACC_TRANSACTION_TEMPLATE', 'Vorlage');
 // Allocation
@@ -250,7 +251,10 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_BALANCES_LIST', 'Liste der Abschlüsse');
 \define('_MA_WGSIMPLEACC_BALANCE_SUBMIT', 'Abschluss erstellen');
 \define('_MA_WGSIMPLEACC_BALANCE_SUBMIT_FINAL', 'Abschluss endgültig erstellen');
+\define('_MA_WGSIMPLEACC_BALANCE_SUBMIT_TEMPORARY', 'Temporären Abschluss erstellen');
 \define('_MA_WGSIMPLEACC_BALANCE_PRECALC', 'Vorausberechnung');
+\define('_MA_WGSIMPLEACC_BALANCE_DELETE', 'Abschluss löschen');
+\define('_MA_WGSIMPLEACC_BALANCE_DELETE_FROMTO', 'Abschluss vom %s bis %s');
 \define('_MA_WGSIMPLEACC_BALANCES_TIMELINE', 'Entwicklung der Vermögenswerte je Abschluss');
 \define('_MA_WGSIMPLEACC_BALANCE_DETAILS', 'Details zum Abschluss');
 // Caption of Balance
@@ -267,8 +271,11 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_BALANCE_DATE', 'Letztes Datum des Vermögenswertes');
 \define('_MA_WGSIMPLEACC_BALANCE_VALUESTART', 'Vermögenswert (zu Beginn)');
 \define('_MA_WGSIMPLEACC_BALANCE_VALUEEND', 'Berechneter Vermögenswertes am Ende');
-\define('_MA_WGSIMPLEACC_BALANCE_DATEUSED', "Das 'Datum von' or 'Datum bis' ist innerhalb des Zeitraumes eines anderen Abschlusses");
+\define('_MA_WGSIMPLEACC_BALANCE_DATEUSED', "Das 'Datum von' oder 'Datum bis' ist innerhalb des Zeitraumes eines anderen Abschlusses");
 \define('_MA_WGSIMPLEACC_BALANCE_ERRORS', 'Abschlüsse wurden erstellt, jedoch sind Fehler aufgetreten');
+\define('_MA_WGSIMPLEACC_BALANCE_TYPE', 'Art des Abschlusses');
+\define('_MA_WGSIMPLEACC_BALANCE_TYPE_TEMPORARY', 'Zwischenabschluss');
+\define('_MA_WGSIMPLEACC_BALANCE_TYPE_FINAL', 'Endgültiger Abschlusses');
 // Output balances
 \define('_MA_WGSIMPLEACC_BALANCES_OUT_TOTAL', 'Total');
 \define('_MA_WGSIMPLEACC_BALANCES_OUT_SUMS', 'Summen');
@@ -411,6 +418,7 @@ require_once __DIR__ . '/admin.php';
 // Form
 \define('_MA_WGSIMPLEACC_FORM_OK', 'Erfolgreich gespeichert');
 \define('_MA_WGSIMPLEACC_FORM_DELETE_OK', 'Erfolgreich gelöscht');
+\define('_MA_WGSIMPLEACC_FORM_DELETE_ERROR', 'Fehler beim Löschen der Daten');
 \define('_MA_WGSIMPLEACC_FORM_SURE_DELETE', "Wollen Sie diesen Eintrag wirklich löschen: <b><span style='color : Red;'>%s </span></b>");
 \define('_MA_WGSIMPLEACC_FORM_SURE_RENEW', "Wollen Sie diesen Eintrag wirklich aktualisieren: <b><span style='color : Red;'>%s </span></b>");
 \define('_MA_WGSIMPLEACC_INVALID_PARAM', 'Ungültiger Parameter');
@@ -432,6 +440,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_STATUS_BROKEN', 'Fehlerhaft');
 \define('_MA_WGSIMPLEACC_STATUS_CREATED', 'Erstellt');
 \define('_MA_WGSIMPLEACC_STATUS_LOCKED', 'Gesperrt');
+\define('_MA_WGSIMPLEACC_STATUS_TEMPORARY', 'Vorläufig');
 //PDF files
 \define('_MA_WGSIMPLEACC_PDF_BUTTON', 'Ausgabe als PDF');
 \define('_MA_WGSIMPLEACC_PDF_TRANAME', 'Transaktion_%y_%n');

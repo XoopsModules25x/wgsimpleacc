@@ -55,27 +55,48 @@ class OutputsHandler extends \XoopsPersistableObjectHandler
         \xoops_load('XoopsFormLoader');
         $form = new \XoopsThemeForm(\_MA_WGSIMPLEACC_BALANCES_OUT_SELECT, 'formBalSelect', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
-        $balancesHandler = $helper->getHandler('Balances');
-        $crBalances = new \CriteriaCompo();
-        $crBalances->setSort('bal_id');
-        $crBalances->setOrder('DESC');
-        $crBalances->setStart(0);
-        $crBalances->setLimit(50);
-        $balancesAll = $balancesHandler->getAll($crBalances);
-        $balSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_BALANCES_OUT_SELECT, 'bal_ids', '', 10, true);
-        foreach (\array_keys($balancesAll) as $i) {
-            $balances[$i] = $balancesAll[$i]->getValuesBalances();
-            $balSelect->addOption($balances[$i]['bal_id'], $balances[$i]['from'] . ' - ' . $balances[$i]['to'] . ' ' .$balances[$i]['asset']);
+
+        $checkboxList = "<ul class='wgsa-checkboxlist'>\n";
+        $sql = 'SELECT `bal_from`, `bal_to`, Sum(`bal_amountstart`) AS Sum_bal_amountstart, Sum(`bal_amountend`) AS Sum_bal_amountend, bal_status, bal_datecreated, bal_submitter ';
+        $sql .= 'FROM ' . $GLOBALS['xoopsDB']->prefix('wgsimpleacc_balances') . ' ';
+        $sql .= 'GROUP BY ' . $GLOBALS['xoopsDB']->prefix('wgsimpleacc_balances') . '.bal_from, ';
+        $sql .= $GLOBALS['xoopsDB']->prefix('wgsimpleacc_balances') . '.bal_to, ';
+        $sql .= $GLOBALS['xoopsDB']->prefix('wgsimpleacc_balances') . '.bal_status, ';
+        $sql .= $GLOBALS['xoopsDB']->prefix('wgsimpleacc_balances') . '.bal_datecreated, ';
+        $sql .= $GLOBALS['xoopsDB']->prefix('wgsimpleacc_balances') . '.bal_submitter ';
+        $sql .= 'ORDER BY ' . $GLOBALS['xoopsDB']->prefix('wgsimpleacc_balances') . '.bal_datecreated DESC;';
+        $result = $GLOBALS['xoopsDB']->query($sql);
+        while (list($balFrom, $balTo, $balAmountStart, $balAmountEnd, $balStatus, $balDatecreated, $balSubmitter) = $GLOBALS['xoopsDB']->fetchRow($result)) {
+            $checkboxList .= '<li><input type="checkbox" />';
+            $checkboxList .= '<span class="wgsa-input-label">' . date(_SHORTDATESTRING, $balFrom) . ' - ' . date(_SHORTDATESTRING, $balTo) .'</span>';
+            $balancesHandler = $helper->getHandler('Balances');
+            $crBalancesSub = new \CriteriaCompo();
+            $crBalancesSub->add(new \Criteria('bal_from', $balFrom));
+            $crBalancesSub->add(new \Criteria('bal_to', $balTo));
+            $crBalancesSub->setSort('bal_id');
+            $crBalancesSub->setOrder('DESC');
+            $balancesSub = $balancesHandler->getAll($crBalancesSub);
+            $checkboxList .= '<ul class="wgsa-checkboxlist-nested">';
+            foreach (\array_keys($balancesSub) as $bs) {
+                $balance = $balancesSub[$bs]->getValuesBalances();
+                $checkboxList .= '<li><input id="balIds[' . $balance['bal_id'] . ']" type="checkbox" name="balIds[' . $balance['bal_id'] . ']" value="' . $balance['bal_id'] . '" />';
+                $checkboxList .= '<span class="wgsa-input-label">' . $balance['asset'] .'</span>';
+                $checkboxList .="</li>\n";
+            }
+            $checkboxList .= "</li>\n";
+            $checkboxList .= "</ul>\n";
+            unset($crBalancesSub);
         }
-        $form->addElement($balSelect);
+        $checkboxList .= '</ul>';
+        $form->addElement(new \XoopsFormLabel(\_MA_WGSIMPLEACC_BALANCES_OUT_SELECT, $checkboxList, 'labelBalids'));
 
         $balLevelDetails = new \XoopsFormElementTray(\_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL,'<br>');
-        $levelAllocations = new \XoopsFormSelect(\_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ALLOC, 'level_alloc', Constants::BALANCES_OUT_LEVEL_SKIP);
+        $levelAllocations = new \XoopsFormSelect(\_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ALLOC, 'level_alloc', $helper->getConfig('balance_level_alloc'));
         $levelAllocations->addOption(Constants::BALANCES_OUT_LEVEL_SKIP, \_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_SKIP);
         $levelAllocations->addOption(Constants::BALANCES_OUT_LEVEL_ALLOC1, \_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ALLOC1);
         $levelAllocations->addOption(Constants::BALANCES_OUT_LEVEL_ALLOC2, \_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ALLOC2);
         $balLevelDetails->addElement($levelAllocations);
-        $levelAccounts = new \XoopsFormSelect(\_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ACC, 'level_account', Constants::BALANCES_OUT_LEVEL_SKIP);
+        $levelAccounts = new \XoopsFormSelect(\_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ACC, 'level_account', $helper->getConfig('balance_level_acc'));
         $levelAccounts->addOption(Constants::BALANCES_OUT_LEVEL_SKIP, \_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_SKIP);
         //$levelAccounts->addOption(Constants::BALANCES_OUT_LEVEL_ACC1, \_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ACC1);
         $levelAccounts->addOption(Constants::BALANCES_OUT_LEVEL_ACC2, \_MA_WGSIMPLEACC_BALANCES_OUT_LEVEL_ACC2);
@@ -85,7 +106,6 @@ class OutputsHandler extends \XoopsPersistableObjectHandler
 
         $form->addElement(new \XoopsFormHidden('op', 'bal_output'));
         $form->addElement(new \XoopsFormButtonTray('', \_MA_WGSIMPLEACC_OUTPUT_BALANCES, 'submit', '', false));
-
 
         return $form;
     }
@@ -129,12 +149,21 @@ class OutputsHandler extends \XoopsPersistableObjectHandler
 
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $accountsHandler = $helper->getHandler('Accounts');
+        $transactionsHandler = $helper->getHandler('Transactions');
 
-        $ret = [];
         $crBalIds = \implode(',', $bal_ids);
+
+        $balSource = 'tra_balid';
+        $crTransactions = new \CriteriaCompo();
+        $crTransactions->add(new \Criteria('tra_balidt', '('. $crBalIds . ')', 'IN'));
+        $transactionsCount = $transactionsHandler->getCount($crTransactions);
+        if ($transactionsCount > 0) {
+            $balSource = 'tra_balidt';
+        }
+        $ret = [];
         $sql = 'SELECT `tra_accid`, Sum(`tra_amountin`) AS Sum_tra_amountin, Sum(`tra_amountout`) AS Sum_tra_amountout ';
         $sql .= 'FROM ' . $xoopsDB->prefix('wgsimpleacc_transactions') . ' ';
-        $sql .= 'WHERE ' . $xoopsDB->prefix('wgsimpleacc_transactions') . '.tra_balid IN(' . $crBalIds. ')';
+        $sql .= 'WHERE ' . $xoopsDB->prefix('wgsimpleacc_transactions') . '.' . $balSource . ' IN(' . $crBalIds. ')';
         $sql .= 'GROUP BY ' . $xoopsDB->prefix('wgsimpleacc_transactions') . '.tra_accid ';
         $sql .= 'ORDER BY ' . $xoopsDB->prefix('wgsimpleacc_transactions') . '.tra_accid;';
         $result = $xoopsDB->query($sql);
@@ -175,12 +204,20 @@ class OutputsHandler extends \XoopsPersistableObjectHandler
 
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $allocationsHandler = $helper->getHandler('Allocations');
+        $transactionsHandler = $helper->getHandler('Transactions');
 
-        $ret = [];
         $crBalIds = \implode(',', $bal_ids);
+        $balSource = 'tra_balid';
+        $crTransactions = new \CriteriaCompo();
+        $crTransactions->add(new \Criteria('tra_balidt', '('. $crBalIds . ')', 'IN'));
+        $transactionsCount = $transactionsHandler->getCount($crTransactions);
+        if ($transactionsCount > 0) {
+            $balSource = 'tra_balidt';
+        }
+        $ret = [];
         $sql = 'SELECT `tra_allid`, Sum(`tra_amountin`) AS Sum_tra_amountin, Sum(`tra_amountout`) AS Sum_tra_amountout ';
         $sql .= 'FROM ' . $xoopsDB->prefix('wgsimpleacc_transactions') . ' ';
-        $sql .= 'WHERE ' . $xoopsDB->prefix('wgsimpleacc_transactions') . '.tra_balid IN(' . $crBalIds. ')';
+        $sql .= 'WHERE ' . $xoopsDB->prefix('wgsimpleacc_transactions') . '.' . $balSource . ' IN(' . $crBalIds. ')';
         $sql .= 'GROUP BY ' . $xoopsDB->prefix('wgsimpleacc_transactions') . '.tra_allid ';
         $sql .= 'ORDER BY ' . $xoopsDB->prefix('wgsimpleacc_transactions') . '.tra_allid;';
         $result = $xoopsDB->query($sql);
@@ -220,6 +257,13 @@ class OutputsHandler extends \XoopsPersistableObjectHandler
         $transactionsHandler = $helper->getHandler('Transactions');
 
         $crBalIds = \implode(',', $bal_ids);
+        $balSource = 'tra_balid';
+        $crTransactions = new \CriteriaCompo();
+        $crTransactions->add(new \Criteria('tra_balidt', '('. $crBalIds . ')', 'IN'));
+        $transactionsCount = $transactionsHandler->getCount($crTransactions);
+        if ($transactionsCount > 0) {
+            $balSource = 'tra_balidt';
+        }
         $ret = [];
 
         //get all allocations
@@ -243,7 +287,7 @@ class OutputsHandler extends \XoopsPersistableObjectHandler
                 foreach ($subAllIds as $subAllId) {
                     $crTransactions = new \CriteriaCompo();
                     $crTransactions->add(new \Criteria('tra_allid', $subAllId));
-                    $crTransactions->add(new \Criteria('tra_balid', '(' . $crBalIds . ')', 'IN'));
+                    $crTransactions->add(new \Criteria($balSource, '(' . $crBalIds . ')', 'IN'));
                     $transactionsAll = $transactionsHandler->getAll($crTransactions);
                     foreach (\array_keys($transactionsAll) as $t) {
                         $sumAmountin += $transactionsAll[$t]->getVar('tra_amountin');

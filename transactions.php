@@ -118,7 +118,7 @@ switch ($op) {
             $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_OFFLINE, '>'));
             $tradateFrom = 0;
             $tradateTo = \time() + (10 * 365 * 24 * 60 * 60);
-            if (Constants::FILTER_PYEARLY == $period_type) {
+            if (Constants::FILTER_PYEARLY == $period_type && 0 == $filterMonthFrom) {
                 //filter data based on form select year
                 if ($filterYear > Constants::FILTER_TYPEALL) {
                     $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYear-1-1");
@@ -218,7 +218,11 @@ switch ($op) {
             // Display Navigation
             if ($transactionsCount > $limit) {
                 require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
-                $pagenav = new \XoopsPageNav($transactionsCount, $limit, $start, 'start', 'op=list&limit=' . $limit . '&amp;all_id=' . $allId);
+                $pagenav = new \XoopsPageNav($transactionsCount, $limit, $start, 'start',
+                    'op=list&amp;limit=' . $limit . '&amp;all_id=' . $allId . '&amp;acc_id=' . $accId . '&amp;as_id=' . $asId . '&amp;cli_id=' . $cliId .
+                    '&tra_type=' . $traType . '&amp;filterYear=' . $filterYear .
+                    '&amp;filterMonthFrom=' . $filterMonthFrom . '&amp;filterYearFrom=' . $filterYearFrom . '&amp;filterMonthTo=' . $filterMonthTo . '&amp;filterYearTo=' . $filterYearTo
+                );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
             $GLOBALS['xoopsTpl']->assign('showAssets', 0 == $asId);

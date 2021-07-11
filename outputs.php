@@ -59,6 +59,7 @@ switch ($op) {
     default:
         break;
     case 'balances':
+        $GLOBALS['xoTheme']->addStylesheet(WGSIMPLEACC_URL . '/assets/css/nestedcheckboxes.css', null);
         $formFilter = $outputsHandler::getFormBalancesSelect();
         $GLOBALS['xoopsTpl']->assign('formFilter', $formFilter->render());
 
@@ -68,14 +69,33 @@ switch ($op) {
         break;
     case 'bal_output':
         $GLOBALS['xoopsTpl']->assign('displayBalOutput', 1);
-        $balIds       = Request::getArray('bal_ids');
-        $levelAlloc   = Request::getInt('level_alloc');
-        $levelAccount = Request::getInt('level_account');
+        $balIds       = Request::getArray('balIds');
+        if (0 == \count($balIds)) {
+            $crBalances = new \CriteriaCompo();
+            $balanceFrom = Request::getInt('balanceFrom');
+            $balanceTo   = Request::getInt('balanceTo');
+            if (0 == $balanceFrom || 0 == $balanceTo) {
+                \redirect_header('index.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
+            }
+            $crBalances->add(new \Criteria('bal_from', $balanceFrom));
+            $crBalances->add(new \Criteria('bal_to', $balanceTo));
+            $balancesCount = $balancesHandler->getCount($crBalances);
+            if ($balancesCount > 0) {
+                $balancesAll = $balancesHandler->getAll($crBalances);
+                foreach (\array_keys($balancesAll) as $i) {
+                    $balIds[] = $i;
+                }
+            }
+        }
+        if (0 == \count($balIds)) {
+            \redirect_header('index.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
+        }
+        $levelAlloc   = Request::getInt('level_alloc', $helper->getConfig('balance_level_alloc'));
+        $levelAccount = Request::getInt('level_account', $helper->getConfig('balance_level_acc'));
         $GLOBALS['xoopsTpl']->assign('buttonBalPdf', true);
         $GLOBALS['xoopsTpl']->assign('balIds', \implode(',', $balIds));
         $GLOBALS['xoopsTpl']->assign('level_alloc', $levelAlloc);
         $GLOBALS['xoopsTpl']->assign('level_account', $levelAccount);
-
 
         $balances = $outputsHandler->getListBalances($balIds);
         $sumTotal = 0;
@@ -129,6 +149,7 @@ switch ($op) {
             $GLOBALS['xoopsTpl']->assign('allocationsAmountOut', Utility::FloatToString($sumAmountout));
             $GLOBALS['xoopsTpl']->assign('allocationsCount', \count($allocations));
             $GLOBALS['xoopsTpl']->assign('allocations', $allocations);
+            $GLOBALS['xoopsTpl']->assign('table_type', $helper->getConfig('table_type'));
         }
         break;
     case 'transactions';

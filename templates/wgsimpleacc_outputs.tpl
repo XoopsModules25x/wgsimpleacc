@@ -63,7 +63,7 @@
                 <tbody>
                 <{foreach item=account from=$accounts}>
                     <tr>
-                        <td class="col-xs-6 col-sm-4 left"><span style="margin-right:10px;padding:5px 10px;width:20px;background-color:<{$account.color}>"></span><{$allocation.level_symbol}><{$account.name}></td>
+                        <td class="col-xs-6 col-sm-4 left"><span style="margin-right:10px;padding:5px 10px;width:20px;background-color:<{$account.color}>"></span><{$account.level_symbol}><{$account.name}></td>
                         <td class="col-xs-6 col-sm-2 right"><{$account.amountin}></td>
                         <td class="col-xs-6 col-sm-2 right"><{$account.amountout}></td>
                         <td class="col-xs-6 col-sm-2 right"><{$account.total}></td>
@@ -114,4 +114,24 @@
         <a class='btn btn-primary pull-right' href='balances_pdf.php?balIds=<{$balIds}>&amp;level_alloc=<{$level_alloc}>&amp;level_account=<{$level_account}>' title='<{$smarty.const._MA_WGSIMPLEACC_PDF_BUTTON}>'><{$smarty.const._MA_WGSIMPLEACC_PDF_BUTTON}></a>
     <{/if}>
 <{/if}>
+
+<script>
+    $('li :checkbox').on('click', function () {
+        var $chk = $(this), $li = $chk.closest('li'), $ul, $parent;
+        if ($li.has('ul')) {
+            $li.find(':checkbox').not(this).prop('checked', this.checked)
+        }
+        do {
+            $ul = $li.parent();
+            $parent = $ul.siblings(':checkbox');
+            if ($chk.is(':checked')) {
+                $parent.prop('checked', $ul.has(':checkbox:not(:checked)').length == 0)
+            } else {
+                $parent.prop('checked', false)
+            }
+            $chk = $parent;
+            $li = $chk.closest('li');
+        } while ($ul.is(':not(.someclass)'));
+    });
+</script>
                 

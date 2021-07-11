@@ -79,6 +79,9 @@ class Utility
             case Constants::STATUS_LOCKED:
                 $status_text = \_MA_WGSIMPLEACC_STATUS_LOCKED;
                 break;
+            case Constants::STATUS_TEMPORARY:
+                $status_text = \_MA_WGSIMPLEACC_STATUS_TEMPORARY;
+                break;
         }
 
         return $status_text;

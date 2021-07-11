@@ -6,6 +6,7 @@
 		<thead>
 			<tr class='head'>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_BALANCE_ID}></th>
+				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_BALANCE_TYPE}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_BALANCE_FROM}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_BALANCE_TO}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_BALANCE_ASID}></th>
@@ -23,6 +24,7 @@
 				<{foreach item=balance from=$balances_list}>
 					<tr class='<{cycle values='odd, even'}>'>
 						<td class='center'><{$balance.id}></td>
+						<td class='center'><{$balance.type}></td>
 						<td class='center'><{$balance.from}></td>
 						<td class='center'><{$balance.to}></td>
 						<td class='center'><{$balance.asset}></td>

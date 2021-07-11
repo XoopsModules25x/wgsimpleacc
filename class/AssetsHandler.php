@@ -219,6 +219,7 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
             $asIecalc = $assetsAll[$i]->getVar('as_iecalc');
             $crBalances = new \CriteriaCompo();
             $crBalances->add(new \Criteria('bal_asid', $asId));
+            $crBalances->add(new \Criteria('bal_to', $dateFrom, '<'));
             $crBalances->setSort('bal_datecreated');
             $crBalances->setOrder('DESC');
             $crBalances->setStart(0);

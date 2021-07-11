@@ -38,17 +38,22 @@ if (!$permissionsHandler->getPermBalancesView()) {
     \redirect_header('index.php', 0, '');
 }
 
-$op    = Request::getCmd('op', 'list');
-$start = Request::getInt('start', 0);
-$limit = Request::getInt('limit', $helper->getConfig('userpager'));
-$balId = Request::getInt('bal_id', 0);
+$op      = Request::getCmd('op', 'list');
+$start   = Request::getInt('start', 0);
+$limit   = Request::getInt('limit', $helper->getConfig('userpager'));
+$balId   = Request::getInt('bal_id', 0);
+$balType = Request::getInt('bal_type', 0);
 
 $GLOBALS['xoopsTpl']->assign('xoops_icons32_url', XOOPS_ICONS32_URL);
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icons_url_32', WGSIMPLEACC_ICONS_URL . '/32/');
 
 $keywords = [];
 
 $GLOBALS['xoopsTpl']->assign('showItem', $balId > 0);
+$GLOBALS['xoopsTpl']->assign('table_type', $helper->getConfig('table_type'));
+$GLOBALS['xoopsTpl']->assign('balTypeFinal', Constants::BALANCE_TYPE_FINAL);
+$GLOBALS['xoopsTpl']->assign('balTypeTemporary', Constants::BALANCE_TYPE_TEMPORARY);
 
 switch ($op) {
     case 'precalc':
@@ -63,24 +68,29 @@ switch ($op) {
         $balanceToObj = \DateTime::createFromFormat(Utility::CustomDateFormat(), $balTo);
         $balanceTo = $balanceToObj->getTimestamp();
 
-        ///check whether balance already exists
-        $crBalances = new \CriteriaCompo();
-        $crBalances->add(new \Criteria('bal_from', $balanceFrom, '>='));
-        $crBalances->add(new \Criteria('bal_from', $balanceTo, '<='));
-        $countBalances = $balancesHandler->getCount($crBalances);
-        if ($countBalances > 0) {
-            \redirect_header('balances.php?op=list', 3, \_MA_WGSIMPLEACC_BALANCE_DATEUSED);
+        if (Constants::BALANCE_TYPE_FINAL == $balType) {
+            ///check whether balance already exists
+            $crBalances = new \CriteriaCompo();
+            $crBalances->add(new \Criteria('bal_from', $balanceFrom, '>='));
+            $crBalances->add(new \Criteria('bal_from', $balanceTo, '<='));
+            $crBalances->add(new \Criteria('bal_status', Constants::STATUS_APPROVED));
+            $countBalances = $balancesHandler->getCount($crBalances);
+            if ($countBalances > 0) {
+                \redirect_header('balances.php?op=list', 3, \_MA_WGSIMPLEACC_BALANCE_DATEUSED);
+            }
+            unset($crBalances);
+            $crBalances = new \CriteriaCompo();
+            $crBalances->add(new \Criteria('bal_to', $balanceFrom, '>='));
+            $crBalances->add(new \Criteria('bal_to', $balanceTo, '<='));
+            $crBalances->add(new \Criteria('bal_status', Constants::STATUS_APPROVED));
+            $countBalances = $balancesHandler->getCount($crBalances);
+            if ($countBalances > 0) {
+                \redirect_header('balances.php?op=list', 3, \_MA_WGSIMPLEACC_BALANCE_DATEUSED);
+            }
+            unset($crBalances);
         }
-        unset($crBalances);
-        $crBalances = new \CriteriaCompo();
-        $crBalances->add(new \Criteria('bal_to', $balanceFrom, '>='));
-        $crBalances->add(new \Criteria('bal_to', $balanceTo, '<='));
-        $countBalances = $balancesHandler->getCount($crBalances);
-        if ($countBalances > 0) {
-            \redirect_header('balances.php?op=list', 3, \_MA_WGSIMPLEACC_BALANCE_DATEUSED);
-        }
-        unset($crBalances);
         $GLOBALS['xoopsTpl']->assign('balancesCalc', true);
+        $GLOBALS['xoopsTpl']->assign('balType', $balType);
 
         //get all assets
         $assetsCurrent = $assetsHandler->getAssetsValues($balanceFrom, $balanceTo, true);
@@ -112,18 +122,27 @@ switch ($op) {
 
         $GLOBALS['xoopsTpl']->assign('balancesList', true);
         $balances = [];
-        $sql = 'SELECT `bal_from`, `bal_to`, Sum(`bal_amountstart`) AS Sum_bal_amountstart, Sum(`bal_amountend`) AS Sum_bal_amountend, bal_datecreated, bal_submitter ';
+
+        $sql = 'SELECT `bal_from`, `bal_to`, Sum(`bal_amountstart`) AS Sum_bal_amountstart, Sum(`bal_amountend`) AS Sum_bal_amountend, bal_status, bal_datecreated, bal_submitter ';
         $sql .= 'FROM ' . $GLOBALS['xoopsDB']->prefix('wgsimpleacc_balances') . ' ';
         $sql .= 'GROUP BY ' . $GLOBALS['xoopsDB']->prefix('wgsimpleacc_balances') . '.bal_from, ';
         $sql .= $GLOBALS['xoopsDB']->prefix('wgsimpleacc_balances') . '.bal_to, ';
+        $sql .= $GLOBALS['xoopsDB']->prefix('wgsimpleacc_balances') . '.bal_status, ';
         $sql .= $GLOBALS['xoopsDB']->prefix('wgsimpleacc_balances') . '.bal_datecreated, ';
         $sql .= $GLOBALS['xoopsDB']->prefix('wgsimpleacc_balances') . '.bal_submitter ';
-        $sql .= 'ORDER BY ' . $GLOBALS['xoopsDB']->prefix('wgsimpleacc_balances') . '.bal_from DESC;';
+        $sql .= 'ORDER BY ' . $GLOBALS['xoopsDB']->prefix('wgsimpleacc_balances') . '.bal_datecreated DESC;';
         $result = $GLOBALS['xoopsDB']->query($sql);
-        while (list($balFrom, $balTo, $balAmountStart, $balAmountEnd, $balDatecreated, $balSubmitter) = $GLOBALS['xoopsDB']->fetchRow($result)) {
+        while (list($balFrom, $balTo, $balAmountStart, $balAmountEnd, $balStatus, $balDatecreated, $balSubmitter) = $GLOBALS['xoopsDB']->fetchRow($result)) {
             $balFromText = \formatTimestamp($balFrom, 's');
             $balToText   = \formatTimestamp($balTo, 's');
+            $balType = 0;
+            if (Constants::STATUS_APPROVED == $balStatus) {
+                $balType = Constants::BALANCE_TYPE_FINAL;
+            } else if (Constants::STATUS_TEMPORARY == $balStatus) {
+                $balType = Constants::BALANCE_TYPE_TEMPORARY;
+            }
             $balances[] = [
+                'type' => $balType,
                 'bal_from' => $balFrom,
                 'from' => $balFromText,
                 'bal_to' => $balTo,
@@ -174,9 +193,6 @@ switch ($op) {
                 $pagenav = new \XoopsPageNav($balancesCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
-            $GLOBALS['xoopsTpl']->assign('type', $helper->getConfig('table_type'));
-            $GLOBALS['xoopsTpl']->assign('divideby', $helper->getConfig('divideby'));
-            $GLOBALS['xoopsTpl']->assign('numb_col', $helper->getConfig('numb_col'));
         }
 
         // Breadcrumbs
@@ -194,23 +210,49 @@ switch ($op) {
         $balanceTo   = Request::getInt('balanceTo');
         $submitter   = $GLOBALS['xoopsUser']->getVar('uid');
 
-        //check whether balance already exists
-        $crBalances = new \CriteriaCompo();
-        $crBalances->add(new \Criteria('bal_from', $balanceFrom, '>='));
-        $crBalances->add(new \Criteria('bal_from', $balanceTo, '<='));
-        $countBalances = $balancesHandler->getCount($crBalances);
-        if ($countBalances > 0) {
-            \redirect_header('balances.php?op=list', 3, \_MA_WGSIMPLEACC_BALANCE_DATEUSED);
+        if (Constants::BALANCE_TYPE_FINAL == $balType) {
+            //check whether balance already exists
+            $crBalances = new \CriteriaCompo();
+            $crBalances->add(new \Criteria('bal_from', $balanceFrom, '>='));
+            $crBalances->add(new \Criteria('bal_from', $balanceTo, '<='));
+            $crBalances->add(new \Criteria('bal_status', Constants::STATUS_APPROVED));
+            $countBalances = $balancesHandler->getCount($crBalances);
+            if ($countBalances > 0) {
+                \redirect_header('balances.php?op=list', 3, \_MA_WGSIMPLEACC_BALANCE_DATEUSED);
+            }
+            unset($crBalances);
+            $crBalances = new \CriteriaCompo();
+            $crBalances->add(new \Criteria('bal_to', $balanceFrom, '>='));
+            $crBalances->add(new \Criteria('bal_to', $balanceTo, '<='));
+            $crBalances->add(new \Criteria('bal_status', Constants::STATUS_APPROVED));
+            $countBalances = $balancesHandler->getCount($crBalances);
+            if ($countBalances > 0) {
+                \redirect_header('balances.php?op=list', 3, \_MA_WGSIMPLEACC_BALANCE_DATEUSED);
+            }
+            unset($crBalances);
+        } else {
+            //check whether balance already exists
+            $crBalances = new \CriteriaCompo();
+            $crBalances->add(new \Criteria('bal_from', $balanceFrom, '>='));
+            $crBalances->add(new \Criteria('bal_from', $balanceTo, '<='));
+            $crBalances->add(new \Criteria('bal_status', Constants::STATUS_TEMPORARY));
+            $countBalances = $balancesHandler->getCount($crBalances);
+            if ($countBalances > 0) {
+                //delete existing one
+                $balancesHandler->deleteAll($crBalances);
+            }
+            unset($crBalances);
+            $crBalances = new \CriteriaCompo();
+            $crBalances->add(new \Criteria('bal_to', $balanceFrom, '>='));
+            $crBalances->add(new \Criteria('bal_to', $balanceTo, '<='));
+            $crBalances->add(new \Criteria('bal_status', Constants::STATUS_TEMPORARY));
+            $countBalances = $balancesHandler->getCount($crBalances);
+            if ($countBalances > 0) {
+                //delete existing one
+                $balancesHandler->deleteAll($crBalances);
+            }
+            unset($crBalances);
         }
-        unset($crBalances);
-        $crBalances = new \CriteriaCompo();
-        $crBalances->add(new \Criteria('bal_to', $balanceFrom, '>='));
-        $crBalances->add(new \Criteria('bal_to', $balanceTo, '<='));
-        $countBalances = $balancesHandler->getCount($crBalances);
-        if ($countBalances > 0) {
-            \redirect_header('balances.php?op=list', 3, \_MA_WGSIMPLEACC_BALANCE_DATEUSED);
-        }
-        unset($crBalances);
 
         //create balance for each asset
         //get all assets
@@ -225,7 +267,11 @@ switch ($op) {
             $balancesObj->setVar('bal_curid', $asset['curid']);
             $balancesObj->setVar('bal_amountstart', $asset['amount_start_val']);
             $balancesObj->setVar('bal_amountend', $asset['amount_end_val']);
-            $balancesObj->setVar('bal_status', Request::getInt('bal_status', Constants::STATUS_APPROVED));
+            if (Constants::BALANCE_TYPE_FINAL == $balType) {
+                $balancesObj->setVar('bal_status', Request::getInt('bal_status', Constants::STATUS_APPROVED));
+            } else {
+                $balancesObj->setVar('bal_status', Request::getInt('bal_status', Constants::STATUS_TEMPORARY));
+            }
             $balancesObj->setVar('bal_datecreated', $balDatecreated);
             $balancesObj->setVar('bal_submitter', $submitter);
             // Insert Data
@@ -238,8 +284,12 @@ switch ($op) {
                 $crTransactions->add(new \Criteria('tra_date', $balanceTo, '<='));
                 $crTransactions->add(new \Criteria('tra_asid', $asset['id']));
                 $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_SUBMITTED, '>'));
-                $transactionsHandler->updateAll('tra_status', Constants::STATUS_LOCKED, $crTransactions, true);
-                $transactionsHandler->updateAll('tra_balid', $newBalId, $crTransactions, true);
+                if (Constants::BALANCE_TYPE_FINAL == $balType) {
+                    $transactionsHandler->updateAll('tra_status', Constants::STATUS_LOCKED, $crTransactions, true);
+                    $transactionsHandler->updateAll('tra_balid', $newBalId, $crTransactions, true);
+                } else {
+                    $transactionsHandler->updateAll('tra_balidt', $newBalId, $crTransactions, true);
+                }
 
                 unset($crTransactions);
 
@@ -283,6 +333,7 @@ switch ($op) {
         if (!$permissionsHandler->getPermBalancesSubmit()) {
             \redirect_header('balances.php?op=list', 3, _NOPERM);
         }
+        $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/forms.js');
         // Form Create
         $balancesObj = $balancesHandler->create();
         $form = $balancesObj->getFormBalances('balances.php');
@@ -291,6 +342,56 @@ switch ($op) {
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_BALANCES, 'link' => 'balances.php?op=list'];
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_BALANCE_SUBMIT];
+        break;
+    case 'delete':
+        // Check permissions
+        if (!$permissionsHandler->getPermBalancesSubmit()) {
+            \redirect_header('balances.php?op=list', 3, _NOPERM);
+        }
+
+        $balanceFrom = Request::getInt('balanceFrom');
+        $balanceTo   = Request::getInt('balanceTo');
+
+        if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
+            $crBalances = new \CriteriaCompo();
+            $crBalances->add(new \Criteria('bal_from', $balanceFrom));
+            $crBalances->add(new \Criteria('bal_to', $balanceTo));
+            $crBalances->add(new \Criteria('bal_status', Constants::STATUS_TEMPORARY));
+            $countBalances = $balancesHandler->getCount($crBalances);
+            if ($countBalances > 0) {
+                $errors = 0;
+                $balancesAll = $balancesHandler->getAll($crBalances);
+                foreach (\array_keys($balancesAll) as $i) {
+                    $balances[$i] = $balancesAll[$i]->getValuesBalances();
+                    $balancesObj = $balancesHandler->get($i);
+                    if (!$balancesHandler->delete($balancesObj)) {
+                        $errors++;
+                    }
+                    unset($balancesObj);
+                    //reset bal_id in table transactions
+                    $crTransactions = new \CriteriaCompo();
+                    $crTransactions->add(new \Criteria('tra_balidt', $i));
+                    $transactionsHandler->updateAll('tra_balidt', '0', $crTransactions, true);
+                    unset($crTransactions);
+                }
+                if (0 == $errors) {
+                    \redirect_header('balances.php?op=list', 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
+                } else {
+                    \redirect_header('balances.php?op=list', 3, \_MA_WGSIMPLEACC_FORM_DELETE_ERROR);
+                }
+            }
+            unset($crBalances);
+        } else {
+            $xoopsconfirm = new Common\XoopsConfirm(
+                ['ok' => 1, 'balanceFrom' => $balanceFrom, 'balanceTo' => $balanceTo, 'op' => 'delete'],
+                $_SERVER['REQUEST_URI'],
+                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, sprintf(_MA_WGSIMPLEACC_BALANCE_DELETE_FROMTO, date(_SHORTDATESTRING, $balanceFrom), date(_SHORTDATESTRING, $balanceTo))));
+            $form = $xoopsconfirm->getFormXoopsConfirm();
+            $GLOBALS['xoopsTpl']->assign('form', $form->render());
+            // Breadcrumbs
+            $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_BALANCES, 'link' => 'balances.php?op=list'];
+            $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_BALANCE_DELETE];
+        }
         break;
 }
 

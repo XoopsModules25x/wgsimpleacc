@@ -1,0 +1,22 @@
+/*css for nested checkbox list in output*/
+
+.wgsa-checkboxlist,
+.wgsa-checkboxlist ul{
+    list-style: none;
+}
+.wgsa-checkboxlist-nested li {
+    display:inline;
+}
+.wgsa-checkboxlist > li:first-child{
+    margin:0;
+}
+.wgsa-checkboxlist > li{
+    margin:20px 0 10px 0;
+}
+.wgsa-checkboxlist-nested > li > input{
+    margin:10px 0 0 0;
+}
+.wgsa-input-label {
+    margin:0 10px 0 10px;
+}
+

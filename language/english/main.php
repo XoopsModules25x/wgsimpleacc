@@ -139,6 +139,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_TRANSACTION_CLASS', 'Class');
 \define('_MA_WGSIMPLEACC_TRANSACTION_FILES', 'Files');
 \define('_MA_WGSIMPLEACC_TRANSACTION_BALID', 'Balance');
+\define('_MA_WGSIMPLEACC_TRANSACTION_BALIDT', 'Temporary balance');
 \define('_MA_WGSIMPLEACC_TRANSACTION_HIST', 'History');
 \define('_MA_WGSIMPLEACC_TRANSACTION_TEMPLATE', 'Template');
 // Allocation
@@ -250,7 +251,10 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_BALANCES_LIST', 'List of Balances');
 \define('_MA_WGSIMPLEACC_BALANCE_SUBMIT', 'Create balance');
 \define('_MA_WGSIMPLEACC_BALANCE_SUBMIT_FINAL', 'Create balance finally');
+\define('_MA_WGSIMPLEACC_BALANCE_SUBMIT_TEMPORARY', 'Create temporary balance');
 \define('_MA_WGSIMPLEACC_BALANCE_PRECALC', 'Pre-Calculate');
+\define('_MA_WGSIMPLEACC_BALANCE_DELETE', 'Delete balance');
+\define('_MA_WGSIMPLEACC_BALANCE_DELETE_FROMTO', 'Balance from %s to %s');
 \define('_MA_WGSIMPLEACC_BALANCES_TIMELINE', 'Development of assets per balance');
 \define('_MA_WGSIMPLEACC_BALANCE_DETAILS', 'Details of balance');
 // Caption of Balance
@@ -266,9 +270,12 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_BALANCE_CALC_PERIOD', 'Calculated values for period from %f to %t');
 \define('_MA_WGSIMPLEACC_BALANCE_DATE', 'Last date of asset');
 \define('_MA_WGSIMPLEACC_BALANCE_VALUESTART', 'Value asset (at start)');
-\define('_MA_WGSIMPLEACC_BALANCE_VALUEEND', 'Calculated value at end');
+\define('_MA_WGSIMPLEACC_BALANCE_VALUEEND', 'Calculated value (at end)');
 \define('_MA_WGSIMPLEACC_BALANCE_DATEUSED', "The 'date from' or 'date to' is within the period of another balance");
 \define('_MA_WGSIMPLEACC_BALANCE_ERRORS', 'Balances were created, but errors occured');
+\define('_MA_WGSIMPLEACC_BALANCE_TYPE', 'Balance type');
+\define('_MA_WGSIMPLEACC_BALANCE_TYPE_TEMPORARY', 'Interim balance');
+\define('_MA_WGSIMPLEACC_BALANCE_TYPE_FINAL', 'Final balance');
 // Output balances
 \define('_MA_WGSIMPLEACC_BALANCES_OUT_TOTAL', 'Total');
 \define('_MA_WGSIMPLEACC_BALANCES_OUT_SUMS', 'Total');
@@ -411,6 +418,7 @@ require_once __DIR__ . '/admin.php';
 // Form
 \define('_MA_WGSIMPLEACC_FORM_OK', 'Successfully saved');
 \define('_MA_WGSIMPLEACC_FORM_DELETE_OK', 'Successfully deleted');
+\define('_MA_WGSIMPLEACC_FORM_DELETE_ERROR', 'Error when deleting data');
 \define('_MA_WGSIMPLEACC_FORM_SURE_DELETE', "Are you sure to delete: <b><span style='color : Red;'>%s </span></b>");
 \define('_MA_WGSIMPLEACC_FORM_SURE_RENEW', "Are you sure to update: <b><span style='color : Red;'>%s </span></b>");
 \define('_MA_WGSIMPLEACC_INVALID_PARAM', 'Invalid parameter');
@@ -432,6 +440,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_STATUS_BROKEN', 'Broken');
 \define('_MA_WGSIMPLEACC_STATUS_CREATED', 'Created');
 \define('_MA_WGSIMPLEACC_STATUS_LOCKED', 'Locked');
+\define('_MA_WGSIMPLEACC_STATUS_TEMPORARY', 'Temporary');
 //PDF files
 \define('_MA_WGSIMPLEACC_PDF_BUTTON', 'Output as PDF');
 \define('_MA_WGSIMPLEACC_PDF_TRANAME', 'Transaction_%y_%n');

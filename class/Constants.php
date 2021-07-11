@@ -29,6 +29,7 @@ namespace XoopsModules\Wgsimpleacc;
 interface Constants
 {
     // Constants for tables
+    /*
     public const TABLE_ACCOUNTS = 0;
     public const TABLE_TRANSACTIONS = 1;
     public const TABLE_ALLOCATIONS = 2;
@@ -36,7 +37,13 @@ interface Constants
     public const TABLE_CURRENCIES = 4;
     public const TABLE_TAXES = 5;
     public const TABLE_FILES = 6;
-    public const TABLE_IMAGES = 7;
+    public const TABLE_TRAHISTORIES = 7;
+    public const TABLE_FILHISTORIES = 8;
+    public const TABLE_BALANCES = 9;
+    public const TABLE_OUTTEMPLATES = 10;
+    public const TABLE_TRATEMPLATES = 11;
+    public const TABLE_CLIENTS = 12;
+    */
 
     // Constants for status
     public const STATUS_NONE      = 0;
@@ -45,6 +52,7 @@ interface Constants
     public const STATUS_OFFLINE   = 3;
     public const STATUS_SUBMITTED = 4;
     public const STATUS_APPROVED  = 7;
+    public const STATUS_TEMPORARY = 8;
     public const STATUS_LOCKED    = 9;
 
     // Constants for permissions
@@ -82,6 +90,9 @@ interface Constants
     public const FILTER_TYPEALL    = 0;
     public const FILTER_TYPECUSTOM = 1;
 
+    //Type of balance
+    public const BALANCE_TYPE_TEMPORARY = 1;
+    public const BALANCE_TYPE_FINAL = 2;
     //Output balances
     public const BALANCES_OUT_LEVEL_SKIP = 0;
     public const BALANCES_OUT_LEVEL_ALLOC1 = 1;

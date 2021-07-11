@@ -81,7 +81,7 @@ switch ($op) {
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
         }
-
+        $GLOBALS['xoopsTpl']->assign('table_type', $helper->getConfig('table_type'));
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_OUTTEMPLATES];
         break;

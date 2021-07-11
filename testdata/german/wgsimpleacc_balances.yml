@@ -6,7 +6,7 @@
     bal_curid: '1'
     bal_amountstart: '0.00'
     bal_amountend: '392.00'
-    bal_status: '3'
+    bal_status: '7'
     bal_datecreated: '1605173557'
     bal_submitter: '1'
 -
@@ -17,7 +17,7 @@
     bal_curid: '1'
     bal_amountstart: '0.00'
     bal_amountend: '317.21'
-    bal_status: '3'
+    bal_status: '7'
     bal_datecreated: '1605173557'
     bal_submitter: '1'
 -
@@ -28,7 +28,7 @@
     bal_curid: '1'
     bal_amountstart: '0.00'
     bal_amountend: '63.85'
-    bal_status: '3'
+    bal_status: '7'
     bal_datecreated: '1605173557'
     bal_submitter: '1'
 -
@@ -39,7 +39,7 @@
     bal_curid: '1'
     bal_amountstart: '0.00'
     bal_amountend: '0.00'
-    bal_status: '3'
+    bal_status: '7'
     bal_datecreated: '1605173557'
     bal_submitter: '1'
 -
@@ -50,7 +50,7 @@
     bal_curid: '1'
     bal_amountstart: '0.00'
     bal_amountend: '10.00'
-    bal_status: '3'
+    bal_status: '7'
     bal_datecreated: '1605173557'
     bal_submitter: '1'
 -
@@ -61,7 +61,7 @@
     bal_curid: '1'
     bal_amountstart: '392.00'
     bal_amountend: '-469.44'
-    bal_status: '3'
+    bal_status: '7'
     bal_datecreated: '1605173584'
     bal_submitter: '1'
 -
@@ -72,7 +72,7 @@
     bal_curid: '1'
     bal_amountstart: '317.21'
     bal_amountend: '293.99'
-    bal_status: '3'
+    bal_status: '7'
     bal_datecreated: '1605173584'
     bal_submitter: '1'
 -
@@ -83,7 +83,7 @@
     bal_curid: '1'
     bal_amountstart: '63.85'
     bal_amountend: '2106.05'
-    bal_status: '3'
+    bal_status: '7'
     bal_datecreated: '1605173584'
     bal_submitter: '1'
 -
@@ -94,7 +94,7 @@
     bal_curid: '1'
     bal_amountstart: '0.00'
     bal_amountend: '0.00'
-    bal_status: '3'
+    bal_status: '7'
     bal_datecreated: '1605173584'
     bal_submitter: '1'
 -
@@ -105,7 +105,7 @@
     bal_curid: '1'
     bal_amountstart: '10.00'
     bal_amountend: '10.00'
-    bal_status: '3'
+    bal_status: '7'
     bal_datecreated: '1605173584'
     bal_submitter: '1'
 -
@@ -116,7 +116,7 @@
     bal_curid: '1'
     bal_amountstart: '-469.44'
     bal_amountend: '1331.03'
-    bal_status: '3'
+    bal_status: '7'
     bal_datecreated: '1605173598'
     bal_submitter: '1'
 -
@@ -127,7 +127,7 @@
     bal_curid: '1'
     bal_amountstart: '293.99'
     bal_amountend: '296.04'
-    bal_status: '3'
+    bal_status: '7'
     bal_datecreated: '1605173598'
     bal_submitter: '1'
 -
@@ -138,7 +138,7 @@
     bal_curid: '1'
     bal_amountstart: '2106.05'
     bal_amountend: '1806.07'
-    bal_status: '3'
+    bal_status: '7'
     bal_datecreated: '1605173598'
     bal_submitter: '1'
 -
@@ -149,7 +149,7 @@
     bal_curid: '1'
     bal_amountstart: '0.00'
     bal_amountend: '0.00'
-    bal_status: '3'
+    bal_status: '7'
     bal_datecreated: '1605173598'
     bal_submitter: '1'
 -
@@ -160,6 +160,6 @@
     bal_curid: '1'
     bal_amountstart: '10.00'
     bal_amountend: '10.00'
-    bal_status: '3'
+    bal_status: '7'
     bal_datecreated: '1605173598'
     bal_submitter: '1'
