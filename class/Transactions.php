@@ -62,6 +62,7 @@ class Transactions extends \XoopsObject
         $this->initVar('tra_comments', \XOBJ_DTYPE_INT);
         $this->initVar('tra_class', \XOBJ_DTYPE_INT);
         $this->initVar('tra_balid', \XOBJ_DTYPE_INT);
+        $this->initVar('tra_balidt', \XOBJ_DTYPE_INT);
         $this->initVar('tra_hist', \XOBJ_DTYPE_TXTBOX);
         $this->initVar('tra_datecreated', \XOBJ_DTYPE_INT);
         $this->initVar('tra_submitter', \XOBJ_DTYPE_INT);
@@ -288,6 +289,8 @@ class Transactions extends \XoopsObject
         $traComments = $this->isNew() ? 0 : $this->getVar('tra_comments');
         // Form Text traBalid
         $traBalid = $this->isNew() ? 0 : $this->getVar('tra_balid');
+        // Form Text traBalidt
+        $traBalidt = $this->isNew() ? 0 : $this->getVar('tra_balidt');
         // Form Text traHist
         $traHist = $this->isNew() ? 0 : $this->getVar('tra_hist');
         // Form Text Date Select traDatecreated
@@ -311,6 +314,12 @@ class Transactions extends \XoopsObject
             $traBalidSelect->addOption(0, '');
             $traBalidSelect->addOptionArray($balancesHandler->getList());
             $form->addElement($traBalidSelect);
+            // Form Select traBalidt
+            $traBalidtSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_BALIDT, 'tra_balid', $traBalidt);
+            $balancesHandler = $helper->getHandler('Balances');
+            $traBalidtSelect->addOption(0, '');
+            $traBalidtSelect->addOptionArray($balancesHandler->getList());
+            $form->addElement($traBalidtSelect);
             $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_TRANSACTION_COMMENTS, 'tra_comments', 50, 255, $traComments));
             $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_TRANSACTION_HIST, 'tra_hist', 20, 150, $traHist));
             $form->addElement(new \XoopsFormTextDateSelect(\_MA_WGSIMPLEACC_DATECREATED, 'tra_datecreated', '', $traDatecreated));
@@ -435,6 +444,7 @@ class Transactions extends \XoopsObject
         }
         $ret['class_text']  = $class_text;
         $ret['balid']       = $this->getVar('tra_balid');
+        $ret['balidt']      = $this->getVar('tra_balidt');
         $ret['hist']        = $this->getVar('tra_hist');
         $ret['datecreated'] = \formatTimestamp($this->getVar('tra_datecreated'), 's');
         $ret['submitter']   = \XoopsUser::getUnameFromId($this->getVar('tra_submitter'));

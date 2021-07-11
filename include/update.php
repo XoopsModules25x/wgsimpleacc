@@ -170,6 +170,7 @@ function wgsimpleacc_check_db($module)
                   `tra_comments` INT(10) NOT NULL DEFAULT '0',
                   `tra_class` INT(10) NOT NULL DEFAULT '0',
                   `tra_balid` INT(10) NOT NULL DEFAULT '0',
+                  `tra_balidt` INT(10) NOT NULL DEFAULT '0',
                   `tra_hist` INT(1) NOT NULL DEFAULT '0',
                   `tra_datecreated` INT(10) NOT NULL DEFAULT '0',
                   `tra_submitter` INT(10) NOT NULL DEFAULT '0',
@@ -200,7 +201,7 @@ function wgsimpleacc_check_db($module)
     $check   = $GLOBALS['xoopsDB']->queryF("SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME='$table'");
     $numRows = $GLOBALS['xoopsDB']->getRowsNum($check);
     if (!$numRows) {
-        // create new table 'wgsimpleacc_trahistories'
+        // create new table 'wgsimpleacc_clients'
         $sql = "CREATE TABLE `$table` (
                   `cli_id` INT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
                   `cli_name` TEXT NOT NULL ,
@@ -235,12 +236,36 @@ function wgsimpleacc_check_db($module)
             $ret = false;
         }
     }
+    $table   = $GLOBALS['xoopsDB']->prefix('wgsimpleacc_transactions');
+    $field   = 'tra_balidt';
+    $check   = $GLOBALS['xoopsDB']->queryF('SHOW COLUMNS FROM `' . $table . "` LIKE '" . $field . "'");
+    $numRows = $GLOBALS['xoopsDB']->getRowsNum($check);
+    if (!$numRows) {
+        $sql = "ALTER TABLE `$table` ADD `$field` INT(10) NOT NULL DEFAULT '0' AFTER `tra_balid`;";
+        if (!$result = $GLOBALS['xoopsDB']->queryF($sql)) {
+            xoops_error($GLOBALS['xoopsDB']->error() . '<br>' . $sql);
+            $module->setErrors("Error when adding '$field' to table '$table'.");
+            $ret = false;
+        }
+    }
     $table   = $GLOBALS['xoopsDB']->prefix('wgsimpleacc_trahistories');
     $field   = 'tra_cliid';
     $check   = $GLOBALS['xoopsDB']->queryF('SHOW COLUMNS FROM `' . $table . "` LIKE '" . $field . "'");
     $numRows = $GLOBALS['xoopsDB']->getRowsNum($check);
     if (!$numRows) {
         $sql = "ALTER TABLE `$table` ADD `$field` INT(10) NOT NULL DEFAULT '0' AFTER `tra_asid`;";
+        if (!$result = $GLOBALS['xoopsDB']->queryF($sql)) {
+            xoops_error($GLOBALS['xoopsDB']->error() . '<br>' . $sql);
+            $module->setErrors("Error when adding '$field' to table '$table'.");
+            $ret = false;
+        }
+    }
+    $table   = $GLOBALS['xoopsDB']->prefix('wgsimpleacc_trahistories');
+    $field   = 'tra_balidt';
+    $check   = $GLOBALS['xoopsDB']->queryF('SHOW COLUMNS FROM `' . $table . "` LIKE '" . $field . "'");
+    $numRows = $GLOBALS['xoopsDB']->getRowsNum($check);
+    if (!$numRows) {
+        $sql = "ALTER TABLE `$table` ADD `$field` INT(10) NOT NULL DEFAULT '0' AFTER `tra_balid`;";
         if (!$result = $GLOBALS['xoopsDB']->queryF($sql)) {
             xoops_error($GLOBALS['xoopsDB']->error() . '<br>' . $sql);
             $module->setErrors("Error when adding '$field' to table '$table'.");

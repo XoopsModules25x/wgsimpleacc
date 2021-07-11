@@ -32,3 +32,12 @@ function presetTraField() {
     xoopsGetElementById('tra_cliid').value = xoopsGetElementById('ttpl_cliid[' + vselected +  ']').value;
 
 }
+
+function presetBalType() {
+
+    var vselected = $("input:radio[name=bal_type]:checked").val()
+
+    xoopsGetElementById('bal_from').value = xoopsGetElementById('dateFrom[' + vselected +  ']').value;
+    xoopsGetElementById('bal_to').value = xoopsGetElementById('dateTo[' + vselected +  ']').value;
+
+}

@@ -87,20 +87,34 @@ class Balances extends \XoopsObject
             $action = $_SERVER['REQUEST_URI'];
         }
         $dtime = \DateTime::createFromFormat('Y-m-d', (date('Y') - 1) . '-1-1');
-        $dateFrom = $dtime->getTimestamp();
+        $dateFromY = $dtime->getTimestamp();
         $dtime = \DateTime::createFromFormat('Y-m-d', (date('Y') - 1) . '-12-31');
-        $dateTo = $dtime->getTimestamp();
+        $dateToY = $dtime->getTimestamp();
+
+        $dateToM = mktime(0, 0, 0, date('m'), 0);
+        $dateFromM = mktime(0, 0, 0, date('m')-1, 1);
+
         // Title
         $title = $this->isNew() ? \sprintf(\_MA_WGSIMPLEACC_BALANCE_ADD) : \sprintf(\_MA_WGSIMPLEACC_BALANCE_EDIT);
         // Get Theme Form
         \xoops_load('XoopsFormLoader');
         $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
+        $form->addElement(new \XoopsFormHidden('dateFrom[1]', date(_SHORTDATESTRING, $dateFromM)));
+        $form->addElement(new \XoopsFormHidden('dateTo[1]', date(_SHORTDATESTRING, $dateToM)));
+        $form->addElement(new \XoopsFormHidden('dateFrom[2]', date(_SHORTDATESTRING, $dateFromY)));
+        $form->addElement(new \XoopsFormHidden('dateTo[2]', date(_SHORTDATESTRING, $dateToY)));
+        // Form Select Status
+        $balStatusSelect = new \XoopsFormRadio(\_MA_WGSIMPLEACC_BALANCE_TYPE, 'bal_type', Constants::BALANCE_TYPE_TEMPORARY);
+        $balStatusSelect->addOption(Constants::BALANCE_TYPE_TEMPORARY, \_MA_WGSIMPLEACC_BALANCE_TYPE_TEMPORARY);
+        $balStatusSelect->addOption(Constants::BALANCE_TYPE_FINAL, \_MA_WGSIMPLEACC_BALANCE_TYPE_FINAL);
+        $balStatusSelect->setExtra(" onchange='presetBalType()' ");
+        $form->addElement($balStatusSelect);
         // Form Text Date Select balFrom
-        $balFrom = $this->isNew() ? $dateFrom : $this->getVar('bal_from');
+        $balFrom = $this->isNew() ? $dateFromM : $this->getVar('bal_from');
         $form->addElement(new \XoopsFormTextDateSelect(\_MA_WGSIMPLEACC_BALANCE_FROM, 'bal_from', '', $balFrom), true);
         // Form Text Date Select balTo
-        $balTo = $this->isNew() ? $dateTo : $this->getVar('bal_to');
+        $balTo = $this->isNew() ? $dateToM : $this->getVar('bal_to');
         $form->addElement(new \XoopsFormTextDateSelect(\_MA_WGSIMPLEACC_BALANCE_TO, 'bal_to', '', $balTo), true);
         // Form Select Status balStatus
         $balStatus = $this->isNew() ? Constants::STATUS_APPROVED : $this->getVar('bal_status');
@@ -126,7 +140,9 @@ class Balances extends \XoopsObject
             $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_BALANCE_AMOUNTEND, 'bal_amountend', 20, 150, $balAmountEnd), true);
             // Form Select Status
             $balStatusSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_BALANCE_STATUS, 'bal_status', $balStatus);
-            //$balStatusSelect->addOption(Constants::STATUS_CREATED, \_MA_WGSIMPLEACC_STATUS_CREATED);
+            $balStatusSelect->addOption(Constants::STATUS_NONE, \_MA_WGSIMPLEACC_STATUS_NONE);
+            $balStatusSelect->addOption(Constants::STATUS_OFFLINE, \_MA_WGSIMPLEACC_STATUS_OFFLINE);
+            $balStatusSelect->addOption(Constants::STATUS_TEMPORARY, \_MA_WGSIMPLEACC_STATUS_TEMPORARY);
             $balStatusSelect->addOption(Constants::STATUS_APPROVED, \_MA_WGSIMPLEACC_STATUS_APPROVED);
             $form->addElement($balStatusSelect);
             // Form Text Date Select balDatecreated
@@ -179,6 +195,18 @@ class Balances extends \XoopsObject
         $status             = $this->getVar('bal_status');
         $ret['status']      = $status;
         $ret['status_text'] = Utility::getStatusText($status);
+        switch ($status) {
+            case 0:
+            default:
+                $ret['type'] = 0;
+                break;
+            case Constants::STATUS_TEMPORARY:
+                $ret['type'] = Constants::BALANCE_TYPE_TEMPORARY;
+                break;
+            case Constants::STATUS_APPROVED:
+                $ret['type'] = Constants::BALANCE_TYPE_FINAL;
+                break;
+        }
         $ret['datecreated'] = \formatTimestamp($this->getVar('bal_datecreated'), 's');
         $ret['submitter']   = \XoopsUser::getUnameFromId($this->getVar('bal_submitter'));
         return $ret;

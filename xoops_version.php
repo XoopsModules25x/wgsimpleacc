@@ -61,7 +61,7 @@ $modversion = [
     'module_website_url'  => 'www.xoops.org',
     'module_website_name' => 'XOOPS Project',
     'release'             => '03/22/2021',
-    'module_status'       => 'RC 3',
+    'module_status'       => 'RC 4',
     'system_menu'         => 1,
     'hasAdmin'            => 1,
     'hasMain'             => 1,
@@ -491,6 +491,26 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'default'     => 12,
     'options'     => ['_MI_WGSIMPLEACC_JANUARY' => 1, '_MI_WGSIMPLEACC_FEBRUARY' => 2, '_MI_WGSIMPLEACC_MARCH' => 3, '_MI_WGSIMPLEACC_APRIL' => 4, '_MI_WGSIMPLEACC_MAY' => 5, '_MI_WGSIMPLEACC_JUNE' => 6, '_MI_WGSIMPLEACC_JULY' => 7, '_MI_WGSIMPLEACC_AUGUST' => 8, '_MI_WGSIMPLEACC_SEPTEMBER' => 9, '_MI_WGSIMPLEACC_OCTOBER' => 10, '_MI_WGSIMPLEACC_NOVEMBER' => 11, '_MI_WGSIMPLEACC_DECEMBER' => 12],
+];
+// Balance : default setttings for output
+$modversion['config'][] = [
+    'name'        => 'balance_level_alloc',
+    'title'       => '_MI_WGSIMPLEACC_BALANCES_OUT_LEVEL_ALLOC',
+    'description' => '_MI_WGSIMPLEACC_BALANCES_OUT_LEVEL_DESC',
+    'formtype'    => 'select',
+    'valuetype'   => 'int',
+    'default'     => 2,
+    'options'     => ['_MI_WGSIMPLEACC_BALANCES_OUT_LEVEL_SKIP' => 0, '_MI_WGSIMPLEACC_BALANCES_OUT_LEVEL_ALLOC1' =>1, '_MI_WGSIMPLEACC_BALANCES_OUT_LEVEL_ALLOC2' => 2],
+];
+// Balance : default setttings for output
+$modversion['config'][] = [
+    'name'        => 'balance_level_acc',
+    'title'       => '_MI_WGSIMPLEACC_BALANCES_OUT_LEVEL_ACC',
+    'description' => '_MI_WGSIMPLEACC_BALANCES_OUT_LEVEL_DESC',
+    'formtype'    => 'select',
+    'valuetype'   => 'int',
+    'default'     => 2,
+    'options'     => ['_MI_WGSIMPLEACC_BALANCES_OUT_LEVEL_SKIP' => 0, '_MI_WGSIMPLEACC_BALANCES_OUT_LEVEL_ACC1' =>1, '_MI_WGSIMPLEACC_BALANCES_OUT_LEVEL_ACC2' => 2],
 ];
 // ------------------- Group header: optional components ------------------- //
 $modversion['config'][] = [

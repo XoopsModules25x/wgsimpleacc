@@ -46,8 +46,8 @@ require_once \XOOPS_ROOT_PATH . '/class/template.php';
 $pdfTpl = new $xoopsTpl();
 
 $balIds       = \explode(',',Request::getString('balIds'));
-$levelAlloc   = Request::getInt('level_alloc');
-$levelAccount = Request::getInt('level_account');
+$levelAlloc   = Request::getInt('level_alloc', $helper->getConfig('balance_level_alloc'));
+$levelAccount = Request::getInt('level_account', $helper->getConfig('balance_level_acc'));
 
 //add custom styles, astcpdf doesnt support a lot of css
 $pdfStyleTh = 'font-weight:bold;border-bottom:1px solid #ddd;';
