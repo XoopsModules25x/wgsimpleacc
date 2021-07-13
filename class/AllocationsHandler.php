@@ -192,10 +192,10 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
                 $childsAll .= '<span data-id="' . $itemsAll[$i]->getVar($itemId) . '" class="itemTitle">' . $itemsAll[$i]->getVar($itemName) . '</span>';
                 $childsAll .= '<span class="pull-right">';
                 $onlineText = (1 == (int)$itemsAll[$i]->getVar($itemOnline)) ? \_MA_WGSIMPLEACC_ONLINE : _MA_WGSIMPLEACC_OFFLINE;
-                $childsAll .= '<img class="wgsa-img-online" src="' . \WGSIMPLEACC_ICONS_URL . '/16/online' . $itemsAll[$i]->getVar($itemOnline) . '.png" title="' . $onlineText . '" alt="' . $onlineText . '">';
-                $childsAll .= '<a class="btn btn-sm btn-default wgsa-btn-list" href="transactions.php?op=list&displayfilter=1&amp;' . $itemId . '=' . $itemsAll[$i]->getVar($itemId) . '" title="' . \_MA_WGSIMPLEACC_TRANSACTIONS . '">' . \_MA_WGSIMPLEACC_TRANSACTIONS . '</a>';
-                $childsAll .= '<a class="btn btn-sm btn-primary wgsa-btn-list" href="allocations.php?op=edit&amp;' . $itemId . '=' . $itemsAll[$i]->getVar($itemId) . '" title="' . _EDIT . '">' . _EDIT . '</a>';
-                $childsAll .= '<a class="btn btn-sm btn-danger wgsa-btn-list" href="allocations.php?op=delete&amp;' . $itemId . '=' . $itemsAll[$i]->getVar($itemId) . '" title="' . _DELETE . '">' . _DELETE . '</a>';
+                $childsAll .= '<img class="wgsa-img-online" src="' . \WGSIMPLEACC_ICONS_URL . '/32/' . $itemsAll[$i]->getVar($itemOnline) . '.png" title="' . $onlineText . '" alt="' . $onlineText . '">';
+                $childsAll .= '<a class="btn btn btn-default wgsa-btn-list" href="transactions.php?op=list&displayfilter=1&amp;' . $itemId . '=' . $itemsAll[$i]->getVar($itemId) . '" title="' . \_MA_WGSIMPLEACC_TRANSACTIONS . '">' . \_MA_WGSIMPLEACC_TRANSACTIONS . '</a>';
+                $childsAll .= '<a class="btn btn btn-primary wgsa-btn-list" href="allocations.php?op=edit&amp;' . $itemId . '=' . $itemsAll[$i]->getVar($itemId) . '" title="' . _EDIT . '">' . _EDIT . '</a>';
+                $childsAll .= '<a class="btn btn btn-danger wgsa-btn-list" href="allocations.php?op=delete&amp;' . $itemId . '=' . $itemsAll[$i]->getVar($itemId) . '" title="' . _DELETE . '">' . _DELETE . '</a>';
                 $childsAll .= '</span>';
                 $childsAll .= '</span>';
                 $childsAll .= '</div>';
