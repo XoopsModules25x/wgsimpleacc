@@ -141,11 +141,11 @@ body {
 }
 
 .sidebar .nav-second-level li a {
-    padding-left: 45px;
+    padding-left: 40px;
 }
 
 .sidebar .nav-third-level li a {
-    padding-left: 52px;
+    padding-left: 55px;
 }
 
 @media(min-width:768px) {

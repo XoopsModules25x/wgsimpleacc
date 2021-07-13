@@ -137,15 +137,18 @@ if ($permissionsHandler->getPermTratemplatesView() || $permissionsHandler->getPe
     if ($permissionsHandler->getPermTratemplatesSubmit()) {
         $nav_items3[] = ['href' => 'tratemplates.php?op=list', 'icon' => '<i class="fa fa-list-ol fa-fw fa-lg"></i>','label' => \_MA_WGSIMPLEACC_TRATEMPLATES_LIST, 'sub_items3' => []];
         $nav_items3[] = ['href' => 'tratemplates.php?op=new', 'icon' => '<i class="fa fa-plus-square fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_TRATEMPLATE_SUBMIT, 'sub_items3' => []];
+        $nav_items2[] = ['href' => '#', 'icon' => '<i class="fa fa-paste fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_TRATEMPLATES, 'sub_items3' => $nav_items3];
+    } else {
+        $nav_items2[] = ['href' => 'tratemplates.php', 'icon' => '<i class="fa fa-paste fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_TRATEMPLATES, 'sub_items3' => $nav_items3];
     }
-    $nav_items2[] = ['href' => '#', 'icon' => '<i class="fa fa-paste fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_TRATEMPLATES, 'sub_items3' => $nav_items3];
-
     $nav_items3 = [];
     if ($permissionsHandler->getPermOuttemplatesSubmit()) {
         $nav_items3[] = ['href' => 'outtemplates.php?op=list', 'icon' => '<i class="fa fa-list-ol fa-fw fa-lg"></i>','label' => \_MA_WGSIMPLEACC_OUTTEMPLATES_LIST, 'sub_items3' => []];
         $nav_items3[] = ['href' => 'outtemplates.php?op=new', 'icon' => '<i class="fa fa-plus-square fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_OUTTEMPLATE_SUBMIT, 'sub_items3' => []];
+        $nav_items2[] = ['href' => '#', 'icon' => '<i class="fa fa-paste fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_OUTTEMPLATES, 'sub_items3' => $nav_items3];
+    } else {
+        $nav_items2[] = ['href' => 'outtemplates.php', 'icon' => '<i class="fa fa-paste fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_OUTTEMPLATES, 'sub_items3' => $nav_items3];
     }
-    $nav_items2[] = ['href' => '#', 'icon' => '<i class="fa fa-paste fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_OUTTEMPLATES, 'sub_items3' => $nav_items3];
     $nav_items1[] = ['href' => '#', 'icon' => '<i class="fa fa-paste fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_TEMPLATES, 'sub_items2' => $nav_items2];
 }
 if ($permissionsHandler->getPermBalancesView()) {
@@ -155,7 +158,7 @@ if ($permissionsHandler->getPermBalancesView()) {
         $nav_items2[] = ['href' => 'balances.php?op=new', 'icon' => '<i class="fa fa-plus-square fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_BALANCE_SUBMIT, 'sub_items2' => []];
         $nav_items1[] = ['href' => '#', 'icon' => '<i class="fa fa-tasks fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_BALANCES, 'sub_items2' => $nav_items2];
     } else {
-        $nav_items1[] = ['href' => 'assets.php', 'icon' => '<i class="fa fa-tasks fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_BALANCES_LIST];
+        $nav_items1[] = ['href' => 'balances.php', 'icon' => '<i class="fa fa-tasks fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_BALANCES_LIST];
     }
 }
 if ($permissionsHandler->getPermGlobalView()) {
@@ -168,7 +171,9 @@ if ($permissionsHandler->getPermGlobalView()) {
     if ($permissionsHandler->getPermBalancesView()) {
         $nav_items2[] = ['href' => 'statistics.php?op=balances', 'icon' => '<i class="fa fa-tasks fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_BALANCES, 'sub_items2' => []];
     }
-    $nav_items1[] = ['href' => '#', 'icon' => '<i class="fa fa-bar-chart-o fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_STATISTICS, 'sub_items2' => $nav_items2];
+    if ($permissionsHandler->getPermTransactionsView() || $permissionsHandler->getPermBalancesView()) {
+        $nav_items1[] = ['href' => '#', 'icon' => '<i class="fa fa-bar-chart-o fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_STATISTICS, 'sub_items2' => $nav_items2];
+    }
 }
 if ($permissionsHandler->getPermGlobalView()) {
     $nav_items2 = [];
@@ -178,7 +183,9 @@ if ($permissionsHandler->getPermGlobalView()) {
     if ($permissionsHandler->getPermBalancesView()) {
         $nav_items2[] = ['href' => 'outputs.php?op=balances', 'icon' => '<i class="fa fa-tasks fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_BALANCES, 'sub_items2' => []];
     }
-    $nav_items1[] = ['href' => '#', 'icon' => '<i class="fa fa-download fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_OUTPUTS, 'sub_items2' => $nav_items2];
+    if ($permissionsHandler->getPermTransactionsView() || $permissionsHandler->getPermBalancesView()) {
+        $nav_items1[] = ['href' => '#', 'icon' => '<i class="fa fa-download fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_OUTPUTS, 'sub_items2' => $nav_items2];
+    }
 }
 
 $GLOBALS['xoopsTpl']->assign('nav_items1', $nav_items1);

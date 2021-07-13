@@ -30,7 +30,7 @@
                                         <a href="<{$sub_item2.href|default:''}>" class="<{$sub_item2.aclass|default:''}>"><{$sub_item2.icon|default:''}> <{$sub_item2.label|default:''}>
                                             <{if $sub_item2.sub_items3|default:false}><span class="fa arrow"></span><{/if}></a>
                                         <{if $sub_item2.sub_items3|default:false}>
-                                            <ul class="nav nav-second-level">
+                                            <ul class="nav nav-third-level">
                                                 <{foreach item=sub_item3 from=$sub_item2.sub_items3}>
                                                     <li>
                                                         <a href="<{$sub_item3.href|default:''}>" class="<{$sub_item3.aclass|default:''}>"><{$sub_item3.icon|default:''}> <{$sub_item3.label|default:''}></a>

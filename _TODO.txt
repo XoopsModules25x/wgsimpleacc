@@ -4,8 +4,3 @@ https://www.jqueryscript.net/other/dashboard-starter-template-bootstrap.html
 freepdf integration?
 
 
-balances show details auch auf gleichen Zeitraum einschränken
-
-
-
-

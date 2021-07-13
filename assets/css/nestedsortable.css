@@ -55,8 +55,8 @@ li.mjs-nestedSortable-collapsed.mjs-nestedSortable-hovering div {
 
 .menuDiv {
 	background: #FFF;
-	padding:10px !important;
-    height:50px !important;
+	padding:5px !important;
+    height:55px !important;
 }
 
 .menuEdit {
@@ -66,6 +66,8 @@ li.mjs-nestedSortable-collapsed.mjs-nestedSortable-hovering div {
 .itemTitle {
 	vertical-align: middle;
 	cursor: pointer;
+	margin-top:20px;
+	margin-left:20px;
 }
 
 .deleteMenu {
