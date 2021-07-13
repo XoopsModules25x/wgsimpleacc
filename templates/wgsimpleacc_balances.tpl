@@ -20,9 +20,9 @@
                         <tr>
                             <td>
                                 <{if $balance.type|default:0 == $balTypeTemporary}>
-                                    <img src="<{$wgsimpleacc_icons_url_32}>/temporary.png" alt="<{$smarty.const._MA_WGSIMPLEACC_BALANCE_TYPE_TEMPORARY}>">
+                                    <img src="<{$wgsimpleacc_icons_url_32}>/temporary.png" alt="<{$smarty.const._MA_WGSIMPLEACC_BALANCE_TYPE_TEMPORARY}>" title="<{$smarty.const._MA_WGSIMPLEACC_BALANCE_TYPE_TEMPORARY}>">
                                 <{elseif $balance.type|default:0 == $balTypeFinal}>
-                                    <img src="<{$wgsimpleacc_icons_url_32}>/final.png" alt="<{$smarty.const._MA_WGSIMPLEACC_BALANCE_TYPE_FINAL}>">
+                                    <img src="<{$wgsimpleacc_icons_url_32}>/final.png" alt="<{$smarty.const._MA_WGSIMPLEACC_BALANCE_TYPE_FINAL}>" title="<{$smarty.const._MA_WGSIMPLEACC_BALANCE_TYPE_FINAL}>">
                                 <{/if}>
                             </td>
                             <td><{$balance.from}></td>
@@ -34,7 +34,7 @@
                             <td class="center">
                                 <a class='btn btn-success right' href='balances.php?op=details&amp;balanceFrom=<{$balance.bal_from}>&amp;balanceTo=<{$balance.bal_to}>' title='<{$smarty.const._MA_WGSIMPLEACC_DETAILS}>'><{$smarty.const._MA_WGSIMPLEACC_DETAILS}></a>
                                 <a class='btn btn-primary right' href='outputs.php?op=bal_output&amp;balanceFrom=<{$balance.bal_from}>&amp;balanceTo=<{$balance.bal_to}>' title='<{$smarty.const._MA_WGSIMPLEACC_OUTPUTS}>'><{$smarty.const._MA_WGSIMPLEACC_OUTPUTS}></a>
-                                <{if $balance.type|default:0 == $balTypeTemporary}>
+                                <{if $balance.type|default:0 == $balTypeTemporary && $permBalancesSubmit}>
                                     <a class='btn btn-danger right' href='balances.php?op=delete&amp;balanceFrom=<{$balance.bal_from}>&amp;balanceTo=<{$balance.bal_to}>' title='<{$smarty.const._MA_WGSIMPLEACC_BALANCE_DELETE}>'><{$smarty.const._MA_WGSIMPLEACC_BALANCE_DELETE}></a>
                                 <{/if}>
                             </td>
@@ -120,10 +120,12 @@
         <tfoot>
             <tr>
                 <td class="center" colspan="5">
-                    <{if $balType|default:0 == $balTypeFinal}>
-                        <a class='btn btn-primary' href='balances.php?op=save<{$balfilter}>&amp;bal_type=<{$balTypeFinal}>' title='<{$smarty.const._MA_WGSIMPLEACC_BALANCE_SUBMIT_FINAL}>'><{$smarty.const._MA_WGSIMPLEACC_BALANCE_SUBMIT_FINAL}></a>
-                    <{else}>
-                        <a class='btn btn-primary' href='balances.php?op=save<{$balfilter}>' title='<{$smarty.const._MA_WGSIMPLEACC_BALANCE_SUBMIT_TEMPORARY}>'><{$smarty.const._MA_WGSIMPLEACC_BALANCE_SUBMIT_TEMPORARY}></a>
+                    <{if $permBalancesSubmit}>
+                        <{if $balType|default:0 == $balTypeFinal}>
+                            <a class='btn btn-primary' href='balances.php?op=save<{$balfilter}>&amp;bal_type=<{$balTypeFinal}>' title='<{$smarty.const._MA_WGSIMPLEACC_BALANCE_SUBMIT_FINAL}>'><{$smarty.const._MA_WGSIMPLEACC_BALANCE_SUBMIT_FINAL}></a>
+                        <{else}>
+                            <a class='btn btn-primary' href='balances.php?op=save<{$balfilter}>' title='<{$smarty.const._MA_WGSIMPLEACC_BALANCE_SUBMIT_TEMPORARY}>'><{$smarty.const._MA_WGSIMPLEACC_BALANCE_SUBMIT_TEMPORARY}></a>
+                        <{/if}>
                     <{/if}>
                 </td>
             </tr>

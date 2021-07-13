@@ -10,7 +10,7 @@
                 <a id="toggleFormFilter" class='btn btn-default pull-right' href='#' title='<{$btnfilter}>'><{$btnfilter}></a>
             </div>
             <{if $formFilter|default:''}>
-            <div id="formFilter" class="row" style="display:<{$displayfilter}>">
+            <div id="formFilter" class="row" style="display:<{$displayfilter|default:''}>">
                 <div class="col-sm-12">
                     <{$formFilter}>
                 </div>

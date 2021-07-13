@@ -54,11 +54,13 @@ $GLOBALS['xoopsTpl']->assign('showItem', $balId > 0);
 $GLOBALS['xoopsTpl']->assign('table_type', $helper->getConfig('table_type'));
 $GLOBALS['xoopsTpl']->assign('balTypeFinal', Constants::BALANCE_TYPE_FINAL);
 $GLOBALS['xoopsTpl']->assign('balTypeTemporary', Constants::BALANCE_TYPE_TEMPORARY);
+$permBalancesSubmit = $permissionsHandler->getPermBalancesSubmit();
+$GLOBALS['xoopsTpl']->assign('permBalancesSubmit', $permBalancesSubmit);
 
 switch ($op) {
     case 'precalc':
         // Check permissions
-        if (!$permissionsHandler->getPermBalancesSubmit()) {
+        if (!$permBalancesSubmit) {
             \redirect_header('balances.php?op=list', 3, _NOPERM);
         }
         $balFrom = Request::getString('bal_from') . ' 00:00';
@@ -201,7 +203,7 @@ switch ($op) {
 
     case 'save':
         // Check permissions
-        if (!$permissionsHandler->getPermBalancesSubmit()) {
+        if (!$permBalancesSubmit) {
             \redirect_header('balances.php?op=list', 3, _NOPERM);
         }
 
@@ -330,7 +332,7 @@ switch ($op) {
 
     case 'new':
         // Check permissions
-        if (!$permissionsHandler->getPermBalancesSubmit()) {
+        if (!$permBalancesSubmit) {
             \redirect_header('balances.php?op=list', 3, _NOPERM);
         }
         $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/forms.js');
@@ -345,7 +347,7 @@ switch ($op) {
         break;
     case 'delete':
         // Check permissions
-        if (!$permissionsHandler->getPermBalancesSubmit()) {
+        if (!$permBalancesSubmit) {
             \redirect_header('balances.php?op=list', 3, _NOPERM);
         }
 

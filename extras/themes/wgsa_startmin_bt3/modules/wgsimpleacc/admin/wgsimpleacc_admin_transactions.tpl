@@ -23,6 +23,7 @@
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_COMMENTS}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_CLASS}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_BALID}></th>
+				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_BALIDT}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_HIST}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_DATECREATED}></th>
 				<th class="center"><{$smarty.const._MA_WGSIMPLEACC_SUBMITTER}></th>
@@ -51,6 +52,7 @@
 						<td class='center'><{$transaction.comments}></td>
 						<td class='center'><{$transaction.class_text}></td>
 						<td class='center'><{$transaction.balid}></td>
+						<td class='center'><{$transaction.balidt}></td>
 						<td class='center'><{$transaction.hist}></td>
 						<td class='center'><{$transaction.datecreated}></td>
 						<td class='center'><{$transaction.submitter}></td>
