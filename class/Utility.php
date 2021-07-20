@@ -708,4 +708,27 @@ var hasSelected = false; var selectBox = myform.item[A][amount];for (i = 0; i < 
     {
         return \ucfirst(\mb_strtolower(\trim($str)));
     }
+
+    /** function to replace html-tags by blank space
+     * cleaned text is for use in dropdowns
+     * @param $string
+     *
+     * @return string
+     */
+    public static function cleanTextDropdown($string) {
+
+        // ----- remove HTML TAGs -----
+        $string = preg_replace ('/<[^>]*>/', ' ', $string);
+
+        // ----- remove control characters -----
+        $string = str_replace("\r", '', $string);    // --- replace with empty space
+        $string = str_replace("\n", ' ', $string);   // --- replace with space
+        $string = str_replace("\t", ' ', $string);   // --- replace with space
+
+        // ----- remove multiple spaces -----
+        $string = trim(preg_replace('/ {2,}/', ' ', $string));
+
+        return $string;
+
+    }
 }
