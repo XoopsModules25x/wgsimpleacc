@@ -349,8 +349,8 @@ class Transactions extends \XoopsObject
             $form->addElement(new \XoopsFormHidden('tra_balid', $traBalid));
             $form->addElement(new \XoopsFormHidden('tra_comments', $traComments));
             $form->addElement(new \XoopsFormHidden('tra_hist', $traHist));
-            $form->addElement(new \XoopsFormHidden('tra_datecreated', $traDatecreated));
-            $form->addElement(new \XoopsFormHidden('tra_submitter', $traSubmitter));
+            $form->addElement(new \XoopsFormHidden('tra_datecreated', \time()));
+            $form->addElement(new \XoopsFormHidden('tra_submitter', $GLOBALS['xoopsUser']->uid()));
         }
         $form->addElement(new \XoopsFormHidden('start', $start));
         $form->addElement(new \XoopsFormHidden('limit', $limit));
@@ -396,7 +396,7 @@ class Transactions extends \XoopsObject
         $allocationsHandler   = $helper->getHandler('Allocations');
         $allocationsObj       = $allocationsHandler->get($this->getVar('tra_allid'));
         $ret['allocation']    = $allocationsObj->getVar('all_name');
-        $ret['date']          = \formatTimestamp($this->getVar('tra_date'), 's');
+        $ret['date']          = \formatTimestamp($this->getVar('tra_date'), _SHORTDATESTRING);
         $currenciesHandler    = $helper->getHandler('Currencies');
         $currenciesObj        = $currenciesHandler->get($this->getVar('tra_curid'));
         if (\is_object($currenciesObj)) {
@@ -442,12 +442,13 @@ class Transactions extends \XoopsObject
                 $class_text = \_MA_WGSIMPLEACC_CLASS_INCOME;
                 break;
         }
-        $ret['class_text']  = $class_text;
-        $ret['balid']       = $this->getVar('tra_balid');
-        $ret['balidt']      = $this->getVar('tra_balidt');
-        $ret['hist']        = $this->getVar('tra_hist');
-        $ret['datecreated'] = \formatTimestamp($this->getVar('tra_datecreated'), 's');
-        $ret['submitter']   = \XoopsUser::getUnameFromId($this->getVar('tra_submitter'));
+        $ret['class_text']      = $class_text;
+        $ret['balid']           = $this->getVar('tra_balid');
+        $ret['balidt']          = $this->getVar('tra_balidt');
+        $ret['hist']            = $this->getVar('tra_hist');
+        $ret['datecreated']     = \formatTimestamp($this->getVar('tra_datecreated'), _SHORTDATESTRING);
+        $ret['datetimecreated'] = \formatTimestamp($this->getVar('tra_datecreated'), _DATESTRING);
+        $ret['submitter']       = \XoopsUser::getUnameFromId($this->getVar('tra_submitter'));
         $filesHandler = $helper->getHandler('Files');
         $crFiles = new \CriteriaCompo();
         $crFiles->add(new \Criteria('fil_traid', $this->getVar('tra_id')));
