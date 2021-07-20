@@ -80,7 +80,7 @@ function wgsimpleacc_search($queryarray, $andor, $limit, $offset, $userid)
         $ret[] = [
             'image'  => 'assets/icons/16/transactions.png',
             'link'   => 'transactions.php?op=show&amp;tra_id=' . $transactionsAll[$i]->getVar('tra_id'),
-            'title'  => $transactionsAll[$i]->getVar('tra_desc'),
+            'title'  => \strip_tags($transactionsAll[$i]->getVar('tra_desc')),
             'time'   => $transactionsAll[$i]->getVar('tra_datecreated')
         ];
     }
@@ -131,7 +131,7 @@ function wgsimpleacc_search($queryarray, $andor, $limit, $offset, $userid)
         $ret[] = [
             'image'  => 'assets/icons/16/allocations.png',
             'link'   => 'allocations.php?op=show&amp;all_id=' . $allocationsAll[$i]->getVar('all_id'),
-            'title'  => $allocationsAll[$i]->getVar('all_name'),
+            'title'  => \strip_tags($allocationsAll[$i]->getVar('all_name')),
             'time'   => $allocationsAll[$i]->getVar('all_datecreated')
         ];
     }
@@ -182,7 +182,7 @@ function wgsimpleacc_search($queryarray, $andor, $limit, $offset, $userid)
         $ret[] = [
             'image'  => 'assets/icons/16/files.png',
             'link'   => 'files.php?op=show&amp;fil_id=' . $filesAll[$i]->getVar('fil_id'),
-            'title'  => $filesAll[$i]->getVar('fil_name'),
+            'title'  => \strip_tags($filesAll[$i]->getVar('fil_name')),
             'time'   => $filesAll[$i]->getVar('fil_datecreated')
         ];
     }
@@ -232,7 +232,7 @@ function wgsimpleacc_search($queryarray, $andor, $limit, $offset, $userid)
         $ret[] = [
             'image'  => 'assets/icons/16/clients.png',
             'link'   => 'clients.php?op=show&amp;cli_id=' . $clientsAll[$i]->getVar('cli_id'),
-            'title'  => $clientsAll[$i]->getVar('cli_name'),
+            'title'  => \strip_tags($clientsAll[$i]->getVar('cli_name')),
             'time'   => $clientsAll[$i]->getVar('cli_datecreated')
         ];
     }
