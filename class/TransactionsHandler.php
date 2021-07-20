@@ -251,9 +251,15 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
             $form->addElement(new \XoopsFormHidden('linebreak', ''));
             // Form Table clients
             $clientsHandler = $helper->getHandler('Clients');
+            $crClients = new \CriteriaCompo();
+            $crClients->setSort('cli_name');
+            $crClients->setOrder('ASC');
             $traCliidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_FILTERBY_CLIENT, 'cli_id', $cliId);
             $traCliidSelect->addOption(Constants::FILTER_TYPEALL, \_MA_WGSIMPLEACC_SHOW_ALL);
-            $traCliidSelect->addOptionArray($clientsHandler->getList());
+            $clientsAll = $clientsHandler->getAll($crClients);
+            foreach ($clientsAll as $client) {
+                $traCliidSelect->addOption($client->getVar('cli_id'), \strip_tags($client->getVar('cli_name')));
+            }
             $form->addElement($traCliidSelect);
         }
         if ('tra_output' === $op) {
