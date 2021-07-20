@@ -30,6 +30,6 @@
 		<td><{$transaction.nbfiles}></td>
 	<{/if}>
 	<td><{$transaction.status_text}></td>
-	<td><{$transaction.datecreated}></td>
+	<td><{$transaction.datetimecreated}></td>
 	<td><{$transaction.submitter}></td>
 </tr>
