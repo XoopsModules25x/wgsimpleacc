@@ -150,10 +150,18 @@ class Clients extends \XoopsObject
         $cliOnline = $this->isNew() ?: $this->getVar('cli_online');
         $form->addElement(new \XoopsFormRadioYN(\_MA_WGSIMPLEACC_CLIENT_ONLINE, 'cli_online', $cliOnline));
         // Form Text Date Select cliDatecreated
-        $cliDatecreated = $this->isNew() ?: $this->getVar('cli_datecreated');
-        $form->addElement(new \XoopsFormTextDateSelect(\_MA_WGSIMPLEACC_DATECREATED, 'cli_datecreated', '', $cliDatecreated));
         // Form Select User cliSubmitter
-        $form->addElement(new \XoopsFormSelectUser(\_MA_WGSIMPLEACC_SUBMITTER, 'cli_submitter', false, $this->getVar('cli_submitter')));
+        $cliDatecreated = $this->isNew() ? \time() : $this->getVar('cli_datecreated');
+        $cliSubmitter = $this->isNew() ? $GLOBALS['xoopsUser']->uid() : $this->getVar('cli_submitter');
+        if ($isAdmin) {
+            $form->addElement(new \XoopsFormTextDateSelect(\_MA_WGSIMPLEACC_DATECREATED, 'cli_datecreated', '', $cliDatecreated));
+            $form->addElement(new \XoopsFormSelectUser(\_MA_WGSIMPLEACC_SUBMITTER, 'cli_submitter', false, $cliSubmitter));
+        } else {
+            $form->addElement(new \XoopsFormLabel(\_MA_WGSIMPLEACC_DATECREATED, \formatTimestamp($cliDatecreated, 's')));
+            $form->addElement(new \XoopsFormHidden('cli_datecreated', \time()));
+            $form->addElement(new \XoopsFormLabel(\_MA_WGSIMPLEACC_SUBMITTER, \XoopsUser::getUnameFromId($cliSubmitter)));
+            $form->addElement(new \XoopsFormHidden('as_submitter', $GLOBALS['xoopsUser']->uid()));
+        }
         // To Save
         $form->addElement(new \XoopsFormHidden('op', 'save'));
         $form->addElement(new \XoopsFormButtonTray('', _SUBMIT, 'submit', '', false));

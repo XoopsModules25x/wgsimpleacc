@@ -47,7 +47,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_FILTER_HIDE', 'Filter ausblenden');
 \define('_MA_WGSIMPLEACC_FILTER_OUTPUT', 'Gewählte Daten ausgeben');
 \define('_MA_WGSIMPLEACC_FILTER_OUTPUTTYPE', 'Art der Ausgabe');
-\define('_MA_WGSIMPLEACC_DATECREATED', 'Erstelldatum');
+\define('_MA_WGSIMPLEACC_DATECREATED', 'Bearbeitungsdatum');
 \define('_MA_WGSIMPLEACC_SUBMITTER', 'Einsender');
 \define('_MA_WGSIMPLEACC_LIST_CHILDS', 'Klicke zum Anzeigen/Verstecken der Unterkategorien');
 \define('_MA_WGSIMPLEACC_APPROVE', 'Freigeben');
