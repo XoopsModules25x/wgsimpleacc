@@ -24,6 +24,7 @@ namespace XoopsModules\Wgsimpleacc;
  */
 
 use XoopsModules\Wgsimpleacc;
+use XoopsModules\Wgsimpleacc\Utility;
 
 
 /**
@@ -258,7 +259,7 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
             $traCliidSelect->addOption(Constants::FILTER_TYPEALL, \_MA_WGSIMPLEACC_SHOW_ALL);
             $clientsAll = $clientsHandler->getAll($crClients);
             foreach ($clientsAll as $client) {
-                $traCliidSelect->addOption($client->getVar('cli_id'), \strip_tags($client->getVar('cli_name')));
+                $traCliidSelect->addOption($client->getVar('cli_id'), Utility::cleanTextDropdown($client->getVar('cli_name')));
             }
             $form->addElement($traCliidSelect);
         }
