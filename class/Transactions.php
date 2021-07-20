@@ -186,7 +186,7 @@ class Transactions extends \XoopsObject
             $traCliidSelect->addOption('', '');
             $clientsAll = $clientsHandler->getAll($crClients);
             foreach ($clientsAll as $client) {
-                $traCliidSelect->addOption($client->getVar('cli_id'), strip_tags($client->getVar('cli_name')));
+                $traCliidSelect->addOption($client->getVar('cli_id'), \strip_tags($client->getVar('cli_name')));
             }
             $form->addElement($traCliidSelect);
         }
