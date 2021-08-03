@@ -6,6 +6,7 @@
  - added function for cleaning html text for dropdowns (goffy)
  - changed datecreated and submitter to last datetime/submitter (goffy)
  - deactivated datecreated and submitter in form clients (goffy)
+ - round for assets statistics (goffy)
 
 ==============================================================
 1.22 RC3 [2021/05/01]
