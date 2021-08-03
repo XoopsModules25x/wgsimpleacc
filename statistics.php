@@ -308,8 +308,8 @@ switch ($op) {
                 $sql .= ') AND ((' . $xoopsDB->prefix('wgsimpleacc_transactions') . '.tra_asid)=' . $asId . '));';
                 $result = $xoopsDB->query($sql);
                 while (list($sumIn, $sumOut) = $xoopsDB->fetchRow($result)) {
-                    $amount += ($sumIn - $sumOut);
-                    $dataAmounts .= $amount . ',';
+                    $amount += (float)($sumIn - $sumOut);
+                    $dataAmounts .= round($amount, 2) . ',';
                     $labels[$y] = $y;
                     $line_assets[$asId] = ['name' => $asName, 'color' => $asColor, 'data' => $dataAmounts];
                 }
