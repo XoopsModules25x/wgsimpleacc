@@ -431,6 +431,26 @@ function wgsimpleacc_check_db($module)
         }
     }
 
+    //change field types
+    $table   = $GLOBALS['xoopsDB']->prefix('wgsimpleacc_transactions');
+    $field   = 'tra_asid';
+    $sql = "ALTER TABLE `$table` CHANGE `$field` `$field` INT(10) NOT NULL DEFAULT '0';";
+    if (!$result = $GLOBALS['xoopsDB']->queryF($sql)) {
+        xoops_error($GLOBALS['xoopsDB']->error() . '<br>' . $sql);
+        $module->setErrors("Error when adding '$field' to table '$table'.");
+        $ret = false;
+    }
+
+    $table   = $GLOBALS['xoopsDB']->prefix('wgsimpleacc_trahistories');
+    $field   = 'tra_asid';
+    $sql = "ALTER TABLE `$table` CHANGE `$field` `$field` INT(10) NOT NULL DEFAULT '0';";
+    if (!$result = $GLOBALS['xoopsDB']->queryF($sql)) {
+        xoops_error($GLOBALS['xoopsDB']->error() . '<br>' . $sql);
+        $module->setErrors("Error when adding '$field' to table '$table'.");
+        $ret = false;
+    }
+
+
     return $ret;
 }
 

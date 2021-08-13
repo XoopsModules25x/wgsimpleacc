@@ -10,6 +10,13 @@
 	</td>
 	<{if $permSubmit}>
 		<td class="center">
+			<{if $asset.as_iecalc|default:0 == 1}>
+				<img src="<{$wgsimpleacc_icons_url_32}>/1.png" alt="<{$asset.iecalc}>">
+			<{else}>
+				<img src="<{$wgsimpleacc_icons_url_32}>/0.png" alt="<{$asset.iecalc}>">
+			<{/if}>
+		</td>
+		<td class="center">
 			<{if $asset.as_online|default:0 == 1}>
 				<img src="<{$wgsimpleacc_icons_url_32}>/1.png" alt="<{$asset.online}>">
 			<{else}>
