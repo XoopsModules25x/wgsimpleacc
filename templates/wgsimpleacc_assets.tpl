@@ -10,6 +10,7 @@
                 <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ASSET_COLOR}></th>
                 <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ASSET_PRIMARY}></th>
                 <{if $permSubmit}>
+                    <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ASSET_IECALC}></th>
                     <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ASSET_ONLINE}></th>
                 <{/if}>
                 <th></th>
