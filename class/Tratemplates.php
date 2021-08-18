@@ -136,12 +136,11 @@ class Tratemplates extends \XoopsObject
         $form->addElement($ttplAsidSelect);
         // Form Table clients
         if ($helper->getConfig('use_clients')) {
-            $ttplClient = $this->isNew() ? 0 : $this->getVar('ttpl_cliid');
             $clientsHandler = $helper->getHandler('Clients');
             $crClients = new \CriteriaCompo();
             $crClients->setSort('cli_name');
             $crClients->setOrder('ASC');
-            $ttplCliidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_CLIID, 'ttpl_cliid', $ttplClient);
+            $ttplCliidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_CLIID, 'ttpl_cliid', $this->getVar('ttpl_cliid'));
             $ttplCliidSelect->addOption(0, ' ');
             $clientsAll = $clientsHandler->getAll($crClients);
             foreach ($clientsAll as $client) {
@@ -169,7 +168,7 @@ class Tratemplates extends \XoopsObject
         $ttplDatecreated = $this->isNew() ?: $this->getVar('ttpl_datecreated');
         $form->addElement(new \XoopsFormTextDateSelect(\_MA_WGSIMPLEACC_DATECREATED, 'ttpl_datecreated', '', $ttplDatecreated));
         // Form Select User tplSubmitter
-        $form->addElement(new \XoopsFormSelectUser(\_MA_WGSIMPLEACC_SUBMITTER, 'ttpl_submitter', false, $this->getVar('ttpl_submitter')));
+        $form->addElement(new \XoopsFormSelectUser(\_MA_WGSIMPLEACC_SUBMITTER, 'ttpl_submitter', false, $GLOBALS['xoopsUser']->uid()));
         // To Save
         $form->addElement(new \XoopsFormHidden('op', 'save'));
         $form->addElement(new \XoopsFormButtonTray('', _SUBMIT, 'submit', '', false));

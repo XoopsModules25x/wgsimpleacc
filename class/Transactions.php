@@ -144,6 +144,15 @@ class Transactions extends \XoopsObject
                 $form->addElement(new \XoopsFormHidden('ttpl_allid[' . $tplId . ']', $tratemplate->getVar('ttpl_allid')));
                 $form->addElement(new \XoopsFormHidden('ttpl_asid[' . $tplId . ']', $tratemplate->getVar('ttpl_asid')));
                 $form->addElement(new \XoopsFormHidden('ttpl_cliid[' . $tplId . ']', $tratemplate->getVar('ttpl_cliid')));
+                $cliName = '';
+                if ($helper->getConfig('use_clients')) {
+                    $clientsHandler = $helper->getHandler('Clients');
+                    $clientsObj = $clientsHandler->get($tratemplate->getVar('ttpl_cliid'));
+                    $cliName = Utility::cleanTextDropdown($clientsObj->getVar('cli_name'));
+                }
+
+
+                $form->addElement(new \XoopsFormHidden('ttpl_client[' . $tplId . ']', $cliName));
                 if (Constants::CLASS_INCOME == $traClass) {
                     $form->addElement(new \XoopsFormHidden('ttpl_amount[' . $tplId . ']', Utility::FloatToString($tratemplate->getVar('ttpl_amountin'))));
                 } else {
