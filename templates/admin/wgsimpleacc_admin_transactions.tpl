@@ -57,8 +57,8 @@
 						<td class='center'><{$transaction.datecreated}></td>
 						<td class='center'><{$transaction.submitter}></td>
 						<td class="center  width5">
-							<a href="transactions.php?op=edit&amp;tra_id=<{$transaction.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="<{$smarty.const._EDIT}> transactions"></a>
-							<a href="transactions.php?op=delete&amp;tra_id=<{$transaction.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> transactions"></a>
+							<a href="transactions.php?op=edit&amp;tra_id=<{$transaction.id}>&amp;start=<{$start}>&amp;limit=<{$limit}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="<{$smarty.const._EDIT}> transactions"></a>
+							<a href="transactions.php?op=delete&amp;tra_id=<{$transaction.id}>&amp;start=<{$start}>&amp;limit=<{$limit}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> transactions"></a>
 						</td>
 					</tr>
 				<{/foreach}>

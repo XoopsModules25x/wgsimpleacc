@@ -50,6 +50,8 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('transactions_count', $transactionsCount);
         $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
         $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', WGSIMPLEACC_UPLOAD_URL);
+        $GLOBALS['xoopsTpl']->assign('start', $start);
+        $GLOBALS['xoopsTpl']->assign('limit', $limit);
         // Table view transactions
         if ($transactionsCount > 0) {
             foreach (\array_keys($transactionsAll) as $i) {
@@ -124,7 +126,7 @@ switch ($op) {
         $transactionsObj->setVar('tra_submitter', Request::getInt('tra_submitter', 0));
         // Insert Data
         if ($transactionsHandler->insert($transactionsObj)) {
-            \redirect_header('transactions.php?op=list', 2, \_MA_WGSIMPLEACC_FORM_OK);
+            \redirect_header('transactions.php?op=list&amp;start=' . $start . '&amp;limit=' . $limit, 2, \_MA_WGSIMPLEACC_FORM_OK);
         }
         // Get Form
         $GLOBALS['xoopsTpl']->assign('error', $transactionsObj->getHtmlErrors());

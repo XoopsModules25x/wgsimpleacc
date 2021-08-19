@@ -34,6 +34,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_FILTERTYPE', 'Filter');
 \define('_MA_WGSIMPLEACC_SHOW_ALL', 'Alle anzeigen');
 \define('_MA_WGSIMPLEACC_SHOW_CUSTOM', 'Benutzerdefinierte Auswahl anzeigen');
+\define('_MA_WGSIMPLEACC_SHOW_TOP', 'Nur Toplevels anzeigen');
 \define('_MA_WGSIMPLEACC_FILTERBY_YEAR', 'Jahr auswählen');
 \define('_MA_WGSIMPLEACC_FILTERBY_ASSET', 'Vermögenswert auswählen');
 \define('_MA_WGSIMPLEACC_FILTERBY_ALLOC', 'Zuordnung auswählen');
