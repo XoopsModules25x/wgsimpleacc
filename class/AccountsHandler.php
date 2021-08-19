@@ -292,7 +292,7 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
     /**
      * Get top level of given accounts
      * @param $accId
-     * @return int|false
+     * @return array
      */
     public function getTopLevelAccount($accId)
     {
