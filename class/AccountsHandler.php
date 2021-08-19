@@ -178,6 +178,7 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
         $itemName     = 'acc_name';
         $itemColor    = 'acc_color';
         $itemOnline   = 'acc_online';
+        $itemClass    = 'acc_classification';
 
         $crItems           = new \CriteriaCompo();
         $crItems->add(new \Criteria('acc_pid', $itemPid));
@@ -199,6 +200,18 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
                 $childsAll .= '<span data-id="' . $itemsAll[$i]->getVar($itemId) . '" class="itemTitle"><span style="background-color:' . $itemsAll[$i]->getVar($itemColor) . '">&nbsp;&nbsp;&nbsp;</span> ' . $itemsAll[$i]->getVar($itemKey) . ' ' . $itemsAll[$i]->getVar($itemName) . '</span>';
                 $childsAll .= '<span class="pull-right">';
                 $onlineText = (1 == (int)$itemsAll[$i]->getVar($itemOnline)) ? \_MA_WGSIMPLEACC_ONLINE : _MA_WGSIMPLEACC_OFFLINE;
+                switch ($itemsAll[$i]->getVar($itemClass)) {
+                    case 'default':
+                    default:
+                        $childsAll .= '<span class="row-class-2">&nbsp;</span><span class="row-class-3">&nbsp;</span>';
+                        break;
+                    case Constants::CLASS_EXPENSES:
+                        $childsAll .= '<span class="row-class-2">&nbsp;</span>';
+                        break;
+                    case Constants::CLASS_INCOME:
+                        $childsAll .= '<span class="row-class-3">&nbsp;</span>';
+                        break;
+                }
                 $childsAll .= '<img class="wgsa-img-online" src="' . \WGSIMPLEACC_ICONS_URL . '/32/' . $itemsAll[$i]->getVar($itemOnline) . '.png" title="' . $onlineText . '" alt="' . $onlineText . '">';
                 $childsAll .= '<a class="btn btn-default wgsa-btn-list" href="transactions.php?op=list&displayfilter=1&amp;' . $itemId . '=' . $itemsAll[$i]->getVar($itemId) . '" title="' . \_MA_WGSIMPLEACC_TRANSACTIONS . '">' . \_MA_WGSIMPLEACC_TRANSACTIONS . '</a>';
                 $childsAll .= '<a class="btn btn-primary wgsa-btn-list" href="accounts.php?op=edit&amp;' . $itemId . '=' . $itemsAll[$i]->getVar($itemId) . '" title="' . _EDIT . '">' . _EDIT . '</a>';
@@ -274,6 +287,37 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
         }
 
         return $childsAll;
+    }
+
+    /**
+     * Get top level of given accounts
+     * @param $accId
+     * @return int|false
+     */
+    public function getTopLevelAccount($accId)
+    {
+        $helper             = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+        $accountsHandler    = $helper->getHandler('Accounts');
+
+        $ret = [];
+        $accountsObj = $accountsHandler->get($accId);
+        $ret['id']   = $accId;
+        $ret['name'] = $accountsObj->getVar('acc_name');
+        $ret['color'] = $accountsObj->getVar('acc_color');
+        $accPid = $accountsObj->getVar('acc_pid');
+        unset($accountsObj);
+        if ($accPid > 0) {
+            while ($accPid > 0) {
+                $accountsObj = $accountsHandler->get($accPid);
+                $ret['id']   = $accPid;
+                $ret['name'] = $accountsObj->getVar('acc_name');
+                $ret['color'] = $accountsObj->getVar('acc_color');
+                $accPid = $accountsObj->getVar('acc_pid');
+                unset($accountsObj);
+            }
+        }
+
+        return $ret;
     }
 
     /**

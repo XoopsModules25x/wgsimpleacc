@@ -395,16 +395,29 @@ switch ($op) {
             $line_labels .= "'" . $i . "', ";
         }
 
+        $crAccounts = new \CriteriaCompo();
+        $crAccounts->setSort('acc_weight');
+        $crAccounts->setOrder('ASC');
         //create array with 0 for all account/year combination
         $accountsCount = $accountsHandler->getCount();
         $GLOBALS['xoopsTpl']->assign('accountsCount', $accountsCount);
         if ($accountsCount > 0) {
-            $accountsAll   = $accountsHandler->getAll();
+            $accountsAll   = $accountsHandler->getAll($crAccounts);
             foreach (\array_keys($accountsAll) as $a) {
-                $dataAccounts[$accountsAll[$a]->getVar('acc_id')]['label'] = $accountsAll[$a]->getVar('acc_name');
-                $dataAccounts[$accountsAll[$a]->getVar('acc_id')]['color'] = Utility::getColorName($colors, $accountsAll[$a]->getVar('acc_color'));
+                if (1 == $level) {
+                    $accTopLevel = $accountsHandler->getTopLevelAccount($a);
+                    $dataAccounts[$accTopLevel['id']]['label'] = $accTopLevel['name'];
+                    $dataAccounts[$accTopLevel['id']]['color'] = Utility::getColorName($colors, $accTopLevel['color']);
+                } else {
+                    $dataAccounts[$accountsAll[$a]->getVar('acc_id')]['label'] = $accountsAll[$a]->getVar('acc_name');
+                    $dataAccounts[$accountsAll[$a]->getVar('acc_id')]['color'] = Utility::getColorName($colors, $accountsAll[$a]->getVar('acc_color'));
+                }
                 for ($i = $minYearFrom; $i <= date('Y'); $i++) {
-                    $dataAccounts[$accountsAll[$a]->getVar('acc_id')]['values'][$i] = 0;
+                    if (1 == $level) {
+                        $dataAccounts[$accTopLevel['id']]['values'][$i] = 0;
+                    } else {
+                        $dataAccounts[$accountsAll[$a]->getVar('acc_id')]['values'][$i] = 0;
+                    }
                 }
             }
         }
@@ -419,7 +432,12 @@ switch ($op) {
             foreach (\array_keys($transactionsAll) as $i) {
                 $period = date('Y', $transactionsAll[$i]->getVar('tra_date'));
                 $sum = $transactionsAll[$i]->getVar('tra_amountin') - $transactionsAll[$i]->getVar('tra_amountout');
-                $dataAccounts[$transactionsAll[$i]->getVar('tra_accid')]['values'][$period] += $sum;
+                if (1 == $level) {
+                    $accTopLevel = $accountsHandler->getTopLevelAccount($transactionsAll[$i]->getVar('tra_accid'));
+                    $dataAccounts[$accTopLevel['id']]['values'][$period] += $sum;
+                } else {
+                    $dataAccounts[$transactionsAll[$i]->getVar('tra_accid')]['values'][$period] += $sum;
+                }
             }
         }
         unset($crTransactions);
@@ -435,6 +453,7 @@ switch ($op) {
 
         $GLOBALS['xoopsTpl']->assign('line_accounts', $line_accounts);
         $GLOBALS['xoopsTpl']->assign('line_labels', $line_labels);
+        $GLOBALS['xoopsTpl']->assign('level', $level);
 
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_STATISTICS];

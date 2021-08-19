@@ -64,9 +64,9 @@
 							<{if $file.image}>
 								<span class="wgsa-modal" data-toggle="modal" data-target="#imgModal" data-title="<{$file.name}>" data-info="<{$wgsimpleacc_upload_files_url}>/<{$file.name}>">
 									<img class="wgsa-transaction-img-list" src="<{$wgsimpleacc_upload_files_url}>/<{$file.name}>" alt="<{$file.name}>" title="<{$file.name}>">
-								</span>
+								</span><br>
 							<{else}>
-								<{$file.name}> <a class='btn btn-default' href='files.php?op=showfile&amp;fil_id=<{$file.id}>' title='<{$file.name}>'><i class="fa fa-download fa-fw"></i></a>
+								<{$file.name}> <a class='btn btn-default' href='files.php?op=showfile&amp;fil_id=<{$file.id}>' title='<{$file.name}>' target="_blank"><i class="fa fa-download fa-fw"></i></a><br>
 							<{/if}>
 							<{/foreach}>
 							<{if $permSubmit && $transaction.edit}>
