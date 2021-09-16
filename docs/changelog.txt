@@ -12,6 +12,7 @@
  - fixed bug taking over client id for template (goffy)
  - added start/limit params on admin area (goffy)
  - added levels for statistics accounts (goffy)
+ - added images for type of accounts (goffy)
 
 ==============================================================
 1.22 RC3 [2021/05/01]

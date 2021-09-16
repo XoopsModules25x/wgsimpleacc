@@ -203,13 +203,14 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
                 switch ($itemsAll[$i]->getVar($itemClass)) {
                     case 'default':
                     default:
-                        $childsAll .= '<span class="row-class-2">&nbsp;</span><span class="row-class-3">&nbsp;</span>';
+                        $childsAll .= '<img class="wgsa-img" src="' . \WGSIMPLEACC_ICONS_URL . '/32/incomes.png" title="' . \_MA_WGSIMPLEACC_TRANSACTIONS_INCOMES . '" alt="' . \_MA_WGSIMPLEACC_TRANSACTIONS_INCOMES . '">';
+                        $childsAll .= '<img class="wgsa-img" src="' . \WGSIMPLEACC_ICONS_URL . '/32/expenses.png" title="' . \_MA_WGSIMPLEACC_TRANSACTIONS_EXPENSES . '" alt="' . \_MA_WGSIMPLEACC_TRANSACTIONS_EXPENSES . '">';
                         break;
                     case Constants::CLASS_EXPENSES:
-                        $childsAll .= '<span class="row-class-2">&nbsp;</span>';
+                        $childsAll .= '<img class="wgsa-img-online" src="' . \WGSIMPLEACC_ICONS_URL . '/32/expenses.png" title="' . \_MA_WGSIMPLEACC_TRANSACTIONS_EXPENSES . '" alt="' . \_MA_WGSIMPLEACC_TRANSACTIONS_EXPENSES . '">';
                         break;
                     case Constants::CLASS_INCOME:
-                        $childsAll .= '<span class="row-class-3">&nbsp;</span>';
+                        $childsAll .= '<img class="wgsa-img-online" src="' . \WGSIMPLEACC_ICONS_URL . '/32/incomes.png" title="' . \_MA_WGSIMPLEACC_TRANSACTIONS_INCOMES . '" alt="' . \_MA_WGSIMPLEACC_TRANSACTIONS_INCOMES . '">';
                         break;
                 }
                 $childsAll .= '<img class="wgsa-img-online" src="' . \WGSIMPLEACC_ICONS_URL . '/32/' . $itemsAll[$i]->getVar($itemOnline) . '.png" title="' . $onlineText . '" alt="' . $onlineText . '">';
