@@ -37,11 +37,11 @@ foreach ($scripts as $script) {
     $GLOBALS['xoTheme']->addScript($script);
 }
 
-//$GLOBALS['xoTheme']->addStylesheet(WGSIMPLEACC_URL . '/assets/css/startmin.css', null);
-//$GLOBALS['xoTheme']->addStylesheet(WGSIMPLEACC_URL . '/assets/css/wgsa_startmin.css', null);
+//$GLOBALS['xoTheme']->addStylesheet(\WGSIMPLEACC_URL . '/assets/css/startmin.css', null);
+//$GLOBALS['xoTheme']->addStylesheet(\WGSIMPLEACC_URL . '/assets/css/wgsa_startmin.css', null);
 
-//$GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/metisMenu.min.js');
-//$GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/startmin.js');
+//$GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/js/metisMenu.min.js');
+//$GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/js/startmin.js');
 
 $GLOBALS['xoopsTpl']->assign('indexHeader', $helper->getConfig('index_header'));
 $GLOBALS['xoopsTpl']->assign('permGlobalView', $permissionsHandler->getPermGlobalView());

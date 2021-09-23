@@ -138,7 +138,7 @@ class Assets extends \XoopsObject
 
         // To Save
         $form->addElement(new \XoopsFormHidden('op', 'save'));
-        $form->addElement(new \XoopsFormButtonTray('', _SUBMIT, 'submit', '', false));
+        $form->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
         return $form;
     }
 
@@ -161,9 +161,9 @@ class Assets extends \XoopsObject
         $ret['color']        = $this->getVar('as_color');
         $editorMaxchar = $helper->getConfig('editor_maxchar');
         $ret['descr_short'] = $utility::truncateHtml($ret['descr'], $editorMaxchar);
-        $ret['online']      = (int)$this->getVar('as_online') > 0 ? _YES : _NO;
-        $ret['iecalc']      = (int)$this->getVar('as_iecalc') > 0 ? _YES : _NO;
-        $ret['primary']     = (int)$this->getVar('as_primary') > 0 ? _YES : _NO;
+        $ret['online']      = (int)$this->getVar('as_online') > 0 ? \_YES : \_NO;
+        $ret['iecalc']      = (int)$this->getVar('as_iecalc') > 0 ? \_YES : \_NO;
+        $ret['primary']     = (int)$this->getVar('as_primary') > 0 ? \_YES : \_NO;
         $ret['datecreated'] = \formatTimestamp($this->getVar('as_datecreated'), 's');
         $ret['submitter']   = \XoopsUser::getUnameFromId($this->getVar('as_submitter'));
 

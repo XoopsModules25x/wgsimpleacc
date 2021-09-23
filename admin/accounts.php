@@ -47,8 +47,8 @@ switch ($op) {
         $accountsCount = $accountsHandler->getCountAccounts();
         $accountsAll = $accountsHandler->getAllAccounts($start, $limit);
         $GLOBALS['xoopsTpl']->assign('accounts_count', $accountsCount);
-        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
-        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', WGSIMPLEACC_UPLOAD_URL);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', \WGSIMPLEACC_UPLOAD_URL);
         // Table view accounts
         if ($accountsCount > 0) {
             foreach (\array_keys($accountsAll) as $i) {

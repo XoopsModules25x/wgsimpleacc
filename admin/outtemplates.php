@@ -44,8 +44,8 @@ switch ($op) {
         $outtemplatesCount = $outtemplatesHandler->getCountOuttemplates();
         $outtemplatesAll = $outtemplatesHandler->getAllOuttemplates($start, $limit);
         $GLOBALS['xoopsTpl']->assign('outtemplates_count', $outtemplatesCount);
-        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
-        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', WGSIMPLEACC_UPLOAD_URL);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', \WGSIMPLEACC_UPLOAD_URL);
         // Table view outtemplates
         if ($outtemplatesCount > 0) {
             foreach (\array_keys($outtemplatesAll) as $i) {

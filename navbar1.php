@@ -29,12 +29,12 @@ use XoopsModules\Wgsimpleacc\{
 };
 
 /* startmin */
-$GLOBALS['xoTheme']->addStylesheet(WGSIMPLEACC_URL . '/assets/css/startmin.css', null);
-$GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/metisMenu.min.js');
-$GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/startmin.js');
+$GLOBALS['xoTheme']->addStylesheet(\WGSIMPLEACC_URL . '/assets/css/startmin.css', null);
+$GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/js/metisMenu.min.js');
+$GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/js/startmin.js');
 
 /* wgSimpleAcc */
-$GLOBALS['xoTheme']->addStylesheet(WGSIMPLEACC_URL . '/assets/css/style.css', null);
+$GLOBALS['xoTheme']->addStylesheet(\WGSIMPLEACC_URL . '/assets/css/style.css', null);
 
 // get configs
 $GLOBALS['xoopsTpl']->assign('useClients', $helper->getConfig('use_clients'));

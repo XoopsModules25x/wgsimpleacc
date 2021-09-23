@@ -45,8 +45,8 @@ switch ($op) {
         $filhistoriesCount = $filhistoriesHandler->getCountFilhistories();
         $filhistoriesAll = $filhistoriesHandler->getAllFilhistories($start, $limit);
         $GLOBALS['xoopsTpl']->assign('filhistories_count', $filhistoriesCount);
-        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
-        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', WGSIMPLEACC_UPLOAD_URL);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', \WGSIMPLEACC_UPLOAD_URL);
         // Table view filhistories
         if ($filhistoriesCount > 0) {
             foreach (\array_keys($filhistoriesAll) as $i) {

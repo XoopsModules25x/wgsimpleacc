@@ -55,10 +55,10 @@ $filterYearTo    = Request::getInt('filterYearTo', date('Y'));
 
 $period_type = $helper->getConfig('balance_period');
 
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icon_url_16', WGSIMPLEACC_ICONS_URL . '/16/');
-$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', XOOPS_ICONS32_URL);
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_files_url', WGSIMPLEACC_UPLOAD_FILES_URL);
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icon_url_16', \WGSIMPLEACC_ICONS_URL . '/16/');
+$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_files_url', \WGSIMPLEACC_UPLOAD_FILES_URL);
 
 $permSubmit = $permissionsHandler->getPermTransactionsSubmit();
 $GLOBALS['xoopsTpl']->assign('permSubmit', $permSubmit);
@@ -230,7 +230,7 @@ switch ($op) {
             $GLOBALS['xoopsTpl']->assign('useTaxes', $helper->getConfig('use_taxes'));
             $GLOBALS['xoopsTpl']->assign('useFiles', $helper->getConfig('use_files'));
             $GLOBALS['xoopsTpl']->assign('useClients', $helper->getConfig('use_clients'));
-            $GLOBALS['xoopsTpl']->assign('modPathIcon32', WGSIMPLEACC_URL . '/' . $GLOBALS['xoopsModule']->getInfo('modicons32') . '/');
+            $GLOBALS['xoopsTpl']->assign('modPathIcon32', \WGSIMPLEACC_URL . '/' . $GLOBALS['xoopsModule']->getInfo('modicons32') . '/');
 
         } else {
             $GLOBALS['xoopsTpl']->assign('noData', \_MA_WGSIMPLEACC_THEREARENT_TRANSACTIONS);
@@ -248,10 +248,10 @@ switch ($op) {
         }
         // Check permissions
         if (!$permissionsHandler->getPermTransactionsSubmit()) {
-            \redirect_header('transactions.php?op=list', 3, _NOPERM);
+            \redirect_header('transactions.php?op=list', 3, \_NOPERM);
         }
 
-        $traDate = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('tra_date'))->getTimestamp();
+        $traDate = \DateTime::createFromFormat(\_SHORTDATESTRING, Request::getString('tra_date'))->getTimestamp();
         $traYear = Request::getInt('tra_year', 0);
         $createYearNb = false;
         if ($traId > 0) {
@@ -292,7 +292,7 @@ switch ($op) {
         $transactionsObj->setVar('tra_remarks', Request::getText('tra_remarks', ''));
         $transactionsObj->setVar('tra_accid', Request::getInt('tra_accid', 0));
         $transactionsObj->setVar('tra_allid', Request::getInt('tra_allid', 0));
-        $transactionDateObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('tra_date'));
+        $transactionDateObj = \DateTime::createFromFormat(\_SHORTDATESTRING, Request::getString('tra_date'));
         $transactionsObj->setVar('tra_date', $traDate);
         $transactionsObj->setVar('tra_curid', Request::getInt('tra_curid', 0));
         $traClass = Request::getInt('tra_class', 0);
@@ -354,14 +354,14 @@ switch ($op) {
     case 'new':
         // Check permissions
         if (!$permissionsHandler->getPermTransactionsSubmit()) {
-            \redirect_header('transactions.php?op=list', 3, _NOPERM);
+            \redirect_header('transactions.php?op=list', 3, \_NOPERM);
         }
 
-        $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/forms.js');
+        $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/js/forms.js');
         if ($helper->getConfig('use_clients')) {
-            $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/select-autocomplete/jquery-ui.min.js');
-            $GLOBALS['xoTheme']->addStylesheet(WGSIMPLEACC_URL . '/assets/select-autocomplete/jquery-ui.min.css');
-            $GLOBALS['xoTheme']->addStylesheet(WGSIMPLEACC_URL . '/assets/select-autocomplete/select-autocomplete.css');
+            $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/select-autocomplete/jquery-ui.min.js');
+            $GLOBALS['xoTheme']->addStylesheet(\WGSIMPLEACC_URL . '/assets/select-autocomplete/jquery-ui.min.css');
+            $GLOBALS['xoTheme']->addStylesheet(\WGSIMPLEACC_URL . '/assets/select-autocomplete/select-autocomplete.css');
         }
 
         // Form Create
@@ -422,24 +422,24 @@ switch ($op) {
 
         // Check permissions
         if ($approve && !$permissionsHandler->getPermTransactionsApprove()) {
-            \redirect_header('transactions.php?op=list', 3, _NOPERM);
+            \redirect_header('transactions.php?op=list', 3, \_NOPERM);
         }
 
-        $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/forms.js');
+        $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/js/forms.js');
         if ($helper->getConfig('use_clients')) {
-            $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/select-autocomplete/jquery-ui.min.js');
-            $GLOBALS['xoTheme']->addStylesheet(WGSIMPLEACC_URL . '/assets/select-autocomplete/jquery-ui.min.css');
-            $GLOBALS['xoTheme']->addStylesheet(WGSIMPLEACC_URL . '/assets/select-autocomplete/select-autocomplete.css');
+            $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/select-autocomplete/jquery-ui.min.js');
+            $GLOBALS['xoTheme']->addStylesheet(\WGSIMPLEACC_URL . '/assets/select-autocomplete/jquery-ui.min.css');
+            $GLOBALS['xoTheme']->addStylesheet(\WGSIMPLEACC_URL . '/assets/select-autocomplete/select-autocomplete.css');
         }
 
         $transactionsObj = $transactionsHandler->get($traId);
         $traSubmitter = $transactionsObj->getVar('tra_submitter');
         $traStatus = $transactionsObj->getVar('tra_status');
         if (!$permissionsHandler->getPermTransactionsEdit($traSubmitter, $traStatus)) {
-            \redirect_header('transactions.php?op=list', 3, _NOPERM);
+            \redirect_header('transactions.php?op=list', 3, \_NOPERM);
         }
         // Get Form
-        $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/forms.js');
+        $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/js/forms.js');
         $form = $transactionsObj->getFormTransactions(false, false, 0, $start, $limit, $approve);
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
 
@@ -454,13 +454,13 @@ switch ($op) {
         }
         // Check permissions
         if (!$permissionsHandler->getPermTransactionsSubmit()) {
-            \redirect_header('transactions.php?op=list', 3, _NOPERM);
+            \redirect_header('transactions.php?op=list', 3, \_NOPERM);
         }
         $transactionsObj = $transactionsHandler->get($traId);
         $traSubmitter = $transactionsObj->getVar('tra_submitter');
         $traStatus = $transactionsObj->getVar('tra_status');
         if (!$permissionsHandler->getPermTransactionsEdit($traSubmitter, $traStatus)) {
-            \redirect_header('transactions.php?op=list', 3, _NOPERM);
+            \redirect_header('transactions.php?op=list', 3, \_NOPERM);
         }
         if ($helper->getConfig('use_trahistories')) {
             //create history
@@ -611,8 +611,8 @@ unset($keywords);
 
 // Description
 wgsimpleaccMetaDescription(\_MA_WGSIMPLEACC_TRANSACTIONS_DESC);
-$GLOBALS['xoopsTpl']->assign('xoops_mpageurl', WGSIMPLEACC_URL.'/transactions.php');
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', WGSIMPLEACC_UPLOAD_URL);
+$GLOBALS['xoopsTpl']->assign('xoops_mpageurl', \WGSIMPLEACC_URL.'/transactions.php');
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', \WGSIMPLEACC_UPLOAD_URL);
 
 // View comments
 require_once \XOOPS_ROOT_PATH . '/include/comment_view.php';

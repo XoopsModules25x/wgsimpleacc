@@ -47,8 +47,8 @@ switch ($op) {
         $filesCount = $filesHandler->getCountFiles();
         $filesAll = $filesHandler->getAllFiles($start, $limit);
         $GLOBALS['xoopsTpl']->assign('files_count', $filesCount);
-        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
-        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', WGSIMPLEACC_UPLOAD_URL);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', \WGSIMPLEACC_UPLOAD_URL);
         // Table view files
         if ($filesCount > 0) {
             foreach (\array_keys($filesAll) as $i) {
@@ -89,7 +89,7 @@ switch ($op) {
         require_once \XOOPS_ROOT_PATH . '/class/uploader.php';
         $fileName       = $_FILES['fil_name']['name'];
         $imgNameDef     = Request::getString('fil_name');
-        $uploader = new \XoopsMediaUploader(WGSIMPLEACC_UPLOAD_FILES_PATH . '/',
+        $uploader = new \XoopsMediaUploader(\WGSIMPLEACC_UPLOAD_FILES_PATH . '/',
                                                     $helper->getConfig('mimetypes_file'), 
                                                     $helper->getConfig('maxsize_file'), null, null);
         if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
@@ -112,7 +112,7 @@ switch ($op) {
             $filesObj->setVar('fil_name', $filSaveName);
         }
         echo WGSIMPLEACC_UPLOAD_FILES_PATH . '/' . $filSaveName;
-        $fileMimetype   = \mime_content_type(WGSIMPLEACC_UPLOAD_FILES_PATH . '/' . $filSaveName);
+        $fileMimetype   = \mime_content_type(\WGSIMPLEACC_UPLOAD_FILES_PATH . '/' . $filSaveName);
         $filesObj->setVar('fil_type', $fileMimetype);
         $filesObj->setVar('fil_desc', Request::getString('fil_desc', ''));
         $filesObj->setVar('fil_ip', Request::getString('fil_ip', ''));

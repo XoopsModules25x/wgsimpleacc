@@ -68,7 +68,7 @@ class OutputsHandler extends \XoopsPersistableObjectHandler
         $result = $GLOBALS['xoopsDB']->query($sql);
         while (list($balFrom, $balTo, $balAmountStart, $balAmountEnd, $balStatus, $balDatecreated, $balSubmitter) = $GLOBALS['xoopsDB']->fetchRow($result)) {
             $checkboxList .= '<li><input type="checkbox" />';
-            $checkboxList .= '<span class="wgsa-input-label">' . date(_SHORTDATESTRING, $balFrom) . ' - ' . date(_SHORTDATESTRING, $balTo) .'</span>';
+            $checkboxList .= '<span class="wgsa-input-label">' . date(\_SHORTDATESTRING, $balFrom) . ' - ' . date(\_SHORTDATESTRING, $balTo) .'</span>';
             $balancesHandler = $helper->getHandler('Balances');
             $crBalancesSub = new \CriteriaCompo();
             $crBalancesSub->add(new \Criteria('bal_from', $balFrom));

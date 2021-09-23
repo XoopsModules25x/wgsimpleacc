@@ -43,9 +43,9 @@ $start = Request::getInt('start', 0);
 $limit = Request::getInt('limit', $helper->getConfig('userpager'));
 $tplId = Request::getInt('ttpl_id', 0);
 
-$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', XOOPS_ICONS32_URL);
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icons_url_32', WGSIMPLEACC_ICONS_URL . '/32/');
+$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icons_url_32', \WGSIMPLEACC_ICONS_URL . '/32/');
 $GLOBALS['xoopsTpl']->assign('showItem', $tplId > 0);
 
 $permSubmit = $permissionsHandler->getPermTratemplatesSubmit();
@@ -96,7 +96,7 @@ switch ($op) {
         }
         // Check permissions
         if (!$permSubmit) {
-            \redirect_header('tratemplates.php?op=list', 3, _NOPERM);
+            \redirect_header('tratemplates.php?op=list', 3, \_NOPERM);
         }
         if ($tplId > 0) {
             $tratemplatesObj = $tratemplatesHandler->get($tplId);
@@ -115,7 +115,7 @@ switch ($op) {
         $tplAmountout = Request::getString('ttpl_amountout');
         $tratemplatesObj->setVar('ttpl_amountout', Utility::StringToFloat($tplAmountout));
         $tratemplatesObj->setVar('ttpl_online', Request::getInt('ttpl_online', 0));
-        $templateDatecreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('ttpl_datecreated'));
+        $templateDatecreatedObj = \DateTime::createFromFormat(\_SHORTDATESTRING, Request::getString('ttpl_datecreated'));
         $tratemplatesObj->setVar('ttpl_datecreated', $templateDatecreatedObj->getTimestamp());
         $tratemplatesObj->setVar('ttpl_submitter', Request::getInt('ttpl_submitter', 0));
         // Insert Data
@@ -131,7 +131,7 @@ switch ($op) {
     case 'new':
         // Check permissions
         if (!$permSubmit) {
-            \redirect_header('tratemplates.php?op=list', 3, _NOPERM);
+            \redirect_header('tratemplates.php?op=list', 3, \_NOPERM);
         }
         $traId = Request::getInt('tra_id', 0);
         // Form Create
@@ -163,7 +163,7 @@ switch ($op) {
         $tratemplatesObj = $tratemplatesHandler->get($tplId);
         // Check permissions
         if (!$permissionsHandler->getPermTratemplatesEdit($tratemplatesObj->getVar('ttpl_submitter'))) {
-            \redirect_header('tratemplates.php?op=list', 3, _NOPERM);
+            \redirect_header('tratemplates.php?op=list', 3, \_NOPERM);
         }
         $form = $tratemplatesObj->getFormTratemplates();
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
@@ -180,7 +180,7 @@ switch ($op) {
         $tratemplatesObj = $tratemplatesHandler->get($tplId);
         // Check permissions
         if (!$permissionsHandler->getPermTratemplatesEdit($tratemplatesObj->getVar('ttpl_submitter'))) {
-            \redirect_header('tratemplates.php?op=list', 3, _NOPERM);
+            \redirect_header('tratemplates.php?op=list', 3, \_NOPERM);
         }
         $tplName = $tratemplatesObj->getVar('ttpl_name');
         if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
@@ -211,7 +211,7 @@ switch ($op) {
 wgsimpleaccMetaKeywords($helper->getConfig('keywords') . ', ' . \implode(',', $keywords));
 unset($keywords);
 
-$GLOBALS['xoopsTpl']->assign('xoops_mpageurl', WGSIMPLEACC_URL.'/tratemplates.php');
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', WGSIMPLEACC_UPLOAD_URL);
+$GLOBALS['xoopsTpl']->assign('xoops_mpageurl', \WGSIMPLEACC_URL.'/tratemplates.php');
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', \WGSIMPLEACC_UPLOAD_URL);
 
 require __DIR__ . '/footer.php';

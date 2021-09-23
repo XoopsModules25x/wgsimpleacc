@@ -47,8 +47,8 @@ switch ($op) {
         $assetsCount = $assetsHandler->getCountAssets();
         $assetsAll = $assetsHandler->getAllAssets($start, $limit);
         $GLOBALS['xoopsTpl']->assign('assets_count', $assetsCount);
-        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
-        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', WGSIMPLEACC_UPLOAD_URL);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', \WGSIMPLEACC_UPLOAD_URL);
         // Table view assets
         if ($assetsCount > 0) {
             foreach (\array_keys($assetsAll) as $i) {

@@ -49,9 +49,9 @@ if ('save_temp' == $op && '' != $deleteFiltemp) {
 
 $uploadByApp = $helper->getConfig('upload_by_app');
 
-$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', XOOPS_ICONS32_URL);
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_files_url', WGSIMPLEACC_UPLOAD_FILES_URL);
+$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_files_url', \WGSIMPLEACC_UPLOAD_FILES_URL);
 $GLOBALS['xoopsTpl']->assign('upload_by_app', $uploadByApp);
 $GLOBALS['xoopsTpl']->assign('start', $start);
 $GLOBALS['xoopsTpl']->assign('limit', $limit);
@@ -140,7 +140,7 @@ switch ($op) {
         }
         // Check permissions
         if (!$permissionsHandler->getPermTransactionsSubmit()) {
-            \redirect_header('files.php?op=list', 3, _NOPERM);
+            \redirect_header('files.php?op=list', 3, \_NOPERM);
         }
         if ($filId > 0) {
             $filesObj = $filesHandler->get($filId);
@@ -171,7 +171,7 @@ switch ($op) {
         }
         // Check permissions
         if (!$permissionsHandler->getPermTransactionsSubmit()) {
-            \redirect_header('files.php?op=list', 3, _NOPERM);
+            \redirect_header('files.php?op=list', 3, \_NOPERM);
         }
         if ($filId > 0) {
             $filesObj = $filesHandler->get($filId);
@@ -185,7 +185,7 @@ switch ($op) {
             require_once \XOOPS_ROOT_PATH . '/class/uploader.php';
             $filename    = $_FILES['fil_name']['name'];
             $imgMimetype = $_FILES['fil_name']['type'];
-            $uploader = new \XoopsMediaUploader(WGSIMPLEACC_UPLOAD_FILES_PATH . '/',
+            $uploader = new \XoopsMediaUploader(\WGSIMPLEACC_UPLOAD_FILES_PATH . '/',
                 $helper->getConfig('mimetypes_file'),
                 $helper->getConfig('maxsize_file'), null, null);
             if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
@@ -202,8 +202,8 @@ switch ($op) {
                     if ($maxwidth > 0 && $maxheight > 0) {
                         // Resize image
                         $imgHandler                = new Wgsimpleacc\Common\Resizer();
-                        $imgHandler->sourceFile    = WGSIMPLEACC_UPLOAD_FILES_PATH . '/' . $savedFilename;
-                        $imgHandler->endFile       = WGSIMPLEACC_UPLOAD_FILES_PATH . '/' . $savedFilename;
+                        $imgHandler->sourceFile    = \WGSIMPLEACC_UPLOAD_FILES_PATH . '/' . $savedFilename;
+                        $imgHandler->endFile       = \WGSIMPLEACC_UPLOAD_FILES_PATH . '/' . $savedFilename;
                         $imgHandler->imageMimetype = $imgMimetype;
                         $imgHandler->maxWidth      = $maxwidth;
                         $imgHandler->maxHeight     = $maxheight;
@@ -257,7 +257,7 @@ switch ($op) {
     case 'edit':
         // Check permissions
         if (!$permissionsHandler->getPermTransactionsSubmit()) {
-            \redirect_header('files.php?op=list', 3, _NOPERM);
+            \redirect_header('files.php?op=list', 3, \_NOPERM);
         }
         // Check params
         if (0 == $filId) {
@@ -277,7 +277,7 @@ switch ($op) {
         $filesObj = $filesHandler->get($filId);
         // Check permissions
         if (!$permissionsHandler->getPermFilesEdit($filesObj->getVar('fil_submitter'))) {
-            \redirect_header('files.php?op=list', 3, _NOPERM);
+            \redirect_header('files.php?op=list', 3, \_NOPERM);
         }
         $filName = $filesObj->getVar('fil_name');
         $filTraid = $filesObj->getVar('fil_traid');
@@ -325,7 +325,7 @@ unset($keywords);
 
 // Description
 wgsimpleaccMetaDescription(\_MA_WGSIMPLEACC_FILES_DESC);
-$GLOBALS['xoopsTpl']->assign('xoops_mpageurl', WGSIMPLEACC_URL.'/files.php');
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', WGSIMPLEACC_UPLOAD_URL);
+$GLOBALS['xoopsTpl']->assign('xoops_mpageurl', \WGSIMPLEACC_URL . '/files.php');
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', \WGSIMPLEACC_UPLOAD_URL);
 
 require __DIR__ . '/footer.php';

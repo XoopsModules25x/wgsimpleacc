@@ -28,7 +28,7 @@ if ($helper->getConfig('show_breadcrumbs')) {
 }
 $GLOBALS['xoopsTpl']->assign('adv', $helper->getConfig('advertise'));
 //
-$GLOBALS['xoopsTpl']->assign('admin', WGSIMPLEACC_ADMIN);
+$GLOBALS['xoopsTpl']->assign('admin', \WGSIMPLEACC_ADMIN);
 if ($helper->getConfig('show_copyright')) {
     $GLOBALS['xoopsTpl']->assign('copyright', $copyright);
 }

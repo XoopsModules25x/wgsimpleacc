@@ -43,10 +43,10 @@ $start = Request::getInt('start', 0);
 $limit = Request::getInt('limit', $helper->getConfig('userpager'));
 $asId  = Request::getInt('as_id', 0);
 
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icon_url_16', WGSIMPLEACC_ICONS_URL . '/16/');
-$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', XOOPS_ICONS32_URL);
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icons_url_32', WGSIMPLEACC_ICONS_URL . '/32/');
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icon_url_16', \WGSIMPLEACC_ICONS_URL . '/16/');
+$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icons_url_32', \WGSIMPLEACC_ICONS_URL . '/32/');
 
 $keywords = [];
 
@@ -100,7 +100,7 @@ switch ($op) {
         }
         // Check permissions
         if (!$permSubmit) {
-            \redirect_header('assets.php?op=list', 3, _NOPERM);
+            \redirect_header('assets.php?op=list', 3, \_NOPERM);
         }
         if ($asId > 0) {
             $assetsObj = $assetsHandler->get($asId);
@@ -133,7 +133,7 @@ switch ($op) {
     case 'new':
         // Check permissions
         if (!$permSubmit) {
-            \redirect_header('assets.php?op=list', 3, _NOPERM);
+            \redirect_header('assets.php?op=list', 3, \_NOPERM);
         }
         // Form Create
         $assetsObj = $assetsHandler->create();
@@ -152,7 +152,7 @@ switch ($op) {
         // Check permissions
         $assetsObj = $assetsHandler->get($asId);
         if (!$permissionsHandler->getPermAssetsEdit($assetsObj->getVar('as_submitter'))) {
-            \redirect_header('assets.php?op=list', 3, _NOPERM);
+            \redirect_header('assets.php?op=list', 3, \_NOPERM);
         }
         // Get Form
         $assetsObj = $assetsHandler->get($asId);
@@ -170,7 +170,7 @@ switch ($op) {
         // Check permissions
         $assetsObj = $assetsHandler->get($asId);
         if (!$permissionsHandler->getPermAssetsEdit($accountsObj->getVar('as_submitter'))) {
-            \redirect_header('assets.php?op=list', 3, _NOPERM);
+            \redirect_header('assets.php?op=list', 3, \_NOPERM);
         }
         // Check whether asset is primary asset
         if ($assetsObj->getVar('as_primary') > 0) {
@@ -223,7 +223,7 @@ unset($keywords);
 
 // Description
 wgsimpleaccMetaDescription(\_MA_WGSIMPLEACC_ASSETS_DESC);
-$GLOBALS['xoopsTpl']->assign('xoops_mpageurl', WGSIMPLEACC_URL.'/assets.php');
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', WGSIMPLEACC_UPLOAD_URL);
+$GLOBALS['xoopsTpl']->assign('xoops_mpageurl', \WGSIMPLEACC_URL . '/assets.php');
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', \WGSIMPLEACC_UPLOAD_URL);
 
 require __DIR__ . '/footer.php';

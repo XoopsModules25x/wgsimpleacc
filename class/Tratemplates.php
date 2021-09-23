@@ -171,7 +171,7 @@ class Tratemplates extends \XoopsObject
         $form->addElement(new \XoopsFormSelectUser(\_MA_WGSIMPLEACC_SUBMITTER, 'ttpl_submitter', false, $GLOBALS['xoopsUser']->uid()));
         // To Save
         $form->addElement(new \XoopsFormHidden('op', 'save'));
-        $form->addElement(new \XoopsFormButtonTray('', _SUBMIT, 'submit', '', false));
+        $form->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
 
         return $form;
     }
@@ -240,7 +240,7 @@ class Tratemplates extends \XoopsObject
         $ret['class_text']  = $class_text;
         $ret['amountin']    =  Utility::FloatToString($this->getVar('ttpl_amountin'));
         $ret['amountout']   =  Utility::FloatToString($this->getVar('ttpl_amountout'));
-        $ret['online']      = (int)$this->getVar('ttpl_online') > 0 ? _YES : _NO;
+        $ret['online']      = (int)$this->getVar('ttpl_online') > 0 ? \_YES : \_NO;
         $ret['datecreated'] = \formatTimestamp($this->getVar('ttpl_datecreated'), 's');
         $ret['submitter']   = \XoopsUser::getUnameFromId($this->getVar('ttpl_submitter'));
 

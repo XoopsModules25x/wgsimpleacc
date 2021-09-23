@@ -159,7 +159,7 @@ $pdfData['keywords']  = $helper->getConfig('keywords');
 
 // Assign customs tpl fields
 //$pdfTpl->assign('content_header', \str_replace(['%y', '%n'], [$transactionsObj->getVar('tra_year'), $transactionsObj->getVar('tra_nb')], \_MA_WGSIMPLEACC_PDF_TRAHEADER));
-$logo = ['src' => WGSIMPLEACC_UPLOAD_IMAGES_URL . '/logoPdf.png', 'height' => '100px'];
+$logo = ['src' => \WGSIMPLEACC_UPLOAD_IMAGES_URL . '/logoPdf.png', 'height' => '100px'];
 $pdfTpl->assign('logo', $logo);
 $pdfTpl->assign('header_title', \WGSIMPLEACC_HEADER_TITLE);
 $pdfTpl->assign('header_string', \WGSIMPLEACC_HEADER_STRING);
@@ -203,7 +203,7 @@ if (@\file_exists($lang)) {
 // Add Page document
 $pdf->AddPage('L');
 // Output
-$template_path = WGSIMPLEACC_PATH . '/templates/wgsimpleacc_balances_pdf.tpl';
+$template_path = \WGSIMPLEACC_PATH . '/templates/wgsimpleacc_balances_pdf.tpl';
 $content = $pdfTpl->fetch($template_path);
 //echo $content;die;
 //$pdf->writeHTMLCell($w=0, $h=0, $x='', $y='', $content, $border=0, $ln=1, $fill=0, $reseth=true, $align='', $autopadding=false);

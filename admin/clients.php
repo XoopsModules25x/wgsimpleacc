@@ -47,8 +47,8 @@ switch ($op) {
         $clientsCount = $clientsHandler->getCountClients();
         $clientsAll = $clientsHandler->getAllClients($start, $limit);
         $GLOBALS['xoopsTpl']->assign('clients_count', $clientsCount);
-        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
-        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', WGSIMPLEACC_UPLOAD_URL);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', \WGSIMPLEACC_UPLOAD_URL);
         // Table view clients
         if ($clientsCount > 0) {
             foreach (\array_keys($clientsAll) as $i) {
