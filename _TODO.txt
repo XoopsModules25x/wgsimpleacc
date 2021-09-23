@@ -1,7 +1,5 @@
 
 https://www.jqueryscript.net/other/dashboard-starter-template-bootstrap.html
 
-xlsx output doesn't work
-
 Design für Postfach, Nachrichten usw. überarbeiten
 
