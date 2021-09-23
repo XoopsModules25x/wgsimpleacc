@@ -14,6 +14,7 @@
  - added levels for statistics accounts (goffy)
  - added images for type of accounts (goffy)
  - fixed bug taking over description of transaction template (goffy)
+ - updated Simplexlsxgen to latest version (goffy)
 
 ==============================================================
 1.22 RC3 [2021/05/01]

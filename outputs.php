@@ -267,7 +267,7 @@ switch ($op) {
                         if ('xlsx' == $outType) {
                             $data[] = [
                                 $transactions[$i]['year'] . '/' . $transactions[$i]['nb'],
-                                $transactions[$i]['desc'],
+                                cleanOutputXlsx($transactions[$i]['desc']),
                                 $transactions[$i]['reference'],
                                 $transactions[$i]['account'],
                                 $transactions[$i]['allocation'],
@@ -324,6 +324,20 @@ function cleanOutputCsv ($text) {
     foreach(mb_list_encodings() as $chr){
         $cleanText = mb_convert_encoding($cleanText, 'UTF-8', $chr);
     }
+
+    return $cleanText;
+}
+
+/**
+ * function to clean output for xlsx
+ *
+ * @param $text
+ * @return string
+ */
+function cleanOutputXlsx ($text) {
+    //replace line breaks by ,
+    $cleanText = \str_replace('</p>', ', ', $text);
+    $cleanText = \str_replace('<br>', ', ', $cleanText);
 
     return $cleanText;
 }
