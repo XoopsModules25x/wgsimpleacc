@@ -319,10 +319,10 @@ function cleanOutputCsv ($text) {
     //replace possible column break in output
     $cleanText = \str_replace(';', ',', $text);
 
-    //convert o utf8
-    mb_convert_encoding($cleanText, 'UTF-8');
-    foreach(mb_list_encodings() as $chr){
-        $cleanText = mb_convert_encoding($cleanText, 'UTF-8', $chr);
+    //convert to utf8
+    \mb_convert_encoding($cleanText, 'UTF-8');
+    foreach(\mb_list_encodings() as $chr){
+        $cleanText = \mb_convert_encoding($cleanText, 'UTF-8', $chr);
     }
 
     return $cleanText;
@@ -335,9 +335,10 @@ function cleanOutputCsv ($text) {
  * @return string
  */
 function cleanOutputXlsx ($text) {
-    //replace line breaks by ,
-    $cleanText = \str_replace('</p>', ', ', $text);
-    $cleanText = \str_replace('<br>', ', ', $cleanText);
+    //replace line breaks by blank space
+    $cleanText = \str_replace(['<br>', '</p>'], ' ', $text);
+    //replace html code by clean char
+    $cleanText = \html_entity_decode($cleanText);
 
     return $cleanText;
 }
