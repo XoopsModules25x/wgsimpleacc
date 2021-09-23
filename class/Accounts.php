@@ -166,7 +166,7 @@ class Accounts extends \XoopsObject
         }
         // To Save
         $form->addElement(new \XoopsFormHidden('op', 'save'));
-        $form->addElement(new \XoopsFormButtonTray('', _SUBMIT, 'submit', '', false));
+        $form->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
         return $form;
     }
 
@@ -207,8 +207,8 @@ class Accounts extends \XoopsObject
         }
         $ret['class_text']  = $class_text;
         $ret['color']       = $this->getVar('acc_color');
-        $ret['iecalc']      = (int)$this->getVar('acc_iecalc') > 0 ? _YES : _NO;
-        $ret['online']      = (int)$this->getVar('acc_online') > 0 ? _YES : _NO;
+        $ret['iecalc']      = (int)$this->getVar('acc_iecalc') > 0 ? \_YES : \_NO;
+        $ret['online']      = (int)$this->getVar('acc_online') > 0 ? \_YES : \_NO;
         $ret['level']       = $this->getVar('acc_level');
         $ret['weight']      = $this->getVar('acc_weight');
         $ret['datecreated'] = \formatTimestamp($this->getVar('acc_datecreated'), 's');

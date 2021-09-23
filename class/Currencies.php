@@ -108,7 +108,7 @@ class Currencies extends \XoopsObject
         $form->addElement(new \XoopsFormSelectUser(\_MA_WGSIMPLEACC_SUBMITTER, 'cur_submitter', false, $this->getVar('cur_submitter')));
         // To Save
         $form->addElement(new \XoopsFormHidden('op', 'save'));
-        $form->addElement(new \XoopsFormButtonTray('', _SUBMIT, 'submit', '', false));
+        $form->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
         return $form;
     }
 
@@ -127,8 +127,8 @@ class Currencies extends \XoopsObject
         $ret['name']        = $this->getVar('cur_name');
         $ret['datecreated'] = \formatTimestamp($this->getVar('cur_datecreated'), 's');
         $ret['submitter']   = \XoopsUser::getUnameFromId($this->getVar('cur_submitter'));
-        $ret['primary']     = (int)$this->getVar('cur_primary') > 0 ? _YES : _NO;
-        $ret['online']      = (int)$this->getVar('cur_online') > 0 ? _YES : _NO;
+        $ret['primary']     = (int)$this->getVar('cur_primary') > 0 ? \_YES : \_NO;
+        $ret['online']      = (int)$this->getVar('cur_online') > 0 ? \_YES : \_NO;
         $ret['symbol']      = $this->getVar('cur_symbol');
         return $ret;
     }

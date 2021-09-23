@@ -164,7 +164,7 @@ class Clients extends \XoopsObject
         }
         // To Save
         $form->addElement(new \XoopsFormHidden('op', 'save'));
-        $form->addElement(new \XoopsFormButtonTray('', _SUBMIT, 'submit', '', false));
+        $form->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
 
         return $form;
     }
@@ -215,9 +215,9 @@ class Clients extends \XoopsObject
         $ret['address_short'] = $utility::truncateHtml($ret['address'], $editorMaxchar);
         $ret['phone']         = $this->getVar('cli_phone');
         $ret['vat']           = $this->getVar('cli_vat');
-        $ret['creditor']      = (int)$this->getVar('cli_creditor') > 0 ? _YES : _NO;
-        $ret['debtor']        = (int)$this->getVar('cli_debtor') > 0 ? _YES : _NO;
-        $ret['online']        = (int)$this->getVar('cli_online') > 0 ? _YES : _NO;
+        $ret['creditor']      = (int)$this->getVar('cli_creditor') > 0 ? \_YES : \_NO;
+        $ret['debtor']        = (int)$this->getVar('cli_debtor') > 0 ? \_YES : \_NO;
+        $ret['online']        = (int)$this->getVar('cli_online') > 0 ? \_YES : \_NO;
         $ret['datecreated']   = \formatTimestamp($this->getVar('cli_datecreated'), 's');
         $ret['submitter']     = \XoopsUser::getUnameFromId($this->getVar('cli_submitter'));
 

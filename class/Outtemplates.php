@@ -244,7 +244,7 @@ class Outtemplates extends \XoopsObject
             $otplAccid .= '</ul>';
         }
         $ret['accid']       = $otplAccid;
-        $ret['online']      = (int)$this->getVar('otpl_online') > 0 ? _YES : _NO;
+        $ret['online']      = (int)$this->getVar('otpl_online') > 0 ? \_YES : \_NO;
         $ret['datecreated'] = \formatTimestamp($this->getVar('otpl_datecreated'), 's');
         $ret['submitter']   = \XoopsUser::getUnameFromId($this->getVar('otpl_submitter'));
         return $ret;

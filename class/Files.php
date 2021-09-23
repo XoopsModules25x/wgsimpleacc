@@ -264,7 +264,7 @@ class Files extends \XoopsObject
         $form->addElement(new \XoopsFormHidden('op', 'save_temp'));
         $form->addElement(new \XoopsFormHidden('fil_traid', $traId));
         $btnTray = new \XoopsFormElementTray('', '');
-        $btnTray->addElement(new \XoopsFormButtonTray('', _SUBMIT, 'submit', '', false));
+        $btnTray->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
         $btnTray->addElement(new \XoopsFormButton('', 'delete_filtemp', \_MA_WGSIMPLEACC_FILES_TEMP_DELETE, 'submit', false));
         $form->addElement($btnTray);
         return $form;

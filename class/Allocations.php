@@ -128,7 +128,7 @@ class Allocations extends \XoopsObject
         }
         // To Save
         $form->addElement(new \XoopsFormHidden('op', 'save'));
-        $form->addElement(new \XoopsFormButtonTray('', _SUBMIT, 'submit', '', false));
+        $form->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
         return $form;
     }
 
@@ -152,7 +152,7 @@ class Allocations extends \XoopsObject
         $ret['desc']        = \strip_tags($this->getVar('all_desc', 'e'));
         $editorMaxchar = $helper->getConfig('editor_maxchar');
         $ret['desc_short']  = $utility::truncateHtml($ret['desc'], $editorMaxchar);
-        $ret['online']      = (int)$this->getVar('all_online') > 0 ? _YES : _NO;
+        $ret['online']      = (int)$this->getVar('all_online') > 0 ? \_YES : \_NO;
         $ret['level']       = $this->getVar('all_level');
         $ret['weight']      = $this->getVar('all_weight');
         $ret['datecreated'] = \formatTimestamp($this->getVar('all_datecreated'), 's');

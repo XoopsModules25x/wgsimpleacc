@@ -106,7 +106,7 @@ class Taxes extends \XoopsObject
         $form->addElement(new \XoopsFormSelectUser(\_MA_WGSIMPLEACC_SUBMITTER, 'tax_submitter', false, $this->getVar('tax_submitter')));
         // To Save
         $form->addElement(new \XoopsFormHidden('op', 'save'));
-        $form->addElement(new \XoopsFormButtonTray('', _SUBMIT, 'submit', '', false));
+        $form->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
         return $form;
     }
 
@@ -123,8 +123,8 @@ class Taxes extends \XoopsObject
         $ret['id']          = $this->getVar('tax_id');
         $ret['name']        = $this->getVar('tax_name');
         $ret['rate']        = $this->getVar('tax_rate');
-        $ret['online']      = (int)$this->getVar('tax_online') > 0 ? _YES : _NO;
-        $ret['primary']     = (int)$this->getVar('tax_primary') > 0 ? _YES : _NO;
+        $ret['online']      = (int)$this->getVar('tax_online') > 0 ? \_YES : \_NO;
+        $ret['primary']     = (int)$this->getVar('tax_primary') > 0 ? \_YES : \_NO;
         $ret['datecreated'] = \formatTimestamp($this->getVar('tax_datecreated'), 's');
         $ret['submitter']   = \XoopsUser::getUnameFromId($this->getVar('tax_submitter'));
 
