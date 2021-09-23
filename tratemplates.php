@@ -104,7 +104,7 @@ switch ($op) {
             $tratemplatesObj = $tratemplatesHandler->create();
         }
         $tratemplatesObj->setVar('ttpl_name', Request::getString('ttpl_name', ''));
-        $tratemplatesObj->setVar('ttpl_desc', Request::getString('ttpl_desc', ''));
+        $tratemplatesObj->setVar('ttpl_desc', Request::getText('ttpl_desc', ''));
         $tratemplatesObj->setVar('ttpl_accid', Request::getInt('ttpl_accid', 0));
         $tratemplatesObj->setVar('ttpl_allid', Request::getInt('ttpl_allid', 0));
         $tratemplatesObj->setVar('ttpl_asid', Request::getInt('ttpl_asid', 0));

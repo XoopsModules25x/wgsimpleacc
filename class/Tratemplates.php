@@ -41,7 +41,7 @@ class Tratemplates extends \XoopsObject
     {
         $this->initVar('ttpl_id', \XOBJ_DTYPE_INT);
         $this->initVar('ttpl_name', \XOBJ_DTYPE_TXTBOX);
-        $this->initVar('ttpl_desc', \XOBJ_DTYPE_TXTBOX);
+        $this->initVar('ttpl_desc', \XOBJ_DTYPE_OTHER);
         $this->initVar('ttpl_accid', \XOBJ_DTYPE_INT);
         $this->initVar('ttpl_allid', \XOBJ_DTYPE_INT);
         $this->initVar('ttpl_asid', \XOBJ_DTYPE_INT);
@@ -189,7 +189,7 @@ class Tratemplates extends \XoopsObject
         $ret = $this->getValues($keys, $format, $maxDepth);
         $ret['id']          = $this->getVar('ttpl_id');
         $ret['name']        = $this->getVar('ttpl_name');
-        $ret['desc']        = $this->getVar('ttpl_desc');
+        $ret['desc']        = $this->getVar('ttpl_desc', 'e');
 
         $accountsHandler = $helper->getHandler('Accounts');
         $accountsObj = $accountsHandler->get($this->getVar('ttpl_accid'));
