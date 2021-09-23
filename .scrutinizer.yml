@@ -7,8 +7,6 @@ build:
         after:
           # The following installs the most recent XOOPS CMS version, you might want
           # to install a specific release tag or branch instead.
-          - git clone --depth=1 https://github.com/XoopsModules25x/wgsimpleacc
-          - git clone --depth=1 https://github.com/ggoffy/wgsimpleacc
       project_setup:
         override: true
       tests:
