@@ -16,7 +16,7 @@ Main features:
 * Usage of customs output templates
 * Visualization by Chartjs
 
-Most of the templates on user side are fully responsive, but for proper displaying you must use a Bootstrap theme. Depending on the template you can select various options like slideshow type (Lightbox, Jssor,....), autoplay, speed and many more.
+Most of the templates on user side are fully responsive, but for proper displaying you must use a Bootstrap theme.
 
 wgSimpleAcc Version 1.22 is based on Bootstrap 3. It is recommended to to use theme 'wgsa_startmin' from folder 'extras/themes'
 
