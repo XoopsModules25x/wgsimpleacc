@@ -44,9 +44,9 @@ $limit   = Request::getInt('limit', $helper->getConfig('userpager'));
 $balId   = Request::getInt('bal_id', 0);
 $balType = Request::getInt('bal_type', 0);
 
-$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', XOOPS_ICONS32_URL);
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icons_url_32', WGSIMPLEACC_ICONS_URL . '/32/');
+$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icons_url_32', \WGSIMPLEACC_ICONS_URL . '/32/');
 
 $keywords = [];
 
@@ -61,7 +61,7 @@ switch ($op) {
     case 'precalc':
         // Check permissions
         if (!$permBalancesSubmit) {
-            \redirect_header('balances.php?op=list', 3, _NOPERM);
+            \redirect_header('balances.php?op=list', 3, \_NOPERM);
         }
         $balFrom = Request::getString('bal_from') . ' 00:00';
         $balanceFromObj = \DateTime::createFromFormat(Utility::CustomDateFormat(), $balFrom);
@@ -204,7 +204,7 @@ switch ($op) {
     case 'save':
         // Check permissions
         if (!$permBalancesSubmit) {
-            \redirect_header('balances.php?op=list', 3, _NOPERM);
+            \redirect_header('balances.php?op=list', 3, \_NOPERM);
         }
 
         $errors = 0;
@@ -333,9 +333,9 @@ switch ($op) {
     case 'new':
         // Check permissions
         if (!$permBalancesSubmit) {
-            \redirect_header('balances.php?op=list', 3, _NOPERM);
+            \redirect_header('balances.php?op=list', 3, \_NOPERM);
         }
-        $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/forms.js');
+        $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/js/forms.js');
         // Form Create
         $balancesObj = $balancesHandler->create();
         $form = $balancesObj->getFormBalances('balances.php');
@@ -348,7 +348,7 @@ switch ($op) {
     case 'delete':
         // Check permissions
         if (!$permBalancesSubmit) {
-            \redirect_header('balances.php?op=list', 3, _NOPERM);
+            \redirect_header('balances.php?op=list', 3, \_NOPERM);
         }
 
         $balanceFrom = Request::getInt('balanceFrom');
@@ -402,7 +402,7 @@ wgsimpleaccMetaKeywords($helper->getConfig('keywords') . ', ' . \implode(',', $k
 unset($keywords);
 
 // Description
-$GLOBALS['xoopsTpl']->assign('xoops_mpageurl', WGSIMPLEACC_URL.'/balances.php');
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', WGSIMPLEACC_UPLOAD_URL);
+$GLOBALS['xoopsTpl']->assign('xoops_mpageurl', \WGSIMPLEACC_URL . '/balances.php');
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', \WGSIMPLEACC_UPLOAD_URL);
 
 require __DIR__ . '/footer.php';

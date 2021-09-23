@@ -48,8 +48,8 @@ switch ($op) {
         $transactionsCount = $transactionsHandler->getCountTransactions();
         $transactionsAll = $transactionsHandler->getAllTransactions($start, $limit, 'tra_id', 'DESC');
         $GLOBALS['xoopsTpl']->assign('transactions_count', $transactionsCount);
-        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
-        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', WGSIMPLEACC_UPLOAD_URL);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', \WGSIMPLEACC_UPLOAD_URL);
         $GLOBALS['xoopsTpl']->assign('start', $start);
         $GLOBALS['xoopsTpl']->assign('limit', $limit);
         // Table view transactions
@@ -71,7 +71,7 @@ switch ($op) {
         break;
     case 'new':
         $templateMain = 'wgsimpleacc_admin_transactions.tpl';
-        $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/forms.js');
+        $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/js/forms.js');
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('transactions.php'));
         $adminObject->addItemButton(\_AM_WGSIMPLEACC_LIST_TRANSACTIONS, 'transactions.php', 'list');
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
@@ -135,7 +135,7 @@ switch ($op) {
         break;
     case 'edit':
         $templateMain = 'wgsimpleacc_admin_transactions.tpl';
-        $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/forms.js');
+        $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/js/forms.js');
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('transactions.php'));
         $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_TRANSACTION, 'transactions.php?op=new', 'add');
         $adminObject->addItemButton(\_AM_WGSIMPLEACC_LIST_TRANSACTIONS, 'transactions.php', 'list');

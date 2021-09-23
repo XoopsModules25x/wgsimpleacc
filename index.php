@@ -54,8 +54,8 @@ if (!$permissionsHandler->getPermGlobalView()) {
 
 $keywords = [];
 // 
-$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', XOOPS_ICONS32_URL);
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
+$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
 $GLOBALS['xoopsTpl']->assign('refer', 'index');
 $GLOBALS['xoopsTpl']->assign('op', $op);
 $colors = Utility::getColors();
@@ -326,8 +326,8 @@ wgsimpleaccMetaKeywords($helper->getConfig('keywords') . ', ' . \implode(',', $k
 unset($keywords);
 // Description
 wgsimpleaccMetaDescription(\_MA_WGSIMPLEACC_INDEX_DESC);
-$GLOBALS['xoopsTpl']->assign('xoops_mpageurl', WGSIMPLEACC_URL.'/index.php');
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', WGSIMPLEACC_UPLOAD_URL);
+$GLOBALS['xoopsTpl']->assign('xoops_mpageurl', \WGSIMPLEACC_URL . '/index.php');
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', \WGSIMPLEACC_UPLOAD_URL);
 require __DIR__ . '/footer.php';
 
 function showLogin() {

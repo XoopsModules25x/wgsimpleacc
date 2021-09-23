@@ -46,8 +46,8 @@ $cliName = Request::getString('cli_name', '');
 
 $GLOBALS['xoopsTpl']->assign('start', $start);
 $GLOBALS['xoopsTpl']->assign('limit', $limit);
-$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', XOOPS_ICONS32_URL);
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
+$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_icons_url_32', WGSIMPLEACC_ICONS_URL . '/32/');
 
 $keywords = [];
@@ -123,7 +123,7 @@ switch ($op) {
         }
         // Check permissions
         if (!$permissionsHandler->getPermClientsSubmit()) {
-            \redirect_header('clients.php?op=list', 3, _NOPERM);
+            \redirect_header('clients.php?op=list', 3, \_NOPERM);
         }
         if ($cliId > 0) {
             $clientsObj = $clientsHandler->get($cliId);
@@ -140,7 +140,7 @@ switch ($op) {
         $clientsObj->setVar('cli_creditor', Request::getInt('cli_creditor', 0));
         $clientsObj->setVar('cli_debtor', Request::getInt('cli_debtor', 0));
         $clientsObj->setVar('cli_online', Request::getInt('cli_online', 0));
-        $clientDatecreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('cli_datecreated'));
+        $clientDatecreatedObj = \DateTime::createFromFormat(\_SHORTDATESTRING, Request::getString('cli_datecreated'));
         $clientsObj->setVar('cli_datecreated', $clientDatecreatedObj->getTimestamp());
         $clientsObj->setVar('cli_submitter', Request::getInt('cli_submitter', 0));
         // Insert Data
@@ -156,7 +156,7 @@ switch ($op) {
     case 'new':
         // Check permissions
         if (!$permissionsHandler->getPermClientsSubmit()) {
-            \redirect_header('clients.php?op=list', 3, _NOPERM);
+            \redirect_header('clients.php?op=list', 3, \_NOPERM);
         }
         // Form Create
         $clientsObj = $clientsHandler->create();
@@ -176,7 +176,7 @@ switch ($op) {
         $clientsObj = $clientsHandler->get($cliId);
         // Check permissions
         if (!$permissionsHandler->getPermClientsEdit($clientsObj->getVar('cli_submitter'))) {
-            \redirect_header('clients.php?op=list', 3, _NOPERM);
+            \redirect_header('clients.php?op=list', 3, \_NOPERM);
         }
 
         $form = $clientsObj->getFormClients();
@@ -195,7 +195,7 @@ switch ($op) {
         $clientsObj = $clientsHandler->get($cliId);
         // Check permissions
         if (!$permissionsHandler->getPermClientsEdit($clientsObj->getVar('cli_submitter'))) {
-            \redirect_header('clients.php?op=list', 3, _NOPERM);
+            \redirect_header('clients.php?op=list', 3, \_NOPERM);
         }
         $clientsObj = $clientsHandler->get($cliId);
         $cliName = $clientsObj->getVar('cli_name');
@@ -238,6 +238,6 @@ wgsimpleaccMetaKeywords($helper->getConfig('keywords') . ', ' . \implode(',', $k
 unset($keywords);
 
 // Description
-$GLOBALS['xoopsTpl']->assign('xoops_mpageurl', WGSIMPLEACC_URL.'/clients.php');
+$GLOBALS['xoopsTpl']->assign('xoops_mpageurl', \WGSIMPLEACC_URL . '/clients.php');
 
 require __DIR__ . '/footer.php';

@@ -44,9 +44,9 @@ $accId = Request::getInt('acc_id', 0);
 
 $permAccountsSubmit = $permissionsHandler->getPermAccountsSubmit();
 
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icon_url_16', WGSIMPLEACC_ICONS_URL . '/16/');
-$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', XOOPS_ICONS32_URL);
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icon_url_16', \WGSIMPLEACC_ICONS_URL . '/16/');
+$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
 
 $keywords = [];
 
@@ -60,12 +60,12 @@ switch ($op) {
     default:
         $accountsCount = $accountsHandler->getCount();
         if ($accountsCount > 0) {
-            $GLOBALS['xoTheme']->addStylesheet(WGSIMPLEACC_URL . '/assets/css/nestedsortable.css');
+            $GLOBALS['xoTheme']->addStylesheet(\WGSIMPLEACC_URL . '/assets/css/nestedsortable.css');
             if ($permAccountsSubmit) {
                 // add scripts
-                $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/jquery-ui.min.js');
-                $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/sortable-accounts.js');
-                $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/jquery.mjs.nestedSortable.js');
+                $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/js/jquery-ui.min.js');
+                $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/js/sortable-accounts.js');
+                $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/js/jquery.mjs.nestedSortable.js');
                 // add list for sorting
                 $accountlist_sort = $accountsHandler->getListOfAccountsEdit(0);
             } else {
@@ -86,7 +86,7 @@ switch ($op) {
         }
         // Check permissions
         if (!$permAccountsSubmit) {
-            \redirect_header('accounts.php?op=list', 3, _NOPERM);
+            \redirect_header('accounts.php?op=list', 3, \_NOPERM);
         }
         if ($accId > 0) {
             $accountsObj = $accountsHandler->get($accId);
@@ -124,7 +124,7 @@ switch ($op) {
     case 'new':
         // Check permissions
         if (!$permAccountsSubmit) {
-            \redirect_header('accounts.php?op=list', 3, _NOPERM);
+            \redirect_header('accounts.php?op=list', 3, \_NOPERM);
         }
         // Form Create
         $accountsObj = $accountsHandler->create();
@@ -143,7 +143,7 @@ switch ($op) {
         // Check permissions
         $accountsObj = $accountsHandler->get($accId);
         if (!$permissionsHandler->getPermAccountsEdit($accountsObj->getVar('acc_submitter'))) {
-            \redirect_header('accounts.php?op=list', 3, _NOPERM);
+            \redirect_header('accounts.php?op=list', 3, \_NOPERM);
         }
         // Get Form
         $form = $accountsObj->getFormAccounts();
@@ -161,7 +161,7 @@ switch ($op) {
         // Check permissions
         $accountsObj = $accountsHandler->get($accId);
         if (!$permissionsHandler->getPermAccountsEdit($accountsObj->getVar('acc_submitter'))) {
-            \redirect_header('accounts.php?op=list', 3, _NOPERM);
+            \redirect_header('accounts.php?op=list', 3, \_NOPERM);
         }
         // Check whether account is already used
         $crTransactions = new \CriteriaCompo();
@@ -224,7 +224,7 @@ unset($keywords);
 
 // Description
 wgsimpleaccMetaDescription(\_MA_WGSIMPLEACC_ACCOUNTS_DESC);
-$GLOBALS['xoopsTpl']->assign('xoops_mpageurl', WGSIMPLEACC_URL.'/accounts.php');
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', WGSIMPLEACC_UPLOAD_URL);
+$GLOBALS['xoopsTpl']->assign('xoops_mpageurl', \WGSIMPLEACC_URL . '/accounts.php');
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', \WGSIMPLEACC_UPLOAD_URL);
 
 require __DIR__ . '/footer.php';

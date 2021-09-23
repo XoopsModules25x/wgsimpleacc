@@ -41,9 +41,9 @@ $limit = Request::getInt('limit', $helper->getConfig('userpager'));
 $otplId = Request::getInt('otpl_id', 0);
 $traId  = Request::getInt('tra_id', 0);
 
-$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', XOOPS_ICONS32_URL);
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icons_url_32', WGSIMPLEACC_ICONS_URL . '/32/');
+$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icons_url_32', \WGSIMPLEACC_ICONS_URL . '/32/');
 $GLOBALS['xoopsTpl']->assign('showItem', $otplId > 0);
 $permSubmit = $permissionsHandler->getPermOuttemplatesSubmit();
 $GLOBALS['xoopsTpl']->assign('permSubmit', $permSubmit);
@@ -92,7 +92,7 @@ switch ($op) {
         }
         // Check permissions
         if (!$permSubmit) {
-            \redirect_header('outtemplates.php?op=list', 3, _NOPERM);
+            \redirect_header('outtemplates.php?op=list', 3, \_NOPERM);
         }
         if ($otplId > 0) {
             $outtemplatesObj = $outtemplatesHandler->get($otplId);
@@ -135,7 +135,7 @@ switch ($op) {
     case 'new':
         // Check permissions
         if (!$permSubmit) {
-            \redirect_header('outtemplates.php?op=list', 3, _NOPERM);
+            \redirect_header('outtemplates.php?op=list', 3, \_NOPERM);
         }
         // Form Create
         $outtemplatesObj = $outtemplatesHandler->create();
@@ -149,7 +149,7 @@ switch ($op) {
     case 'edit':
         // Check permissions
         if (!$permSubmit) {
-            \redirect_header('outtemplates.php?op=list', 3, _NOPERM);
+            \redirect_header('outtemplates.php?op=list', 3, \_NOPERM);
         }
         // Check params
         if (0 == $otplId) {
@@ -167,7 +167,7 @@ switch ($op) {
     case 'delete':
         // Check permissions
         if (!$permSubmit) {
-            \redirect_header('outtemplates.php?op=list', 3, _NOPERM);
+            \redirect_header('outtemplates.php?op=list', 3, \_NOPERM);
         }
         // Check params
         if (0 == $otplId) {
@@ -201,7 +201,7 @@ switch ($op) {
     case 'editpdf':
         // Check permissions
         if (!$permSubmit) {
-            \redirect_header('outtemplates.php?op=list', 3, _NOPERM);
+            \redirect_header('outtemplates.php?op=list', 3, \_NOPERM);
         }
         // Form Create
         $form = $outtemplatesHandler::getFormEditTraOutput($otplId);
@@ -211,7 +211,7 @@ switch ($op) {
     case 'exec_output':
         // Check permissions
         if (!$permSubmit) {
-            \redirect_header('outtemplates.php?op=list', 3, _NOPERM);
+            \redirect_header('outtemplates.php?op=list', 3, \_NOPERM);
         }
         $outParams = [];
         $template  = [];
@@ -255,7 +255,7 @@ switch ($op) {
 wgsimpleaccMetaKeywords($helper->getConfig('keywords') . ', ' . \implode(',', $keywords));
 unset($keywords);
 
-$GLOBALS['xoopsTpl']->assign('xoops_mpageurl', WGSIMPLEACC_URL.'/outtemplates.php');
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', WGSIMPLEACC_UPLOAD_URL);
+$GLOBALS['xoopsTpl']->assign('xoops_mpageurl', \WGSIMPLEACC_URL . '/outtemplates.php');
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', \WGSIMPLEACC_UPLOAD_URL);
 
 require __DIR__ . '/footer.php';

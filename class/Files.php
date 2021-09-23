@@ -81,7 +81,7 @@ class Files extends \XoopsObject
     public function getFormFilesAdmin($traId, $action = false)
     {
         if (!$GLOBALS['xoopsUser']->isAdmin($GLOBALS['xoopsModule']->mid())) {
-            \redirect_header('accounts.php?op=list', 3, _NOPERM);
+            \redirect_header('accounts.php?op=list', 3, \_NOPERM);
         }
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         if (!$action) {
@@ -164,7 +164,7 @@ class Files extends \XoopsObject
         $form->addElement(new \XoopsFormTextArea(\_MA_WGSIMPLEACC_FILE_DESC, 'fil_desc', $this->getVar('fil_desc', 'e'), 4, 47));
         // To Save
         $form->addElement(new \XoopsFormHidden('op', 'save_edit'));
-        $form->addElement(new \XoopsFormButtonTray('', _SUBMIT, 'submit', '', false));
+        $form->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
         return $form;
     }
 
@@ -217,7 +217,7 @@ class Files extends \XoopsObject
         // To Save
         $form->addElement(new \XoopsFormHidden('op', 'upload_file'));
         $form->addElement(new \XoopsFormHidden('fil_traid', $filTraid));
-        $form->addElement(new \XoopsFormButtonTray('', _SUBMIT, 'submit', '', false));
+        $form->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
         return $form;
     }
 

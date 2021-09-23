@@ -46,8 +46,8 @@ switch ($op) {
         $trahistoriesCount = $trahistoriesHandler->getCountTrahistories();
         $trahistoriesAll = $trahistoriesHandler->getAllTrahistories($start, $limit, 'hist_id', 'DESC');
         $GLOBALS['xoopsTpl']->assign('trahistories_count', $trahistoriesCount);
-        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
-        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', WGSIMPLEACC_UPLOAD_URL);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', \WGSIMPLEACC_UPLOAD_URL);
         // Table view trahistories
         if ($trahistoriesCount > 0) {
             foreach (\array_keys($trahistoriesAll) as $i) {

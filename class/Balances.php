@@ -100,10 +100,10 @@ class Balances extends \XoopsObject
         \xoops_load('XoopsFormLoader');
         $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
-        $form->addElement(new \XoopsFormHidden('dateFrom[1]', date(_SHORTDATESTRING, $dateFromM)));
-        $form->addElement(new \XoopsFormHidden('dateTo[1]', date(_SHORTDATESTRING, $dateToM)));
-        $form->addElement(new \XoopsFormHidden('dateFrom[2]', date(_SHORTDATESTRING, $dateFromY)));
-        $form->addElement(new \XoopsFormHidden('dateTo[2]', date(_SHORTDATESTRING, $dateToY)));
+        $form->addElement(new \XoopsFormHidden('dateFrom[1]', date(\_SHORTDATESTRING, $dateFromM)));
+        $form->addElement(new \XoopsFormHidden('dateTo[1]', date(\_SHORTDATESTRING, $dateToM)));
+        $form->addElement(new \XoopsFormHidden('dateFrom[2]', date(\_SHORTDATESTRING, $dateFromY)));
+        $form->addElement(new \XoopsFormHidden('dateTo[2]', date(\_SHORTDATESTRING, $dateToY)));
         // Form Select Status
         $balStatusSelect = new \XoopsFormRadio(\_MA_WGSIMPLEACC_BALANCE_TYPE, 'bal_type', Constants::BALANCE_TYPE_TEMPORARY);
         $balStatusSelect->addOption(Constants::BALANCE_TYPE_TEMPORARY, \_MA_WGSIMPLEACC_BALANCE_TYPE_TEMPORARY);

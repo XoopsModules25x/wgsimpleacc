@@ -46,8 +46,8 @@ switch ($op) {
         $taxesCount = $taxesHandler->getCountTaxes();
         $taxesAll = $taxesHandler->getAllTaxes($start, $limit);
         $GLOBALS['xoopsTpl']->assign('taxes_count', $taxesCount);
-        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
-        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', WGSIMPLEACC_UPLOAD_URL);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', \WGSIMPLEACC_UPLOAD_URL);
         // Table view taxes
         if ($taxesCount > 0) {
             foreach (\array_keys($taxesAll) as $i) {

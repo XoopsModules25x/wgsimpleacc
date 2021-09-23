@@ -47,8 +47,8 @@ switch ($op) {
         $tratemplatesCount = $tratemplatesHandler->getCountTratemplates();
         $tratemplatesAll = $tratemplatesHandler->getAllTratemplates($start, $limit);
         $GLOBALS['xoopsTpl']->assign('tratemplates_count', $tratemplatesCount);
-        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
-        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', WGSIMPLEACC_UPLOAD_URL);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', \WGSIMPLEACC_UPLOAD_URL);
         // Table view tratemplates
         if ($tratemplatesCount > 0) {
             foreach (\array_keys($tratemplatesAll) as $i) {
@@ -114,7 +114,7 @@ switch ($op) {
     case 'edit':
         $templateMain = 'wgsimpleacc_admin_tratemplates.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('tratemplates.php'));
-        $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/functions.js');
+        $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/js/functions.js');
         $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_TRATEMPLATE, 'tratemplates.php?op=new', 'add');
         $adminObject->addItemButton(\_AM_WGSIMPLEACC_LIST_TRATEMPLATES, 'tratemplates.php', 'list');
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));

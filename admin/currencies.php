@@ -46,8 +46,8 @@ switch ($op) {
         $currenciesCount = $currenciesHandler->getCountCurrencies();
         $currenciesAll = $currenciesHandler->getAllCurrencies($start, $limit);
         $GLOBALS['xoopsTpl']->assign('currencies_count', $currenciesCount);
-        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
-        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', WGSIMPLEACC_UPLOAD_URL);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', \WGSIMPLEACC_UPLOAD_URL);
         // Table view currencies
         if ($currenciesCount > 0) {
             foreach (\array_keys($currenciesAll) as $i) {

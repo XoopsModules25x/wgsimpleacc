@@ -44,8 +44,8 @@ switch ($op) {
         $allocationsCount = $allocationsHandler->getCountAllocations();
         $allocationsAll = $allocationsHandler->getAllAllocations($start, $limit);
         $GLOBALS['xoopsTpl']->assign('allocations_count', $allocationsCount);
-        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
-        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', WGSIMPLEACC_UPLOAD_URL);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', \WGSIMPLEACC_UPLOAD_URL);
         // Table view allocations
         if ($allocationsCount > 0) {
             foreach (\array_keys($allocationsAll) as $i) {

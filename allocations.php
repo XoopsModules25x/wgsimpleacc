@@ -40,9 +40,9 @@ $start = Request::getInt('start', 0);
 $limit = Request::getInt('limit', $helper->getConfig('userpager'));
 $allId = Request::getInt('all_id', 0);
 
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icon_url_16', WGSIMPLEACC_ICONS_URL . '/16/');
-$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', XOOPS_ICONS32_URL);
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icon_url_16', \WGSIMPLEACC_ICONS_URL . '/16/');
+$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
 
 $keywords = [];
 
@@ -57,12 +57,12 @@ switch ($op) {
     case 'list':
     default:
         if ($allocationsCount > 0) {
-            $GLOBALS['xoTheme']->addStylesheet(WGSIMPLEACC_URL . '/assets/css/nestedsortable.css');
+            $GLOBALS['xoTheme']->addStylesheet(\WGSIMPLEACC_URL . '/assets/css/nestedsortable.css');
             if ($permAllocationsSubmit) {
                 // add scripts
-                $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/jquery-ui.min.js');
-                $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/sortable-allocations.js');
-                $GLOBALS['xoTheme']->addScript(WGSIMPLEACC_URL . '/assets/js/jquery.mjs.nestedSortable.js');
+                $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/js/jquery-ui.min.js');
+                $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/js/sortable-allocations.js');
+                $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/js/jquery.mjs.nestedSortable.js');
 
                 // add list for sorting
                 $allocationlist_sort = $allocationsHandler->getListOfAllocationsEdit(0);
@@ -85,7 +85,7 @@ switch ($op) {
         }
         // Check permissions
         if (!$permAllocationsSubmit) {
-            \redirect_header('allocations.php?op=list', 3, _NOPERM);
+            \redirect_header('allocations.php?op=list', 3, \_NOPERM);
         }
         if ($allId > 0) {
             $allocationsObj = $allocationsHandler->get($allId);
@@ -120,7 +120,7 @@ switch ($op) {
     case 'new':
         // Check permissions
         if (!$permAllocationsSubmit) {
-            \redirect_header('allocations.php?op=list', 3, _NOPERM);
+            \redirect_header('allocations.php?op=list', 3, \_NOPERM);
         }
         // Form Create
         $allocationsObj = $allocationsHandler->create();
@@ -139,7 +139,7 @@ switch ($op) {
         // Check permissions
         $allocationsObj = $allocationsHandler->get($allId);
         if (!$permissionsHandler->getPermAllocationsEdit($allocationsObj->getVar('all_submitter'))) {
-            \redirect_header('allocations.php?op=list', 3, _NOPERM);
+            \redirect_header('allocations.php?op=list', 3, \_NOPERM);
         }
         // Get Form
 
@@ -158,7 +158,7 @@ switch ($op) {
         // Check permissions
         $allocationsObj = $allocationsHandler->get($allId);
         if (!$permissionsHandler->getPermAllocationsEdit($allocationsObj->getVar('all_submitter'))) {
-            \redirect_header('allocations.php?op=list', 3, _NOPERM);
+            \redirect_header('allocations.php?op=list', 3, \_NOPERM);
         }
         // Check whether allocation is already used
         $crTransactions = new \CriteriaCompo();
@@ -233,7 +233,7 @@ unset($keywords);
 
 // Description
 wgsimpleaccMetaDescription(\_MA_WGSIMPLEACC_ALLOCATIONS_DESC);
-$GLOBALS['xoopsTpl']->assign('xoops_mpageurl', WGSIMPLEACC_URL.'/allocations.php');
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', WGSIMPLEACC_UPLOAD_URL);
+$GLOBALS['xoopsTpl']->assign('xoops_mpageurl', \WGSIMPLEACC_URL . '/allocations.php');
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', \WGSIMPLEACC_UPLOAD_URL);
 
 require __DIR__ . '/footer.php';

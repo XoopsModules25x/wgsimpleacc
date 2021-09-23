@@ -47,8 +47,8 @@ switch ($op) {
         $balancesCount = $balancesHandler->getCountBalances();
         $balancesAll = $balancesHandler->getAllBalances($start, $limit);
         $GLOBALS['xoopsTpl']->assign('balances_count', $balancesCount);
-        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', WGSIMPLEACC_URL);
-        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', WGSIMPLEACC_UPLOAD_URL);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', \WGSIMPLEACC_UPLOAD_URL);
         // Table view balances
         if ($balancesCount > 0) {
             foreach (\array_keys($balancesAll) as $i) {
