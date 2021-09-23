@@ -25,6 +25,11 @@ function presetTraField() {
     var vselected = $("input:radio[name=tra_template]:checked").val();
 
     xoopsGetElementById('tra_desc').value = xoopsGetElementById('ttpl_desc[' + vselected +  ']').value;
+    /*handle iframe if tinymce is used*/
+    var tradescifr = document.getElementById('tra_desc_ifr');
+    if (tradescifr !== null) {
+        tradescifr.contentDocument.getElementById('tinymce').innerHTML = xoopsGetElementById('tra_desc').value;
+    }
     xoopsGetElementById('tra_accid').value = xoopsGetElementById('ttpl_accid[' + vselected +  ']').value;
     xoopsGetElementById('tra_allid').value = xoopsGetElementById('ttpl_allid[' + vselected +  ']').value;
     xoopsGetElementById('tra_asid').value = xoopsGetElementById('ttpl_asid[' + vselected +  ']').value;
