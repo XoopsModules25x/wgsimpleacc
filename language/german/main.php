@@ -38,6 +38,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_FILTERBY_YEAR', 'Jahr auswählen');
 \define('_MA_WGSIMPLEACC_FILTERBY_ASSET', 'Vermögenswert auswählen');
 \define('_MA_WGSIMPLEACC_FILTERBY_ALLOC', 'Zuordnung auswählen');
+\define('_MA_WGSIMPLEACC_FILTERBY_ALLOCSUB', 'Alle Unterzuordnungen einschließen');
 \define('_MA_WGSIMPLEACC_FILTERBY_ACCOUNT', 'Konto auswählen');
 \define('_MA_WGSIMPLEACC_FILTERBY_PERIOD', 'Zeitraum auswählen');
 \define('_MA_WGSIMPLEACC_FILTERBY_CLIENT', 'Klient auswählen');

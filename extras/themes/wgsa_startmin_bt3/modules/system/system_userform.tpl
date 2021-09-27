@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container" style="margin:50px auto">
     <div class="row">
     <legend class="bold"><{$lang_login}></legend>
 
