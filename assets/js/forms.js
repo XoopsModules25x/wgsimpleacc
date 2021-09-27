@@ -51,3 +51,20 @@ function presetBalType() {
     xoopsGetElementById('bal_to').value = xoopsGetElementById('dateTo[' + vselected +  ']').value;
 
 }
+
+function presetAllSubField() {
+    allId = document.getElementById("all_id").value;
+    allSubs1 = document.getElementById("allSubs1");
+    allSubs2 = document.getElementById("allSubs2");
+    if (allId > 0) {
+        allSubs1.disabled = false;
+        allSubs2.disabled = false;
+    } else {
+        allSubs1.disabled = true;
+        allSubs1.value = 0;
+        allSubs1.checked = false;
+        allSubs2.disabled = true;
+        allSubs2.value = 1;
+        allSubs2.checked = true;
+    }
+}

@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container" style="margin:50px auto">
 	<legend class="bold"><{$lang_login}></legend>
 	<form action="user.php" method="post">
 		<label for="profile-uname"><{$lang_username}></label>

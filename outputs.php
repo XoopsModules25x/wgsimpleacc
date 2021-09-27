@@ -46,6 +46,7 @@ $op      = Request::getCmd('op', 'none');
 $traId   = Request::getInt('tra_id', 0);
 $traType = Request::getInt('tra_type', 0);
 $allId   = Request::getInt('all_id', 0);
+$allSubs = Request::getInt('allSubs', 0);
 $accId   = Request::getInt('acc_id', 0);
 $asId    = Request::getInt('as_id', 0);
 $cliId   = Request::getInt('cli_id', 0);
@@ -153,6 +154,7 @@ switch ($op) {
         }
         break;
     case 'transactions';
+        $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/js/forms.js');
         $filterYear = Request::getInt('filterYear', 0);
         $filterMonthFrom = Request::getInt('filterMonthFrom', 0);
         $filterYearFrom = Request::getInt('filterYearFrom', 0);
@@ -227,7 +229,13 @@ switch ($op) {
                     $crTransactions->add(new \Criteria('tra_date', $tradateTo, '<='));
                 }
                 if ($allId > 0) {
-                    $crTransactions->add(new \Criteria('tra_allid', $allId));
+                    if ($allSubs) {
+                        $subAllIds = $allocationsHandler->getSubsOfAllocations($allId);
+                        $critAllIds = '(' . \implode(',', $subAllIds) . ')';
+                        $crTransactions->add(new \Criteria('tra_allid', $critAllIds, 'IN'));
+                    } else {
+                        $crTransactions->add(new \Criteria('tra_allid', $allId));
+                    }
                 }
                 if ($asId > 0) {
                     $crTransactions->add(new \Criteria('tra_asid', $asId));

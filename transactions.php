@@ -44,6 +44,7 @@ $limit           = Request::getInt('limit', $helper->getConfig('userpager'));
 $traId           = Request::getInt('tra_id', 0);
 $traType         = Request::getInt('tra_type', 0);
 $allId           = Request::getInt('all_id', 0);
+$allSubs         = Request::getInt('allSubs', 0);
 $accId           = Request::getInt('acc_id', 0);
 $asId            = Request::getInt('as_id', 0);
 $cliId           = Request::getInt('cli_id', 0);
@@ -75,7 +76,7 @@ if (0 == $displayfilter || $traId > 0) {
 
 $traOp = '&amp;start=' . $start . '&amp;limit=' . $limit . '&amp;all_id=' . $allId . '&amp;acc_id=' . $accId . '&amp;as_id=' . $asId;
 $traOp .= '&amp;filterYear=' . $filterYear . '&amp;filterMonthFrom=' . $filterMonthFrom . '&amp;filterYearFrom=' . $filterYearFrom . '&amp;filterMonthTo=' . $filterMonthTo . '&amp;filterYearTo=' . $filterYearTo;
-$traOp .= '&amp;displayfilter=' . $displayfilter;
+$traOp .= '&amp;displayfilter=' . $displayfilter . '&amp;allSubs=' . $allSubs;
 
 $keywords = [];
 
@@ -86,6 +87,7 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('showList', true);
         $GLOBALS['xoopsTpl']->assign('listHead', \_MA_WGSIMPLEACC_TRANSACTIONS_LIST);
         $GLOBALS['xoopsTpl']->assign('permDelete', true);
+        $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/js/forms.js');
         if (0 == $traId) {
             //get first and last year
             $transactionsHandler = $helper->getHandler('Transactions');
@@ -108,7 +110,7 @@ switch ($op) {
             foreach (\array_keys($transactionsAll) as $i) {
                 $yearMax = date('Y', $transactionsAll[$i]->getVar('tra_date'));
             }
-            $formFilter = $transactionsHandler::getFormFilterTransactions($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, $cliId);
+            $formFilter = $transactionsHandler::getFormFilterTransactions($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, $cliId, 'list', $allSubs);
             $GLOBALS['xoopsTpl']->assign('formFilter', $formFilter->render());
         }
         $crTransactions = new \CriteriaCompo();
@@ -138,7 +140,13 @@ switch ($op) {
             $crTransactions->add(new \Criteria('tra_date', $tradateTo, '<='));
         }
         if ($allId > 0) {
-            $crTransactions->add(new \Criteria('tra_allid', $allId));
+            if ($allSubs) {
+                $subAllIds = $allocationsHandler->getSubsOfAllocations($allId);
+                $critAllIds = '(' . \implode(',', $subAllIds) . ')';
+                $crTransactions->add(new \Criteria('tra_allid', $critAllIds, 'IN'));
+            } else {
+                $crTransactions->add(new \Criteria('tra_allid', $allId));
+            }
         }
         if ($asId > 0) {
             $crTransactions->add(new \Criteria('tra_asid', $asId));
@@ -221,7 +229,8 @@ switch ($op) {
                 $pagenav = new \XoopsPageNav($transactionsCount, $limit, $start, 'start',
                     'op=list&amp;limit=' . $limit . '&amp;all_id=' . $allId . '&amp;acc_id=' . $accId . '&amp;as_id=' . $asId . '&amp;cli_id=' . $cliId .
                     '&tra_type=' . $traType . '&amp;filterYear=' . $filterYear .
-                    '&amp;filterMonthFrom=' . $filterMonthFrom . '&amp;filterYearFrom=' . $filterYearFrom . '&amp;filterMonthTo=' . $filterMonthTo . '&amp;filterYearTo=' . $filterYearTo
+                    '&amp;filterMonthFrom=' . $filterMonthFrom . '&amp;filterYearFrom=' . $filterYearFrom . '&amp;filterMonthTo=' . $filterMonthTo . '&amp;filterYearTo=' . $filterYearTo .
+                    '&amp;allSubs=' . $allSubs
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
@@ -330,7 +339,11 @@ switch ($op) {
             $tags['ITEM_URL']  = \XOOPS_URL . '/modules/wgsimpleacc/transactions.php?op=show&tra_id=' . $newTraId;
             $notificationHandler = \xoops_getHandler('notification');
             if (Constants::STATUS_SUBMITTED == $traStatus) {
-                // Event approve notification
+                if (0 === $traId) {
+                    // Event new notification
+                    $notificationHandler->triggerEvent('global', 0, 'global_new', $tags);
+                }
+                // Event approve notifications
                 $notificationHandler->triggerEvent('global', 0, 'global_approve', $tags);
                 $notificationHandler->triggerEvent('transactions', $newTraId, 'transaction_approve', $tags);
             } else {
@@ -344,7 +357,7 @@ switch ($op) {
                 }
             }
             // redirect after insert
-            \redirect_header('transactions.php?op=list' . $traOp . '#traId_' . $traId, 2, \_MA_WGSIMPLEACC_FORM_OK);
+            \redirect_header('transactions.php?op=list' . $traOp . '#traId_' . $newTraId, 2, \_MA_WGSIMPLEACC_FORM_OK);
         }
         // Get Form Error
         $GLOBALS['xoopsTpl']->assign('error', $transactionsObj->getHtmlErrors());

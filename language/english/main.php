@@ -38,6 +38,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_FILTERBY_YEAR', 'Select year');
 \define('_MA_WGSIMPLEACC_FILTERBY_ASSET', 'Select asset');
 \define('_MA_WGSIMPLEACC_FILTERBY_ALLOC', 'Select allocation');
+\define('_MA_WGSIMPLEACC_FILTERBY_ALLOCSUB', 'Include all sub allocations');
 \define('_MA_WGSIMPLEACC_FILTERBY_ACCOUNT', 'Select account');
 \define('_MA_WGSIMPLEACC_FILTERBY_PERIOD', 'Select period');
 \define('_MA_WGSIMPLEACC_FILTERBY_CLIENT', 'Select client');

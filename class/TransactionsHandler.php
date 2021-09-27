@@ -139,7 +139,7 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
      * @param string $op
      * @return FormInline
      */
-    public static function getFormFilterTransactions($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, $cliId, $op='list')
+    public static function getFormFilterTransactions($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, $cliId, $op='list', $allSubs = 0)
     {
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $period_type = $helper->getConfig('balance_period');
@@ -155,12 +155,19 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
         // Form Table allocations
         $allocationsHandler = $helper->getHandler('Allocations');
         $traAllocationSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_FILTERBY_ALLOC, 'all_id', $allId);
+        $traAllocationSelect->setExtra(" onchange='presetAllSubField()' ");
         $allocations = $allocationsHandler->getSelectTreeOfAllocations();
         $traAllocationSelect->addOption(0, \_MA_WGSIMPLEACC_SHOW_ALL);
         foreach ($allocations as $allocation) {
             $traAllocationSelect->addOption($allocation['id'], $allocation['text']);
         }
         $form->addElement($traAllocationSelect, true);
+        $traAllSubRadio = new \XoopsFormRadioYN(\_MA_WGSIMPLEACC_FILTERBY_ALLOCSUB, 'allSubs', $allSubs);
+        if (0 == $allId) {
+            $traAllSubRadio->setExtra(" disabled='disabled' ");
+        }
+        $form->addElement($traAllSubRadio, true);
+
         //linebreak
         $form->addElement(new \XoopsFormHidden('linebreak', ''));
         //create filter depending on preferences
