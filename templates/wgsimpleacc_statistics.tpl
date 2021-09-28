@@ -44,4 +44,4 @@
     <{include file='db:wgsimpleacc_chart_balances_line.tpl'}>
 </div>
 <{/if}>
-		
+        

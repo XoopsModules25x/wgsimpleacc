@@ -21,4 +21,4 @@
 <{if $accountsCount|default:0 == 0}>
     <{$smarty.const._MA_WGSIMPLEACC_THEREARENT_ACCOUNTS}>
 <{/if}>
-		
+        
