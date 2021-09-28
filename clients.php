@@ -43,6 +43,8 @@ $start   = Request::getInt('start', 0);
 $limit   = Request::getInt('limit', $helper->getConfig('userpager'));
 $cliId   = Request::getInt('cli_id', 0);
 $cliName = Request::getString('cli_name', '');
+$sortBy  = 'cli_' . Request::getString('sortby', 'name');
+$orderBy = Request::getString('orderby', 'ASC');
 
 $GLOBALS['xoopsTpl']->assign('start', $start);
 $GLOBALS['xoopsTpl']->assign('limit', $limit);
@@ -78,8 +80,8 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('clientsCount', $clientsCount);
         $crClients->setStart($start);
         $crClients->setLimit($limit);
-        $crClients->setSort('cli_name');
-        $crClients->setOrder('ASC');
+        $crClients->setSort($sortBy);
+        $crClients->setOrder($orderBy);
         $clientsAll = $clientsHandler->getAll($crClients);
         if ($clientsCount > 0) {
             $clients = [];

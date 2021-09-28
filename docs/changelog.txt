@@ -18,6 +18,8 @@
  - clean html output for xlsx (goffy)
  - added possibility to include sub allocations in output (goffy)
  - added strip_tags to notifications output (goffy)
+ - added sorting to clients list (goffy)
+ - replaced tab by 4 spaces in tpl (goffy)
 
 ==============================================================
 1.22 RC3 [2021/05/01]
