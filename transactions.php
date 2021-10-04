@@ -332,7 +332,7 @@ switch ($op) {
             $grouppermHandler = \xoops_getHandler('groupperm');
             $mid = $GLOBALS['xoopsModule']->getVar('mid');
             // Handle notification
-            $traDesc = $transactionsObj->getVar('tra_desc');
+            $traDesc = \trim(\preg_replace('#<[^>]+>#', ' ', $transactionsObj->getVar('tra_desc')));
             $traStatus = $transactionsObj->getVar('tra_status');
             $tags = [];
             $tags['ITEM_NAME'] = $traDesc;
