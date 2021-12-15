@@ -1,0 +1,62 @@
+@font-face {
+    font-family: 'Digital-7';
+    src: url('./fonts/Digital-7.ttf') format('embedded-opentype'), /* Internet Explorer */
+    url('./fonts/Digital-7.ttf') format('woff2'), /* Super Modern Browsers */
+    url('./fonts/Digital-7.ttf') format('woff'), /* Pretty Modern Browsers */
+    url('./fonts/Digital-7.ttf')  format('truetype'), /* Safari, Android, iOS */
+    url('./fonts/Digital-7.ttf') format('svg'); /* Legacy iOS */
+}
+
+.calc-container {
+    font-family: 'Digital-7';
+    border: 1px dashed black;
+    min-width: 310px;
+    max-width: 310px;
+    margin: 10px auto;
+    overflow: auto;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.calc-row {
+    min-width: 290px;
+    max-width: 290px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.calc-screen {
+    height: 40px;
+    line-height: 28px;
+    width: 190px;
+    text-align: right;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 30px;
+    padding: 6px;
+}
+
+.calc-row button {
+    background-color: #fff;
+    color: #000;
+    font-family: inherit;
+    border: 1px solid #ccc;
+    width: 50px;
+    padding: 5px 15px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 25px;
+    line-height: 30px;
+ }
+
+.calc-row button:active {
+    background-color: lightgrey;
+}
+
+#calc-clear {
+    padding:5px !important;
+}

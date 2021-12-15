@@ -1,13 +1,13 @@
 Read Me First
 =============
 
-Originally created by the TDM Team.
+Originally created by Goffy with XOOPS modulebuilder.
 
-Modified by Timgno (http://www.txmodxoops.org)
+Contributors: Goffy (German Xoops), Mamba (https://xoops.org)
 
-Contributors: Mamba (https://xoops.org), Goffy (German Xoops)
+Charts: Chart.js (https://www.chartjs.org/)
 
-Included ideas for Logo Generator from Trabis (Publisher module) and Suin (Koins module)
+Simple Online Calculator: https://www.jqueryscript.net/other/simple-online-calculator.html developed by Jenguk42
 
 Left side menu:
 - based on Startmin

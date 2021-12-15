@@ -462,6 +462,9 @@ require_once __DIR__ . '/admin.php';
 // ---------------- Activate ----------------
 \define('_MA_WGSIMPLEACC_ACTIVE', 'Aktiv (klicke zum Deaktivieren)');
 \define('_MA_WGSIMPLEACC_NONACTIVE', 'Nicht aktiv (klicke zum Aktivieren)');
+// Calculator
+\define('_MA_WGSIMPLEACC_CALC', 'Rechner');
+\define('_MA_WGSIMPLEACC_CALC_APPLY', 'Ergebnis übernehmen');
 // Admin link
 \define('_MA_WGSIMPLEACC_ADMIN', 'Admin');
 // ---------------- End ----------------

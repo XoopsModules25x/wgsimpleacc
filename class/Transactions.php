@@ -274,9 +274,14 @@ class Transactions extends \XoopsObject
         if (Constants::CLASS_EXPENSES == $type || Constants::CLASS_EXPENSES == $traClass || Constants::CLASS_BOTH == $type) {
             $traAmount = $traAmountout;
         }
-        $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_TRANSACTION_AMOUNT, 'tra_amount', 20, 150, $traAmount));
+        $traAmountTray = new \XoopsFormElementTray(\_MA_WGSIMPLEACC_TRANSACTION_AMOUNT, '&nbsp;');
+        $traAmountTray->addElement(new \XoopsFormText('', 'tra_amount', 20, 150, $traAmount));
+        $button = new \XoopsFormButton('', 'calcAmount', 'Rechner');
+        $button->setExtra('onclick="$(\'#calcModal\').modal();"');
+        $traAmountTray->addElement($button);
+        $form->addElement($traAmountTray);
+        // Form Table taxes
         if ($helper->getConfig('use_taxes')) {
-            // Form Table taxes
             $taxesHandler = $helper->getHandler('Taxes');
             $crTaxes = new \CriteriaCompo();
             $crTaxes->add(new \Criteria('tax_online', 1));
