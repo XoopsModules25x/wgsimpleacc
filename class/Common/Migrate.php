@@ -12,7 +12,7 @@ namespace XoopsModules\Wgsimpleacc\Common;
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
-use \XoopsModules\Wgsimpleacc\Common;
+use XoopsModules\Wgsimpleacc\Common;
 
 /**
  * Class Migrate synchronize existing tables with target schema
@@ -20,7 +20,7 @@ use \XoopsModules\Wgsimpleacc\Common;
  * @category  Migrate
  * @author    Richard Griffith <richard@geekwright.com>
  * @copyright 2016 XOOPS Project (https://xoops.org)
- * @license   GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license   GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @link      https://xoops.org
  */
 
@@ -28,16 +28,16 @@ class Migrate extends \Xmf\Database\Migrate
 {
     private $renameTables;
 
+    private $renameColumns;
+
     /**
-     * Migrate constructor.
-     * @param Common\Configurator $configurator
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
+     * @param \XoopsModules\Wgsimpleacc\Common\Configurator|null $configurator
      */
     public function __construct(Common\Configurator $configurator = null)
     {
         if (null !== $configurator) {
             $this->renameTables = $configurator->renameTables;
+            $this->renameColumns = $configurator->renameColumns;
 
             $moduleDirName = \basename(\dirname(__DIR__, 2));
             parent::__construct($moduleDirName);
@@ -57,6 +57,24 @@ class Migrate extends \Xmf\Database\Migrate
     }
 
     /**
+     * change column name of given table if needed
+     */
+    private function changeColumnNames()
+    {
+        foreach ($this->renameColumns as $table => $columns) {
+            if ($this->tableHandler->useTable($table)) {
+                foreach ($columns as $oldName => $newName) {
+                    $attributes = $this->tableHandler->getColumnAttributes($table, $oldName);
+                    if ('' != $attributes) {
+                        // column exists
+                        $this->tableHandler->alterColumn($table, $oldName, $attributes, $newName);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
      * Change integer IPv4 column to varchar IPv6 capable
      *
      * @param string $tableName  table to convert
@@ -66,8 +84,8 @@ class Migrate extends \Xmf\Database\Migrate
     {
         if ($this->tableHandler->useTable($tableName)) {
             $attributes = $this->tableHandler->getColumnAttributes($tableName, $columnName);
-            if (false !== mb_strpos($attributes, ' int(')) {
-                if (false === mb_strpos($attributes, 'unsigned')) {
+            if (false !== \mb_strpos($attributes, ' int(')) {
+                if (false === \mb_strpos($attributes, 'unsigned')) {
                     $this->tableHandler->alterColumn($tableName, $columnName, " bigint(16) NOT NULL  DEFAULT '0' ");
                     $this->tableHandler->update($tableName, [$columnName => "4294967296 + $columnName"], "WHERE $columnName < 0", false);
                 }
@@ -106,9 +124,16 @@ class Migrate extends \Xmf\Database\Migrate
      */
     protected function preSyncActions()
     {
+        if (\count($this->renameTables) > 0) {
+            // change 'bb' table prefix to 'newbb'
+            $this->changePrefix();
+        }
+        if (\count($this->renameColumns) > 0) {
+            // change 'bb' table prefix to 'newbb'
+            $this->changeColumnNames();
+        }
+
         /*
-        // change 'bb' table prefix to 'newbb'
-        $this->changePrefix();
         // columns dohtml, dosmiley, doxcode, doimage and dobr moved between tables as some point
         $this->moveDoColumns();
         // Convert IP address columns from int to readable varchar(45) for IPv6

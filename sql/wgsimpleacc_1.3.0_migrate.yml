@@ -1,0 +1,583 @@
+wgsimpleacc_transactions:
+    options: 'ENGINE=InnoDB'
+    columns: 
+        -
+            name: tra_id
+            attributes: ' INT(8) UNSIGNED NOT NULL AUTO_INCREMENT '
+        -
+            name: tra_year
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_nb
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_desc
+            attributes: ' TEXT            NOT NULL '
+        -
+            name: tra_reference
+            attributes: ' VARCHAR(255)    NOT NULL DEFAULT '''''''' '
+        -
+            name: tra_remarks
+            attributes: ' TEXT            NOT NULL '
+        -
+            name: tra_accid
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_allid
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_date
+            attributes: ' INT(11)         NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_curid
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_amountin
+            attributes: ' DOUBLE(16 2)   NOT NULL DEFAULT ''0.00'' '
+        -
+            name: tra_amountout
+            attributes: ' DOUBLE(162)    NOT NULL DEFAULT ''0.00'' '
+        -
+            name: tra_taxid
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_asid
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_cliid
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_status
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_comments
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_class
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_balid
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_balidt
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_hist
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_datecreated
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_submitter
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: tra_id
+            unique: true
+wgsimpleacc_trahistories:
+    options: 'ENGINE=InnoDB'
+    columns: 
+        -
+            name: hist_id
+            attributes: ' INT(8) UNSIGNED NOT NULL AUTO_INCREMENT '
+        -
+            name: hist_type
+            attributes: ' VARCHAR(25)     NOT NULL DEFAULT '''''''' '
+        -
+            name: hist_datecreated
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: hist_submitter
+            attributes: ' INT(11)         NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_id
+            attributes: ' INT(8)          NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_year
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_nb
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_desc
+            attributes: ' TEXT            NOT NULL '
+        -
+            name: tra_reference
+            attributes: ' VARCHAR(255)    NOT NULL DEFAULT '''''''' '
+        -
+            name: tra_remarks
+            attributes: ' TEXT            NOT NULL '
+        -
+            name: tra_accid
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_allid
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_date
+            attributes: ' INT(11)         NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_curid
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_amountin
+            attributes: ' DOUBLE(16 2)   NOT NULL DEFAULT ''0.00'' '
+        -
+            name: tra_amountout
+            attributes: ' DOUBLE(162)    NOT NULL DEFAULT ''0.00'' '
+        -
+            name: tra_taxid
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_asid
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_cliid
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_status
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_comments
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_class
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_balid
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_balidt
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_hist
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_datecreated
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_submitter
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: hist_id
+            unique: true
+wgsimpleacc_assets:
+    options: 'ENGINE=InnoDB'
+    columns: 
+        -
+            name: as_id
+            attributes: ' INT(8) UNSIGNED NOT NULL AUTO_INCREMENT '
+        -
+            name: as_name
+            attributes: ' VARCHAR(255)    NOT NULL DEFAULT '''''''' '
+        -
+            name: as_reference
+            attributes: ' VARCHAR(255)    NOT NULL DEFAULT '''''''' '
+        -
+            name: as_descr
+            attributes: ' TEXT            NOT NULL '
+        -
+            name: as_color
+            attributes: ' VARCHAR(7)      NOT NULL DEFAULT '''''''' '
+        -
+            name: as_iecalc
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: as_online
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: as_primary
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: as_datecreated
+            attributes: ' INT(11)         NOT NULL DEFAULT ''0'' '
+        -
+            name: as_submitter
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: as_id
+            unique: true
+wgsimpleacc_balances:
+    options: 'ENGINE=InnoDB'
+    columns: 
+        -
+            name: bal_id
+            attributes: ' INT(8) UNSIGNED NOT NULL AUTO_INCREMENT '
+        -
+            name: bal_from
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: bal_to
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: bal_asid
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: bal_curid
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: bal_amountstart
+            attributes: ' DOUBLE(16 2)   NOT NULL DEFAULT ''0.00'' '
+        -
+            name: bal_amountend
+            attributes: ' DOUBLE(16 2)   NOT NULL DEFAULT ''0.00'' '
+        -
+            name: bal_status
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: bal_datecreated
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: bal_submitter
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: bal_id
+            unique: true
+wgsimpleacc_files:
+    options: 'ENGINE=InnoDB'
+    columns: 
+        -
+            name: fil_id
+            attributes: ' INT(8) UNSIGNED NOT NULL AUTO_INCREMENT '
+        -
+            name: fil_traid
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: fil_name
+            attributes: ' VARCHAR(255)    NOT NULL DEFAULT '''''''' '
+        -
+            name: fil_type
+            attributes: ' VARCHAR(100)    NOT NULL DEFAULT '''''''' '
+        -
+            name: fil_desc
+            attributes: ' TEXT            NOT NULL '
+        -
+            name: fil_ip
+            attributes: ' VARCHAR(16)     NOT NULL DEFAULT '''''''' '
+        -
+            name: fil_datecreated
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: fil_submitter
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: fil_id
+            unique: true
+wgsimpleacc_filhistories:
+    options: 'ENGINE=InnoDB'
+    columns: 
+        -
+            name: hist_id
+            attributes: ' INT(8) UNSIGNED NOT NULL AUTO_INCREMENT '
+        -
+            name: hist_type
+            attributes: ' VARCHAR(255)    NOT NULL DEFAULT '''''''' '
+        -
+            name: hist_datecreated
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: hist_submitter
+            attributes: ' INT(11)         NOT NULL DEFAULT ''0'' '
+        -
+            name: fil_id
+            attributes: ' INT(8)          NOT NULL DEFAULT ''0'' '
+        -
+            name: fil_traid
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: fil_name
+            attributes: ' VARCHAR(255)    NOT NULL DEFAULT '''''''' '
+        -
+            name: fil_type
+            attributes: ' VARCHAR(100)    NOT NULL DEFAULT ''0'' '
+        -
+            name: fil_desc
+            attributes: ' TEXT            NOT NULL '
+        -
+            name: fil_ip
+            attributes: ' VARCHAR(16)     NOT NULL DEFAULT '''''''' '
+        -
+            name: fil_datecreated
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: fil_submitter
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: hist_id
+            unique: true
+wgsimpleacc_accounts:
+    options: 'ENGINE=InnoDB'
+    columns: 
+        -
+            name: acc_id
+            attributes: ' INT(8) UNSIGNED NOT NULL AUTO_INCREMENT '
+        -
+            name: acc_pid
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: acc_key
+            attributes: ' VARCHAR(25)     NOT NULL DEFAULT '''''''' '
+        -
+            name: acc_name
+            attributes: ' VARCHAR(255)    NOT NULL DEFAULT '''''''' '
+        -
+            name: acc_desc
+            attributes: ' TEXT            NOT NULL '
+        -
+            name: acc_classification
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: acc_iecalc
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: acc_color
+            attributes: ' VARCHAR(7)      NOT NULL DEFAULT '''''''' '
+        -
+            name: acc_weight
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: acc_level
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: acc_online
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: acc_datecreated
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: acc_submitter
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: acc_id
+            unique: true
+wgsimpleacc_allocations:
+    options: 'ENGINE=InnoDB'
+    columns: 
+        -
+            name: all_id
+            attributes: ' INT(8) UNSIGNED NOT NULL AUTO_INCREMENT '
+        -
+            name: all_pid
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: all_name
+            attributes: ' VARCHAR(255)    NOT NULL DEFAULT '''''''' '
+        -
+            name: all_desc
+            attributes: ' TEXT            NOT NULL '
+        -
+            name: all_online
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: all_weight
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: all_level
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: all_datecreated
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: all_submitter
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: all_id
+            unique: true
+wgsimpleacc_currencies:
+    options: 'ENGINE=InnoDB'
+    columns: 
+        -
+            name: cur_id
+            attributes: ' INT(8) UNSIGNED NOT NULL AUTO_INCREMENT '
+        -
+            name: cur_symbol
+            attributes: ' VARCHAR(5)      NOT NULL DEFAULT '''''''' '
+        -
+            name: cur_code
+            attributes: ' VARCHAR(3)      NOT NULL DEFAULT '''''''' '
+        -
+            name: cur_name
+            attributes: ' VARCHAR(255)    NOT NULL DEFAULT '''''''' '
+        -
+            name: cur_primary
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: cur_online
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: cur_datecreated
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: cur_submitter
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: cur_id
+            unique: true
+wgsimpleacc_taxes:
+    options: 'ENGINE=InnoDB'
+    columns: 
+        -
+            name: tax_id
+            attributes: ' INT(8) UNSIGNED NOT NULL AUTO_INCREMENT '
+        -
+            name: tax_name
+            attributes: ' VARCHAR(255)    NOT NULL DEFAULT '''''''' '
+        -
+            name: tax_rate
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: tax_online
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: tax_primary
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: tax_datecreated
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: tax_submitter
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: tax_id
+            unique: true
+wgsimpleacc_tratemplates:
+    options: 'ENGINE=InnoDB'
+    columns: 
+        -
+            name: ttpl_id
+            attributes: ' INT(8) UNSIGNED NOT NULL AUTO_INCREMENT '
+        -
+            name: ttpl_name
+            attributes: ' VARCHAR(255)    NOT NULL DEFAULT '''''''' '
+        -
+            name: ttpl_desc
+            attributes: ' VARCHAR(255)    NOT NULL DEFAULT '''''''' '
+        -
+            name: ttpl_accid
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: ttpl_allid
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: ttpl_asid
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: ttpl_cliid
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: ttpl_class
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: ttpl_amountin
+            attributes: ' DOUBLE(16 2)   NOT NULL DEFAULT ''0.00'' '
+        -
+            name: ttpl_amountout
+            attributes: ' DOUBLE(16 2)   NOT NULL DEFAULT ''0.00'' '
+        -
+            name: ttpl_online
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: ttpl_datecreated
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: ttpl_submitter
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: ttpl_id
+            unique: true
+wgsimpleacc_outtemplates:
+    options: 'ENGINE=InnoDB'
+    columns: 
+        -
+            name: otpl_id
+            attributes: ' INT(8) UNSIGNED NOT NULL AUTO_INCREMENT '
+        -
+            name: otpl_name
+            attributes: ' VARCHAR(255)    NOT NULL DEFAULT '''''''' '
+        -
+            name: otpl_type
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: otpl_header
+            attributes: ' TEXT            NOT NULL '
+        -
+            name: otpl_body
+            attributes: ' TEXT            NOT NULL '
+        -
+            name: otpl_footer
+            attributes: ' TEXT            NOT NULL '
+        -
+            name: otpl_allid
+            attributes: ' VARCHAR(255)    NOT NULL DEFAULT '''''''' '
+        -
+            name: otpl_accid
+            attributes: ' VARCHAR(255)    NOT NULL DEFAULT '''''''' '
+        -
+            name: otpl_online
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: otpl_datecreated
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: otpl_submitter
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: otpl_id
+            unique: true
+wgsimpleacc_clients:
+    options: 'ENGINE=InnoDB'
+    columns: 
+        -
+            name: cli_id
+            attributes: ' INT(8) UNSIGNED NOT NULL AUTO_INCREMENT '
+        -
+            name: cli_name
+            attributes: ' TEXT            NOT NULL '
+        -
+            name: cli_postal
+            attributes: ' VARCHAR(255)    NOT NULL DEFAULT '''''''' '
+        -
+            name: cli_city
+            attributes: ' VARCHAR(255)    NOT NULL DEFAULT '''''''' '
+        -
+            name: cli_address
+            attributes: ' TEXT            NOT NULL '
+        -
+            name: cli_ctry
+            attributes: ' VARCHAR(3)      NOT NULL DEFAULT '''''''' '
+        -
+            name: cli_phone
+            attributes: ' VARCHAR(255)    NOT NULL DEFAULT '''''''' '
+        -
+            name: cli_vat
+            attributes: ' VARCHAR(255)    NOT NULL DEFAULT '''''''' '
+        -
+            name: cli_creditor
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: cli_debtor
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: cli_online
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: cli_datecreated
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: cli_submitter
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: cli_id
+            unique: true

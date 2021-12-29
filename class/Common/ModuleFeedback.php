@@ -16,12 +16,12 @@ namespace XoopsModules\Wgsimpleacc\Common;
  * Feedback plugin for xoops modules
  *
  * @copyright      XOOPS Project  (https://xoops.org)
- * @license        GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @license        GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author         Michael Beck <mambax7@gmailc.com>
  * @author         Wedega - Email:<webmaster@wedega.com>
  * @author         Fernando Santos (topet05) <fernando@mastop.com.br>
  */
-\defined('\XOOPS_ROOT_PATH') || die('Restricted access');
+\defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * Class Object ModuleFeedback
@@ -84,7 +84,7 @@ class ModuleFeedback extends \XoopsObject
         $form->addElement($your_mail);
 
         $fbtypeSelect = new \XoopsFormSelect(\constant('CO_' . $moduleDirNameUpper . '_' . 'FB_TYPE'), 'fb_type', $this->type);
-        $fbtypeSelect->addOption('', '');
+        $fbtypeSelect->addOption('');
         $fbtypeSelect->addOption(\constant('CO_' . $moduleDirNameUpper . '_' . 'FB_TYPE_SUGGESTION'), \constant('CO_' . $moduleDirNameUpper . '_' . 'FB_TYPE_SUGGESTION'));
         $fbtypeSelect->addOption(\constant('CO_' . $moduleDirNameUpper . '_' . 'FB_TYPE_BUGS'), \constant('CO_' . $moduleDirNameUpper . '_' . 'FB_TYPE_BUGS'));
         $fbtypeSelect->addOption(\constant('CO_' . $moduleDirNameUpper . '_' . 'FB_TYPE_TESTIMONIAL'), \constant('CO_' . $moduleDirNameUpper . '_' . 'FB_TYPE_TESTIMONIAL'));
@@ -108,7 +108,7 @@ class ModuleFeedback extends \XoopsObject
         $form->addElement($editor, true);
 
         $form->addElement(new \XoopsFormHidden('op', 'send'));
-        $form->addElement(new \XoopsFormButtonTray('', _SUBMIT, 'submit', '', false));
+        $form->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
 
         return $form;
     }

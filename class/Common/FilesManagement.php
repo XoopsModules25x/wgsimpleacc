@@ -20,7 +20,7 @@ namespace XoopsModules\Wgsimpleacc\Common;
 trait FilesManagement
 {
     /**
-     * Function responsible for checking if a directory exists, we can also write in and create an index.html file
+     * Function responsible for checking if a directory exists, we can also write in and create an index.php file
      *
      * @param string $folder The full path of the directory to check
      *
@@ -30,12 +30,12 @@ trait FilesManagement
     public static function createFolder($folder)
     {
         try {
-            if (!\is_dir($folder)) {
+            if (!\file_exists($folder)) {
                 if (!\is_dir($folder) && !\mkdir($folder) && !\is_dir($folder)) {
                     throw new \RuntimeException(\sprintf('Unable to create the %s directory', $folder));
                 }
 
-                file_put_contents($folder . '/index.html', '<script>history.go(-1);</script>');
+                \file_put_contents($folder . '/index.php', "<?php\nheader('HTTP/1.0 404 Not Found');");
             }
         } catch (\Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), '<br>';
@@ -92,7 +92,7 @@ trait FilesManagement
         }
 
         // Simple copy for a file
-        if (is_file($source)) {
+        if (\is_file($source)) {
             return \copy($source, $dest);
         }
 
@@ -104,7 +104,7 @@ trait FilesManagement
         }
 
         // Loop through the folder
-        $dir = dir($source);
+        $dir = \dir($source);
         if (@\is_dir($dir)) {
             while (false !== $entry = $dir->read()) {
                 // Skip pointers
@@ -143,7 +143,7 @@ trait FilesManagement
         $dirInfo = new \SplFileInfo($src);
         // validate is a directory
         if ($dirInfo->isDir()) {
-            $fileList = \array_diff(\scandir($src, SCANDIR_SORT_NONE), ['..', '.']);
+            $fileList = \array_diff(\scandir($src, \SCANDIR_SORT_NONE), ['..', '.']);
             foreach ($fileList as $k => $v) {
                 $fileInfo = new \SplFileInfo("{$src}/{$v}");
                 if ($fileInfo->isDir()) {

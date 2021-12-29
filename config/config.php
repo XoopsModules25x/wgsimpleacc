@@ -57,6 +57,10 @@ return (object)[
     'oldFolders'  => [
     ],
     'renameTables'  => [
+        //'tablename_old' => 'tablename_new'
+    ],
+    'renameColumns'  => [
+        'otpl_content' => ['otpl_content' => 'otpl_body'],
     ],
     'moduleStats'  => [
     ],

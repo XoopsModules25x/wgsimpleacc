@@ -15,17 +15,17 @@ namespace XoopsModules\Wgsimpleacc\Common;
 /**
  * My Module module for xoops
  *
- * @copyright     2020 XOOPS Project (https://xooops.org)
+ * @copyright     2020 XOOPS Project (https://xoops.org)
  * @license        GPL 2.0 or later
  * @package        Wgsimpleacc
  * @since          1.0
  * @min_xoops      2.5.9
- * @author         Goffy - Email:<goffy@myxoops.org> - Website:<http://xoops.org>
+ * @author         Goffy - Email:<goffy@myxoops.org> - Website:<https://xoops.org>
  */
 
 use XoopsModules\Wgsimpleacc;
 
-\defined('\XOOPS_ROOT_PATH') || die('Restricted access');
+\defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * Class Object XoopsConfirm
@@ -62,19 +62,21 @@ class XoopsConfirm
     public function getFormXoopsConfirm()
     {
         //in order to be accessable from user and admin area this should be place in language common.php
-        \define('CO_WGSIMPLEACC_DELETE_CONFIRM', 'Confirm delete');
-        \define('CO_WGSIMPLEACC_DELETE_LABEL', 'Do you really want to delete:');
+        if (!\defined('CO_WGTEAMS_DELETE_CONFIRM')) {
+            \define('CO_WGTEAMS_DELETE_CONFIRM', 'Confirm delete');
+            \define('CO_WGTEAMS_DELETE_LABEL', 'Do you really want to delete:');
+        }
 
         // Get Theme Form
         if ('' === $this->action) {
             $this->action = \Xmf\Request::getString('REQUEST_URI', '', 'SERVER');
         }
         if ('' === $this->title) {
-            $this->title = \CO_WGSIMPLEACC_DELETE_CONFIRM;
+            $this->title = \CO_WGTEAMS_DELETE_CONFIRM;
         }
         if ('' === $this->label) {
 
-            $this->label = \CO_WGSIMPLEACC_DELETE_LABEL;
+            $this->label = \CO_WGTEAMS_DELETE_LABEL;
         }
 
         \xoops_load('XoopsFormLoader');
