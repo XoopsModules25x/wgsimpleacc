@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Wgsimpleacc\Common;
+namespace XoopsModules\Wgtransifex\Common;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -79,10 +79,20 @@ class MigrateHelper
             }
         }
 
+        $skip = true;
+        $skipWords = ['CREATE DATABASE ', 'CREATE VIEW ', 'INSERT INTO ', 'SELECT ', 'DELETE ', 'UPDATE ', 'ALTER ', 'DROP '];
+        $options = '';
         // read remaining lines line by line and create new schema
         foreach ($lines as $key => $value) {
             $line = \trim($value);
+            foreach ($skipWords as $skipWord) {
+                if ($skipWord === \mb_strtoupper(\substr($line, 0, \strlen($skipWord)))) {
+                    $skip = true;
+                }
+            }
             if ('CREATE TABLE' === \mb_strtoupper(\substr($line, 0, 12))) {
+                $skip = false;
+                $options = '';
                 // start table definition
                 $tableName = $this->getTableName ($line);
                 $tables[$tableName] = [];
@@ -90,23 +100,32 @@ class MigrateHelper
                 $tables[$tableName]['columns'] = [];
                 $tables[$tableName]['keys'] = [];
             } else {
-                if (')' === \mb_strtoupper(\substr($line, 0, 1))) {
-                    // end of table definition
-                    // get options
-                    $tables[$tableName]['options'] = $this->getOptions($line);
-                } else {
-                    // get keys and fields
-                    switch (\mb_strtoupper(\substr($line, 0, 3))) {
-                        case 'KEY':
-                        case 'PRI':
-                        case 'UNI':
-                            $tables[$tableName]['keys'][] = $this->getKey($line);
-                            break;
-                        case 'else':
-                        default:
-                            $columns = $this->getColumns($line);
-                            $tables[$tableName]['columns'][] = $columns;
-                            break;
+                if (false == $skip) {
+                    if (')' === \mb_strtoupper(\substr($line, 0, 1))) {
+                        // end of table definition
+                        // get options
+                        $this->getOptions($line, $options);
+                        $tables[$tableName]['options'] = $options;
+                    } elseif ('ENGINE ' === \mb_strtoupper(\substr($line, 0, 7))) {
+                        $this->getOptions($line, $options);
+                        $tables[$tableName]['options'] = $options;
+                    } elseif ('DEFAULT CHARSET ' === \mb_strtoupper(\substr($line, 0, 16))) {
+                        $this->getOptions($line, $options);
+                        $tables[$tableName]['options'] = $options;
+                    } else {
+                        // get keys and fields
+                        switch (\mb_strtoupper(\substr($line, 0, 3))) {
+                            case 'KEY':
+                            case 'PRI':
+                            case 'UNI':
+                                $tables[$tableName]['keys'][] = $this->getKey($line);
+                                break;
+                            case 'else':
+                            default:
+                                $columns = $this->getColumns($line);
+                                $tables[$tableName]['columns'][] = $columns;
+                                break;
+                        }
                     }
                 }
             }
@@ -212,16 +231,19 @@ class MigrateHelper
      * Extract options of table from given line
      *
      * @param string $line
-     * @return string
+     * @param string $options
+     * @return void
      */
-    private function getOptions (string $line): string
+    private function getOptions (string $line, string &$options): void
     {
 
-        $options = \str_replace([')', ';'], '', $line);
-        $options = \trim($options);
-        $options = "'" . $options . "'";
-
-        return $options;
+        $lineText = \trim(\str_replace([')', ';'], '', $line));
+        // remove all existing '
+        $options = \str_replace("'", '', $options);
+        if ('' != $options) {
+            $options .= ' ';
+        }
+        $options = "'" . $options . $lineText . "'";
 
     }
 
@@ -229,7 +251,7 @@ class MigrateHelper
      * Extract keys of table from given line
      *
      * @param string $line
-     * @return array|bool
+     * @return array
      */
     private function getKey (string $line)
     {
