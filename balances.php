@@ -384,11 +384,11 @@ switch ($op) {
             }
             unset($crBalances);
         } else {
-            $xoopsconfirm = new Common\XoopsConfirm(
+            $customConfirm = new Common\Confirm(
                 ['ok' => 1, 'balanceFrom' => $balanceFrom, 'balanceTo' => $balanceTo, 'op' => 'delete'],
                 $_SERVER['REQUEST_URI'],
                 \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, sprintf(_MA_WGSIMPLEACC_BALANCE_DELETE_FROMTO, date(_SHORTDATESTRING, $balanceFrom), date(_SHORTDATESTRING, $balanceTo))));
-            $form = $xoopsconfirm->getFormXoopsConfirm();
+            $form = $customConfirm->getFormConfirm();
             $GLOBALS['xoopsTpl']->assign('form', $form->render());
             // Breadcrumbs
             $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_BALANCES, 'link' => 'balances.php?op=list'];

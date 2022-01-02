@@ -296,11 +296,11 @@ switch ($op) {
                 $GLOBALS['xoopsTpl']->assign('error', $filesObj->getHtmlErrors());
             }
         } else {
-            $xoopsconfirm = new Common\XoopsConfirm(
+            $customConfirm = new Common\Confirm(
                 ['ok' => 1, 'fil_id' => $filId, 'op' => 'delete'],
                 $_SERVER['REQUEST_URI'],
                 \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $filesObj->getVar('fil_name')));
-            $form = $xoopsconfirm->getFormXoopsConfirm();
+            $form = $customConfirm->getFormConfirm();
             $GLOBALS['xoopsTpl']->assign('form', $form->render());
         }
         break;

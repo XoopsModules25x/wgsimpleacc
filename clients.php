@@ -211,11 +211,11 @@ switch ($op) {
                 $GLOBALS['xoopsTpl']->assign('error', $clientsObj->getHtmlErrors());
             }
         } else {
-            $xoopsconfirm = new Common\XoopsConfirm(
+            $customConfirm = new Common\Confirm(
                 ['ok' => 1, 'cli_id' => $cliId, 'op' => 'delete'],
                 $_SERVER['REQUEST_URI'],
                 \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $clientsObj->getVar('cli_name')));
-            $form = $xoopsconfirm->getFormXoopsConfirm();
+            $form = $customConfirm->getFormConfirm();
             $GLOBALS['xoopsTpl']->assign('form', $form->render());
         }
 

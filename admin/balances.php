@@ -136,11 +136,11 @@ switch ($op) {
                 $GLOBALS['xoopsTpl']->assign('error', $balancesObj->getHtmlErrors());
             }
         } else {
-            $xoopsconfirm = new Common\XoopsConfirm(
+            $customConfirm = new Common\Confirm(
                 ['ok' => 1, 'bal_id' => $balId, 'op' => 'delete'],
                 $_SERVER['REQUEST_URI'],
                 \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $balancesObj->getVar('bal_id')));
-            $form = $xoopsconfirm->getFormXoopsConfirm();
+            $form = $customConfirm->getFormConfirm();
             $GLOBALS['xoopsTpl']->assign('form', $form->render());
         }
         break;
