@@ -3,7 +3,8 @@
 ==============================================================
  - semantic versioning (mamba/goffy)
  - added simple calculator (goffy)
- - replaced Common/XoopsConfirm by Common/Confirm(mamba/goffy)
+ - replaced Common/XoopsConfirm by Common/Confirm (mamba/goffy)
+ - uninstall with bak-file creation (mamba/goffy)
  
 ==============================================================
 1.22 final [2021/10/24]

@@ -30,35 +30,29 @@ function xoops_module_pre_uninstall_wgsimpleacc(\XoopsModule $module)
  */
 function xoops_module_uninstall_wgsimpleacc(\XoopsModule $module)
 {
-    //    return true;
 
     $moduleDirName      = \basename(\dirname(__DIR__));
     $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
-    /** @var Wgsimpleacc\Helper $helper */
     $helper = Wgsimpleacc\Helper::getInstance();
 
-    /** @var Wgsimpleacc\Utility $utility */
-    $utility = new Wgsimpleacc\Utility();
 
     $success = true;
     $helper->loadLanguage('admin');
 
     //------------------------------------------------------------------
-    // Remove uploads folder (and all subfolders) if they exist
+    // Rename uploads folder to BAK and add date to name
     //------------------------------------------------------------------
-
-    $old_directories = [$GLOBALS['xoops']->path("uploads/{$moduleDirName}")];
-    foreach ($old_directories as $old_dir) {
-        $dirInfo = new \SplFileInfo($old_dir);
-        if ($dirInfo->isDir()) {
-            // The directory exists so delete it
-            if (!$utility::rrmdir($old_dir)) {
-                $module->setErrors(\sprintf(\constant('CO_' . $moduleDirNameUpper . '_ERROR_BAD_DEL_PATH'), $old_dir));
-                $success = false;
-            }
+    $uploadDirectory = $GLOBALS['xoops']->path("uploads/$moduleDirName");
+    $dirInfo = new \SplFileInfo($uploadDirectory);
+    if ($dirInfo->isDir()) {
+        // The directory exists so rename it
+        $date = date('Y-m-d');
+        if (!rename($uploadDirectory, $uploadDirectory . "_bak_$date")) {
+            $module->setErrors(sprintf(constant('CO_' . $moduleDirNameUpper . '_ERROR_BAD_DEL_PATH'), $uploadDirectory));
+            $success = false;
         }
-        unset($dirInfo);
     }
+    unset($dirInfo);
     /*
     //------------ START ----------------
     //------------------------------------------------------------------
