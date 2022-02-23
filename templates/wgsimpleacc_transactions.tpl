@@ -10,11 +10,11 @@
                 <a id="toggleFormFilter" class='btn btn-default pull-right' href='#' title='<{$btnfilter}>'><{$btnfilter}></a>
             </div>
             <{if $formFilter|default:''}>
-            <div id="formFilter" class="row" style="display:<{$displayfilter|default:''}>">
-                <div class="col-sm-12">
-                    <{$formFilter}>
+                <div id="formFilter" class="row" style="display:<{$displayfilter|default:''}>">
+                    <div class="col-sm-12">
+                        <{$formFilter}>
+                    </div>
                 </div>
-            </div>
             <{/if}>
             <h3><{$listHead|default:''}></h3>
             <div class='table-responsive'>
@@ -52,7 +52,14 @@
             </div>
         <{/if}>
     <{else}>
-        <{$noData|default:''}>
+        <{if $formFilter|default:''}>
+            <div id="formFilter" class="row" style="display:<{$displayfilter|default:''}>">
+                <div class="col-sm-12">
+                    <{$formFilter}>
+                </div>
+            </div>
+        <{/if}>
+        <div class="alert alert-danger"><{$noData|default:''}></div>
     <{/if}>
 <{/if}>
 

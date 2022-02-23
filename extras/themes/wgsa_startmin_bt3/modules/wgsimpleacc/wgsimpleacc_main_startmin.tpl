@@ -29,9 +29,13 @@
     <div class="wgsa-startmincontent">
         <{if $formLogin|default:''}>
             <div class="clear"></div>
-            <div class="col-xs-12">
-                <div class="errorMsg"><strong><{$errorPerm|default:'no permission'}></strong></div>
-                <{include file='db:system_block_login.tpl'}>
+            <div class="row">
+                <div class="hidden-xs col-sm-4">&nbsp;</div>
+                <div class="col-xs-12 col-sm-4">
+                    <div class="errorMsg"><strong><{$errorPerm|default:'no permission'}></strong></div>
+                    <{include file='db:system_block_login.tpl'}>
+                </div>
+                <div class="hidden-xs col-sm-4">&nbsp;</div>
             </div>
         <{else}>
             <{if $show_breadcrumbs|default:''}>

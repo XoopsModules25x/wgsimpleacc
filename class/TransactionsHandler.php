@@ -126,23 +126,28 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
     /**
      * @public function to get form for filter Transactions
      * @param int $allId
-     * @param $filterYear
-     * @param $filterMonthFrom
-     * @param $filterYearFrom
-     * @param $filterMonthTo
-     * @param $filterYearTo
-     * @param $yearMin
-     * @param $yearMax
-     * @param $asId
-     * @param $accId
-     * @param $cliId
+     * @param int $filterYear
+     * @param int $filterMonthFrom
+     * @param int $filterYearFrom
+     * @param int $filterMonthTo
+     * @param int $filterYearTo
+     * @param int $yearMin
+     * @param int $yearMax
+     * @param int $asId
+     * @param int $accId
+     * @param int $cliId
      * @param string $op
+     * @param int $allSubs
+     * @param array $traStatus
+     * @param string $traDesc
      * @return FormInline
      */
-    public static function getFormFilterTransactions($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, $cliId, $op='list', $allSubs = 0)
+    public static function getFormFilter($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, $cliId, $op, $allSubs, $traStatus, $traDesc)
     {
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $period_type = $helper->getConfig('balance_period');
+        $permissionsHandler = $helper->getHandler('Permissions');
+        $permApprove = $permissionsHandler->getPermTransactionsApprove();
         $action = $_SERVER['REQUEST_URI'];
 
         // Title
@@ -270,6 +275,21 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
             }
             $form->addElement($traCliidSelect);
         }
+        if ($permApprove) {
+            //linebreak
+            $form->addElement(new \XoopsFormHidden('linebreak', ''));
+            // Form Select Status traStatus
+            $traStatusSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_FILTERBY_STATUS, 'tra_status', $traStatus, 4, true);
+            $traStatusSelect->addOption(Constants::STATUS_CREATED, \_MA_WGSIMPLEACC_STATUS_CREATED);
+            $traStatusSelect->addOption(Constants::STATUS_SUBMITTED, \_MA_WGSIMPLEACC_STATUS_SUBMITTED);
+            $traStatusSelect->addOption(Constants::STATUS_APPROVED, \_MA_WGSIMPLEACC_STATUS_APPROVED);
+            $traStatusSelect->addOption(Constants::STATUS_LOCKED, \_MA_WGSIMPLEACC_STATUS_LOCKED);
+            $form->addElement($traStatusSelect);
+        }
+        //linebreak
+        $form->addElement(new \XoopsFormHidden('linebreak', ''));
+        $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_FILTERBY_DESC, 'tra_desc', 50, 255, $traDesc));
+
         if ('tra_output' === $op) {
             //linebreak
             $form->addElement(new \XoopsFormHidden('linebreak', ''));
@@ -278,7 +298,6 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
             $outputSelect->addOption('xlsx', 'xlsx');
             $form->addElement($outputSelect);
         }
-
         //linebreak
         $form->addElement(new \XoopsFormHidden('linebreak', ''));
         //button
