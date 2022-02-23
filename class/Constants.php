@@ -47,13 +47,13 @@ interface Constants
 
     // Constants for status
     public const STATUS_NONE      = 0;
-    public const STATUS_CREATED   = 1;
-    public const STATUS_BROKEN    = 2;
-    public const STATUS_OFFLINE   = 3;
+    public const STATUS_OFFLINE   = 1;
+    public const STATUS_CREATED   = 2;
     public const STATUS_SUBMITTED = 4;
     public const STATUS_APPROVED  = 7;
     public const STATUS_TEMPORARY = 8;
     public const STATUS_LOCKED    = 9;
+    public const STATUS_BROKEN    = 10;
 
     // Constants for permissions
     public const PERM_GLOBAL_NONE          = 0;

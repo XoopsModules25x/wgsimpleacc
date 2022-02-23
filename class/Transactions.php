@@ -318,6 +318,7 @@ class Transactions extends \XoopsObject
             $traStatusSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_STATUS, 'tra_status', $traStatus);
             $traStatusSelect->addOption(Constants::STATUS_NONE, \_MA_WGSIMPLEACC_STATUS_NONE);
             $traStatusSelect->addOption(Constants::STATUS_OFFLINE, \_MA_WGSIMPLEACC_STATUS_OFFLINE);
+            $traStatusSelect->addOption(Constants::STATUS_CREATED, \_MA_WGSIMPLEACC_STATUS_CREATED);
             $traStatusSelect->addOption(Constants::STATUS_SUBMITTED, \_MA_WGSIMPLEACC_STATUS_SUBMITTED);
             $traStatusSelect->addOption(Constants::STATUS_APPROVED, \_MA_WGSIMPLEACC_STATUS_APPROVED);
             $traStatusSelect->addOption(Constants::STATUS_LOCKED, \_MA_WGSIMPLEACC_STATUS_LOCKED);
@@ -348,6 +349,7 @@ class Transactions extends \XoopsObject
                 }
                 $traStatusSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_STATUS, 'tra_status', $traStatus);
                 $traStatusSelect->addOption(Constants::STATUS_OFFLINE, \_MA_WGSIMPLEACC_STATUS_OFFLINE);
+                $traStatusSelect->addOption(Constants::STATUS_CREATED, \_MA_WGSIMPLEACC_STATUS_CREATED);
                 $traStatusSelect->addOption(Constants::STATUS_SUBMITTED, \_MA_WGSIMPLEACC_STATUS_SUBMITTED);
                 $traStatusSelect->addOption(Constants::STATUS_APPROVED, \_MA_WGSIMPLEACC_STATUS_APPROVED);
                 $form->addElement($traStatusSelect);

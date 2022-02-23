@@ -70,6 +70,9 @@ class Utility
             case Constants::STATUS_OFFLINE:
                 $status_text = \_MA_WGSIMPLEACC_STATUS_OFFLINE;
                 break;
+            case Constants::STATUS_CREATED:
+                $status_text = \_MA_WGSIMPLEACC_STATUS_CREATED;
+                break;
             case Constants::STATUS_SUBMITTED:
                 $status_text = \_MA_WGSIMPLEACC_STATUS_SUBMITTED;
                 break;

@@ -53,6 +53,7 @@ return (object)[
         '/templates/',
     ],
     'oldFiles'  => [
+        '/preloads/index.php',
     ],
     'oldFolders'  => [
     ],
