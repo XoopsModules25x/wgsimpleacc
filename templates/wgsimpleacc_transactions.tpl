@@ -21,7 +21,11 @@
                 <table class='table table-striped'>
                     <thead>
                         <tr>
-                            <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_YEARNB}></th>
+                            <th scope="col">
+                                <{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_YEARNB}>
+                                <a class='btn btn-warning btn-xs wgsa-btn-sort' href='transactions.php?op=list&amp;sortby=tra_id&amp;order=asc<{$traOp}>' title='<{$smarty.const._ASCENDING}>'><i class="fa fa-arrow-up fa-fw"></i></a>
+                                <a class='btn btn-warning btn-xs wgsa-btn-sort' href='transactions.php?op=list&amp;sortby=tra_id&amp;order=desc<{$traOp}>' title='<{$smarty.const._DESCENDING}>'><i class="fa fa-arrow-down fa-fw"></i></a>
+                            </th>
                             <{if $useClients|default:''}>
                             <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_CLIID}></th>
                             <{/if}>
@@ -29,7 +33,11 @@
                             <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_REFERENCE}></th>
                             <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_ACCID}></th>
                             <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_ALLID}></th>
-                            <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_DATE}></th>
+                            <th scope="col">
+                                <{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_DATE}>
+                                <a class='btn btn-warning btn-xs wgsa-btn-sort' href='transactions.php?op=list&amp;sortby=tra_date&amp;order=asc<{$traOp}>' title='<{$smarty.const._ASCENDING}>'><i class="fa fa-arrow-up fa-fw"></i></a>
+                                <a class='btn btn-warning btn-xs wgsa-btn-sort' href='transactions.php?op=list&amp;sortby=tra_date&amp;order=desc<{$traOp}>' title='<{$smarty.const._DESCENDING}>'><i class="fa fa-arrow-down fa-fw"></i></a>
+                            </th>
                             <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_AMOUNT}></th>
                             <{if $showAssets|default:''}>
                                 <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_ASID}></th>
