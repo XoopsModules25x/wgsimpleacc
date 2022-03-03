@@ -55,6 +55,8 @@ $filterMonthTo   = Request::getInt('filterMonthTo', 0);
 $filterYearTo    = Request::getInt('filterYearTo', date('Y'));
 $traStatus       = Request::getArray('tra_status');
 $traDesc         = Request::getString('tra_desc');
+$sortBy          = Request::getString('sortby', 'tra_id');
+$order           = Request::getString('order', 'desc');
 
 $period_type = $helper->getConfig('balance_period');
 
@@ -174,8 +176,8 @@ switch ($op) {
             $crTransactions->setStart($start);
             $crTransactions->setLimit($limit);
         }
-        $crTransactions->setSort('tra_id');
-        $crTransactions->setOrder('DESC');
+        $crTransactions->setSort($sortBy);
+        $crTransactions->setOrder($order);
         $transactionsAll = $transactionsHandler->getAll($crTransactions);
         if ($transactionsCount > 0) {
             $transactions = [];
