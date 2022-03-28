@@ -68,8 +68,7 @@ class Currencies extends \XoopsObject
      */
     public function getNewInsertedIdCurrencies()
     {
-        $newInsertedId = $GLOBALS['xoopsDB']->getInsertId();
-        return $newInsertedId;
+        return $GLOBALS['xoopsDB']->getInsertId();
     }
 
     /**

@@ -32,14 +32,14 @@ require __DIR__ . '/navbar.php';
 
 // Permissions
 if (!$permissionsHandler->getPermOuttemplatesView()) {
-    \redirect_header('index.php', 0, '');
+    \redirect_header('index.php', 0);
 }
 
 $op    = Request::getCmd('op', 'list');
-$start = Request::getInt('start', 0);
+$start = Request::getInt('start');
 $limit = Request::getInt('limit', $helper->getConfig('userpager'));
-$otplId = Request::getInt('otpl_id', 0);
-$traId  = Request::getInt('tra_id', 0);
+$otplId = Request::getInt('otpl_id');
+$traId  = Request::getInt('tra_id');
 
 $GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
@@ -78,7 +78,7 @@ switch ($op) {
             if ($outtemplatesCount > $limit) {
                 include_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
                 $pagenav = new \XoopsPageNav($outtemplatesCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
-                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
             }
         }
         $GLOBALS['xoopsTpl']->assign('table_type', $helper->getConfig('table_type'));
@@ -99,11 +99,11 @@ switch ($op) {
         } else {
             $outtemplatesObj = $outtemplatesHandler->create();
         }
-        $outtemplatesObj->setVar('otpl_name', Request::getString('otpl_name', ''));
-        $outtemplatesObj->setVar('otpl_type', Request::getInt('otpl_type', 0));
-        $outtemplatesObj->setVar('otpl_header', Request::getText('otpl_header', ''));
-        $outtemplatesObj->setVar('otpl_body', Request::getText('otpl_body', ''));
-        $outtemplatesObj->setVar('otpl_footer', Request::getText('otpl_footer', ''));
+        $outtemplatesObj->setVar('otpl_name', Request::getString('otpl_name'));
+        $outtemplatesObj->setVar('otpl_type', Request::getInt('otpl_type'));
+        $outtemplatesObj->setVar('otpl_header', Request::getText('otpl_header'));
+        $outtemplatesObj->setVar('otpl_body', Request::getText('otpl_body'));
+        $outtemplatesObj->setVar('otpl_footer', Request::getText('otpl_footer'));
         $arrAllid = Request::getArray('otpl_allid');
         if (0 == (int)$arrAllid[0]) {
             $otpl_allid = serialize([0]);
@@ -118,10 +118,10 @@ switch ($op) {
             $otpl_accid = serialize($arrAccid);
         }
         $outtemplatesObj->setVar('otpl_accid', $otpl_accid);
-        $outtemplatesObj->setVar('otpl_online', Request::getInt('otpl_online', 0));
+        $outtemplatesObj->setVar('otpl_online', Request::getInt('otpl_online'));
         $outtemplateDatecreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('otpl_datecreated'));
         $outtemplatesObj->setVar('otpl_datecreated', $outtemplateDatecreatedObj->getTimestamp());
-        $outtemplatesObj->setVar('otpl_submitter', Request::getInt('otpl_submitter', 0));
+        $outtemplatesObj->setVar('otpl_submitter', Request::getInt('otpl_submitter'));
         // Insert Data
         if ($outtemplatesHandler->insert($outtemplatesObj)) {
             // redirect after insert
@@ -209,22 +209,26 @@ switch ($op) {
         break;
         */
     case 'exec_output':
+        if (Request::hasVar('back')) {
+            \redirect_header('transactions.php?op=list', 0);
+        }
         // Check permissions
         if (!$permSubmit) {
             \redirect_header('outtemplates.php?op=list', 3, \_NOPERM);
         }
         $outParams = [];
         $template  = [];
-        $outTarget = Request::getString('target', '');
+        $outTarget = Request::getString('target');
 
         $outParams = $outtemplatesHandler->getOutParams($traId);
-        $outParams['otpl_id'] = $otplId;
+        $outParams['otpl_id']  = $otplId;
+        $outParams['auto_add'] = Request::getBool('auto_add');
 
         if ('form_browser' == $outTarget || 'form_pdf' == $outTarget) {
             //data from form
-            $template['header'] = Request::getText('otpl_header', '');
-            $template['body'] = Request::getText('otpl_body', '');
-            $template['footer'] = Request::getText('otpl_footer', '');
+            $template['header'] = Request::getText('otpl_header');
+            $template['body'] = Request::getText('otpl_body');
+            $template['footer'] = Request::getText('otpl_footer');
         } else {
             $template = $outtemplatesHandler::getFetchedOutput($outParams);
         }
@@ -243,9 +247,40 @@ switch ($op) {
             case 'pdf':
             case 'form_pdf':
                 require_once __DIR__ . '/outtemplates_pdf.php';
+
+                $filePdf = \str_replace(['%y', '%n'], [$outParams['tra_year'], $outParams['tra_nb']], \_MA_WGSIMPLEACC_PDF_TRANAME);
+                $filePdf = $filePdf . '_' . time() . '.pdf';
+
+                $outParams['file_name'] = $filePdf;
+                if ($outParams['auto_add']) {
+                    $tempPdf = \WGSIMPLEACC_UPLOAD_TEMP_PATH. '/' . $filePdf;
+                    $outParams['file_temp'] = $tempPdf;
+                    // delete if exists
+                    if (\file_exists($tempPdf)) {
+                        \unlink($tempPdf);
+                    }
+                }
+
                 $result = execute_output($template, $outParams);
-                exit;
-                //\redirect_header('transactions.php?op=list', 3, \_MA_WGSIMPLEACC_OUTTEMPLATE_PDF_SUCCESS);
+                if ($outParams['auto_add']) {
+                    // move file to final destination
+                    $filDest = \WGSIMPLEACC_UPLOAD_FILES_PATH . '/' . $filePdf;
+                    \rename($tempPdf, $filDest);
+
+                    // create file
+                    $filesObj = $filesHandler->create();
+                    $fileMimetype   = \mime_content_type($filDest);
+                    $filesObj->setVar('fil_traid', $traId);
+                    $filesObj->setVar('fil_name', $filePdf);
+                    $filesObj->setVar('fil_type', $fileMimetype);
+                    $filesObj->setVar('fil_desc', '');
+                    $filesObj->setVar('fil_ip', $_SERVER['REMOTE_ADDR']);
+                    $filesObj->setVar('fil_datecreated', \time());
+                    $filesObj->setVar('fil_submitter', $GLOBALS['xoopsUser']->id());
+                    // Insert Data
+                    $filesHandler->insert($filesObj);
+                }
+                //\redirect_header('transactions.php?op=list&amp;filePdf=' . $filePdf, 3, \_MA_WGSIMPLEACC_OUTTEMPLATE_PDF_SUCCESS);
                 break;
         }
         break;

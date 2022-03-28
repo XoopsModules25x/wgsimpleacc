@@ -32,13 +32,13 @@ require __DIR__ . '/navbar.php';
 
 // Permissions
 if (!$permissionsHandler->getPermAllocationsView()) {
-    \redirect_header('index.php', 0, '');
+    \redirect_header('index.php', 0);
 }
 
 $op    = Request::getCmd('op', 'list');
-$start = Request::getInt('start', 0);
+$start = Request::getInt('start');
 $limit = Request::getInt('limit', $helper->getConfig('userpager'));
-$allId = Request::getInt('all_id', 0);
+$allId = Request::getInt('all_id');
 
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_icon_url_16', \WGSIMPLEACC_ICONS_URL . '/16/');
 $GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
@@ -92,11 +92,11 @@ switch ($op) {
         } else {
             $allocationsObj = $allocationsHandler->create();
         }
-        $allPid = Request::getInt('all_pid', 0);
+        $allPid = Request::getInt('all_pid');
         $allocationsObj->setVar('all_pid', $allPid);
-        $allocationsObj->setVar('all_name', Request::getString('all_name', ''));
-        $allocationsObj->setVar('all_desc', Request::getString('all_desc', ''));
-        $allocationsObj->setVar('all_online', Request::getInt('all_online', 0));
+        $allocationsObj->setVar('all_name', Request::getString('all_name'));
+        $allocationsObj->setVar('all_desc', Request::getString('all_desc'));
+        $allocationsObj->setVar('all_online', Request::getInt('all_online'));
         $level = 1;
         if ($allPid > 0) {
             $allParentObj = $allocationsHandler->get($allPid);
@@ -104,9 +104,9 @@ switch ($op) {
         }
         unset($allParentObj);
         $allocationsObj->setVar('all_level', $level);
-        $allocationsObj->setVar('all_weight', Request::getInt('all_weight', 0));
+        $allocationsObj->setVar('all_weight', Request::getInt('all_weight'));
         $allocationsObj->setVar('all_datecreated', \time());
-        $allocationsObj->setVar('all_submitter', Request::getInt('all_submitter', 0));
+        $allocationsObj->setVar('all_submitter', Request::getInt('all_submitter'));
         // Insert Data
         if ($allocationsHandler->insert($allocationsObj)) {
             // redirect after insert

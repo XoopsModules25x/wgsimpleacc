@@ -38,7 +38,7 @@ switch ($op) {
     default:
         // Define Stylesheet
         $GLOBALS['xoTheme']->addStylesheet($style, null);
-        $start = Request::getInt('start', 0);
+        $start = Request::getInt('start');
         $limit = Request::getInt('limit', $helper->getConfig('adminpager'));
         $templateMain = 'wgsimpleacc_admin_filhistories.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('filhistories.php'));
@@ -58,7 +58,7 @@ switch ($op) {
             if ($filhistoriesCount > $limit) {
                 include_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
                 $pagenav = new \XoopsPageNav($filhistoriesCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
-                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
             }
         } else {
             $GLOBALS['xoopsTpl']->assign('error', \_MA_WGSIMPLEACC_THEREARENT_FILHISTORIES);

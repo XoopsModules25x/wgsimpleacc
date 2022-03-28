@@ -32,8 +32,9 @@ use XoopsModules\Wgsimpleacc\Helper;
 function wgsimpleaccCommentsUpdate($itemId, $itemNumb)
 {
     // Get instance of module
-    $helper = Helper::getInstance();
     /*
+    $helper = Helper::getInstance();
+
     $imagesHandler = $helper->getHandler('Images');
     $imgId = (int)$itemId;
     $imagesObj = $imagesHandler->get($imgId);
@@ -55,8 +56,9 @@ function wgsimpleaccCommentsApprove(&$comment)
 {
     // Notification event
     // Get instance of module
-    $helper = Helper::getInstance();
     /*
+    $helper = Helper::getInstance();
+
     $imagesHandler = $helper->getHandler('Images');
     $imgId = $comment->getVar('com_itemid');
     $imagesObj = $imagesHandler->get($imgId);

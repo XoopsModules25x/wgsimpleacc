@@ -68,8 +68,7 @@ class Files extends \XoopsObject
      */
     public function getNewInsertedIdFiles()
     {
-        $newInsertedId = $GLOBALS['xoopsDB']->getInsertId();
-        return $newInsertedId;
+        return $GLOBALS['xoopsDB']->getInsertId();
     }
 
     /**
@@ -99,7 +98,7 @@ class Files extends \XoopsObject
         $filTraidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_FILE_TRAID, 'fil_traid', $filTraid);
         $transactionsAll = $transactionsHandler->getAll();
         foreach (\array_keys($transactionsAll) as $i) {
-            $yearMin = date('Y', $transactionsAll[$i]->getVar('tra_date'));
+            //$yearMin = date('Y', $transactionsAll[$i]->getVar('tra_date'));
             $year_nb = $transactionsAll[$i]->getVar('tra_year') . '/' . \substr('00000' . $transactionsAll[$i]->getVar('tra_nb'), -5);
             $filTraidSelect->addOption($transactionsAll[$i]->getVar('tra_id'), $year_nb);
         }
@@ -225,11 +224,9 @@ class Files extends \XoopsObject
      * @public function getForm
      * @param int  $traId
      * @param bool $action
-     * @param bool $admin
      * @return \XoopsThemeForm
      */
-    public function getFormTemp($traId, $action = false, $admin = false)
-    {
+    public function getFormTemp($traId, $action = false) {
         //$helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         if (!$action) {
             $action = $_SERVER['REQUEST_URI'];
@@ -265,7 +262,7 @@ class Files extends \XoopsObject
         $form->addElement(new \XoopsFormHidden('fil_traid', $traId));
         $btnTray = new \XoopsFormElementTray('', '');
         $btnTray->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
-        $btnTray->addElement(new \XoopsFormButton('', 'delete_filtemp', \_MA_WGSIMPLEACC_FILES_TEMP_DELETE, 'submit', false));
+        $btnTray->addElement(new \XoopsFormButton('', 'delete_filtemp', \_MA_WGSIMPLEACC_FILES_TEMP_DELETE, 'submit'));
         $form->addElement($btnTray);
         return $form;
     }

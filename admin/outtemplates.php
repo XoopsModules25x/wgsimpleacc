@@ -35,11 +35,11 @@ switch ($op) {
     default:
         // Define Stylesheet
         $GLOBALS['xoTheme']->addStylesheet($style, null);
-        $start = Request::getInt('start', 0);
+        $start = Request::getInt('start');
         $limit = Request::getInt('limit', $helper->getConfig('adminpager'));
         $templateMain = 'wgsimpleacc_admin_outtemplates.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('outtemplates.php'));
-        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_OUTTEMPLATE, 'outtemplates.php?op=new', 'add');
+        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_OUTTEMPLATE, 'outtemplates.php?op=new');
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
         $outtemplatesCount = $outtemplatesHandler->getCountOuttemplates();
         $outtemplatesAll = $outtemplatesHandler->getAllOuttemplates($start, $limit);
@@ -57,7 +57,7 @@ switch ($op) {
             if ($outtemplatesCount > $limit) {
                 include_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
                 $pagenav = new \XoopsPageNav($outtemplatesCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
-                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
             }
         } else {
             $GLOBALS['xoopsTpl']->assign('error', \_MA_WGSIMPLEACC_THEREARENT_OUTTEMPLATES);
@@ -95,11 +95,11 @@ switch ($op) {
             $outtemplatesObj = $outtemplatesHandler->create();
         }
         // Set Vars
-        $outtemplatesObj->setVar('otpl_name', Request::getString('otpl_name', ''));
-        $outtemplatesObj->setVar('otpl_type', Request::getInt('otpl_type', 0));
-        $outtemplatesObj->setVar('otpl_header', Request::getText('otpl_header', ''));
-        $outtemplatesObj->setVar('otpl_body', Request::getText('otpl_body', ''));
-        $outtemplatesObj->setVar('otpl_footer', Request::getText('otpl_footer', ''));
+        $outtemplatesObj->setVar('otpl_name', Request::getString('otpl_name'));
+        $outtemplatesObj->setVar('otpl_type', Request::getInt('otpl_type'));
+        $outtemplatesObj->setVar('otpl_header', Request::getText('otpl_header'));
+        $outtemplatesObj->setVar('otpl_body', Request::getText('otpl_body'));
+        $outtemplatesObj->setVar('otpl_footer', Request::getText('otpl_footer'));
         $arrAllid = Request::getArray('otpl_allid');
         if (0 == (int)$arrAllid[0]) {
             $otpl_allid = serialize([0]);
@@ -114,10 +114,10 @@ switch ($op) {
             $otpl_accid = serialize($arrAccid);
         }
         $outtemplatesObj->setVar('otpl_accid', $otpl_accid);
-        $outtemplatesObj->setVar('otpl_online', Request::getInt('otpl_online', 0));
+        $outtemplatesObj->setVar('otpl_online', Request::getInt('otpl_online'));
         $outtemplateDatecreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('otpl_datecreated'));
         $outtemplatesObj->setVar('otpl_datecreated', $outtemplateDatecreatedObj->getTimestamp());
-        $outtemplatesObj->setVar('otpl_submitter', Request::getInt('otpl_submitter', 0));
+        $outtemplatesObj->setVar('otpl_submitter', Request::getInt('otpl_submitter'));
         // Insert Data
         if ($outtemplatesHandler->insert($outtemplatesObj)) {
             \redirect_header('outtemplates.php?op=list', 2, \_MA_WGSIMPLEACC_FORM_OK);
@@ -130,7 +130,7 @@ switch ($op) {
     case 'edit':
         $templateMain = 'wgsimpleacc_admin_outtemplates.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('outtemplates.php'));
-        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_OUTTEMPLATE, 'outtemplates.php?op=new', 'add');
+        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_OUTTEMPLATE, 'outtemplates.php?op=new');
         $adminObject->addItemButton(\_AM_WGSIMPLEACC_LIST_OUTTEMPLATES, 'outtemplates.php', 'list');
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
         // Get Form

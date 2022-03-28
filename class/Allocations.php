@@ -69,8 +69,7 @@ class Allocations extends \XoopsObject
      */
     public function getNewInsertedIdAllocations()
     {
-        $newInsertedId = $GLOBALS['xoopsDB']->getInsertId();
-        return $newInsertedId;
+        return $GLOBALS['xoopsDB']->getInsertId();
     }
 
     /**

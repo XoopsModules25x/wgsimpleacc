@@ -38,11 +38,11 @@ switch ($op) {
     default:
         // Define Stylesheet
         $GLOBALS['xoTheme']->addStylesheet($style, null);
-        $start = Request::getInt('start', 0);
+        $start = Request::getInt('start');
         $limit = Request::getInt('limit', $helper->getConfig('adminpager'));
         $templateMain = 'wgsimpleacc_admin_files.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('files.php'));
-        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_FILE, 'files.php?op=new', 'add');
+        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_FILE, 'files.php?op=new');
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
         $filesCount = $filesHandler->getCountFiles();
         $filesAll = $filesHandler->getAllFiles($start, $limit);
@@ -60,7 +60,7 @@ switch ($op) {
             if ($filesCount > $limit) {
                 require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
                 $pagenav = new \XoopsPageNav($filesCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
-                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
             }
         } else {
             $GLOBALS['xoopsTpl']->assign('error', \_MA_WGSIMPLEACC_THEREARENT_FILES);
@@ -84,7 +84,7 @@ switch ($op) {
             $filesObj = $filesHandler->create();
         }
         // Set Vars
-        $filesObj->setVar('fil_traid', Request::getInt('fil_traid', 0));
+        $filesObj->setVar('fil_traid', Request::getInt('fil_traid'));
         // Set Var fil_name
         require_once \XOOPS_ROOT_PATH . '/class/uploader.php';
         $fileName       = $_FILES['fil_name']['name'];
@@ -114,11 +114,11 @@ switch ($op) {
         echo WGSIMPLEACC_UPLOAD_FILES_PATH . '/' . $filSaveName;
         $fileMimetype   = \mime_content_type(\WGSIMPLEACC_UPLOAD_FILES_PATH . '/' . $filSaveName);
         $filesObj->setVar('fil_type', $fileMimetype);
-        $filesObj->setVar('fil_desc', Request::getString('fil_desc', ''));
-        $filesObj->setVar('fil_ip', Request::getString('fil_ip', ''));
+        $filesObj->setVar('fil_desc', Request::getString('fil_desc'));
+        $filesObj->setVar('fil_ip', Request::getString('fil_ip'));
         $fileDatecreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('fil_datecreated'));
         $filesObj->setVar('fil_datecreated', $fileDatecreatedObj->getTimestamp());
-        $filesObj->setVar('fil_submitter', Request::getInt('fil_submitter', 0));
+        $filesObj->setVar('fil_submitter', Request::getInt('fil_submitter'));
         // Insert Data
         if ($filesHandler->insert($filesObj)) {
             if ('' !== $uploaderErrors) {
@@ -135,7 +135,7 @@ switch ($op) {
     case 'edit':
         $templateMain = 'wgsimpleacc_admin_files.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('files.php'));
-        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_FILE, 'files.php?op=new', 'add');
+        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_FILE, 'files.php?op=new');
         $adminObject->addItemButton(\_AM_WGSIMPLEACC_LIST_FILES, 'files.php', 'list');
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
         // Get Form

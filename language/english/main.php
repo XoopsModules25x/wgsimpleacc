@@ -379,6 +379,8 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_TARGET_BROWSER', 'Show only');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_TARGET_PDF', 'Output as PDF');
 \define('_MA_WGSIMPLEACC_OUTTEMPLATE_PDF_SUCCESS', 'Output data as PDF successfully');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_AUTOADD', 'Add automatically');
+\define('_MA_WGSIMPLEACC_OUTTEMPLATE_AUTOADD_DESC', 'Add created file automatically to the transaction');
 // Client
 \define('_MA_WGSIMPLEACC_CLIENTS', 'Clients');
 \define('_MA_WGSIMPLEACC_CLIENTS_LIST', 'List of Clients');

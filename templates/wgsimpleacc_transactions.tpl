@@ -23,11 +23,11 @@
                         <tr>
                             <th scope="col">
                                 <{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_YEARNB}>
-                                <a class='btn btn-warning btn-xs wgsa-btn-sort' href='transactions.php?op=list&amp;sortby=tra_id&amp;order=asc<{$traOp}>' title='<{$smarty.const._ASCENDING}>'><i class="fa fa-arrow-up fa-fw"></i></a>
-                                <a class='btn btn-warning btn-xs wgsa-btn-sort' href='transactions.php?op=list&amp;sortby=tra_id&amp;order=desc<{$traOp}>' title='<{$smarty.const._DESCENDING}>'><i class="fa fa-arrow-down fa-fw"></i></a>
+                                <a class='btn btn-warning btn-xs wgsa-btn-sort' href='transactions.php?op=list&amp;sortby=tra_id&amp;order=asc<{$traOpSorter|default:''}>' title='<{$smarty.const._ASCENDING}>' <{if $sort_order|default:'' == 'tra_id_asc'}>disabled<{/if}>><i class="fa fa-arrow-up fa-fw"></i></a>
+                                <a class='btn btn-warning btn-xs wgsa-btn-sort' href='transactions.php?op=list&amp;sortby=tra_id&amp;order=desc<{$traOpSorter|default:''}>' title='<{$smarty.const._DESCENDING}>' <{if $sort_order|default:'' == 'tra_id_desc'}>disabled<{/if}>><i class="fa fa-arrow-down fa-fw"></i></a>
                             </th>
                             <{if $useClients|default:''}>
-                            <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_CLIID}></th>
+                                <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_CLIID}></th>
                             <{/if}>
                             <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_DESC}></th>
                             <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_REFERENCE}></th>
@@ -35,8 +35,8 @@
                             <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_ALLID}></th>
                             <th scope="col">
                                 <{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_DATE}>
-                                <a class='btn btn-warning btn-xs wgsa-btn-sort' href='transactions.php?op=list&amp;sortby=tra_date&amp;order=asc<{$traOp}>' title='<{$smarty.const._ASCENDING}>'><i class="fa fa-arrow-up fa-fw"></i></a>
-                                <a class='btn btn-warning btn-xs wgsa-btn-sort' href='transactions.php?op=list&amp;sortby=tra_date&amp;order=desc<{$traOp}>' title='<{$smarty.const._DESCENDING}>'><i class="fa fa-arrow-down fa-fw"></i></a>
+                                <a class='btn btn-warning btn-xs wgsa-btn-sort' href='transactions.php?op=list&amp;sortby=tra_date&amp;order=asc<{$traOpSorter|default:''}>' title='<{$smarty.const._ASCENDING}>' <{if $sort_order|default:'' == 'tra_date_asc'}>disabled<{/if}>><i class="fa fa-arrow-up fa-fw"></i></a>
+                                <a class='btn btn-warning btn-xs wgsa-btn-sort' href='transactions.php?op=list&amp;sortby=tra_date&amp;order=desc<{$traOpSorter|default:''}>' title='<{$smarty.const._DESCENDING}>' <{if $sort_order|default:'' == 'tra_date_desc'}>disabled<{/if}>><i class="fa fa-arrow-down fa-fw"></i></a>
                             </th>
                             <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_AMOUNT}></th>
                             <{if $showAssets|default:''}>
@@ -151,7 +151,7 @@
         display: none;
         background-color: #f9f9f9;
         min-width: 50px;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
         z-index: 1;
     }
     .dropdown-content a {

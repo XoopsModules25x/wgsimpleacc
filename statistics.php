@@ -34,17 +34,17 @@ require __DIR__ . '/navbar.php';
 
 // Permissions
 if (!$permissionsHandler->getPermGlobalView()) {
-    \redirect_header('index.php', 0, '');
+    \redirect_header('index.php', 0);
 }
 
 $op     = Request::getCmd('op', 'list');
-$allId  = Request::getInt('all_id', 0);
-$allPid = Request::getInt('all_pid', 0);
+$allId  = Request::getInt('all_id');
+$allPid = Request::getInt('all_pid');
 $level  = Request::getInt('level', 1);
 $filterYear      = Request::getInt('filterYear', date('Y'));
-$filterMonthFrom = Request::getInt('filterMonthFrom', 0);
+$filterMonthFrom = Request::getInt('filterMonthFrom');
 $filterYearFrom  = Request::getInt('filterYearFrom', date('Y'));
-$filterMonthTo   = Request::getInt('filterMonthTo', 0);
+$filterMonthTo   = Request::getInt('filterMonthTo');
 $filterYearTo    = Request::getInt('filterYearTo', date('Y'));
 $filterType      = Request::getInt('filterType', Constants::FILTER_TYPEALL);
 
@@ -279,14 +279,14 @@ switch ($op) {
         $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_SUBMITTED, '>'));
         $crTransactions->setSort('tra_year');
         $crTransactions->setOrder('ASC');
-        $crTransactions->setStart(0);
+        $crTransactions->setStart();
         $crTransactions->setLimit(1);
         $transactionsAll   = $transactionsHandler->getAll($crTransactions);
         foreach (\array_keys($transactionsAll) as $i) {
             $minYear = $transactionsAll[$i]->getVar('tra_year');
         }
         $crTransactions->setOrder('DESC');
-        $crTransactions->setStart(0);
+        $crTransactions->setStart();
         $crTransactions->setLimit(1);
         $transactionsAll   = $transactionsHandler->getAll($crTransactions);
         foreach (\array_keys($transactionsAll) as $i) {
@@ -378,7 +378,7 @@ switch ($op) {
         $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_SUBMITTED, '>'));
         $crTransactions->setSort('tra_date');
         $crTransactions->setOrder('ASC');
-        $crTransactions->setStart(0);
+        $crTransactions->setStart();
         $crTransactions->setLimit(1);
         $transactionsAll   = $transactionsHandler->getAll($crTransactions);
         foreach (\array_keys($transactionsAll) as $i) {

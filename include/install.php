@@ -30,7 +30,6 @@ use XoopsModules\Wgsimpleacc\Common;
 function xoops_module_pre_install_wgsimpleacc(\XoopsModule $module)
 {
     require \dirname(__DIR__) . '/preloads/autoloader.php';
-    /** @var Wgsimpleacc\Utility $utility */
     $utility = new Wgsimpleacc\Utility();
 
     //check for minimum XOOPS version

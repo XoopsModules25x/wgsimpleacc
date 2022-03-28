@@ -38,11 +38,11 @@ switch ($op) {
     default:
         // Define Stylesheet
         $GLOBALS['xoTheme']->addStylesheet($style, null);
-        $start = Request::getInt('start', 0);
+        $start = Request::getInt('start');
         $limit = Request::getInt('limit', $helper->getConfig('adminpager'));
         $templateMain = 'wgsimpleacc_admin_balances.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('balances.php'));
-        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_BALANCE, 'balances.php?op=new', 'add');
+        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_BALANCE, 'balances.php?op=new');
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
         $balancesCount = $balancesHandler->getCountBalances();
         $balancesAll = $balancesHandler->getAllBalances($start, $limit);
@@ -60,7 +60,7 @@ switch ($op) {
             if ($balancesCount > $limit) {
                 require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
                 $pagenav = new \XoopsPageNav($balancesCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
-                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
             }
         } else {
             $GLOBALS['xoopsTpl']->assign('error', \_MA_WGSIMPLEACC_THEREARENT_BALANCES);
@@ -91,16 +91,16 @@ switch ($op) {
         $balancesObj->setVar('bal_from', $balanceFromObj->getTimestamp());
         $balanceToObj = \DateTime::createFromFormat(Utility::CustomDateFormat(), Request::getString('bal_to') . ' 23:59');
         $balancesObj->setVar('bal_to', $balanceToObj->getTimestamp());
-        $balancesObj->setVar('bal_asid', Request::getInt('bal_asid', 0));
-        $balancesObj->setVar('bal_curid', Request::getInt('bal_curid', 0));
+        $balancesObj->setVar('bal_asid', Request::getInt('bal_asid'));
+        $balancesObj->setVar('bal_curid', Request::getInt('bal_curid'));
         $balAmountStart = Request::getString('bal_amountstart');
         $balancesObj->setVar('bal_amountstart', Utility::StringToFloat($balAmountStart));
         $balAmount = Request::getString('bal_amountend');
         $balancesObj->setVar('bal_amountend', Utility::StringToFloat($balAmount));
-        $balancesObj->setVar('bal_status', Request::getInt('bal_status', 0));
+        $balancesObj->setVar('bal_status', Request::getInt('bal_status'));
         $balanceDatecreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('bal_datecreated'));
         $balancesObj->setVar('bal_datecreated', $balanceDatecreatedObj->getTimestamp());
-        $balancesObj->setVar('bal_submitter', Request::getInt('bal_submitter', 0));
+        $balancesObj->setVar('bal_submitter', Request::getInt('bal_submitter'));
         // Insert Data
         if ($balancesHandler->insert($balancesObj)) {
             \redirect_header('balances.php?op=list', 2, \_MA_WGSIMPLEACC_FORM_OK);
@@ -113,7 +113,7 @@ switch ($op) {
     case 'edit':
         $templateMain = 'wgsimpleacc_admin_balances.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('balances.php'));
-        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_BALANCE, 'balances.php?op=new', 'add');
+        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_BALANCE, 'balances.php?op=new');
         $adminObject->addItemButton(\_AM_WGSIMPLEACC_LIST_BALANCES, 'balances.php', 'list');
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
         // Get Form

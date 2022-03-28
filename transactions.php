@@ -79,9 +79,11 @@ if (0 == $displayfilter || $traId > 0) {
 }
 $GLOBALS['xoopsTpl']->assign('sepComma', $helper->getConfig('sep_comma'));
 
-$traOp = '&amp;start=' . $start . '&amp;limit=' . $limit . '&amp;all_id=' . $allId . '&amp;acc_id=' . $accId . '&amp;as_id=' . $asId;
-$traOp .= '&amp;filterYear=' . $filterYear . '&amp;filterMonthFrom=' . $filterMonthFrom . '&amp;filterYearFrom=' . $filterYearFrom . '&amp;filterMonthTo=' . $filterMonthTo . '&amp;filterYearTo=' . $filterYearTo;
-$traOp .= '&amp;displayfilter=' . $displayfilter . '&amp;allSubs=' . $allSubs;
+$traOpSorter = '&amp;start=' . $start . '&amp;limit=' . $limit . '&amp;all_id=' . $allId . '&amp;acc_id=' . $accId . '&amp;as_id=' . $asId;
+$traOpSorter .= '&amp;filterYear=' . $filterYear . '&amp;filterMonthFrom=' . $filterMonthFrom . '&amp;filterYearFrom=' . $filterYearFrom . '&amp;filterMonthTo=' . $filterMonthTo . '&amp;filterYearTo=' . $filterYearTo;
+$traOpSorter .= '&amp;displayfilter=' . $displayfilter . '&amp;allSubs=' . $allSubs;
+
+$traOp = $traOpSorter . '&amp;sortby=' . $sortBy . '&amp;order=' . $order;
 
 $keywords = [];
 
@@ -243,11 +245,12 @@ switch ($op) {
                     'op=list&amp;limit=' . $limit . '&amp;all_id=' . $allId . '&amp;acc_id=' . $accId . '&amp;as_id=' . $asId . '&amp;cli_id=' . $cliId .
                     '&tra_type=' . $traType . '&amp;filterYear=' . $filterYear .
                     '&amp;filterMonthFrom=' . $filterMonthFrom . '&amp;filterYearFrom=' . $filterYearFrom . '&amp;filterMonthTo=' . $filterMonthTo . '&amp;filterYearTo=' . $filterYearTo .
-                    '&amp;allSubs=' . $allSubs
+                    '&amp;allSubs=' . $allSubs . '&amp;sortby=' . $sortBy . '&amp;order=' . $order
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
             $GLOBALS['xoopsTpl']->assign('showAssets', 0 == $asId);
+            $GLOBALS['xoopsTpl']->assign('sort_order', \strtolower($sortBy . '_' . $order));
             $GLOBALS['xoopsTpl']->assign('useCurrencies', $helper->getConfig('use_currencies'));
             $GLOBALS['xoopsTpl']->assign('useTaxes', $helper->getConfig('use_taxes'));
             $GLOBALS['xoopsTpl']->assign('useFiles', $helper->getConfig('use_files'));
@@ -261,6 +264,7 @@ switch ($op) {
                 $GLOBALS['xoopsTpl']->assign('noData', \_MA_WGSIMPLEACC_THEREARENT_TRANSACTIONS);
             }
         }
+        $GLOBALS['xoopsTpl']->assign('traOpSorter',$traOpSorter);
         $GLOBALS['xoopsTpl']->assign('traOp',$traOp);
 
         // Breadcrumbs

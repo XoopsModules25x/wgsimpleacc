@@ -39,17 +39,17 @@ require_once __DIR__ . '/navbar.php';
 
 // Permissions
 if (!$permissionsHandler->getPermGlobalView()) {
-    \redirect_header('index.php', 0, '');
+    \redirect_header('index.php', 0);
 }
 
 $op        = Request::getCmd('op', 'none');
-$traId     = Request::getInt('tra_id', 0);
-$traType   = Request::getInt('tra_type', 0);
-$allId     = Request::getInt('all_id', 0);
-$allSubs   = Request::getInt('allSubs', 0);
-$accId     = Request::getInt('acc_id', 0);
-$asId      = Request::getInt('as_id', 0);
-$cliId     = Request::getInt('cli_id', 0);
+$traId     = Request::getInt('tra_id');
+$traType   = Request::getInt('tra_type');
+$allId     = Request::getInt('all_id');
+$allSubs   = Request::getInt('allSubs');
+$accId     = Request::getInt('acc_id');
+$asId      = Request::getInt('as_id');
+$cliId     = Request::getInt('cli_id');
 $outType   = Request::getString('output_type', 'none');
 
 $period_type = $helper->getConfig('balance_period');
@@ -155,10 +155,10 @@ switch ($op) {
         break;
     case 'transactions';
         $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/js/forms.js');
-        $filterYear = Request::getInt('filterYear', 0);
-        $filterMonthFrom = Request::getInt('filterMonthFrom', 0);
-        $filterYearFrom = Request::getInt('filterYearFrom', 0);
-        $filterMonthTo = Request::getInt('filterMonthTo', 0);
+        $filterYear = Request::getInt('filterYear');
+        $filterMonthFrom = Request::getInt('filterMonthFrom');
+        $filterYearFrom = Request::getInt('filterYearFrom');
+        $filterMonthTo = Request::getInt('filterMonthTo');
         $filterYearTo = Request::getInt('filterYearTo', date('Y'));
         $traStatus = Request::getArray('tra_status');
         $traDesc   = Request::getString('tra_desc');
@@ -169,7 +169,7 @@ switch ($op) {
         $crTransactions = new \CriteriaCompo();
         $crTransactions->setSort('tra_date');
         $crTransactions->setOrder('ASC');
-        $crTransactions->setStart(0);
+        $crTransactions->setStart();
         $crTransactions->setLimit(1);
         $transactionsAll = $transactionsHandler->getAll($crTransactions);
         foreach (\array_keys($transactionsAll) as $i) {
@@ -177,7 +177,7 @@ switch ($op) {
         }
         $crTransactions->setSort('tra_date');
         $crTransactions->setOrder('DESC');
-        $crTransactions->setStart(0);
+        $crTransactions->setStart();
         $crTransactions->setLimit(1);
         $transactionsAll = $transactionsHandler->getAll($crTransactions);
         foreach (\array_keys($transactionsAll) as $i) {
@@ -197,10 +197,10 @@ switch ($op) {
                 //$creator = ('' != $GLOBALS['xoopsUser']->getVar('name')) ? $GLOBALS['xoopsUser']->getVar('name') : $GLOBALS['xoopsUser']->getVar('uname');
                 $filename = date('Ymd_H_i_s_', \time()) . \_MA_WGSIMPLEACC_TRANSACTIONS . '.' . $outType;
 
-                $filterYear      = Request::getInt('filterYear', 0);
-                $filterMonthFrom = Request::getInt('filterMonthFrom', 0);
-                $filterYearFrom  = Request::getInt('filterYearFrom', 0);
-                $filterMonthTo   = Request::getInt('filterMonthTo', 0);
+                $filterYear      = Request::getInt('filterYear');
+                $filterMonthFrom = Request::getInt('filterMonthFrom');
+                $filterYearFrom  = Request::getInt('filterYearFrom');
+                $filterMonthTo   = Request::getInt('filterMonthTo');
                 $filterYearTo    = Request::getInt('filterYearTo', date('Y'));
                 $traStatus       = Request::getArray('tra_status');
                 $traDesc         = Request::getString('tra_desc');

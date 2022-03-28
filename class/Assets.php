@@ -71,8 +71,7 @@ class Assets extends \XoopsObject
      */
     public function getNewInsertedIdAssets()
     {
-        $newInsertedId = $GLOBALS['xoopsDB']->getInsertId();
-        return $newInsertedId;
+        return $GLOBALS['xoopsDB']->getInsertId();
     }
 
     /**

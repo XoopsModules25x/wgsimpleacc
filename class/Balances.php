@@ -70,8 +70,7 @@ class Balances extends \XoopsObject
      */
     public function getNewInsertedIdBalances()
     {
-        $newInsertedId = $GLOBALS['xoopsDB']->getInsertId();
-        return $newInsertedId;
+        return $GLOBALS['xoopsDB']->getInsertId();
     }
 
     /**

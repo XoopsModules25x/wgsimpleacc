@@ -41,7 +41,7 @@ if (\file_exists($tcpdf = \XOOPS_ROOT_PATH . '/Frameworks/tcpdf/')) {
 
 // Permissions
 if (!$permissionsHandler->getPermOuttemplatesView()) {
-    \redirect_header('index.php', 0, '');
+    \redirect_header('index.php', 0);
 }
 
 // Extend the TCPDF class to create custom Header and Footer
@@ -86,9 +86,9 @@ function execute_output ($template, $outParams)
     $myts = MyTextSanitizer::getInstance();
 
     // Set defaults
-    $pdfFilename = \str_replace(['%y', '%n'], [$outParams['tra_year'], $outParams['tra_nb']], \_MA_WGSIMPLEACC_PDF_TRANAME) . '.pdf';
+    $pdfFilename = $outParams['file_name'];
     $title = $GLOBALS['xoopsConfig']['sitename'];
-    $subject = 'Pdf Subject';
+    //$subject = 'Pdf Subject';
 
     // Read data from table and create pdfData
     $pdfData['date'] = $outParams['date'];
@@ -152,6 +152,11 @@ function execute_output ($template, $outParams)
     $pdf->AddPage();
     // Output
     $pdf->writeHTML($pdfData['content'], true, false, true, false, '');
+
+    if ($outParams['auto_add']) {
+        // create file in temp folder for adding automatically to transaction
+        $pdf->Output($outParams['file_temp'], 'F');
+    }
 
     return $pdf->Output($pdfFilename, 'D');
 }

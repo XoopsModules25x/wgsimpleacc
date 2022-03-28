@@ -40,7 +40,6 @@ function wgsimpleacc_notify_iteminfo($category, $item_id)
             $item['name'] = '';
             $item['url']  = '';
             return $item;
-            break;
         case 'transactions':
             $sql          = 'SELECT tra_desc FROM ' . $xoopsDB->prefix('wgsimpleacc_transactions') . ' WHERE tra_id = '. $item_id;
             $result       = $xoopsDB->query($sql);
@@ -48,7 +47,6 @@ function wgsimpleacc_notify_iteminfo($category, $item_id)
             $item['name'] = \strip_tags($result_array['tra_desc']);
             $item['url']  = WGSIMPLEACC_URL . '/transactions.php?tra_id=' . $item_id;
             return $item;
-            break;
     }
     return null;
 }
