@@ -35,14 +35,14 @@ require __DIR__ . '/navbar.php';
 
 // Permissions
 if (!$permissionsHandler->getPermBalancesView()) {
-    \redirect_header('index.php', 0, '');
+    \redirect_header('index.php', 0);
 }
 
 $op      = Request::getCmd('op', 'list');
-$start   = Request::getInt('start', 0);
+$start   = Request::getInt('start');
 $limit   = Request::getInt('limit', $helper->getConfig('userpager'));
-$balId   = Request::getInt('bal_id', 0);
-$balType = Request::getInt('bal_type', 0);
+$balId   = Request::getInt('bal_id');
+$balType = Request::getInt('bal_type');
 
 $GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
@@ -193,7 +193,7 @@ switch ($op) {
             if ($balancesCount > $limit) {
                 require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
                 $pagenav = new \XoopsPageNav($balancesCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
-                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
             }
         }
 

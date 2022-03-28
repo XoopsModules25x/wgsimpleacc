@@ -37,11 +37,11 @@ switch ($op) {
     default:
         // Define Stylesheet
         $GLOBALS['xoTheme']->addStylesheet($style, null);
-        $start = Request::getInt('start', 0);
+        $start = Request::getInt('start');
         $limit = Request::getInt('limit', $helper->getConfig('adminpager'));
         $templateMain = 'wgsimpleacc_admin_currencies.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('currencies.php'));
-        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_CURRENCY, 'currencies.php?op=new', 'add');
+        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_CURRENCY, 'currencies.php?op=new');
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
         $currenciesCount = $currenciesHandler->getCountCurrencies();
         $currenciesAll = $currenciesHandler->getAllCurrencies($start, $limit);
@@ -59,7 +59,7 @@ switch ($op) {
             if ($currenciesCount > $limit) {
                 require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
                 $pagenav = new \XoopsPageNav($currenciesCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
-                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
             }
         } else {
             $GLOBALS['xoopsTpl']->assign('error', \_MA_WGSIMPLEACC_THEREARENT_CURRENCIES);
@@ -86,16 +86,16 @@ switch ($op) {
             $currenciesObj = $currenciesHandler->create();
         }
         // Set Vars
-        $currenciesObj->setVar('cur_code', Request::getString('cur_code', ''));
-        $currenciesObj->setVar('cur_name', Request::getString('cur_name', ''));
+        $currenciesObj->setVar('cur_code', Request::getString('cur_code'));
+        $currenciesObj->setVar('cur_name', Request::getString('cur_name'));
         $currencyDatecreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('cur_datecreated'));
         $currenciesObj->setVar('cur_datecreated', $currencyDatecreatedObj->getTimestamp());
-        $currenciesObj->setVar('cur_submitter', Request::getInt('cur_submitter', 0));
-        $currenciesObj->setVar('cur_online', Request::getInt('cur_online', 0));
-        $currenciesObj->setVar('cur_symbol', Request::getString('cur_symbol', ''));
+        $currenciesObj->setVar('cur_submitter', Request::getInt('cur_submitter'));
+        $currenciesObj->setVar('cur_online', Request::getInt('cur_online'));
+        $currenciesObj->setVar('cur_symbol', Request::getString('cur_symbol'));
         // Insert Data
         if ($currenciesHandler->insert($currenciesObj)) {
-            if (Request::getInt('cur_primary', 0) > 0) {
+            if (Request::getInt('cur_primary') > 0) {
                 $newCurId = $currenciesObj->getNewInsertedIdCurrencies();
                 $curId = $curId > 0 ? $curId : $newCurId;
                 $currenciesHandler->setPrimaryCurrencies($curId);
@@ -110,7 +110,7 @@ switch ($op) {
     case 'edit':
         $templateMain = 'wgsimpleacc_admin_currencies.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('currencies.php'));
-        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_CURRENCY, 'currencies.php?op=new', 'add');
+        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_CURRENCY, 'currencies.php?op=new');
         $adminObject->addItemButton(\_AM_WGSIMPLEACC_LIST_CURRENCIES, 'currencies.php', 'list');
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
         // Get Form

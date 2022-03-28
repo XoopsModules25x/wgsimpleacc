@@ -87,8 +87,7 @@ class Transactions extends \XoopsObject
      */
     public function getNewInsertedIdTransactions()
     {
-        $newInsertedId = $GLOBALS['xoopsDB']->getInsertId();
-        return $newInsertedId;
+        return $GLOBALS['xoopsDB']->getInsertId();
     }
 
     /**
@@ -192,7 +191,7 @@ class Transactions extends \XoopsObject
             $crClients->setSort('cli_name');
             $crClients->setOrder('ASC');
             $traCliidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_CLIID, 'tra_cliid', $traClient);
-            $traCliidSelect->addOption('', '');
+            $traCliidSelect->addOption('');
             $clientsAll = $clientsHandler->getAll($crClients);
             foreach ($clientsAll as $client) {
                 $traCliidSelect->addOption($client->getVar('cli_id'), Utility::cleanTextDropdown($client->getVar('cli_name')));
@@ -326,13 +325,13 @@ class Transactions extends \XoopsObject
             // Form Select traBalid
             $traBalidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_BALID, 'tra_balid', $traBalid);
             $balancesHandler = $helper->getHandler('Balances');
-            $traBalidSelect->addOption(0, '');
+            $traBalidSelect->addOption(0);
             $traBalidSelect->addOptionArray($balancesHandler->getList());
             $form->addElement($traBalidSelect);
             // Form Select traBalidt
             $traBalidtSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_BALIDT, 'tra_balid', $traBalidt);
             $balancesHandler = $helper->getHandler('Balances');
-            $traBalidtSelect->addOption(0, '');
+            $traBalidtSelect->addOption(0);
             $traBalidtSelect->addOptionArray($balancesHandler->getList());
             $form->addElement($traBalidtSelect);
             $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_TRANSACTION_COMMENTS, 'tra_comments', 50, 255, $traComments));

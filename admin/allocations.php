@@ -35,11 +35,11 @@ switch ($op) {
     default:
         // Define Stylesheet
         $GLOBALS['xoTheme']->addStylesheet($style, null);
-        $start = Request::getInt('start', 0);
+        $start = Request::getInt('start');
         $limit = Request::getInt('limit', $helper->getConfig('adminpager'));
         $templateMain = 'wgsimpleacc_admin_allocations.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('allocations.php'));
-        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_ALLOCATION, 'allocations.php?op=new', 'add');
+        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_ALLOCATION, 'allocations.php?op=new');
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
         $allocationsCount = $allocationsHandler->getCountAllocations();
         $allocationsAll = $allocationsHandler->getAllAllocations($start, $limit);
@@ -57,7 +57,7 @@ switch ($op) {
             if ($allocationsCount > $limit) {
                 require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
                 $pagenav = new \XoopsPageNav($allocationsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
-                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
             }
         } else {
             $GLOBALS['xoopsTpl']->assign('error', \_MA_WGSIMPLEACC_THEREARENT_ALLOCATIONS);
@@ -84,11 +84,11 @@ switch ($op) {
             $allocationsObj = $allocationsHandler->create();
         }
         // Set Vars
-        $allPid = Request::getInt('all_pid', 0);
+        $allPid = Request::getInt('all_pid');
         $allocationsObj->setVar('all_pid', $allPid);
-        $allocationsObj->setVar('all_name', Request::getString('all_name', ''));
-        $allocationsObj->setVar('all_desc', Request::getString('all_desc', ''));
-        $allocationsObj->setVar('all_online', Request::getInt('all_online', 0));
+        $allocationsObj->setVar('all_name', Request::getString('all_name'));
+        $allocationsObj->setVar('all_desc', Request::getString('all_desc'));
+        $allocationsObj->setVar('all_online', Request::getInt('all_online'));
         $level = 1;
         if ($allPid > 0) {
             $allParentObj = $allocationsHandler->get($allPid);
@@ -96,10 +96,10 @@ switch ($op) {
         }
         unset($allParentObj);
         $allocationsObj->setVar('all_level', $level);
-        $allocationsObj->setVar('all_weight', Request::getInt('all_weight', 0));
+        $allocationsObj->setVar('all_weight', Request::getInt('all_weight'));
         $allocationDatecreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('all_datecreated'));
         $allocationsObj->setVar('all_datecreated', $allocationDatecreatedObj->getTimestamp());
-        $allocationsObj->setVar('all_submitter', Request::getInt('all_submitter', 0));
+        $allocationsObj->setVar('all_submitter', Request::getInt('all_submitter'));
         // Insert Data
         if ($allocationsHandler->insert($allocationsObj)) {
             \redirect_header('allocations.php?op=list', 2, \_MA_WGSIMPLEACC_FORM_OK);
@@ -112,7 +112,7 @@ switch ($op) {
     case 'edit':
         $templateMain = 'wgsimpleacc_admin_allocations.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('allocations.php'));
-        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_ALLOCATION, 'allocations.php?op=new', 'add');
+        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_ALLOCATION, 'allocations.php?op=new');
         $adminObject->addItemButton(\_AM_WGSIMPLEACC_LIST_ALLOCATIONS, 'allocations.php', 'list');
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
         // Get Form

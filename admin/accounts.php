@@ -38,11 +38,11 @@ switch ($op) {
     default:
         // Define Stylesheet
         $GLOBALS['xoTheme']->addStylesheet($style, null);
-        $start = Request::getInt('start', 0);
+        $start = Request::getInt('start');
         $limit = Request::getInt('limit', $helper->getConfig('adminpager'));
         $templateMain = 'wgsimpleacc_admin_accounts.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('accounts.php'));
-        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_ACCOUNT, 'accounts.php?op=new', 'add');
+        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_ACCOUNT, 'accounts.php?op=new');
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
         $accountsCount = $accountsHandler->getCountAccounts();
         $accountsAll = $accountsHandler->getAllAccounts($start, $limit);
@@ -60,7 +60,7 @@ switch ($op) {
             if ($accountsCount > $limit) {
                 require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
                 $pagenav = new \XoopsPageNav($accountsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
-                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
             }
         } else {
             $GLOBALS['xoopsTpl']->assign('error', \_MA_WGSIMPLEACC_THEREARENT_ACCOUNTS);
@@ -89,26 +89,26 @@ switch ($op) {
             $accountsObj = $accountsHandler->create();
         }
         // Set Vars
-        $accPid = Request::getInt('acc_pid', 0);
+        $accPid = Request::getInt('acc_pid');
         $accountsObj->setVar('acc_pid', $accPid);
-        $accountsObj->setVar('acc_key', Request::getString('acc_key', ''));
-        $accountsObj->setVar('acc_name', Request::getString('acc_name', ''));
-        $accountsObj->setVar('acc_desc', Request::getString('acc_desc', ''));
-        $accountsObj->setVar('acc_classification', Request::getInt('acc_classification', 0));
-        $accountsObj->setVar('acc_color', Request::getString('acc_color', ''));
-        $accountsObj->setVar('acc_iecalc', Request::getInt('acc_iecalc', 0));
-        $accountsObj->setVar('acc_online', Request::getInt('acc_online', 0));
+        $accountsObj->setVar('acc_key', Request::getString('acc_key'));
+        $accountsObj->setVar('acc_name', Request::getString('acc_name'));
+        $accountsObj->setVar('acc_desc', Request::getString('acc_desc'));
+        $accountsObj->setVar('acc_classification', Request::getInt('acc_classification'));
+        $accountsObj->setVar('acc_color', Request::getString('acc_color'));
+        $accountsObj->setVar('acc_iecalc', Request::getInt('acc_iecalc'));
+        $accountsObj->setVar('acc_online', Request::getInt('acc_online'));
         $level = 1;
         if ($accPid > 0) {
             $accParentObj = $accountsHandler->get($accPid);
             $level = $accParentObj->getVar('acc_level') + 1;
         }
         unset($accParentObj);
-        $accountsObj->setVar('acc_level', Request::getInt('acc_level', 0));
-        $accountsObj->setVar('acc_weight', Request::getInt('acc_weight', 0));
+        $accountsObj->setVar('acc_level', Request::getInt('acc_level'));
+        $accountsObj->setVar('acc_weight', Request::getInt('acc_weight'));
         $accountDatecreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('acc_datecreated'));
         $accountsObj->setVar('acc_datecreated', $accountDatecreatedObj->getTimestamp());
-        $accountsObj->setVar('acc_submitter', Request::getInt('acc_submitter', 0));
+        $accountsObj->setVar('acc_submitter', Request::getInt('acc_submitter'));
         // Insert Data
         if ($accountsHandler->insert($accountsObj)) {
             \redirect_header('accounts.php?op=list', 2, \_MA_WGSIMPLEACC_FORM_OK);
@@ -125,7 +125,7 @@ switch ($op) {
             \redirect_header('accounts.php', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
         }
         // Set Vars
-        $accountsObj->setVar('acc_color', '#' . Request::getString('acc_color', ''));
+        $accountsObj->setVar('acc_color', '#' . Request::getString('acc_color'));
         // Insert Data
         if ($accountsHandler->insert($accountsObj)) {
             \redirect_header('accounts.php?op=list', 2, \_MA_WGSIMPLEACC_FORM_OK);
@@ -134,7 +134,7 @@ switch ($op) {
     case 'edit':
         $templateMain = 'wgsimpleacc_admin_accounts.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('accounts.php'));
-        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_ACCOUNT, 'accounts.php?op=new', 'add');
+        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_ACCOUNT, 'accounts.php?op=new');
         $adminObject->addItemButton(\_AM_WGSIMPLEACC_LIST_ACCOUNTS, 'accounts.php', 'list');
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
         // Get Form

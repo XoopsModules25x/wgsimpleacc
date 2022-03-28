@@ -41,7 +41,7 @@ if (\file_exists($tcpdf = \XOOPS_ROOT_PATH . '/Frameworks/tcpdf/')) {
 
 // Permissions
 if (!$permissionsHandler->getPermOuttemplatesView()) {
-    \redirect_header('index.php', 0, '');
+    \redirect_header('index.php', 0);
 }
 
 // Extend the TCPDF class to create custom Header and Footer
@@ -88,7 +88,7 @@ function execute_output ($template, $outParams)
     // Set defaults
     $pdfFilename = $outParams['file_name'];
     $title = $GLOBALS['xoopsConfig']['sitename'];
-    $subject = 'Pdf Subject';
+    //$subject = 'Pdf Subject';
 
     // Read data from table and create pdfData
     $pdfData['date'] = $outParams['date'];

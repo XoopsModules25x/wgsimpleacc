@@ -71,8 +71,7 @@ class Outtemplates extends \XoopsObject
      */
     public function getNewInsertedIdOuttemplates()
     {
-        $newInsertedId = $GLOBALS['xoopsDB']->getInsertId();
-        return $newInsertedId;
+        return $GLOBALS['xoopsDB']->getInsertId();
     }
 
     /**

@@ -76,8 +76,7 @@ class Clients extends \XoopsObject
      */
     public function getNewInsertedIdClients()
     {
-        $newInsertedId = $GLOBALS['xoopsDB']->getInsertId();
-        return $newInsertedId;
+        return $GLOBALS['xoopsDB']->getInsertId();
     }
 
     /**

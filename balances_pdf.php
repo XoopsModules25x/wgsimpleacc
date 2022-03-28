@@ -37,7 +37,7 @@ if (\file_exists($tcpdf = \XOOPS_ROOT_PATH.'/Frameworks/tcpdf/')) {
 
 // Permissions
 if (!$permissionsHandler->getPermBalancesView()) {
-    \redirect_header('index.php', 0, '');
+    \redirect_header('index.php', 0);
 }
 
 require_once $tcpdf . 'config/tcpdf_config.php';

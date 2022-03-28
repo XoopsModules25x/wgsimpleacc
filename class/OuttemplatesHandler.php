@@ -54,13 +54,13 @@ class OuttemplatesHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve a field
      *
-     * @param int $i field id
+     * @param int $id field id
      * @param null fields
      * @return mixed reference to the {@link Get} object
      */
-    public function get($i = null, $fields = null)
+    public function get($id = null, $fields = null)
     {
-        return parent::get($i, $fields);
+        return parent::get($id, $fields);
     }
 
     /**
@@ -190,7 +190,7 @@ class OuttemplatesHandler extends \XoopsPersistableObjectHandler
         $form->addElement(new \XoopsFormHidden('op', 'exec_output'));
         $btnTray = new \XoopsFormElementTray('', '&nbsp;');
         $btnTray->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
-        $btnBack = new \XoopsFormButton('', 'back', \_BACK, 'submit', false);
+        $btnBack = new \XoopsFormButton('', 'back', \_BACK, 'submit');
         $btnBack->setExtra('class="btn btn-success"');
         $btnTray->addElement($btnBack);
         $form->addElement($btnTray);
