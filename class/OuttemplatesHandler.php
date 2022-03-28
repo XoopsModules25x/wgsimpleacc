@@ -176,15 +176,25 @@ class OuttemplatesHandler extends \XoopsPersistableObjectHandler
         $editorConfigs3['editor'] = $editor;
         $outFooter = new \XoopsFormEditor(\_MA_WGSIMPLEACC_OUTTEMPLATE_FOOTER, 'otpl_footer', $editorConfigs3);
         $form->addElement($outFooter);
-
+        // Form Select Target
         $targetSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_OUTTEMPLATE_TARGET, 'target', 'form_browser', 5);
         $targetSelect->addOption('form_browser', \_MA_WGSIMPLEACC_OUTTEMPLATE_TARGET_BROWSER);
         $targetSelect->addOption('form_pdf', \_MA_WGSIMPLEACC_OUTTEMPLATE_TARGET_PDF);
         $form->addElement($targetSelect);
+        // Form Radio Yes/No auto_add
+        $auto_addYN = new \XoopsFormRadioYN(\_MA_WGSIMPLEACC_OUTTEMPLATE_AUTOADD, 'auto_add', 0);
+        $auto_addYN->setDescription(\_MA_WGSIMPLEACC_OUTTEMPLATE_AUTOADD_DESC);
+        $form->addElement($auto_addYN);
 
         // To Save
         $form->addElement(new \XoopsFormHidden('op', 'exec_output'));
-        $form->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
+        $btnTray = new \XoopsFormElementTray('', '&nbsp;');
+        $btnTray->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
+        $btnBack = new \XoopsFormButton('', 'back', \_BACK, 'submit', false);
+        $btnBack->setExtra('class="btn btn-success"');
+        $btnTray->addElement($btnBack);
+        $form->addElement($btnTray);
+
         return $form;
     }
 

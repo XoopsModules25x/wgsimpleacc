@@ -209,6 +209,9 @@ switch ($op) {
         break;
         */
     case 'exec_output':
+        if (Request::hasVar('back')) {
+            \redirect_header('transactions.php?op=list', 0);
+        }
         // Check permissions
         if (!$permSubmit) {
             \redirect_header('outtemplates.php?op=list', 3, \_NOPERM);
@@ -218,7 +221,8 @@ switch ($op) {
         $outTarget = Request::getString('target', '');
 
         $outParams = $outtemplatesHandler->getOutParams($traId);
-        $outParams['otpl_id'] = $otplId;
+        $outParams['otpl_id']  = $otplId;
+        $outParams['auto_add'] = Request::getBool('auto_add');
 
         if ('form_browser' == $outTarget || 'form_pdf' == $outTarget) {
             //data from form
@@ -243,9 +247,40 @@ switch ($op) {
             case 'pdf':
             case 'form_pdf':
                 require_once __DIR__ . '/outtemplates_pdf.php';
+
+                $filePdf = \str_replace(['%y', '%n'], [$outParams['tra_year'], $outParams['tra_nb']], \_MA_WGSIMPLEACC_PDF_TRANAME);
+                $filePdf = $filePdf . '_' . time() . '.pdf';
+
+                $outParams['file_name'] = $filePdf;
+                if ($outParams['auto_add']) {
+                    $tempPdf = \WGSIMPLEACC_UPLOAD_TEMP_PATH. '/' . $filePdf;
+                    $outParams['file_temp'] = $tempPdf;
+                    // delete if exists
+                    if (\file_exists($tempPdf)) {
+                        \unlink($tempPdf);
+                    }
+                }
+
                 $result = execute_output($template, $outParams);
-                exit;
-                //\redirect_header('transactions.php?op=list', 3, \_MA_WGSIMPLEACC_OUTTEMPLATE_PDF_SUCCESS);
+                if ($outParams['auto_add']) {
+                    // move file to final destination
+                    $filDest = \WGSIMPLEACC_UPLOAD_FILES_PATH . '/' . $filePdf;
+                    \rename($tempPdf, $filDest);
+
+                    // create file
+                    $filesObj = $filesHandler->create();
+                    $fileMimetype   = \mime_content_type($filDest);
+                    $filesObj->setVar('fil_traid', $traId);
+                    $filesObj->setVar('fil_name', $filePdf);
+                    $filesObj->setVar('fil_type', $fileMimetype);
+                    $filesObj->setVar('fil_desc', '');
+                    $filesObj->setVar('fil_ip', $_SERVER['REMOTE_ADDR']);
+                    $filesObj->setVar('fil_datecreated', \time());
+                    $filesObj->setVar('fil_submitter', $GLOBALS['xoopsUser']->id());
+                    // Insert Data
+                    $filesHandler->insert($filesObj);
+                }
+                //\redirect_header('transactions.php?op=list&amp;filePdf=' . $filePdf, 3, \_MA_WGSIMPLEACC_OUTTEMPLATE_PDF_SUCCESS);
                 break;
         }
         break;

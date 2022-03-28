@@ -38,6 +38,7 @@ if (!\defined('XOOPS_ICONS32_URL')) {
 \define('WGSIMPLEACC_UPLOAD_FILES_PATH', WGSIMPLEACC_UPLOAD_PATH . '/files');
 \define('WGSIMPLEACC_UPLOAD_FILES_URL', WGSIMPLEACC_UPLOAD_URL . '/files');
 \define('WGSIMPLEACC_UPLOAD_IMAGES_URL', WGSIMPLEACC_UPLOAD_URL . '/images');
+\define('WGSIMPLEACC_UPLOAD_TEMP_PATH', WGSIMPLEACC_UPLOAD_PATH . '/temp');
 \define('WGSIMPLEACC_ADMIN', WGSIMPLEACC_URL . '/admin/index.php');
 $localLogo = WGSIMPLEACC_IMAGE_URL . '/wedega_logo.png';
 // Module Information
