@@ -42,6 +42,7 @@
  - added sorting to clients list (goffy)
  - replaced tab by 4 spaces in tpl (goffy)
  - cleaned notifications output (goffy)
+ - added new chart account distribution (goffy)
 
 ==============================================================
 1.22 RC3 [2021/05/01]
