@@ -372,4 +372,35 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
         return $ret;
     }
     */
+
+    /**
+     * Get all sub accounts for given account
+     * @param $accId
+     * @return array|false
+     */
+    public function getSubsOfAccounts($accId)
+    {
+        $list = [];
+        $helper             = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+        $accountsHandler = $helper->getHandler('accounts');
+
+        $crItems           = new \CriteriaCompo();
+        $crItems->add(new \Criteria('acc_online', 1));
+        $crItems->setSort('acc_weight ASC, acc_id');
+        $crItems->setOrder('ASC');
+        $accountsCount = $accountsHandler->getCount($crItems);
+        $accountsAll   = $accountsHandler->getAll($crItems);
+        // Table view accounts
+        if ($accountsCount > 0) {
+            foreach (\array_keys($accountsAll) as $i) {
+                if ($accountsAll[$i]->getVar('acc_id') == $accId || \in_array($accountsAll[$i]->getVar('acc_pid'), $list)) {
+                    $list[] = $accountsAll[$i]->getVar('acc_id');
+                }
+            }
+        } else {
+            return false;
+        }
+
+        return $list;
+    }
 }

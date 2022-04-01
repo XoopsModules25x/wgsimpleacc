@@ -86,6 +86,8 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_ACCOUNTS_LIST', 'Liste der Buchungskonten');
 \define('_MA_WGSIMPLEACC_ACCOUNTS_TIMELINE', 'Entwicklung nach Konten');
 \define('_MA_WGSIMPLEACC_ACCOUNT_SUBMIT', 'Konto einsenden');
+\define('_MA_WGSIMPLEACC_ACCOUNTS_BARCHART', 'Verteilung nach Konten');
+\define('_MA_WGSIMPLEACC_ACCOUNT_CURRID', 'Dieses Konto: %s');
 // Caption of Account
 \define('_MA_WGSIMPLEACC_ACCOUNT_ID', 'Id');
 \define('_MA_WGSIMPLEACC_ACCOUNT_PID', 'Übergeordnetes Konto');
@@ -157,6 +159,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_ALLOCATIONS_LIST', 'Liste der Zuordnungen');
 \define('_MA_WGSIMPLEACC_ALLOCATION_SUBMIT', 'Zuordnung einsenden');
 \define('_MA_WGSIMPLEACC_ALLOCATION_SELECT', 'Zuordnung wählen');
+\define('_MA_WGSIMPLEACC_ALLOCATIONS_BARCHART', 'Verteilung nach Zuordnung');
 // Caption of Allocation
 \define('_MA_WGSIMPLEACC_ALLOCATION_ID', 'Id');
 \define('_MA_WGSIMPLEACC_ALLOCATION_PID', 'Übergeordnete Zuordnung');

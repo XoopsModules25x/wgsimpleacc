@@ -86,6 +86,8 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_ACCOUNTS_LIST', 'List of Accounts');
 \define('_MA_WGSIMPLEACC_ACCOUNTS_TIMELINE', 'Development of accounts');
 \define('_MA_WGSIMPLEACC_ACCOUNT_SUBMIT', 'Submit account');
+\define('_MA_WGSIMPLEACC_ACCOUNTS_BARCHART', 'Distribution per account');
+\define('_MA_WGSIMPLEACC_ACCOUNT_CURRID', 'This account: %s');
 // Caption of Account
 \define('_MA_WGSIMPLEACC_ACCOUNT_ID', 'Id');
 \define('_MA_WGSIMPLEACC_ACCOUNT_PID', 'Parent account');
@@ -157,6 +159,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_ALLOCATIONS_LIST', 'List of Allocations');
 \define('_MA_WGSIMPLEACC_ALLOCATION_SUBMIT', 'Submit allocation');
 \define('_MA_WGSIMPLEACC_ALLOCATION_SELECT', 'Select allocation');
+\define('_MA_WGSIMPLEACC_ALLOCATIONS_BARCHART', 'Distribution per allocation');
 // Caption of Allocation
 \define('_MA_WGSIMPLEACC_ALLOCATION_ID', 'Id');
 \define('_MA_WGSIMPLEACC_ALLOCATION_PID', 'Parent allocation');

@@ -104,6 +104,7 @@ $modversion['templates'] = [
     ['file' => 'wgsimpleacc_chart_assets_pietotal.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_chart_assets_line.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_chart_accounts_line.tpl', 'description' => ''],
+    ['file' => 'wgsimpleacc_chart_accounts_hbar.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_chart_balances_line.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_chart_transactions_hbar.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_chart_transactions_inexpie.tpl', 'description' => ''],
