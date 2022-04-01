@@ -565,9 +565,9 @@ switch ($op) {
                     $tra_accounts_list[] = ['acc_id' => $accId, 'acc_name' => ' < ', 'accSubs' => 0, 'href' => $href];
                 }
                 // Go through all accounts
-                foreach (\array_keys($accountsAll) as $i) {
-                    $accId   = $accountsAll[$i]->getVar('acc_id');
-                    $accName = $accountsAll[$i]->getVar('acc_name');
+                foreach (\array_keys($accountsAll) as $acc){
+                    $accId   = $accountsAll[$acc]->getVar('acc_id');
+                    $accName = $accountsAll[$acc]->getVar('acc_name');
                     $accounts_list[] = ['acc_id' => $accId, 'acc_name' => $accName];
                     $transactions_labels .= "'" . $accName . "',";
                     $sumAmountin  = 0;
