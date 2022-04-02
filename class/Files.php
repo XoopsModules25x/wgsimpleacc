@@ -294,9 +294,13 @@ class Files extends \XoopsObject
             case 'image/png':
                 $ret['image'] = 1;
                 break;
+            case 'application/pdf':
+                $ret['pdf'] = 1;
+                break;
             case '':
             default:
                 $ret['image'] = 0;
+                $ret['pdf']   = 0;
                 break;
         }
         $ret['desc']        = $this->getVar('fil_desc', 'e');

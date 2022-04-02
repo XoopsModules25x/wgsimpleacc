@@ -86,7 +86,8 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_ACCOUNTS_LIST', 'Liste der Buchungskonten');
 \define('_MA_WGSIMPLEACC_ACCOUNTS_TIMELINE', 'Entwicklung nach Konten');
 \define('_MA_WGSIMPLEACC_ACCOUNT_SUBMIT', 'Konto einsenden');
-\define('_MA_WGSIMPLEACC_ACCOUNTS_BARCHART', 'Verteilung nach Konten');
+\define('_MA_WGSIMPLEACC_ACCOUNTS_LINECHART', 'Entwicklung');
+\define('_MA_WGSIMPLEACC_ACCOUNTS_BARCHART', 'Verteilung');
 \define('_MA_WGSIMPLEACC_ACCOUNT_CURRID', 'Dieses Konto: %s');
 // Caption of Account
 \define('_MA_WGSIMPLEACC_ACCOUNT_ID', 'Id');

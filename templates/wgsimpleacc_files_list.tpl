@@ -11,7 +11,9 @@
     <td scope="col"><{$file.submitter}></td>
     <td scope="col">
         <{if $file.image}>
-            <a class='btn btn-default' href='#' data-toggle="modal" data-target="#imgModal" data-title="<{$file.name}>" data-info="<{$wgsimpleacc_upload_files_url}>/<{$file.name}>" title='<{$file.name}>'><i class="fa fa-search fa-fw"></i></a>
+            <a class='btn btn-default' href='#' data-toggle="modal" data-target="#imgModal" data-title="<{$file.name}>" data-info="<{$wgsimpleacc_upload_files_url}>/<{$file.name}>" title='<{$file.name}>'><i class="fa fa-eye fa-fw"></i></a>
+        <{elseif $file.pdf}>
+            <a class='btn btn-default' href='#' data-toggle="modal" data-target="#pdfModal" data-title="<{$file.name}>" data-info="<{$wgsimpleacc_upload_files_url}>/<{$file.name}>" title='<{$file.name}>'><i class="fa fa-eye fa-fw"></i></a>
         <{else}>
             <a class='btn btn-default' href='files.php?op=showfile&amp;fil_id=<{$file.id}>' target="_blank" title='<{$file.name}>'><i class="fa fa-download fa-fw"></i></a>
         <{/if}>
