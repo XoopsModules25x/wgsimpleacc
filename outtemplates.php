@@ -45,10 +45,13 @@ $GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_icons_url_32', \WGSIMPLEACC_ICONS_URL . '/32/');
 $GLOBALS['xoopsTpl']->assign('showItem', $otplId > 0);
-$permSubmit = $permissionsHandler->getPermOuttemplatesSubmit();
-$GLOBALS['xoopsTpl']->assign('permSubmit', $permSubmit);
+$permSubmitOTpl = $permissionsHandler->getPermOuttemplatesSubmit();
+$permSubmitTra = $permissionsHandler->getPermTransactionsSubmit();
+$GLOBALS['xoopsTpl']->assign('permSubmit', $permSubmitOTpl);
 
 $keywords = [];
+
+$useFooter = true;
 
 switch ($op) {
     case 'show':
@@ -90,13 +93,17 @@ switch ($op) {
         if (!$GLOBALS['xoopsSecurity']->check()) {
             \redirect_header('outtemplates.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
-        // Check permissions
-        if (!$permSubmit) {
-            \redirect_header('outtemplates.php?op=list', 3, \_NOPERM);
-        }
         if ($otplId > 0) {
             $outtemplatesObj = $outtemplatesHandler->get($otplId);
+            // Check permissions
+            if (!$permissionsHandler->getPermOuttemplatesSubmit($outtemplatesObj->getVar('otpl_submitter'))) {
+                \redirect_header('outtemplates.php?op=list', 3, \_NOPERM);
+            }
         } else {
+            // Check permissions
+            if (!$permSubmitOTpl) {
+                \redirect_header('outtemplates.php?op=list', 3, \_NOPERM);
+            }
             $outtemplatesObj = $outtemplatesHandler->create();
         }
         $outtemplatesObj->setVar('otpl_name', Request::getString('otpl_name'));
@@ -134,7 +141,7 @@ switch ($op) {
         break;
     case 'new':
         // Check permissions
-        if (!$permSubmit) {
+        if (!$permSubmitOTpl) {
             \redirect_header('outtemplates.php?op=list', 3, \_NOPERM);
         }
         // Form Create
@@ -147,16 +154,16 @@ switch ($op) {
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_OUTTEMPLATE_ADD];
         break;
     case 'edit':
-        // Check permissions
-        if (!$permSubmit) {
-            \redirect_header('outtemplates.php?op=list', 3, \_NOPERM);
-        }
         // Check params
         if (0 == $otplId) {
             \redirect_header('outtemplates.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
         }
         // Get Form
         $outtemplatesObj = $outtemplatesHandler->get($otplId);
+        // Check permissions
+        if (!$permissionsHandler->getPermOuttemplatesSubmit($outtemplatesObj->getVar('otpl_submitter'))) {
+            \redirect_header('outtemplates.php?op=list', 3, \_NOPERM);
+        }
         $form = $outtemplatesObj->getFormOuttemplates();
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
 
@@ -166,7 +173,7 @@ switch ($op) {
         break;
     case 'delete':
         // Check permissions
-        if (!$permSubmit) {
+        if (!$permSubmitOTpl) {
             \redirect_header('outtemplates.php?op=list', 3, \_NOPERM);
         }
         // Check params
@@ -200,7 +207,7 @@ switch ($op) {
 /*
     case 'editpdf':
         // Check permissions
-        if (!$permSubmit) {
+        if (!$permSubmitOTpl) {
             \redirect_header('outtemplates.php?op=list', 3, \_NOPERM);
         }
         // Form Create
@@ -213,7 +220,7 @@ switch ($op) {
             \redirect_header('transactions.php?op=list', 0);
         }
         // Check permissions
-        if (!$permSubmit) {
+        if (!$permSubmitTra) {
             \redirect_header('outtemplates.php?op=list', 3, \_NOPERM);
         }
         $outParams = [];
@@ -246,6 +253,7 @@ switch ($op) {
                 break;
             case 'pdf':
             case 'form_pdf':
+                $useFooter = false;
                 require_once __DIR__ . '/outtemplates_pdf.php';
 
                 $filePdf = \str_replace(['%y', '%n'], [$outParams['tra_year'], $outParams['tra_nb']], \_MA_WGSIMPLEACC_PDF_TRANAME);
@@ -293,4 +301,6 @@ unset($keywords);
 $GLOBALS['xoopsTpl']->assign('xoops_mpageurl', \WGSIMPLEACC_URL . '/outtemplates.php');
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', \WGSIMPLEACC_UPLOAD_URL);
 
-require __DIR__ . '/footer.php';
+if ($useFooter) {
+    require __DIR__ . '/footer.php';
+}

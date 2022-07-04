@@ -86,7 +86,8 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_ACCOUNTS_LIST', 'List of Accounts');
 \define('_MA_WGSIMPLEACC_ACCOUNTS_TIMELINE', 'Development of accounts');
 \define('_MA_WGSIMPLEACC_ACCOUNT_SUBMIT', 'Submit account');
-\define('_MA_WGSIMPLEACC_ACCOUNTS_BARCHART', 'Distribution per account');
+\define('_MA_WGSIMPLEACC_ACCOUNTS_LINECHART', 'Development');
+\define('_MA_WGSIMPLEACC_ACCOUNTS_BARCHART', 'Distribution');
 \define('_MA_WGSIMPLEACC_ACCOUNT_CURRID', 'This account: %s');
 // Caption of Account
 \define('_MA_WGSIMPLEACC_ACCOUNT_ID', 'Id');

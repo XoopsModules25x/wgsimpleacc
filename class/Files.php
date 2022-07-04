@@ -285,6 +285,8 @@ class Files extends \XoopsObject
         $ret['tra_number']   = $transactionsObj->getVar('tra_year') . '/' . \substr('00000' . $transactionsObj->getVar('tra_nb'), -5);
         $ret['name']         = $this->getVar('fil_name');
         $ret['type']         = $this->getVar('fil_type');
+        $ret['image']        = 0;
+        $ret['pdf']          = 0;
         switch ($ret['type']) {
             case 'image/gif':
             case 'image/jpeg':
@@ -294,9 +296,11 @@ class Files extends \XoopsObject
             case 'image/png':
                 $ret['image'] = 1;
                 break;
+            case 'application/pdf':
+                $ret['pdf'] = 1;
+                break;
             case '':
             default:
-                $ret['image'] = 0;
                 break;
         }
         $ret['desc']        = $this->getVar('fil_desc', 'e');
