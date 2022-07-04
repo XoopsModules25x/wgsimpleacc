@@ -5,6 +5,8 @@
  - transaction sorting (goffy)
  - added auto adding of pdf output to transaction (goffy)
  - code cleaning with PS Inspect code (goffy)
+ - fixed bug in pdf output (goffy)
+ - fixed bug in permissions (goffy)
 
 ==============================================================
 1.3.0 Alpha [2021/11/20]
