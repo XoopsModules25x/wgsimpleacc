@@ -132,7 +132,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_TRANSACTION_DESC', 'Beschreibung');
 \define('_MA_WGSIMPLEACC_TRANSACTION_REFERENCE', 'Referenz');
 \define('_MA_WGSIMPLEACC_TRANSACTION_REMARKS', 'Anmerkungen');
-\define('_MA_WGSIMPLEACC_TRANSACTION_ACCID', 'Konto');
+\define('_MA_WGSIMPLEACC_TRANSACTION_ACCID', 'Verwendung');
 \define('_MA_WGSIMPLEACC_TRANSACTION_ALLID', 'Zuordnung');
 \define('_MA_WGSIMPLEACC_TRANSACTION_DATE', 'Valutadatum');
 \define('_MA_WGSIMPLEACC_TRANSACTION_CURID', 'Währung');

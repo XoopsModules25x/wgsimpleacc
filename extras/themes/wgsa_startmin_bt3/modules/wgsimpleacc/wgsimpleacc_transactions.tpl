@@ -180,66 +180,6 @@
 </style>
 <!-- End code for dropdown output -->
 
-<!-- Start code for calc modal -->
-<div class="clear"></div>
-<div class="modal fade" id="calcModal" tabindex="-1" role="dialog" aria-labelledby="calcModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="calcModalLabel"><{$smarty.const._MA_WGSIMPLEACC_CALC}></h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="<{$smarty.const._CLOSE}>">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="calc-container">
-                    <div class="calc-row">
-                        <button id="calc-clear" value="">AC</button>
-                        <div id="calc-screen" class="calc-screen"></div>
-                    </div>
-                    <div class="calc-row">
-                        <button class="digit" value="7">7</button>
-                        <button class="digit" value="8">8</button>
-                        <button class="digit" value="9">9</button>
-                        <button class="operation" id="/">/</button>
-                    </div>
-                    <div class="calc-row">
-                        <button class="digit" value="4">4</button>
-                        <button class="digit" value="5">5</button>
-                        <button class="digit" value="6">6</button>
-                        <button class="operation" id="-">-</button>
-                    </div>
-                    <div class="calc-row">
-                        <button class="digit" value="1">1</button>
-                        <button class="digit" value="2">2</button>
-                        <button class="digit" value="3">3</button>
-                        <button class="operation" id="+">+</button>
-                    </div>
-                    <div class="calc-row">
-                        <button class="digit" value="0">0</button>
-                        <button class="decPoint" value=".">.</button>
-                        <button class="equal" id="eql">=</button>
-                        <button class="operation" id="*">*</button>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button id="btnApplyResult" type="button" class="btn btn-secondary" data-dismiss="modal"><{$smarty.const._MA_WGSIMPLEACC_CALC_APPLY}></button>
-            </div>
-        </div>
-    </div>
-</div>
-<script>
-    $(function () {
-        $("#btnApplyResult").click(function () {
-            $result = document.getElementById("calc-screen").innerText;
-            $result = $result.replace(".", "<{$sepComma}>");
-            document.getElementById("tra_amount").value = $result;
-        });
-    });
-</script>
-<!-- End code for calc modal -->
-
 <!-- Start code for info modal -->
 <div class="clear"></div>
 <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
@@ -425,3 +365,7 @@
     } );
 </script>
 <!-- End script for autocomplete select -->
+
+<!-- start calculator -->
+<{include file='db:wgsimpleacc_modal_calc.tpl' }>
+<!-- end calculator -->
