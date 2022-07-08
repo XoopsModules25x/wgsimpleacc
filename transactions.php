@@ -78,6 +78,7 @@ if (0 == $displayfilter || $traId > 0) {
     $GLOBALS['xoopsTpl']->assign('btnfilter', \_MA_WGSIMPLEACC_FILTER_HIDE);
 }
 $GLOBALS['xoopsTpl']->assign('sepComma', $helper->getConfig('sep_comma'));
+$GLOBALS['xoopsTpl']->assign('sepThousand', $helper->getConfig('sep_thousand'));
 
 $traOpSorter = '&amp;start=' . $start . '&amp;limit=' . $limit . '&amp;all_id=' . $allId . '&amp;acc_id=' . $accId . '&amp;as_id=' . $asId;
 $traOpSorter .= '&amp;filterYear=' . $filterYear . '&amp;filterMonthFrom=' . $filterMonthFrom . '&amp;filterYearFrom=' . $filterYearFrom . '&amp;filterMonthTo=' . $filterMonthTo . '&amp;filterYearTo=' . $filterYearTo;
@@ -397,9 +398,6 @@ switch ($op) {
             $GLOBALS['xoTheme']->addStylesheet(\WGSIMPLEACC_URL . '/assets/select-autocomplete/jquery-ui.min.css');
             $GLOBALS['xoTheme']->addStylesheet(\WGSIMPLEACC_URL . '/assets/select-autocomplete/select-autocomplete.css');
         }
-        $GLOBALS['xoTheme']->addStylesheet(\WGSIMPLEACC_URL . '/assets/calculator/style.css');
-        $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/calculator/main.js');
-
         // Form Create
         $transactionsObj = $transactionsHandler->create();
         $form = $transactionsObj->getFormTransactions(false, false, $traType, $start, $limit);
@@ -467,8 +465,6 @@ switch ($op) {
             $GLOBALS['xoTheme']->addStylesheet(\WGSIMPLEACC_URL . '/assets/select-autocomplete/jquery-ui.min.css');
             $GLOBALS['xoTheme']->addStylesheet(\WGSIMPLEACC_URL . '/assets/select-autocomplete/select-autocomplete.css');
         }
-        $GLOBALS['xoTheme']->addStylesheet(\WGSIMPLEACC_URL . '/assets/calculator/style.css');
-        $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/calculator/main.js');
 
         $transactionsObj = $transactionsHandler->get($traId);
         $traSubmitter = $transactionsObj->getVar('tra_submitter');

@@ -8,6 +8,7 @@ Contributors: Goffy (German Xoops), Mamba (https://xoops.org)
 Charts: Chart.js (https://www.chartjs.org/)
 
 Simple Online Calculator: https://www.jqueryscript.net/other/simple-online-calculator.html developed by Jenguk42
+https://github.com/lvcc-wad/Simple-JS-Calculator
 
 Left side menu:
 - based on Startmin

@@ -115,6 +115,7 @@ $modversion['templates'] = [
     ['file' => 'wgsimpleacc_footer.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_header.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_index.tpl', 'description' => ''],
+    ['file' => 'wgsimpleacc_modal_calc.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_navbar.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_outputs.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_outtemplates.tpl', 'description' => ''],
