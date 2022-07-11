@@ -61,6 +61,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_REACTIVATE', 'Reaktivieren (Transaktion wieder zu gültigen Transaktionen hinzufügen');
 \define('_MA_WGSIMPLEACC_SUMS', 'Summen');
 \define('_MA_WGSIMPLEACC_FORM_PLACEHOLDER_NAME', 'Name eingeben');
+\define('_MA_WGSIMPLEACC_CALCULATOR', 'Rechner');
 // ---------------- Contents ----------------
 // There aren't
 \define('_MA_WGSIMPLEACC_THEREARENT_ACCOUNTS', 'Es gibt derzeit keine Konten in der Datenbank');
