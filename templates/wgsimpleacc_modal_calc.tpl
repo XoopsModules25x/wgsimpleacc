@@ -5,7 +5,6 @@
         border-radius: 5px;
         width: 100%;
     }
-
     .calculator-screen {
         width: 100%;
         font-size: 5rem;
@@ -17,22 +16,17 @@
         padding-right: 20px;
         padding-left: 10px;
     }
-
     button {
         height: 60px;
         font-size: 24px !important;
     }
-
-
     .equal-sign {
         height: 100%;
         grid-area: 2 / 4 / 6 / 5;
     }
-
     .equal-sign:hover {
         background-color: #4e9ed4;
     }
-
     .calculator-keys {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -49,7 +43,7 @@
             <div class="modal-header">
                 <h4 class="modal-title" id="calcModalLabel"><{$smarty.const._MA_WGSIMPLEACC_CALC}></h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="<{$smarty.const._CLOSE}>">
-                    <span aria-hidden="true">&times;</span>
+                    <span class="btn btn-danger" aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div id="modal-body" class="modal-body">
@@ -167,6 +161,7 @@
 
     updateDisplay();
 
+    //code for button clicks
     const keys = document.querySelector('.calculator-keys');
     keys.addEventListener('click', (event) => {
         const {
@@ -194,6 +189,7 @@
         updateDisplay();
     });
 
+    //code for keydown events
     document.getElementById("calcModal").addEventListener('keydown', function(event) {
         var key = event.key.toString();
 
@@ -230,6 +226,7 @@
         //alert($key);
     }, true);
 
+    //code for applying result to field of calling form
     $(function () {
         $("#btnApplyResult").click(function () {
             const display = document.querySelector('.calculator-screen');
