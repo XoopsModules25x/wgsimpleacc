@@ -275,7 +275,7 @@ class Transactions extends \XoopsObject
         }
         $traAmountTray = new \XoopsFormElementTray(\_MA_WGSIMPLEACC_TRANSACTION_AMOUNT, '&nbsp;');
         $traAmountTray->addElement(new \XoopsFormText('', 'tra_amount', 20, 150, $traAmount));
-        $button = new \XoopsFormButton('', 'calcAmount', \_MA_WGSIMPLEACC_CALCULATOR);
+        $button = new \XoopsFormButton('', 'calcAmount', \_MA_WGSIMPLEACC_CALC);
         $button->setExtra('onclick="$(\'#calcModal\').modal();"');
         $traAmountTray->addElement($button);
         $form->addElement($traAmountTray);
