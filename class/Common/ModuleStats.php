@@ -17,7 +17,7 @@ namespace XoopsModules\Wgsimpleacc\Common;
  *
  * @copyright      XOOPS Project  (https://xoops.org)
  * @license        GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
- * @author         Michael Beck <mambax7@gmailc.com>
+ * @author         Michael Beck <mambax7@gmail.com>
  */
 trait ModuleStats
 {
