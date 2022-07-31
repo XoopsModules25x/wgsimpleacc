@@ -34,17 +34,19 @@ require __DIR__ . '/navbar.php';
 
 // Permissions
 if (!$permissionsHandler->getPermGlobalView()) {
-    \redirect_header('index.php', 0, '');
+    \redirect_header('index.php', 0);
 }
 
 $op     = Request::getCmd('op', 'list');
-$allId  = Request::getInt('all_id', 0);
-$allPid = Request::getInt('all_pid', 0);
+$allId  = Request::getInt('all_id');
+$allPid = Request::getInt('all_pid');
+$accId  = Request::getInt('acc_id');
+$accPid = Request::getInt('acc_pid');
 $level  = Request::getInt('level', 1);
 $filterYear      = Request::getInt('filterYear', date('Y'));
-$filterMonthFrom = Request::getInt('filterMonthFrom', 0);
+$filterMonthFrom = Request::getInt('filterMonthFrom');
 $filterYearFrom  = Request::getInt('filterYearFrom', date('Y'));
-$filterMonthTo   = Request::getInt('filterMonthTo', 0);
+$filterMonthTo   = Request::getInt('filterMonthTo');
 $filterYearTo    = Request::getInt('filterYearTo', date('Y'));
 $filterType      = Request::getInt('filterType', Constants::FILTER_TYPEALL);
 
@@ -61,6 +63,7 @@ $GLOBALS['xoopsTpl']->assign('colors', $colors);
 
 switch ($op) {
     case 'allocations':
+        $GLOBALS['xoopsTpl']->assign('header_allocs_bar', \_MA_WGSIMPLEACC_ALLOCATIONS_BARCHART);
         //*************************
         // handle transaction chart
         //*************************
@@ -279,14 +282,14 @@ switch ($op) {
         $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_SUBMITTED, '>'));
         $crTransactions->setSort('tra_year');
         $crTransactions->setOrder('ASC');
-        $crTransactions->setStart(0);
+        $crTransactions->setStart();
         $crTransactions->setLimit(1);
         $transactionsAll   = $transactionsHandler->getAll($crTransactions);
         foreach (\array_keys($transactionsAll) as $i) {
             $minYear = $transactionsAll[$i]->getVar('tra_year');
         }
         $crTransactions->setOrder('DESC');
-        $crTransactions->setStart(0);
+        $crTransactions->setStart();
         $crTransactions->setLimit(1);
         $transactionsAll   = $transactionsHandler->getAll($crTransactions);
         foreach (\array_keys($transactionsAll) as $i) {
@@ -378,7 +381,7 @@ switch ($op) {
         $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_SUBMITTED, '>'));
         $crTransactions->setSort('tra_date');
         $crTransactions->setOrder('ASC');
-        $crTransactions->setStart(0);
+        $crTransactions->setStart();
         $crTransactions->setLimit(1);
         $transactionsAll   = $transactionsHandler->getAll($crTransactions);
         foreach (\array_keys($transactionsAll) as $i) {
@@ -454,6 +457,187 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('line_accounts', $line_accounts);
         $GLOBALS['xoopsTpl']->assign('line_labels', $line_labels);
         $GLOBALS['xoopsTpl']->assign('level', $level);
+
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_STATISTICS];
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ACCOUNTS];
+        break;
+    case 'hbar_accounts':
+        $GLOBALS['xoopsTpl']->assign('header_accounts_bar', \_MA_WGSIMPLEACC_ACCOUNTS_BARCHART);
+        //*************************
+        // handle transaction chart
+        //*************************
+        $transactionsCount = $transactionsHandler->getCountTransactions();
+        $GLOBALS['xoopsTpl']->assign('transactionsAccBarCount', $transactionsCount);
+        $count = 1;
+        if ($transactionsCount > 0) {
+            $GLOBALS['xoopsTpl']->assign('header_transactions', \_MA_WGSIMPLEACC_TRANSACTIONS_OVERVIEW );
+            //get all accounts
+            $crAccounts = new \CriteriaCompo();
+            if ($accPid > 0) {
+                $crAccounts->add(new \Criteria('acc_pid', $accPid));
+            }
+            $crAccounts->add(new \Criteria('acc_online', 1));
+            $crAccounts->add(new \Criteria('acc_level', $level));
+            $crAccounts->setSort('acc_weight ASC, acc_id');
+            $crAccounts->setOrder('ASC');
+            $accountsCount = $accountsHandler->getCount($crAccounts);
+            $GLOBALS['xoopsTpl']->assign('accountsBarCount', $accountsCount);
+            $accountsAll   = $accountsHandler->getAll($crAccounts);
+            $transactions_datain = '';
+            $transactions_dataout = '';
+            $transactions_labels = '';
+            $transactions_total_in = 0;
+            $transactions_total_out = 0;
+            $tra_accounts_list = [];
+            $strFilter = "&amp;filterYear=$filterYear&amp;filterType=$filterType";
+            $strFilter .= "&amp;filterMonthFrom=$filterMonthFrom&amp;filterYearFrom=$filterYearFrom";
+            $strFilter .= "&amp;filterMonthTo=$filterMonthTo&amp;filterYearTo=$filterYearTo";
+            if ($accountsCount > 0) {
+                if ($accPid > 0) {
+                    //read current accounts
+                    $accountCurrObj = $accountsHandler->get($accPid);
+                    $accName = $accountCurrObj->getVar('acc_name');
+                    $sumAmountin = 0;
+                    $sumAmountout = 0;
+                    //create filter
+                    $tradateFrom = 0;
+                    $tradateTo = \time();
+                    if (Constants::FILTER_PYEARLY == $period_type) {
+                        //filter data based on form select year
+                        if ($filterYear > Constants::FILTER_TYPEALL) {
+                            $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYear-1-1");
+                            $tradateFrom = $dtime->getTimestamp();
+                            $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYear-12-31");
+                            $tradateTo = $dtime->getTimestamp();
+                        }
+                    } else {
+                        //filter data based on form select month and year from/to
+                        if ($filterType > Constants::FILTER_TYPEALL) {
+                            $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYearFrom-$filterMonthFrom-1");
+                            $tradateFrom = $dtime->getTimestamp();
+                            $last = \DateTime::createFromFormat('Y-m-d', "$filterYearTo-$filterMonthTo-1")->format('Y-m-t');
+                            $dtime = \DateTime::createFromFormat('Y-m-d', $last);
+                            $tradateTo = $dtime->getTimestamp();
+                        }
+                    }
+
+                    $crTransactions = new \CriteriaCompo();
+                    $crTransactions->add(new \Criteria('tra_accid', $accPid));
+                    $crTransactions->add(new \Criteria('tra_date', $tradateFrom, '>='));
+                    $crTransactions->add(new \Criteria('tra_date', $tradateTo, '<='));
+                    $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_SUBMITTED, '>'));
+                    $transactionsAll   = $transactionsHandler->getAll($crTransactions);
+                    foreach (\array_keys($transactionsAll) as $i) {
+                        $sumAmountin += $transactionsAll[$i]->getVar('tra_amountin');
+                        $sumAmountout += $transactionsAll[$i]->getVar('tra_amountout');
+                        $transactions_total_in += $transactionsAll[$i]->getVar('tra_amountin');
+                        $transactions_total_out += $transactionsAll[$i]->getVar('tra_amountout');
+                    }
+
+                    if ((float)$sumAmountin > 0 || (float)$sumAmountout > 0) {
+                        $transactions_datain .= $sumAmountin . ',';
+                        $transactions_dataout .= $sumAmountout . ',';
+                        $accounts_list[] = ['acc_id' => $accId, 'acc_name' => $accName];
+                        $transactions_labels .= "'" . \str_replace('%s', $accName, \_MA_WGSIMPLEACC_ACCOUNT_CURRID) . "',";
+                    }
+
+                    unset($crTransactions);
+                }
+
+                // Go through all accounts
+                $crAccount2 = new \CriteriaCompo();
+                $crAccount2->add(new \Criteria('acc_id', $accPid));
+                $account2Count = $accountsHandler->getCount($crAccount2);
+                if ($account2Count > 0) {
+                    $account2All   = $accountsHandler->getAll($crAccount2);
+                    // Go through all accounts
+                    foreach (\array_keys($account2All) as $j) {
+                        $pidReturn = $account2All[$j]->getVar('acc_pid');
+                    }
+                }
+                if ($level > 1) {
+                    $href = 'statistics.php?op=' . $op . '&amp;acc_pid=0&amp;level=1' .  $strFilter;
+                    $tra_accounts_list[] = ['acc_id' => $accId, 'acc_name' => ' << ', 'accSubs' => 0, 'href' => $href];
+                }
+                if ($level > 2) {
+                    $href = 'statistics.php?op=' . $op . '&amp;acc_pid=' . $pidReturn . '&amp;level=' . ($level - 1) . $strFilter;
+                    $tra_accounts_list[] = ['acc_id' => $accId, 'acc_name' => ' < ', 'accSubs' => 0, 'href' => $href];
+                }
+                // Go through all accounts
+                foreach (\array_keys($accountsAll) as $acc){
+                    $accId   = $accountsAll[$acc]->getVar('acc_id');
+                    $accName = $accountsAll[$acc]->getVar('acc_name');
+                    $accounts_list[] = ['acc_id' => $accId, 'acc_name' => $accName];
+                    $transactions_labels .= "'" . $accName . "',";
+                    $sumAmountin  = 0;
+                    $sumAmountout = 0;
+                    //create filter
+                    $tradateFrom = 0;
+                    $tradateTo = \time();
+                    if (Constants::FILTER_PYEARLY == $period_type) {
+                        //filter data based on form select year
+                        if ($filterYear > Constants::FILTER_TYPEALL) {
+                            $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYear-1-1");
+                            $tradateFrom = $dtime->getTimestamp();
+                            $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYear-12-31");
+                            $tradateTo = $dtime->getTimestamp();
+                        }
+                    } else {
+                        //filter data based on form select month and year from/to
+                        if ($filterType > Constants::FILTER_TYPEALL) {
+                            $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYearFrom-$filterMonthFrom-1");
+                            $tradateFrom = $dtime->getTimestamp();
+                            $last = \DateTime::createFromFormat('Y-m-d', "$filterYearTo-$filterMonthTo-1")->format('Y-m-t');
+                            $dtime = \DateTime::createFromFormat('Y-m-d', $last);
+                            $tradateTo= $dtime->getTimestamp();
+                        }
+                    }
+
+                    $subAccIds = $accountsHandler->getSubsOfAccounts($accId);
+                    foreach ($subAccIds as $subAccId) {
+                        $crTransactions = new \CriteriaCompo();
+                        $crTransactions->add(new \Criteria('tra_accid', $subAccId));
+                        $crTransactions->add(new \Criteria('tra_date', $tradateFrom, '>='));
+                        $crTransactions->add(new \Criteria('tra_date', $tradateTo, '<='));
+                        $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_SUBMITTED, '>'));
+                        $transactionsCount = $transactionsHandler->getCount($crTransactions);
+                        $transactionsAll   = $transactionsHandler->getAll($crTransactions);
+                        if ($transactionsCount > 0) {
+                            foreach (\array_keys($transactionsAll) as $i) {
+                                $sumAmountin += $transactionsAll[$i]->getVar('tra_amountin');
+                                $sumAmountout += $transactionsAll[$i]->getVar('tra_amountout');
+                                $transactions_total_in += $transactionsAll[$i]->getVar('tra_amountin');
+                                $transactions_total_out += $transactionsAll[$i]->getVar('tra_amountout');
+                            }
+                        }
+                        unset($crTransactions);
+                    }
+                    $href = 'statistics.php?op=' . $op . '&amp;acc_pid=' . $accId . '&amp;level=' . ($level + 1) . $strFilter;
+                    $tra_accounts_list[] = ['acc_id' => $accId, 'acc_name' => $accName, 'accSubs' => \count($subAccIds), 'href' => $href];
+                    $transactions_datain .= $sumAmountin . ',';
+                    $transactions_dataout .= $sumAmountout . ',';
+                }
+            }
+            unset($crAccounts);
+
+            $GLOBALS['xoopsTpl']->assign('tra_accounts_list', $tra_accounts_list);
+            $GLOBALS['xoopsTpl']->assign('transactions_datain1', $transactions_datain);
+            $GLOBALS['xoopsTpl']->assign('transactions_dataout1', $transactions_dataout);
+            $GLOBALS['xoopsTpl']->assign('transactions_labels', $transactions_labels);
+            $GLOBALS['xoopsTpl']->assign('transactions_total_in', Utility::FloatToString($transactions_total_in));
+            $GLOBALS['xoopsTpl']->assign('transactions_total_out', Utility::FloatToString($transactions_total_out));
+            $GLOBALS['xoopsTpl']->assign('transactions_total', Utility::FloatToString($transactions_total_in - $transactions_total_out));
+            $GLOBALS['xoopsTpl']->assign('label_datain1', \_MA_WGSIMPLEACC_TRANSACTIONS_INCOMES . ' (' . \_MA_WGSIMPLEACC_STATUS_APPROVED .')');
+            $GLOBALS['xoopsTpl']->assign('label_dataout1', \_MA_WGSIMPLEACC_TRANSACTIONS_EXPENSES . ' (' . \_MA_WGSIMPLEACC_STATUS_APPROVED .')');
+        }
+        unset($count);
+
+        //get form filter year
+        if (\count($tra_accounts_list) > 0) {
+            $formFilter = Utility::getFormFilterPeriod($filterYear, $filterType, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, 'hbar_accounts');
+            $GLOBALS['xoopsTpl']->assign('formTraFilter', $formFilter->render());
+        }
 
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_STATISTICS];

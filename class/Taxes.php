@@ -67,8 +67,7 @@ class Taxes extends \XoopsObject
      */
     public function getNewInsertedIdTaxes()
     {
-        $newInsertedId = $GLOBALS['xoopsDB']->getInsertId();
-        return $newInsertedId;
+        return $GLOBALS['xoopsDB']->getInsertId();
     }
 
     /**

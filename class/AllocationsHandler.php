@@ -54,13 +54,13 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve a field
      *
-     * @param int $i field id
+     * @param int $id field id
      * @param null fields
      * @return mixed reference to the {@link Get} object
      */
-    public function get($i = null, $fields = null)
+    public function get($id = null, $fields = null)
     {
-        return parent::get($i, $fields);
+        return parent::get($id, $fields);
     }
 
     /**
@@ -131,7 +131,6 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
         $list = [];
         $helper             = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $allocationsHandler = $helper->getHandler('Allocations');
-        $permissionsHandler = $helper->getHandler('Permissions');
 
         $crItems           = new \CriteriaCompo();
         $crItems->add(new \Criteria('all_online', 1));
@@ -142,9 +141,7 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
         // Table view allocations
         if ($allocationsCount > 0) {
             foreach (\array_keys($allocationsAll) as $i) {
-                //if ($permissionsHandler->getPermAllocationsSubmit()) {
-                    $list[] = ['id' => $allocationsAll[$i]->getVar('all_id'), 'text' => \str_repeat('- ', $allocationsAll[$i]->getVar('all_level')) . ' ' . $allocationsAll[$i]->getVar('all_name')];
-                //}
+                $list[] = ['id' => $allocationsAll[$i]->getVar('all_id'), 'text' => \str_repeat('- ', $allocationsAll[$i]->getVar('all_level')) . ' ' . $allocationsAll[$i]->getVar('all_name')];
             }
         } else {
             return false;

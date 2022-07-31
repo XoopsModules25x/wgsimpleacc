@@ -54,13 +54,13 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve a field
      *
-     * @param int $i field id
+     * @param int $id field id
      * @param null fields
      * @return mixed reference to the {@link Get} object
      */
-    public function get($i = null, $fields = null)
+    public function get($id = null, $fields = null)
     {
-        return parent::get($i, $fields);
+        return parent::get($id, $fields);
     }
 
     /**
@@ -130,9 +130,8 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
     public function getSelectTreeOfAccounts($class)
     {
         $list = [];
-        $helper             = \XoopsModules\Wgsimpleacc\Helper::getInstance();
-        $accountsHandler    = $helper->getHandler('Accounts');
-        $permissionsHandler = $helper->getHandler('Permissions');
+        $helper          = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+        $accountsHandler = $helper->getHandler('Accounts');
 
         $crItems = new \CriteriaCompo();
         $crItems->add(new \Criteria('acc_online', 1));
@@ -147,9 +146,7 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
         // Table view accounts
         if ($accountsCount > 0) {
             foreach (\array_keys($accountsAll) as $i) {
-                //if ($permissionsHandler->getPermAccountsSubmit()) {
-                    $list[] = ['id' => $accountsAll[$i]->getVar('acc_id'), 'text' => \str_repeat('- ', $accountsAll[$i]->getVar('acc_level')) . $accountsAll[$i]->getVar('acc_key') . ' ' . $accountsAll[$i]->getVar('acc_name')];
-                //}
+                $list[] = ['id' => $accountsAll[$i]->getVar('acc_id'), 'text' => \str_repeat('- ', $accountsAll[$i]->getVar('acc_level')) . $accountsAll[$i]->getVar('acc_key') . ' ' . $accountsAll[$i]->getVar('acc_name')];
             }
         } else {
             return false;
@@ -375,4 +372,35 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
         return $ret;
     }
     */
+
+    /**
+     * Get all sub accounts for given account
+     * @param $accId
+     * @return array|false
+     */
+    public function getSubsOfAccounts($accId)
+    {
+        $list = [];
+        $helper             = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+        $accountsHandler = $helper->getHandler('accounts');
+
+        $crItems           = new \CriteriaCompo();
+        $crItems->add(new \Criteria('acc_online', 1));
+        $crItems->setSort('acc_weight ASC, acc_id');
+        $crItems->setOrder('ASC');
+        $accountsCount = $accountsHandler->getCount($crItems);
+        $accountsAll   = $accountsHandler->getAll($crItems);
+        // Table view accounts
+        if ($accountsCount > 0) {
+            foreach (\array_keys($accountsAll) as $i) {
+                if ($accountsAll[$i]->getVar('acc_id') == $accId || \in_array($accountsAll[$i]->getVar('acc_pid'), $list)) {
+                    $list[] = $accountsAll[$i]->getVar('acc_id');
+                }
+            }
+        } else {
+            return false;
+        }
+
+        return $list;
+    }
 }

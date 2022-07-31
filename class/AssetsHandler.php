@@ -54,13 +54,13 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve a field
      *
-     * @param int $i field id
+     * @param int $id field id
      * @param null fields
      * @return mixed reference to the {@link Get} object
      */
-    public function get($i = null, $fields = null)
+    public function get($id = null, $fields = null)
     {
-        return parent::get($i, $fields);
+        return parent::get($id, $fields);
     }
 
     /**
@@ -174,7 +174,7 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
             $crBalances->add(new \Criteria('bal_asid', $asId));
             $crBalances->setSort('bal_datecreated');
             $crBalances->setOrder('DESC');
-            $crBalances->setStart(0);
+            $crBalances->setStart();
             $crBalances->setLimit(1);
             $balancesAll = $balancesHandler->getAll($crBalances);
             foreach (\array_keys($balancesAll) as $b) {
@@ -222,7 +222,7 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
             $crBalances->add(new \Criteria('bal_to', $dateFrom, '<'));
             $crBalances->setSort('bal_datecreated');
             $crBalances->setOrder('DESC');
-            $crBalances->setStart(0);
+            $crBalances->setStart();
             $crBalances->setLimit(1);
             $balAmountStart = (float)0;
             $sumAmountin    = (float)0;

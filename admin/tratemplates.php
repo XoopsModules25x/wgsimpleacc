@@ -38,11 +38,11 @@ switch ($op) {
     default:
         // Define Stylesheet
         $GLOBALS['xoTheme']->addStylesheet($style, null);
-        $start = Request::getInt('start', 0);
+        $start = Request::getInt('start');
         $limit = Request::getInt('limit', $helper->getConfig('adminpager'));
         $templateMain = 'wgsimpleacc_admin_tratemplates.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('tratemplates.php'));
-        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_TRATEMPLATE, 'tratemplates.php?op=new', 'add');
+        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_TRATEMPLATE, 'tratemplates.php?op=new');
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
         $tratemplatesCount = $tratemplatesHandler->getCountTratemplates();
         $tratemplatesAll = $tratemplatesHandler->getAllTratemplates($start, $limit);
@@ -60,7 +60,7 @@ switch ($op) {
             if ($tratemplatesCount > $limit) {
                 include_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
                 $pagenav = new \XoopsPageNav($tratemplatesCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
-                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
             }
         } else {
             $GLOBALS['xoopsTpl']->assign('error', \_MA_WGSIMPLEACC_THEREARENT_TRATEMPLATES);
@@ -87,21 +87,21 @@ switch ($op) {
             $tratemplatesObj = $tratemplatesHandler->create();
         }
         // Set Vars
-        $tratemplatesObj->setVar('ttpl_name', Request::getString('ttpl_name', ''));
-        $tratemplatesObj->setVar('ttpl_desc', Request::getString('ttpl_desc', ''));
-        $tratemplatesObj->setVar('ttpl_accid', Request::getInt('ttpl_accid', 0));
-        $tratemplatesObj->setVar('ttpl_allid', Request::getInt('ttpl_allid', 0));
-        $tratemplatesObj->setVar('ttpl_asid', Request::getInt('ttpl_asid', 0));
-        $tratemplatesObj->setVar('ttpl_cliid', Request::getInt('ttpl_cliid', 0));
-        $tratemplatesObj->setVar('ttpl_class', Request::getInt('ttpl_class', 0));
+        $tratemplatesObj->setVar('ttpl_name', Request::getString('ttpl_name'));
+        $tratemplatesObj->setVar('ttpl_desc', Request::getString('ttpl_desc'));
+        $tratemplatesObj->setVar('ttpl_accid', Request::getInt('ttpl_accid'));
+        $tratemplatesObj->setVar('ttpl_allid', Request::getInt('ttpl_allid'));
+        $tratemplatesObj->setVar('ttpl_asid', Request::getInt('ttpl_asid'));
+        $tratemplatesObj->setVar('ttpl_cliid', Request::getInt('ttpl_cliid'));
+        $tratemplatesObj->setVar('ttpl_class', Request::getInt('ttpl_class'));
         $ttplAmountin = Request::getString('ttpl_amountin');
         $tratemplatesObj->setVar('ttpl_amountin', Utility::StringToFloat($ttplAmountin));
         $ttplAmountout = Request::getString('ttpl_amountout');
         $tratemplatesObj->setVar('ttpl_amountout', Utility::StringToFloat($ttplAmountout));
-        $tratemplatesObj->setVar('ttpl_online', Request::getInt('ttpl_online', 0));
+        $tratemplatesObj->setVar('ttpl_online', Request::getInt('ttpl_online'));
         $ttemplateDatecreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('ttpl_datecreated'));
         $tratemplatesObj->setVar('ttpl_datecreated', $ttemplateDatecreatedObj->getTimestamp());
-        $tratemplatesObj->setVar('ttpl_submitter', Request::getInt('ttpl_submitter', 0));
+        $tratemplatesObj->setVar('ttpl_submitter', Request::getInt('ttpl_submitter'));
         // Insert Data
         if ($tratemplatesHandler->insert($tratemplatesObj)) {
             \redirect_header('tratemplates.php?op=list', 2, \_MA_WGSIMPLEACC_FORM_OK);
@@ -115,7 +115,7 @@ switch ($op) {
         $templateMain = 'wgsimpleacc_admin_tratemplates.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('tratemplates.php'));
         $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/js/functions.js');
-        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_TRATEMPLATE, 'tratemplates.php?op=new', 'add');
+        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_TRATEMPLATE, 'tratemplates.php?op=new');
         $adminObject->addItemButton(\_AM_WGSIMPLEACC_LIST_TRATEMPLATES, 'tratemplates.php', 'list');
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
         // Get Form

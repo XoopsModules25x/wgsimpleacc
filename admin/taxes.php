@@ -37,11 +37,11 @@ switch ($op) {
     default:
         // Define Stylesheet
         $GLOBALS['xoTheme']->addStylesheet($style, null);
-        $start = Request::getInt('start', 0);
+        $start = Request::getInt('start');
         $limit = Request::getInt('limit', $helper->getConfig('adminpager'));
         $templateMain = 'wgsimpleacc_admin_taxes.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('taxes.php'));
-        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_TAX, 'taxes.php?op=new', 'add');
+        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_TAX, 'taxes.php?op=new');
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
         $taxesCount = $taxesHandler->getCountTaxes();
         $taxesAll = $taxesHandler->getAllTaxes($start, $limit);
@@ -59,7 +59,7 @@ switch ($op) {
             if ($taxesCount > $limit) {
                 require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
                 $pagenav = new \XoopsPageNav($taxesCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
-                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
             }
         } else {
             $GLOBALS['xoopsTpl']->assign('error', \_MA_WGSIMPLEACC_THEREARENT_TAXES);
@@ -86,15 +86,15 @@ switch ($op) {
             $taxesObj = $taxesHandler->create();
         }
         // Set Vars
-        $taxesObj->setVar('tax_name', Request::getString('tax_name', ''));
-        $taxesObj->setVar('tax_rate', Request::getInt('tax_rate', 0));
-        $taxesObj->setVar('tax_online', Request::getInt('tax_online', 0));
+        $taxesObj->setVar('tax_name', Request::getString('tax_name'));
+        $taxesObj->setVar('tax_rate', Request::getInt('tax_rate'));
+        $taxesObj->setVar('tax_online', Request::getInt('tax_online'));
         $taxDatecreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('tax_datecreated'));
         $taxesObj->setVar('tax_datecreated', $taxDatecreatedObj->getTimestamp());
-        $taxesObj->setVar('tax_submitter', Request::getInt('tax_submitter', 0));
+        $taxesObj->setVar('tax_submitter', Request::getInt('tax_submitter'));
         // Insert Data
         if ($taxesHandler->insert($taxesObj)) {
-            if (Request::getInt('tax_primary', 0) > 0) {
+            if (Request::getInt('tax_primary') > 0) {
                 $newTaxId = $taxesObj->getNewInsertedIdTaxes();
                 $taxId = $taxId > 0 ? $taxId : $newTaxId;
                 $taxesHandler->setPrimaryTaxes($taxId);
@@ -109,7 +109,7 @@ switch ($op) {
     case 'edit':
         $templateMain = 'wgsimpleacc_admin_taxes.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('taxes.php'));
-        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_TAX, 'taxes.php?op=new', 'add');
+        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_TAX, 'taxes.php?op=new');
         $adminObject->addItemButton(\_AM_WGSIMPLEACC_LIST_TAXES, 'taxes.php', 'list');
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
         // Get Form

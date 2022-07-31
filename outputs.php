@@ -39,18 +39,18 @@ require_once __DIR__ . '/navbar.php';
 
 // Permissions
 if (!$permissionsHandler->getPermGlobalView()) {
-    \redirect_header('index.php', 0, '');
+    \redirect_header('index.php', 0);
 }
 
-$op      = Request::getCmd('op', 'none');
-$traId   = Request::getInt('tra_id', 0);
-$traType = Request::getInt('tra_type', 0);
-$allId   = Request::getInt('all_id', 0);
-$allSubs = Request::getInt('allSubs', 0);
-$accId   = Request::getInt('acc_id', 0);
-$asId    = Request::getInt('as_id', 0);
-$cliId   = Request::getInt('cli_id', 0);
-$outType = Request::getString('output_type', 'none');
+$op        = Request::getCmd('op', 'none');
+$traId     = Request::getInt('tra_id');
+$traType   = Request::getInt('tra_type');
+$allId     = Request::getInt('all_id');
+$allSubs   = Request::getInt('allSubs');
+$accId     = Request::getInt('acc_id');
+$asId      = Request::getInt('as_id');
+$cliId     = Request::getInt('cli_id');
+$outType   = Request::getString('output_type', 'none');
 
 $period_type = $helper->getConfig('balance_period');
 $GLOBALS['xoopsTpl']->assign('displayfilter', 1);
@@ -155,11 +155,13 @@ switch ($op) {
         break;
     case 'transactions';
         $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/js/forms.js');
-        $filterYear = Request::getInt('filterYear', 0);
-        $filterMonthFrom = Request::getInt('filterMonthFrom', 0);
-        $filterYearFrom = Request::getInt('filterYearFrom', 0);
-        $filterMonthTo = Request::getInt('filterMonthTo', 0);
+        $filterYear = Request::getInt('filterYear');
+        $filterMonthFrom = Request::getInt('filterMonthFrom');
+        $filterYearFrom = Request::getInt('filterYearFrom');
+        $filterMonthTo = Request::getInt('filterMonthTo');
         $filterYearTo = Request::getInt('filterYearTo', date('Y'));
+        $traStatus = Request::getArray('tra_status');
+        $traDesc   = Request::getString('tra_desc');
         //get first and last year
         $transactionsHandler = $helper->getHandler('Transactions');
         $yearMin = date('Y');
@@ -167,7 +169,7 @@ switch ($op) {
         $crTransactions = new \CriteriaCompo();
         $crTransactions->setSort('tra_date');
         $crTransactions->setOrder('ASC');
-        $crTransactions->setStart(0);
+        $crTransactions->setStart();
         $crTransactions->setLimit(1);
         $transactionsAll = $transactionsHandler->getAll($crTransactions);
         foreach (\array_keys($transactionsAll) as $i) {
@@ -175,13 +177,13 @@ switch ($op) {
         }
         $crTransactions->setSort('tra_date');
         $crTransactions->setOrder('DESC');
-        $crTransactions->setStart(0);
+        $crTransactions->setStart();
         $crTransactions->setLimit(1);
         $transactionsAll = $transactionsHandler->getAll($crTransactions);
         foreach (\array_keys($transactionsAll) as $i) {
             $yearMax = date('Y', $transactionsAll[$i]->getVar('tra_date'));
         }
-        $formFilter = $transactionsHandler::getFormFilterTransactions($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, $cliId, 'tra_output');
+        $formFilter = $transactionsHandler::getFormFilter($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, $cliId, 'tra_output', $traStatus, $traDesc);
         $GLOBALS['xoopsTpl']->assign('formFilter', $formFilter->render());
 
         // Breadcrumbs
@@ -195,11 +197,13 @@ switch ($op) {
                 //$creator = ('' != $GLOBALS['xoopsUser']->getVar('name')) ? $GLOBALS['xoopsUser']->getVar('name') : $GLOBALS['xoopsUser']->getVar('uname');
                 $filename = date('Ymd_H_i_s_', \time()) . \_MA_WGSIMPLEACC_TRANSACTIONS . '.' . $outType;
 
-                $filterYear = Request::getInt('filterYear', 0);
-                $filterMonthFrom = Request::getInt('filterMonthFrom', 0);
-                $filterYearFrom = Request::getInt('filterYearFrom', 0);
-                $filterMonthTo = Request::getInt('filterMonthTo', 0);
-                $filterYearTo = Request::getInt('filterYearTo', date('Y'));
+                $filterYear      = Request::getInt('filterYear');
+                $filterMonthFrom = Request::getInt('filterMonthFrom');
+                $filterYearFrom  = Request::getInt('filterYearFrom');
+                $filterMonthTo   = Request::getInt('filterMonthTo');
+                $filterYearTo    = Request::getInt('filterYearTo', date('Y'));
+                $traStatus       = Request::getArray('tra_status');
+                $traDesc         = Request::getString('tra_desc');
 
                 // Add data
                 $crTransactions = new \CriteriaCompo();
@@ -243,6 +247,13 @@ switch ($op) {
                 if ($accId > 0) {
                     $crTransactions->add(new \Criteria('tra_accid', $accId));
                 }
+                if (\count($traStatus) > 0) {
+                    $critStatus = '(' . \implode(',', $traStatus) . ')';
+                    $crTransactions->add(new \Criteria('tra_status', $critStatus, 'IN'));
+                }
+                if ('' != $traDesc) {
+                    $crTransactions->add(new \Criteria('tra_desc', $traDesc, 'LIKE'));
+                }
                 $transactionsCount = $transactionsHandler->getCount($crTransactions);
                 $GLOBALS['xoopsTpl']->assign('transactionsCount', $transactionsCount);
                 $crTransactions->setSort('tra_id');
@@ -253,7 +264,7 @@ switch ($op) {
                     if ('xlsx' == $outType) {
                         $data[] = [\_MA_WGSIMPLEACC_TRANSACTION_YEARNB, \_MA_WGSIMPLEACC_TRANSACTION_DESC, \_MA_WGSIMPLEACC_TRANSACTION_REFERENCE,
                             \_MA_WGSIMPLEACC_TRANSACTION_ACCID, \_MA_WGSIMPLEACC_TRANSACTION_ALLID, \_MA_WGSIMPLEACC_TRANSACTION_DATE,
-                            \_MA_WGSIMPLEACC_TRANSACTION_AMOUNTIN, \_MA_WGSIMPLEACC_TRANSACTION_AMOUNTOUT, \_MA_WGSIMPLEACC_TRANSACTION_ASID];
+                            \_MA_WGSIMPLEACC_TRANSACTION_AMOUNTIN, \_MA_WGSIMPLEACC_TRANSACTION_AMOUNTOUT, \_MA_WGSIMPLEACC_TRANSACTION_ASID,  \_MA_WGSIMPLEACC_TRANSACTION_STATUS];
                     } else {
                         $data[] = [
                             '"' . \_MA_WGSIMPLEACC_TRANSACTION_YEARNB . '"',
@@ -264,7 +275,8 @@ switch ($op) {
                             '"' . \_MA_WGSIMPLEACC_TRANSACTION_DATE . '"',
                             '"' . \_MA_WGSIMPLEACC_TRANSACTION_AMOUNTIN . '"',
                             '"' . \_MA_WGSIMPLEACC_TRANSACTION_AMOUNTOUT . '"',
-                            '"' . \_MA_WGSIMPLEACC_TRANSACTION_ASID . '"'
+                            '"' . \_MA_WGSIMPLEACC_TRANSACTION_ASID . '"',
+                            '"' . \_MA_WGSIMPLEACC_TRANSACTION_STATUS . '"'
                         ];
                     }
 
@@ -282,7 +294,8 @@ switch ($op) {
                                 $transactions[$i]['date'],
                                 $transactions[$i]['amountin'],
                                 $transactions[$i]['amountout'],
-                                $transactions[$i]['asset']
+                                $transactions[$i]['asset'],
+                                $transactions[$i]['status_text']
                             ];
                         } else {
                             $data[] = [
@@ -294,7 +307,8 @@ switch ($op) {
                                 $transactions[$i]['date'],
                                 $transactions[$i]['amountin'],
                                 $transactions[$i]['amountout'],
-                                '"' . $transactions[$i]['asset'] . '"'
+                                '"' . $transactions[$i]['asset'] . '"',
+                                '"' . $transactions[$i]['status_text'] . '"'
                             ];
                         }
 

@@ -53,6 +53,10 @@ $filterMonthFrom = Request::getInt('filterMonthFrom', 0);
 $filterYearFrom  = Request::getInt('filterYearFrom', 0);
 $filterMonthTo   = Request::getInt('filterMonthTo', 0);
 $filterYearTo    = Request::getInt('filterYearTo', date('Y'));
+$traStatus       = Request::getArray('tra_status');
+$traDesc         = Request::getString('tra_desc');
+$sortBy          = Request::getString('sortby', 'tra_id');
+$order           = Request::getString('order', 'desc');
 
 $period_type = $helper->getConfig('balance_period');
 
@@ -74,10 +78,13 @@ if (0 == $displayfilter || $traId > 0) {
     $GLOBALS['xoopsTpl']->assign('btnfilter', \_MA_WGSIMPLEACC_FILTER_HIDE);
 }
 $GLOBALS['xoopsTpl']->assign('sepComma', $helper->getConfig('sep_comma'));
+$GLOBALS['xoopsTpl']->assign('sepThousand', $helper->getConfig('sep_thousand'));
 
-$traOp = '&amp;start=' . $start . '&amp;limit=' . $limit . '&amp;all_id=' . $allId . '&amp;acc_id=' . $accId . '&amp;as_id=' . $asId;
-$traOp .= '&amp;filterYear=' . $filterYear . '&amp;filterMonthFrom=' . $filterMonthFrom . '&amp;filterYearFrom=' . $filterYearFrom . '&amp;filterMonthTo=' . $filterMonthTo . '&amp;filterYearTo=' . $filterYearTo;
-$traOp .= '&amp;displayfilter=' . $displayfilter . '&amp;allSubs=' . $allSubs;
+$traOpSorter = '&amp;start=' . $start . '&amp;limit=' . $limit . '&amp;all_id=' . $allId . '&amp;acc_id=' . $accId . '&amp;as_id=' . $asId;
+$traOpSorter .= '&amp;filterYear=' . $filterYear . '&amp;filterMonthFrom=' . $filterMonthFrom . '&amp;filterYearFrom=' . $filterYearFrom . '&amp;filterMonthTo=' . $filterMonthTo . '&amp;filterYearTo=' . $filterYearTo;
+$traOpSorter .= '&amp;displayfilter=' . $displayfilter . '&amp;allSubs=' . $allSubs;
+
+$traOp = $traOpSorter . '&amp;sortby=' . $sortBy . '&amp;order=' . $order;
 
 $keywords = [];
 
@@ -111,10 +118,11 @@ switch ($op) {
             foreach (\array_keys($transactionsAll) as $i) {
                 $yearMax = date('Y', $transactionsAll[$i]->getVar('tra_date'));
             }
-            $formFilter = $transactionsHandler::getFormFilterTransactions($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, $cliId, 'list', $allSubs);
+            $formFilter = $transactionsHandler::getFormFilter($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, $cliId, 'list', $allSubs, $traStatus, $traDesc);
             $GLOBALS['xoopsTpl']->assign('formFilter', $formFilter->render());
         }
         $crTransactions = new \CriteriaCompo();
+        $transactionsCountTotal = $transactionsHandler->getCount($crTransactions);
         if ($traId > 0) {
             $crTransactions->add(new \Criteria('tra_id', $traId));
         } else {
@@ -158,14 +166,21 @@ switch ($op) {
         if ($cliId > 0) {
             $crTransactions->add(new \Criteria('tra_cliid', $cliId));
         }
+        if (\count($traStatus) > 0) {
+            $critStatus = '(' . \implode(',', $traStatus) . ')';
+            $crTransactions->add(new \Criteria('tra_status', $critStatus, 'IN'));
+        }
+        if ('' != $traDesc) {
+            $crTransactions->add(new \Criteria('tra_desc', $traDesc, 'LIKE'));
+        }
         $transactionsCount = $transactionsHandler->getCount($crTransactions);
         $GLOBALS['xoopsTpl']->assign('transactionsCount', $transactionsCount);
         if (0 == $traId) {
             $crTransactions->setStart($start);
             $crTransactions->setLimit($limit);
         }
-        $crTransactions->setSort('tra_id');
-        $crTransactions->setOrder('DESC');
+        $crTransactions->setSort($sortBy);
+        $crTransactions->setOrder($order);
         $transactionsAll = $transactionsHandler->getAll($crTransactions);
         if ($transactionsCount > 0) {
             $transactions = [];
@@ -231,11 +246,12 @@ switch ($op) {
                     'op=list&amp;limit=' . $limit . '&amp;all_id=' . $allId . '&amp;acc_id=' . $accId . '&amp;as_id=' . $asId . '&amp;cli_id=' . $cliId .
                     '&tra_type=' . $traType . '&amp;filterYear=' . $filterYear .
                     '&amp;filterMonthFrom=' . $filterMonthFrom . '&amp;filterYearFrom=' . $filterYearFrom . '&amp;filterMonthTo=' . $filterMonthTo . '&amp;filterYearTo=' . $filterYearTo .
-                    '&amp;allSubs=' . $allSubs
+                    '&amp;allSubs=' . $allSubs . '&amp;sortby=' . $sortBy . '&amp;order=' . $order
                 );
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
             }
             $GLOBALS['xoopsTpl']->assign('showAssets', 0 == $asId);
+            $GLOBALS['xoopsTpl']->assign('sort_order', \strtolower($sortBy . '_' . $order));
             $GLOBALS['xoopsTpl']->assign('useCurrencies', $helper->getConfig('use_currencies'));
             $GLOBALS['xoopsTpl']->assign('useTaxes', $helper->getConfig('use_taxes'));
             $GLOBALS['xoopsTpl']->assign('useFiles', $helper->getConfig('use_files'));
@@ -243,8 +259,13 @@ switch ($op) {
             $GLOBALS['xoopsTpl']->assign('modPathIcon32', \WGSIMPLEACC_URL . '/' . $GLOBALS['xoopsModule']->getInfo('modicons32') . '/');
 
         } else {
-            $GLOBALS['xoopsTpl']->assign('noData', \_MA_WGSIMPLEACC_THEREARENT_TRANSACTIONS);
+            if ($transactionsCountTotal > 0) {
+                $GLOBALS['xoopsTpl']->assign('noData', \_MA_WGSIMPLEACC_FILTER_NO_TRANSACTIONS);
+            } else {
+                $GLOBALS['xoopsTpl']->assign('noData', \_MA_WGSIMPLEACC_THEREARENT_TRANSACTIONS);
+            }
         }
+        $GLOBALS['xoopsTpl']->assign('traOpSorter',$traOpSorter);
         $GLOBALS['xoopsTpl']->assign('traOp',$traOp);
 
         // Breadcrumbs
@@ -377,9 +398,6 @@ switch ($op) {
             $GLOBALS['xoTheme']->addStylesheet(\WGSIMPLEACC_URL . '/assets/select-autocomplete/jquery-ui.min.css');
             $GLOBALS['xoTheme']->addStylesheet(\WGSIMPLEACC_URL . '/assets/select-autocomplete/select-autocomplete.css');
         }
-        $GLOBALS['xoTheme']->addStylesheet(\WGSIMPLEACC_URL . '/assets/calculator/style.css');
-        $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/calculator/main.js');
-
         // Form Create
         $transactionsObj = $transactionsHandler->create();
         $form = $transactionsObj->getFormTransactions(false, false, $traType, $start, $limit);
@@ -447,8 +465,6 @@ switch ($op) {
             $GLOBALS['xoTheme']->addStylesheet(\WGSIMPLEACC_URL . '/assets/select-autocomplete/jquery-ui.min.css');
             $GLOBALS['xoTheme']->addStylesheet(\WGSIMPLEACC_URL . '/assets/select-autocomplete/select-autocomplete.css');
         }
-        $GLOBALS['xoTheme']->addStylesheet(\WGSIMPLEACC_URL . '/assets/calculator/style.css');
-        $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/calculator/main.js');
 
         $transactionsObj = $transactionsHandler->get($traId);
         $traSubmitter = $transactionsObj->getVar('tra_submitter');
@@ -545,7 +561,7 @@ switch ($op) {
             foreach (\array_keys($transactionsAll) as $i) {
                 $yearMax = date('Y', $transactionsAll[$i]->getVar('tra_date'));
             }
-            $formFilter = $transactionsHandler::getFormFilterTransactions($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, $cliId);
+            $formFilter = $transactionsHandler::getFormFilter($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, $cliId, 'list', 0, $traStatus, $traDesc);
             $GLOBALS['xoopsTpl']->assign('formFilter', $formFilter->render());
         }
         $crTransactions = new \CriteriaCompo();
@@ -582,6 +598,13 @@ switch ($op) {
         }
         if ($accId > 0) {
             $crTransactions->add(new \Criteria('tra_accid', $accId));
+        }
+        if (\count($traStatus) > 0) {
+            $critStatus = '(' . \implode(',', $traStatus) . ')';
+            $crTransactions->add(new \Criteria('tra_status', $critStatus, 'IN'));
+        }
+        if ('' != $traDesc) {
+            $crTransactions->add(new \Criteria('tra_desc', $traDesc, 'LIKE'));
         }
         $transactionsCount = $transactionsHandler->getCount($crTransactions);
         $GLOBALS['xoopsTpl']->assign('transactionsCount', $transactionsCount);

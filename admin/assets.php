@@ -38,11 +38,11 @@ switch ($op) {
     default:
         // Define Stylesheet
         $GLOBALS['xoTheme']->addStylesheet($style, null);
-        $start = Request::getInt('start', 0);
+        $start = Request::getInt('start');
         $limit = Request::getInt('limit', $helper->getConfig('adminpager'));
         $templateMain = 'wgsimpleacc_admin_assets.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('assets.php'));
-        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_ASSET, 'assets.php?op=new', 'add');
+        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_ASSET, 'assets.php?op=new');
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
         $assetsCount = $assetsHandler->getCountAssets();
         $assetsAll = $assetsHandler->getAllAssets($start, $limit);
@@ -60,7 +60,7 @@ switch ($op) {
             if ($assetsCount > $limit) {
                 require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
                 $pagenav = new \XoopsPageNav($assetsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
-                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
             }
         } else {
             $GLOBALS['xoopsTpl']->assign('error', \_MA_WGSIMPLEACC_THEREARENT_ASSETS);
@@ -89,18 +89,18 @@ switch ($op) {
             $assetsObj = $assetsHandler->create();
         }
         // Set Vars
-        $assetsObj->setVar('as_name', Request::getString('as_name', ''));
-        $assetsObj->setVar('as_descr', Request::getString('as_descr', ''));
-        $assetsObj->setVar('as_reference', Request::getString('as_reference', ''));
-        $assetsObj->setVar('as_color', Request::getString('as_color', ''));
-        $assetsObj->setVar('as_iecalc', Request::getInt('as_iecalc', 0));
-        $assetsObj->setVar('as_online', Request::getInt('as_online', 0));
+        $assetsObj->setVar('as_name', Request::getString('as_name'));
+        $assetsObj->setVar('as_descr', Request::getString('as_descr'));
+        $assetsObj->setVar('as_reference', Request::getString('as_reference'));
+        $assetsObj->setVar('as_color', Request::getString('as_color'));
+        $assetsObj->setVar('as_iecalc', Request::getInt('as_iecalc'));
+        $assetsObj->setVar('as_online', Request::getInt('as_online'));
         $assetDatecreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('as_datecreated'));
         $assetsObj->setVar('as_datecreated', $assetDatecreatedObj->getTimestamp());
-        $assetsObj->setVar('as_submitter', Request::getInt('as_submitter', 0));
+        $assetsObj->setVar('as_submitter', Request::getInt('as_submitter'));
         // Insert Data
         if ($assetsHandler->insert($assetsObj)) {
-            if (Request::getInt('as_primary', 0) > 0) {
+            if (Request::getInt('as_primary') > 0) {
                 $newAsId = $assetsObj->getNewInsertedIdAssets();
                 $asId = $asId > 0 ? $asId : $newAsId;
                 $assetsHandler->setPrimaryAssets($asId);
@@ -119,7 +119,7 @@ switch ($op) {
             \redirect_header('assets.php', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
         }
         // Set Vars
-        $assetsObj->setVar('as_color', '#' . Request::getString('as_color', ''));
+        $assetsObj->setVar('as_color', '#' . Request::getString('as_color'));
         // Insert Data
         if ($assetsHandler->insert($assetsObj)) {
             \redirect_header('assets.php?op=list', 2, \_MA_WGSIMPLEACC_FORM_OK);
@@ -128,7 +128,7 @@ switch ($op) {
     case 'edit':
         $templateMain = 'wgsimpleacc_admin_assets.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('assets.php'));
-        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_ASSET, 'assets.php?op=new', 'add');
+        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_ASSET, 'assets.php?op=new');
         $adminObject->addItemButton(\_AM_WGSIMPLEACC_LIST_ASSETS, 'assets.php', 'list');
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
         // Get Form

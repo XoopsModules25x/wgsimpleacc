@@ -70,6 +70,9 @@ class Utility
             case Constants::STATUS_OFFLINE:
                 $status_text = \_MA_WGSIMPLEACC_STATUS_OFFLINE;
                 break;
+            case Constants::STATUS_CREATED:
+                $status_text = \_MA_WGSIMPLEACC_STATUS_CREATED;
+                break;
             case Constants::STATUS_SUBMITTED:
                 $status_text = \_MA_WGSIMPLEACC_STATUS_SUBMITTED;
                 break;
@@ -168,7 +171,7 @@ class Utility
         $crTransactions           = new \CriteriaCompo();
         $crTransactions->setSort('tra_date');
         $crTransactions->setOrder('ASC');
-        $crTransactions->setStart(0);
+        $crTransactions->setStart();
         $crTransactions->setLimit(1);
         $transactionsAll   = $transactionsHandler->getAll($crTransactions);
         foreach (\array_keys($transactionsAll) as $i) {
@@ -176,7 +179,7 @@ class Utility
         }
         $crTransactions->setSort('tra_date');
         $crTransactions->setOrder('DESC');
-        $crTransactions->setStart(0);
+        $crTransactions->setStart();
         $crTransactions->setLimit(1);
         $transactionsAll   = $transactionsHandler->getAll($crTransactions);
         foreach (\array_keys($transactionsAll) as $i) {
@@ -271,9 +274,7 @@ class Utility
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $dec = $helper->getConfig('sep_comma');
         $thnd = $helper->getConfig('sep_thousand');
-        $ret = number_format($float, 2, $dec, $thnd);
-
-        return $ret;
+        return number_format($float, 2, $dec, $thnd);
 
     }
 

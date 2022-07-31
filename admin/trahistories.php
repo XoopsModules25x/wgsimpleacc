@@ -33,7 +33,7 @@ require __DIR__ . '/header.php';
 $op = Request::getCmd('op', 'list');
 // Request hist_id
 $histId = Request::getInt('hist_id');
-$start = Request::getInt('start', 0);
+$start = Request::getInt('start');
 $limit = Request::getInt('limit', $helper->getConfig('adminpager'));
 
 switch ($op) {
@@ -44,7 +44,7 @@ switch ($op) {
         $templateMain = 'wgsimpleacc_admin_trahistories.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('trahistories.php'));
         $trahistoriesCount = $trahistoriesHandler->getCountTrahistories();
-        $trahistoriesAll = $trahistoriesHandler->getAllTrahistories($start, $limit, 'hist_id', 'DESC');
+        $trahistoriesAll = $trahistoriesHandler->getAllTrahistories($start, $limit);
         $GLOBALS['xoopsTpl']->assign('trahistories_count', $trahistoriesCount);
         $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
         $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', \WGSIMPLEACC_UPLOAD_URL);
@@ -59,7 +59,7 @@ switch ($op) {
             if ($trahistoriesCount > $limit) {
                 require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
                 $pagenav = new \XoopsPageNav($trahistoriesCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
-                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
             }
         } else {
             $GLOBALS['xoopsTpl']->assign('error', \_MA_WGSIMPLEACC_THEREARENT_TRANSACTIONS);

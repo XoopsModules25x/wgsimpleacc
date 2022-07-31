@@ -56,13 +56,13 @@ class ClientsHandler extends \XoopsPersistableObjectHandler
     /**
      * retrieve a field
      *
-     * @param int $i field id
+     * @param int $id field id
      * @param null fields
      * @return mixed reference to the {@link Get} object
      */
-    public function get($i = null, $fields = null)
+    public function get($id = null, $fields = null)
     {
-        return parent::get($i, $fields);
+        return parent::get($id, $fields);
     }
 
     /**
@@ -151,8 +151,7 @@ class ClientsHandler extends \XoopsPersistableObjectHandler
                 $line2 = '<p>' . $line2 . '</p>';
             }
         }
-        $fullAddress = $line1 . $line2;
-        return $fullAddress;
+        return $line1 . $line2;
     }
 
     /**

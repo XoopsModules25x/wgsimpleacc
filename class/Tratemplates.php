@@ -73,8 +73,7 @@ class Tratemplates extends \XoopsObject
      */
     public function getNewInsertedIdTratemplates()
     {
-        $newInsertedId = $GLOBALS['xoopsDB']->getInsertId();
-        return $newInsertedId;
+        return $GLOBALS['xoopsDB']->getInsertId();
     }
 
     /**

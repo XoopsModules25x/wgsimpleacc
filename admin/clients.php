@@ -38,11 +38,11 @@ switch ($op) {
     default:
         // Define Stylesheet
         $GLOBALS['xoTheme']->addStylesheet($style, null);
-        $start = Request::getInt('start', 0);
+        $start = Request::getInt('start');
         $limit = Request::getInt('limit', $helper->getConfig('adminpager'));
         $templateMain = 'wgsimpleacc_admin_clients.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('clients.php'));
-        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_CLIENT, 'clients.php?op=new', 'add');
+        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_CLIENT, 'clients.php?op=new');
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
         $clientsCount = $clientsHandler->getCountClients();
         $clientsAll = $clientsHandler->getAllClients($start, $limit);
@@ -60,7 +60,7 @@ switch ($op) {
             if ($clientsCount > $limit) {
                 include_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
                 $pagenav = new \XoopsPageNav($clientsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
-                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
             }
         } else {
             $GLOBALS['xoopsTpl']->assign('error', \_MA_WGSIMPLEACC_THEREARENT_CLIENTS);
@@ -87,19 +87,19 @@ switch ($op) {
             $clientsObj = $clientsHandler->create();
         }
         // Set Vars
-        $clientsObj->setVar('cli_name', Request::getText('cli_name', ''));
-        $clientsObj->setVar('cli_postal', Request::getString('cli_postal', ''));
-        $clientsObj->setVar('cli_city', Request::getString('cli_city', ''));
-        $clientsObj->setVar('cli_address', Request::getText('cli_address', ''));
-        $clientsObj->setVar('cli_ctry', Request::getString('cli_ctry', ''));
-        $clientsObj->setVar('cli_phone', Request::getString('cli_phone', ''));
-        $clientsObj->setVar('cli_vat', Request::getString('cli_vat', ''));
-        $clientsObj->setVar('cli_creditor', Request::getInt('cli_creditor', 0));
-        $clientsObj->setVar('cli_debtor', Request::getInt('cli_debtor', 0));
-        $clientsObj->setVar('cli_online', Request::getInt('cli_online', 0));
+        $clientsObj->setVar('cli_name', Request::getText('cli_name'));
+        $clientsObj->setVar('cli_postal', Request::getString('cli_postal'));
+        $clientsObj->setVar('cli_city', Request::getString('cli_city'));
+        $clientsObj->setVar('cli_address', Request::getText('cli_address'));
+        $clientsObj->setVar('cli_ctry', Request::getString('cli_ctry'));
+        $clientsObj->setVar('cli_phone', Request::getString('cli_phone'));
+        $clientsObj->setVar('cli_vat', Request::getString('cli_vat'));
+        $clientsObj->setVar('cli_creditor', Request::getInt('cli_creditor'));
+        $clientsObj->setVar('cli_debtor', Request::getInt('cli_debtor'));
+        $clientsObj->setVar('cli_online', Request::getInt('cli_online'));
         $clientDatecreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('cli_datecreated'));
         $clientsObj->setVar('cli_datecreated', $clientDatecreatedObj->getTimestamp());
-        $clientsObj->setVar('cli_submitter', Request::getInt('cli_submitter', 0));
+        $clientsObj->setVar('cli_submitter', Request::getInt('cli_submitter'));
         // Insert Data
         if ($clientsHandler->insert($clientsObj)) {
             \redirect_header('clients.php?op=list', 2, \_MA_WGSIMPLEACC_FORM_OK);
@@ -112,7 +112,7 @@ switch ($op) {
     case 'edit':
         $templateMain = 'wgsimpleacc_admin_clients.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('clients.php'));
-        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_CLIENT, 'clients.php?op=new', 'add');
+        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_CLIENT, 'clients.php?op=new');
         $adminObject->addItemButton(\_AM_WGSIMPLEACC_LIST_CLIENTS, 'clients.php', 'list');
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
         // Get Form

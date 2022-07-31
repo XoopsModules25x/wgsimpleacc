@@ -182,3 +182,8 @@ ul.menu > li + li:before {
 	padding:0 !important;
 	margin:0 !important;
 }
+.wgsa-btn-sort,
+.wgsa-btn-sort i {
+	padding:0;
+}
+

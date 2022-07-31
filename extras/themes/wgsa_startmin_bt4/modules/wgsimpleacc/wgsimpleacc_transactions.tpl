@@ -10,26 +10,34 @@
                 <a id="toggleFormFilter" class='btn btn-default pull-right' href='#' title='<{$btnfilter}>'><{$btnfilter}></a>
             </div>
             <{if $formFilter|default:''}>
-            <div id="formFilter" class="row" style="display:<{$displayfilter}>">
-                <div class="col-sm-12">
-                    <{$formFilter}>
+                <div id="formFilter" class="row" style="display:<{$displayfilter|default:''}>">
+                    <div class="col-sm-12">
+                        <{$formFilter}>
+                    </div>
                 </div>
-            </div>
             <{/if}>
             <h3><{$listHead|default:''}></h3>
             <div class='table-responsive'>
                 <table class='table table-striped'>
                     <thead>
                         <tr>
-                            <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_YEARNB}></th>
+                            <th scope="col">
+                                <{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_YEARNB}>
+                                <a class='btn btn-warning btn-xs wgsa-btn-sort' href='transactions.php?op=list&amp;sortby=tra_id&amp;order=asc<{$traOpSorter|default:''}>' title='<{$smarty.const._ASCENDING}>' <{if $sort_order|default:'' == 'tra_id_asc'}>disabled<{/if}>><i class="fa fa-arrow-up fa-fw"></i></a>
+                                <a class='btn btn-warning btn-xs wgsa-btn-sort' href='transactions.php?op=list&amp;sortby=tra_id&amp;order=desc<{$traOpSorter|default:''}>' title='<{$smarty.const._DESCENDING}>' <{if $sort_order|default:'' == 'tra_id_desc'}>disabled<{/if}>><i class="fa fa-arrow-down fa-fw"></i></a>
+                            </th>
                             <{if $useClients|default:''}>
-                            <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_CLIID}></th>
+                                <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_CLIID}></th>
                             <{/if}>
                             <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_DESC}></th>
                             <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_REFERENCE}></th>
                             <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_ACCID}></th>
                             <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_ALLID}></th>
-                            <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_DATE}></th>
+                            <th scope="col">
+                                <{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_DATE}>
+                                <a class='btn btn-warning btn-xs wgsa-btn-sort' href='transactions.php?op=list&amp;sortby=tra_date&amp;order=asc<{$traOpSorter|default:''}>' title='<{$smarty.const._ASCENDING}>' <{if $sort_order|default:'' == 'tra_date_asc'}>disabled<{/if}>><i class="fa fa-arrow-up fa-fw"></i></a>
+                                <a class='btn btn-warning btn-xs wgsa-btn-sort' href='transactions.php?op=list&amp;sortby=tra_date&amp;order=desc<{$traOpSorter|default:''}>' title='<{$smarty.const._DESCENDING}>' <{if $sort_order|default:'' == 'tra_date_desc'}>disabled<{/if}>><i class="fa fa-arrow-down fa-fw"></i></a>
+                            </th>
                             <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_AMOUNT}></th>
                             <{if $showAssets|default:''}>
                                 <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_ASID}></th>
@@ -52,7 +60,14 @@
             </div>
         <{/if}>
     <{else}>
-        <{$noData|default:''}>
+        <{if $formFilter|default:''}>
+            <div id="formFilter" class="row" style="display:<{$displayfilter|default:''}>">
+                <div class="col-sm-12">
+                    <{$formFilter}>
+                </div>
+            </div>
+        <{/if}>
+        <div class="alert alert-danger"><{$noData|default:''}></div>
     <{/if}>
 <{/if}>
 
@@ -165,66 +180,6 @@
 </style>
 <!-- End code for dropdown output -->
 
-<!-- Start code for calc modal -->
-<div class="clear"></div>
-<div class="modal fade" id="calcModal" tabindex="-1" role="dialog" aria-labelledby="calcModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="calcModalLabel"><{$smarty.const._MA_WGSIMPLEACC_CALC}></h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="<{$smarty.const._CLOSE}>">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="calc-container">
-                    <div class="calc-row">
-                        <button id="calc-clear" value="">AC</button>
-                        <div id="calc-screen" class="calc-screen"></div>
-                    </div>
-                    <div class="calc-row">
-                        <button class="digit" value="7">7</button>
-                        <button class="digit" value="8">8</button>
-                        <button class="digit" value="9">9</button>
-                        <button class="operation" id="/">/</button>
-                    </div>
-                    <div class="calc-row">
-                        <button class="digit" value="4">4</button>
-                        <button class="digit" value="5">5</button>
-                        <button class="digit" value="6">6</button>
-                        <button class="operation" id="-">-</button>
-                    </div>
-                    <div class="calc-row">
-                        <button class="digit" value="1">1</button>
-                        <button class="digit" value="2">2</button>
-                        <button class="digit" value="3">3</button>
-                        <button class="operation" id="+">+</button>
-                    </div>
-                    <div class="calc-row">
-                        <button class="digit" value="0">0</button>
-                        <button class="decPoint" value=".">.</button>
-                        <button class="equal" id="eql">=</button>
-                        <button class="operation" id="*">*</button>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button id="btnApplyResult" type="button" class="btn btn-secondary" data-dismiss="modal"><{$smarty.const._MA_WGSIMPLEACC_CALC_APPLY}></button>
-            </div>
-        </div>
-    </div>
-</div>
-<script>
-    $(function () {
-        $("#btnApplyResult").click(function () {
-            $result = document.getElementById("calc-screen").innerText;
-            $result = $result.replace(".", "<{$sepComma}>");
-            document.getElementById("tra_amount").value = $result;
-        });
-    });
-</script>
-<!-- End code for calc modal -->
-
 <!-- Start code for info modal -->
 <div class="clear"></div>
 <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
@@ -288,3 +243,129 @@
     })
 </script>
 <!-- End code for image modal -->
+
+<!-- script for autocomplete select -->
+<!-- https://jqueryui.com/autocomplete/#combobox -->
+<script>
+    $( function() {
+        $.widget( "custom.combobox", {
+            _create: function() {
+                this.wrapper = $( "<div>" )
+                    .addClass( "custom-combobox" )
+                    .insertAfter( this.element );
+                this.element.hide();
+                this._createAutocomplete();
+                this._createShowAllButton();
+            },
+            _createAutocomplete: function() {
+                var selected = this.element.children( ":selected" ),
+                    value = selected.val() ? selected.text() : "";
+                this.input = $( "<input>" )
+                    .appendTo( this.wrapper )
+                    .val( value )
+                    .attr( "title", "" )
+                    .addClass( "custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left" )
+                    .autocomplete({
+                        delay: 0,
+                        minLength: 0,
+                        source: $.proxy( this, "_source" )
+                    })
+                    .tooltip({
+                        classes: {
+                            "ui-tooltip": "ui-state-highlight"
+                        }
+                    });
+                this._on( this.input, {
+                    autocompleteselect: function( event, ui ) {
+                        ui.item.option.selected = true;
+                        this._trigger( "select", event, {
+                            item: ui.item.option
+                        });
+                    },
+                    autocompletechange: "_removeIfInvalid"
+                });
+            },
+            _createShowAllButton: function() {
+                var input = this.input,
+                    wasOpen = false;
+                $( "<a>" )
+                    .attr( "tabIndex", -1 )
+                    .attr( "title", "<{$smarty.const._MA_WGSIMPLEACC_CLIENTS_SHOWALL}>" )
+                    .tooltip()
+                    .appendTo( this.wrapper )
+                    .button({
+                        icons: {
+                            primary: "ui-icon-triangle-1-s"
+                        },
+                        text: false
+                    })
+                    .removeClass( "ui-corner-all" )
+                    .addClass( "custom-combobox-toggle ui-corner-right" )
+                    .on( "mousedown", function() {
+                        wasOpen = input.autocomplete( "widget" ).is( ":visible" );
+                    })
+                    .on( "click", function() {
+                        input.trigger( "focus" );
+                        // Close if already visible
+                        if ( wasOpen ) {
+                            return;
+                        }
+                        // Pass empty string as value to search for, displaying all results
+                        input.autocomplete( "search", "" );
+                    });
+            },
+            _source: function( request, response ) {
+                var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
+                response( this.element.children( "option" ).map(function() {
+                    var text = $( this ).text();
+                    if ( this.value && ( !request.term || matcher.test(text) ) )
+                        return {
+                            label: text,
+                            value: text,
+                            option: this
+                        };
+                }) );
+            },
+            _removeIfInvalid: function( event, ui ) {
+                // Selected an item, nothing to do
+                if ( ui.item ) {
+                    return;
+                }
+                // Search for a match (case-insensitive)
+                var value = this.input.val(),
+                    valueLowerCase = value.toLowerCase(),
+                    valid = false;
+                this.element.children( "option" ).each(function() {
+                    if ( $( this ).text().toLowerCase() === valueLowerCase ) {
+                        this.selected = valid = true;
+                        return false;
+                    }
+                });
+                // Found a match, nothing to do
+                if ( valid ) {
+                    return;
+                }
+                // Remove invalid value
+                this.input
+                    .val( "" )
+                    .attr( "title", "'" + value + "'<{$smarty.const._MA_WGSIMPLEACC_CLIENTS_NOTFOUND}>" )
+                    .tooltip( "open" );
+                this.element.val( "" );
+                this._delay(function() {
+                    this.input.tooltip( "close" ).attr( "title", "" );
+                }, 2500 );
+                this.input.autocomplete( "instance" ).term = "";
+            },
+            _destroy: function() {
+                this.wrapper.remove();
+                this.element.show();
+            }
+        });
+        $( "#tra_cliid" ).combobox();
+    } );
+</script>
+<!-- End script for autocomplete select -->
+
+<!-- start calculator -->
+<{include file='db:wgsimpleacc_modal_calc.tpl' }>
+<!-- end calculator -->

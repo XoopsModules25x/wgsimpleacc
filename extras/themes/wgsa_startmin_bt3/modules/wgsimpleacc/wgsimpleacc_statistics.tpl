@@ -8,6 +8,7 @@
 </script>
 
 <{if $transactionsCount|default:0 > 0}>
+    <h3><{$header_allocs_bar}></h3>
     <div class="col-xs-12 col-sm-12">
         <{include file='db:wgsimpleacc_chart_transactions_hbar.tpl'}>
     </div>
@@ -34,6 +35,11 @@
         <{include file='db:wgsimpleacc_chart_assets_line.tpl'}>
     </div>
 <{/if}>
+<{if $accountsBarCount|default:0 > 0}>
+    <div class="col-xs-12 col-sm-12">
+        <{include file='db:wgsimpleacc_chart_accounts_hbar.tpl'}>
+    </div>
+<{/if}>
 <{if $accountsCount|default:0 > 0}>
     <div class="col-xs-12 col-sm-12">
         <{include file='db:wgsimpleacc_chart_accounts_line.tpl'}>
@@ -44,4 +50,4 @@
     <{include file='db:wgsimpleacc_chart_balances_line.tpl'}>
 </div>
 <{/if}>
-		
+        

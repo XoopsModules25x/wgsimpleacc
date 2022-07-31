@@ -10,26 +10,34 @@
                 <a id="toggleFormFilter" class='btn btn-default pull-right' href='#' title='<{$btnfilter}>'><{$btnfilter}></a>
             </div>
             <{if $formFilter|default:''}>
-            <div id="formFilter" class="row" style="display:<{$displayfilter|default:''}>">
-                <div class="col-sm-12">
-                    <{$formFilter}>
+                <div id="formFilter" class="row" style="display:<{$displayfilter|default:''}>">
+                    <div class="col-sm-12">
+                        <{$formFilter}>
+                    </div>
                 </div>
-            </div>
             <{/if}>
             <h3><{$listHead|default:''}></h3>
             <div class='table-responsive'>
                 <table class='table table-striped'>
                     <thead>
                         <tr>
-                            <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_YEARNB}></th>
+                            <th scope="col">
+                                <{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_YEARNB}>
+                                <a class='btn btn-warning btn-xs wgsa-btn-sort' href='transactions.php?op=list&amp;sortby=tra_id&amp;order=asc<{$traOpSorter|default:''}>' title='<{$smarty.const._ASCENDING}>' <{if $sort_order|default:'' == 'tra_id_asc'}>disabled<{/if}>><i class="fa fa-arrow-up fa-fw"></i></a>
+                                <a class='btn btn-warning btn-xs wgsa-btn-sort' href='transactions.php?op=list&amp;sortby=tra_id&amp;order=desc<{$traOpSorter|default:''}>' title='<{$smarty.const._DESCENDING}>' <{if $sort_order|default:'' == 'tra_id_desc'}>disabled<{/if}>><i class="fa fa-arrow-down fa-fw"></i></a>
+                            </th>
                             <{if $useClients|default:''}>
-                            <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_CLIID}></th>
+                                <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_CLIID}></th>
                             <{/if}>
                             <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_DESC}></th>
                             <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_REFERENCE}></th>
                             <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_ACCID}></th>
                             <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_ALLID}></th>
-                            <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_DATE}></th>
+                            <th scope="col">
+                                <{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_DATE}>
+                                <a class='btn btn-warning btn-xs wgsa-btn-sort' href='transactions.php?op=list&amp;sortby=tra_date&amp;order=asc<{$traOpSorter|default:''}>' title='<{$smarty.const._ASCENDING}>' <{if $sort_order|default:'' == 'tra_date_asc'}>disabled<{/if}>><i class="fa fa-arrow-up fa-fw"></i></a>
+                                <a class='btn btn-warning btn-xs wgsa-btn-sort' href='transactions.php?op=list&amp;sortby=tra_date&amp;order=desc<{$traOpSorter|default:''}>' title='<{$smarty.const._DESCENDING}>' <{if $sort_order|default:'' == 'tra_date_desc'}>disabled<{/if}>><i class="fa fa-arrow-down fa-fw"></i></a>
+                            </th>
                             <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_AMOUNT}></th>
                             <{if $showAssets|default:''}>
                                 <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_ASID}></th>
@@ -52,7 +60,14 @@
             </div>
         <{/if}>
     <{else}>
-        <{$noData|default:''}>
+        <{if $formFilter|default:''}>
+            <div id="formFilter" class="row" style="display:<{$displayfilter|default:''}>">
+                <div class="col-sm-12">
+                    <{$formFilter}>
+                </div>
+            </div>
+        <{/if}>
+        <div class="alert alert-danger"><{$noData|default:''}></div>
     <{/if}>
 <{/if}>
 
@@ -136,7 +151,7 @@
         display: none;
         background-color: #f9f9f9;
         min-width: 50px;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
         z-index: 1;
     }
     .dropdown-content a {
@@ -164,66 +179,6 @@
     }
 </style>
 <!-- End code for dropdown output -->
-
-<!-- Start code for calc modal -->
-<div class="clear"></div>
-<div class="modal fade" id="calcModal" tabindex="-1" role="dialog" aria-labelledby="calcModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="calcModalLabel"><{$smarty.const._MA_WGSIMPLEACC_CALC}></h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="<{$smarty.const._CLOSE}>">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="calc-container">
-                    <div class="calc-row">
-                        <button id="calc-clear" value="">AC</button>
-                        <div id="calc-screen" class="calc-screen"></div>
-                    </div>
-                    <div class="calc-row">
-                        <button class="digit" value="7">7</button>
-                        <button class="digit" value="8">8</button>
-                        <button class="digit" value="9">9</button>
-                        <button class="operation" id="/">/</button>
-                    </div>
-                    <div class="calc-row">
-                        <button class="digit" value="4">4</button>
-                        <button class="digit" value="5">5</button>
-                        <button class="digit" value="6">6</button>
-                        <button class="operation" id="-">-</button>
-                    </div>
-                    <div class="calc-row">
-                        <button class="digit" value="1">1</button>
-                        <button class="digit" value="2">2</button>
-                        <button class="digit" value="3">3</button>
-                        <button class="operation" id="+">+</button>
-                    </div>
-                    <div class="calc-row">
-                        <button class="digit" value="0">0</button>
-                        <button class="decPoint" value=".">.</button>
-                        <button class="equal" id="eql">=</button>
-                        <button class="operation" id="*">*</button>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button id="btnApplyResult" type="button" class="btn btn-secondary" data-dismiss="modal"><{$smarty.const._MA_WGSIMPLEACC_CALC_APPLY}></button>
-            </div>
-        </div>
-    </div>
-</div>
-<script>
-    $(function () {
-        $("#btnApplyResult").click(function () {
-            $result = document.getElementById("calc-screen").innerText;
-            $result = $result.replace(".", "<{$sepComma}>");
-            document.getElementById("tra_amount").value = $result;
-        });
-    });
-</script>
-<!-- End code for calc modal -->
 
 <!-- Start code for info modal -->
 <div class="clear"></div>
@@ -410,3 +365,7 @@
     } );
 </script>
 <!-- End script for autocomplete select -->
+
+<!-- start calculator -->
+<{include file='db:wgsimpleacc_modal_calc.tpl' }>
+<!-- end calculator -->

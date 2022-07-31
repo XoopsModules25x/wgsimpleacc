@@ -74,8 +74,7 @@ class Accounts extends \XoopsObject
      */
     public function getNewInsertedIdAccounts()
     {
-        $newInsertedId = $GLOBALS['xoopsDB']->getInsertId();
-        return $newInsertedId;
+        return $GLOBALS['xoopsDB']->getInsertId();
     }
 
     /**

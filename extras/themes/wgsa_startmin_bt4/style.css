@@ -93,8 +93,6 @@ a.navbar-brand.xlogo {
 }
 
 .footer > h3 {
-    font-size: 0.9em;
-    margin: 0;
     line-height: inherit;
     max-width: 960px;
     margin: 0 auto 0 auto;
@@ -271,7 +269,7 @@ strong.hit-counter {
     border-radius: 50px;
     -moz-border-radius: 50px;
     -webkit-border-radius: 50px;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
     transition: all linear 300ms;
     -moz-transition: all linear 300ms;
     -webkit-transition: all linear 300ms;
@@ -1357,7 +1355,7 @@ img.avatar {
 .vert .carousel-item-next,
 .vert .active.carousel-item-right {
     -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100% 0);
+    transform: translate3d(0, 100%, 0);
 }
 
 .vert .carousel-item-prev,
