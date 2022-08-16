@@ -35,7 +35,7 @@
                 <{else}>
                     <div style="padding:20px"><{$smarty.const._MA_WGSIMPLEACC_THEREARENT_FILES}></div>
                 <{/if}>
-                <a class='btn btn-danger right' href='transactions.php?op=list&amp;start=<{$start}>&amp;limit=<{$limit}>' title='<{$smarty.const._CANCEL}>'><{$smarty.const._CANCEL}></a>
+                <a class='btn btn-danger right' href='transactions.php?op=list&amp;start=<{$start}>&amp;limit=<{$limit}>' title='<{$smarty.const._BACK}>'><{$smarty.const._BACK}></a>
             </div>
             <!-- *************** Tab for upload files ***************-->
             <div class='tab-pane' id='2'>
