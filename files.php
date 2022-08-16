@@ -227,6 +227,9 @@ switch ($op) {
             $filesObj->setVar('fil_name', $filName);
         }
         $filePath = \XOOPS_ROOT_PATH . '/uploads/wgsimpleacc/files/' . $filName;
+        if ('' === $filName) {
+            \redirect_header('files.php?op=list&fil_traid=' . $filTraid, 5, \_MA_WGSIMPLEACC_FILES_UPLOAD_ERROR);
+        }
         $fileMimetype   = \mime_content_type($filePath);
         $filesObj->setVar('fil_type', $fileMimetype);
         $filesObj->setVar('fil_desc', Request::getString('fil_desc', ''));
