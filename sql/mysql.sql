@@ -22,7 +22,7 @@ CREATE TABLE `wgsimpleacc_transactions` (
   `tra_allid`       INT(10)         NOT NULL DEFAULT '0',
   `tra_date`        INT(11)         NOT NULL DEFAULT '0',
   `tra_curid`       INT(10)         NOT NULL DEFAULT '0',
-  `tra_amountin`    DOUBLE(16, 2)   NOT NULL DEFAULT '0.00',
+  `tra_amountin`    DOUBLE(16,2)    NOT NULL DEFAULT '0.00',
   `tra_amountout`   DOUBLE(16,2)    NOT NULL DEFAULT '0.00',
   `tra_taxid`       INT(10)         NOT NULL DEFAULT '0',
   `tra_asid`        INT(10)         NOT NULL DEFAULT '0',
