@@ -214,7 +214,7 @@ class MigrateHelper
         }
 
         $attributes = \trim(\str_replace([$name, '`'], '', $line));
-        if (',' == \substr($attributes, -1)) {
+        if (',' == \substr($attributes, - 1)) {
             $attributes = substr($attributes, 0, strlen($attributes) - 1);
         }
         $columns['name'] = $name;
