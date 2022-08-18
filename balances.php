@@ -279,7 +279,6 @@ switch ($op) {
             // Insert Data
             if ($balancesHandler->insert($balancesObj)) {
                 $newBalId = $balId > 0 ? $balId : $balancesObj->getNewInsertedIdBalances();
-
                 //lock all transactions for this period
                 $crTransactions = new \CriteriaCompo();
                 $crTransactions->add(new \Criteria('tra_date', $balanceFrom, '>='));
@@ -292,30 +291,7 @@ switch ($op) {
                 } else {
                     $transactionsHandler->updateAll('tra_balidt', $newBalId, $crTransactions, true);
                 }
-
                 unset($crTransactions);
-
-                // Handle notification
-                $balFrom = $balancesObj->getVar('bal_from');
-                $balStatus = $balancesObj->getVar('bal_status');
-                $tags = [];
-                $tags['ITEM_NAME'] = $balFrom;
-                $tags['ITEM_URL']  = \XOOPS_URL . '/modules/wgsimpleacc/balances.php?op=show&bal_id=' . $balId;
-                $notificationHandler = \xoops_getHandler('notification');
-                if (Constants::STATUS_SUBMITTED == $balStatus) {
-                    // Event approve notification
-                    $notificationHandler->triggerEvent('global', 0, 'global_approve', $tags);
-                    $notificationHandler->triggerEvent('balances', $newBalId, 'balance_approve', $tags);
-                } else {
-                    if ($balId > 0) {
-                        // Event modify notification
-                        $notificationHandler->triggerEvent('global', 0, 'global_modify', $tags);
-                        $notificationHandler->triggerEvent('balances', $newBalId, 'balance_modify', $tags);
-                    } else {
-                        // Event new notification
-                        $notificationHandler->triggerEvent('global', 0, 'global_new', $tags);
-                    }
-                }
             } else {
                 $errors++;
             }
