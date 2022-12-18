@@ -153,6 +153,20 @@ switch ($op) {
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_OUTTEMPLATES, 'link' => 'outtemplates.php?op=list'];
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_OUTTEMPLATE_ADD];
         break;
+    case 'clone':
+        // Form Create
+        $outtemplatesObj = $outtemplatesHandler->create();
+        $otplId = Request::getInt('otpl_id_clone');
+        $outtemplatesObjOld = $outtemplatesHandler->get($otplId);
+        foreach ($outtemplatesObjOld->vars as $k => $v) {
+            if ('otpl_id' !== $k) {
+                $outtemplatesObj->setVar($k, $v['value']);
+            }
+        }
+        unset($outtemplatesObjOld);
+        $form = $outtemplatesObj->getFormOuttemplates();
+        $GLOBALS['xoopsTpl']->assign('form', $form->render());
+        break;
     case 'edit':
         // Check params
         if (0 == $otplId) {
