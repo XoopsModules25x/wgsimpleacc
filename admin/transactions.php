@@ -116,6 +116,7 @@ switch ($op) {
         $transactionsObj->setVar('tra_taxid', Request::getInt('tra_taxid'));
         $transactionsObj->setVar('tra_asid', Request::getInt('tra_asid'));
         $transactionsObj->setVar('tra_balid', Request::getInt('tra_balid'));
+        $transactionsObj->setVar('tra_balidt', Request::getInt('tra_balidt'));
         $transactionsObj->setVar('tra_cliid', Request::getInt('tra_cliid'));
         $transactionsObj->setVar('tra_status', Request::getInt('tra_status'));
         $transactionsObj->setVar('tra_comments', Request::getInt('tra_comments'));
@@ -164,7 +165,7 @@ switch ($op) {
             $customConfirm = new Common\Confirm(
                 ['ok' => 1, 'tra_id' => $traId, 'op' => 'delete'],
                 $_SERVER['REQUEST_URI'],
-                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $transactionsObj->getVar('tra_desc')));
+                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $transactionsObj->getVar('tra_desc')), _MA_WGSIMPLEACC_FORM_DELETE_CONFIRM, _MA_WGSIMPLEACC_FORM_DELETE_LABEL);
             $form = $customConfirm->getFormConfirm();
             $GLOBALS['xoopsTpl']->assign('form', $form->render());
         }

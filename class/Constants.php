@@ -47,7 +47,7 @@ interface Constants
 
     // Constants for status
     public const STATUS_NONE      = 0;
-    public const STATUS_OFFLINE   = 1;
+    public const STATUS_OFFLINE   = 1; // = deleted
     public const STATUS_CREATED   = 2;
     public const STATUS_SUBMITTED = 4;
     public const STATUS_APPROVED  = 7;

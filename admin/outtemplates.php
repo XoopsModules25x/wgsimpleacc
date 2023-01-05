@@ -148,7 +148,7 @@ switch ($op) {
                 \redirect_header('outtemplates.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
             if ($outtemplatesHandler->delete($outtemplatesObj)) {
-                \redirect_header('outtemplates.php', 3, \_AM_WGSIMPLEACC_FORM_DELETE_OK);
+                \redirect_header('outtemplates.php', 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
             } else {
                 $GLOBALS['xoopsTpl']->assign('error', $outtemplatesObj->getHtmlErrors());
             }
@@ -156,7 +156,7 @@ switch ($op) {
             $customConfirm = new Common\Confirm(
                 ['ok' => 1, 'otpl_id' => $otplId, 'op' => 'delete'],
                 $_SERVER['REQUEST_URI'],
-                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $outtemplatesObj->getVar('otpl_name')));
+                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $outtemplatesObj->getVar('otpl_name')), _MA_WGSIMPLEACC_FORM_DELETE_CONFIRM, _MA_WGSIMPLEACC_FORM_DELETE_LABEL);
             $form = $customConfirm->getFormConfirm();
             $GLOBALS['xoopsTpl']->assign('form', $form->render());
         }

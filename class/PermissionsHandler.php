@@ -182,18 +182,22 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      *  - transaction is not closed
      * @param $traSubmitter
      * @param $traStatus
+     * @param $traBalId
      * @return bool
      */
-    public function getPermTransactionsEdit($traSubmitter, $traStatus)
+    public function getPermTransactionsEdit($traSubmitter, $traStatus, $traBalId)
     {
         global $xoopsUser, $xoopsModule;
+
+        if ((int)$traBalId > 0) {
+            // transaction locked by balance
+            return false;
+        }
 
         if ($this->getPermGlobalApprove()) {
             return true;
         }
-        if (Constants::STATUS_LOCKED == $traStatus) {
-            return false;
-        }
+
         $currentuid = 0;
         if (isset($xoopsUser) && \is_object($xoopsUser)) {
             if ($xoopsUser->isAdmin($xoopsModule->mid())) {

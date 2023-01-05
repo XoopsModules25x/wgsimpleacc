@@ -329,7 +329,7 @@ class Transactions extends \XoopsObject
             $traBalidSelect->addOptionArray($balancesHandler->getList());
             $form->addElement($traBalidSelect);
             // Form Select traBalidt
-            $traBalidtSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_BALIDT, 'tra_balid', $traBalidt);
+            $traBalidtSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_BALIDT, 'tra_balidt', $traBalidt);
             $balancesHandler = $helper->getHandler('Balances');
             $traBalidtSelect->addOption(0);
             $traBalidtSelect->addOptionArray($balancesHandler->getList());

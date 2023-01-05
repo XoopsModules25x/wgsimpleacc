@@ -285,6 +285,10 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_BALANCE_TYPE', 'Balance type');
 \define('_MA_WGSIMPLEACC_BALANCE_TYPE_TEMPORARY', 'Interim balance');
 \define('_MA_WGSIMPLEACC_BALANCE_TYPE_FINAL', 'Final balance');
+\define('_MA_WGSIMPLEACC_BALANCES_WARNING', 'Attention');
+\define('_MA_WGSIMPLEACC_BALANCES_WARNING_NONE', 'In balance period there are %s transaktion(s) without status');
+\define('_MA_WGSIMPLEACC_BALANCES_WARNING_CREATED', "In balance period there are %s transaktion(s) with status 'CREATED'");
+\define('_MA_WGSIMPLEACC_BALANCES_WARNING_SUBMITTED', "In balance period there are %s transaktion(s) with status 'SUBMITTED'");
 // Output balances
 \define('_MA_WGSIMPLEACC_BALANCES_OUT_TOTAL', 'Total');
 \define('_MA_WGSIMPLEACC_BALANCES_OUT_SUMS', 'Total');
@@ -439,6 +443,8 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_FORM_UPLOAD_SIZE_MB', 'MB');
 \define('_MA_WGSIMPLEACC_FORM_IMAGE_PATH', 'Files in %s :');
 \define('_MA_WGSIMPLEACC_FORM_UPLOAD_ALLOWEDMIME', 'Allowed mimetypes:');
+\define('_MA_WGSIMPLEACC_FORM_DELETE_CONFIRM', 'Confirm delete');
+\define('_MA_WGSIMPLEACC_FORM_DELETE_LABEL', 'Do you really want to delete:');
 //Constants class
 \define('_MA_WGSIMPLEACC_CLASS_EXPENSES', 'Expenses');
 \define('_MA_WGSIMPLEACC_CLASS_INCOME', 'Incomes');

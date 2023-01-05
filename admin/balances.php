@@ -139,7 +139,7 @@ switch ($op) {
             $customConfirm = new Common\Confirm(
                 ['ok' => 1, 'bal_id' => $balId, 'op' => 'delete'],
                 $_SERVER['REQUEST_URI'],
-                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $balancesObj->getVar('bal_id')));
+                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $balancesObj->getVar('bal_id')), _MA_WGSIMPLEACC_FORM_DELETE_CONFIRM, _MA_WGSIMPLEACC_FORM_DELETE_LABEL);
             $form = $customConfirm->getFormConfirm();
             $GLOBALS['xoopsTpl']->assign('form', $form->render());
         }

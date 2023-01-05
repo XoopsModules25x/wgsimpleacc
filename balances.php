@@ -71,7 +71,8 @@ switch ($op) {
         $balanceTo = $balanceToObj->getTimestamp();
 
         if (Constants::BALANCE_TYPE_FINAL == $balType) {
-            ///check whether balance already exists
+            // check whether balance already exists
+            // date 'balance from' within range
             $crBalances = new \CriteriaCompo();
             $crBalances->add(new \Criteria('bal_from', $balanceFrom, '>='));
             $crBalances->add(new \Criteria('bal_from', $balanceTo, '<='));
@@ -81,6 +82,7 @@ switch ($op) {
                 \redirect_header('balances.php?op=list', 3, \_MA_WGSIMPLEACC_BALANCE_DATEUSED);
             }
             unset($crBalances);
+            // date 'balance to' within range
             $crBalances = new \CriteriaCompo();
             $crBalances->add(new \Criteria('bal_to', $balanceFrom, '>='));
             $crBalances->add(new \Criteria('bal_to', $balanceTo, '<='));
@@ -112,6 +114,39 @@ switch ($op) {
             $GLOBALS['xoopsTpl']->assign('trafilter', $strFilter);
             $strFilter = "&amp;balanceFrom=$balanceFrom&amp;balanceTo=$balanceTo";
             $GLOBALS['xoopsTpl']->assign('balfilter', $strFilter);
+        }
+
+        // check for non-approved transactions and show warning, if yes
+        $warnings = [];
+        $crTransactions = new \CriteriaCompo();
+        $crTransactions->add(new \Criteria('tra_date', $balanceFrom, '>='));
+        $crTransactions->add(new \Criteria('tra_date', $balanceTo, '<='));
+        $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_NONE));
+        $countNone = $transactionsHandler->getCount($crTransactions);
+        if ($countNone > 0) {
+            $warnings[] = \sprintf(\_MA_WGSIMPLEACC_BALANCES_WARNING_NONE, $countNone);
+        }
+        unset($crTransactions);
+        $crTransactions = new \CriteriaCompo();
+        $crTransactions->add(new \Criteria('tra_date', $balanceFrom, '>='));
+        $crTransactions->add(new \Criteria('tra_date', $balanceTo, '<='));
+        $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_CREATED));
+        $countOffline = $transactionsHandler->getCount($crTransactions);
+        if ($countOffline > 0) {
+            $warnings[] = \sprintf(\_MA_WGSIMPLEACC_BALANCES_WARNING_CREATED, $countOffline);
+        }
+        unset($crTransactions);
+        $crTransactions = new \CriteriaCompo();
+        $crTransactions->add(new \Criteria('tra_date', $balanceFrom, '>='));
+        $crTransactions->add(new \Criteria('tra_date', $balanceTo, '<='));
+        $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_SUBMITTED));
+        $countSubmitted = $transactionsHandler->getCount($crTransactions);
+        if ($countSubmitted > 0) {
+            $warnings[] = \sprintf(\_MA_WGSIMPLEACC_BALANCES_WARNING_SUBMITTED, $countSubmitted);
+        }
+        unset($crTransactions);
+        if (\count($warnings) > 0) {
+            $GLOBALS['xoopsTpl']->assign('warnings', $warnings);
         }
 
         // Breadcrumbs
@@ -214,6 +249,7 @@ switch ($op) {
 
         if (Constants::BALANCE_TYPE_FINAL == $balType) {
             //check whether balance already exists
+            // date 'balance from' within range
             $crBalances = new \CriteriaCompo();
             $crBalances->add(new \Criteria('bal_from', $balanceFrom, '>='));
             $crBalances->add(new \Criteria('bal_from', $balanceTo, '<='));
@@ -223,6 +259,7 @@ switch ($op) {
                 \redirect_header('balances.php?op=list', 3, \_MA_WGSIMPLEACC_BALANCE_DATEUSED);
             }
             unset($crBalances);
+            // date 'balance to' within range
             $crBalances = new \CriteriaCompo();
             $crBalances->add(new \Criteria('bal_to', $balanceFrom, '>='));
             $crBalances->add(new \Criteria('bal_to', $balanceTo, '<='));
@@ -234,6 +271,7 @@ switch ($op) {
             unset($crBalances);
         } else {
             //check whether balance already exists
+            // date 'balance from' within range
             $crBalances = new \CriteriaCompo();
             $crBalances->add(new \Criteria('bal_from', $balanceFrom, '>='));
             $crBalances->add(new \Criteria('bal_from', $balanceTo, '<='));
@@ -244,6 +282,7 @@ switch ($op) {
                 $balancesHandler->deleteAll($crBalances);
             }
             unset($crBalances);
+            // date 'balance to' within range
             $crBalances = new \CriteriaCompo();
             $crBalances->add(new \Criteria('bal_to', $balanceFrom, '>='));
             $crBalances->add(new \Criteria('bal_to', $balanceTo, '<='));
@@ -258,7 +297,7 @@ switch ($op) {
 
         //create balance for each asset
         //get all assets
-        $assetsCurrent = $assetsHandler->getAssetsValues($balanceFrom, $balanceTo);
+        $assetsCurrent = $assetsHandler->getAssetsValues($balanceFrom, $balanceTo, false, true);
         $assetsCount = \count($assetsCurrent);
         $balDatecreated = \time(); //all balances made at once must have same time
         foreach ($assetsCurrent as $asset) {
@@ -284,9 +323,9 @@ switch ($op) {
                 $crTransactions->add(new \Criteria('tra_date', $balanceFrom, '>='));
                 $crTransactions->add(new \Criteria('tra_date', $balanceTo, '<='));
                 $crTransactions->add(new \Criteria('tra_asid', $asset['id']));
-                $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_SUBMITTED, '>'));
+                //$crTransactions->add(new \Criteria('tra_status', Constants::STATUS_SUBMITTED, '>'));
                 if (Constants::BALANCE_TYPE_FINAL == $balType) {
-                    $transactionsHandler->updateAll('tra_status', Constants::STATUS_LOCKED, $crTransactions, true);
+                    //$transactionsHandler->updateAll('tra_status', Constants::STATUS_LOCKED, $crTransactions, true);
                     $transactionsHandler->updateAll('tra_balid', $newBalId, $crTransactions, true);
                 } else {
                     $transactionsHandler->updateAll('tra_balidt', $newBalId, $crTransactions, true);
@@ -363,7 +402,7 @@ switch ($op) {
             $customConfirm = new Common\Confirm(
                 ['ok' => 1, 'balanceFrom' => $balanceFrom, 'balanceTo' => $balanceTo, 'op' => 'delete'],
                 $_SERVER['REQUEST_URI'],
-                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, sprintf(_MA_WGSIMPLEACC_BALANCE_DELETE_FROMTO, date(_SHORTDATESTRING, $balanceFrom), date(_SHORTDATESTRING, $balanceTo))));
+                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, sprintf(_MA_WGSIMPLEACC_BALANCE_DELETE_FROMTO, date(_SHORTDATESTRING, $balanceFrom), date(_SHORTDATESTRING, $balanceTo))), _MA_WGSIMPLEACC_FORM_DELETE_CONFIRM, _MA_WGSIMPLEACC_FORM_DELETE_LABEL);
             $form = $customConfirm->getFormConfirm();
             $GLOBALS['xoopsTpl']->assign('form', $form->render());
             // Breadcrumbs

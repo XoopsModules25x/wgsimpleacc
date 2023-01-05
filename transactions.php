@@ -187,7 +187,7 @@ switch ($op) {
             // Get All Transactions
             foreach (\array_keys($transactionsAll) as $i) {
                 $transactions[$i] = $transactionsAll[$i]->getValuesTransactions();
-                $transactions[$i]['editable'] = $permissionsHandler->getPermTransactionsEdit($transactions[$i]['tra_submitter'], $transactions[$i]['tra_status']);
+                $transactions[$i]['editable'] = $permissionsHandler->getPermTransactionsEdit($transactions[$i]['tra_submitter'], $transactions[$i]['tra_status'], $transactions[$i]['tra_balid']);
                 $transactions[$i]['waiting'] = (Constants::STATUS_SUBMITTED == $transactions[$i]['tra_status']);
                 if ($traId > 0) {
                     $transactions[$i]['tratemplate'] = $permissionsHandler->getPermTratemplatesSubmit();
@@ -469,7 +469,7 @@ switch ($op) {
         $transactionsObj = $transactionsHandler->get($traId);
         $traSubmitter = $transactionsObj->getVar('tra_submitter');
         $traStatus = $transactionsObj->getVar('tra_status');
-        if (!$permissionsHandler->getPermTransactionsEdit($traSubmitter, $traStatus)) {
+        if (!$permissionsHandler->getPermTransactionsEdit($traSubmitter, $traStatus, $transactionsObj->getVar('tra_balid'))) {
             \redirect_header('transactions.php?op=list', 3, \_NOPERM);
         }
         // Get Form
@@ -493,7 +493,7 @@ switch ($op) {
         $transactionsObj = $transactionsHandler->get($traId);
         $traSubmitter = $transactionsObj->getVar('tra_submitter');
         $traStatus = $transactionsObj->getVar('tra_status');
-        if (!$permissionsHandler->getPermTransactionsEdit($traSubmitter, $traStatus)) {
+        if (!$permissionsHandler->getPermTransactionsEdit($traSubmitter, $traStatus, $transactionsObj->getVar('tra_balid'))) {
             \redirect_header('transactions.php?op=list', 3, \_NOPERM);
         }
         if ($helper->getConfig('use_trahistories')) {
@@ -525,7 +525,7 @@ switch ($op) {
             $customConfirm = new Common\Confirm(
                 ['ok' => 1, 'tra_id' => $traId, 'op' => 'delete'],
                 $_SERVER['REQUEST_URI'],
-                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $info));
+                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $info), _MA_WGSIMPLEACC_FORM_DELETE_CONFIRM, _MA_WGSIMPLEACC_FORM_DELETE_LABEL);
             $form = $customConfirm->getFormConfirm();
             $GLOBALS['xoopsTpl']->assign('form', $form->render());
 
@@ -620,7 +620,7 @@ switch ($op) {
             // Get All Transactions
             foreach (\array_keys($transactionsAll) as $i) {
                 $transactions[$i] = $transactionsAll[$i]->getValuesTransactions();
-                $transactions[$i]['editable'] = $permissionsHandler->getPermTransactionsEdit($transactions[$i]['tra_submitter'], $transactions[$i]['tra_status']);
+                $transactions[$i]['editable'] = $permissionsHandler->getPermTransactionsEdit($transactions[$i]['tra_submitter'], $transactions[$i]['tra_status'], $transactions[$i]['tra_balid']);
                 if ('' !== (string)$transactions[$i]['tra_remarks']) {
                     $transactions[$i]['modaltitle'] = \str_replace('%s', $transactions[$i]['year_nb'], \_MA_WGSIMPLEACC_MODAL_TRATITLE);
                 }

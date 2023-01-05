@@ -285,6 +285,10 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_BALANCE_TYPE', 'Art des Abschlusses');
 \define('_MA_WGSIMPLEACC_BALANCE_TYPE_TEMPORARY', 'Zwischenabschluss');
 \define('_MA_WGSIMPLEACC_BALANCE_TYPE_FINAL', 'Endgültiger Abschlusses');
+\define('_MA_WGSIMPLEACC_BALANCES_WARNING', 'Achtung');
+\define('_MA_WGSIMPLEACC_BALANCES_WARNING_NONE', 'Es gibt im Abschlusszeitraum %s Transaktion(en) ohne Status');
+\define('_MA_WGSIMPLEACC_BALANCES_WARNING_CREATED', "Es gibt im Abschlusszeitraum %s Transaktion(en) mit Status 'ERSTELLT'");
+\define('_MA_WGSIMPLEACC_BALANCES_WARNING_SUBMITTED', "Es gibt im Abschlusszeitraum %s Transaktion(en) mit Status 'EINGESENDET'");
 // Output balances
 \define('_MA_WGSIMPLEACC_BALANCES_OUT_TOTAL', 'Total');
 \define('_MA_WGSIMPLEACC_BALANCES_OUT_SUMS', 'Summen');
@@ -439,6 +443,8 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_FORM_UPLOAD_SIZE_MB', 'MB');
 \define('_MA_WGSIMPLEACC_FORM_IMAGE_PATH', 'Dateien in %s :');
 \define('_MA_WGSIMPLEACC_FORM_UPLOAD_ALLOWEDMIME', 'Erlaubte Dateitypen:');
+\define('_MA_WGSIMPLEACC_FORM_DELETE_CONFIRM', 'Löschen bestätigen');
+\define('_MA_WGSIMPLEACC_FORM_DELETE_LABEL', 'Wollen Sie wirklich löschen:');
 //Constants class
 \define('_MA_WGSIMPLEACC_CLASS_EXPENSES', 'Ausgaben');
 \define('_MA_WGSIMPLEACC_CLASS_INCOME', 'Einnahmen');

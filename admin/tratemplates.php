@@ -133,7 +133,7 @@ switch ($op) {
                 \redirect_header('tratemplates.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
             if ($tratemplatesHandler->delete($tratemplatesObj)) {
-                \redirect_header('tratemplates.php', 3, \_AM_WGSIMPLEACC_FORM_DELETE_OK);
+                \redirect_header('tratemplates.php', 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
             } else {
                 $GLOBALS['xoopsTpl']->assign('error', $tratemplatesObj->getHtmlErrors());
             }
@@ -141,7 +141,7 @@ switch ($op) {
             $customConfirm = new Common\Confirm(
                 ['ok' => 1, 'ttpl_id' => $tplId, 'op' => 'delete'],
                 $_SERVER['REQUEST_URI'],
-                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $tratemplatesObj->getVar('ttpl_name')));
+                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $tratemplatesObj->getVar('ttpl_name')), _MA_WGSIMPLEACC_FORM_DELETE_CONFIRM, _MA_WGSIMPLEACC_FORM_DELETE_LABEL);
             $form = $customConfirm->getFormConfirm();
             $GLOBALS['xoopsTpl']->assign('form', $form->render());
         }
