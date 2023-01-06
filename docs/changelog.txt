@@ -3,6 +3,7 @@
 ==============================================================
  - fixed missing lang vars for confirm (goffy)
  - added warnings for balances (goffy)
+ - catch cases when account/allocation isn't valid anymore (goffy)
 
 ==============================================================
 1.3.0 RC1 [2022/02/23]

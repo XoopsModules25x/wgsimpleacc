@@ -321,8 +321,18 @@ switch ($op) {
         $transactionsObj->setVar('tra_desc', Request::getText('tra_desc', ''));
         $transactionsObj->setVar('tra_reference', Request::getString('tra_reference', ''));
         $transactionsObj->setVar('tra_remarks', Request::getText('tra_remarks', ''));
-        $transactionsObj->setVar('tra_accid', Request::getInt('tra_accid', 0));
-        $transactionsObj->setVar('tra_allid', Request::getInt('tra_allid', 0));
+        $traAccid = Request::getInt('tra_accid');
+        // catch cases when editing older transactions where account isn't valid anymore
+        if (0 === $traAccid && Request::hasVar('tra_accid_old')) {
+            $traAccid = Request::getInt('tra_accid_old');
+        }
+        $transactionsObj->setVar('tra_accid', $traAccid);
+        $traAllid = Request::getInt('tra_allid');
+        // catch cases when editing older transactions where account isn't valid anymore
+        if (0 === $traAllid && Request::hasVar('tra_allid_old')) {
+            $traAllid = Request::getInt('tra_allid_old');
+        }
+        $transactionsObj->setVar('tra_allid', $traAllid);
         $transactionDateObj = \DateTime::createFromFormat(\_SHORTDATESTRING, Request::getString('tra_date'));
         $transactionsObj->setVar('tra_date', $traDate);
         $transactionsObj->setVar('tra_curid', Request::getInt('tra_curid', 0));

@@ -333,6 +333,15 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
         return $list;
     }
 
+    /**
+     * Check whether given allocation is online or not
+     * @param $allId
+     * @return array
+     */
+    public function AllocationIsOnline($allId)
+    {
+        $allocationObj = $this->get($allId);
 
-
+        return ['online' => (bool)$allocationObj->getVar('all_online'), 'name' => $allocationObj->getVar('all_name')];
+    }
 }

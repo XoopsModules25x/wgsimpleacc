@@ -403,4 +403,17 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
 
         return $list;
     }
+
+    /**
+     * Check whether given account is online or not
+     * @param $accId
+     * @return array
+     */
+    public function AccountIsOnline($accId)
+    {
+        $accountObj = $this->get($accId);
+
+        return ['online' => (bool)$accountObj->getVar('acc_online'), 'name' => $accountObj->getVar('acc_key') . ' ' . $accountObj->getVar('acc_name')];
+    }
+    
 }

@@ -227,22 +227,50 @@ class Transactions extends \XoopsObject
         $editorConfigs['editor'] = $editor;
         $traRemarks = new \XoopsFormEditor(\_MA_WGSIMPLEACC_TRANSACTION_REMARKS, 'tra_remarks', $editorConfigs);
         $form->addElement($traRemarks);
-        // Form Table accounts
-        $accountsHandler = $helper->getHandler('Accounts');
-        $traAccidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_ACCID, 'tra_accid', $this->getVar('tra_accid'), 5);
-        $accounts = $accountsHandler->getSelectTreeOfAccounts($traClass);
-        foreach ($accounts as $account) {
-            $traAccidSelect->addOption($account['id'], $account['text']);
-        }
-        $form->addElement($traAccidSelect, true);
         // Form Table allocations
         $allocationsHandler = $helper->getHandler('Allocations');
-        $traAllocationSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_ALLID, 'tra_allid', $this->getVar('tra_allid'), 5);
+        $traAllid = $this->isNew() ? 0 : (int)$this->getVar('tra_allid');
+        $allRequired = true;
+        $allTray = new \XoopsFormElementTray(\_MA_WGSIMPLEACC_TRANSACTION_ALLID, '<br>');
+        if ($traAllid > 0) {
+            $allIsOnline = $allocationsHandler->AllocationIsOnline($traAllid);
+            if (!$allIsOnline['online']) {
+                // show info that allocation isn't valid anymore
+                $allInfoInvalid = new \XoopsFormLabel($allIsOnline['name'],\_MA_WGSIMPLEACC_TRANSACTION_SELECT_INVALID);
+                $allTray->addElement($allInfoInvalid);
+                $allTray->addElement(new \XoopsFormHidden('tra_allid_old', $traAllid));
+                $allRequired = false;
+            }
+        }
+        $traAllocationSelect = new \XoopsFormSelect('', 'tra_allid', $traAllid, 15);
         $allocations = $allocationsHandler->getSelectTreeOfAllocations();
         foreach ($allocations as $allocation) {
             $traAllocationSelect->addOption($allocation['id'], $allocation['text']);
         }
-        $form->addElement($traAllocationSelect, true);
+        $allTray->addElement($traAllocationSelect, $allRequired);
+        $form->addElement($allTray);
+        // Form Table accounts
+        $accountsHandler = $helper->getHandler('Accounts');
+        $traAccid = $this->isNew() ? 0 : (int)$this->getVar('tra_accid');
+        $accRequired = true;
+        $accTray = new \XoopsFormElementTray(\_MA_WGSIMPLEACC_TRANSACTION_ACCID, '<br>');
+        if ($traAccid > 0) {
+            $accIsOnline = $accountsHandler->AccountIsOnline($traAccid);
+            if (!$accIsOnline['online']) {
+                // show info that allocation isn't valid anymore
+                $accInfoInvalid = new \XoopsFormLabel($accIsOnline['name'],\_MA_WGSIMPLEACC_TRANSACTION_SELECT_INVALID);
+                $accTray->addElement($accInfoInvalid);
+                $accTray->addElement(new \XoopsFormHidden('tra_accid_old', $traAccid));
+                $accRequired = false;
+            }
+        }
+        $traAccidSelect = new \XoopsFormSelect('', 'tra_accid', $this->getVar('tra_accid'), 15);
+        $accounts = $accountsHandler->getSelectTreeOfAccounts($traClass);
+        foreach ($accounts as $account) {
+            $traAccidSelect->addOption($account['id'], $account['text']);
+        }
+        $accTray->addElement($traAccidSelect, $accRequired);
+        $form->addElement($accTray);
         // Form Text Date Select traDate
         $traDate = $this->isNew() ?: $this->getVar('tra_date');
         $form->addElement(new \XoopsFormTextDateSelect(\_MA_WGSIMPLEACC_TRANSACTION_DATE, 'tra_date', '', $traDate), true);
