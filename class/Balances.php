@@ -198,12 +198,15 @@ class Balances extends \XoopsObject
             case 0:
             default:
                 $ret['type'] = 0;
+                $ret['type_text'] = 'invalid';
                 break;
             case Constants::STATUS_TEMPORARY:
                 $ret['type'] = Constants::BALANCE_TYPE_TEMPORARY;
+                $ret['type_text'] = \_MA_WGSIMPLEACC_BALANCE_TYPE_TEMPORARY;
                 break;
             case Constants::STATUS_APPROVED:
                 $ret['type'] = Constants::BALANCE_TYPE_FINAL;
+                $ret['type_text'] = \_MA_WGSIMPLEACC_BALANCE_TYPE_FINAL;
                 break;
         }
         $ret['datecreated'] = \formatTimestamp($this->getVar('bal_datecreated'), 's');
