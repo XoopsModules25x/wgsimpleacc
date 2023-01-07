@@ -35,14 +35,14 @@ require __DIR__ . '/navbar.php';
 
 // Permissions
 if (!$permissionsHandler->getPermClientsView()) {
-    \redirect_header('index.php', 0, '');
+    \redirect_header('index.php', 0);
 }
 
 $op      = Request::getCmd('op', 'list');
-$start   = Request::getInt('start', 0);
+$start   = Request::getInt('start');
 $limit   = Request::getInt('limit', $helper->getConfig('userpager'));
-$cliId   = Request::getInt('cli_id', 0);
-$cliName = Request::getString('cli_name', '');
+$cliId   = Request::getInt('cli_id');
+$cliName = Request::getString('cli_name');
 $sortBy  = 'cli_' . Request::getString('sortby', 'name');
 $orderBy = Request::getString('orderby', 'ASC');
 
@@ -104,7 +104,7 @@ switch ($op) {
             if ($clientsCount > $limit) {
                 include_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
                 $pagenav = new \XoopsPageNav($clientsCount, $limit, $start, 'start', 'op=list&amp;limit=' . $limit . '&amp;cli_name=' . $cliName);
-                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
             }
             $GLOBALS['xoopsTpl']->assign('table_type', $helper->getConfig('table_type'));
             $GLOBALS['xoopsTpl']->assign('panel_type', $helper->getConfig('panel_type'));
@@ -132,19 +132,19 @@ switch ($op) {
         } else {
             $clientsObj = $clientsHandler->create();
         }
-        $clientsObj->setVar('cli_name', Request::getText('cli_name', ''));
-        $clientsObj->setVar('cli_postal', Request::getString('cli_postal', ''));
-        $clientsObj->setVar('cli_city', Request::getString('cli_city', ''));
-        $clientsObj->setVar('cli_address', Request::getText('cli_address', ''));
-        $clientsObj->setVar('cli_ctry', Request::getString('cli_ctry', ''));
-        $clientsObj->setVar('cli_phone', Request::getString('cli_phone', ''));
-        $clientsObj->setVar('cli_vat', Request::getString('cli_vat', ''));
-        $clientsObj->setVar('cli_creditor', Request::getInt('cli_creditor', 0));
-        $clientsObj->setVar('cli_debtor', Request::getInt('cli_debtor', 0));
-        $clientsObj->setVar('cli_online', Request::getInt('cli_online', 0));
+        $clientsObj->setVar('cli_name', Request::getText('cli_name'));
+        $clientsObj->setVar('cli_postal', Request::getString('cli_postal'));
+        $clientsObj->setVar('cli_city', Request::getString('cli_city'));
+        $clientsObj->setVar('cli_address', Request::getText('cli_address'));
+        $clientsObj->setVar('cli_ctry', Request::getString('cli_ctry'));
+        $clientsObj->setVar('cli_phone', Request::getString('cli_phone'));
+        $clientsObj->setVar('cli_vat', Request::getString('cli_vat'));
+        $clientsObj->setVar('cli_creditor', Request::getInt('cli_creditor'));
+        $clientsObj->setVar('cli_debtor', Request::getInt('cli_debtor'));
+        $clientsObj->setVar('cli_online', Request::getInt('cli_online'));
         $clientDatecreatedObj = \DateTime::createFromFormat(\_SHORTDATESTRING, Request::getString('cli_datecreated'));
         $clientsObj->setVar('cli_datecreated', $clientDatecreatedObj->getTimestamp());
-        $clientsObj->setVar('cli_submitter', Request::getInt('cli_submitter', 0));
+        $clientsObj->setVar('cli_submitter', Request::getInt('cli_submitter'));
         // Insert Data
         if ($clientsHandler->insert($clientsObj)) {
             // redirect after insert
@@ -226,7 +226,7 @@ switch ($op) {
     case 'change_yn':
         if ($cliId > 0) {
             $clientsObj = $clientsHandler->get($cliId);
-            $clientsObj->setVar(Request::getString('field'), Request::getInt('value', 0));
+            $clientsObj->setVar(Request::getString('field'), Request::getInt('value'));
             // Insert Data
             if ($clientsHandler->insert($clientsObj, true)) {
                 \redirect_header('clients.php?op=list&amp;start=' . $start . '&amp;limit=' . $limit, 2, \_MA_WGSIMPLEACC_FORM_OK);

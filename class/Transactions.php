@@ -109,12 +109,12 @@ class Transactions extends \XoopsObject
         $isAdmin = $GLOBALS['xoopsUser']->isAdmin($GLOBALS['xoopsModule']->mid());
         $traClass = $this->isNew() ? $type : $this->getVar('tra_class');
         // Title
-        $title = $this->isNew() ? \sprintf(\_MA_WGSIMPLEACC_TRANSACTION_ADD) : \sprintf(\_MA_WGSIMPLEACC_TRANSACTION_EDIT);
+        $title = $this->isNew() ? \_MA_WGSIMPLEACC_TRANSACTION_ADD : \_MA_WGSIMPLEACC_TRANSACTION_EDIT;
         if (Constants::CLASS_INCOME == $traClass || Constants::CLASS_BOTH == $traClass) {
-            $title = $this->isNew() ? \sprintf(\_MA_WGSIMPLEACC_TRANSACTION_ADD_INCOME) : \sprintf(\_MA_WGSIMPLEACC_TRANSACTION_EDIT_INCOME);
+            $title = $this->isNew() ? \_MA_WGSIMPLEACC_TRANSACTION_ADD_INCOME : \_MA_WGSIMPLEACC_TRANSACTION_EDIT_INCOME;
         }
         if (Constants::CLASS_EXPENSES == $traClass || Constants::CLASS_BOTH == $traClass) {
-            $title = $this->isNew() ? \sprintf(\_MA_WGSIMPLEACC_TRANSACTION_ADD_EXPENSES) : \sprintf(\_MA_WGSIMPLEACC_TRANSACTION_EDIT_EXPENSES);
+            $title = $this->isNew() ? \_MA_WGSIMPLEACC_TRANSACTION_ADD_EXPENSES : \_MA_WGSIMPLEACC_TRANSACTION_EDIT_EXPENSES;
         }
         // Get Theme Form
         \xoops_load('XoopsFormLoader');
@@ -149,8 +149,6 @@ class Transactions extends \XoopsObject
                     $clientsObj = $clientsHandler->get($tratemplate->getVar('ttpl_cliid'));
                     $cliName = Utility::cleanTextDropdown($clientsObj->getVar('cli_name'));
                 }
-
-
                 $form->addElement(new \XoopsFormHidden('ttpl_client[' . $tplId . ']', $cliName));
                 if (Constants::CLASS_INCOME == $traClass) {
                     $form->addElement(new \XoopsFormHidden('ttpl_amount[' . $tplId . ']', Utility::FloatToString($tratemplate->getVar('ttpl_amountin'))));

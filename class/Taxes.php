@@ -82,7 +82,7 @@ class Taxes extends \XoopsObject
             $action = $_SERVER['REQUEST_URI'];
         }
         // Title
-        $title = $this->isNew() ? \sprintf(\_AM_WGSIMPLEACC_TAX_ADD) : \sprintf(\_AM_WGSIMPLEACC_TAX_EDIT);
+        $title = $this->isNew() ? \_AM_WGSIMPLEACC_TAX_ADD : \_AM_WGSIMPLEACC_TAX_EDIT;
         // Get Theme Form
         \xoops_load('XoopsFormLoader');
         $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);

@@ -280,7 +280,7 @@ class OutputsHandler extends \XoopsPersistableObjectHandler
                 $allName = $allocationsAll[$i]->getVar('all_name');
                 $allWeight = $allocationsAll[$i]->getVar('all_weight');
                 $allLevel = $allocationsAll[$i]->getVar('all_level');
-                $allocations_list[] = ['all_id' => $allId, 'all_name' => $allName];
+                //$allocations_list[] = ['all_id' => $allId, 'all_name' => $allName];
                 $sumAmountin = 0;
                 $sumAmountout = 0;
                 $subAllIds = $allocationsHandler->getSubsOfAllocations($allId);

@@ -63,6 +63,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_FILTER_OUTPUT', 'Gewählte Daten ausgeben');
 \define('_MA_WGSIMPLEACC_FILTER_OUTPUTTYPE', 'Art der Ausgabe');
 \define('_MA_WGSIMPLEACC_FILTER_NO_TRANSACTIONS', "Es gibt keine Transaktionen, die dem Filter entsprechen");
+\define('_MA_WGSIMPLEACC_FILTER_SELECT_INVALID', 'Ungültige Zuordungen/Konten im Filter verwenden');
 // ---------------- Contents ----------------
 // There aren't
 \define('_MA_WGSIMPLEACC_THEREARENT_ACCOUNTS', 'Es gibt derzeit keine Konten in der Datenbank');

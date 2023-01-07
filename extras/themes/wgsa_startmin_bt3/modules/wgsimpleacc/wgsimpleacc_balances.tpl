@@ -1,3 +1,12 @@
+<{if $warnings|default:''}>
+    <h3><{$smarty.const._MA_WGSIMPLEACC_BALANCES_WARNING}></h3>
+    <div class="alert alert-danger">
+    <{foreach item=warning from=$warnings}>
+        <p><{$warning}></p>
+    <{/foreach}>
+    </div>
+<{/if}>
+
 <{if $balancesList|default:''}>
     <{if $balancesCount|default:0 > 0}>
         <h3><{$smarty.const._MA_WGSIMPLEACC_BALANCES_LIST}></h3>

@@ -34,15 +34,15 @@ require __DIR__ . '/navbar.php';
 
 // Permissions
 if (!$permissionsHandler->getPermFilesView()) {
-    \redirect_header('index.php', 0, '');
+    \redirect_header('index.php', 0);
 }
 
 $op            = Request::getCmd('op', 'list');
-$deleteFiltemp = Request::getString('delete_filtemp', '');
-$start         = Request::getInt('start', 0);
+$deleteFiltemp = Request::getString('delete_filtemp');
+$start         = Request::getInt('start');
 $limit         = Request::getInt('limit', $helper->getConfig('userpager'));
-$filId         = Request::getInt('fil_id', 0);
-$filTraid      = Request::getInt('fil_traid', 0);
+$filId         = Request::getInt('fil_id');
+$filTraid      = Request::getInt('fil_traid');
 if ('save_temp' == $op && '' != $deleteFiltemp) {
     $op = 'delete_filtemp';
 }
@@ -77,7 +77,6 @@ switch ($op) {
                     throw new Exception('Cannot access ' . $filePath .' to read.');
                 }
                 exit;
-                break;
             case 'application/pdf':
                 // Header content type
                 header('Content-type: application/pdf');
@@ -90,9 +89,7 @@ switch ($op) {
                     throw new Exception("Cannot access '$filePath' to read.");
                 }
                 exit;
-                break;
         }
-        break;
     case 'list':
     default:
         if ($filTraid > 0) {
@@ -150,7 +147,7 @@ switch ($op) {
         } else {
             \redirect_header('files.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
         }
-        $filesObj->setVar('fil_desc', Request::getString('fil_desc', ''));
+        $filesObj->setVar('fil_desc', Request::getString('fil_desc'));
         $filesObj->setVar('fil_ip', $_SERVER['REMOTE_ADDR']);
         $filesObj->setVar('fil_datecreated', \time());
         $filesObj->setVar('fil_submitter', $GLOBALS['xoopsUser']->id());
@@ -220,7 +217,7 @@ switch ($op) {
                 $filesObj->setVar('fil_name', $filName);
             }
         } else {
-            $filName = Request::getString('fil_temp', '');
+            $filName = Request::getString('fil_temp');
             $filSource = \XOOPS_ROOT_PATH . '/uploads/wgsimpleacc/temp/' . $filName;
             $filDest = \XOOPS_ROOT_PATH . '/uploads/wgsimpleacc/files/' . $filName;
             \rename($filSource, $filDest);
@@ -232,7 +229,7 @@ switch ($op) {
         }
         $fileMimetype   = \mime_content_type($filePath);
         $filesObj->setVar('fil_type', $fileMimetype);
-        $filesObj->setVar('fil_desc', Request::getString('fil_desc', ''));
+        $filesObj->setVar('fil_desc', Request::getString('fil_desc'));
         $filesObj->setVar('fil_ip', $_SERVER['REMOTE_ADDR']);
         $filesObj->setVar('fil_datecreated', \time());
         $filesObj->setVar('fil_submitter', $GLOBALS['xoopsUser']->id());
@@ -312,7 +309,7 @@ switch ($op) {
         if (!$GLOBALS['xoopsSecurity']->check()) {
             \redirect_header('files.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
-        $fileName = Request::getString('fil_temp', '');
+        $fileName = Request::getString('fil_temp');
         $filePath = \XOOPS_ROOT_PATH . '/uploads/wgsimpleacc/temp/' . $fileName;
         \unlink($filePath);
         \redirect_header('files.php?op=list&amp;fil_traid=' . $filTraid, 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);

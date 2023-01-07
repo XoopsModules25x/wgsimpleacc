@@ -58,7 +58,7 @@ class ClientsHandler extends \XoopsPersistableObjectHandler
      *
      * @param int $id field id
      * @param null fields
-     * @return mixed reference to the {@link Get} object
+     * @return \XoopsObject|null reference to the {@link Get} object
      */
     public function get($id = null, $fields = null)
     {

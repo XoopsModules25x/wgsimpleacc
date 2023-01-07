@@ -183,6 +183,5 @@ function wgsimpleacc_Filter($url, $type = '') {
     $url .= htmlentities($url, ENT_COMPAT, 'utf-8');
     $url .= \preg_replace('`&([a-z])(acute|uml|circ|grave|ring|cedil|slash|tilde|caron|lig);`i', "\1", $url);
     $url .= \preg_replace([$regular_expression, '`[-]+`'], '-', $url);
-    $url = ($url == '') ? $type : strtolower(\trim($url, '-'));
-    return $url;
+    return ($url == '') ? $type : strtolower(\trim($url, '-'));
 }

@@ -96,7 +96,7 @@ switch ($op) {
         if ($otplId > 0) {
             $outtemplatesObj = $outtemplatesHandler->get($otplId);
             // Check permissions
-            if (!$permissionsHandler->getPermOuttemplatesSubmit($outtemplatesObj->getVar('otpl_submitter'))) {
+            if (!$permissionsHandler->getPermOuttemplatesSubmit()) {
                 \redirect_header('outtemplates.php?op=list', 3, \_NOPERM);
             }
         } else {
@@ -172,7 +172,7 @@ switch ($op) {
         // Get Form
         $outtemplatesObj = $outtemplatesHandler->get($otplId);
         // Check permissions
-        if (!$permissionsHandler->getPermOuttemplatesSubmit($outtemplatesObj->getVar('otpl_submitter'))) {
+        if (!$permissionsHandler->getPermOuttemplatesSubmit()) {
             \redirect_header('outtemplates.php?op=list', 3, \_NOPERM);
         }
         $form = $outtemplatesObj->getFormOuttemplates();

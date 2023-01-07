@@ -33,7 +33,7 @@ $GLOBALS['xoopsTpl']->assign('template_sub', 'db:wgsimpleacc_index.tpl');
 require __DIR__ . '/navbar.php';
 
 $op     = Request::getCmd('op', 'list');
-$allPid = Request::getInt('all_pid', 0);
+$allPid = Request::getInt('all_pid');
 $level  = Request::getInt('level', 1);
 $filterYear      = date('Y');
 $filterMonthFrom = $helper->getConfig('balance_period_from');

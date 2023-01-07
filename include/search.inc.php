@@ -31,7 +31,7 @@ use XoopsModules\Wgsimpleacc\Helper;
  * @param $limit
  * @param $offset
  * @param $userid
- * @return mixed $itemIds
+ * @return array $itemIds
  */
 function wgsimpleacc_search($queryarray, $andor, $limit, $offset, $userid)
 {

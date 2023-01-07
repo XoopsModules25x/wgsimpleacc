@@ -60,7 +60,7 @@ class MYPDF extends TCPDF {
     //Page header
     public function Header() {
         //add my custom header
-        $this->writeHTMLCell(0, 0, '', '', $this->htmlHeader, 0, 1, 0, true, 'top', true);
+        $this->writeHTMLCell(0, 0, '', '', $this->htmlHeader, 0, 1, 0, true, 'top');
     }
 
     // Page footer
@@ -116,8 +116,8 @@ function execute_output ($template, $outParams)
     // Remove/add default header/footer
     $pdf->htmlHeader = $template['header'];
     $pdf->htmlFooter = $template['footer'];
-    $pdf->setPrintHeader(true);
-    $pdf->setPrintFooter(true);
+    $pdf->setPrintHeader();
+    $pdf->setPrintFooter();
     // Set document information
     $pdf->SetCreator($pdfData['creator']);
     $pdf->SetAuthor($pdfData['author']);
@@ -151,7 +151,7 @@ function execute_output ($template, $outParams)
     // Add Page document
     $pdf->AddPage();
     // Output
-    $pdf->writeHTML($pdfData['content'], true, false, true, false, '');
+    $pdf->writeHTML($pdfData['content'], true, false, true);
 
     if ($outParams['auto_add']) {
         // create file in temp folder for adding automatically to transaction

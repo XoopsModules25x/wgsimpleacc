@@ -93,7 +93,7 @@ class Outtemplates extends \XoopsObject
         }
 
         // Title
-        $title = $this->isNew() ? \sprintf(\_MA_WGSIMPLEACC_OUTTEMPLATE_ADD) : \sprintf(\_MA_WGSIMPLEACC_OUTTEMPLATE_EDIT);
+        $title = $this->isNew() ? \_MA_WGSIMPLEACC_OUTTEMPLATE_ADD : \_MA_WGSIMPLEACC_OUTTEMPLATE_EDIT;
         // Get Theme Form
         \xoops_load('XoopsFormLoader');
         $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);

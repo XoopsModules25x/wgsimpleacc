@@ -94,7 +94,7 @@ class Balances extends \XoopsObject
         $dateFromM = mktime(0, 0, 0, date('m')-1, 1);
 
         // Title
-        $title = $this->isNew() ? \sprintf(\_MA_WGSIMPLEACC_BALANCE_ADD) : \sprintf(\_MA_WGSIMPLEACC_BALANCE_EDIT);
+        $title = $this->isNew() ? \_MA_WGSIMPLEACC_BALANCE_ADD : \_MA_WGSIMPLEACC_BALANCE_EDIT;
         // Get Theme Form
         \xoops_load('XoopsFormLoader');
         $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);

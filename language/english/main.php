@@ -63,6 +63,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_FILTER_OUTPUT', 'Output selected data');
 \define('_MA_WGSIMPLEACC_FILTER_OUTPUTTYPE', 'Type of output');
 \define('_MA_WGSIMPLEACC_FILTER_NO_TRANSACTIONS', "There aren't transactions corresponding the filter");
+\define('_MA_WGSIMPLEACC_FILTER_SELECT_INVALID', 'Include invalid account/allocations in filter');
 // ---------------- Contents ----------------
 // There aren't
 \define('_MA_WGSIMPLEACC_THEREARENT_ACCOUNTS', "There aren't accounts at the moment");

@@ -16,6 +16,7 @@ namespace XoopsModules\Wgsimpleacc;
  * wgSimpleAcc module for xoops
  *
  * @copyright      2020 XOOPS Project (https://xooops.org)
+ *
  * @license        GPL 2.0 or later
  * @package        wgsimpleacc
  * @since          1.0
@@ -87,7 +88,7 @@ class Files extends \XoopsObject
             $action = $_SERVER['REQUEST_URI'];
         }
         // Title
-        $title = $this->isNew() ? \sprintf(\_MA_WGSIMPLEACC_FILE_ADD) : \sprintf(\_MA_WGSIMPLEACC_FILE_EDIT);
+        $title = $this->isNew() ? \_MA_WGSIMPLEACC_FILE_ADD : \_MA_WGSIMPLEACC_FILE_EDIT;
         // Get Theme Form
         \xoops_load('XoopsFormLoader');
         $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
@@ -110,7 +111,7 @@ class Files extends \XoopsObject
         $fileUploadTray = new \XoopsFormElementTray(\_MA_WGSIMPLEACC_FILE_NAME, '<br>');
         $fileDirectory = '/uploads/wgsimpleacc/files';
         if (!$this->isNew()) {
-            $fileUploadTray->addElement(new \XoopsFormLabel(\sprintf(\_MA_WGSIMPLEACC_FILE_NAME_UPLOADS, ".{$fileDirectory}/"), $filName));
+            $fileUploadTray->addElement(new \XoopsFormLabel(\sprintf(\_MA_WGSIMPLEACC_FILE_NAME_UPLOADS, ".$fileDirectory/"), $filName));
         }
         $maxsize = $helper->getConfig('maxsize_file');
         $fileUploadTray->addElement(new \XoopsFormFile('', 'fil_name', $maxsize));
@@ -180,7 +181,7 @@ class Files extends \XoopsObject
             $action = $_SERVER['REQUEST_URI'];
         }
         // Title
-        $title = $this->isNew() ? '' : \sprintf(\_MA_WGSIMPLEACC_FILE_EDIT);
+        $title = $this->isNew() ? '' : \_MA_WGSIMPLEACC_FILE_EDIT;
         // Get Theme Form
         \xoops_load('XoopsFormLoader');
         $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
@@ -192,7 +193,7 @@ class Files extends \XoopsObject
         $fileUploadTray = new \XoopsFormElementTray(\_MA_WGSIMPLEACC_FILE_NAME, '<br>');
         $fileDirectory = '/uploads/wgsimpleacc/files';
         if (!$this->isNew()) {
-            $fileUploadTray->addElement(new \XoopsFormLabel(\sprintf(\_MA_WGSIMPLEACC_FILE_NAME_UPLOADS, ".{$fileDirectory}/"), $filName));
+            $fileUploadTray->addElement(new \XoopsFormLabel(\sprintf(\_MA_WGSIMPLEACC_FILE_NAME_UPLOADS, ".$fileDirectory/"), $filName));
         }
         $maxsize = $helper->getConfig('maxsize_file');
         $fileUploadTray->addElement(new \XoopsFormFile('', 'fil_name', $maxsize), true);
@@ -243,11 +244,11 @@ class Files extends \XoopsObject
         $filTemp = '';
         $imageDirectory = '/uploads/wgsimpleacc/temp';
         $imageTray = new \XoopsFormElementTray(\_MA_WGSIMPLEACC_FILES_TEMP, '<br>');
-        $imageSelect = new \XoopsFormSelect(\str_replace('%f', ".{$imageDirectory}/", \_MA_WGSIMPLEACC_FILES_TEMP_DESC), 'fil_temp', $filTemp, 5);
+        $imageSelect = new \XoopsFormSelect(\str_replace('%f', ".$imageDirectory/", \_MA_WGSIMPLEACC_FILES_TEMP_DESC), 'fil_temp', $filTemp, 5);
         $imageArray = \XoopsLists::getImgListAsArray( \XOOPS_ROOT_PATH . $imageDirectory );
         foreach ($imageArray as $image1) {
             if ('blank.gif' !== $image1 && 'blank.png' !== $image1) {
-                $imageSelect->addOption((string)($image1), $image1);
+                $imageSelect->addOption($image1, $image1);
             }
         }
         $imageSelect->setExtra("onchange='showBtnDel();showImgSelected(\"imglabel_fil_temp\", \"fil_temp\", \"" . $imageDirectory . '", "", "' . \XOOPS_URL . "\")'");

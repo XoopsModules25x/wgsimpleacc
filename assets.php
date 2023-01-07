@@ -35,13 +35,13 @@ require __DIR__ . '/navbar.php';
 
 // Permissions
 if (!$permissionsHandler->getPermAssetsView()) {
-    \redirect_header('index.php', 0, '');
+    \redirect_header('index.php', 0);
 }
 
 $op    = Request::getCmd('op', 'list');
-$start = Request::getInt('start', 0);
+$start = Request::getInt('start');
 $limit = Request::getInt('limit', $helper->getConfig('userpager'));
-$asId  = Request::getInt('as_id', 0);
+$asId  = Request::getInt('as_id');
 
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_icon_url_16', \WGSIMPLEACC_ICONS_URL . '/16/');
 $GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
@@ -87,7 +87,7 @@ switch ($op) {
             if ($assetsCount > $limit) {
                 require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
                 $pagenav = new \XoopsPageNav($assetsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
-                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
             }
         }
         // Breadcrumbs
@@ -107,17 +107,17 @@ switch ($op) {
         } else {
             $assetsObj = $assetsHandler->create();
         }
-        $assetsObj->setVar('as_name', Request::getString('as_name', ''));
-        $assetsObj->setVar('as_descr', Request::getString('as_descr', ''));
-        $assetsObj->setVar('as_reference', Request::getString('as_reference', ''));
-        $assetsObj->setVar('as_color', Request::getString('as_color', ''));
-        $assetsObj->setVar('as_iecalc', Request::getInt('as_iecalc', 0));
-        $assetsObj->setVar('as_online', Request::getInt('as_online', 0));
+        $assetsObj->setVar('as_name', Request::getString('as_name'));
+        $assetsObj->setVar('as_descr', Request::getString('as_descr'));
+        $assetsObj->setVar('as_reference', Request::getString('as_reference'));
+        $assetsObj->setVar('as_color', Request::getString('as_color'));
+        $assetsObj->setVar('as_iecalc', Request::getInt('as_iecalc'));
+        $assetsObj->setVar('as_online', Request::getInt('as_online'));
         $assetsObj->setVar('as_datecreated', Request::getInt('as_datecreated'));
-        $assetsObj->setVar('as_submitter', Request::getInt('as_submitter', 0));
+        $assetsObj->setVar('as_submitter', Request::getInt('as_submitter'));
         // Insert Data
         if ($assetsHandler->insert($assetsObj)) {
-            if (Request::getInt('as_primary', 0) > 0) {
+            if (Request::getInt('as_primary') > 0) {
                 $newAsId = $assetsObj->getNewInsertedIdAssets();
                 $asId = $asId > 0 ? $asId : $newAsId;
                 $assetsHandler->setPrimaryAssets($asId);

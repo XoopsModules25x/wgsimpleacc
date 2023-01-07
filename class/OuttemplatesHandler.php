@@ -56,7 +56,7 @@ class OuttemplatesHandler extends \XoopsPersistableObjectHandler
      *
      * @param int $id field id
      * @param null fields
-     * @return mixed reference to the {@link Get} object
+     * @return \XoopsObject|null reference to the {@link Get} object
      */
     public function get($id = null, $fields = null)
     {
@@ -219,7 +219,7 @@ class OuttemplatesHandler extends \XoopsPersistableObjectHandler
 
         // assign data of transaction
         foreach ($outParams as $key => $value) {
-            $letterTpl->assign($key, $outParams[$key]);
+            $letterTpl->assign($key, $value);
         }
         // assign extra data
         $letterTpl->assign('sender', $helper->getConfig('otpl_sender'));

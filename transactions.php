@@ -35,24 +35,26 @@ require_once __DIR__ . '/navbar.php';
 
 // Permissions
 if (!$permissionsHandler->getPermTransactionsView()) {
-    \redirect_header('index.php', 0, '');
+    \redirect_header('index.php', 0);
 }
 
 $op              = Request::getCmd('op', 'list');
-$start           = Request::getInt('start', 0);
+$start           = Request::getInt('start');
 $limit           = Request::getInt('limit', $helper->getConfig('userpager'));
-$traId           = Request::getInt('tra_id', 0);
-$traType         = Request::getInt('tra_type', 0);
-$allId           = Request::getInt('all_id', 0);
-$allSubs         = Request::getInt('allSubs', 0);
-$accId           = Request::getInt('acc_id', 0);
-$asId            = Request::getInt('as_id', 0);
-$cliId           = Request::getInt('cli_id', 0);
-$filterYear      = Request::getInt('filterYear', 0);
-$filterMonthFrom = Request::getInt('filterMonthFrom', 0);
-$filterYearFrom  = Request::getInt('filterYearFrom', 0);
-$filterMonthTo   = Request::getInt('filterMonthTo', 0);
+$traId           = Request::getInt('tra_id');
+$traType         = Request::getInt('tra_type');
+$allId           = Request::getInt('all_id');
+$allSubs         = Request::getInt('allSubs');
+$accId           = Request::getInt('acc_id');
+$asId            = Request::getInt('as_id');
+$cliId           = Request::getInt('cli_id');
+$displayfilter   = Request::getInt('displayfilter');
+$filterYear      = Request::getInt('filterYear');
+$filterMonthFrom = Request::getInt('filterMonthFrom');
+$filterYearFrom  = Request::getInt('filterYearFrom');
+$filterMonthTo   = Request::getInt('filterMonthTo');
 $filterYearTo    = Request::getInt('filterYearTo', date('Y'));
+$filterInvalid   = Request::getInt('filterInvalid');
 $traStatus       = Request::getArray('tra_status');
 $traDesc         = Request::getString('tra_desc');
 $sortBy          = Request::getString('sortby', 'tra_id');
@@ -70,7 +72,7 @@ $GLOBALS['xoopsTpl']->assign('permSubmit', $permSubmit);
 $permApprove = $permissionsHandler->getPermTransactionsApprove();
 $GLOBALS['xoopsTpl']->assign('permApprove', $permApprove);
 $GLOBALS['xoopsTpl']->assign('showItem', $traId > 0);
-$displayfilter    = Request::getInt('displayfilter', 0);
+
 if (0 == $displayfilter || $traId > 0) {
     $GLOBALS['xoopsTpl']->assign('displayfilter', 'none');
     $GLOBALS['xoopsTpl']->assign('btnfilter', \_MA_WGSIMPLEACC_FILTER_SHOW);
@@ -82,7 +84,8 @@ $GLOBALS['xoopsTpl']->assign('sepThousand', $helper->getConfig('sep_thousand'));
 
 $traOpSorter = '&amp;start=' . $start . '&amp;limit=' . $limit . '&amp;all_id=' . $allId . '&amp;acc_id=' . $accId . '&amp;as_id=' . $asId;
 $traOpSorter .= '&amp;filterYear=' . $filterYear . '&amp;filterMonthFrom=' . $filterMonthFrom . '&amp;filterYearFrom=' . $filterYearFrom . '&amp;filterMonthTo=' . $filterMonthTo . '&amp;filterYearTo=' . $filterYearTo;
-$traOpSorter .= '&amp;displayfilter=' . $displayfilter . '&amp;allSubs=' . $allSubs;
+$traOpSorter .= '&amp;displayfilter=' . $displayfilter . '&amp;allSubs=' . $allSubs . '&amp;filterInvalid=' . $filterInvalid;
+$traOpSorter .= '&amp;cli_id=' . $cliId . '&amp;tra_type=' . $traType;
 
 $traOp = $traOpSorter . '&amp;sortby=' . $sortBy . '&amp;order=' . $order;
 
@@ -104,7 +107,7 @@ switch ($op) {
             $crTransactions = new \CriteriaCompo();
             $crTransactions->setSort('tra_date');
             $crTransactions->setOrder('ASC');
-            $crTransactions->setStart(0);
+            $crTransactions->setStart();
             $crTransactions->setLimit(1);
             $transactionsAll = $transactionsHandler->getAll($crTransactions);
             foreach (\array_keys($transactionsAll) as $i) {
@@ -112,13 +115,13 @@ switch ($op) {
             }
             $crTransactions->setSort('tra_date');
             $crTransactions->setOrder('DESC');
-            $crTransactions->setStart(0);
+            $crTransactions->setStart();
             $crTransactions->setLimit(1);
             $transactionsAll = $transactionsHandler->getAll($crTransactions);
             foreach (\array_keys($transactionsAll) as $i) {
                 $yearMax = date('Y', $transactionsAll[$i]->getVar('tra_date'));
             }
-            $formFilter = $transactionsHandler::getFormFilter($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, $cliId, 'list', $allSubs, $traStatus, $traDesc);
+            $formFilter = $transactionsHandler::getFormFilter($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, $cliId, 'list', $allSubs, $traStatus, $traDesc, $filterInvalid);
             $GLOBALS['xoopsTpl']->assign('formFilter', $formFilter->render());
         }
         $crTransactions = new \CriteriaCompo();
@@ -242,13 +245,8 @@ switch ($op) {
             // Display Navigation
             if ($transactionsCount > $limit) {
                 require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
-                $pagenav = new \XoopsPageNav($transactionsCount, $limit, $start, 'start',
-                    'op=list&amp;limit=' . $limit . '&amp;all_id=' . $allId . '&amp;acc_id=' . $accId . '&amp;as_id=' . $asId . '&amp;cli_id=' . $cliId .
-                    '&tra_type=' . $traType . '&amp;filterYear=' . $filterYear .
-                    '&amp;filterMonthFrom=' . $filterMonthFrom . '&amp;filterYearFrom=' . $filterYearFrom . '&amp;filterMonthTo=' . $filterMonthTo . '&amp;filterYearTo=' . $filterYearTo .
-                    '&amp;allSubs=' . $allSubs . '&amp;sortby=' . $sortBy . '&amp;order=' . $order
-                );
-                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
+                $pagenav = new \XoopsPageNav($transactionsCount, $limit, $start, 'start', 'op=list' . $traOp);
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
             }
             $GLOBALS['xoopsTpl']->assign('showAssets', 0 == $asId);
             $GLOBALS['xoopsTpl']->assign('sort_order', \strtolower($sortBy . '_' . $order));
@@ -283,7 +281,7 @@ switch ($op) {
         }
 
         $traDate = \DateTime::createFromFormat(\_SHORTDATESTRING, Request::getString('tra_date'))->getTimestamp();
-        $traYear = Request::getInt('tra_year', 0);
+        $traYear = Request::getInt('tra_year');
         $createYearNb = false;
         if ($traId > 0) {
             $transactionsObj = $transactionsHandler->get($traId);
@@ -305,7 +303,7 @@ switch ($op) {
             $crTransactions->add(new \Criteria('tra_year', $traYear));
             $crTransactions->setSort('tra_nb');
             $crTransactions->setOrder('DESC');
-            $crTransactions->setStart(0);
+            $crTransactions->setStart();
             $crTransactions->setLimit(1);
             $transactionsAll = $transactionsHandler->getAll($crTransactions);
             foreach (\array_keys($transactionsAll) as $i) {
@@ -313,14 +311,14 @@ switch ($op) {
             }
             $traNb++;
         } else {
-            $traYear = Request::getInt('tra_year', 0);
-            $traNb = Request::getInt('tra_nb', 0);
+            $traYear = Request::getInt('tra_year');
+            $traNb = Request::getInt('tra_nb');
         }
         $transactionsObj->setVar('tra_year', $traYear);
         $transactionsObj->setVar('tra_nb', $traNb);
-        $transactionsObj->setVar('tra_desc', Request::getText('tra_desc', ''));
-        $transactionsObj->setVar('tra_reference', Request::getString('tra_reference', ''));
-        $transactionsObj->setVar('tra_remarks', Request::getText('tra_remarks', ''));
+        $transactionsObj->setVar('tra_desc', Request::getText('tra_desc'));
+        $transactionsObj->setVar('tra_reference', Request::getString('tra_reference'));
+        $transactionsObj->setVar('tra_remarks', Request::getText('tra_remarks'));
         $traAccid = Request::getInt('tra_accid');
         // catch cases when editing older transactions where account isn't valid anymore
         if (0 === $traAccid && Request::hasVar('tra_accid_old')) {
@@ -335,8 +333,8 @@ switch ($op) {
         $transactionsObj->setVar('tra_allid', $traAllid);
         $transactionDateObj = \DateTime::createFromFormat(\_SHORTDATESTRING, Request::getString('tra_date'));
         $transactionsObj->setVar('tra_date', $traDate);
-        $transactionsObj->setVar('tra_curid', Request::getInt('tra_curid', 0));
-        $traClass = Request::getInt('tra_class', 0);
+        $transactionsObj->setVar('tra_curid', Request::getInt('tra_curid'));
+        $traClass = Request::getInt('tra_class');
         $traAmount = Utility::StringToFloat(Request::getString('tra_amount'));
         if (Constants::CLASS_INCOME == $traClass) {
             $transactionsObj->setVar('tra_amountin', $traAmount);
@@ -348,16 +346,16 @@ switch ($op) {
             $transactionsObj->setVar('tra_amountin', 0);
             $transactionsObj->setVar('tra_amountout', 0);
         }
-        $transactionsObj->setVar('tra_taxid', Request::getInt('tra_taxid', 0));
-        $transactionsObj->setVar('tra_asid', Request::getInt('tra_asid', 0));
-        $transactionsObj->setVar('tra_balid', Request::getInt('tra_balid', 0));
-        $transactionsObj->setVar('tra_cliid', Request::getInt('tra_cliid', 0));
-        $transactionsObj->setVar('tra_status', Request::getInt('tra_status', 0));
-        $transactionsObj->setVar('tra_comments', Request::getInt('tra_comments', 0));
+        $transactionsObj->setVar('tra_taxid', Request::getInt('tra_taxid'));
+        $transactionsObj->setVar('tra_asid', Request::getInt('tra_asid'));
+        $transactionsObj->setVar('tra_balid', Request::getInt('tra_balid'));
+        $transactionsObj->setVar('tra_cliid', Request::getInt('tra_cliid'));
+        $transactionsObj->setVar('tra_status', Request::getInt('tra_status'));
+        $transactionsObj->setVar('tra_comments', Request::getInt('tra_comments'));
         $transactionsObj->setVar('tra_class', $traClass);
         $transactionsObj->setVar('tra_hist', $traHist);
-        $transactionsObj->setVar('tra_datecreated', Request::getInt('tra_datecreated', 0));
-        $transactionsObj->setVar('tra_submitter', Request::getInt('tra_submitter', 0));
+        $transactionsObj->setVar('tra_datecreated', Request::getInt('tra_datecreated'));
+        $transactionsObj->setVar('tra_submitter', Request::getInt('tra_submitter'));
         // Insert Data
         if ($transactionsHandler->insert($transactionsObj)) {
             $newTraId = $traId > 0 ? $traId : $transactionsObj->getNewInsertedIdTransactions();
@@ -407,6 +405,7 @@ switch ($op) {
             $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/select-autocomplete/jquery-ui.min.js');
             $GLOBALS['xoTheme']->addStylesheet(\WGSIMPLEACC_URL . '/assets/select-autocomplete/jquery-ui.min.css');
             $GLOBALS['xoTheme']->addStylesheet(\WGSIMPLEACC_URL . '/assets/select-autocomplete/select-autocomplete.css');
+            $GLOBALS['xoopsTpl']->assign('js_autocomplete', true);
         }
         // Form Create
         $transactionsObj = $transactionsHandler->create();
@@ -462,7 +461,7 @@ switch ($op) {
         if (0 == $traId) {
             \redirect_header('transactions.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
         }
-        $approve = (bool)('approve' == $op);
+        $approve = ('approve' == $op);
 
         // Check permissions
         if ($approve && !$permissionsHandler->getPermTransactionsApprove()) {
@@ -474,6 +473,7 @@ switch ($op) {
             $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/select-autocomplete/jquery-ui.min.js');
             $GLOBALS['xoTheme']->addStylesheet(\WGSIMPLEACC_URL . '/assets/select-autocomplete/jquery-ui.min.css');
             $GLOBALS['xoTheme']->addStylesheet(\WGSIMPLEACC_URL . '/assets/select-autocomplete/select-autocomplete.css');
+            $GLOBALS['xoopsTpl']->assign('js_autocomplete', true);
         }
 
         $transactionsObj = $transactionsHandler->get($traId);
@@ -557,7 +557,7 @@ switch ($op) {
             $crTransactions = new \CriteriaCompo();
             $crTransactions->setSort('tra_date');
             $crTransactions->setOrder('ASC');
-            $crTransactions->setStart(0);
+            $crTransactions->setStart();
             $crTransactions->setLimit(1);
             $transactionsAll = $transactionsHandler->getAll($crTransactions);
             foreach (\array_keys($transactionsAll) as $i) {
@@ -565,13 +565,13 @@ switch ($op) {
             }
             $crTransactions->setSort('tra_date');
             $crTransactions->setOrder('DESC');
-            $crTransactions->setStart(0);
+            $crTransactions->setStart();
             $crTransactions->setLimit(1);
             $transactionsAll = $transactionsHandler->getAll($crTransactions);
             foreach (\array_keys($transactionsAll) as $i) {
                 $yearMax = date('Y', $transactionsAll[$i]->getVar('tra_date'));
             }
-            $formFilter = $transactionsHandler::getFormFilter($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, $cliId, 'list', 0, $traStatus, $traDesc);
+            $formFilter = $transactionsHandler::getFormFilter($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, $cliId, 'list', 0, $traStatus, $traDesc, $filterInvalid);
             $GLOBALS['xoopsTpl']->assign('formFilter', $formFilter->render());
         }
         $crTransactions = new \CriteriaCompo();
@@ -642,7 +642,7 @@ switch ($op) {
             if ($transactionsCount > $limit) {
                 require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
                 $pagenav = new \XoopsPageNav($transactionsCount, $limit, $start, 'start', 'op=list&limit=' . $limit . '&amp;all_id=' . $allId);
-                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
             }
             $GLOBALS['xoopsTpl']->assign('showAssets', 0 == $asId);
             $GLOBALS['xoopsTpl']->assign('useCurrencies', $helper->getConfig('use_currencies'));

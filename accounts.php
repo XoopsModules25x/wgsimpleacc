@@ -34,13 +34,13 @@ require __DIR__ . '/navbar.php';
 
 // Permissions
 if (!$permissionsHandler->getPermAccountsView()) {
-    \redirect_header('index.php', 0, '');
+    \redirect_header('index.php', 0);
 }
 
 $op    = Request::getCmd('op', 'list');
-$start = Request::getInt('start', 0);
+$start = Request::getInt('start');
 $limit = Request::getInt('limit', $helper->getConfig('userpager'));
-$accId = Request::getInt('acc_id', 0);
+$accId = Request::getInt('acc_id');
 
 $permAccountsSubmit = $permissionsHandler->getPermAccountsSubmit();
 
@@ -93,25 +93,25 @@ switch ($op) {
         } else {
             $accountsObj = $accountsHandler->create();
         }
-        $accPid = Request::getInt('acc_pid', 0);
+        $accPid = Request::getInt('acc_pid');
         $accountsObj->setVar('acc_pid', $accPid);
-        $accountsObj->setVar('acc_key', Request::getString('acc_key', ''));
-        $accountsObj->setVar('acc_name', Request::getString('acc_name', ''));
-        $accountsObj->setVar('acc_desc', Request::getString('acc_desc', ''));
-        $accountsObj->setVar('acc_classification', Request::getInt('acc_classification', 0));
-        $accountsObj->setVar('acc_color', Request::getString('acc_color', ''));
-        $accountsObj->setVar('acc_iecalc', Request::getInt('acc_iecalc', 0));
-        $accountsObj->setVar('acc_online', Request::getInt('acc_online', 0));
+        $accountsObj->setVar('acc_key', Request::getString('acc_key'));
+        $accountsObj->setVar('acc_name', Request::getString('acc_name'));
+        $accountsObj->setVar('acc_desc', Request::getString('acc_desc'));
+        $accountsObj->setVar('acc_classification', Request::getInt('acc_classification'));
+        $accountsObj->setVar('acc_color', Request::getString('acc_color'));
+        $accountsObj->setVar('acc_iecalc', Request::getInt('acc_iecalc'));
+        $accountsObj->setVar('acc_online', Request::getInt('acc_online'));
         $level = 1;
         if ($accPid > 0) {
             $accParentObj = $accountsHandler->get($accPid);
             $level = $accParentObj->getVar('acc_level') + 1;
         }
         unset($accParentObj);
-        $accountsObj->setVar('acc_level', Request::getInt('acc_level', 0));
-        $accountsObj->setVar('acc_weight', Request::getInt('acc_weight', 0));
+        $accountsObj->setVar('acc_level', Request::getInt('acc_level'));
+        $accountsObj->setVar('acc_weight', Request::getInt('acc_weight'));
         $accountsObj->setVar('acc_datecreated', \time());
-        $accountsObj->setVar('acc_submitter', Request::getInt('acc_submitter', 0));
+        $accountsObj->setVar('acc_submitter', Request::getInt('acc_submitter'));
         // Insert Data
         if ($accountsHandler->insert($accountsObj)) {
             \redirect_header('accounts.php?op=list', 2, \_MA_WGSIMPLEACC_FORM_OK);
