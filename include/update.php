@@ -15,8 +15,6 @@
  * @param mixed      $module
  * @param null|mixed $prev_version
  * @package        Wgsimpleacc
- * @since          1.0
- * @min_xoops      2.5.9
  * @author         Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version        $Id: 1.0 update.php 1 Mon 2018-03-19 10:04:53Z XOOPS Project (www.xoops.org) $
  * @copyright      module for xoops
