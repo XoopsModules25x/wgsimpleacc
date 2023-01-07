@@ -120,12 +120,12 @@ switch ($op) {
         if ($permissionsHandler->getPermTransactionsSubmit()) {
             // Form upload files
             $filesObj = $filesHandler->create();
-            $formFiles = $filesObj->getFormFiles($filTraid);
+            $formFiles = $filesObj->getFormFiles($filTraid, $start, $limit);
             $GLOBALS['xoopsTpl']->assign('formFilesUpload', $formFiles->render());
 
             if ($uploadByApp) {
                 $filesObj = $filesHandler->create();
-                $formFilesTemp = $filesObj->getFormTemp($filTraid);
+                $formFilesTemp = $filesObj->getFormTemp($filTraid, $start, $limit);
                 $GLOBALS['xoopsTpl']->assign('formFilesTemp', $formFilesTemp->render());
             }
         }

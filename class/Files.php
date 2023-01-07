@@ -170,11 +170,13 @@ class Files extends \XoopsObject
 
     /**
      * @public function getForm
-     * @param int $traId
+     * @param int  $traId
+     * @param int  $start
+     * @param int  $limit
      * @param bool $action
      * @return \XoopsThemeForm
      */
-    public function getFormFiles($traId, $action = false)
+    public function getFormFiles($traId, $start = 0, $limit = 0, $action = false)
     {
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         if (!$action) {
@@ -217,6 +219,8 @@ class Files extends \XoopsObject
         // To Save
         $form->addElement(new \XoopsFormHidden('op', 'upload_file'));
         $form->addElement(new \XoopsFormHidden('fil_traid', $filTraid));
+        $form->addElement(new \XoopsFormHidden('start', $start));
+        $form->addElement(new \XoopsFormHidden('limit', $limit));
         $form->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
         return $form;
     }
@@ -224,10 +228,12 @@ class Files extends \XoopsObject
     /**
      * @public function getForm
      * @param int  $traId
+     * @param int  $start
+     * @param int  $limit
      * @param bool $action
      * @return \XoopsThemeForm
      */
-    public function getFormTemp($traId, $action = false) {
+    public function getFormTemp($traId, $start = 0, $limit = 0, $action = false) {
         //$helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         if (!$action) {
             $action = $_SERVER['REQUEST_URI'];
@@ -261,6 +267,8 @@ class Files extends \XoopsObject
         // To Save
         $form->addElement(new \XoopsFormHidden('op', 'save_temp'));
         $form->addElement(new \XoopsFormHidden('fil_traid', $traId));
+        $form->addElement(new \XoopsFormHidden('start', $start));
+        $form->addElement(new \XoopsFormHidden('limit', $limit));
         $btnTray = new \XoopsFormElementTray('', '');
         $btnTray->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
         $btnTray->addElement(new \XoopsFormButton('', 'delete_filtemp', \_MA_WGSIMPLEACC_FILES_TEMP_DELETE, 'submit'));
