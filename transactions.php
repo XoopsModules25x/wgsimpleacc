@@ -86,6 +86,7 @@ $traOpSorter .= '&amp;displayfilter=' . $displayfilter . '&amp;allSubs=' . $allS
 $traOpSorter .= '&amp;cli_id=' . $cliId . '&amp;tra_type=' . $traType;
 
 $traOp = $traOpSorter . '&amp;sortby=' . $sortBy . '&amp;order=' . $order;
+$GLOBALS['xoopsTpl']->assign('traOp',$traOp);
 
 $keywords = [];
 
@@ -262,7 +263,6 @@ switch ($op) {
             }
         }
         $GLOBALS['xoopsTpl']->assign('traOpSorter',$traOpSorter);
-        $GLOBALS['xoopsTpl']->assign('traOp',$traOp);
 
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_TRANSACTIONS];

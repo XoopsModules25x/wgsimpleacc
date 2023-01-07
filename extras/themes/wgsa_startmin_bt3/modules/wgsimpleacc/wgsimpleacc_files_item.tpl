@@ -5,9 +5,13 @@
         <div class="row"><div class='col-sm-3 left'><{$smarty.const._MA_WGSIMPLEACC_FILE_TRAID}></div><div class='col-sm-9'><{$file.tra_number}></div></div>
         <div class="row"><div class='col-sm-3 left'><{$smarty.const._MA_WGSIMPLEACC_FILE_NAME}></div><div class='col-sm-9'><{$file.name}></div></div>
         <div class="row"><div class='col-sm-3 left'><{$smarty.const._MA_WGSIMPLEACC_FILE_TYPE}></div><div class='col-sm-9'><{$file.type}></div></div>
+        <div class="row"><div class='col-sm-3 left'></div><div class='col-sm-9 left'>
         <{if $file.image}>
-            <div class="row"><div class='col-sm-3 left'></div><div class='col-sm-9 left'><img class="img-responsive" src="<{$wgsimpleacc_upload_files_url}>/<{$file.name}>" alt="<{$file.name}>" title="<{$file.name}>"></div></div>
+            <img class="img-responsive" src="<{$wgsimpleacc_upload_files_url}>/<{$file.name}>" alt="<{$file.name}>" title="<{$file.name}>">
+        <{else}>
+            <iframe style="width:100%;height:20em" src="<{$wgsimpleacc_upload_files_url}>/<{$file.name}>"></iframe>
         <{/if}>
+        </div></div>
         <div class="row"><div class='col-sm-3 left'><{$smarty.const._MA_WGSIMPLEACC_FILE_DESC}></div><div class='col-sm-9'><{$file.desc}>&nbsp;</div></div>
         <div class="row"><div class='col-sm-3 left'><{$smarty.const._MA_WGSIMPLEACC_DATECREATED}></div><div class='col-sm-9'><{$file.datecreated}></div></div>
         <div class="row"><div class='col-sm-3 left'><{$smarty.const._MA_WGSIMPLEACC_SUBMITTER}></div><div class='col-sm-9'><{$file.submitter}></div></div>

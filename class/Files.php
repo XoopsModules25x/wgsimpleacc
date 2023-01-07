@@ -134,10 +134,11 @@ class Files extends \XoopsObject
 
     /**
      * @public function getForm
+     * @param strting $traOp
      * @param bool $action
      * @return \XoopsThemeForm
      */
-    public function getFormFilesEdit($action = false)
+    public function getFormFilesEdit($traOp = '', $action = false)
     {
 
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
@@ -161,6 +162,7 @@ class Files extends \XoopsObject
         $form->addElement(new \XoopsFormTextArea(\_MA_WGSIMPLEACC_FILE_DESC, 'fil_desc', $this->getVar('fil_desc', 'e'), 4, 47));
         // To Save
         $form->addElement(new \XoopsFormHidden('op', 'save_edit'));
+        $form->addElement(new \XoopsFormHidden('traOp', $traOp));
         $form->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
         return $form;
     }
@@ -168,12 +170,11 @@ class Files extends \XoopsObject
     /**
      * @public function getForm
      * @param int  $traId
-     * @param int  $start
-     * @param int  $limit
+     * @param int  $traOp
      * @param bool $action
      * @return \XoopsThemeForm
      */
-    public function getFormFiles($traId, $start = 0, $limit = 0, $action = false)
+    public function getFormFiles($traId, $traOp = '', $action = false)
     {
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         if (!$action) {
@@ -216,7 +217,7 @@ class Files extends \XoopsObject
         // To Save
         $form->addElement(new \XoopsFormHidden('op', 'upload_file'));
         $form->addElement(new \XoopsFormHidden('fil_traid', $filTraid));
-        $form->addElement(new \XoopsFormHidden('start', $start));
+        $form->addElement(new \XoopsFormHidden('traOp', $traOp));
         $form->addElement(new \XoopsFormHidden('limit', $limit));
         $form->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
         return $form;
@@ -225,12 +226,11 @@ class Files extends \XoopsObject
     /**
      * @public function getForm
      * @param int  $traId
-     * @param int  $start
-     * @param int  $limit
+     * @param int  $traOp
      * @param bool $action
      * @return \XoopsThemeForm
      */
-    public function getFormTemp($traId, $start = 0, $limit = 0, $action = false) {
+    public function getFormTemp($traId, $traOp = '', $action = false) {
         //$helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         if (!$action) {
             $action = $_SERVER['REQUEST_URI'];
@@ -244,7 +244,7 @@ class Files extends \XoopsObject
         // Form Frameworks Images Files filTemp
         // Form Frameworks Images filTemp: Select Uploaded Image
 
-        $filTemp = '';
+        $filTemp = 'blank.gif';
         $imageDirectory = '/uploads/wgsimpleacc/temp';
         $imageTray = new \XoopsFormElementTray(\_MA_WGSIMPLEACC_FILES_TEMP, '<br>');
         $imageSelect = new \XoopsFormSelect(\str_replace('%f', ".$imageDirectory/", \_MA_WGSIMPLEACC_FILES_TEMP_DESC), 'fil_temp', $filTemp, 5);
@@ -256,7 +256,7 @@ class Files extends \XoopsObject
         }
         $imageSelect->setExtra("onchange='showBtnDel();showImgSelected(\"imglabel_fil_temp\", \"fil_temp\", \"" . $imageDirectory . '", "", "' . \XOOPS_URL . "\")'");
         $imageTray->addElement($imageSelect, false);
-        $imageTray->addElement(new \XoopsFormLabel('', "<br><img src='" . \XOOPS_URL . '/' . $imageDirectory . '/' . $filTemp . "' id='imglabel_fil_temp' alt='' style='max-width:100px'>"));
+        $imageTray->addElement(new \XoopsFormLabel('', "<br><img src='" . \XOOPS_URL . $imageDirectory . '/' . $filTemp . "' id='imglabel_fil_temp' alt='' style='max-width:100px'>"));
         $form->addElement($imageTray);
 
         // Form Editor TextArea filDesc
@@ -264,8 +264,7 @@ class Files extends \XoopsObject
         // To Save
         $form->addElement(new \XoopsFormHidden('op', 'save_temp'));
         $form->addElement(new \XoopsFormHidden('fil_traid', $traId));
-        $form->addElement(new \XoopsFormHidden('start', $start));
-        $form->addElement(new \XoopsFormHidden('limit', $limit));
+        $form->addElement(new \XoopsFormHidden('traOp', $traOp));
         $btnTray = new \XoopsFormElementTray('', '');
         $btnTray->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
         $btnTray->addElement(new \XoopsFormButton('', 'delete_filtemp', \_MA_WGSIMPLEACC_FILES_TEMP_DELETE, 'submit'));

@@ -263,7 +263,7 @@ switch ($op) {
             case 'pdf':
             case 'form_pdf':
                 $useFooter = false;
-                require_once __DIR__ . '/outtemplates_pdf.php';
+                require_once __DIR__ . '/output_pdf.php';
 
                 $filePdf = \str_replace(['%y', '%n'], [$outParams['tra_year'], $outParams['tra_nb']], \_MA_WGSIMPLEACC_PDF_TRANAME);
                 $filePdf = $filePdf . '_' . time() . '.pdf';
