@@ -15,8 +15,6 @@
  * @copyright      2020 XOOPS Project (https://xooops.org)
  * @license        GPL 2.0 or later
  * @package        wgsimpleacc
- * @since          1.0
- * @min_xoops      2.5.10
  * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
@@ -34,17 +32,46 @@ require __DIR__ . '/navbar.php';
 
 // Permissions
 if (!$permissionsHandler->getPermFilesView()) {
-    \redirect_header('index.php', 0, '');
+    \redirect_header('index.php', 0);
 }
 
+/* params from files.php */
 $op            = Request::getCmd('op', 'list');
-$deleteFiltemp = Request::getString('delete_filtemp', '');
-$start         = Request::getInt('start', 0);
+$deleteFiltemp = Request::getString('delete_filtemp');
+$start         = Request::getInt('start');
 $limit         = Request::getInt('limit', $helper->getConfig('userpager'));
-$filId         = Request::getInt('fil_id', 0);
-$filTraid      = Request::getInt('fil_traid', 0);
+$filId         = Request::getInt('fil_id');
+$filTraid      = Request::getInt('fil_traid');
 if ('save_temp' == $op && '' != $deleteFiltemp) {
     $op = 'delete_filtemp';
+}
+/* params from transactions.php */
+$traOp = Request::getString('traOp');
+if ('' === $traOp) {
+    $traId           = Request::getInt('tra_id');
+    $traType         = Request::getInt('tra_type');
+    $allId           = Request::getInt('all_id');
+    $allSubs         = Request::getInt('allSubs');
+    $accId           = Request::getInt('acc_id');
+    $asId            = Request::getInt('as_id');
+    $cliId           = Request::getInt('cli_id');
+    $displayfilter   = Request::getInt('displayfilter');
+    $filterYear      = Request::getInt('filterYear');
+    $filterMonthFrom = Request::getInt('filterMonthFrom');
+    $filterYearFrom  = Request::getInt('filterYearFrom');
+    $filterMonthTo   = Request::getInt('filterMonthTo');
+    $filterYearTo    = Request::getInt('filterYearTo', date('Y'));
+    $filterInvalid   = Request::getInt('filterInvalid');
+    $traStatus       = Request::getArray('tra_status');
+    $traDesc         = Request::getString('tra_desc');
+    $sortBy          = Request::getString('sortby', 'tra_id');
+    $order           = Request::getString('order', 'desc');
+
+    $traOp = '&amp;start=' . $start . '&amp;limit=' . $limit . '&amp;all_id=' . $allId . '&amp;acc_id=' . $accId . '&amp;as_id=' . $asId;
+    $traOp .= '&amp;filterYear=' . $filterYear . '&amp;filterMonthFrom=' . $filterMonthFrom . '&amp;filterYearFrom=' . $filterYearFrom . '&amp;filterMonthTo=' . $filterMonthTo . '&amp;filterYearTo=' . $filterYearTo;
+    $traOp .= '&amp;displayfilter=' . $displayfilter . '&amp;allSubs=' . $allSubs . '&amp;filterInvalid=' . $filterInvalid;
+    $traOp .= '&amp;cli_id=' . $cliId . '&amp;tra_type=' . $traType;
+    $GLOBALS['xoopsTpl']->assign('traOp', $traOp);
 }
 
 $uploadByApp = $helper->getConfig('upload_by_app');
@@ -77,7 +104,6 @@ switch ($op) {
                     throw new Exception('Cannot access ' . $filePath .' to read.');
                 }
                 exit;
-                break;
             case 'application/pdf':
                 // Header content type
                 header('Content-type: application/pdf');
@@ -90,9 +116,7 @@ switch ($op) {
                     throw new Exception("Cannot access '$filePath' to read.");
                 }
                 exit;
-                break;
         }
-        break;
     case 'list':
     default:
         if ($filTraid > 0) {
@@ -123,12 +147,12 @@ switch ($op) {
         if ($permissionsHandler->getPermTransactionsSubmit()) {
             // Form upload files
             $filesObj = $filesHandler->create();
-            $formFiles = $filesObj->getFormFiles($filTraid);
+            $formFiles = $filesObj->getFormFiles($filTraid, $traOp);
             $GLOBALS['xoopsTpl']->assign('formFilesUpload', $formFiles->render());
 
             if ($uploadByApp) {
                 $filesObj = $filesHandler->create();
-                $formFilesTemp = $filesObj->getFormTemp($filTraid);
+                $formFilesTemp = $filesObj->getFormTemp($filTraid, $traOp);
                 $GLOBALS['xoopsTpl']->assign('formFilesTemp', $formFilesTemp->render());
             }
         }
@@ -150,17 +174,17 @@ switch ($op) {
         } else {
             \redirect_header('files.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
         }
-        $filesObj->setVar('fil_desc', Request::getString('fil_desc', ''));
+        $filesObj->setVar('fil_desc', Request::getString('fil_desc'));
         $filesObj->setVar('fil_ip', $_SERVER['REMOTE_ADDR']);
         $filesObj->setVar('fil_datecreated', \time());
         $filesObj->setVar('fil_submitter', $GLOBALS['xoopsUser']->id());
         // Insert Data
         if ($filesHandler->insert($filesObj)) {
-            \redirect_header('files.php?op=list&amp;fil_traid=' . $filesObj->getVar('fil_traid'), 2, \_MA_WGSIMPLEACC_FORM_OK);
+            \redirect_header('files.php?op=list&amp;fil_traid=' . $filesObj->getVar('fil_traid') . $traOp, 2, \_MA_WGSIMPLEACC_FORM_OK);
         }
         // Get Form Error
         $GLOBALS['xoopsTpl']->assign('error', $filesObj->getHtmlErrors());
-        $formFiles = $filesObj->getFormFilesEdit($filTraid);
+        $formFiles = $filesObj->getFormFilesEdit($traOp);
         $GLOBALS['xoopsTpl']->assign('formFilesEdit', $formFiles->render());
         break;
     case 'upload_file':
@@ -220,7 +244,7 @@ switch ($op) {
                 $filesObj->setVar('fil_name', $filName);
             }
         } else {
-            $filName = Request::getString('fil_temp', '');
+            $filName = Request::getString('fil_temp');
             $filSource = \XOOPS_ROOT_PATH . '/uploads/wgsimpleacc/temp/' . $filName;
             $filDest = \XOOPS_ROOT_PATH . '/uploads/wgsimpleacc/files/' . $filName;
             \rename($filSource, $filDest);
@@ -232,7 +256,7 @@ switch ($op) {
         }
         $fileMimetype   = \mime_content_type($filePath);
         $filesObj->setVar('fil_type', $fileMimetype);
-        $filesObj->setVar('fil_desc', Request::getString('fil_desc', ''));
+        $filesObj->setVar('fil_desc', Request::getString('fil_desc'));
         $filesObj->setVar('fil_ip', $_SERVER['REMOTE_ADDR']);
         $filesObj->setVar('fil_datecreated', \time());
         $filesObj->setVar('fil_submitter', $GLOBALS['xoopsUser']->id());
@@ -243,7 +267,7 @@ switch ($op) {
             if ('' !== $uploaderErrors) {
                 \redirect_header('files.php?op=edit&fil_id=' . $newFilId, 5, $uploaderErrors);
             } else {
-                \redirect_header('files.php?op=list&amp;fil_traid=' . $filTraid, 2, \_MA_WGSIMPLEACC_FORM_OK);
+                \redirect_header('files.php?op=list&amp;fil_traid=' . $filTraid . $traOp, 2, \_MA_WGSIMPLEACC_FORM_OK);
             }
         }
         // Get Form Error
@@ -268,7 +292,7 @@ switch ($op) {
         }
         // Get Form
         $filesObj = $filesHandler->get($filId);
-        $form = $filesObj->getFormFilesEdit();
+        $form = $filesObj->getFormFilesEdit($traOp);
         $GLOBALS['xoopsTpl']->assign('formFilesEdit', $form->render());
         break;
 
@@ -294,15 +318,15 @@ switch ($op) {
                 \unlink(\XOOPS_ROOT_PATH . '/uploads/wgsimpleacc/files/' . $filName);
             }
             if ($filesHandler->delete($filesObj)) {
-                \redirect_header('files.php?op=list&amp;fil_traid=' . $filTraid, 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
+                \redirect_header('files.php?op=list&amp;fil_traid=' . $filTraid . $traOp, 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
             } else {
                 $GLOBALS['xoopsTpl']->assign('error', $filesObj->getHtmlErrors());
             }
         } else {
             $customConfirm = new Common\Confirm(
-                ['ok' => 1, 'fil_id' => $filId, 'op' => 'delete'],
+                ['ok' => 1, 'fil_id' => $filId, 'op' => 'delete', 'traOp' => $traOp],
                 $_SERVER['REQUEST_URI'],
-                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $filesObj->getVar('fil_name')));
+                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $filesObj->getVar('fil_name')), _MA_WGSIMPLEACC_FORM_DELETE_CONFIRM, _MA_WGSIMPLEACC_FORM_DELETE_LABEL);
             $form = $customConfirm->getFormConfirm();
             $GLOBALS['xoopsTpl']->assign('form', $form->render());
         }
@@ -312,10 +336,10 @@ switch ($op) {
         if (!$GLOBALS['xoopsSecurity']->check()) {
             \redirect_header('files.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
-        $fileName = Request::getString('fil_temp', '');
+        $fileName = Request::getString('fil_temp');
         $filePath = \XOOPS_ROOT_PATH . '/uploads/wgsimpleacc/temp/' . $fileName;
         \unlink($filePath);
-        \redirect_header('files.php?op=list&amp;fil_traid=' . $filTraid, 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
+        \redirect_header('files.php?op=list&amp;fil_traid=' . $filTraid . $traOp, 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
         break;
 }
 

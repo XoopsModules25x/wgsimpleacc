@@ -21,8 +21,6 @@ namespace XoopsModules\Wgsimpleacc;
  * @copyright      2020 XOOPS Project (https://xooops.org)
  * @license        GPL 2.0 or later
  * @package        wgsimpleacc
- * @since          1.0
- * @min_xoops      2.5.10
  * @author         XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
@@ -59,7 +57,7 @@ class FilhistoriesHandler extends \XoopsPersistableObjectHandler
      *
      * @param int $id field id
      * @param null fields
-     * @return mixed reference to the {@link Get} object
+     * @return \XoopsObject|null reference to the {@link Get} object
      */
     public function get($id = null, $fields = null)
     {

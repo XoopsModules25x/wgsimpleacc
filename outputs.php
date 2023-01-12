@@ -15,8 +15,6 @@
  * @copyright      2020 XOOPS Project (https://xooops.org)
  * @license        GPL 2.0 or later
  * @package        wgsimpleacc
- * @since          1.0
- * @min_xoops      2.5.10
  * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
@@ -155,13 +153,14 @@ switch ($op) {
         break;
     case 'transactions';
         $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/js/forms.js');
-        $filterYear = Request::getInt('filterYear');
+        $filterYear      = Request::getInt('filterYear');
         $filterMonthFrom = Request::getInt('filterMonthFrom');
-        $filterYearFrom = Request::getInt('filterYearFrom');
-        $filterMonthTo = Request::getInt('filterMonthTo');
-        $filterYearTo = Request::getInt('filterYearTo', date('Y'));
-        $traStatus = Request::getArray('tra_status');
-        $traDesc   = Request::getString('tra_desc');
+        $filterYearFrom  = Request::getInt('filterYearFrom');
+        $filterMonthTo   = Request::getInt('filterMonthTo');
+        $filterYearTo    = Request::getInt('filterYearTo', date('Y'));
+        $traStatus       = Request::getArray('tra_status');
+        $traDesc         = Request::getString('tra_desc');
+        $filterInvalid   = Request::getInt('filterInvalid');
         //get first and last year
         $transactionsHandler = $helper->getHandler('Transactions');
         $yearMin = date('Y');
@@ -183,7 +182,7 @@ switch ($op) {
         foreach (\array_keys($transactionsAll) as $i) {
             $yearMax = date('Y', $transactionsAll[$i]->getVar('tra_date'));
         }
-        $formFilter = $transactionsHandler::getFormFilter($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, $cliId, 'tra_output', $traStatus, $traDesc);
+        $formFilter = $transactionsHandler::getFormFilter($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, $cliId, 'tra_output', $allSubs, $traStatus, $traDesc, $filterInvalid);
         $GLOBALS['xoopsTpl']->assign('formFilter', $formFilter->render());
 
         // Breadcrumbs
@@ -360,7 +359,5 @@ function cleanOutputXlsx ($text) {
     //replace line breaks by blank space
     $cleanText = \str_replace(['<br>', '</p>'], ' ', $text);
     //replace html code by clean char
-    $cleanText = \html_entity_decode($cleanText);
-
-    return $cleanText;
+    return \html_entity_decode($cleanText);
 }

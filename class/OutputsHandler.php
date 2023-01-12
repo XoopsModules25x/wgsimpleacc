@@ -18,8 +18,6 @@ namespace XoopsModules\Wgsimpleacc;
  * @copyright      2020 XOOPS Project (https://xooops.org)
  * @license        GPL 2.0 or later
  * @package        wgsimpleacc
- * @since          1.0
- * @min_xoops      2.5.10
  * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
@@ -280,7 +278,7 @@ class OutputsHandler extends \XoopsPersistableObjectHandler
                 $allName = $allocationsAll[$i]->getVar('all_name');
                 $allWeight = $allocationsAll[$i]->getVar('all_weight');
                 $allLevel = $allocationsAll[$i]->getVar('all_level');
-                $allocations_list[] = ['all_id' => $allId, 'all_name' => $allName];
+                //$allocations_list[] = ['all_id' => $allId, 'all_name' => $allName];
                 $sumAmountin = 0;
                 $sumAmountout = 0;
                 $subAllIds = $allocationsHandler->getSubsOfAllocations($allId);

@@ -15,8 +15,6 @@
  * @copyright      2020 XOOPS Project (https://xooops.org)
  * @license        GPL 2.0 or later
  * @package        wgsimpleacc
- * @since          1.0
- * @min_xoops      2.5.10
  * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
@@ -42,8 +40,6 @@ switch ($op) {
         $limit = Request::getInt('limit', $helper->getConfig('adminpager'));
         $templateMain = 'wgsimpleacc_admin_balances.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('balances.php'));
-        $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_BALANCE, 'balances.php?op=new');
-        $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
         $balancesCount = $balancesHandler->getCountBalances();
         $balancesAll = $balancesHandler->getAllBalances($start, $limit);
         $GLOBALS['xoopsTpl']->assign('balances_count', $balancesCount);
@@ -65,16 +61,6 @@ switch ($op) {
         } else {
             $GLOBALS['xoopsTpl']->assign('error', \_MA_WGSIMPLEACC_THEREARENT_BALANCES);
         }
-        break;
-    case 'new':
-        $templateMain = 'wgsimpleacc_admin_balances.tpl';
-        $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('balances.php'));
-        $adminObject->addItemButton(\_AM_WGSIMPLEACC_LIST_BALANCES, 'balances.php', 'list');
-        $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
-        // Form Create
-        $balancesObj = $balancesHandler->create();
-        $form = $balancesObj->getFormBalances(false, true);
-        $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
     case 'save':
         // Security Check
@@ -131,6 +117,14 @@ switch ($op) {
                 \redirect_header('balances.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
             if ($balancesHandler->delete($balancesObj)) {
+                //reset bal_id in table transactions
+                $crTransactions = new \CriteriaCompo();
+                $crTransactions->add(new \Criteria('tra_balid', $balId));
+                $transactionsHandler->updateAll('tra_balid', '0', $crTransactions, true);
+                //reset bal_idt in table transactions
+                $crTransactions = new \CriteriaCompo();
+                $crTransactions->add(new \Criteria('tra_balidt', $balId));
+                $transactionsHandler->updateAll('tra_balidt', '0', $crTransactions, true);
                 \redirect_header('balances.php', 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
             } else {
                 $GLOBALS['xoopsTpl']->assign('error', $balancesObj->getHtmlErrors());
@@ -139,7 +133,7 @@ switch ($op) {
             $customConfirm = new Common\Confirm(
                 ['ok' => 1, 'bal_id' => $balId, 'op' => 'delete'],
                 $_SERVER['REQUEST_URI'],
-                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $balancesObj->getVar('bal_id')));
+                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $balancesObj->getVar('bal_id')), _MA_WGSIMPLEACC_FORM_DELETE_CONFIRM, _MA_WGSIMPLEACC_FORM_DELETE_LABEL);
             $form = $customConfirm->getFormConfirm();
             $GLOBALS['xoopsTpl']->assign('form', $form->render());
         }

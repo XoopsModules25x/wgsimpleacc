@@ -18,8 +18,6 @@ namespace XoopsModules\Wgsimpleacc;
  * @copyright      2020 XOOPS Project (https://xooops.org)
  * @license        GPL 2.0 or later
  * @package        wgsimpleacc
- * @since          1.0
- * @min_xoops      2.5.10
  * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
@@ -90,7 +88,7 @@ class Accounts extends \XoopsObject
             $action = $_SERVER['REQUEST_URI'];
         }
         // Title
-        $title = $this->isNew() ? \sprintf(\_MA_WGSIMPLEACC_ACCOUNT_ADD) : \sprintf(\_MA_WGSIMPLEACC_ACCOUNT_EDIT);
+        $title = $this->isNew() ? \_MA_WGSIMPLEACC_ACCOUNT_ADD : \_MA_WGSIMPLEACC_ACCOUNT_EDIT;
         // Get Theme Form
         \xoops_load('XoopsFormLoader');
         $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
@@ -180,10 +178,10 @@ class Accounts extends \XoopsObject
     {
         $helper  = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $utility = new \XoopsModules\Wgsimpleacc\Utility();
+        $accountsHandler = $helper->getHandler('Accounts');
         $ret = $this->getValues($keys, $format, $maxDepth);
         $ret['id']             = $this->getVar('acc_id');
-        $accountsHandler = $helper->getHandler('Accounts');
-        $accountsObj = $accountsHandler->get($this->getVar('acc_pid'));
+        $accountsObj           = $accountsHandler->get($this->getVar('acc_pid'));
         $ret['pid']            = $accountsObj->getVar('acc_key');
         $ret['key']            = $this->getVar('acc_key');
         $ret['name']           = $this->getVar('acc_name');

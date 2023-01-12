@@ -15,8 +15,6 @@
  * @copyright      2020 XOOPS Project (https://xooops.org)
  * @license        GPL 2.0 or later
  * @package        wgsimpleacc
- * @since          1.0
- * @min_xoops      2.5.10
  * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
@@ -31,6 +29,18 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_NO', 'Nein');
 \define('_MA_WGSIMPLEACC_DETAILS', 'Details anzeigen');
 \define('_MA_WGSIMPLEACC_REFRESH', 'Aktualisieren');
+\define('_MA_WGSIMPLEACC_DATECREATED', 'Bearbeitungsdatum');
+\define('_MA_WGSIMPLEACC_SUBMITTER', 'Einsender');
+\define('_MA_WGSIMPLEACC_LIST_CHILDS', 'Klicke zum Anzeigen/Verstecken der Unterkategorien');
+\define('_MA_WGSIMPLEACC_APPROVE', 'Freigeben');
+\define('_MA_WGSIMPLEACC_DASHBOARD', 'Dashboard');
+\define('_MA_WGSIMPLEACC_DOWNLOAD', 'Download');
+\define('_MA_WGSIMPLEACC_REACTIVATE', 'Reaktivieren (Transaktion wieder zu gültigen Transaktionen hinzufügen');
+\define('_MA_WGSIMPLEACC_SUMS', 'Summen');
+\define('_MA_WGSIMPLEACC_FORM_PLACEHOLDER_NAME', 'Name eingeben');
+\define('_MA_WGSIMPLEACC_INVALID_PARAM', 'Ungültiger Parameter');
+\define('_MA_WGSIMPLEACC_COLLAPSE_ALL', 'Alle aufklappen');
+// ---------------- Filter   ----------------
 \define('_MA_WGSIMPLEACC_FILTERTYPE', 'Filter');
 \define('_MA_WGSIMPLEACC_SHOW_ALL', 'Alle anzeigen');
 \define('_MA_WGSIMPLEACC_SHOW_CUSTOM', 'Benutzerdefinierte Auswahl anzeigen');
@@ -52,15 +62,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_FILTER_OUTPUT', 'Gewählte Daten ausgeben');
 \define('_MA_WGSIMPLEACC_FILTER_OUTPUTTYPE', 'Art der Ausgabe');
 \define('_MA_WGSIMPLEACC_FILTER_NO_TRANSACTIONS', "Es gibt keine Transaktionen, die dem Filter entsprechen");
-\define('_MA_WGSIMPLEACC_DATECREATED', 'Bearbeitungsdatum');
-\define('_MA_WGSIMPLEACC_SUBMITTER', 'Einsender');
-\define('_MA_WGSIMPLEACC_LIST_CHILDS', 'Klicke zum Anzeigen/Verstecken der Unterkategorien');
-\define('_MA_WGSIMPLEACC_APPROVE', 'Freigeben');
-\define('_MA_WGSIMPLEACC_DASHBOARD', 'Dashboard');
-\define('_MA_WGSIMPLEACC_DOWNLOAD', 'Download');
-\define('_MA_WGSIMPLEACC_REACTIVATE', 'Reaktivieren (Transaktion wieder zu gültigen Transaktionen hinzufügen');
-\define('_MA_WGSIMPLEACC_SUMS', 'Summen');
-\define('_MA_WGSIMPLEACC_FORM_PLACEHOLDER_NAME', 'Name eingeben');
+\define('_MA_WGSIMPLEACC_FILTER_SELECT_INVALID', 'Ungültige Zuordungen/Konten im Filter verwenden');
 // ---------------- Contents ----------------
 // There aren't
 \define('_MA_WGSIMPLEACC_THEREARENT_ACCOUNTS', 'Es gibt derzeit keine Konten in der Datenbank');
@@ -124,6 +126,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_TRANSACTION_SUBMIT_INCOME', 'Einnahme erstellen');
 \define('_MA_WGSIMPLEACC_TRANSACTION_SUBMIT_EXPENSE', 'Ausgabe erstellen');
 \define('_MA_WGSIMPLEACC_TRANSACTION_TRATEMPLATE', 'Als Vorlage verwenden');
+\define('_MA_WGSIMPLEACC_TRANSACTION_SELECT_INVALID', '(dies Auswahl ist derzeit nicht gültig)');
 // Caption of Transaction
 \define('_MA_WGSIMPLEACC_TRANSACTION_ID', 'Id');
 \define('_MA_WGSIMPLEACC_TRANSACTION_YEAR', 'Jahr');
@@ -167,6 +170,9 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_ALLOCATION_NAME', 'Name');
 \define('_MA_WGSIMPLEACC_ALLOCATION_DESC', 'Beschreibung');
 \define('_MA_WGSIMPLEACC_ALLOCATION_ONLINE', 'Online');
+\define('_MA_WGSIMPLEACC_ALLOCATION_ACCOUNTS', 'Konten');
+\define('_MA_WGSIMPLEACC_ALLOCATION_ACCOUNTS_DESC', 'Definieren Sie alle Konten, bei denen diese Zuordnung verwendet werden soll.<br>Achtung: Das Konto muss für die Anzeige im Transaktionsformular zusätzlich noch auf "online" gesetzt sein.');
+\define('_MA_WGSIMPLEACC_ALLOCATION_ACCOUNTS_COMPARE', 'Vergleich Zuordnungen Konten');
 \define('_MA_WGSIMPLEACC_ALLOCATION_SORT', 'Sortierung');
 \define('_MA_WGSIMPLEACC_ALLOCATION_LEVEL', 'Ebene');
 \define('_MA_WGSIMPLEACC_ALLOCATION_WEIGHT', 'Reihung');
@@ -285,6 +291,10 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_BALANCE_TYPE', 'Art des Abschlusses');
 \define('_MA_WGSIMPLEACC_BALANCE_TYPE_TEMPORARY', 'Zwischenabschluss');
 \define('_MA_WGSIMPLEACC_BALANCE_TYPE_FINAL', 'Endgültiger Abschlusses');
+\define('_MA_WGSIMPLEACC_BALANCES_WARNING', 'Achtung');
+\define('_MA_WGSIMPLEACC_BALANCES_WARNING_NONE', 'Es gibt im Abschlusszeitraum %s Transaktion(en) ohne Status');
+\define('_MA_WGSIMPLEACC_BALANCES_WARNING_CREATED', "Es gibt im Abschlusszeitraum %s Transaktion(en) mit Status 'ERSTELLT'");
+\define('_MA_WGSIMPLEACC_BALANCES_WARNING_SUBMITTED', "Es gibt im Abschlusszeitraum %s Transaktion(en) mit Status 'EINGESENDET'");
 // Output balances
 \define('_MA_WGSIMPLEACC_BALANCES_OUT_TOTAL', 'Total');
 \define('_MA_WGSIMPLEACC_BALANCES_OUT_SUMS', 'Summen');
@@ -432,13 +442,14 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_FORM_DELETE_ERROR', 'Fehler beim Löschen der Daten');
 \define('_MA_WGSIMPLEACC_FORM_SURE_DELETE', "Wollen Sie diesen Eintrag wirklich löschen: <b><span style='color : Red;'>%s </span></b>");
 \define('_MA_WGSIMPLEACC_FORM_SURE_RENEW', "Wollen Sie diesen Eintrag wirklich aktualisieren: <b><span style='color : Red;'>%s </span></b>");
-\define('_MA_WGSIMPLEACC_INVALID_PARAM', 'Ungültiger Parameter');
 \define('_MA_WGSIMPLEACC_FORM_ACTION', 'Aktion');
 \define('_MA_WGSIMPLEACC_FORM_UPLOAD', 'Datei hochladen');
 \define('_MA_WGSIMPLEACC_FORM_UPLOAD_SIZE', 'Maximale Dateigröße: ');
 \define('_MA_WGSIMPLEACC_FORM_UPLOAD_SIZE_MB', 'MB');
 \define('_MA_WGSIMPLEACC_FORM_IMAGE_PATH', 'Dateien in %s :');
 \define('_MA_WGSIMPLEACC_FORM_UPLOAD_ALLOWEDMIME', 'Erlaubte Dateitypen:');
+\define('_MA_WGSIMPLEACC_FORM_DELETE_CONFIRM', 'Löschen bestätigen');
+\define('_MA_WGSIMPLEACC_FORM_DELETE_LABEL', 'Wollen Sie wirklich löschen:');
 //Constants class
 \define('_MA_WGSIMPLEACC_CLASS_EXPENSES', 'Ausgaben');
 \define('_MA_WGSIMPLEACC_CLASS_INCOME', 'Einnahmen');

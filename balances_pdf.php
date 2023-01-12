@@ -15,8 +15,6 @@
  * @copyright      2020 XOOPS Project (https://xooops.org)
  * @license        GPL 2.0 or later
  * @package        wgsimpleacc
- * @since          1.0
- * @min_xoops      2.5.10
  * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
@@ -168,7 +166,7 @@ $pdfTpl->assign('header_string', \WGSIMPLEACC_HEADER_STRING);
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, _CHARSET, false);
 // Remove/add default header/footer
 $pdf->setPrintHeader(false);
-$pdf->setPrintFooter(true);
+$pdf->setPrintFooter();
 // Set document information
 $pdf->SetCreator($pdfData['creator']);
 $pdf->SetAuthor($pdfData['author']);
@@ -207,5 +205,5 @@ $template_path = \WGSIMPLEACC_PATH . '/templates/wgsimpleacc_balances_pdf.tpl';
 $content = $pdfTpl->fetch($template_path);
 //echo $content;die;
 //$pdf->writeHTMLCell($w=0, $h=0, $x='', $y='', $content, $border=0, $ln=1, $fill=0, $reseth=true, $align='', $autopadding=false);
-$pdf->writeHTML($content, true, false, true, false, '');
-$pdf->Output($pdfFilename, 'I');
+$pdf->writeHTML($content, true, false, true);
+$pdf->Output($pdfFilename);

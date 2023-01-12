@@ -15,8 +15,6 @@
  * @copyright      2020 XOOPS Project (https://xooops.org)
  * @license        GPL 2.0 or later
  * @package        wgsimpleacc
- * @since          1.0
- * @min_xoops      2.5.10
  * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
@@ -124,6 +122,4 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_SUPPORT_FORUM', 'Support Forum');
 \define('_AM_WGSIMPLEACC_DONATION_AMOUNT', 'Donation Amount');
 \define('_AM_WGSIMPLEACC_MAINTAINEDBY', ' is maintained by ');
-
-\define('_AM_WGSIMPLEACC_FORM_DELETE_OK', 'Successfully deleted');
 // ---------------- End ----------------

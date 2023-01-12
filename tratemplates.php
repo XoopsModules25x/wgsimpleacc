@@ -15,8 +15,6 @@
  * @copyright      2020 XOOPS Project (https://xooops.org)
  * @license        GPL 2.0 or later
  * @package        wgsimpleacc
- * @since          1.0
- * @min_xoops      2.5.10
  * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
@@ -35,13 +33,13 @@ require __DIR__ . '/navbar.php';
 
 // Permissions
 if (!$permissionsHandler->getPermTratemplatesView()) {
-    \redirect_header('index.php', 0, '');
+    \redirect_header('index.php', 0);
 }
 
 $op    = Request::getCmd('op', 'list');
-$start = Request::getInt('start', 0);
+$start = Request::getInt('start');
 $limit = Request::getInt('limit', $helper->getConfig('userpager'));
-$tplId = Request::getInt('ttpl_id', 0);
+$tplId = Request::getInt('ttpl_id');
 
 $GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
@@ -82,7 +80,7 @@ switch ($op) {
             if ($tratemplatesCount > $limit) {
                 include_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
                 $pagenav = new \XoopsPageNav($tratemplatesCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
-                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
             }
         }
 
@@ -103,21 +101,21 @@ switch ($op) {
         } else {
             $tratemplatesObj = $tratemplatesHandler->create();
         }
-        $tratemplatesObj->setVar('ttpl_name', Request::getString('ttpl_name', ''));
-        $tratemplatesObj->setVar('ttpl_desc', Request::getText('ttpl_desc', ''));
-        $tratemplatesObj->setVar('ttpl_accid', Request::getInt('ttpl_accid', 0));
-        $tratemplatesObj->setVar('ttpl_allid', Request::getInt('ttpl_allid', 0));
-        $tratemplatesObj->setVar('ttpl_asid', Request::getInt('ttpl_asid', 0));
-        $tratemplatesObj->setVar('ttpl_cliid', Request::getInt('ttpl_cliid', 0));
-        $tratemplatesObj->setVar('ttpl_class', Request::getInt('ttpl_class', 0));
+        $tratemplatesObj->setVar('ttpl_name', Request::getString('ttpl_name'));
+        $tratemplatesObj->setVar('ttpl_desc', Request::getText('ttpl_desc'));
+        $tratemplatesObj->setVar('ttpl_accid', Request::getInt('ttpl_accid'));
+        $tratemplatesObj->setVar('ttpl_allid', Request::getInt('ttpl_allid'));
+        $tratemplatesObj->setVar('ttpl_asid', Request::getInt('ttpl_asid'));
+        $tratemplatesObj->setVar('ttpl_cliid', Request::getInt('ttpl_cliid'));
+        $tratemplatesObj->setVar('ttpl_class', Request::getInt('ttpl_class'));
         $tplAmountin = Request::getString('ttpl_amountin');
         $tratemplatesObj->setVar('ttpl_amountin', Utility::StringToFloat($tplAmountin));
         $tplAmountout = Request::getString('ttpl_amountout');
         $tratemplatesObj->setVar('ttpl_amountout', Utility::StringToFloat($tplAmountout));
-        $tratemplatesObj->setVar('ttpl_online', Request::getInt('ttpl_online', 0));
+        $tratemplatesObj->setVar('ttpl_online', Request::getInt('ttpl_online'));
         $templateDatecreatedObj = \DateTime::createFromFormat(\_SHORTDATESTRING, Request::getString('ttpl_datecreated'));
         $tratemplatesObj->setVar('ttpl_datecreated', $templateDatecreatedObj->getTimestamp());
-        $tratemplatesObj->setVar('ttpl_submitter', Request::getInt('ttpl_submitter', 0));
+        $tratemplatesObj->setVar('ttpl_submitter', Request::getInt('ttpl_submitter'));
         // Insert Data
         if ($tratemplatesHandler->insert($tratemplatesObj)) {
             // redirect after insert
@@ -133,7 +131,7 @@ switch ($op) {
         if (!$permSubmit) {
             \redirect_header('tratemplates.php?op=list', 3, \_NOPERM);
         }
-        $traId = Request::getInt('tra_id', 0);
+        $traId = Request::getInt('tra_id');
         // Form Create
         $tratemplatesObj = $tratemplatesHandler->create();
         if ($traId > 0) {
@@ -196,7 +194,7 @@ switch ($op) {
             $customConfirm = new Common\Confirm(
                 ['ok' => 1, 'ttpl_id' => $tplId, 'op' => 'delete'],
                 $_SERVER['REQUEST_URI'],
-                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $tratemplatesObj->getVar('ttpl_name')));
+                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $tratemplatesObj->getVar('ttpl_name')), _MA_WGSIMPLEACC_FORM_DELETE_CONFIRM, _MA_WGSIMPLEACC_FORM_DELETE_LABEL);
             $form = $customConfirm->getFormConfirm();
             $GLOBALS['xoopsTpl']->assign('form', $form->render());
 

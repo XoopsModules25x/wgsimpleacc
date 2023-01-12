@@ -15,8 +15,6 @@
  * @copyright      2020 XOOPS Project (https://xooops.org)
  * @license        GPL 2.0 or later
  * @package        wgsimpleacc
- * @since          1.0
- * @min_xoops      2.5.10
  * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
@@ -35,13 +33,13 @@ require __DIR__ . '/navbar.php';
 
 // Permissions
 if (!$permissionsHandler->getPermAssetsView()) {
-    \redirect_header('index.php', 0, '');
+    \redirect_header('index.php', 0);
 }
 
 $op    = Request::getCmd('op', 'list');
-$start = Request::getInt('start', 0);
+$start = Request::getInt('start');
 $limit = Request::getInt('limit', $helper->getConfig('userpager'));
-$asId  = Request::getInt('as_id', 0);
+$asId  = Request::getInt('as_id');
 
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_icon_url_16', \WGSIMPLEACC_ICONS_URL . '/16/');
 $GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
@@ -87,7 +85,7 @@ switch ($op) {
             if ($assetsCount > $limit) {
                 require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
                 $pagenav = new \XoopsPageNav($assetsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
-                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav(4));
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
             }
         }
         // Breadcrumbs
@@ -107,17 +105,17 @@ switch ($op) {
         } else {
             $assetsObj = $assetsHandler->create();
         }
-        $assetsObj->setVar('as_name', Request::getString('as_name', ''));
-        $assetsObj->setVar('as_descr', Request::getString('as_descr', ''));
-        $assetsObj->setVar('as_reference', Request::getString('as_reference', ''));
-        $assetsObj->setVar('as_color', Request::getString('as_color', ''));
-        $assetsObj->setVar('as_iecalc', Request::getInt('as_iecalc', 0));
-        $assetsObj->setVar('as_online', Request::getInt('as_online', 0));
+        $assetsObj->setVar('as_name', Request::getString('as_name'));
+        $assetsObj->setVar('as_descr', Request::getString('as_descr'));
+        $assetsObj->setVar('as_reference', Request::getString('as_reference'));
+        $assetsObj->setVar('as_color', Request::getString('as_color'));
+        $assetsObj->setVar('as_iecalc', Request::getInt('as_iecalc'));
+        $assetsObj->setVar('as_online', Request::getInt('as_online'));
         $assetsObj->setVar('as_datecreated', Request::getInt('as_datecreated'));
-        $assetsObj->setVar('as_submitter', Request::getInt('as_submitter', 0));
+        $assetsObj->setVar('as_submitter', Request::getInt('as_submitter'));
         // Insert Data
         if ($assetsHandler->insert($assetsObj)) {
-            if (Request::getInt('as_primary', 0) > 0) {
+            if (Request::getInt('as_primary') > 0) {
                 $newAsId = $assetsObj->getNewInsertedIdAssets();
                 $asId = $asId > 0 ? $asId : $newAsId;
                 $assetsHandler->setPrimaryAssets($asId);
@@ -206,7 +204,7 @@ switch ($op) {
             $customConfirm = new Common\Confirm(
                 ['ok' => 1, 'as_id' => $asId, 'op' => 'delete'],
                 $_SERVER['REQUEST_URI'],
-                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $assetsObj->getVar('as_name')));
+                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $assetsObj->getVar('as_name')), _MA_WGSIMPLEACC_FORM_DELETE_CONFIRM, _MA_WGSIMPLEACC_FORM_DELETE_LABEL);
             $form = $customConfirm->getFormConfirm();
             $GLOBALS['xoopsTpl']->assign('form', $form->render());
 

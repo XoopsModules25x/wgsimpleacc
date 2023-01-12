@@ -20,8 +20,6 @@ namespace XoopsModules\Wgsimpleacc;
  * @copyright      2020 XOOPS Project (https://xooops.org)
  * @license        GPL 2.0 or later
  * @package        wgsimpleacc
- * @since          1.0
- * @min_xoops      2.5.10
  * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
@@ -182,18 +180,22 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      *  - transaction is not closed
      * @param $traSubmitter
      * @param $traStatus
+     * @param $traBalId
      * @return bool
      */
-    public function getPermTransactionsEdit($traSubmitter, $traStatus)
+    public function getPermTransactionsEdit($traSubmitter, $traStatus, $traBalId)
     {
         global $xoopsUser, $xoopsModule;
+
+        if ((int)$traBalId > 0) {
+            // transaction locked by balance
+            return false;
+        }
 
         if ($this->getPermGlobalApprove()) {
             return true;
         }
-        if (Constants::STATUS_LOCKED == $traStatus) {
-            return false;
-        }
+
         $currentuid = 0;
         if (isset($xoopsUser) && \is_object($xoopsUser)) {
             if ($xoopsUser->isAdmin($xoopsModule->mid())) {

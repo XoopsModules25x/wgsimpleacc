@@ -15,8 +15,6 @@
  * @copyright      2020 XOOPS Project (https://xooops.org)
  * @license        GPL 2.0 or later
  * @package        wgsimpleacc
- * @since          1.0
- * @min_xoops      2.5.10
  * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
@@ -96,7 +94,7 @@ switch ($op) {
         if ($otplId > 0) {
             $outtemplatesObj = $outtemplatesHandler->get($otplId);
             // Check permissions
-            if (!$permissionsHandler->getPermOuttemplatesSubmit($outtemplatesObj->getVar('otpl_submitter'))) {
+            if (!$permissionsHandler->getPermOuttemplatesSubmit()) {
                 \redirect_header('outtemplates.php?op=list', 3, \_NOPERM);
             }
         } else {
@@ -172,7 +170,7 @@ switch ($op) {
         // Get Form
         $outtemplatesObj = $outtemplatesHandler->get($otplId);
         // Check permissions
-        if (!$permissionsHandler->getPermOuttemplatesSubmit($outtemplatesObj->getVar('otpl_submitter'))) {
+        if (!$permissionsHandler->getPermOuttemplatesSubmit()) {
             \redirect_header('outtemplates.php?op=list', 3, \_NOPERM);
         }
         $form = $outtemplatesObj->getFormOuttemplates();
@@ -206,7 +204,7 @@ switch ($op) {
             $customConfirm = new Common\Confirm(
                 ['ok' => 1, 'otpl_id' => $otplId, 'op' => 'delete'],
                 $_SERVER['REQUEST_URI'],
-                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $outtemplatesObj->getVar('otpl_name')));
+                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $outtemplatesObj->getVar('otpl_name')), _MA_WGSIMPLEACC_FORM_DELETE_CONFIRM, _MA_WGSIMPLEACC_FORM_DELETE_LABEL);
             $form = $customConfirm->getFormConfirm();
             $GLOBALS['xoopsTpl']->assign('form', $form->render());
 
@@ -265,7 +263,7 @@ switch ($op) {
             case 'pdf':
             case 'form_pdf':
                 $useFooter = false;
-                require_once __DIR__ . '/outtemplates_pdf.php';
+                require_once __DIR__ . '/output_pdf.php';
 
                 $filePdf = \str_replace(['%y', '%n'], [$outParams['tra_year'], $outParams['tra_nb']], \_MA_WGSIMPLEACC_PDF_TRANAME);
                 $filePdf = $filePdf . '_' . time() . '.pdf';

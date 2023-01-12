@@ -137,7 +137,7 @@ class MigrateHelper
         $level3 = \str_repeat(' ', 12);
 
         foreach ($tables as $tkey => $table) {
-            $schema[] = "{$tkey}:\n";
+            $schema[] = "$tkey:\n";
             foreach ($table as $lkey => $line) {
                 if ('keys' == $lkey) {
                     $schema[] = $level1 . "keys:\n";

@@ -15,8 +15,6 @@
  * @copyright      module for xoops
  * @license        GPL 2.0 or later
  * @package        general
- * @since          1.0
- * @min_xoops      2.5.9
  * @author         XOOPS - Website:<https://xoops.org>
  */
 $moduleDirName      = \basename(\dirname(__DIR__, 2));

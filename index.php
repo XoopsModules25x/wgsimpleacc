@@ -15,8 +15,6 @@
  * @copyright      2020 XOOPS Project (https://xooops.org)
  * @license        GPL 2.0 or later
  * @package        wgsimpleacc
- * @since          1.0
- * @min_xoops      2.5.10
  * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
@@ -33,7 +31,7 @@ $GLOBALS['xoopsTpl']->assign('template_sub', 'db:wgsimpleacc_index.tpl');
 require __DIR__ . '/navbar.php';
 
 $op     = Request::getCmd('op', 'list');
-$allPid = Request::getInt('all_pid', 0);
+$allPid = Request::getInt('all_pid');
 $level  = Request::getInt('level', 1);
 $filterYear      = date('Y');
 $filterMonthFrom = $helper->getConfig('balance_period_from');
@@ -301,7 +299,7 @@ if ($indexAssetsPieTotal) {
         $pcolors = [];
         $assetList = [];
         foreach ($assetsCurrent as $asset) {
-            if (1 == (int)$asset['iecalc']) {
+            if (1 == (int)$asset['iecalc'] && (float)$asset['amount_val'] > 0) {
                 $assets_data .= $asset['amount_val'] . ',';
                 $assets_labels .= "'" . $asset['name'] . "',";
                 $assets_total += $asset['amount_val'];

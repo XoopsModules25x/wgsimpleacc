@@ -18,8 +18,6 @@ namespace XoopsModules\Wgsimpleacc;
  * @copyright      2020 XOOPS Project (https://xooops.org)
  * @license        GPL 2.0 or later
  * @package        wgsimpleacc
- * @since          1.0
- * @min_xoops      2.5.10
  * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
@@ -47,7 +45,7 @@ interface Constants
 
     // Constants for status
     public const STATUS_NONE      = 0;
-    public const STATUS_OFFLINE   = 1;
+    public const STATUS_OFFLINE   = 1; // = deleted
     public const STATUS_CREATED   = 2;
     public const STATUS_SUBMITTED = 4;
     public const STATUS_APPROVED  = 7;

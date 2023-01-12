@@ -18,8 +18,6 @@ namespace XoopsModules\Wgsimpleacc;
  * @copyright      2020 XOOPS Project (https://xooops.org)
  * @license        GPL 2.0 or later
  * @package        wgsimpleacc
- * @since          1.0
- * @min_xoops      2.5.10
  * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
@@ -93,7 +91,7 @@ class Outtemplates extends \XoopsObject
         }
 
         // Title
-        $title = $this->isNew() ? \sprintf(\_MA_WGSIMPLEACC_OUTTEMPLATE_ADD) : \sprintf(\_MA_WGSIMPLEACC_OUTTEMPLATE_EDIT);
+        $title = $this->isNew() ? \_MA_WGSIMPLEACC_OUTTEMPLATE_ADD : \_MA_WGSIMPLEACC_OUTTEMPLATE_EDIT;
         // Get Theme Form
         \xoops_load('XoopsFormLoader');
         $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);

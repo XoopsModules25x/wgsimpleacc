@@ -35,7 +35,7 @@
                 <{else}>
                     <div style="padding:20px"><{$smarty.const._MA_WGSIMPLEACC_THEREARENT_FILES}></div>
                 <{/if}>
-                <a class='btn btn-danger right' href='transactions.php?op=list&amp;start=<{$start}>&amp;limit=<{$limit}>' title='<{$smarty.const._BACK}>'><{$smarty.const._BACK}></a>
+                <a class='btn btn-danger right' href='transactions.php?op=list<{$traOp}>' title='<{$smarty.const._BACK}>'><{$smarty.const._BACK}></a>
             </div>
             <!-- *************** Tab for upload files ***************-->
             <div class='tab-pane' id='2'>
@@ -59,6 +59,10 @@
 <{/if}>
 
 <div class="clear"></div>
+
+<!-- ---------------------------------- -->
+<!-- Start code for show files as modal -->
+<!-- ---------------------------------- -->
 <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-labelledby="imgModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -69,7 +73,27 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img id="modalimg" class="modal-img" src="" alt="" title="">
+                <img id="modalimg" class="modal-img" src="assets/images/blank.gif" alt="blank" title="blank">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><{$smarty.const._CLOSE}></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="pdfModal" tabindex="-1" role="dialog" aria-labelledby="pdfModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="pdfModalLabel">Default Title</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="<{$smarty.const._CLOSE}>">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <embed id="embedPdf" src="assets/images/blank.gif"
+                       frameborder="0" width="100%" height="400px">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><{$smarty.const._CLOSE}></button>
@@ -99,4 +123,54 @@
         var btnDel = document.getElementById('delete_filtemp');
         btnDel.classList.remove("hidden");
     }
+    $('#pdfModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var info = button.data('info');
+        var title = button.data('title');
+        var modal = $(this);
+        modal.find('.modal-title').text(title);
+        var modalpdf = document.getElementById("embedPdf");
+        modalpdf.src = info;
+        var width = modalpdf.naturalWidth;
+        modal.find(".modal-dialog").css("width", width + 100);
+    });
 </script>
+<!-- End code for show files as modal-->
+
+<!-- ----------------------------- -->
+<!-- Start code for printing files -->
+<!-- ----------------------------- -->
+<script>
+    function printFile(url) {
+        const iframe = document.createElement('iframe');
+        iframe.src = url;
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+
+        // Use onload to make pdf preview work on firefox
+        iframe.onload = () => {
+            iframe.contentWindow.focus();
+            iframe.contentWindow.print();
+        };
+    }
+</script>
+<style>
+    @media print,
+    @print {
+        .navigation {
+            visibility: hidden;
+        }
+        @page
+        {
+            size: auto;
+            margin: 0;
+        }
+        @page :footer {
+            display: none
+        }
+        @page :header {
+            display: none
+        }
+    }
+</style>
+<!-- End code for printing files -->

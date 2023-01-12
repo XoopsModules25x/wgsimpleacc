@@ -25,6 +25,25 @@ $(document).ready( function(){
 		$(this).closest('li').toggleClass('mjs-nestedSortable-collapsed').toggleClass('mjs-nestedSortable-expanded');
 		$(this).toggleClass('ui-icon-plusthick').toggleClass('ui-icon-minusthick');
 	});
+	$('.disclose_text').on('click', function() {
+		$(this).closest('li').toggleClass('mjs-nestedSortable-collapsed').toggleClass('mjs-nestedSortable-expanded');
+		$('#disclose_icon_' + this.id).toggleClass('ui-icon-plusthick').toggleClass('ui-icon-minusthick');
+	});
+	$('#collapse_all').on('click', function() {
+		if (0 == this.value) {
+			this.value=1;
+		} else {
+			this.value=0;
+		}
+
+		var cusid_ele = document.getElementsByClassName('disclose');
+		for (var i = 0; i < cusid_ele.length; ++i) {
+			var item = cusid_ele[i];
+			$(item).closest('li').toggleClass('mjs-nestedSortable-collapsed').toggleClass('mjs-nestedSortable-expanded');
+			$('#' + item.id).toggleClass('ui-icon-plusthick').toggleClass('ui-icon-minusthick');
+		}
+
+	});
 
 /* Call the container items to reorder fields */
   $( function() {

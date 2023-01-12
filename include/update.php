@@ -15,8 +15,6 @@
  * @param mixed      $module
  * @param null|mixed $prev_version
  * @package        Wgsimpleacc
- * @since          1.0
- * @min_xoops      2.5.9
  * @author         Wedega - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
  * @version        $Id: 1.0 update.php 1 Mon 2018-03-19 10:04:53Z XOOPS Project (www.xoops.org) $
  * @copyright      module for xoops
@@ -40,10 +38,11 @@ function xoops_module_update_wgsimpleacc($module, $prev_version = null)
 {
     $moduleDirName = $module->dirname();
 
+    /*
     if ($prev_version < 120) {
         update_wgsimpleacc_v120($module);
     }
-
+    */
     //wgsimpleacc_check_db($module);
 
     //check upload directory
@@ -109,6 +108,7 @@ function wgsimpleacc_check_db($module)
  *
  * @return bool
  */
+/*
 function update_wgsimpleacc_v120($module)
 {
     $table = $GLOBALS['xoopsDB']->prefix('wgsimpleacc_transactions');
@@ -127,3 +127,4 @@ function update_wgsimpleacc_v120($module)
 
     return true;
 }
+*/

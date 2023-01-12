@@ -15,8 +15,6 @@
  * @copyright      2020 XOOPS Project (https://xooops.org)
  * @license        GPL 2.0 or later
  * @package        wgsimpleacc
- * @since          1.0
- * @min_xoops      2.5.10
  * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
@@ -31,7 +29,7 @@ use XoopsModules\Wgsimpleacc\Helper;
  * @param $limit
  * @param $offset
  * @param $userid
- * @return mixed $itemIds
+ * @return array $itemIds
  */
 function wgsimpleacc_search($queryarray, $andor, $limit, $offset, $userid)
 {

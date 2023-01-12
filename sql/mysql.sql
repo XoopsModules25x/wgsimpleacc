@@ -177,6 +177,7 @@ CREATE TABLE `wgsimpleacc_allocations` (
   `all_name`        VARCHAR(255)    NOT NULL DEFAULT '',
   `all_desc`        TEXT            NOT NULL ,
   `all_online`      INT(1)          NOT NULL DEFAULT '0',
+  `all_accounts`    TEXT            NOT NULL ,
   `all_weight`      INT(10)         NOT NULL DEFAULT '0',
   `all_level`       INT(10)         NOT NULL DEFAULT '0',
   `all_datecreated` INT(10)         NOT NULL DEFAULT '0',

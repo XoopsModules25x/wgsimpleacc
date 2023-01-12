@@ -17,10 +17,10 @@
 </div>
 <div class='panel-foot'>
     <div class='col-sm-12 right'>
-        <a class='btn btn-success right' href='clients.php?op=list&amp;#cliId_<{$client.cli_id}>' title='<{$smarty.const._MA_WGSIMPLEACC_CLIENTS_LIST}>'><{$smarty.const._MA_WGSIMPLEACC_CLIENTS_LIST}></a>
+        <a class='btn btn-success right' href='clients.php?op=list<{$cliOp|default:''}>' title='<{$smarty.const._MA_WGSIMPLEACC_CLIENTS_LIST}>'><{$smarty.const._MA_WGSIMPLEACC_CLIENTS_LIST}></a>
         <{if $client.editable|default:''}>
-            <a class='btn btn-primary right' href='clients.php?op=edit&amp;cli_id=<{$client.cli_id}>' title='<{$smarty.const._EDIT}>'><{$smarty.const._EDIT}></a>
-            <a class='btn btn-danger right' href='clients.php?op=delete&amp;cli_id=<{$client.cli_id}>' title='<{$smarty.const._DELETE}>'><{$smarty.const._DELETE}></a>
+            <a class='btn btn-primary right' href='clients.php?op=edit&amp;cli_id=<{$client.cli_id}><{$cliOp|default:''}>' title='<{$smarty.const._EDIT}>'><{$smarty.const._EDIT}></a>
+            <a class='btn btn-danger right' href='clients.php?op=delete&amp;cli_id=<{$client.cli_id}><{$cliOp|default:''}>' title='<{$smarty.const._DELETE}>'><{$smarty.const._DELETE}></a>
         <{/if}>
     </div>
 </div>

@@ -18,8 +18,6 @@ namespace XoopsModules\Wgsimpleacc;
  * @copyright      2020 XOOPS Project (https://xooops.org)
  * @license        GPL 2.0 or later
  * @package        wgsimpleacc
- * @since          1.0
- * @min_xoops      2.5.10
  * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
@@ -94,7 +92,7 @@ class Balances extends \XoopsObject
         $dateFromM = mktime(0, 0, 0, date('m')-1, 1);
 
         // Title
-        $title = $this->isNew() ? \sprintf(\_MA_WGSIMPLEACC_BALANCE_ADD) : \sprintf(\_MA_WGSIMPLEACC_BALANCE_EDIT);
+        $title = $this->isNew() ? \_MA_WGSIMPLEACC_BALANCE_ADD : \_MA_WGSIMPLEACC_BALANCE_EDIT;
         // Get Theme Form
         \xoops_load('XoopsFormLoader');
         $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
@@ -198,12 +196,15 @@ class Balances extends \XoopsObject
             case 0:
             default:
                 $ret['type'] = 0;
+                $ret['type_text'] = 'invalid';
                 break;
             case Constants::STATUS_TEMPORARY:
                 $ret['type'] = Constants::BALANCE_TYPE_TEMPORARY;
+                $ret['type_text'] = \_MA_WGSIMPLEACC_BALANCE_TYPE_TEMPORARY;
                 break;
             case Constants::STATUS_APPROVED:
                 $ret['type'] = Constants::BALANCE_TYPE_FINAL;
+                $ret['type_text'] = \_MA_WGSIMPLEACC_BALANCE_TYPE_FINAL;
                 break;
         }
         $ret['datecreated'] = \formatTimestamp($this->getVar('bal_datecreated'), 's');

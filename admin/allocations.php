@@ -15,8 +15,6 @@
  * @copyright      2020 XOOPS Project (https://xooops.org)
  * @license        GPL 2.0 or later
  * @package        wgsimpleacc
- * @since          1.0
- * @min_xoops      2.5.10
  * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
@@ -27,7 +25,9 @@ use XoopsModules\Wgsimpleacc\Common;
 
 require __DIR__ . '/header.php';
 // It recovered the value of argument op in URL$
-$op = Request::getCmd('op', 'list');
+$op    = Request::getCmd('op', 'list');
+$start = Request::getInt('start');
+$limit = Request::getInt('limit', $helper->getConfig('adminpager'));
 // Request all_id
 $allId = Request::getInt('all_id');
 switch ($op) {
@@ -35,8 +35,6 @@ switch ($op) {
     default:
         // Define Stylesheet
         $GLOBALS['xoTheme']->addStylesheet($style, null);
-        $start = Request::getInt('start');
-        $limit = Request::getInt('limit', $helper->getConfig('adminpager'));
         $templateMain = 'wgsimpleacc_admin_allocations.tpl';
         $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('allocations.php'));
         $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_ALLOCATION, 'allocations.php?op=new');
@@ -48,8 +46,20 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', \WGSIMPLEACC_UPLOAD_URL);
         // Table view allocations
         if ($allocationsCount > 0) {
+            $accountsHandler = $helper->getHandler('Accounts');
             foreach (\array_keys($allocationsAll) as $i) {
                 $allocation = $allocationsAll[$i]->getValuesAllocations();
+                // get accounts defined for this allocation
+                $arrAccounts = \unserialize($allocationsAll[$i]->getVar('all_accounts'));
+                $allAccounts = [];
+                foreach ($arrAccounts as $account) {
+                    $accountsObj = $accountsHandler->get($account);
+                    if (\is_object($accountsObj)) {
+                        $allAccounts[$account] = $accountsObj->getVar('acc_name');
+                    }
+                    unset($accountsObj);
+                }
+                $allocation['accounts'] = $allAccounts;
                 $GLOBALS['xoopsTpl']->append('allocations_list', $allocation);
                 unset($allocation);
             }
@@ -70,7 +80,7 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
         // Form Create
         $allocationsObj = $allocationsHandler->create();
-        $form = $allocationsObj->getFormAllocations(false, true);
+        $form = $allocationsObj->getFormAllocations($start, $limit, 'list', false, true);
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
     case 'save':
@@ -89,6 +99,7 @@ switch ($op) {
         $allocationsObj->setVar('all_name', Request::getString('all_name'));
         $allocationsObj->setVar('all_desc', Request::getString('all_desc'));
         $allocationsObj->setVar('all_online', Request::getInt('all_online'));
+        $allocationsObj->setVar('all_accounts', \serialize(Request::getArray('all_accounts')));
         $level = 1;
         if ($allPid > 0) {
             $allParentObj = $allocationsHandler->get($allPid);
@@ -106,7 +117,7 @@ switch ($op) {
         }
         // Get Form
         $GLOBALS['xoopsTpl']->assign('error', $allocationsObj->getHtmlErrors());
-        $form = $allocationsObj->getFormAllocations();
+        $form = $allocationsObj->getFormAllocations($start, $limit);
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
     case 'edit':
@@ -117,7 +128,7 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
         // Get Form
         $allocationsObj = $allocationsHandler->get($allId);
-        $form = $allocationsObj->getFormAllocations(false, true);
+        $form = $allocationsObj->getFormAllocations($start, $limit, 'list',false, true);
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
     case 'delete':
@@ -138,7 +149,7 @@ switch ($op) {
             $customConfirm = new Common\Confirm(
                 ['ok' => 1, 'all_id' => $allId, 'op' => 'delete'],
                 $_SERVER['REQUEST_URI'],
-                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $allocationsObj->getVar('all_name')));
+                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $allocationsObj->getVar('all_name')), _MA_WGSIMPLEACC_FORM_DELETE_CONFIRM, _MA_WGSIMPLEACC_FORM_DELETE_LABEL);
             $form = $customConfirm->getFormConfirm();
             $GLOBALS['xoopsTpl']->assign('form', $form->render());
         }

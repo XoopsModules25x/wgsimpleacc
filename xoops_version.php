@@ -15,8 +15,6 @@
  * @copyright      2020 XOOPS Project (https://xooops.org)
  * @license        GPL 2.0 or later
  * @package        wgsimpleacc
- * @since          1.0
- * @min_xoops      2.5.10
  * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
@@ -29,7 +27,7 @@ $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 $modversion = [
     'name'                => \_MI_WGSIMPLEACC_NAME,
     'version'             => '1.3.0',
-    'module_status'       => 'RC1',
+    'module_status'       => 'RC2',
     'description'         => \_MI_WGSIMPLEACC_DESC,
     'author'              => 'Goffy - XOOPS Development Team',
     'author_mail'         => 'webmaster@wedega.com',

@@ -187,3 +187,15 @@ ul.menu > li + li:before {
 	padding:0;
 }
 
+
+/* checkbox 'collapse all' in allocation/account tpl*/
+.wgsa-collapse-all {
+	margin:10px !important;
+}
+
+/* styles for forms*/
+#formTransaction #tra_accid,
+#formTransaction #tra_allid {
+	width:100% !important;
+}
+

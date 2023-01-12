@@ -18,8 +18,6 @@ namespace XoopsModules\Wgsimpleacc;
  * @copyright      2020 XOOPS Project (https://xooops.org)
  * @license        GPL 2.0 or later
  * @package        wgsimpleacc
- * @since          1.0
- * @min_xoops      2.5.10
  * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
@@ -57,7 +55,7 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
      *
      * @param int $id field id
      * @param null fields
-     * @return mixed reference to the {@link Get} object
+     * @return \XoopsObject|null reference to the {@link Get} object
      */
     public function get($id = null, $fields = null)
     {
@@ -140,9 +138,10 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
      * @param int $allSubs
      * @param array $traStatus
      * @param string $traDesc
+     * @param int $filterInvalid
      * @return FormInline
      */
-    public static function getFormFilter($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, $cliId, $op, $allSubs, $traStatus, $traDesc)
+    public static function getFormFilter($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, $cliId, $op, $allSubs, $traStatus, $traDesc, $filterInvalid)
     {
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $period_type = $helper->getConfig('balance_period');
@@ -172,7 +171,11 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
             $traAllSubRadio->setExtra(" disabled='disabled' ");
         }
         $form->addElement($traAllSubRadio, true);
-
+        /*
+        $invalidAccAll = new \XoopsFormRadioYN(\_MA_WGSIMPLEACC_FILTER_SELECT_INVALID, 'filterInvalid', $filterInvalid);
+        //$invalidAccAll->setExtra(' onchange="document.getElementById(' . "'formFilter'" . ').submit();"');
+        $form->addElement($invalidAccAll);
+        */
         //linebreak
         $form->addElement(new \XoopsFormHidden('linebreak', ''));
         //create filter depending on preferences

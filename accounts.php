@@ -15,8 +15,6 @@
  * @copyright      2020 XOOPS Project (https://xooops.org)
  * @license        GPL 2.0 or later
  * @package        wgsimpleacc
- * @since          1.0
- * @min_xoops      2.5.10
  * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
@@ -34,13 +32,13 @@ require __DIR__ . '/navbar.php';
 
 // Permissions
 if (!$permissionsHandler->getPermAccountsView()) {
-    \redirect_header('index.php', 0, '');
+    \redirect_header('index.php', 0);
 }
 
 $op    = Request::getCmd('op', 'list');
-$start = Request::getInt('start', 0);
+$start = Request::getInt('start');
 $limit = Request::getInt('limit', $helper->getConfig('userpager'));
-$accId = Request::getInt('acc_id', 0);
+$accId = Request::getInt('acc_id');
 
 $permAccountsSubmit = $permissionsHandler->getPermAccountsSubmit();
 
@@ -79,6 +77,43 @@ switch ($op) {
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ACCOUNTS];
         break;
+        /*
+    case 'compare_alloc':
+        $accountsCount = $accountsHandler->getCountAccounts();
+        $accountsAll = $accountsHandler->getAllAccounts($start, $limit);
+        $GLOBALS['xoopsTpl']->assign('accounts_count', $accountsCount);
+        //$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
+        //$GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', \WGSIMPLEACC_UPLOAD_URL);
+        // Table view accounts
+        if ($accountsCount > 0) {
+            foreach (\array_keys($accountsAll) as $i) {
+                $account = $accountsAll[$i]->getValuesAccounts();
+                $accAllocations = \unserialize($accountsAll[$i]->getVar('acc_allocations'));
+                $allocations = [];
+                if (\is_array($accAllocations)) {
+                    foreach ($accAllocations as $alloc) {
+                        $allocationObj = $allocationsHandler->get($alloc);
+                        if (\is_object($allocationObj)) {
+                            $allocations[$alloc] = $allocationObj->getVar('all_name');
+                        }
+                        unset($allocationObj);
+                    }
+                }
+                $account['allocations'] = $allocations;
+
+                $GLOBALS['xoopsTpl']->append('compare_list', $account);
+                unset($account);
+            }
+            // Display Navigation
+            if ($accountsCount > $limit) {
+                require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
+                $pagenav = new \XoopsPageNav($accountsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
+            }
+        } else {
+            $GLOBALS['xoopsTpl']->assign('error', \_MA_WGSIMPLEACC_THEREARENT_ACCOUNTS);
+        }
+        break;*/
     case 'save':
         // Security Check
         if (!$GLOBALS['xoopsSecurity']->check()) {
@@ -93,25 +128,26 @@ switch ($op) {
         } else {
             $accountsObj = $accountsHandler->create();
         }
-        $accPid = Request::getInt('acc_pid', 0);
+        $accPid = Request::getInt('acc_pid');
         $accountsObj->setVar('acc_pid', $accPid);
-        $accountsObj->setVar('acc_key', Request::getString('acc_key', ''));
-        $accountsObj->setVar('acc_name', Request::getString('acc_name', ''));
-        $accountsObj->setVar('acc_desc', Request::getString('acc_desc', ''));
-        $accountsObj->setVar('acc_classification', Request::getInt('acc_classification', 0));
-        $accountsObj->setVar('acc_color', Request::getString('acc_color', ''));
-        $accountsObj->setVar('acc_iecalc', Request::getInt('acc_iecalc', 0));
-        $accountsObj->setVar('acc_online', Request::getInt('acc_online', 0));
+        $accountsObj->setVar('acc_key', Request::getString('acc_key'));
+        $accountsObj->setVar('acc_name', Request::getString('acc_name'));
+        $accountsObj->setVar('acc_desc', Request::getString('acc_desc'));
+        $accountsObj->setVar('acc_classification', Request::getInt('acc_classification'));
+        $accountsObj->setVar('acc_color', Request::getString('acc_color'));
+        $accountsObj->setVar('acc_iecalc', Request::getInt('acc_iecalc'));
+        $accountsObj->setVar('acc_online', Request::getInt('acc_online'));
+        $accountsObj->setVar('acc_allocations', \serialize(Request::getArray('acc_allocations')));
         $level = 1;
         if ($accPid > 0) {
             $accParentObj = $accountsHandler->get($accPid);
             $level = $accParentObj->getVar('acc_level') + 1;
         }
         unset($accParentObj);
-        $accountsObj->setVar('acc_level', Request::getInt('acc_level', 0));
-        $accountsObj->setVar('acc_weight', Request::getInt('acc_weight', 0));
+        $accountsObj->setVar('acc_level', Request::getInt('acc_level'));
+        $accountsObj->setVar('acc_weight', Request::getInt('acc_weight'));
         $accountsObj->setVar('acc_datecreated', \time());
-        $accountsObj->setVar('acc_submitter', Request::getInt('acc_submitter', 0));
+        $accountsObj->setVar('acc_submitter', Request::getInt('acc_submitter'));
         // Insert Data
         if ($accountsHandler->insert($accountsObj)) {
             \redirect_header('accounts.php?op=list', 2, \_MA_WGSIMPLEACC_FORM_OK);
@@ -186,7 +222,7 @@ switch ($op) {
             $customConfirm = new Common\Confirm(
                 ['ok' => 1, 'acc_id' => $accId, 'op' => 'delete'],
                 $_SERVER['REQUEST_URI'],
-                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $accountsObj->getVar('acc_key')));
+                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $accountsObj->getVar('acc_key')), _MA_WGSIMPLEACC_FORM_DELETE_CONFIRM, _MA_WGSIMPLEACC_FORM_DELETE_LABEL);
             $form = $customConfirm->getFormConfirm();
             $GLOBALS['xoopsTpl']->assign('form', $form->render());
         }

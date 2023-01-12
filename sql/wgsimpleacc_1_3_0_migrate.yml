@@ -375,6 +375,9 @@ wgsimpleacc_allocations:
             name: all_online
             attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
         -
+            name: all_accounts
+            attributes: ' TEXT            NOT NULL  '
+        -
             name: all_weight
             attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
         -

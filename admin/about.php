@@ -15,10 +15,9 @@
  * @copyright      2020 XOOPS Project (https://xooops.org)
  * @license        GPL 2.0 or later
  * @package        wgsimpleacc
- * @since          1.0
- * @min_xoops      2.5.10
  * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
+ 
 require __DIR__ . '/header.php';
 $templateMain = 'wgsimpleacc_admin_about.tpl';
 $GLOBALS['xoopsTpl']->assign('navigation', $adminObject->displayNavigation('about.php'));

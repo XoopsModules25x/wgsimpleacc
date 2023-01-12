@@ -1,26 +1,26 @@
 
 <style>
-	canvas {
-		-moz-user-select: none;
-		-webkit-user-select: none;
-		-ms-user-select: none;
-	}
+    canvas {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
 </style>
 
 <{if $formTraFilter|default:''}>
     <{$formTraFilter}>
  <{/if}>
 <{foreach item=alloc from=$tra_allocs_list}>
-	<a class='btn btn-default <{if $alloc.allSubs == 1}>disabled<{/if}>' href='<{$alloc.href}>' title='<{$alloc.all_name}>'>
-		<{$alloc.all_name}>
-		<{if $alloc.allSubs > 1}>
+    <a class='btn btn-default <{if $alloc.allSubs == 1}>disabled<{/if}>' href='<{$alloc.href}>' title='<{$alloc.all_name}>'>
+        <{$alloc.all_name}>
+        <{if $alloc.allSubs > 1}>
             <i class="fa fa-angle-double-down"></i>
-		<{/if}>
-	</a>
+        <{/if}>
+    </a>
 <{/foreach}>
 
 <div id="canvas-holder" class="canvas-assets" style="width:100%">
-	<canvas id="chart-transactions"></canvas>
+    <canvas id="chart-transactions"></canvas>
 </div>
 
 <script>

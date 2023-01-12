@@ -109,7 +109,7 @@ a.navbar-brand.xlogo {
 
 .xoops-banner {
     position: relative;
-    top: 0px;
+    top: 0;
 }
 
 .xoops-banner * {
@@ -1374,7 +1374,7 @@ img.avatar {
 }
 
 #xo-pagenav a:last-child {
-    margin-left: 0px;
+    margin-left: 0;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }
