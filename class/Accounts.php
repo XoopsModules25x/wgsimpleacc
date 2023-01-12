@@ -179,7 +179,6 @@ class Accounts extends \XoopsObject
         $helper  = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $utility = new \XoopsModules\Wgsimpleacc\Utility();
         $accountsHandler = $helper->getHandler('Accounts');
-        $allocationsHandler = $helper->getHandler('Allocations');
         $ret = $this->getValues($keys, $format, $maxDepth);
         $ret['id']             = $this->getVar('acc_id');
         $accountsObj           = $accountsHandler->get($this->getVar('acc_pid'));
