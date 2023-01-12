@@ -10,6 +10,7 @@
                 <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ALLOCATION_NAME}></th>
                 <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ALLOCATION_DESC}></th>
                 <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ALLOCATION_ONLINE}></th>
+                <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ALLOCATION_ACCOUNTS}></th>
                 <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ALLOCATION_LEVEL}></th>
                 <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ALLOCATION_WEIGHT}></th>
                 <th class="center"><{$smarty.const._MA_WGSIMPLEACC_DATECREATED}></th>
@@ -26,6 +27,15 @@
                 <td class='center'><{$allocation.name}></td>
                 <td class='center'><{$allocation.desc_short}></td>
                 <td class='center'><{$allocation.online}></td>
+                <td class='left'>
+                    <{if $allocation.accounts|default:false}>
+                        <ul>
+                            <{foreach item=account from=$allocation.accounts|default:false}>
+                                <li><{$account}></li>
+                            <{/foreach}>
+                        </ul>
+                    <{/if}>
+                </td>
                 <td class='center'><{$allocation.level}></td>
                 <td class='center'><{$allocation.weight}></td>
                 <td class='center'><{$allocation.datecreated}></td>

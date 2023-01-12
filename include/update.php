@@ -38,10 +38,11 @@ function xoops_module_update_wgsimpleacc($module, $prev_version = null)
 {
     $moduleDirName = $module->dirname();
 
+    /*
     if ($prev_version < 120) {
         update_wgsimpleacc_v120($module);
     }
-
+    */
     //wgsimpleacc_check_db($module);
 
     //check upload directory
@@ -107,6 +108,7 @@ function wgsimpleacc_check_db($module)
  *
  * @return bool
  */
+/*
 function update_wgsimpleacc_v120($module)
 {
     $table = $GLOBALS['xoopsDB']->prefix('wgsimpleacc_transactions');
@@ -125,3 +127,4 @@ function update_wgsimpleacc_v120($module)
 
     return true;
 }
+*/

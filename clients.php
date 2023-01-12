@@ -41,9 +41,12 @@ $start   = Request::getInt('start');
 $limit   = Request::getInt('limit', $helper->getConfig('userpager'));
 $cliId   = Request::getInt('cli_id');
 $cliName = Request::getString('cli_name');
-$sortBy  = 'cli_' . Request::getString('sortby', 'name');
+$sortBy  = Request::getString('sortby', 'cli_name');
 $orderBy = Request::getString('orderby', 'ASC');
 
+$cliOp = '&amp;start=' . $start . '&amp;limit=' . $limit . '&amp;sortby=' . $sortBy . '&amp;order=' . $orderBy;
+
+$GLOBALS['xoopsTpl']->assign('cliOp', $cliOp);
 $GLOBALS['xoopsTpl']->assign('start', $start);
 $GLOBALS['xoopsTpl']->assign('limit', $limit);
 $GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);

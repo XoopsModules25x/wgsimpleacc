@@ -77,6 +77,43 @@ switch ($op) {
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ACCOUNTS];
         break;
+        /*
+    case 'compare_alloc':
+        $accountsCount = $accountsHandler->getCountAccounts();
+        $accountsAll = $accountsHandler->getAllAccounts($start, $limit);
+        $GLOBALS['xoopsTpl']->assign('accounts_count', $accountsCount);
+        //$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
+        //$GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', \WGSIMPLEACC_UPLOAD_URL);
+        // Table view accounts
+        if ($accountsCount > 0) {
+            foreach (\array_keys($accountsAll) as $i) {
+                $account = $accountsAll[$i]->getValuesAccounts();
+                $accAllocations = \unserialize($accountsAll[$i]->getVar('acc_allocations'));
+                $allocations = [];
+                if (\is_array($accAllocations)) {
+                    foreach ($accAllocations as $alloc) {
+                        $allocationObj = $allocationsHandler->get($alloc);
+                        if (\is_object($allocationObj)) {
+                            $allocations[$alloc] = $allocationObj->getVar('all_name');
+                        }
+                        unset($allocationObj);
+                    }
+                }
+                $account['allocations'] = $allocations;
+
+                $GLOBALS['xoopsTpl']->append('compare_list', $account);
+                unset($account);
+            }
+            // Display Navigation
+            if ($accountsCount > $limit) {
+                require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
+                $pagenav = new \XoopsPageNav($accountsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
+            }
+        } else {
+            $GLOBALS['xoopsTpl']->assign('error', \_MA_WGSIMPLEACC_THEREARENT_ACCOUNTS);
+        }
+        break;*/
     case 'save':
         // Security Check
         if (!$GLOBALS['xoopsSecurity']->check()) {
@@ -100,6 +137,7 @@ switch ($op) {
         $accountsObj->setVar('acc_color', Request::getString('acc_color'));
         $accountsObj->setVar('acc_iecalc', Request::getInt('acc_iecalc'));
         $accountsObj->setVar('acc_online', Request::getInt('acc_online'));
+        $accountsObj->setVar('acc_allocations', \serialize(Request::getArray('acc_allocations')));
         $level = 1;
         if ($accPid > 0) {
             $accParentObj = $accountsHandler->get($accPid);

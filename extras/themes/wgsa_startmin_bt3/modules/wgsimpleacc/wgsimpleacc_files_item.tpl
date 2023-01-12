@@ -20,10 +20,10 @@
 <div class='panel-foot'>
     <div class="row">
         <div class='col-sm-12 right'>
-            <a class='btn btn-success right' href='files.php?op=list&amp;fil_traid=<{$file.fil_traid}>' title='<{$smarty.const._MA_WGSIMPLEACC_FILES_LIST}>'><{$smarty.const._MA_WGSIMPLEACC_FILES_LIST}></a>
+            <a class='btn btn-success right' href='files.php?op=list&amp;fil_traid=<{$file.fil_traid}><{$traOp}>' title='<{$smarty.const._MA_WGSIMPLEACC_FILES_LIST}>'><{$smarty.const._MA_WGSIMPLEACC_FILES_LIST}></a>
             <{if $permEdit}>
-                <a class='btn btn-primary right' href='files.php?op=edit&amp;fil_id=<{$file.fil_id}>' title='<{$smarty.const._EDIT}>'><{$smarty.const._EDIT}></a>
-                <a class='btn btn-danger right' href='files.php?op=delete&amp;fil_id=<{$file.fil_id}>' title='<{$smarty.const._DELETE}>'><{$smarty.const._DELETE}></a>
+                <a class='btn btn-primary right' href='files.php?op=edit&amp;fil_id=<{$file.fil_id}><{$traOp}>' title='<{$smarty.const._EDIT}>'><{$smarty.const._EDIT}></a>
+                <a class='btn btn-danger right' href='files.php?op=delete&amp;fil_id=<{$file.fil_id}><{$traOp}>' title='<{$smarty.const._DELETE}>'><{$smarty.const._DELETE}></a>
             <{/if}>
         </div>
     </div>

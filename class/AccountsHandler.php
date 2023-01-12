@@ -134,8 +134,10 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
         $crItems = new \CriteriaCompo();
         $crItems->add(new \Criteria('acc_online', 1));
         if ($class > Constants::CLASS_BOTH) {
-            $crItems->add(new \Criteria('acc_classification', $class));
-            $crItems->add(new \Criteria('acc_classification', Constants::CLASS_BOTH), 'OR');
+            $crItemClass = new \CriteriaCompo();
+            $crItemClass->add(new \Criteria('acc_classification', $class));
+            $crItemClass->add(new \Criteria('acc_classification', Constants::CLASS_BOTH), 'OR');
+            $crItems->add($crItemClass);
         }
         $crItems->setSort('acc_weight ASC, acc_key');
         $crItems->setOrder('ASC');
@@ -144,7 +146,17 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
         // Table view accounts
         if ($accountsCount > 0) {
             foreach (\array_keys($accountsAll) as $i) {
-                $list[] = ['id' => $accountsAll[$i]->getVar('acc_id'), 'text' => \str_repeat('- ', $accountsAll[$i]->getVar('acc_level')) . $accountsAll[$i]->getVar('acc_key') . ' ' . $accountsAll[$i]->getVar('acc_name')];
+                $level = $accountsAll[$i]->getVar('acc_level');
+                switch ($level) {
+                    case 1:
+                        $dots = \str_repeat('- ', $level);
+                        break;
+                    case 2:
+                    default:
+                        $dots = \str_repeat('&nbsp; ', $level) . \str_repeat('- ', $level);
+                        break;
+                }
+                $list[] = ['id' => $accountsAll[$i]->getVar('acc_id'), 'text' => $dots . $accountsAll[$i]->getVar('acc_key') . ' ' . $accountsAll[$i]->getVar('acc_name')];
             }
         } else {
             return false;
@@ -167,6 +179,7 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
         }
 
         $helper       = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+        $transactionsHandler = $helper->getHandler('Transactions');
         $itemsHandler = $helper->getHandler('Accounts');
         $itemId       = 'acc_id';
         $itemKey      = 'acc_key';
@@ -186,13 +199,13 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
             foreach (\array_keys($itemsAll) as $i) {
                 $child     = $this->getListOfAccountsEdit($itemsAll[$i]->getVar($itemId));
                 $childsAll .= '<li style="display: list-item;" class="mjs-nestedSortable-branch mjs-nestedSortable-collapsed" id="menuItem_' . $itemsAll[$i]->getVar($itemId) . '">';
-
                 $childsAll .= '<div class="menuDiv">';
                 if ($child) {
-                    $childsAll .= '<span title="' . \_MA_WGSIMPLEACC_LIST_CHILDS . '" class="disclose ui-icon ui-icon-plusthick"><span>-</span></span>';
+                    $childsAll .= '<span id="disclose_icon_' . $itemsAll[$i]->getVar($itemId) . '" title="' . \_MA_WGSIMPLEACC_LIST_CHILDS . '" class="disclose ui-icon ui-icon-plusthick"><span>-</span></span>';
                 }
                 $childsAll .= '<span>';
-                $childsAll .= '<span data-id="' . $itemsAll[$i]->getVar($itemId) . '" class="itemTitle"><span style="background-color:' . $itemsAll[$i]->getVar($itemColor) . '">&nbsp;&nbsp;&nbsp;</span> ' . $itemsAll[$i]->getVar($itemKey) . ' ' . $itemsAll[$i]->getVar($itemName) . '</span>';
+                $childsAll .= '<span id="' . $itemsAll[$i]->getVar($itemId) . '" data-id="' . $itemsAll[$i]->getVar($itemId) . '" class="disclose_text itemTitle"><span style="background-color:' . $itemsAll[$i]->getVar($itemColor) . '">&nbsp;&nbsp;&nbsp;</span> ' . $itemsAll[$i]->getVar($itemKey) . ' ' . $itemsAll[$i]->getVar($itemName) . '</span>';
+
                 $childsAll .= '<span class="pull-right">';
                 $onlineText = (1 == (int)$itemsAll[$i]->getVar($itemOnline)) ? \_MA_WGSIMPLEACC_ONLINE : \_MA_WGSIMPLEACC_OFFLINE;
                 switch ($itemsAll[$i]->getVar($itemClass)) {
@@ -208,14 +221,25 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
                         $childsAll .= '<img class="wgsa-img-online" src="' . \WGSIMPLEACC_ICONS_URL . '/32/incomes.png" title="' . \_MA_WGSIMPLEACC_TRANSACTIONS_INCOMES . '" alt="' . \_MA_WGSIMPLEACC_TRANSACTIONS_INCOMES . '">';
                         break;
                 }
+                $crTransactions = new \CriteriaCompo();
+                $crTransactions->add(new \Criteria('tra_accid', $i));
+                $transactionsCount = $transactionsHandler->getCount($crTransactions);
                 $childsAll .= '<img class="wgsa-img-online" src="' . \WGSIMPLEACC_ICONS_URL . '/32/' . $itemsAll[$i]->getVar($itemOnline) . '.png" title="' . $onlineText . '" alt="' . $onlineText . '">';
-                $childsAll .= '<a class="btn btn-default wgsa-btn-list" href="transactions.php?op=list&displayfilter=1&amp;' . $itemId . '=' . $itemsAll[$i]->getVar($itemId) . '" title="' . \_MA_WGSIMPLEACC_TRANSACTIONS . '">' . \_MA_WGSIMPLEACC_TRANSACTIONS . '</a>';
+                $childsAll .= '<a class="btn btn-default wgsa-btn-list';
+                if (0 === $transactionsCount) {
+                    $childsAll .= ' disabled';
+                }
+                $childsAll .= '" href="transactions.php?op=list&displayfilter=1&amp;' . $itemId . '=' . $itemsAll[$i]->getVar($itemId) . '" title="' . \_MA_WGSIMPLEACC_TRANSACTIONS . '">(' . $transactionsCount . ') ' . \_MA_WGSIMPLEACC_TRANSACTIONS . '</a>';
                 $childsAll .= '<a class="btn btn-primary wgsa-btn-list" href="accounts.php?op=edit&amp;' . $itemId . '=' . $itemsAll[$i]->getVar($itemId) . '" title="' . \_EDIT . '">' . \_EDIT . '</a>';
-                $childsAll .= '<a class="btn btn btn-danger wgsa-btn-list" href="accounts.php?op=delete&amp;' . $itemId . '=' . $itemsAll[$i]->getVar($itemId) . '" title="' . \_DELETE . '">' . \_DELETE . '</a>';
+                $childsAll .= '<a class="btn btn btn-danger wgsa-btn-list';
+                if ($transactionsCount > 0) {
+                    $childsAll .= ' disabled';
+                }
+                $childsAll .= '" href="accounts.php?op=delete&amp;' . $itemId . '=' . $itemsAll[$i]->getVar($itemId) . '" title="' . \_DELETE . '">' . \_DELETE . '</a>';
                 $childsAll .= '</span>';
                 $childsAll .= '</span>';
-
                 $childsAll .= '</div>';
+                unset($crTransactions);
 
                 if ($child) {
                     $childsAll .= $child;

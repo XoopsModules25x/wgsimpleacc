@@ -37,10 +37,13 @@ $op    = Request::getCmd('op', 'list');
 $start = Request::getInt('start');
 $limit = Request::getInt('limit', $helper->getConfig('userpager'));
 $allId = Request::getInt('all_id');
+$redir = Request::getString('redir', 'list');
 
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_icon_url_16', \WGSIMPLEACC_ICONS_URL . '/16/');
 $GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
+$GLOBALS['xoopsTpl']->assign('start', $start);
+$GLOBALS['xoopsTpl']->assign('limit', $limit);
 
 $keywords = [];
 
@@ -76,6 +79,52 @@ switch ($op) {
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ALLOCATIONS];
         break;
+    case 'compare_accounts':
+        $allocationsCount = $allocationsHandler->getCountAllocations();
+        $allocationsAll = $allocationsHandler->getAllAllocations($start, $limit);
+        $GLOBALS['xoopsTpl']->assign('allocations_count', $allocationsCount);
+        // Table view allocations
+        if ($allocationsCount > 0) {
+            $accountsHandler     = $helper->getHandler('Accounts');
+            $transactionsHandler = $helper->getHandler('Transactions');
+            foreach (\array_keys($allocationsAll) as $i) {
+                $allocation = $allocationsAll[$i]->getValuesAllocations();
+                // count number of transactions for this allocation
+                $crTransactions = new \CriteriaCompo();
+                $crTransactions->add(new \Criteria('tra_allid', $i));
+                $allocation['tracount'] = $transactionsHandler->getCount($crTransactions);
+                // get text on-/offline
+                $allocation['online_text'] = (1 == (int)$allocationsAll[$i]->getVar('all_online')) ? \_MA_WGSIMPLEACC_ONLINE : \_MA_WGSIMPLEACC_OFFLINE;
+                // get accounts defined for this allocation
+                $arrAccounts = \unserialize($allocationsAll[$i]->getVar('all_accounts'));
+                $allAccounts = [];
+                if (\is_array($arrAccounts)) {
+                    foreach ($arrAccounts as $account) {
+                        $accountsObj = $accountsHandler->get($account);
+                        if (\is_object($accountsObj)) {
+                            $allAccounts[$account]['name'] = $accountsObj->getVar('acc_name');
+                            $allAccounts[$account]['online'] = $accountsObj->getVar('acc_online');
+                            $allAccounts[$account]['online_text'] = (1 == (int)$accountsObj->getVar('acc_online')) ? \_MA_WGSIMPLEACC_ONLINE : \_MA_WGSIMPLEACC_OFFLINE;
+                        }
+                        unset($accountsObj);
+                    }
+                }
+                $allocation['accounts'] = $allAccounts;
+                $GLOBALS['xoopsTpl']->append('compare_list', $allocation);
+                unset($allocation);
+            }
+            // Display Navigation
+            if ($allocationsCount > $limit) {
+                require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
+                $pagenav = new \XoopsPageNav($allocationsCount, $limit, $start, 'start', 'op=compare_accounts&limit=' . $limit);
+                $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
+            }
+        } else {
+            $GLOBALS['xoopsTpl']->assign('error', \_MA_WGSIMPLEACC_THEREARENT_ALLOCATIONS);
+        }
+        // Breadcrumbs
+        $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ALLOCATION_ACCOUNTS_COMPARE];
+        break;
     case 'save':
         // Security Check
         if (!$GLOBALS['xoopsSecurity']->check()) {
@@ -95,6 +144,7 @@ switch ($op) {
         $allocationsObj->setVar('all_name', Request::getString('all_name'));
         $allocationsObj->setVar('all_desc', Request::getString('all_desc'));
         $allocationsObj->setVar('all_online', Request::getInt('all_online'));
+        $allocationsObj->setVar('all_accounts', \serialize(Request::getArray('all_accounts')));
         $level = 1;
         if ($allPid > 0) {
             $allParentObj = $allocationsHandler->get($allPid);
@@ -108,11 +158,11 @@ switch ($op) {
         // Insert Data
         if ($allocationsHandler->insert($allocationsObj)) {
             // redirect after insert
-            \redirect_header('allocations.php', 2, \_MA_WGSIMPLEACC_FORM_OK);
+            \redirect_header('allocations.php?op=' . $redir . '&amp;start=' . $start . '&amp;limit=' . $limit, 2, \_MA_WGSIMPLEACC_FORM_OK);
         }
         // Get Form Error
         $GLOBALS['xoopsTpl']->assign('error', $allocationsObj->getHtmlErrors());
-        $form = $allocationsObj->getFormAllocations();
+        $form = $allocationsObj->getFormAllocations($start, $limit);
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
     case 'new':
@@ -122,7 +172,7 @@ switch ($op) {
         }
         // Form Create
         $allocationsObj = $allocationsHandler->create();
-        $form = $allocationsObj->getFormAllocations();
+        $form = $allocationsObj->getFormAllocations($start, $limit);
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
 
         // Breadcrumbs
@@ -140,8 +190,7 @@ switch ($op) {
             \redirect_header('allocations.php?op=list', 3, \_NOPERM);
         }
         // Get Form
-
-        $form = $allocationsObj->getFormAllocations();
+        $form = $allocationsObj->getFormAllocations($start, $limit, $redir);
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
 
         // Breadcrumbs

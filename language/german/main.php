@@ -39,6 +39,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_SUMS', 'Summen');
 \define('_MA_WGSIMPLEACC_FORM_PLACEHOLDER_NAME', 'Name eingeben');
 \define('_MA_WGSIMPLEACC_INVALID_PARAM', 'Ungültiger Parameter');
+\define('_MA_WGSIMPLEACC_COLLAPSE_ALL', 'Alle aufklappen');
 // ---------------- Filter   ----------------
 \define('_MA_WGSIMPLEACC_FILTERTYPE', 'Filter');
 \define('_MA_WGSIMPLEACC_SHOW_ALL', 'Alle anzeigen');
@@ -169,6 +170,9 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_ALLOCATION_NAME', 'Name');
 \define('_MA_WGSIMPLEACC_ALLOCATION_DESC', 'Beschreibung');
 \define('_MA_WGSIMPLEACC_ALLOCATION_ONLINE', 'Online');
+\define('_MA_WGSIMPLEACC_ALLOCATION_ACCOUNTS', 'Konten');
+\define('_MA_WGSIMPLEACC_ALLOCATION_ACCOUNTS_DESC', 'Definieren Sie alle Konten, bei denen diese Zuordnung verwendet werden soll.<br>Achtung: Das Konto muss für die Anzeige im Transaktionsformular zusätzlich noch auf "online" gesetzt sein.');
+\define('_MA_WGSIMPLEACC_ALLOCATION_ACCOUNTS_COMPARE', 'Vergleich Zuordnungen Konten');
 \define('_MA_WGSIMPLEACC_ALLOCATION_SORT', 'Sortierung');
 \define('_MA_WGSIMPLEACC_ALLOCATION_LEVEL', 'Ebene');
 \define('_MA_WGSIMPLEACC_ALLOCATION_WEIGHT', 'Reihung');

@@ -26,6 +26,7 @@ use XoopsModules\Wgsimpleacc\{
     Constants,
     Utility
 };
+use XoopsModules\Wgsimpleacc\Form\FormSelectCascading;
 
 \defined('\XOOPS_ROOT_PATH') || die('Restricted access');
 
@@ -131,8 +132,12 @@ class Transactions extends \XoopsObject
             $form->addElement(new \XoopsFormHidden('ttpl_amountout[0]', '0'));
             $crTratemplates = new \CriteriaCompo();
             $crTratemplates->add(new \Criteria('ttpl_online', 1));
-            $crTratemplates->add(new \Criteria('ttpl_class', Constants::CLASS_BOTH));
-            $crTratemplates->add(new \Criteria('ttpl_class', $traClass), 'OR');
+            if ($traClass > Constants::CLASS_BOTH) {
+                $crTraClass = new \CriteriaCompo();
+                $crTraClass->add(new \Criteria('ttpl_class', $traClass));
+                $crTraClass->add(new \Criteria('ttpl_class', Constants::CLASS_BOTH), 'OR');
+                $crTratemplates->add($crTraClass);
+            }
             $tratemplatesAll = $helper->getHandler('Tratemplates')->getAll($crTratemplates);
             foreach ($tratemplatesAll as $tratemplate) {
                 $tplId = $tratemplate->getVar('ttpl_id');
@@ -244,6 +249,39 @@ class Transactions extends \XoopsObject
             $traAllocationSelect->addOption($allocation['id'], $allocation['text']);
         }
         $allTray->addElement($traAllocationSelect, $allRequired);
+        /*
+
+
+
+
+        $traAllocationSelect1 = new Form\FormSelectCascading('caption rel', 'name1', '2', 15);
+        $traAllocationSelect1->setType(1);
+        //$arrAllocations = $allocationsHandler->getSelectTreeOfAllocations();
+        $arrAllocations = [
+            ['id' => '1', 'text'=>'text1 rel 1'],
+            ['id' => '2', 'text'=>'text2 rel 2'],
+            ['id' => '3', 'text'=>'text3 rel 3'],
+        ];
+        $traAllocationSelect1->setCustomOptions($arrAllocations);
+        $form->addElement($traAllocationSelect1, $allRequired);
+
+        $traAccidSelect1 = new Form\FormSelectCascading('caption class', 'name2', '2', 15);
+        $traAccidSelect1->setType(2);
+        //$arrAccounts = $accountsHandler->getSelectTreeOfAccounts($traClass);
+        $arrAccounts = [
+            ['id' => '10', 'text'=>'text10 rel 1', 'rel'=> '1', 'init'=> '2'],
+            ['id' => '10', 'text'=>'text10 rel 2', 'rel'=> '2', 'init'=> '2'],
+            ['id' => '11', 'text'=>'text11 rel 1', 'rel'=> '1', 'init'=> '2'],
+            ['id' => '12', 'text'=>'text12 rel 1', 'rel'=> '1', 'init'=> '2'],
+            ['id' => '13', 'text'=>'text13 rel 2', 'rel'=> '2', 'init'=> '2'],
+        ];
+        $traAccidSelect1->setCustomOptions($arrAccounts);
+        $form->addElement($traAccidSelect1, true);
+
+
+
+
+*/
         $form->addElement($allTray);
         // Form Table accounts
         $accountsHandler = $helper->getHandler('Accounts');
@@ -266,6 +304,13 @@ class Transactions extends \XoopsObject
             $traAccidSelect->addOption($account['id'], $account['text']);
         }
         $accTray->addElement($traAccidSelect, $accRequired);
+        /*
+        $traAccidSelect = new Form\FormSelectCascading('caption', 'name', '2', 15);
+        $traAccidSelect->setType(2);
+        $arrAccounts = $accountsHandler->getSelectTreeOfAccounts($traClass);
+        $traAccidSelect->setCustomOptions($arrAccounts);
+        $form->addElement($traAccidSelect, $accRequired);
+        */
         $form->addElement($accTray);
         // Form Text Date Select traDate
         $traDate = $this->isNew() ?: $this->getVar('tra_date');

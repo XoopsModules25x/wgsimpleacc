@@ -94,7 +94,7 @@
 		<tfoot>
 			<tr>
 				<td class="center" colspan="2">
-					<a class='btn btn-success right' href='transactions.php?op=list<{$traOp}>#traId_<{$transaction.tra_id}>' title='<{$smarty.const._MA_WGSIMPLEACC_TRANSACTIONS_LIST}>'><{$smarty.const._MA_WGSIMPLEACC_TRANSACTIONS_LIST}></a>
+					<a class='btn btn-success right' href='transactions.php?op=list<{$traOp}>' title='<{$smarty.const._MA_WGSIMPLEACC_TRANSACTIONS_LIST}>'><{$smarty.const._MA_WGSIMPLEACC_TRANSACTIONS_LIST}></a>
 					<{if $permSubmit && $transaction.edit}>
 						<a class='btn btn-primary right' href='transactions.php?op=edit&amp;tra_id=<{$transaction.tra_id}>' title='<{$smarty.const._EDIT}>'><{$smarty.const._EDIT}></a>
 						<a class='btn btn-danger right' href='transactions.php?op=delete&amp;tra_id=<{$transaction.tra_id}>' title='<{$smarty.const._DELETE}>'><{$smarty.const._DELETE}></a>

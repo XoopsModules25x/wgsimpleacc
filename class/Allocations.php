@@ -42,6 +42,7 @@ class Allocations extends \XoopsObject
         $this->initVar('all_name', \XOBJ_DTYPE_TXTBOX);
         $this->initVar('all_desc', \XOBJ_DTYPE_TXTAREA);
         $this->initVar('all_online', \XOBJ_DTYPE_INT);
+        $this->initVar('all_accounts', \XOBJ_DTYPE_OTHER);
         $this->initVar('all_weight', \XOBJ_DTYPE_INT);
         $this->initVar('all_level', \XOBJ_DTYPE_INT);
         $this->initVar('all_datecreated', \XOBJ_DTYPE_INT);
@@ -72,11 +73,14 @@ class Allocations extends \XoopsObject
 
     /**
      * @public function getForm
+     * @param int $start
+     * @param int $limit
      * @param bool $action
      * @param bool $admin
+     * @param string $redir
      * @return \XoopsThemeForm
      */
-    public function getFormAllocations($action = false, $admin = false)
+    public function getFormAllocations($start, $limit, $redir = '', $action = false, $admin = false)
     {
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         if (!$action) {
@@ -101,6 +105,16 @@ class Allocations extends \XoopsObject
         // Form Radio Yes/No allOnline
         $allOnline = $this->isNew() ?: $this->getVar('all_online');
         $form->addElement(new \XoopsFormRadioYN(\_MA_WGSIMPLEACC_ALLOCATION_ONLINE, 'all_online', $allOnline));
+        // Form Select allAccounts
+        $accountsHandler = $helper->getHandler('Accounts');
+        $allAccounts = \unserialize($this->getVar('all_accounts'));
+        $allAccountsSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_ALLOCATION_ACCOUNTS, 'all_accounts', $allAccounts, 15, true);
+        $allAccountsSelect->setDescription(\_MA_WGSIMPLEACC_ALLOCATION_ACCOUNTS_DESC);
+        $accounts = $accountsHandler->getSelectTreeOfAccounts(Constants::CLASS_BOTH);
+        foreach ($accounts as $account) {
+            $allAccountsSelect->addOption($account['id'], $account['text']);
+        }
+        $form->addElement($allAccountsSelect, true);
         // Form Text allLevel
         $allLevel = $this->isNew() ? 99 : $this->getVar('all_level');
         if ($admin) {
@@ -125,6 +139,9 @@ class Allocations extends \XoopsObject
         }
         // To Save
         $form->addElement(new \XoopsFormHidden('op', 'save'));
+        $form->addElement(new \XoopsFormHidden('redir', $redir));
+        $form->addElement(new \XoopsFormHidden('start', $start));
+        $form->addElement(new \XoopsFormHidden('limit', $limit));
         $form->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
         return $form;
     }

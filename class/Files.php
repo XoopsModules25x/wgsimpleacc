@@ -134,7 +134,7 @@ class Files extends \XoopsObject
 
     /**
      * @public function getForm
-     * @param strting $traOp
+     * @param string $traOp
      * @param bool $action
      * @return \XoopsThemeForm
      */
@@ -218,7 +218,6 @@ class Files extends \XoopsObject
         $form->addElement(new \XoopsFormHidden('op', 'upload_file'));
         $form->addElement(new \XoopsFormHidden('fil_traid', $filTraid));
         $form->addElement(new \XoopsFormHidden('traOp', $traOp));
-        $form->addElement(new \XoopsFormHidden('limit', $limit));
         $form->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
         return $form;
     }

@@ -58,6 +58,16 @@ $traDesc         = Request::getString('tra_desc');
 $sortBy          = Request::getString('sortby', 'tra_id');
 $order           = Request::getString('order', 'desc');
 
+$traFilter = '&amp;all_id=' . $allId . '&amp;acc_id=' . $accId . '&amp;as_id=' . $asId;
+$traFilter .= '&amp;filterYear=' . $filterYear . '&amp;filterMonthFrom=' . $filterMonthFrom . '&amp;filterYearFrom=' . $filterYearFrom . '&amp;filterMonthTo=' . $filterMonthTo . '&amp;filterYearTo=' . $filterYearTo;
+$traFilter .= '&amp;displayfilter=' . $displayfilter . '&amp;allSubs=' . $allSubs . '&amp;filterInvalid=' . $filterInvalid;
+$traFilter .= '&amp;cli_id=' . $cliId . '&amp;tra_type=' . $traType;
+
+$traOpSorter = '&amp;start=' . $start . '&amp;limit=' . $limit . $traFilter;
+$traOp = $traOpSorter . '&amp;sortby=' . $sortBy . '&amp;order=' . $order;
+
+$GLOBALS['xoopsTpl']->assign('traOp',$traOp);
+
 $period_type = $helper->getConfig('balance_period');
 
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_icon_url_16', \WGSIMPLEACC_ICONS_URL . '/16/');
@@ -79,14 +89,6 @@ if (0 == $displayfilter || $traId > 0) {
 }
 $GLOBALS['xoopsTpl']->assign('sepComma', $helper->getConfig('sep_comma'));
 $GLOBALS['xoopsTpl']->assign('sepThousand', $helper->getConfig('sep_thousand'));
-
-$traOpSorter = '&amp;start=' . $start . '&amp;limit=' . $limit . '&amp;all_id=' . $allId . '&amp;acc_id=' . $accId . '&amp;as_id=' . $asId;
-$traOpSorter .= '&amp;filterYear=' . $filterYear . '&amp;filterMonthFrom=' . $filterMonthFrom . '&amp;filterYearFrom=' . $filterYearFrom . '&amp;filterMonthTo=' . $filterMonthTo . '&amp;filterYearTo=' . $filterYearTo;
-$traOpSorter .= '&amp;displayfilter=' . $displayfilter . '&amp;allSubs=' . $allSubs . '&amp;filterInvalid=' . $filterInvalid;
-$traOpSorter .= '&amp;cli_id=' . $cliId . '&amp;tra_type=' . $traType;
-
-$traOp = $traOpSorter . '&amp;sortby=' . $sortBy . '&amp;order=' . $order;
-$GLOBALS['xoopsTpl']->assign('traOp',$traOp);
 
 $keywords = [];
 
@@ -244,7 +246,7 @@ switch ($op) {
             // Display Navigation
             if ($transactionsCount > $limit) {
                 require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
-                $pagenav = new \XoopsPageNav($transactionsCount, $limit, $start, 'start', 'op=list' . $traOp);
+                $pagenav = new \XoopsPageNav($transactionsCount, $limit, $start, 'start', 'op=list&amp;limit=' . $limit . $traFilter);
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
             }
             $GLOBALS['xoopsTpl']->assign('showAssets', 0 == $asId);

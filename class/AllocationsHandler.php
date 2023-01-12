@@ -139,7 +139,33 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
         // Table view allocations
         if ($allocationsCount > 0) {
             foreach (\array_keys($allocationsAll) as $i) {
-                $list[] = ['id' => $allocationsAll[$i]->getVar('all_id'), 'text' => \str_repeat('- ', $allocationsAll[$i]->getVar('all_level')) . ' ' . $allocationsAll[$i]->getVar('all_name')];
+                $level = $allocationsAll[$i]->getVar('all_level');
+                /*
+                switch ($level) {
+                    case 1:
+                        $dots = \str_repeat('&#9679; ', $level);
+                        break;
+                    case 2:
+                        $dots = '&nbsp;&nbsp;' . \str_repeat('&#9675; ', $level);
+                        break;
+                    case 3:
+                        $dots = \str_repeat('&nbsp; ', $level) . \str_repeat('&#9726; ', $level);
+                        break;
+                    case 4:
+                    default:
+                        $dots = \str_repeat('&nbsp; ', $level) . \str_repeat('&#9725; ', $level);
+                        break;
+                }*/
+                switch ($level) {
+                    case 1:
+                        $dots = \str_repeat('- ', $level);
+                        break;
+                    case 2:
+                    default:
+                        $dots = \str_repeat('&nbsp; ', $level) . \str_repeat('- ', $level);
+                        break;
+                }
+                $list[] = ['id' => $allocationsAll[$i]->getVar('all_id'), 'text' => $dots . ' ' . $allocationsAll[$i]->getVar('all_name')];
             }
         } else {
             return false;
@@ -162,6 +188,7 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
         }
 
         $helper       = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+        $transactionsHandler = $helper->getHandler('Transactions');
         $itemsHandler = $helper->getHandler('Allocations');
         $itemId       = 'all_id';
         $itemName     = 'all_name';
@@ -178,22 +205,33 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
             foreach (\array_keys($itemsAll) as $i) {
                 $child     = $this->getListOfAllocationsEdit($itemsAll[$i]->getVar($itemId));
                 $childsAll .= '<li style="display: list-item;" class="mjs-nestedSortable-branch mjs-nestedSortable-collapsed" id="menuItem_' . $itemsAll[$i]->getVar($itemId) . '">';
-
                 $childsAll .= '<div class="menuDiv">';
                 if ($child) {
-                    $childsAll .= '<span title="' . \_MA_WGSIMPLEACC_LIST_CHILDS . '" class="disclose ui-icon ui-icon-plusthick"><span>-</span></span>';
+                    $childsAll .= '<span id="disclose_icon_' . $itemsAll[$i]->getVar($itemId) . '" title="' . \_MA_WGSIMPLEACC_LIST_CHILDS . '" class="disclose ui-icon ui-icon-plusthick"><span>-</span></span>';
                 }
                 $childsAll .= '<span>';
-                $childsAll .= '<span data-id="' . $itemsAll[$i]->getVar($itemId) . '" class="itemTitle">' . $itemsAll[$i]->getVar($itemName) . '</span>';
+                $childsAll .= '<span id="' . $itemsAll[$i]->getVar($itemId) . '" data-id="' . $itemsAll[$i]->getVar($itemId) . '" class="disclose_text itemTitle">' . $itemsAll[$i]->getVar($itemName) . '</span>';
                 $childsAll .= '<span class="pull-right">';
                 $onlineText = (1 == (int)$itemsAll[$i]->getVar($itemOnline)) ? \_MA_WGSIMPLEACC_ONLINE : \_MA_WGSIMPLEACC_OFFLINE;
                 $childsAll .= '<img class="wgsa-img-online" src="' . \WGSIMPLEACC_ICONS_URL . '/32/' . $itemsAll[$i]->getVar($itemOnline) . '.png" title="' . $onlineText . '" alt="' . $onlineText . '">';
-                $childsAll .= '<a class="btn btn btn-default wgsa-btn-list" href="transactions.php?op=list&displayfilter=1&amp;' . $itemId . '=' . $itemsAll[$i]->getVar($itemId) . '" title="' . \_MA_WGSIMPLEACC_TRANSACTIONS . '">' . \_MA_WGSIMPLEACC_TRANSACTIONS . '</a>';
+                $crTransactions = new \CriteriaCompo();
+                $crTransactions->add(new \Criteria('tra_allid', $i));
+                $transactionsCount = $transactionsHandler->getCount($crTransactions);
+                $childsAll .= '<a class="btn btn btn-default wgsa-btn-list';
+                if (0 === $transactionsCount) {
+                    $childsAll .= ' disabled';
+                }
+                $childsAll .= '" href="transactions.php?op=list&displayfilter=1&amp;' . $itemId . '=' . $itemsAll[$i]->getVar($itemId) . '" title="' . \_MA_WGSIMPLEACC_TRANSACTIONS . '">(' . $transactionsCount . ') ' . \_MA_WGSIMPLEACC_TRANSACTIONS . '</a>';
                 $childsAll .= '<a class="btn btn btn-primary wgsa-btn-list" href="allocations.php?op=edit&amp;' . $itemId . '=' . $itemsAll[$i]->getVar($itemId) . '" title="' . \_EDIT . '">' . \_EDIT . '</a>';
-                $childsAll .= '<a class="btn btn btn-danger wgsa-btn-list" href="allocations.php?op=delete&amp;' . $itemId . '=' . $itemsAll[$i]->getVar($itemId) . '" title="' . \_DELETE . '">' . \_DELETE . '</a>';
+                $childsAll .= '<a class="btn btn btn-danger wgsa-btn-list';
+                if ($transactionsCount > 0) {
+                    $childsAll .= ' disabled';
+                }
+                $childsAll .= '" href="allocations.php?op=delete&amp;' . $itemId . '=' . $itemsAll[$i]->getVar($itemId) . '" title="' . \_DELETE . '">' . \_DELETE . '</a>';
                 $childsAll .= '</span>';
                 $childsAll .= '</span>';
                 $childsAll .= '</div>';
+                unset($crTransactions);
 
                 if ($child) {
                     $childsAll .= $child;
