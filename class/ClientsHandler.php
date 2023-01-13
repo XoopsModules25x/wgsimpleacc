@@ -163,7 +163,7 @@ class ClientsHandler extends \XoopsPersistableObjectHandler
 
         // Get Theme Form
         \xoops_load('XoopsFormLoader');
-        $form = new \XoopsModules\Wgsimpleacc\FormInline('', 'formFilter', $action, 'post', true);
+        $form = new \XoopsModules\Wgsimpleacc\Form\FormInline('', 'formFilter', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
         $nameTray = new \XoopsFormElementTray('', '');
         $formText = new \XoopsFormText('', 'cli_name', 30, 100, $cliName);

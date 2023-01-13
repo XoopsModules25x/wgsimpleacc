@@ -28,7 +28,7 @@ namespace XoopsModules\Wgsimpleacc;
 
 use Xmf\Request;
 use XoopsModules\Wgsimpleacc;
-use XoopsModules\Wgsimpleacc\{Helper, Constants, FormInline};
+use XoopsModules\Wgsimpleacc\{Helper, Constants, Form\FormInline};
 
 /**
  * Class Utility

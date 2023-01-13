@@ -153,7 +153,7 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
         //$title = \_MA_WGSIMPLEACC_FILTERBY_YEAR;
         // Get Theme Form
         \xoops_load('XoopsFormLoader');
-        $form = new \XoopsModules\Wgsimpleacc\FormInline('', 'formFilter', $action, 'post', true);
+        $form = new \XoopsModules\Wgsimpleacc\Form\FormInline('', 'formFilter', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
         $form->setExtra('class="wgsa-form-inline"');
         // Form Table allocations
