@@ -40,6 +40,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_FORM_PLACEHOLDER_NAME', 'Name eingeben');
 \define('_MA_WGSIMPLEACC_INVALID_PARAM', 'Ungültiger Parameter');
 \define('_MA_WGSIMPLEACC_COLLAPSE_ALL', 'Alle aufklappen');
+\define('_MA_WGSIMPLEACC_LIMIT', 'Anzahl an Zeilen');
 // ---------------- Filter   ----------------
 \define('_MA_WGSIMPLEACC_FILTERTYPE', 'Filter');
 \define('_MA_WGSIMPLEACC_SHOW_ALL', 'Alle anzeigen');

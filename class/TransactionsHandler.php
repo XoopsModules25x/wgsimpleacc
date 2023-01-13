@@ -139,9 +139,10 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
      * @param array $traStatus
      * @param string $traDesc
      * @param int $filterInvalid
+     * @param int $limit
      * @return FormInline
      */
-    public static function getFormFilter($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, $cliId, $op, $allSubs, $traStatus, $traDesc, $filterInvalid)
+    public static function getFormFilter($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, $cliId, $op, $allSubs, $traStatus, $traDesc, $filterInvalid, $limit)
     {
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $period_type = $helper->getConfig('balance_period');
@@ -293,6 +294,16 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
         $form->addElement(new \XoopsFormHidden('linebreak', ''));
         $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_FILTERBY_DESC, 'tra_desc', 50, 255, $traDesc));
 
+        //linebreak
+        $form->addElement(new \XoopsFormHidden('linebreak', ''));
+        $limitSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_LIMIT, 'limit', $limit);
+        $limitSelect->addOption(10, 10);
+        $limitSelect->addOption(20, 20);
+        $limitSelect->addOption(50, 50);
+        $limitSelect->addOption(100, 100);
+        $limitSelect->addOption(200, 200);
+        $form->addElement($limitSelect);
+
         if ('tra_output' === $op) {
             //linebreak
             $form->addElement(new \XoopsFormHidden('linebreak', ''));
@@ -311,6 +322,7 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
         }
         $form->addElement($btnApply);
         $form->addElement(new \XoopsFormHidden('displayfilter', 1));
+        $form->addElement(new \XoopsFormHidden('filterInvalid', $filterInvalid));
         $form->addElement(new \XoopsFormHidden('start', 0));
         $form->addElement(new \XoopsFormHidden('op', $op));
         return $form;

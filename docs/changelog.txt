@@ -7,6 +7,7 @@
  - added file printing (goffy)
  - added missing params (goffy)
  - added 'collapse all' in allocation/account tpl (goffy)
+ - added limit to filter (goffy)
 
 ==============================================================
 1.3.0 RC1 [2022/02/23]
