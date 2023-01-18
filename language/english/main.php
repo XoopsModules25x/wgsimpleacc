@@ -40,6 +40,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_FORM_PLACEHOLDER_NAME', 'Enter name');
 \define('_MA_WGSIMPLEACC_INVALID_PARAM', 'Invalid parameter');
 \define('_MA_WGSIMPLEACC_COLLAPSE_ALL', 'Collapse all');
+\define('_MA_WGSIMPLEACC_LIMIT', 'Number of lines');
 // ---------------- Filter   ----------------
 \define('_MA_WGSIMPLEACC_FILTERTYPE', 'Filter');
 \define('_MA_WGSIMPLEACC_SHOW_ALL', 'Show all');

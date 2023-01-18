@@ -24,7 +24,6 @@ namespace XoopsModules\Wgsimpleacc;
 use XoopsModules\Wgsimpleacc;
 use XoopsModules\Wgsimpleacc\Utility;
 
-
 /**
  * Class Object Handler Transactions
  */
@@ -139,9 +138,10 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
      * @param array $traStatus
      * @param string $traDesc
      * @param int $filterInvalid
-     * @return FormInline
+     * @param int $limit
+     * @return Form\FormInline
      */
-    public static function getFormFilter($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, $cliId, $op, $allSubs, $traStatus, $traDesc, $filterInvalid)
+    public static function getFormFilter($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, $cliId, $op, $allSubs, $traStatus, $traDesc, $filterInvalid, $limit)
     {
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $period_type = $helper->getConfig('balance_period');
@@ -149,11 +149,9 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
         $permApprove = $permissionsHandler->getPermTransactionsApprove();
         $action = $_SERVER['REQUEST_URI'];
 
-        // Title
-        //$title = \_MA_WGSIMPLEACC_FILTERBY_YEAR;
         // Get Theme Form
         \xoops_load('XoopsFormLoader');
-        $form = new \XoopsModules\Wgsimpleacc\FormInline('', 'formFilter', $action, 'post', true);
+        $form = new \XoopsModules\Wgsimpleacc\Form\FormInline('', 'formFilter', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
         $form->setExtra('class="wgsa-form-inline"');
         // Form Table allocations
@@ -293,6 +291,16 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
         $form->addElement(new \XoopsFormHidden('linebreak', ''));
         $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_FILTERBY_DESC, 'tra_desc', 50, 255, $traDesc));
 
+        //linebreak
+        $form->addElement(new \XoopsFormHidden('linebreak', ''));
+        $limitSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_LIMIT, 'limit', $limit);
+        $limitSelect->addOption(10, 10);
+        $limitSelect->addOption(20, 20);
+        $limitSelect->addOption(50, 50);
+        $limitSelect->addOption(100, 100);
+        $limitSelect->addOption(200, 200);
+        $form->addElement($limitSelect);
+
         if ('tra_output' === $op) {
             //linebreak
             $form->addElement(new \XoopsFormHidden('linebreak', ''));
@@ -311,6 +319,7 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
         }
         $form->addElement($btnApply);
         $form->addElement(new \XoopsFormHidden('displayfilter', 1));
+        $form->addElement(new \XoopsFormHidden('filterInvalid', $filterInvalid));
         $form->addElement(new \XoopsFormHidden('start', 0));
         $form->addElement(new \XoopsFormHidden('op', $op));
         return $form;

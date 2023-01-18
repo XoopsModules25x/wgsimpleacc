@@ -1,11 +1,4 @@
-<{if $error|default:''}>
-                    <div class="errorMsg"><strong><{$error}></strong></div>
-                <{/if}>
-                <{if $form|default:''}>
-                    <{$form}>
-                <{/if}>
-=> aus main_startmin.tpl in einzelne tpl verlagern
-
+Dashboard: Name des Verzeichnisses daz
 
 https://www.jqueryscript.net/other/dashboard-starter-template-bootstrap.html
 

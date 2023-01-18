@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Wgsimpleacc;
+namespace XoopsModules\Wgsimpleacc\Form;
 
 /**
  * XOOPS simple form
