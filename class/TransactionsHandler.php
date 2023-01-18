@@ -24,7 +24,6 @@ namespace XoopsModules\Wgsimpleacc;
 use XoopsModules\Wgsimpleacc;
 use XoopsModules\Wgsimpleacc\Utility;
 
-
 /**
  * Class Object Handler Transactions
  */
@@ -140,7 +139,7 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
      * @param string $traDesc
      * @param int $filterInvalid
      * @param int $limit
-     * @return FormInline
+     * @return Form\FormInline
      */
     public static function getFormFilter($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, $cliId, $op, $allSubs, $traStatus, $traDesc, $filterInvalid, $limit)
     {
@@ -150,8 +149,6 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
         $permApprove = $permissionsHandler->getPermTransactionsApprove();
         $action = $_SERVER['REQUEST_URI'];
 
-        // Title
-        //$title = \_MA_WGSIMPLEACC_FILTERBY_YEAR;
         // Get Theme Form
         \xoops_load('XoopsFormLoader');
         $form = new \XoopsModules\Wgsimpleacc\Form\FormInline('', 'formFilter', $action, 'post', true);
