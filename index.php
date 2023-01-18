@@ -105,8 +105,6 @@ if ($indexTrahbar || $indexTraInExSums || $indexAssetsPie) {
     $count = 1;
     $filter = '';
     if ($transactionsCount > 0) {
-        $GLOBALS['xoopsTpl']->assign('header_transactions', \_MA_WGSIMPLEACC_TRANSACTIONS_OVERVIEW . ': ' . $filterYear);
-        $GLOBALS['xoopsTpl']->assign('header_transactions_sums', \_MA_WGSIMPLEACC_CHART_TRAINEXSUMS . ': ' . $filterYear);
         //get all allocations
         $crAllocations = new \CriteriaCompo();
         if ($allPid > 0) {
@@ -131,11 +129,12 @@ if ($indexTrahbar || $indexTraInExSums || $indexAssetsPie) {
         $strFilter = "&amp;filterYear=$filterYear&amp;filterType=$filterType";
         $strFilter .= "&amp;filterMonthFrom=$filterMonthFrom&amp;filterYearFrom=$filterYearFrom";
         $strFilter .= "&amp;filterMonthTo=$filterMonthTo&amp;filterYearTo=$filterYearTo";
+        $allPidName = '';
         if ($allocationsCount > 0) {
             if ($allPid > 0) {
                 //read current allocations
                 $allocCurrObj = $allocationsHandler->get($allPid);
-                $allName = $allocCurrObj->getVar('all_name');
+                $allPidName = $allocCurrObj->getVar('all_name');
                 $sumAmountin1 = 0; //approved
                 $sumAmountout1 = 0; //approved
                 $sumAmountin2 = 0; //submitted
@@ -159,13 +158,13 @@ if ($indexTrahbar || $indexTraInExSums || $indexAssetsPie) {
                 }
 
                 if ((float)$sumAmountin1 > 0 || (float)$sumAmountout1 > 0 || (float)$sumAmountin2 > 0 || (float)$sumAmountout2 > 0) {
-                    //$allocations_list[] = ['all_id' => $allId, 'all_name' => $allName];
-                    //$tra_allocs_list[] = ['all_id' => $allId, 'all_name' => $allName, 'allSubs' => \count($subAllIds), 'href' => $href];
+                    //$allocations_list[] = ['all_id' => $allId, 'all_name' => $allPidName];
+                    //$tra_allocs_list[] = ['all_id' => $allId, 'all_name' => $allPidName, 'allSubs' => \count($subAllIds), 'href' => $href];
                     $transactions_datain1 .= $sumAmountin1 . ',';
                     $transactions_datain2 .= $sumAmountin2 . ',';
                     $transactions_dataout1 .= $sumAmountout1 . ',';
                     $transactions_dataout2 .= $sumAmountout2 . ',';
-                    $transactions_labels .= "'" . \str_replace('%s', $allName, \_MA_WGSIMPLEACC_ALLOCATION_CURRID) . "',";
+                    $transactions_labels .= "'" . \str_replace('%s', $allPidName, \_MA_WGSIMPLEACC_ALLOCATION_CURRID) . "',";
                 }
 
                 unset($crAllocCur, $allocCurObj, $crTransactions);
@@ -231,6 +230,16 @@ if ($indexTrahbar || $indexTraInExSums || $indexAssetsPie) {
             }
         }
         unset($crAllocations);
+        $headerTra = '';
+        $headerTraSums = '';
+        if ('' !== $allPidName) {
+            $headerTra .= "'" . $allPidName . "'<br>";
+            $headerTraSums .= "'" . $allPidName . "'<br>";
+        }
+        $headerTra .= \_MA_WGSIMPLEACC_TRANSACTIONS_OVERVIEW . ': ' . $filterYear;
+        $headerTraSums .= \_MA_WGSIMPLEACC_CHART_TRAINEXSUMS . ': ' . $filterYear;
+        $GLOBALS['xoopsTpl']->assign('header_transactions', $headerTra);
+        $GLOBALS['xoopsTpl']->assign('header_transactions_sums', $headerTraSums);
         $GLOBALS['xoopsTpl']->assign('tra_allocs_list', $tra_allocs_list);
         $GLOBALS['xoopsTpl']->assign('transactions_datain1', $transactions_datain1);
         $GLOBALS['xoopsTpl']->assign('transactions_datain2', $transactions_datain2);
