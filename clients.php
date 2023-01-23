@@ -79,10 +79,12 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('showList', 'show' !== $op);
         $clientsCount = $clientsHandler->getCount($crClients);
         $GLOBALS['xoopsTpl']->assign('clientsCount', $clientsCount);
-        $crClients->setStart($start);
-        $crClients->setLimit($limit);
-        $crClients->setSort($sortBy);
-        $crClients->setOrder($orderBy);
+        if ('show' !== $op) {
+            $crClients->setStart($start);
+            $crClients->setLimit($limit);
+            $crClients->setSort($sortBy);
+            $crClients->setOrder($orderBy);
+        }
         $clientsAll = $clientsHandler->getAll($crClients);
         if ($clientsCount > 0) {
             $clients = [];
