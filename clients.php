@@ -143,8 +143,12 @@ switch ($op) {
         $clientsObj->setVar('cli_creditor', Request::getInt('cli_creditor'));
         $clientsObj->setVar('cli_debtor', Request::getInt('cli_debtor'));
         $clientsObj->setVar('cli_online', Request::getInt('cli_online'));
-        $clientDatecreatedObj = \DateTime::createFromFormat(\_SHORTDATESTRING, Request::getString('cli_datecreated'));
-        $clientsObj->setVar('cli_datecreated', $clientDatecreatedObj->getTimestamp());
+        if (Request::hasVar('cli_datecreated_int')) {
+            $clientsObj->setVar('cli_datecreated', Request::getInt('cli_datecreated_int'));
+        } else {
+            $clientDatecreatedObj = \DateTime::createFromFormat(\_SHORTDATESTRING, Request::getString('cli_datecreated'));
+            $clientsObj->setVar('cli_datecreated', $clientDatecreatedObj->getTimestamp());
+        }
         $clientsObj->setVar('cli_submitter', Request::getInt('cli_submitter'));
         // Insert Data
         if ($clientsHandler->insert($clientsObj)) {
