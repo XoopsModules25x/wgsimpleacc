@@ -9,6 +9,7 @@
  - added 'collapse all' in allocation/account tpl (goffy)
  - added limit to filter (goffy)
  - added allocation name to charts (goffy)
+ - fixed bug for datecreate and non-admins (goffy)
 
 ==============================================================
 1.3.0 RC1 [2022/02/23]

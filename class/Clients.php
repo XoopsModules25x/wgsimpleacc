@@ -155,9 +155,9 @@ class Clients extends \XoopsObject
             $form->addElement(new \XoopsFormSelectUser(\_MA_WGSIMPLEACC_SUBMITTER, 'cli_submitter', false, $cliSubmitter));
         } else {
             $form->addElement(new \XoopsFormLabel(\_MA_WGSIMPLEACC_DATECREATED, \formatTimestamp($cliDatecreated, 's')));
-            $form->addElement(new \XoopsFormHidden('cli_datecreated', \time()));
+            $form->addElement(new \XoopsFormHidden('cli_datecreated_int', \time()));
             $form->addElement(new \XoopsFormLabel(\_MA_WGSIMPLEACC_SUBMITTER, \XoopsUser::getUnameFromId($cliSubmitter)));
-            $form->addElement(new \XoopsFormHidden('as_submitter', $GLOBALS['xoopsUser']->uid()));
+            $form->addElement(new \XoopsFormHidden('cli_submitter', $GLOBALS['xoopsUser']->uid()));
         }
         // To Save
         $form->addElement(new \XoopsFormHidden('op', 'save'));

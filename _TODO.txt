@@ -1,4 +1,4 @@
-Dashboard: Name des Verzeichnisses daz
+
 
 https://www.jqueryscript.net/other/dashboard-starter-template-bootstrap.html
 
