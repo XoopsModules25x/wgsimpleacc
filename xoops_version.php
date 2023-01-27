@@ -558,7 +558,7 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'default'     => 0,
 ];
-// use clients
+// use transaction history
 $modversion['config'][] = [
     'name'        => 'use_trahistories',
     'title'       => '_MI_WGSIMPLEACC_USE_TRAHISTORY',
@@ -567,11 +567,20 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'default'     => 0,
 ];
-// use clients
+// use files history
 $modversion['config'][] = [
     'name'        => 'use_filhistories',
     'title'       => '_MI_WGSIMPLEACC_USE_FILHISTORY',
     'description' => '_MI_WGSIMPLEACC_USE_FILHISTORY_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0,
+];
+// use cascading accounts
+$modversion['config'][] = [
+    'name'        => 'use_cascadingacc',
+    'title'       => '_MI_WGSIMPLEACC_USE_CASCADINGACC',
+    'description' => '_MI_WGSIMPLEACC_USE_CASCADINGACC_DESC',
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
     'default'     => 0,

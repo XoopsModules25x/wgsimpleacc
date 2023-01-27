@@ -95,6 +95,8 @@ require_once __DIR__ . '/common.php';
 \define('_MI_WGSIMPLEACC_USE_TRAHISTORY_DESC', 'Wenn Sie die Historisierung verwenden, dann werden die Originaldaten vor dem Löschen oder Ändern in einer History-Tabelle gespeichert');
 \define('_MI_WGSIMPLEACC_USE_FILHISTORY', 'Historie Dateien verwenden');
 \define('_MI_WGSIMPLEACC_USE_FILHISTORY_DESC', 'Wenn Sie die Historisierung verwenden, dann werden die Originaldaten vor dem Löschen oder Ändern in einer History-Tabelle gespeichert. Die Dateien selbst werden dann nicht mehr gelöscht');
+\define('_MI_WGSIMPLEACC_USE_CASCADINGACC', 'Cascadierende Konten verwenden');
+\define('_MI_WGSIMPLEACC_USE_CASCADINGACC_DESC', 'Wenn Sie diese Option verwenden, dann müssen den Zuordnungen auch entsprechend Konten zugeordnet werden. Bei der Erfassung von Transaktionen werden bei der Auswahl einer Zuordnung auch nur die entsprechenden Konten angezeigt.<br>Wenn Sie diese Option nicht verwenden, dann werden bei der Erfassung von Transaktionen immer alle verfügbaren Konten angezeigt.');
 \define('_MI_WGSIMPLEACC_BALANCE_PERIOD', 'Zeitraum Abschlüsse');
 \define('_MI_WGSIMPLEACC_BALANCE_PERIOD_DESC', 'Definieren Sie den Zeitraum für die Durchführung von Abschlüssen');
 \define('_MI_WGSIMPLEACC_BALANCE_FILTER_PYEARLY', 'Jahr');

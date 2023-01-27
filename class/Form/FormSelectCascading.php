@@ -85,7 +85,7 @@ class FormSelectCascading extends \XoopsFormSelect
         }
         foreach ($ele_options as $ele_option) {
             $ret .= '<option value="' . htmlspecialchars($ele_option['id'], ENT_QUOTES) . '"';
-            if (count($ele_value) > 0 && in_array($ele_option['id'], $ele_value)) {
+            if (count($ele_value) > 0 && in_array($ele_option['id'], $ele_value) && ((int)$ele_option['init'] === (int)$ele_option['rel'])) {
                 $ret .= ' selected';
             }
             if (1 === (int)$ele_type) {

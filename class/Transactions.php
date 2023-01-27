@@ -229,6 +229,7 @@ class Transactions extends \XoopsObject
         $traRemarks = new \XoopsFormEditor(\_MA_WGSIMPLEACC_TRANSACTION_REMARKS, 'tra_remarks', $editorConfigs);
         $form->addElement($traRemarks);
         // Form Table allocations
+        $cascadingAccounts = (bool)$helper->getConfig('use_cascadingacc');
         $allocationsHandler = $helper->getHandler('Allocations');
         $traAllid = $this->isNew() ? 0 : (int)$this->getVar('tra_allid');
         $allRequired = true;
@@ -243,23 +244,26 @@ class Transactions extends \XoopsObject
                 $allRequired = false;
             }
         }
-        $traAllocationSelect = new \XoopsFormSelect('', 'tra_allid', $traAllid, 15);
-        $allocations = $allocationsHandler->getSelectTreeOfAllocations();
-        foreach ($allocations as $allocation) {
-            $traAllocationSelect->addOption($allocation['id'], $allocation['text']);
+        if ($cascadingAccounts) {
+            // add cascading form select for accounts
+            $traAllocationSelect1 = new Form\FormSelectCascading('', 'tra_allid', $traAllid, 15);
+            $traAllocationSelect1->setType(1);
+            $allocations = $allocationsHandler->getSelectTreeOfAllocations();
+            $arrAllocations = [];
+            foreach ($allocations as $allocation) {
+                $arrAllocations[] = ['id' => $allocation['id'], 'text' => $allocation['text']];
+            }
+            $traAllocationSelect1->setCustomOptions($arrAllocations);
+            $allTray->addElement($traAllocationSelect1, $allRequired);
+        } else {
+            // add default xoops form select
+            $traAllocationSelect = new \XoopsFormSelect('', 'tra_allid', $traAllid, 15);
+            $allocations = $allocationsHandler->getSelectTreeOfAllocations();
+            foreach ($allocations as $allocation) {
+                $traAllocationSelect->addOption($allocation['id'], $allocation['text']);
+            }
+            $allTray->addElement($traAllocationSelect, $allRequired);
         }
-        $allTray->addElement($traAllocationSelect, $allRequired);
-        /*
-                $traAllocationSelect1 = new Form\FormSelectCascading(\_MA_WGSIMPLEACC_TRANSACTION_ALLID . 'neu', 'tra_allid', $traAllid, 15);
-                $traAllocationSelect1->setType(1);
-                $allocations = $allocationsHandler->getSelectTreeOfAllocations();
-                $arrAllocations = [];
-                foreach ($allocations as $allocation) {
-                    $arrAllocations[] = ['id' => $allocation['id'], 'text' => $allocation['text']];
-                }
-                $traAllocationSelect1->setCustomOptions($arrAllocations);
-                $allTray->addElement($traAllocationSelect1, $allRequired);
-                */
         $form->addElement($allTray);
         // Form Table accounts
         $accountsHandler = $helper->getHandler('Accounts');
@@ -269,30 +273,42 @@ class Transactions extends \XoopsObject
         if ($traAccid > 0) {
             $accIsOnline = $accountsHandler->AccountIsOnline($traAccid);
             if (!$accIsOnline['online']) {
-                // show info that allocation isn't valid anymore
+                // show info that account isn't valid anymore
                 $accInfoInvalid = new \XoopsFormLabel($accIsOnline['name'],\_MA_WGSIMPLEACC_TRANSACTION_SELECT_INVALID);
                 $accTray->addElement($accInfoInvalid);
                 $accTray->addElement(new \XoopsFormHidden('tra_accid_old', $traAccid));
                 $accRequired = false;
             }
         }
-        $traAccidSelect = new \XoopsFormSelect('', 'tra_accid', $this->getVar('tra_accid'), 15);
-        $accounts = $accountsHandler->getSelectTreeOfAccounts($traClass);
-        foreach ($accounts as $account) {
-            $traAccidSelect->addOption($account['id'], $account['text']);
-        }
-        $accTray->addElement($traAccidSelect, $accRequired);
-        /*
-                $traAccidSelect = new Form\FormSelectCascading(\_MA_WGSIMPLEACC_TRANSACTION_ACCID . 'neu', 'tra_accid', $this->getVar('tra_accid'), 15);
-                $traAccidSelect->setType(2);
-                $accounts = $accountsHandler->getSelectTreeOfAccounts($traClass);
-                $arrAccounts = [];
-                foreach ($accounts as $account) {
-                    $arrAccounts[] = ['id' => $account['id'], 'text'=>$account['text']];
+        if ($cascadingAccounts) {
+            // add cascading form select for accounts
+            $traAccidSelect = new Form\FormSelectCascading('', 'tra_accid', $traAccid, 15);
+            $traAccidSelect->setType(2);
+            $arrAccounts = [];
+            $accountsAll = $accountsHandler->getSelectTreeOfAccounts($traClass);
+            // get all accounts associated with allocations
+            foreach ($allocations as $allocation) {
+                $allObj = $allocationsHandler->get($allocation['id']);
+                $allAccounts = \unserialize($allObj->getVar('all_accounts'));
+                foreach ($allAccounts as $account) {
+                    foreach ($accountsAll as $accSingle) {
+                        if ((int)$accSingle['id'] == (int)$account) {
+                            $arrAccounts[] = ['id' => $accSingle['id'], 'rel' => $allocation['id'], 'text' => $accSingle['text'], 'init' => $traAllid];
+                        }
+                    }
                 }
-                $traAccidSelect->setCustomOptions($arrAccounts);
-                $accTray->addElement($traAccidSelect, $accRequired);
-                */
+            }
+            $traAccidSelect->setCustomOptions($arrAccounts);
+            $accTray->addElement($traAccidSelect, $accRequired);
+        } else {
+            // add default xoops form select
+            $traAccidSelect = new \XoopsFormSelect('', 'tra_accid', $traAccid, 15);
+            $accounts = $accountsHandler->getSelectTreeOfAccounts($traClass);
+            foreach ($accounts as $account) {
+                $traAccidSelect->addOption($account['id'], $account['text']);
+            }
+            $accTray->addElement($traAccidSelect, $accRequired);
+        }
         $form->addElement($accTray);
         // Form Text Date Select traDate
         $traDate = $this->isNew() ?: $this->getVar('tra_date');

@@ -95,6 +95,8 @@ require_once __DIR__ . '/common.php';
 \define('_MI_WGSIMPLEACC_USE_TRAHISTORY_DESC', 'If you are using histories then original data will be stored in history table before deleting or updating');
 \define('_MI_WGSIMPLEACC_USE_FILHISTORY', 'Use files histories');
 \define('_MI_WGSIMPLEACC_USE_FILHISTORY_DESC', 'If you are using histories then original data will be stored in history table before deleting or updating. Then files itself will be not deleted');
+\define('_MI_WGSIMPLEACC_USE_CASCADINGACC', 'Use cascadierende accounts');
+\define('_MI_WGSIMPLEACC_USE_CASCADINGACC_DESC', 'If you are using this option, then you have to associate accounts to the allocations. When you are create a transaction, then only accounts will be shown which are associated to the selected allocation.<br>If you are not using this option, then allways all available accounts will be shown if you are creating a transaction.');
 \define('_MI_WGSIMPLEACC_BALANCE_PERIOD', 'Balancing period');
 \define('_MI_WGSIMPLEACC_BALANCE_PERIOD_DESC', 'Define period how balancing should be done');
 \define('_MI_WGSIMPLEACC_BALANCE_FILTER_PYEARLY', 'Yearly');
