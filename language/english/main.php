@@ -41,6 +41,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_INVALID_PARAM', 'Invalid parameter');
 \define('_MA_WGSIMPLEACC_COLLAPSE_ALL', 'Collapse all');
 \define('_MA_WGSIMPLEACC_LIMIT', 'Number of lines');
+\define('_MA_WGSIMPLEACC_MISSING_ID', 'Missing Id');
 // ---------------- Filter   ----------------
 \define('_MA_WGSIMPLEACC_FILTERTYPE', 'Filter');
 \define('_MA_WGSIMPLEACC_SHOW_ALL', 'Show all');
@@ -105,7 +106,8 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_ACCOUNT_LEVEL', 'Level');
 \define('_MA_WGSIMPLEACC_ACCOUNT_WEIGHT', 'Weight');
 \define('_MA_WGSIMPLEACC_ACCOUNT_IECALC', 'Use in income/expenses calculation');
-\define('_MA_WGSIMPLEACC_ACCOUNT_ERR_DELETE', 'Deleting account not possible!<br>Account already used for transactions!<br>Please change these transactions first');
+\define('_MA_WGSIMPLEACC_ACCOUNT_ERR_DELETE1', 'Deleting account not possible!<br>Account already used for transactions!<br>Please change these transactions first');
+\define('_MA_WGSIMPLEACC_ACCOUNT_ERR_DELETE2', 'Deleting account not possible!<br>Account has sub accounts!<br>Please delete/move sub accounts first');
 // Transaction add/edit
 \define('_MA_WGSIMPLEACC_TRANSACTION_ADD', 'Add transaction');
 \define('_MA_WGSIMPLEACC_TRANSACTION_ADD_INCOME', 'Add transaction for income');
@@ -456,14 +458,18 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_CLASS_INCOME', 'Incomes');
 \define('_MA_WGSIMPLEACC_CLASS_BOTH', 'Both');
 // Constants Status
-\define('_MA_WGSIMPLEACC_STATUS_NONE', 'No status');
-\define('_MA_WGSIMPLEACC_STATUS_OFFLINE', 'Deleted');
-\define('_MA_WGSIMPLEACC_STATUS_SUBMITTED', 'Submitted');
-\define('_MA_WGSIMPLEACC_STATUS_APPROVED', 'Approved');
-\define('_MA_WGSIMPLEACC_STATUS_BROKEN', 'Broken');
-\define('_MA_WGSIMPLEACC_STATUS_CREATED', 'Created');
-\define('_MA_WGSIMPLEACC_STATUS_LOCKED', 'Locked');
-\define('_MA_WGSIMPLEACC_STATUS_TEMPORARY', 'Temporary');
+\define('_MA_WGSIMPLEACC_TRASTATUS_NONE', 'No status');
+\define('_MA_WGSIMPLEACC_TRASTATUS_DELETED', 'Deleted');
+\define('_MA_WGSIMPLEACC_TRASTATUS_SUBMITTED', 'Submitted');
+\define('_MA_WGSIMPLEACC_TRASTATUS_APPROVED', 'Approved');
+\define('_MA_WGSIMPLEACC_TRASTATUS_CREATED', 'Created');
+\define('_MA_WGSIMPLEACC_TRASTATUS_LOCKED', 'Locked');
+\define('_MA_WGSIMPLEACC_BALSTATUS_NONE', 'No status');
+\define('_MA_WGSIMPLEACC_BALSTATUS_APPROVED', 'Approved');
+\define('_MA_WGSIMPLEACC_BALSTATUS_TEMPORARY', 'Temporary');
+\define('_MA_WGSIMPLEACC_ONOFF_OFFLINE', 'Offline');
+\define('_MA_WGSIMPLEACC_ONOFF_ONLINE', 'Online');
+\define('_MA_WGSIMPLEACC_ONOFF_HIDDEN', 'Hidden');
 //PDF files
 \define('_MA_WGSIMPLEACC_PDF_BUTTON', 'Output as PDF');
 \define('_MA_WGSIMPLEACC_PDF_TRANAME', 'Transaction_%y_%n');

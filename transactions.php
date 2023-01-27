@@ -130,7 +130,7 @@ switch ($op) {
         if ($traId > 0) {
             $crTransactions->add(new \Criteria('tra_id', $traId));
         } else {
-            $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_OFFLINE, '>'));
+            $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_DELETED, '>'));
             $tradateFrom = 0;
             $tradateTo = \time() + (10 * 365 * 24 * 60 * 60);
             if (Constants::FILTER_PYEARLY == $period_type && 0 == $filterMonthFrom) {
@@ -192,7 +192,7 @@ switch ($op) {
             foreach (\array_keys($transactionsAll) as $i) {
                 $transactions[$i] = $transactionsAll[$i]->getValuesTransactions();
                 $transactions[$i]['editable'] = $permissionsHandler->getPermTransactionsEdit($transactions[$i]['tra_submitter'], $transactions[$i]['tra_status'], $transactions[$i]['tra_balid']);
-                $transactions[$i]['waiting'] = (Constants::STATUS_SUBMITTED == $transactions[$i]['tra_status']);
+                $transactions[$i]['waiting'] = (Constants::TRASTATUS_SUBMITTED == $transactions[$i]['tra_status']);
                 if ($traId > 0) {
                     $transactions[$i]['tratemplate'] = $permissionsHandler->getPermTratemplatesSubmit();
                 }
@@ -368,7 +368,7 @@ switch ($op) {
             $tags['ITEM_NAME'] = $traDesc;
             $tags['ITEM_URL']  = \XOOPS_URL . '/modules/wgsimpleacc/transactions.php?op=show&tra_id=' . $newTraId;
             $notificationHandler = \xoops_getHandler('notification');
-            if (Constants::STATUS_SUBMITTED == $traStatus) {
+            if (Constants::TRASTATUS_SUBMITTED == $traStatus) {
                 if (0 === $traId) {
                     // Event new notification
                     $notificationHandler->triggerEvent('global', 0, 'global_new', $tags);
@@ -515,9 +515,9 @@ switch ($op) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 \redirect_header('transactions.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
-            $transactionsObj->setVar('tra_status', Constants::STATUS_OFFLINE);
+            $transactionsObj->setVar('tra_status', Constants::TRASTATUS_DELETED);
             if ($transactionsHandler->insert($transactionsObj)) {
-                // Event delete notification
+                // Transaction delete notification
                 $tags = [];
                 $tags['ITEM_NAME'] = $traDesc;
                 $notificationHandler = \xoops_getHandler('notification');
@@ -575,7 +575,7 @@ switch ($op) {
             $GLOBALS['xoopsTpl']->assign('formFilter', $formFilter->render());
         }
         $crTransactions = new \CriteriaCompo();
-        $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_OFFLINE));
+        $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_DELETED));
         if ($traId > 0) {
             $crTransactions->add(new \Criteria('tra_id', $traId));
         } else {

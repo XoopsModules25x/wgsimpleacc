@@ -143,13 +143,13 @@ if ($indexTrahbar || $indexTraInExSums || $indexAssetsPie) {
                 $crTransactions->add(new \Criteria('tra_allid', $allPid));
                 $crTransactions->add(new \Criteria('tra_date', $tradateFrom, '>='));
                 $crTransactions->add(new \Criteria('tra_date', $tradateTo, '<='));
-                $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_SUBMITTED, '>='));
+                $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_SUBMITTED, '>='));
                 $transactionsAll = $transactionsHandler->getAll($crTransactions);
                 foreach (\array_keys($transactionsAll) as $i) {
-                    if (Constants::STATUS_APPROVED == $transactionsAll[$i]->getVar('tra_status')) {
+                    if (Constants::TRASTATUS_APPROVED == $transactionsAll[$i]->getVar('tra_status')) {
                         $sumAmountin1 += $transactionsAll[$i]->getVar('tra_amountin');
                         $sumAmountout1 += $transactionsAll[$i]->getVar('tra_amountout');
-                    } elseif (Constants::STATUS_SUBMITTED == $transactionsAll[$i]->getVar('tra_status')) {
+                    } elseif (Constants::TRASTATUS_SUBMITTED == $transactionsAll[$i]->getVar('tra_status')) {
                         $sumAmountin2 += $transactionsAll[$i]->getVar('tra_amountin');
                         $sumAmountout2 += $transactionsAll[$i]->getVar('tra_amountout');
                     }
@@ -203,15 +203,15 @@ if ($indexTrahbar || $indexTraInExSums || $indexAssetsPie) {
                     $crTransactions->add(new \Criteria('tra_allid', $subAllId));
                     $crTransactions->add(new \Criteria('tra_date', $tradateFrom, '>='));
                     $crTransactions->add(new \Criteria('tra_date', $tradateTo, '<='));
-                    $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_SUBMITTED, '>='));
+                    $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_SUBMITTED, '>='));
                     $transactionsCount = $transactionsHandler->getCount($crTransactions);
                     $transactionsAll = $transactionsHandler->getAll($crTransactions);
                     if ($transactionsCount > 0) {
                         foreach (\array_keys($transactionsAll) as $t) {
-                            if (Constants::STATUS_APPROVED == $transactionsAll[$t]->getVar('tra_status')) {
+                            if (Constants::TRASTATUS_APPROVED == $transactionsAll[$t]->getVar('tra_status')) {
                                 $sumAmountin1 += $transactionsAll[$t]->getVar('tra_amountin');
                                 $sumAmountout1 += $transactionsAll[$t]->getVar('tra_amountout');
-                            } elseif (Constants::STATUS_SUBMITTED == $transactionsAll[$t]->getVar('tra_status')) {
+                            } elseif (Constants::TRASTATUS_SUBMITTED == $transactionsAll[$t]->getVar('tra_status')) {
                                 $sumAmountin2 += $transactionsAll[$t]->getVar('tra_amountin');
                                 $sumAmountout2 += $transactionsAll[$t]->getVar('tra_amountout');
                             }
@@ -251,10 +251,10 @@ if ($indexTrahbar || $indexTraInExSums || $indexAssetsPie) {
         $GLOBALS['xoopsTpl']->assign('transactions_total_out', Utility::FloatToString($transactions_total_out));
         $GLOBALS['xoopsTpl']->assign('transactions_total_out_val', $transactions_total_out);
         $GLOBALS['xoopsTpl']->assign('transactions_total', Utility::FloatToString($transactions_total_in - $transactions_total_out));
-        $GLOBALS['xoopsTpl']->assign('label_datain1', \_MA_WGSIMPLEACC_TRANSACTIONS_INCOMES . ' (' . \_MA_WGSIMPLEACC_STATUS_APPROVED .')');
-        $GLOBALS['xoopsTpl']->assign('label_datain2', \_MA_WGSIMPLEACC_TRANSACTIONS_INCOMES . ' (' . \_MA_WGSIMPLEACC_STATUS_SUBMITTED .')');
-        $GLOBALS['xoopsTpl']->assign('label_dataout1', \_MA_WGSIMPLEACC_TRANSACTIONS_EXPENSES . ' (' . \_MA_WGSIMPLEACC_STATUS_APPROVED .')');
-        $GLOBALS['xoopsTpl']->assign('label_dataout2', \_MA_WGSIMPLEACC_TRANSACTIONS_EXPENSES . ' (' . \_MA_WGSIMPLEACC_STATUS_SUBMITTED .')');
+        $GLOBALS['xoopsTpl']->assign('label_datain1', \_MA_WGSIMPLEACC_TRANSACTIONS_INCOMES . ' (' . \_MA_WGSIMPLEACC_TRASTATUS_APPROVED .')');
+        $GLOBALS['xoopsTpl']->assign('label_datain2', \_MA_WGSIMPLEACC_TRANSACTIONS_INCOMES . ' (' . \_MA_WGSIMPLEACC_TRASTATUS_SUBMITTED .')');
+        $GLOBALS['xoopsTpl']->assign('label_dataout1', \_MA_WGSIMPLEACC_TRANSACTIONS_EXPENSES . ' (' . \_MA_WGSIMPLEACC_TRASTATUS_APPROVED .')');
+        $GLOBALS['xoopsTpl']->assign('label_dataout2', \_MA_WGSIMPLEACC_TRANSACTIONS_EXPENSES . ' (' . \_MA_WGSIMPLEACC_TRASTATUS_SUBMITTED .')');
     }
     unset($count);
 }

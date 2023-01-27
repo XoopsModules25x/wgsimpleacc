@@ -123,7 +123,7 @@ switch ($op) {
                     $crTransactions->add(new \Criteria('tra_allid', $allPid));
                     $crTransactions->add(new \Criteria('tra_date', $tradateFrom, '>='));
                     $crTransactions->add(new \Criteria('tra_date', $tradateTo, '<='));
-                    $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_SUBMITTED, '>'));
+                    $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_SUBMITTED, '>'));
                     $transactionsAll   = $transactionsHandler->getAll($crTransactions);
                     foreach (\array_keys($transactionsAll) as $i) {
                         $sumAmountin += $transactionsAll[$i]->getVar('tra_amountin');
@@ -197,7 +197,7 @@ switch ($op) {
                         $crTransactions->add(new \Criteria('tra_allid', $subAllId));
                         $crTransactions->add(new \Criteria('tra_date', $tradateFrom, '>='));
                         $crTransactions->add(new \Criteria('tra_date', $tradateTo, '<='));
-                        $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_SUBMITTED, '>'));
+                        $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_SUBMITTED, '>'));
                         $transactionsCount = $transactionsHandler->getCount($crTransactions);
                         $transactionsAll   = $transactionsHandler->getAll($crTransactions);
                         if ($transactionsCount > 0) {
@@ -225,8 +225,8 @@ switch ($op) {
             $GLOBALS['xoopsTpl']->assign('transactions_total_in', Utility::FloatToString($transactions_total_in));
             $GLOBALS['xoopsTpl']->assign('transactions_total_out', Utility::FloatToString($transactions_total_out));
             $GLOBALS['xoopsTpl']->assign('transactions_total', Utility::FloatToString($transactions_total_in - $transactions_total_out));
-            $GLOBALS['xoopsTpl']->assign('label_datain1', \_MA_WGSIMPLEACC_TRANSACTIONS_INCOMES . ' (' . \_MA_WGSIMPLEACC_STATUS_APPROVED .')');
-            $GLOBALS['xoopsTpl']->assign('label_dataout1', \_MA_WGSIMPLEACC_TRANSACTIONS_EXPENSES . ' (' . \_MA_WGSIMPLEACC_STATUS_APPROVED .')');
+            $GLOBALS['xoopsTpl']->assign('label_datain1', \_MA_WGSIMPLEACC_TRANSACTIONS_INCOMES . ' (' . \_MA_WGSIMPLEACC_TRASTATUS_APPROVED .')');
+            $GLOBALS['xoopsTpl']->assign('label_dataout1', \_MA_WGSIMPLEACC_TRANSACTIONS_EXPENSES . ' (' . \_MA_WGSIMPLEACC_TRASTATUS_APPROVED .')');
         }
         unset($count);
 
@@ -277,7 +277,7 @@ switch ($op) {
         $minYear = 0;
         $maxYear = 0;
         $crTransactions = new \CriteriaCompo();
-        $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_SUBMITTED, '>'));
+        $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_SUBMITTED, '>'));
         $crTransactions->setSort('tra_year');
         $crTransactions->setOrder('ASC');
         $crTransactions->setStart();
@@ -376,7 +376,7 @@ switch ($op) {
         $minYearFrom = date('Y') - 5;
         $minDateFrom = \DateTime::createFromFormat('Y-m-d', (date('Y') - 5) . '-1-1')->getTimestamp();
         $crTransactions = new \CriteriaCompo();
-        $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_SUBMITTED, '>'));
+        $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_SUBMITTED, '>'));
         $crTransactions->setSort('tra_date');
         $crTransactions->setOrder('ASC');
         $crTransactions->setStart();
@@ -424,7 +424,7 @@ switch ($op) {
         }
         $crTransactions = new \CriteriaCompo();
         $crTransactions->add(new \Criteria('tra_date', $minDateFrom, '>='));
-        $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_SUBMITTED, '>'));
+        $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_SUBMITTED, '>'));
         $crTransactions->setSort('tra_accid ASC, tra_date');
         $crTransactions->setOrder('ASC');
         $transactionsCount = $transactionsHandler->getCount($crTransactions);
@@ -524,7 +524,7 @@ switch ($op) {
                     $crTransactions->add(new \Criteria('tra_accid', $accPid));
                     $crTransactions->add(new \Criteria('tra_date', $tradateFrom, '>='));
                     $crTransactions->add(new \Criteria('tra_date', $tradateTo, '<='));
-                    $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_SUBMITTED, '>'));
+                    $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_SUBMITTED, '>'));
                     $transactionsAll   = $transactionsHandler->getAll($crTransactions);
                     foreach (\array_keys($transactionsAll) as $i) {
                         $sumAmountin += $transactionsAll[$i]->getVar('tra_amountin');
@@ -598,7 +598,7 @@ switch ($op) {
                         $crTransactions->add(new \Criteria('tra_accid', $subAccId));
                         $crTransactions->add(new \Criteria('tra_date', $tradateFrom, '>='));
                         $crTransactions->add(new \Criteria('tra_date', $tradateTo, '<='));
-                        $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_SUBMITTED, '>'));
+                        $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_SUBMITTED, '>'));
                         $transactionsCount = $transactionsHandler->getCount($crTransactions);
                         $transactionsAll   = $transactionsHandler->getAll($crTransactions);
                         if ($transactionsCount > 0) {
@@ -626,8 +626,8 @@ switch ($op) {
             $GLOBALS['xoopsTpl']->assign('transactions_total_in', Utility::FloatToString($transactions_total_in));
             $GLOBALS['xoopsTpl']->assign('transactions_total_out', Utility::FloatToString($transactions_total_out));
             $GLOBALS['xoopsTpl']->assign('transactions_total', Utility::FloatToString($transactions_total_in - $transactions_total_out));
-            $GLOBALS['xoopsTpl']->assign('label_datain1', \_MA_WGSIMPLEACC_TRANSACTIONS_INCOMES . ' (' . \_MA_WGSIMPLEACC_STATUS_APPROVED .')');
-            $GLOBALS['xoopsTpl']->assign('label_dataout1', \_MA_WGSIMPLEACC_TRANSACTIONS_EXPENSES . ' (' . \_MA_WGSIMPLEACC_STATUS_APPROVED .')');
+            $GLOBALS['xoopsTpl']->assign('label_datain1', \_MA_WGSIMPLEACC_TRANSACTIONS_INCOMES . ' (' . \_MA_WGSIMPLEACC_TRASTATUS_APPROVED .')');
+            $GLOBALS['xoopsTpl']->assign('label_dataout1', \_MA_WGSIMPLEACC_TRANSACTIONS_EXPENSES . ' (' . \_MA_WGSIMPLEACC_TRASTATUS_APPROVED .')');
         }
         unset($count);
 

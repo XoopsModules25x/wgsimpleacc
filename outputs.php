@@ -206,7 +206,7 @@ switch ($op) {
 
                 // Add data
                 $crTransactions = new \CriteriaCompo();
-                $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_OFFLINE, '>'));
+                $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_DELETED, '>'));
                 if ($traId > 0) {
                     $crTransactions->add(new \Criteria('tra_id', $traId));
                 } else {

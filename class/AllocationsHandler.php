@@ -22,7 +22,7 @@ namespace XoopsModules\Wgsimpleacc;
  */
 
 use XoopsModules\Wgsimpleacc;
-
+use XoopsModules\Wgsimpleacc\Constants;
 
 /**
  * Class Object Handler Allocations
@@ -131,7 +131,7 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
         $allocationsHandler = $helper->getHandler('Allocations');
 
         $crItems           = new \CriteriaCompo();
-        $crItems->add(new \Criteria('all_online', 1));
+        $crItems->add(new \Criteria('all_online', Constants::ONOFF_ONLINE));
         $crItems->setSort('all_weight ASC, all_id');
         $crItems->setOrder('ASC');
         $allocationsCount = $allocationsHandler->getCount($crItems);
@@ -192,10 +192,12 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
         $itemsHandler = $helper->getHandler('Allocations');
         $itemId       = 'all_id';
         $itemName     = 'all_name';
+        $itemDesc     = 'all_desc';
         $itemOnline   = 'all_online';
 
         $crItems           = new \CriteriaCompo();
         $crItems->add(new \Criteria('all_pid', $itemPid));
+        $crItems->add(new \Criteria('all_online', Constants::ONOFF_HIDDEN, '<'));
         $crItems->setSort('all_weight ASC, all_datecreated');
         $crItems->setOrder('DESC');
         $itemsCount = $itemsHandler->getCount($crItems);
@@ -210,12 +212,18 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
                     $childsAll .= '<span id="disclose_icon_' . $itemsAll[$i]->getVar($itemId) . '" title="' . \_MA_WGSIMPLEACC_LIST_CHILDS . '" class="disclose ui-icon ui-icon-plusthick"><span>-</span></span>';
                 }
                 $childsAll .= '<span>';
-                $childsAll .= '<span id="' . $itemsAll[$i]->getVar($itemId) . '" data-id="' . $itemsAll[$i]->getVar($itemId) . '" class="disclose_text itemTitle">' . $itemsAll[$i]->getVar($itemName) . '</span>';
+                $childsAll .= '<span id="' . $itemsAll[$i]->getVar($itemId) . '" data-id="' . $itemsAll[$i]->getVar($itemId) . '" class="disclose_text itemTitle">' . $itemsAll[$i]->getVar($itemName);
+                $itemDescText = (string)$itemsAll[$i]->getVar($itemDesc);
+                if ('' !== $itemDescText) {
+                    $childsAll .= '<span class="badge wgsa-info-badge" title="' . $itemDescText . '">i</span>';
+                }
+                $childsAll .= '</span>';
                 $childsAll .= '<span class="pull-right">';
                 $onlineText = (1 == (int)$itemsAll[$i]->getVar($itemOnline)) ? \_MA_WGSIMPLEACC_ONLINE : \_MA_WGSIMPLEACC_OFFLINE;
                 $childsAll .= '<img class="wgsa-img-online" src="' . \WGSIMPLEACC_ICONS_URL . '/32/' . $itemsAll[$i]->getVar($itemOnline) . '.png" title="' . $onlineText . '" alt="' . $onlineText . '">';
                 $crTransactions = new \CriteriaCompo();
                 $crTransactions->add(new \Criteria('tra_allid', $i));
+                $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_DELETED, '>'));
                 $transactionsCount = $transactionsHandler->getCount($crTransactions);
                 $childsAll .= '<a class="btn btn btn-default wgsa-btn-list';
                 if (0 === $transactionsCount) {
@@ -268,6 +276,7 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
 
         $crItems           = new \CriteriaCompo();
         $crItems->add(new \Criteria('all_pid', $itemPid));
+        $crItems->add(new \Criteria('all_online', Constants::ONOFF_HIDDEN, '<'));
         $crItems->setSort('all_weight ASC, all_datecreated');
         $crItems->setOrder('DESC');
         $itemsCount = $itemsHandler->getCount($crItems);
@@ -350,7 +359,7 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
         $allocationsHandler = $helper->getHandler('Allocations');
 
         $crItems           = new \CriteriaCompo();
-        $crItems->add(new \Criteria('all_online', 1));
+        $crItems->add(new \Criteria('all_online', Constants::ONOFF_ONLINE));
         $crItems->setSort('all_weight ASC, all_id');
         $crItems->setOrder('ASC');
         $allocationsCount = $allocationsHandler->getCount($crItems);

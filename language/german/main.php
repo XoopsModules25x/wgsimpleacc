@@ -41,6 +41,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_INVALID_PARAM', 'Ungültiger Parameter');
 \define('_MA_WGSIMPLEACC_COLLAPSE_ALL', 'Alle aufklappen');
 \define('_MA_WGSIMPLEACC_LIMIT', 'Anzahl an Zeilen');
+\define('_MA_WGSIMPLEACC_MISSING_ID', 'Fehlende ID');
 // ---------------- Filter   ----------------
 \define('_MA_WGSIMPLEACC_FILTERTYPE', 'Filter');
 \define('_MA_WGSIMPLEACC_SHOW_ALL', 'Alle anzeigen');
@@ -105,7 +106,8 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_ACCOUNT_LEVEL', 'Ebene');
 \define('_MA_WGSIMPLEACC_ACCOUNT_WEIGHT', 'Reihung');
 \define('_MA_WGSIMPLEACC_ACCOUNT_IECALC', 'Verwendung in Einnahmen-Ausgaben-Berechnung');
-\define('_MA_WGSIMPLEACC_ACCOUNT_ERR_DELETE', 'Löschen des Kontos nicht zulässig!<br>Das Konto wurde bereits für Transaktionen verwendet!<br>Bitte zuerst diese Transaktionen ändern');
+\define('_MA_WGSIMPLEACC_ACCOUNT_ERR_DELETE1', 'Löschen des Kontos nicht zulässig!<br>Das Konto wurde bereits für Transaktionen verwendet!<br>Bitte zuerst diese Transaktionen ändern');
+\define('_MA_WGSIMPLEACC_ACCOUNT_ERR_DELETE2', 'Löschen des Kontos nicht zulässig!<br>Das Konto besitzt Subkonten!<br>Bitte zuerst diese Subkonten entfernen/verschieben');
 // Transaction add/edit
 \define('_MA_WGSIMPLEACC_TRANSACTION_ADD', 'Transaktion hinzufügen');
 \define('_MA_WGSIMPLEACC_TRANSACTION_ADD_INCOME', 'Transaktion Einnahmen hinzufügen');
@@ -456,14 +458,18 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_CLASS_INCOME', 'Einnahmen');
 \define('_MA_WGSIMPLEACC_CLASS_BOTH', 'Beides');
 // Constants Status
-\define('_MA_WGSIMPLEACC_STATUS_NONE', 'Kein Status');
-\define('_MA_WGSIMPLEACC_STATUS_OFFLINE', 'Gelöscht');
-\define('_MA_WGSIMPLEACC_STATUS_SUBMITTED', 'Eingesendet');
-\define('_MA_WGSIMPLEACC_STATUS_APPROVED', 'Bestätigt');
-\define('_MA_WGSIMPLEACC_STATUS_BROKEN', 'Fehlerhaft');
-\define('_MA_WGSIMPLEACC_STATUS_CREATED', 'Erstellt');
-\define('_MA_WGSIMPLEACC_STATUS_LOCKED', 'Gesperrt');
-\define('_MA_WGSIMPLEACC_STATUS_TEMPORARY', 'Vorläufig');
+\define('_MA_WGSIMPLEACC_TRASTATUS_NONE', 'Kein Status');
+\define('_MA_WGSIMPLEACC_TRASTATUS_DELETED', 'Gelöscht');
+\define('_MA_WGSIMPLEACC_TRASTATUS_SUBMITTED', 'Eingesendet');
+\define('_MA_WGSIMPLEACC_TRASTATUS_APPROVED', 'Bestätigt');
+\define('_MA_WGSIMPLEACC_TRASTATUS_CREATED', 'Erstellt');
+\define('_MA_WGSIMPLEACC_TRASTATUS_LOCKED', 'Gesperrt');
+\define('_MA_WGSIMPLEACC_BALSTATUS_NONE', 'Kein Status');
+\define('_MA_WGSIMPLEACC_BALSTATUS_APPROVED', 'Bestätigt');
+\define('_MA_WGSIMPLEACC_BALSTATUS_TEMPORARY', 'Vorläufig');
+\define('_MA_WGSIMPLEACC_ONOFF_OFFLINE', 'Offline');
+\define('_MA_WGSIMPLEACC_ONOFF_ONLINE', 'Online');
+\define('_MA_WGSIMPLEACC_ONOFF_HIDDEN', 'Versteckt');
 //PDF files
 \define('_MA_WGSIMPLEACC_PDF_BUTTON', 'Ausgabe als PDF');
 \define('_MA_WGSIMPLEACC_PDF_TRANAME', 'Transaktion_%y_%n');
