@@ -216,7 +216,7 @@ class Transactions extends \XoopsObject
         $editorConfigs['height'] = '400px';
         $editorConfigs['editor'] = $editor;
         $traDesc = new \XoopsFormEditor(\_MA_WGSIMPLEACC_TRANSACTION_DESC, 'tra_desc', $editorConfigs);
-        $form->addElement($traDesc);
+        $form->addElement($traDesc, true);
         // Form Editor DhtmlTextArea traRemarks
         $editorConfigs = [];
         $editorConfigs['name'] = 'tra_remarks';

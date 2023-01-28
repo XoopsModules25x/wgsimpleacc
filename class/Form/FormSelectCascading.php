@@ -20,6 +20,45 @@ namespace XoopsModules\Wgsimpleacc\Form;
  * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
+/** Example Code
+ *
+    // Get Theme Form
+    \xoops_load('XoopsFormLoader');
+    $form = new \XoopsThemeForm('My form for testing cascading select', 'formTest',  $_SERVER['REQUEST_URI'], 'post', true);
+    $form->setExtra('enctype="multipart/form-data"');
+
+    $mySelect1 = new XoopsModules\Wgsimpleacc\Form\FormSelectCascading('Caption Select 1', 'select1', '2', 15);
+    $mySelect1->setType(1);
+    $arrSelect1 = [
+    ['id' => '1', 'text'=>'Sourceelement 1'],
+    ['id' => '2', 'text'=>'Sourceelement 2'],
+    ['id' => '3', 'text'=>'Sourceelement 3'],
+    ];
+    $mySelect1->setCustomOptions($arrSelect1);
+    $form->addElement($mySelect1);
+
+    $mySelect2 = new XoopsModules\Wgsimpleacc\Form\FormSelectCascading('Caption Select 2', 'select2', '13', 15);
+    $mySelect2->setType(2);
+    $arrSelect2 = [
+    ['id' => '1', 'text'=>'Targetelement 1, linked to Sourceelement 1', 'rel'=> '1', 'init'=> '2'],
+    ['id' => '1', 'text'=>'Targetelement 1, linked to Sourceelement 2', 'rel'=> '2', 'init'=> '2'],
+    ['id' => '1', 'text'=>'Targetelement 1, linked to Sourceelement 3', 'rel'=> '3', 'init'=> '2'],
+    ['id' => '2', 'text'=>'Targetelement 2, linked to Sourceelement 1', 'rel'=> '1', 'init'=> '2'],
+    ['id' => '3', 'text'=>'Targetelement 3, linked to Sourceelement 1', 'rel'=> '1', 'init'=> '2'],
+    ['id' => '3', 'text'=>'Targetelement 3, linked to Sourceelement 3', 'rel'=> '3', 'init'=> '2'],
+    ['id' => '4', 'text'=>'Targetelement 4, linked to Sourceelement 2', 'rel'=> '2', 'init'=> '2'],
+    ['id' => '5', 'text'=>'Targetelement 5, linked to Sourceelement 2', 'rel'=> '2', 'init'=> '2'],
+    ];
+    $mySelect2->setCustomOptions($arrSelect2);
+    $form->addElement($mySelect2);
+
+    $form->addElement(new \XoopsFormHidden('op', 'save'));
+    $form->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
+    $GLOBALS['xoopsTpl']->assign('form', $form->render());
+
+ *
+ */
+
 use XoopsFormSelect;
 
 \defined('XOOPS_ROOT_PATH') || exit('Restricted access');
@@ -35,11 +74,11 @@ class FormSelectCascading extends \XoopsFormSelect
      * custom option array of select
      * first select needs:
      * - id: id of option
-     * - text: Text of select
+     * - text: text of option
      *
      * second select needs:
      * - id: id of option
-     * - text: Text of select
+     * - text: text of option
      * - rel: id of option of first select
      * - init: initial value of first select
      *  => combination 'id' 'rel' should be unique
@@ -148,5 +187,4 @@ class FormSelectCascading extends \XoopsFormSelect
     public function getCustomOptions() {
         return $this->custom_options;
     }
-
 }
