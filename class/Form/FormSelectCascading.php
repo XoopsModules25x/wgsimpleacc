@@ -27,17 +27,18 @@ namespace XoopsModules\Wgsimpleacc\Form;
     $form = new \XoopsThemeForm('My form for testing cascading select', 'formTest',  $_SERVER['REQUEST_URI'], 'post', true);
     $form->setExtra('enctype="multipart/form-data"');
 
+    $myExampleTray1 = new XoopsFormElementTray('Example Tray 1');
     $mySelect1 = new XoopsModules\Wgsimpleacc\Form\FormSelectCascading('Caption Select 1', 'select1', '2', 15);
     $mySelect1->setType(1);
     $arrSelect1 = [
-    ['id' => '1', 'text'=>'Sourceelement 1'],
-    ['id' => '2', 'text'=>'Sourceelement 2'],
-    ['id' => '3', 'text'=>'Sourceelement 3'],
+    ['id' => '1', 'text'=>'Sourceelement 1', 'rel'=> '0', 'init'=> '0'],
+    ['id' => '2', 'text'=>'Sourceelement 2', 'rel'=> '0', 'init'=> '0'],
+    ['id' => '3', 'text'=>'Sourceelement 3', 'rel'=> '0', 'init'=> '0'],
     ];
     $mySelect1->setCustomOptions($arrSelect1);
-    $form->addElement($mySelect1);
+    $myExampleTray1->addElement($mySelect1);
 
-    $mySelect2 = new XoopsModules\Wgsimpleacc\Form\FormSelectCascading('Caption Select 2', 'select2', '13', 15);
+    $mySelect2 = new XoopsModules\Wgsimpleacc\Form\FormSelectCascading('Caption Select 2', 'select2', '4', 15);
     $mySelect2->setType(2);
     $arrSelect2 = [
     ['id' => '1', 'text'=>'Targetelement 1, linked to Sourceelement 1', 'rel'=> '1', 'init'=> '2'],
@@ -50,12 +51,11 @@ namespace XoopsModules\Wgsimpleacc\Form;
     ['id' => '5', 'text'=>'Targetelement 5, linked to Sourceelement 2', 'rel'=> '2', 'init'=> '2'],
     ];
     $mySelect2->setCustomOptions($arrSelect2);
-    $form->addElement($mySelect2);
-
+    $myExampleTray1->addElement($mySelect2);
+    $form->addElement($myExampleTray1);
     $form->addElement(new \XoopsFormHidden('op', 'save'));
     $form->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
     $GLOBALS['xoopsTpl']->assign('form', $form->render());
-
  *
  */
 
@@ -75,6 +75,8 @@ class FormSelectCascading extends \XoopsFormSelect
      * first select needs:
      * - id: id of option
      * - text: text of option
+     * - rel: 0
+     * - init: 0
      *
      * second select needs:
      * - id: id of option
@@ -128,10 +130,10 @@ class FormSelectCascading extends \XoopsFormSelect
                 $ret .= ' selected';
             }
             if (1 === (int)$ele_type) {
-                $ret .= ' data-ref="all' . $ele_option['id'] . '"';
+                $ret .= ' data-ref="' . $ele_option['id'] . '"';
             }
             if (2 === (int)$ele_type) {
-                $ret .= ' data-belong="all' . $ele_option['rel'] . '"';
+                $ret .= ' data-belong="' . $ele_option['rel'] . '"';
             }
             if ((int)$ele_option['init'] !== (int)$ele_option['rel']) {
                 $ret .= ' hidden';

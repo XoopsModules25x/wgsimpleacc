@@ -251,7 +251,7 @@ class Transactions extends \XoopsObject
             $allocations = $allocationsHandler->getSelectTreeOfAllocations();
             $arrAllocations = [];
             foreach ($allocations as $allocation) {
-                $arrAllocations[] = ['id' => $allocation['id'], 'text' => $allocation['text']];
+                $arrAllocations[] = ['id' => $allocation['id'], 'text' => $allocation['text'], 'rel' => '0', 'init' => '0'];
             }
             $traAllocationSelect1->setCustomOptions($arrAllocations);
             $allTray->addElement($traAllocationSelect1, $allRequired);
@@ -293,7 +293,7 @@ class Transactions extends \XoopsObject
                 foreach ($allAccounts as $account) {
                     foreach ($accountsAll as $accSingle) {
                         if ((int)$accSingle['id'] == (int)$account) {
-                            $arrAccounts[] = ['id' => $accSingle['id'], 'rel' => $allocation['id'], 'text' => $accSingle['text'], 'init' => $traAllid];
+                            $arrAccounts[] = ['id' => $accSingle['id'], 'text' => $accSingle['text'], 'rel' => $allocation['id'], 'init' => $traAllid];
                         }
                     }
                 }
