@@ -114,7 +114,7 @@ class Balances extends \XoopsObject
         $balTo = $this->isNew() ? $dateToM : $this->getVar('bal_to');
         $form->addElement(new \XoopsFormTextDateSelect(\_MA_WGSIMPLEACC_BALANCE_TO, 'bal_to', '', $balTo), true);
         // Form Select Status balStatus
-        $balStatus = $this->isNew() ? Constants::STATUS_APPROVED : $this->getVar('bal_status');
+        $balStatus = $this->isNew() ? Constants::TRASTATUS_APPROVED : $this->getVar('bal_status');
         if ($admin) {
             // Form Table assets
             $assetsHandler = $helper->getHandler('Assets');
@@ -137,10 +137,9 @@ class Balances extends \XoopsObject
             $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_BALANCE_AMOUNTEND, 'bal_amountend', 20, 150, $balAmountEnd), true);
             // Form Select Status
             $balStatusSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_BALANCE_STATUS, 'bal_status', $balStatus);
-            $balStatusSelect->addOption(Constants::STATUS_NONE, \_MA_WGSIMPLEACC_STATUS_NONE);
-            $balStatusSelect->addOption(Constants::STATUS_OFFLINE, \_MA_WGSIMPLEACC_STATUS_OFFLINE);
-            $balStatusSelect->addOption(Constants::STATUS_TEMPORARY, \_MA_WGSIMPLEACC_STATUS_TEMPORARY);
-            $balStatusSelect->addOption(Constants::STATUS_APPROVED, \_MA_WGSIMPLEACC_STATUS_APPROVED);
+            $balStatusSelect->addOption(Constants::BALSTATUS_NONE, \_MA_WGSIMPLEACC_BALSTATUS_NONE);
+            $balStatusSelect->addOption(Constants::BALSTATUS_TEMPORARY, \_MA_WGSIMPLEACC_BALSTATUS_TEMPORARY);
+            $balStatusSelect->addOption(Constants::BALSTATUS_APPROVED, \_MA_WGSIMPLEACC_BALSTATUS_APPROVED);
             $form->addElement($balStatusSelect);
             // Form Text Date Select balDatecreated
             $balDatecreated = $this->isNew() ?: $this->getVar('bal_datecreated');
@@ -191,18 +190,18 @@ class Balances extends \XoopsObject
         $ret['difference']   = Utility::FloatToString($this->getVar('bal_amountend') - $this->getVar('bal_amountstart'));
         $status             = $this->getVar('bal_status');
         $ret['status']      = $status;
-        $ret['status_text'] = Utility::getStatusText($status);
+        $ret['status_text'] = Utility::getBalStatusText($status);
         switch ($status) {
             case 0:
             default:
                 $ret['type'] = 0;
                 $ret['type_text'] = 'invalid';
                 break;
-            case Constants::STATUS_TEMPORARY:
+            case Constants::BALSTATUS_TEMPORARY:
                 $ret['type'] = Constants::BALANCE_TYPE_TEMPORARY;
                 $ret['type_text'] = \_MA_WGSIMPLEACC_BALANCE_TYPE_TEMPORARY;
                 break;
-            case Constants::STATUS_APPROVED:
+            case Constants::BALSTATUS_APPROVED:
                 $ret['type'] = Constants::BALANCE_TYPE_FINAL;
                 $ret['type_text'] = \_MA_WGSIMPLEACC_BALANCE_TYPE_FINAL;
                 break;

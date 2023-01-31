@@ -43,16 +43,27 @@ interface Constants
     public const TABLE_CLIENTS = 12;
     */
 
-    // Constants for status
-    public const STATUS_NONE      = 0;
-    public const STATUS_OFFLINE   = 1; // = deleted
-    public const STATUS_CREATED   = 2;
-    public const STATUS_SUBMITTED = 4;
-    public const STATUS_APPROVED  = 7;
-    public const STATUS_TEMPORARY = 8;
-    public const STATUS_LOCKED    = 9;
-    public const STATUS_BROKEN    = 10;
+    // Constants for status transactions
+    public const TRASTATUS_NONE      = 0;
+    public const TRASTATUS_DELETED   = 1;
+    public const TRASTATUS_CREATED   = 2;
+    public const TRASTATUS_SUBMITTED = 4;
+    public const TRASTATUS_APPROVED  = 7;
+    public const TRASTATUS_LOCKED    = 9;
 
+    // Constants for status balances
+    public const BALSTATUS_NONE      = 0;
+    public const BALSTATUS_APPROVED  = 7;
+    public const BALSTATUS_TEMPORARY = 8;
+
+    // Constants for status online
+    public const ONOFF_OFFLINE = 0;
+    public const ONOFF_ONLINE  = 1;
+    public const ONOFF_HIDDEN = 2; //if an allocation or account is deleted but still necessary for transaction_hist
+
+
+/*    public const STATUS_BROKEN    = 10;
+*/
     // Constants for permissions
     public const PERM_GLOBAL_NONE          = 0;
     public const PERM_GLOBAL_VIEW          = 1;

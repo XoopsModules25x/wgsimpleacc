@@ -56,34 +56,53 @@ class Utility
     }
 
     /**
-     * @public function to get text of status
+     * @public function to get text of transaction status
      * @param $status
      * @return string
      */
-    public static function getStatusText($status)
+    public static function getTraStatusText($status)
     {
         switch ($status) {
-            case Constants::STATUS_NONE:
+            case Constants::TRASTATUS_NONE:
             default:
-                $status_text = \_MA_WGSIMPLEACC_STATUS_NONE;
+                $status_text = \_MA_WGSIMPLEACC_TRASTATUS_NONE;
                 break;
-            case Constants::STATUS_OFFLINE:
-                $status_text = \_MA_WGSIMPLEACC_STATUS_OFFLINE;
+            case Constants::TRASTATUS_DELETED:
+                $status_text = \_MA_WGSIMPLEACC_TRASTATUS_DELETED;
                 break;
-            case Constants::STATUS_CREATED:
-                $status_text = \_MA_WGSIMPLEACC_STATUS_CREATED;
+            case Constants::TRASTATUS_CREATED:
+                $status_text = \_MA_WGSIMPLEACC_TRASTATUS_CREATED;
                 break;
-            case Constants::STATUS_SUBMITTED:
-                $status_text = \_MA_WGSIMPLEACC_STATUS_SUBMITTED;
+            case Constants::TRASTATUS_SUBMITTED:
+                $status_text = \_MA_WGSIMPLEACC_TRASTATUS_SUBMITTED;
                 break;
-            case Constants::STATUS_APPROVED:
-                $status_text = \_MA_WGSIMPLEACC_STATUS_APPROVED;
+            case Constants::TRASTATUS_APPROVED:
+                $status_text = \_MA_WGSIMPLEACC_TRASTATUS_APPROVED;
                 break;
-            case Constants::STATUS_LOCKED:
-                $status_text = \_MA_WGSIMPLEACC_STATUS_LOCKED;
+            case Constants::TRASTATUS_LOCKED:
+                $status_text = \_MA_WGSIMPLEACC_TRASTATUS_LOCKED;
                 break;
-            case Constants::STATUS_TEMPORARY:
-                $status_text = \_MA_WGSIMPLEACC_STATUS_TEMPORARY;
+        }
+
+        return $status_text;
+    }
+    /**
+     * @public function to get text of balance status
+     * @param $status
+     * @return string
+     */
+    public static function getBalStatusText($status)
+    {
+        switch ($status) {
+            case Constants::BALSTATUS_NONE:
+            default:
+                $status_text = \_MA_WGSIMPLEACC_BALSTATUS_NONE;
+                break;
+            case Constants::BALSTATUS_APPROVED:
+                $status_text = \_MA_WGSIMPLEACC_BALSTATUS_APPROVED;
+                break;
+            case Constants::BALSTATUS_TEMPORARY:
+                $status_text = \_MA_WGSIMPLEACC_BALSTATUS_TEMPORARY;
                 break;
         }
 

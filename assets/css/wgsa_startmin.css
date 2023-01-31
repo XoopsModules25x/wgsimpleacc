@@ -106,6 +106,10 @@
 .wgsa-files-badge {
 	background-color:#ffc107 !important;
 }
+.wgsa-info-badge {
+	background-color:#ffc107 !important;
+	margin-left:10px;
+}
 
 .wgsa-output-sum td {
 	font-weight:500;

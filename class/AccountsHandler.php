@@ -132,7 +132,7 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
         $accountsHandler = $helper->getHandler('Accounts');
 
         $crItems = new \CriteriaCompo();
-        $crItems->add(new \Criteria('acc_online', 1));
+        $crItems->add(new \Criteria('acc_online', Constants::ONOFF_ONLINE));
         if ($class > Constants::CLASS_BOTH) {
             $crItemClass = new \CriteriaCompo();
             $crItemClass->add(new \Criteria('acc_classification', $class));
@@ -184,12 +184,14 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
         $itemId       = 'acc_id';
         $itemKey      = 'acc_key';
         $itemName     = 'acc_name';
+        $itemDesc     = 'acc_desc';
         $itemColor    = 'acc_color';
         $itemOnline   = 'acc_online';
         $itemClass    = 'acc_classification';
 
         $crItems           = new \CriteriaCompo();
         $crItems->add(new \Criteria('acc_pid', $itemPid));
+        $crItems->add(new \Criteria('acc_online', Constants::ONOFF_HIDDEN, '<'));
         $crItems->setSort('acc_weight ASC, acc_datecreated');
         $crItems->setOrder('DESC');
         $itemsCount = $itemsHandler->getCount($crItems);
@@ -204,8 +206,13 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
                     $childsAll .= '<span id="disclose_icon_' . $itemsAll[$i]->getVar($itemId) . '" title="' . \_MA_WGSIMPLEACC_LIST_CHILDS . '" class="disclose ui-icon ui-icon-plusthick"><span>-</span></span>';
                 }
                 $childsAll .= '<span>';
-                $childsAll .= '<span id="' . $itemsAll[$i]->getVar($itemId) . '" data-id="' . $itemsAll[$i]->getVar($itemId) . '" class="disclose_text itemTitle"><span style="background-color:' . $itemsAll[$i]->getVar($itemColor) . '">&nbsp;&nbsp;&nbsp;</span> ' . $itemsAll[$i]->getVar($itemKey) . ' ' . $itemsAll[$i]->getVar($itemName) . '</span>';
-
+                $childsAll .= '<span id="' . $itemsAll[$i]->getVar($itemId) . '" data-id="' . $itemsAll[$i]->getVar($itemId) . '" class="disclose_text itemTitle">';
+                $childsAll .= '<span style="background-color:' . $itemsAll[$i]->getVar($itemColor) . '">&nbsp;&nbsp;&nbsp;</span> ' . $itemsAll[$i]->getVar($itemKey) . ' ' . $itemsAll[$i]->getVar($itemName);
+                $itemDescText = (string)$itemsAll[$i]->getVar($itemDesc);
+                if ('' !== $itemDescText) {
+                    $childsAll .= '<span class="badge wgsa-info-badge" title="' . $itemDescText . '">i</span>';
+                }
+                $childsAll .= '</span>';
                 $childsAll .= '<span class="pull-right">';
                 $onlineText = (1 == (int)$itemsAll[$i]->getVar($itemOnline)) ? \_MA_WGSIMPLEACC_ONLINE : \_MA_WGSIMPLEACC_OFFLINE;
                 switch ($itemsAll[$i]->getVar($itemClass)) {
@@ -223,6 +230,7 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
                 }
                 $crTransactions = new \CriteriaCompo();
                 $crTransactions->add(new \Criteria('tra_accid', $i));
+                $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_DELETED, '>'));
                 $transactionsCount = $transactionsHandler->getCount($crTransactions);
                 $childsAll .= '<img class="wgsa-img-online" src="' . \WGSIMPLEACC_ICONS_URL . '/32/' . $itemsAll[$i]->getVar($itemOnline) . '.png" title="' . $onlineText . '" alt="' . $onlineText . '">';
                 $childsAll .= '<a class="btn btn-default wgsa-btn-list';
@@ -278,6 +286,7 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
 
         $crItems           = new \CriteriaCompo();
         $crItems->add(new \Criteria('acc_pid', $itemPid));
+        $crItems->add(new \Criteria('acc_online', Constants::ONOFF_HIDDEN, '<'));
         $crItems->setSort('acc_weight ASC, acc_datecreated');
         $crItems->setOrder('DESC');
         $itemsCount = $itemsHandler->getCount($crItems);
@@ -407,7 +416,7 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
         $accountsHandler = $helper->getHandler('accounts');
 
         $crItems           = new \CriteriaCompo();
-        $crItems->add(new \Criteria('acc_online', 1));
+        $crItems->add(new \Criteria('acc_online', Constants::ONOFF_ONLINE));
         $crItems->setSort('acc_weight ASC, acc_id');
         $crItems->setOrder('ASC');
         $accountsCount = $accountsHandler->getCount($crItems);

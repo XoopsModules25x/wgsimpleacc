@@ -74,7 +74,7 @@ switch ($op) {
             $crBalances = new \CriteriaCompo();
             $crBalances->add(new \Criteria('bal_from', $balanceFrom, '>='));
             $crBalances->add(new \Criteria('bal_from', $balanceTo, '<='));
-            $crBalances->add(new \Criteria('bal_status', Constants::STATUS_APPROVED));
+            $crBalances->add(new \Criteria('bal_status', Constants::TRASTATUS_APPROVED));
             $countBalances = $balancesHandler->getCount($crBalances);
             if ($countBalances > 0) {
                 \redirect_header('balances.php?op=list', 3, \_MA_WGSIMPLEACC_BALANCE_DATEUSED);
@@ -84,7 +84,7 @@ switch ($op) {
             $crBalances = new \CriteriaCompo();
             $crBalances->add(new \Criteria('bal_to', $balanceFrom, '>='));
             $crBalances->add(new \Criteria('bal_to', $balanceTo, '<='));
-            $crBalances->add(new \Criteria('bal_status', Constants::STATUS_APPROVED));
+            $crBalances->add(new \Criteria('bal_status', Constants::TRASTATUS_APPROVED));
             $countBalances = $balancesHandler->getCount($crBalances);
             if ($countBalances > 0) {
                 \redirect_header('balances.php?op=list', 3, \_MA_WGSIMPLEACC_BALANCE_DATEUSED);
@@ -119,7 +119,7 @@ switch ($op) {
         $crTransactions = new \CriteriaCompo();
         $crTransactions->add(new \Criteria('tra_date', $balanceFrom, '>='));
         $crTransactions->add(new \Criteria('tra_date', $balanceTo, '<='));
-        $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_NONE));
+        $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_NONE));
         $countNone = $transactionsHandler->getCount($crTransactions);
         if ($countNone > 0) {
             $warnings[] = \sprintf(\_MA_WGSIMPLEACC_BALANCES_WARNING_NONE, $countNone);
@@ -128,7 +128,7 @@ switch ($op) {
         $crTransactions = new \CriteriaCompo();
         $crTransactions->add(new \Criteria('tra_date', $balanceFrom, '>='));
         $crTransactions->add(new \Criteria('tra_date', $balanceTo, '<='));
-        $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_CREATED));
+        $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_CREATED));
         $countOffline = $transactionsHandler->getCount($crTransactions);
         if ($countOffline > 0) {
             $warnings[] = \sprintf(\_MA_WGSIMPLEACC_BALANCES_WARNING_CREATED, $countOffline);
@@ -137,7 +137,7 @@ switch ($op) {
         $crTransactions = new \CriteriaCompo();
         $crTransactions->add(new \Criteria('tra_date', $balanceFrom, '>='));
         $crTransactions->add(new \Criteria('tra_date', $balanceTo, '<='));
-        $crTransactions->add(new \Criteria('tra_status', Constants::STATUS_SUBMITTED));
+        $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_SUBMITTED));
         $countSubmitted = $transactionsHandler->getCount($crTransactions);
         if ($countSubmitted > 0) {
             $warnings[] = \sprintf(\_MA_WGSIMPLEACC_BALANCES_WARNING_SUBMITTED, $countSubmitted);
@@ -171,9 +171,9 @@ switch ($op) {
             $balFromText = \formatTimestamp($balFrom, 's');
             $balToText   = \formatTimestamp($balTo, 's');
             $balType = 0;
-            if (Constants::STATUS_APPROVED == $balStatus) {
+            if (Constants::TRASTATUS_APPROVED == $balStatus) {
                 $balType = Constants::BALANCE_TYPE_FINAL;
-            } else if (Constants::STATUS_TEMPORARY == $balStatus) {
+            } else if (Constants::BALSTATUS_TEMPORARY == $balStatus) {
                 $balType = Constants::BALANCE_TYPE_TEMPORARY;
             }
             $balances[] = [
@@ -251,7 +251,7 @@ switch ($op) {
             $crBalances = new \CriteriaCompo();
             $crBalances->add(new \Criteria('bal_from', $balanceFrom, '>='));
             $crBalances->add(new \Criteria('bal_from', $balanceTo, '<='));
-            $crBalances->add(new \Criteria('bal_status', Constants::STATUS_APPROVED));
+            $crBalances->add(new \Criteria('bal_status', Constants::TRASTATUS_APPROVED));
             $countBalances = $balancesHandler->getCount($crBalances);
             if ($countBalances > 0) {
                 \redirect_header('balances.php?op=list', 3, \_MA_WGSIMPLEACC_BALANCE_DATEUSED);
@@ -261,7 +261,7 @@ switch ($op) {
             $crBalances = new \CriteriaCompo();
             $crBalances->add(new \Criteria('bal_to', $balanceFrom, '>='));
             $crBalances->add(new \Criteria('bal_to', $balanceTo, '<='));
-            $crBalances->add(new \Criteria('bal_status', Constants::STATUS_APPROVED));
+            $crBalances->add(new \Criteria('bal_status', Constants::TRASTATUS_APPROVED));
             $countBalances = $balancesHandler->getCount($crBalances);
             if ($countBalances > 0) {
                 \redirect_header('balances.php?op=list', 3, \_MA_WGSIMPLEACC_BALANCE_DATEUSED);
@@ -273,7 +273,7 @@ switch ($op) {
             $crBalances = new \CriteriaCompo();
             $crBalances->add(new \Criteria('bal_from', $balanceFrom, '>='));
             $crBalances->add(new \Criteria('bal_from', $balanceTo, '<='));
-            $crBalances->add(new \Criteria('bal_status', Constants::STATUS_TEMPORARY));
+            $crBalances->add(new \Criteria('bal_status', Constants::BALSTATUS_TEMPORARY));
             $countBalances = $balancesHandler->getCount($crBalances);
             if ($countBalances > 0) {
                 //delete existing one
@@ -284,7 +284,7 @@ switch ($op) {
             $crBalances = new \CriteriaCompo();
             $crBalances->add(new \Criteria('bal_to', $balanceFrom, '>='));
             $crBalances->add(new \Criteria('bal_to', $balanceTo, '<='));
-            $crBalances->add(new \Criteria('bal_status', Constants::STATUS_TEMPORARY));
+            $crBalances->add(new \Criteria('bal_status', Constants::BALSTATUS_TEMPORARY));
             $countBalances = $balancesHandler->getCount($crBalances);
             if ($countBalances > 0) {
                 //delete existing one
@@ -307,9 +307,9 @@ switch ($op) {
             $balancesObj->setVar('bal_amountstart', $asset['amount_start_val']);
             $balancesObj->setVar('bal_amountend', $asset['amount_end_val']);
             if (Constants::BALANCE_TYPE_FINAL == $balType) {
-                $balancesObj->setVar('bal_status', Request::getInt('bal_status', Constants::STATUS_APPROVED));
+                $balancesObj->setVar('bal_status', Request::getInt('bal_status', Constants::TRASTATUS_APPROVED));
             } else {
-                $balancesObj->setVar('bal_status', Request::getInt('bal_status', Constants::STATUS_TEMPORARY));
+                $balancesObj->setVar('bal_status', Request::getInt('bal_status', Constants::BALSTATUS_TEMPORARY));
             }
             $balancesObj->setVar('bal_datecreated', $balDatecreated);
             $balancesObj->setVar('bal_submitter', $submitter);
@@ -321,9 +321,9 @@ switch ($op) {
                 $crTransactions->add(new \Criteria('tra_date', $balanceFrom, '>='));
                 $crTransactions->add(new \Criteria('tra_date', $balanceTo, '<='));
                 $crTransactions->add(new \Criteria('tra_asid', $asset['id']));
-                //$crTransactions->add(new \Criteria('tra_status', Constants::STATUS_SUBMITTED, '>'));
+                //$crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_SUBMITTED, '>'));
                 if (Constants::BALANCE_TYPE_FINAL == $balType) {
-                    //$transactionsHandler->updateAll('tra_status', Constants::STATUS_LOCKED, $crTransactions, true);
+                    //$transactionsHandler->updateAll('tra_status', Constants::TRASTATUS_LOCKED, $crTransactions, true);
                     $transactionsHandler->updateAll('tra_balid', $newBalId, $crTransactions, true);
                 } else {
                     $transactionsHandler->updateAll('tra_balidt', $newBalId, $crTransactions, true);
@@ -371,7 +371,7 @@ switch ($op) {
             $crBalances = new \CriteriaCompo();
             $crBalances->add(new \Criteria('bal_from', $balanceFrom));
             $crBalances->add(new \Criteria('bal_to', $balanceTo));
-            $crBalances->add(new \Criteria('bal_status', Constants::STATUS_TEMPORARY));
+            $crBalances->add(new \Criteria('bal_status', Constants::BALSTATUS_TEMPORARY));
             $countBalances = $balancesHandler->getCount($crBalances);
             if ($countBalances > 0) {
                 $errors = 0;

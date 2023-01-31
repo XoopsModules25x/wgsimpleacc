@@ -138,7 +138,15 @@ class Accounts extends \XoopsObject
         $form->addElement(new \XoopsFormRadioYN(\_MA_WGSIMPLEACC_ACCOUNT_IECALC, 'acc_iecalc', $accIecalc));
         // Form Radio Yes/No accOnline
         $accOnline = $this->isNew() ?: $this->getVar('acc_online');
-        $form->addElement(new \XoopsFormRadioYN(\_MA_WGSIMPLEACC_ACCOUNT_ONLINE, 'acc_online', $accOnline));
+        if ($admin) {
+            $accOnlineSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_ACCOUNT_ONLINE, 'acc_online', $accOnline, 3);
+            $accOnlineSelect->addOption(Constants::ONOFF_OFFLINE, \_MA_WGSIMPLEACC_ONOFF_OFFLINE);
+            $accOnlineSelect->addOption(Constants::ONOFF_ONLINE, \_MA_WGSIMPLEACC_ONOFF_ONLINE);
+            $accOnlineSelect->addOption(Constants::ONOFF_HIDDEN, \_MA_WGSIMPLEACC_ONOFF_HIDDEN);
+            $form->addElement($accOnlineSelect);
+        } else {
+            $form->addElement(new \XoopsFormRadioYN(\_MA_WGSIMPLEACC_ACCOUNT_ONLINE, 'acc_online', $accOnline));
+        }
         // Form Text accLevel
         $accLevel = $this->isNew() ? 1 : $this->getVar('acc_level');
         if ($admin) {
@@ -205,7 +213,18 @@ class Accounts extends \XoopsObject
         $ret['class_text']  = $class_text;
         $ret['color']       = $this->getVar('acc_color');
         $ret['iecalc']      = (int)$this->getVar('acc_iecalc') > 0 ? \_YES : \_NO;
-        $ret['online']      = (int)$this->getVar('acc_online') > 0 ? \_YES : \_NO;
+        switch ((int)$this->getVar('acc_online')) {
+            case Constants::ONOFF_OFFLINE:
+            default:
+                $ret['online'] = \_NO;
+                break;
+            case Constants::ONOFF_ONLINE:
+                $ret['online'] = \_YES;
+                break;
+            case Constants::ONOFF_HIDDEN:
+                $ret['online'] = \_MA_WGSIMPLEACC_ONOFF_HIDDEN;
+                break;
+        }
         $ret['level']       = $this->getVar('acc_level');
         $ret['weight']      = $this->getVar('acc_weight');
         $ret['datecreated'] = \formatTimestamp($this->getVar('acc_datecreated'), 's');

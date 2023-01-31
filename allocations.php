@@ -75,7 +75,6 @@ switch ($op) {
             $GLOBALS['xoopsTpl']->assign('allocationlist_sort', $allocationlist_sort);
             $GLOBALS['xoopsTpl']->assign('allocations_submit', $permAllocationsSubmit);
         }
-
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ALLOCATIONS];
         break;
@@ -92,6 +91,7 @@ switch ($op) {
                 // count number of transactions for this allocation
                 $crTransactions = new \CriteriaCompo();
                 $crTransactions->add(new \Criteria('tra_allid', $i));
+                $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_DELETED, '>'));
                 $allocation['tracount'] = $transactionsHandler->getCount($crTransactions);
                 // get text on-/offline
                 $allocation['online_text'] = (1 == (int)$allocationsAll[$i]->getVar('all_online')) ? \_MA_WGSIMPLEACC_ONLINE : \_MA_WGSIMPLEACC_OFFLINE;
@@ -229,10 +229,25 @@ switch ($op) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 \redirect_header('allocations.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
-            if ($allocationsHandler->delete($allocationsObj)) {
-                \redirect_header('allocations.php', 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
+            // Check whether allocation is already used in transaction hist
+            $crTrahistories = new \CriteriaCompo();
+            $crTrahistories->add(new \Criteria('tra_allid', $allId));
+            $trahistoriesCount = $trahistoriesHandler->getCount($crTrahistories);
+            if ($trahistoriesCount > 0) {
+                // if allocation is used in transaction hist then only hide the allocation
+                $allocationsObj->setVar('all_online', Constants::ONOFF_HIDDEN);
+                if ($allocationsHandler->insert($allocationsObj)) {
+                    // redirect after insert
+                    \redirect_header('allocations.php', 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
+                } else {
+                    $GLOBALS['xoopsTpl']->assign('error', $allocationsObj->getHtmlErrors());
+                }
             } else {
-                $GLOBALS['xoopsTpl']->assign('error', $allocationsObj->getHtmlErrors());
+                if ($allocationsHandler->delete($allocationsObj)) {
+                    \redirect_header('allocations.php', 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
+                } else {
+                    $GLOBALS['xoopsTpl']->assign('error', $allocationsObj->getHtmlErrors());
+                }
             }
         } else {
             $customConfirm = new Common\Confirm(

@@ -206,7 +206,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
         if ($this->getPermTransactionsApprove()) {
             return true;
         }
-        if ($this->getPermTransactionsSubmit() && $currentuid == $traSubmitter && Constants::STATUS_SUBMITTED == $traStatus) {
+        if ($this->getPermTransactionsSubmit() && $currentuid == $traSubmitter && Constants::TRASTATUS_SUBMITTED == $traStatus) {
             return true;
         }
 

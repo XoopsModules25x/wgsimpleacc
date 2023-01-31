@@ -20,6 +20,45 @@ namespace XoopsModules\Wgsimpleacc\Form;
  * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
+/** Example Code
+ *
+    // Get Theme Form
+    \xoops_load('XoopsFormLoader');
+    $form = new \XoopsThemeForm('My form for testing cascading select', 'formTest',  $_SERVER['REQUEST_URI'], 'post', true);
+    $form->setExtra('enctype="multipart/form-data"');
+
+    $myExampleTray1 = new XoopsFormElementTray('Example Tray 1');
+    $mySelect1 = new XoopsModules\Wgsimpleacc\Form\FormSelectCascading('Caption Select 1', 'select1', '2', 15);
+    $mySelect1->setType(1);
+    $arrSelect1 = [
+    ['id' => '1', 'text'=>'Sourceelement 1', 'rel'=> '0', 'init'=> '0'],
+    ['id' => '2', 'text'=>'Sourceelement 2', 'rel'=> '0', 'init'=> '0'],
+    ['id' => '3', 'text'=>'Sourceelement 3', 'rel'=> '0', 'init'=> '0'],
+    ];
+    $mySelect1->setCustomOptions($arrSelect1);
+    $myExampleTray1->addElement($mySelect1);
+
+    $mySelect2 = new XoopsModules\Wgsimpleacc\Form\FormSelectCascading('Caption Select 2', 'select2', '4', 15);
+    $mySelect2->setType(2);
+    $arrSelect2 = [
+    ['id' => '1', 'text'=>'Targetelement 1, linked to Sourceelement 1', 'rel'=> '1', 'init'=> '2'],
+    ['id' => '1', 'text'=>'Targetelement 1, linked to Sourceelement 2', 'rel'=> '2', 'init'=> '2'],
+    ['id' => '1', 'text'=>'Targetelement 1, linked to Sourceelement 3', 'rel'=> '3', 'init'=> '2'],
+    ['id' => '2', 'text'=>'Targetelement 2, linked to Sourceelement 1', 'rel'=> '1', 'init'=> '2'],
+    ['id' => '3', 'text'=>'Targetelement 3, linked to Sourceelement 1', 'rel'=> '1', 'init'=> '2'],
+    ['id' => '3', 'text'=>'Targetelement 3, linked to Sourceelement 3', 'rel'=> '3', 'init'=> '2'],
+    ['id' => '4', 'text'=>'Targetelement 4, linked to Sourceelement 2', 'rel'=> '2', 'init'=> '2'],
+    ['id' => '5', 'text'=>'Targetelement 5, linked to Sourceelement 2', 'rel'=> '2', 'init'=> '2'],
+    ];
+    $mySelect2->setCustomOptions($arrSelect2);
+    $myExampleTray1->addElement($mySelect2);
+    $form->addElement($myExampleTray1);
+    $form->addElement(new \XoopsFormHidden('op', 'save'));
+    $form->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));
+    $GLOBALS['xoopsTpl']->assign('form', $form->render());
+ *
+ */
+
 use XoopsFormSelect;
 
 \defined('XOOPS_ROOT_PATH') || exit('Restricted access');
@@ -35,11 +74,13 @@ class FormSelectCascading extends \XoopsFormSelect
      * custom option array of select
      * first select needs:
      * - id: id of option
-     * - text: Text of select
+     * - text: text of option
+     * - rel: 0
+     * - init: 0
      *
      * second select needs:
      * - id: id of option
-     * - text: Text of select
+     * - text: text of option
      * - rel: id of option of first select
      * - init: initial value of first select
      *  => combination 'id' 'rel' should be unique
@@ -85,14 +126,14 @@ class FormSelectCascading extends \XoopsFormSelect
         }
         foreach ($ele_options as $ele_option) {
             $ret .= '<option value="' . htmlspecialchars($ele_option['id'], ENT_QUOTES) . '"';
-            if (count($ele_value) > 0 && in_array($ele_option['id'], $ele_value)) {
+            if (count($ele_value) > 0 && in_array($ele_option['id'], $ele_value) && ((int)$ele_option['init'] === (int)$ele_option['rel'])) {
                 $ret .= ' selected';
             }
             if (1 === (int)$ele_type) {
-                $ret .= ' data-ref="all' . $ele_option['id'] . '"';
+                $ret .= ' data-ref="' . $ele_option['id'] . '"';
             }
             if (2 === (int)$ele_type) {
-                $ret .= ' data-belong="all' . $ele_option['rel'] . '"';
+                $ret .= ' data-belong="' . $ele_option['rel'] . '"';
             }
             if ((int)$ele_option['init'] !== (int)$ele_option['rel']) {
                 $ret .= ' hidden';
@@ -148,5 +189,4 @@ class FormSelectCascading extends \XoopsFormSelect
     public function getCustomOptions() {
         return $this->custom_options;
     }
-
 }

@@ -104,7 +104,15 @@ class Allocations extends \XoopsObject
         $form->addElement(new \XoopsFormTextArea(\_MA_WGSIMPLEACC_ALLOCATION_DESC, 'all_desc', $this->getVar('all_desc', 'e'), 4, 47));
         // Form Radio Yes/No allOnline
         $allOnline = $this->isNew() ?: $this->getVar('all_online');
-        $form->addElement(new \XoopsFormRadioYN(\_MA_WGSIMPLEACC_ALLOCATION_ONLINE, 'all_online', $allOnline));
+        if ($admin) {
+            $allOnlineSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_ALLOCATION_ONLINE, 'all_online', $allOnline, 3);
+            $allOnlineSelect->addOption(Constants::ONOFF_OFFLINE, \_MA_WGSIMPLEACC_ONOFF_OFFLINE);
+            $allOnlineSelect->addOption(Constants::ONOFF_ONLINE, \_MA_WGSIMPLEACC_ONOFF_ONLINE);
+            $allOnlineSelect->addOption(Constants::ONOFF_HIDDEN, \_MA_WGSIMPLEACC_ONOFF_HIDDEN);
+            $form->addElement($allOnlineSelect);
+        } else {
+            $form->addElement(new \XoopsFormRadioYN(\_MA_WGSIMPLEACC_ALLOCATION_ONLINE, 'all_online', $allOnline));
+        }
         // Form Select allAccounts
         $accountsHandler = $helper->getHandler('Accounts');
         $allAccounts = \unserialize($this->getVar('all_accounts'));
@@ -166,7 +174,18 @@ class Allocations extends \XoopsObject
         $ret['desc']        = \strip_tags($this->getVar('all_desc', 'e'));
         $editorMaxchar = $helper->getConfig('editor_maxchar');
         $ret['desc_short']  = $utility::truncateHtml($ret['desc'], $editorMaxchar);
-        $ret['online']      = (int)$this->getVar('all_online') > 0 ? \_YES : \_NO;
+        switch ((int)$this->getVar('all_online')) {
+            case Constants::ONOFF_OFFLINE:
+            default:
+                $ret['online'] = \_NO;
+                break;
+            case Constants::ONOFF_ONLINE:
+                $ret['online'] = \_YES;
+                break;
+            case Constants::ONOFF_HIDDEN:
+                $ret['online'] = \_MA_WGSIMPLEACC_ONOFF_HIDDEN;
+                break;
+        }
         $ret['level']       = $this->getVar('all_level');
         $ret['weight']      = $this->getVar('all_weight');
         $ret['datecreated'] = \formatTimestamp($this->getVar('all_datecreated'), 's');

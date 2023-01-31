@@ -106,13 +106,23 @@ class Trahistories extends \XoopsObject
         $ret['reference']     = $this->getVar('tra_reference');
         $ret['remarks']       = $this->getVar('tra_remarks', 'e');
         $ret['remarks_short'] = $utility::truncateHtml($ret['remarks'], $editorMaxchar);
+        $ret['accid']         = $this->getVar('tra_accid');
         $accountsHandler      = $helper->getHandler('Accounts');
         $accountsObj          = $accountsHandler->get($this->getVar('tra_accid'));
-        $ret['accid']         = $accountsObj->getVar('acc_key');
-        $ret['account']       = $accountsObj->getVar('acc_key') . ' ' . $accountsObj->getVar('acc_name');
+        if (\is_object($accountsObj)) {
+            $ret['acckey']  = $accountsObj->getVar('acc_key');
+            $ret['account'] = $accountsObj->getVar('acc_key') . ' ' . $accountsObj->getVar('acc_name');
+        } else {
+            $ret['acckey']  = '?';
+            $ret['account'] = \_MA_WGSIMPLEACC_MISSING_ID . ':' . $this->getVar('tra_accid');
+        }
         $allocationsHandler   = $helper->getHandler('Allocations');
         $allocationsObj       = $allocationsHandler->get($this->getVar('tra_allid'));
-        $ret['allocation']    = $allocationsObj->getVar('all_name');
+        $allName              = \_MA_WGSIMPLEACC_MISSING_ID . ':' . $this->getVar('tra_allid');
+        if (\is_object($allocationsObj)) {
+            $allName = $allocationsObj->getVar('all_name');
+        }
+        $ret['allocation']    = $allName;
         $ret['date']          = \formatTimestamp($this->getVar('tra_date'), _SHORTDATESTRING);
         $currenciesHandler    = $helper->getHandler('Currencies');
         $currenciesObj        = $currenciesHandler->get($this->getVar('tra_curid'));
@@ -135,7 +145,7 @@ class Trahistories extends \XoopsObject
         $ret['asset']       = $assetsObj->getVar('as_name');
         $status             = $this->getVar('tra_status');
         $ret['status']      = $status;
-        $ret['status_text'] = Utility::getStatusText($status);
+        $ret['status_text'] = Utility::getTraStatusText($status);
         $ret['comments']    = $this->getVar('tra_comments');
         $traClass           = $this->getVar('tra_class');
         $ret['class']       = $traClass;

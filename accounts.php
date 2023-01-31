@@ -204,25 +204,46 @@ switch ($op) {
         $crTransactions->add(new \Criteria('tra_accid', $accId));
         $transactionsCount = $transactionsHandler->getCount($crTransactions);
         if ($transactionsCount > 0) {
-            \redirect_header('accounts.php?op=list', 3, \_MA_WGSIMPLEACC_ACCOUNT_ERR_DELETE);
+            \redirect_header('accounts.php?op=list', 3, \_MA_WGSIMPLEACC_ACCOUNT_ERR_DELETE1);
         }
         unset($crTransactions);
+        // Check whether account has sub accounts
+        $crAccounts = new \CriteriaCompo();
+        $crAccounts->add(new \Criteria('acc_pid', $accId));
+        $accountsCount = $accountsHandler->getCount($crAccounts);
+        if ($accountsCount > 0) {
+            \redirect_header('accounts.php?op=list', 3, \_MA_WGSIMPLEACC_ACCOUNT_ERR_DELETE2);
+        }
         $accountsObj = $accountsHandler->get($accId);
         $accKey = $accountsObj->getVar('acc_key');
         if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 \redirect_header('accounts.php', 3, \implode(', ', $GLOBALS['xoopsSecurity']->getErrors()));
             }
-            if ($accountsHandler->delete($accountsObj)) {
-                \redirect_header('accounts.php', 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
+            // Check whether account is already used in transaction hist
+            $crTrahistories = new \CriteriaCompo();
+            $crTrahistories->add(new \Criteria('tra_accid', $accId));
+            $trahistoriesCount = $trahistoriesHandler->getCount($crTrahistories);
+            if ($trahistoriesCount > 0) {
+                // if allocation is used in transaction hist then only hide the allocation
+                $accountsObj->setVar('acc_online', Constants::ONOFF_HIDDEN);
+                if ($accountsHandler->insert($accountsObj)) {
+                    \redirect_header('accounts.php', 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
+                } else {
+                    $GLOBALS['xoopsTpl']->assign('error', $accountsObj->getHtmlErrors());
+                }
             } else {
-                $GLOBALS['xoopsTpl']->assign('error', $accountsObj->getHtmlErrors());
+                if ($accountsHandler->delete($accountsObj)) {
+                    \redirect_header('accounts.php', 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
+                } else {
+                    $GLOBALS['xoopsTpl']->assign('error', $accountsObj->getHtmlErrors());
+                }
             }
         } else {
             $customConfirm = new Common\Confirm(
                 ['ok' => 1, 'acc_id' => $accId, 'op' => 'delete'],
                 $_SERVER['REQUEST_URI'],
-                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $accountsObj->getVar('acc_key')), _MA_WGSIMPLEACC_FORM_DELETE_CONFIRM, _MA_WGSIMPLEACC_FORM_DELETE_LABEL);
+                \sprintf(\_MA_WGSIMPLEACC_FORM_SURE_DELETE, $accountsObj->getVar('acc_key') . ' ' . $accountsObj->getVar('acc_name')), _MA_WGSIMPLEACC_FORM_DELETE_CONFIRM, _MA_WGSIMPLEACC_FORM_DELETE_LABEL);
             $form = $customConfirm->getFormConfirm();
             $GLOBALS['xoopsTpl']->assign('form', $form->render());
         }
