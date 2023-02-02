@@ -1,1 +1,18 @@
-{  }
+-
+    fil_id: '1'
+    fil_traid: '857'
+    fil_name: Transaktion_2023_5_1675255003.pdf
+    fil_type: application/pdf
+    fil_desc: ''
+    fil_ip: 127.0.0.1
+    fil_datecreated: '1675255079'
+    fil_submitter: '1'
+-
+    fil_id: '2'
+    fil_traid: '854'
+    fil_name: FjDp1kQaMAAWS37_63da5db0d6310.jpg
+    fil_type: image/jpeg
+    fil_desc: ''
+    fil_ip: 127.0.0.1
+    fil_datecreated: '1675255216'
+    fil_submitter: '1'

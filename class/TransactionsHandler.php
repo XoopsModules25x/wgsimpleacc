@@ -299,6 +299,7 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
         $limitSelect->addOption(50, 50);
         $limitSelect->addOption(100, 100);
         $limitSelect->addOption(200, 200);
+        $limitSelect->addOption(0, \_ALL);
         $form->addElement($limitSelect);
 
         if ('tra_output' === $op) {
