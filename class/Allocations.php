@@ -113,16 +113,19 @@ class Allocations extends \XoopsObject
         } else {
             $form->addElement(new \XoopsFormRadioYN(\_MA_WGSIMPLEACC_ALLOCATION_ONLINE, 'all_online', $allOnline));
         }
-        // Form Select allAccounts
-        $accountsHandler = $helper->getHandler('Accounts');
-        $allAccounts = \unserialize($this->getVar('all_accounts'));
-        $allAccountsSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_ALLOCATION_ACCOUNTS, 'all_accounts', $allAccounts, 15, true);
-        $allAccountsSelect->setDescription(\_MA_WGSIMPLEACC_ALLOCATION_ACCOUNTS_DESC);
-        $accounts = $accountsHandler->getSelectTreeOfAccounts(Constants::CLASS_BOTH);
-        foreach ($accounts as $account) {
-            $allAccountsSelect->addOption($account['id'], $account['text']);
+        if ((bool)$helper->getConfig('use_cascadingacc')) {
+            // Form Select allAccounts
+            $accountsHandler = $helper->getHandler('Accounts');
+            $allAccounts = \unserialize($this->getVar('all_accounts'));
+            $allAccountsSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_ALLOCATION_ACCOUNTS, 'all_accounts', $allAccounts, 15, true);
+            $allAccountsSelect->setDescription(\_MA_WGSIMPLEACC_ALLOCATION_ACCOUNTS_DESC);
+            $accounts = $accountsHandler->getSelectTreeOfAccounts(Constants::CLASS_BOTH);
+            foreach ($accounts as $account) {
+                $allAccountsSelect->addOption($account['id'], $account['text']);
+            }
+            $form->addElement($allAccountsSelect, true);
         }
-        $form->addElement($allAccountsSelect, true);
+        
         // Form Text allLevel
         $allLevel = $this->isNew() ? 99 : $this->getVar('all_level');
         if ($admin) {
