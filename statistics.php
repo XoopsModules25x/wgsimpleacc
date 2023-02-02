@@ -60,6 +60,16 @@ $colors = Utility::getColors();
 $GLOBALS['xoopsTpl']->assign('colors', $colors);
 
 switch ($op) {
+    case 'test':
+        $GLOBALS['xoTheme']->addStylesheet(\WGSIMPLEACC_URL . '/assets/css/nestedcheckboxes.css', null);
+        $paramsArr = [];
+        $statisticshandler = new XoopsModules\Wgsimpleacc\StatisticsHandler;
+        $formFilter = $statisticshandler::getFormStatisticsSelect($paramsArr);
+        $GLOBALS['xoopsTpl']->assign('formFilter', $formFilter->render());
+
+
+
+        break;
     case 'allocations':
         $GLOBALS['xoopsTpl']->assign('header_allocs_bar', \_MA_WGSIMPLEACC_ALLOCATIONS_BARCHART);
         //*************************

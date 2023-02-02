@@ -127,15 +127,13 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
     public function getSelectTreeOfAllocations()
     {
         $list = [];
-        $helper             = \XoopsModules\Wgsimpleacc\Helper::getInstance();
-        $allocationsHandler = $helper->getHandler('Allocations');
 
         $crItems           = new \CriteriaCompo();
         $crItems->add(new \Criteria('all_online', Constants::ONOFF_ONLINE));
         $crItems->setSort('all_weight ASC, all_id');
         $crItems->setOrder('ASC');
-        $allocationsCount = $allocationsHandler->getCount($crItems);
-        $allocationsAll   = $allocationsHandler->getAll($crItems);
+        $allocationsCount = $this->getCount($crItems);
+        $allocationsAll   = $this->getAll($crItems);
         // Table view allocations
         if ($allocationsCount > 0) {
             foreach (\array_keys($allocationsAll) as $i) {
@@ -162,7 +160,7 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
                         break;
                     case 2:
                     default:
-                        $dots = \str_repeat('&nbsp; ', $level) . \str_repeat('- ', $level);
+                        $dots = \str_repeat('&nbsp; ', $level) . \str_repeat('-&nbsp;', $level);
                         break;
                 }
                 $list[] = ['id' => $allocationsAll[$i]->getVar('all_id'), 'text' => $dots . ' ' . $allocationsAll[$i]->getVar('all_name')];
@@ -189,7 +187,6 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
 
         $helper       = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $transactionsHandler = $helper->getHandler('Transactions');
-        $itemsHandler = $helper->getHandler('Allocations');
         $itemId       = 'all_id';
         $itemName     = 'all_name';
         $itemDesc     = 'all_desc';
@@ -200,8 +197,8 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
         $crItems->add(new \Criteria('all_online', Constants::ONOFF_HIDDEN, '<'));
         $crItems->setSort('all_weight ASC, all_datecreated');
         $crItems->setOrder('DESC');
-        $itemsCount = $itemsHandler->getCount($crItems);
-        $itemsAll   = $itemsHandler->getAll($crItems);
+        $itemsCount = $this->getCount($crItems);
+        $itemsAll   = $this->getAll($crItems);
         // Table view items
         if ($itemsCount > 0) {
             foreach (\array_keys($itemsAll) as $i) {
@@ -269,8 +266,6 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
             $childsAll = '';
         }
 
-        $helper       = \XoopsModules\Wgsimpleacc\Helper::getInstance();
-        $itemsHandler = $helper->getHandler('Allocations');
         $itemId       = 'all_id';
         $itemName     = 'all_name';
 
@@ -279,8 +274,8 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
         $crItems->add(new \Criteria('all_online', Constants::ONOFF_HIDDEN, '<'));
         $crItems->setSort('all_weight ASC, all_datecreated');
         $crItems->setOrder('DESC');
-        $itemsCount = $itemsHandler->getCount($crItems);
-        $itemsAll   = $itemsHandler->getAll($crItems);
+        $itemsCount = $this->getCount($crItems);
+        $itemsAll   = $this->getAll($crItems);
         // Table view items
         if ($itemsCount > 0) {
             foreach (\array_keys($itemsAll) as $i) {
@@ -306,6 +301,42 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
         }
 
         return $childsAll;
+    }
+
+    /**
+     * Get array of allocations with all childs
+     * @param $allPid
+     * @return bool|array
+     */
+    public function getArrayTreeOfAllocations($allPid)
+    {
+
+        $arrayAllTree = [];
+
+        $crItems           = new \CriteriaCompo();
+        $crItems->add(new \Criteria('all_pid', $allPid));
+        $crItems->add(new \Criteria('all_online', Constants::ONOFF_HIDDEN, '<'));
+        $crItems->setSort('all_weight ASC, all_datecreated');
+        $crItems->setOrder('DESC');
+        $itemsCount = $this->getCount($crItems);
+        $itemsAll   = $this->getAll($crItems);
+        // Table view items
+        if ($itemsCount > 0) {
+            foreach (\array_keys($itemsAll) as $i) {
+                $arrayAllTree[$i]['id'] = $i;
+                $arrayAllTree[$i]['name'] = $itemsAll[$i]->getVar('all_name');
+                $child     = $this->getArrayTreeOfAllocations($i);
+                if ($child) {
+                    $arrayAllTree[$i]['child'] = $child;
+                } else {
+                    $arrayAllTree[$i]['child'] = [];
+                }
+            }
+        } else {
+            return false;
+        }
+
+        return $arrayAllTree;
     }
 
     /**
@@ -355,15 +386,13 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
     public function getSubsOfAllocations($allId)
     {
         $list = [];
-        $helper             = \XoopsModules\Wgsimpleacc\Helper::getInstance();
-        $allocationsHandler = $helper->getHandler('Allocations');
 
         $crItems           = new \CriteriaCompo();
         $crItems->add(new \Criteria('all_online', Constants::ONOFF_ONLINE));
         $crItems->setSort('all_weight ASC, all_id');
         $crItems->setOrder('ASC');
-        $allocationsCount = $allocationsHandler->getCount($crItems);
-        $allocationsAll   = $allocationsHandler->getAll($crItems);
+        $allocationsCount = $this->getCount($crItems);
+        $allocationsAll   = $this->getAll($crItems);
         // Table view allocations
         if ($allocationsCount > 0) {
             foreach (\array_keys($allocationsAll) as $i) {

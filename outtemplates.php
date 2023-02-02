@@ -297,7 +297,7 @@ switch ($op) {
                     // Insert Data
                     $filesHandler->insert($filesObj);
                 }
-                //\redirect_header('transactions.php?op=list&amp;filePdf=' . $filePdf, 3, \_MA_WGSIMPLEACC_OUTTEMPLATE_PDF_SUCCESS);
+                \redirect_header('transactions.php?op=list&amp;filePdf=' . $filePdf, 3, \_MA_WGSIMPLEACC_OUTTEMPLATE_PDF_SUCCESS);
                 break;
         }
         break;

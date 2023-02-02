@@ -425,6 +425,12 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_CLIENT_ONLINE', 'Online');
 // Statistics
 \define('_MA_WGSIMPLEACC_STATISTICS', 'Statistics');
+\define('_MA_WGSIMPLEACC_STATISTICS_ALL_SELECT', 'Select allocations');
+\define('_MA_WGSIMPLEACC_STATISTICS_ACC_SELECT', 'Select accounts');
+\define('_MA_WGSIMPLEACC_STATISTICS_TYPE', 'Type of export');
+\define('_MA_WGSIMPLEACC_STATISTICS_TYPE_TIMELINE', 'Timeline');
+\define('_MA_WGSIMPLEACC_STATISTICS_TYPE_DISTR', 'Distribution');
+\define('_MA_WGSIMPLEACC_STATISTICS_SHOW', 'Show Statistics');
 // Outputs
 \define('_MA_WGSIMPLEACC_OUTPUTS', 'Outputs');
 \define('_MA_WGSIMPLEACC_OUTPUT_TRA_TITLE', 'Output Transaktions');

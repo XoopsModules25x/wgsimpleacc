@@ -480,7 +480,7 @@ class Transactions extends \XoopsObject
         }
         $allocationsHandler   = $helper->getHandler('Allocations');
         $allocationsObj       = $allocationsHandler->get($this->getVar('tra_allid'));
-        if (\is_object($accountsObj)) {
+        if (\is_object($allocationsObj)) {
             $ret['allocation']    = $allocationsObj->getVar('all_name');
         }
         $ret['date']          = \formatTimestamp($this->getVar('tra_date'), _SHORTDATESTRING);

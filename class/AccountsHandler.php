@@ -128,8 +128,6 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
     public function getSelectTreeOfAccounts($class)
     {
         $list = [];
-        $helper          = \XoopsModules\Wgsimpleacc\Helper::getInstance();
-        $accountsHandler = $helper->getHandler('Accounts');
 
         $crItems = new \CriteriaCompo();
         $crItems->add(new \Criteria('acc_online', Constants::ONOFF_ONLINE));
@@ -141,8 +139,8 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
         }
         $crItems->setSort('acc_weight ASC, acc_key');
         $crItems->setOrder('ASC');
-        $accountsCount = $accountsHandler->getCount($crItems);
-        $accountsAll   = $accountsHandler->getAll($crItems);
+        $accountsCount = $this->getCount($crItems);
+        $accountsAll   = $this->getAll($crItems);
         // Table view accounts
         if ($accountsCount > 0) {
             foreach (\array_keys($accountsAll) as $i) {
@@ -180,7 +178,6 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
 
         $helper       = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $transactionsHandler = $helper->getHandler('Transactions');
-        $itemsHandler = $helper->getHandler('Accounts');
         $itemId       = 'acc_id';
         $itemKey      = 'acc_key';
         $itemName     = 'acc_name';
@@ -194,8 +191,8 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
         $crItems->add(new \Criteria('acc_online', Constants::ONOFF_HIDDEN, '<'));
         $crItems->setSort('acc_weight ASC, acc_datecreated');
         $crItems->setOrder('DESC');
-        $itemsCount = $itemsHandler->getCount($crItems);
-        $itemsAll   = $itemsHandler->getAll($crItems);
+        $itemsCount = $this->getCount($crItems);
+        $itemsAll   = $this->getAll($crItems);
         // Table view items
         if ($itemsCount > 0) {
             foreach (\array_keys($itemsAll) as $i) {
@@ -277,8 +274,6 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
             $childsAll = '';
         }
 
-        $helper             = \XoopsModules\Wgsimpleacc\Helper::getInstance();
-        $itemsHandler      = $helper->getHandler('Accounts');
         $itemId        = 'acc_id';
         $itemKey       = 'acc_key';
         $itemName      = 'acc_name';
@@ -289,8 +284,8 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
         $crItems->add(new \Criteria('acc_online', Constants::ONOFF_HIDDEN, '<'));
         $crItems->setSort('acc_weight ASC, acc_datecreated');
         $crItems->setOrder('DESC');
-        $itemsCount = $itemsHandler->getCount($crItems);
-        $itemsAll   = $itemsHandler->getAll($crItems);
+        $itemsCount = $this->getCount($crItems);
+        $itemsAll   = $this->getAll($crItems);
         // Table view items
         if ($itemsCount > 0) {
             foreach (\array_keys($itemsAll) as $i) {
@@ -325,11 +320,9 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
      */
     public function getTopLevelAccount($accId)
     {
-        $helper             = \XoopsModules\Wgsimpleacc\Helper::getInstance();
-        $accountsHandler    = $helper->getHandler('Accounts');
 
         $ret = [];
-        $accountsObj = $accountsHandler->get($accId);
+        $accountsObj = $this->get($accId);
         $ret['id']   = $accId;
         $ret['name'] = $accountsObj->getVar('acc_name');
         $ret['color'] = $accountsObj->getVar('acc_color');
@@ -337,7 +330,7 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
         unset($accountsObj);
         if ($accPid > 0) {
             while ($accPid > 0) {
-                $accountsObj = $accountsHandler->get($accPid);
+                $accountsObj = $this->get($accPid);
                 $ret['id']   = $accPid;
                 $ret['name'] = $accountsObj->getVar('acc_name');
                 $ret['color'] = $accountsObj->getVar('acc_color');
@@ -412,15 +405,13 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
     public function getSubsOfAccounts($accId)
     {
         $list = [];
-        $helper             = \XoopsModules\Wgsimpleacc\Helper::getInstance();
-        $accountsHandler = $helper->getHandler('accounts');
 
         $crItems           = new \CriteriaCompo();
         $crItems->add(new \Criteria('acc_online', Constants::ONOFF_ONLINE));
         $crItems->setSort('acc_weight ASC, acc_id');
         $crItems->setOrder('ASC');
-        $accountsCount = $accountsHandler->getCount($crItems);
-        $accountsAll   = $accountsHandler->getAll($crItems);
+        $accountsCount = $this->getCount($crItems);
+        $accountsAll   = $this->getAll($crItems);
         // Table view accounts
         if ($accountsCount > 0) {
             foreach (\array_keys($accountsAll) as $i) {
@@ -445,6 +436,42 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
         $accountObj = $this->get($accId);
 
         return ['online' => (bool)$accountObj->getVar('acc_online'), 'name' => $accountObj->getVar('acc_key') . ' ' . $accountObj->getVar('acc_name')];
+    }
+
+    /**
+     * Get array of accounts with all childs
+     * @param $accPid
+     * @return bool|array
+     */
+    public function getArrayTreeOfAccounts($accPid)
+    {
+
+        $arrayAccTree = [];
+
+        $crItems           = new \CriteriaCompo();
+        $crItems->add(new \Criteria('acc_pid', $accPid));
+        $crItems->add(new \Criteria('acc_online', Constants::ONOFF_HIDDEN, '<'));
+        $crItems->setSort('acc_weight ASC, acc_datecreated');
+        $crItems->setOrder('DESC');
+        $itemsCount = $this->getCount($crItems);
+        $itemsAll   = $this->getAll($crItems);
+        // Table view items
+        if ($itemsCount > 0) {
+            foreach (\array_keys($itemsAll) as $i) {
+                $arrayAccTree[$i]['id'] = $i;
+                $arrayAccTree[$i]['name'] = $itemsAll[$i]->getVar('acc_name');
+                $child     = $this->getArrayTreeOfAccounts($i);
+                if ($child) {
+                    $arrayAccTree[$i]['child'] = $child;
+                } else {
+                    $arrayAccTree[$i]['child'] = [];
+                }
+            }
+        } else {
+            return false;
+        }
+
+        return $arrayAccTree;
     }
     
 }
