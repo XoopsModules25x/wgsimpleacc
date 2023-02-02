@@ -310,9 +310,8 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
      */
     public function getArrayTreeOfAllocations($allPid)
     {
-        if (0 == $allPid) {
-            $arrayAllTree = [];
-        }
+
+        $arrayAllTree = [];
 
         $crItems           = new \CriteriaCompo();
         $crItems->add(new \Criteria('all_pid', $allPid));

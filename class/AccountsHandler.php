@@ -445,9 +445,8 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
      */
     public function getArrayTreeOfAccounts($accPid)
     {
-        if (0 == $accPid) {
-            $arrayAccTree = [];
-        }
+
+        $arrayAccTree = [];
 
         $crItems           = new \CriteriaCompo();
         $crItems->add(new \Criteria('acc_pid', $accPid));
