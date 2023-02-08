@@ -239,17 +239,20 @@ class Transactions extends \XoopsObject
         $allocationsHandler = $helper->getHandler('Allocations');
         $traAllid = $this->isNew() ? 0 : (int)$this->getVar('tra_allid');
         $allRequired = true;
+        $allInfoInvalid = null;
+        $accInfoInvalid = null;
         if ($traAllid > 0) {
             $allIsOnline = $allocationsHandler->AllocationIsOnline($traAllid);
             if (!$allIsOnline['online']) {
-                // show info that allocation isn't valid anymore
+                // create info that allocation isn't valid anymore
+                // required is false in order to allow saving without changing it
                 $allInfoInvalid = new \XoopsFormLabel('', \sprintf(\_MA_WGSIMPLEACC_TRANSACTION_SELECT_INVALID, \_MA_WGSIMPLEACC_ALLOCATION, $allIsOnline['name']));
                 $allRequired = false;
             }
         }
         if ($cascadingAccounts) {
             // add cascading form select for accounts
-            $traAllocationSelect1 = new Form\FormSelectCascading(\_MA_WGSIMPLEACC_TRANSACTION_ALLID, 'tra_allid', $traAllid, 15);
+            $traAllocationSelect1 = new Form\FormSelectCascading(\_MA_WGSIMPLEACC_TRANSACTION_ALLID, 'tra_allid', $traAllid, 10);
             $traAllocationSelect1->setType(1);
             $allocations = $allocationsHandler->getSelectTreeOfAllocations();
             $arrAllocations = [];
@@ -267,7 +270,7 @@ class Transactions extends \XoopsObject
             }
             $form->addElement($traAllocationSelect, $allRequired);
         }
-        if (!$allIsOnline['online']) {
+        if (\is_object($allInfoInvalid)) {
             // show info that allocation isn't valid anymore
             $form->addElement($allInfoInvalid);
             $form->addElement(new \XoopsFormHidden('tra_allid_old', $traAllid));
@@ -279,14 +282,15 @@ class Transactions extends \XoopsObject
         if ($traAccid > 0) {
             $accIsOnline = $accountsHandler->AccountIsOnline($traAccid);
             if (!$accIsOnline['online']) {
-                // show info that account isn't valid anymore
+                // create info that account isn't valid anymore
+                // required is false in order to allow saving without changing it
                 $accInfoInvalid = new \XoopsFormLabel('', \sprintf(\_MA_WGSIMPLEACC_TRANSACTION_SELECT_INVALID, \_MA_WGSIMPLEACC_ACCOUNT, $accIsOnline['name']));
                 $accRequired = false;
             }
         }
         if ($cascadingAccounts) {
             // add cascading form select for accounts
-            $traAccidSelect = new Form\FormSelectCascading(\_MA_WGSIMPLEACC_TRANSACTION_ACCID, 'tra_accid', $traAccid . '_' . $traAllid, 15);
+            $traAccidSelect = new Form\FormSelectCascading(\_MA_WGSIMPLEACC_TRANSACTION_ACCID, 'tra_accid', $traAccid . '_' . $traAllid, 10);
             $traAccidSelect->setType(2);
             $arrAccounts = [];
             $accountsAll = $accountsHandler->getSelectTreeOfAccounts($traClass);
