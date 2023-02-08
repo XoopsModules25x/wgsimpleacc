@@ -69,6 +69,33 @@
         <{/if}>
         <div class="alert alert-danger"><{$noData|default:''}></div>
     <{/if}>
+    <{if $sumAmountIn|default:''}>
+        <h3><{$smarty.const._MA_WGSIMPLEACC_SUMS}></h3>
+        <table class="wgsa-transaction-sum">
+            <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th><{$smarty.const._MA_WGSIMPLEACC_BALANCES_OUT_TOTAL}></th>
+                    <th><{$smarty.const._MA_WGSIMPLEACC_TRASTATUS_SUBMITTED}></th>
+                    <th><{$smarty.const._MA_WGSIMPLEACC_TRASTATUS_APPROVED}></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="row-class-3">
+                    <td class="left"><{$smarty.const._MA_WGSIMPLEACC_CLASS_INCOME}></td>
+                    <td class="right"><{$sumAmountIn.total|default:0}></td>
+                    <td class="right"><{$sumAmountIn.submitted|default:0}></td>
+                    <td class="right"><{$sumAmountIn.approved|default:0}></td>
+                </tr>
+                <tr class="row-class-2">
+                    <td class="left"><{$smarty.const._MA_WGSIMPLEACC_CLASS_EXPENSES}></td>
+                    <td class="right"><{$sumAmountOut.total|default:0}></td>
+                    <td class="right"><{$sumAmountOut.submitted|default:0}></td>
+                    <td class="right"><{$sumAmountOut.approved|default:0}></td>
+                </tr>
+            </tbody>
+        </table>
+    <{/if}>
 <{/if}>
 
 <{if $showHist|default:''}>

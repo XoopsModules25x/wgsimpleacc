@@ -189,6 +189,10 @@ switch ($op) {
         if ($transactionsCount > 0) {
             $transactions = [];
             // Get All Transactions
+            if ('list' === $op) {
+                $sumAmountIn = ['total' => 0, 'submitted' => 0, 'approved' => 0];
+                $sumAmountOut = ['total' => 0, 'submitted' => 0, 'approved' => 0];
+            }
             foreach (\array_keys($transactionsAll) as $i) {
                 $transactions[$i] = $transactionsAll[$i]->getValuesTransactions();
                 $transactions[$i]['editable'] = $permissionsHandler->getPermTransactionsEdit($transactions[$i]['tra_submitter'], $transactions[$i]['tra_status'], $transactions[$i]['tra_balid']);
@@ -199,6 +203,7 @@ switch ($op) {
                 if ('' !== (string)$transactions[$i]['tra_remarks']) {
                     $transactions[$i]['modaltitle'] = \str_replace('%s', $transactions[$i]['year_nb'], \_MA_WGSIMPLEACC_MODAL_TRATITLE);
                 }
+                // get list of possible output templates
                 $outputTpls = [];
                 //$outputTpls[] = ['href' => 'transactions_pdf.php?tra_id=', 'title' => \_MA_WGSIMPLEACC_DOWNLOAD, 'class' => 'fa fa-file-pdf-o fa-fw', 'caption' => \_MA_WGSIMPLEACC_OUTTEMPLATE_DEFAULT];
                 $crOuttemplates = new \CriteriaCompo();
@@ -239,7 +244,44 @@ switch ($op) {
                     $transactions[$i]['outputTpls'] = $outputTpls;
                 }
                 unset($crOuttemplates, $outtemplates);
+                if ('list' === $op) {
+                    // get sums of different amounts
+                    if (Constants::CLASS_INCOME === $transactions[$i]['tra_class']) {
+                        $amount = $transactions[$i]['tra_amountin'];
+                        $sumAmountIn['total'] = (float)$sumAmountIn['total'] + $amount;
+                        if (Constants::TRASTATUS_SUBMITTED === (int)$transactions[$i]['tra_status']) {
+                            $sumAmountIn['submitted'] = (float)$sumAmountIn['submitted'] + $amount;
+                        }
+                        if (Constants::TRASTATUS_APPROVED === (int)$transactions[$i]['tra_status']) {
+                            $sumAmountIn['approved'] = (float)$sumAmountIn['approved'] + $amount;
+                        }
+                    }
+                    if (Constants::CLASS_EXPENSES === (int)$transactions[$i]['tra_class']) {
+                        $amount = $transactions[$i]['tra_amountout'];
+                        $sumAmountOut['total'] = $sumAmountOut['total'] + $amount;
+                        if (Constants::TRASTATUS_SUBMITTED === (int)$transactions[$i]['tra_status']) {
+                            $sumAmountOut['submitted'] = $sumAmountOut['submitted'] + $amount;
+                        }
+                        if (Constants::TRASTATUS_APPROVED === (int)$transactions[$i]['tra_status']) {
+                            $sumAmountOut['approved'] = $sumAmountOut['approved'] + $amount;
+                        }
+                    }
+                }
                 $keywords[$i] = $transactionsAll[$i]->getVar('tra_desc');
+            }
+            if ('list' === $op) {
+                $sumAmountIn = [
+                    'total' => Utility::FloatToString(\round($sumAmountIn['total'], 2)),
+                    'submitted' => Utility::FloatToString(\round($sumAmountIn['submitted'], 2)),
+                    'approved' => Utility::FloatToString(\round($sumAmountIn['approved'], 2))
+                ];
+                $sumAmountOut = [
+                    'total' => Utility::FloatToString(\round($sumAmountOut['total'], 2)),
+                    'submitted' => Utility::FloatToString(\round($sumAmountOut['submitted'], 2)),
+                    'approved' => Utility::FloatToString(\round($sumAmountOut['approved'], 2))
+                ];
+                $GLOBALS['xoopsTpl']->assign('sumAmountIn', $sumAmountIn);
+                $GLOBALS['xoopsTpl']->assign('sumAmountOut', $sumAmountOut);
             }
             $GLOBALS['xoopsTpl']->assign('transactions', $transactions);
             unset($transactions);

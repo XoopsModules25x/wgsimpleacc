@@ -1,4 +1,5 @@
 
+Filter Jahr durch von/bis ersetzen
 
 Summe bei Liste der Transaktionen
 

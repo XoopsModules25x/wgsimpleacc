@@ -13,6 +13,7 @@
  - fixed bugs with deleted accounts/allocations (goffy)
  - added cascading accounts (goffy)
  - fixed problem with tratemplates and cascading accounts (goffy)
+ - added sums to transaction list (goffy)
 
 ==============================================================
 1.3.0 RC1 [2022/02/23]
