@@ -113,14 +113,14 @@ class FormSelectCascading extends \XoopsFormSelect
 
         $ret = '<select class="form-control';
         if (1 == $ele_type) {
-            $ret .= ' firstList selectFilter" data-target="secondList"';
+            $ret .= ' firstList selectFilter" data-target="secondList" ';
         } else {
-            $ret .= ' secondList"';
+            $ret .= ' secondList" ';
         }
-        $ret .= '" size="' . $this->getSize() . '"' . $this->getExtra();
+        $ret .= ' size="' . $this->getSize() . '"' . $this->getExtra();
         if ($this->isMultiple() != false) {
             $ret .= ' name="' . $ele_name . '[]" id="' . $ele_name . '" title="' . $ele_title
-                . '" multiple="multiple">';
+                . ' multiple="multiple">';
         } else {
             $ret .= ' name="' . $ele_name . '" id="' . $ele_name . '" title="' . $ele_title . '">';
         }

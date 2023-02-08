@@ -7,8 +7,8 @@
                 <tr>
                     <th><{$smarty.const._MA_WGSIMPLEACC_TRATEMPLATE_NAME}></th>
                     <th><{$smarty.const._MA_WGSIMPLEACC_TRATEMPLATE_DESC}></th>
-                    <th><{$smarty.const._MA_WGSIMPLEACC_TRATEMPLATE_ACCID}></th>
                     <th><{$smarty.const._MA_WGSIMPLEACC_TRATEMPLATE_ALLID}></th>
+                    <th><{$smarty.const._MA_WGSIMPLEACC_TRATEMPLATE_ACCID}></th>
                     <th><{$smarty.const._MA_WGSIMPLEACC_TRATEMPLATE_ASID}></th>
                     <{if $useClients|default:''}>
                     <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_CLIID}></th>

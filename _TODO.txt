@@ -1,3 +1,8 @@
 
+
+Summe bei Liste der Transaktionen
+
+all_accounts anpassen wenn account offline gesetzt wird
+
 https://www.jqueryscript.net/other/dashboard-starter-template-bootstrap.html
 

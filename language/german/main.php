@@ -129,7 +129,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_TRANSACTION_SUBMIT_INCOME', 'Einnahme erstellen');
 \define('_MA_WGSIMPLEACC_TRANSACTION_SUBMIT_EXPENSE', 'Ausgabe erstellen');
 \define('_MA_WGSIMPLEACC_TRANSACTION_TRATEMPLATE', 'Als Vorlage verwenden');
-\define('_MA_WGSIMPLEACC_TRANSACTION_SELECT_INVALID', '(dies Auswahl ist derzeit nicht gültig)');
+\define('_MA_WGSIMPLEACC_TRANSACTION_SELECT_INVALID', "Die aktuell gespeicherte Auswahl %s '%s' ist derzeit nicht gültig");
 // Caption of Transaction
 \define('_MA_WGSIMPLEACC_TRANSACTION_ID', 'Id');
 \define('_MA_WGSIMPLEACC_TRANSACTION_YEAR', 'Jahr');

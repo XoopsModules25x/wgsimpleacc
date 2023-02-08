@@ -31,8 +31,8 @@
                             <{/if}>
                             <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_DESC}></th>
                             <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_REFERENCE}></th>
-                            <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_ACCID}></th>
                             <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_ALLID}></th>
+                            <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_ACCID}></th>
                             <th scope="col">
                                 <{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_DATE}>
                                 <a class='btn btn-warning btn-xs wgsa-btn-sort' href='transactions.php?op=list&amp;sortby=tra_date&amp;order=asc<{$traOpSorter|default:''}>' title='<{$smarty.const._ASCENDING}>' <{if $sort_order|default:'' == 'tra_date_asc'}>disabled<{/if}>><i class="fa fa-arrow-up fa-fw"></i></a>

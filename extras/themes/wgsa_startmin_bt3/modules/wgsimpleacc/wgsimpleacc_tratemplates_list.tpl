@@ -1,8 +1,8 @@
 <tr id='tplId_<{$template.ttpl_id}>'>
     <td><{$template.name}></td>
     <td><{$template.desc}></td>
-    <td><{$template.accid}></td>
     <td><{$template.allid}></td>
+    <td><{$template.accid}> <{$template.accname}></td>
     <td><{$template.asid}></td>
     <{if $useClients|default:''}>
         <td><{$template.cliid}></td>

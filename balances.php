@@ -321,7 +321,7 @@ switch ($op) {
                 $crTransactions->add(new \Criteria('tra_date', $balanceFrom, '>='));
                 $crTransactions->add(new \Criteria('tra_date', $balanceTo, '<='));
                 $crTransactions->add(new \Criteria('tra_asid', $asset['id']));
-                //$crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_SUBMITTED, '>'));
+                $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_SUBMITTED, '>'));
                 if (Constants::BALANCE_TYPE_FINAL == $balType) {
                     //$transactionsHandler->updateAll('tra_status', Constants::TRASTATUS_LOCKED, $crTransactions, true);
                     $transactionsHandler->updateAll('tra_balid', $newBalId, $crTransactions, true);
