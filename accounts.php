@@ -77,43 +77,42 @@ switch ($op) {
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ACCOUNTS];
         break;
-        /*
+
     case 'compare_alloc':
         $accountsCount = $accountsHandler->getCountAccounts();
-        $accountsAll = $accountsHandler->getAllAccounts($start, $limit);
         $GLOBALS['xoopsTpl']->assign('accounts_count', $accountsCount);
-        //$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
-        //$GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', \WGSIMPLEACC_UPLOAD_URL);
         // Table view accounts
         if ($accountsCount > 0) {
-            foreach (\array_keys($accountsAll) as $i) {
-                $account = $accountsAll[$i]->getValuesAccounts();
-                $accAllocations = \unserialize($accountsAll[$i]->getVar('acc_allocations'));
-                $allocations = [];
-                if (\is_array($accAllocations)) {
-                    foreach ($accAllocations as $alloc) {
-                        $allocationObj = $allocationsHandler->get($alloc);
-                        if (\is_object($allocationObj)) {
-                            $allocations[$alloc] = $allocationObj->getVar('all_name');
-                        }
-                        unset($allocationObj);
+            $accountsAll = $accountsHandler->getAllAccounts($start, $limit);
+            foreach (\array_keys($accountsAll) as $acc) {
+                $allocationsAll = $allocationsHandler->getAllAllocations();
+                $accUsedIn = [];
+                foreach (\array_keys($allocationsAll) as $all) {
+                    $arrAccounts = \unserialize($allocationsAll[$all]->getVar('all_accounts'));
+                    if (\is_array($arrAccounts) && \in_array($acc, $arrAccounts)) {
+                        $accUsedIn[] = [
+                            'id' => $all,
+                            'name' => $allocationsAll[$all]->getVar('all_name'),
+                            'online' => $allocationsAll[$all]->getVar('all_online'),
+                            'online_text' => $allocationsAll[$all]->getVar('all_online') > 0 ? _MA_WGSIMPLEACC_ONLINE : _MA_WGSIMPLEACC_OFFLINE
+                        ];
                     }
                 }
-                $account['allocations'] = $allocations;
-
+                $account = $accountsAll[$acc]->getValuesAccounts();
+                $account['allocations'] = $accUsedIn;
                 $GLOBALS['xoopsTpl']->append('compare_list', $account);
                 unset($account);
             }
             // Display Navigation
             if ($accountsCount > $limit) {
                 require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
-                $pagenav = new \XoopsPageNav($accountsCount, $limit, $start, 'start', 'op=list&limit=' . $limit);
+                $pagenav = new \XoopsPageNav($accountsCount, $limit, $start, 'start', 'op=compare_alloc&limit=' . $limit);
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
             }
         } else {
             $GLOBALS['xoopsTpl']->assign('error', \_MA_WGSIMPLEACC_THEREARENT_ACCOUNTS);
         }
-        break;*/
+        break;
     case 'save':
         // Security Check
         if (!$GLOBALS['xoopsSecurity']->check()) {

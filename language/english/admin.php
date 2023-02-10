@@ -115,6 +115,7 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_PERMISSIONS_TRATEMPLATE_VIEW', 'Permissions to view templates');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_OUTTEMPLATE_SUBMIT', 'Permissions to submit output templates');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_OUTTEMPLATE_VIEW', 'Permissions to view output templates');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_CLIENT_ADMIN', 'Permissions to admin clients');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_CLIENT_SUBMIT', 'Permissions to submit clients');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_CLIENT_VIEW', 'Permissions to view clients');
 // ---------------- Admin Others ----------------

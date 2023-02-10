@@ -1,7 +1,7 @@
 
 Filter Jahr durch von/bis ersetzen
 
-Summe bei Liste der Transaktionen
+Einträge bei Liste Alloc deaktivieren wenn keine Accounts verfügbar
 
 all_accounts anpassen wenn account offline gesetzt wird
 

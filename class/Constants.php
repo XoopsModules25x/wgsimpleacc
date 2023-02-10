@@ -61,9 +61,6 @@ interface Constants
     public const ONOFF_ONLINE  = 1;
     public const ONOFF_HIDDEN = 2; //if an allocation or account is deleted but still necessary for transaction_hist
 
-
-/*    public const STATUS_BROKEN    = 10;
-*/
     // Constants for permissions
     public const PERM_GLOBAL_NONE          = 0;
     public const PERM_GLOBAL_VIEW          = 1;
@@ -86,6 +83,7 @@ interface Constants
     public const PERM_OUTTEMPLATES_VIEW    = 18;
     public const PERM_CLIENTS_SUBMIT       = 19;
     public const PERM_CLIENTS_VIEW         = 20;
+    public const PERM_CLIENTS_ADMIN        = 21;
 
     // Constants for account class
     public const CLASS_BOTH   = 1;
