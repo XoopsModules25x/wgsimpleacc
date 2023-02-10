@@ -57,6 +57,11 @@
 .wgsa-transaction-img-list {
 	max-height:200px !important;
 }
+.wgsa-transaction-sum th,
+.wgsa-transaction-sum td {
+	border-bottom: 1px solid #ccc;
+	padding:5px 20px 5px 10px;
+}
 
 .wgsa-nav-icon {
 	height:20px;

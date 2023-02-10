@@ -125,7 +125,7 @@ class Allocations extends \XoopsObject
             }
             $form->addElement($allAccountsSelect, true);
         }
-        
+
         // Form Text allLevel
         $allLevel = $this->isNew() ? 99 : $this->getVar('all_level');
         if ($admin) {

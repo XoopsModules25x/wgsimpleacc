@@ -165,7 +165,7 @@ switch ($op) {
         $sql .= $GLOBALS['xoopsDB']->prefix('wgsimpleacc_balances') . '.bal_status, ';
         $sql .= $GLOBALS['xoopsDB']->prefix('wgsimpleacc_balances') . '.bal_datecreated, ';
         $sql .= $GLOBALS['xoopsDB']->prefix('wgsimpleacc_balances') . '.bal_submitter ';
-        $sql .= 'ORDER BY ' . $GLOBALS['xoopsDB']->prefix('wgsimpleacc_balances') . '.bal_datecreated DESC;';
+        $sql .= 'ORDER BY ' . $GLOBALS['xoopsDB']->prefix('wgsimpleacc_balances') . '.bal_from DESC, ' . $GLOBALS['xoopsDB']->prefix('wgsimpleacc_balances') . '.bal_datecreated DESC;';
         $result = $GLOBALS['xoopsDB']->query($sql);
         while (list($balFrom, $balTo, $balAmountStart, $balAmountEnd, $balStatus, $balDatecreated, $balSubmitter) = $GLOBALS['xoopsDB']->fetchRow($result)) {
             $balFromText = \formatTimestamp($balFrom, 's');
@@ -321,7 +321,7 @@ switch ($op) {
                 $crTransactions->add(new \Criteria('tra_date', $balanceFrom, '>='));
                 $crTransactions->add(new \Criteria('tra_date', $balanceTo, '<='));
                 $crTransactions->add(new \Criteria('tra_asid', $asset['id']));
-                //$crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_SUBMITTED, '>'));
+                $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_SUBMITTED, '>'));
                 if (Constants::BALANCE_TYPE_FINAL == $balType) {
                     //$transactionsHandler->updateAll('tra_status', Constants::TRASTATUS_LOCKED, $crTransactions, true);
                     $transactionsHandler->updateAll('tra_balid', $newBalId, $crTransactions, true);

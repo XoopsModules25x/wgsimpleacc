@@ -117,6 +117,9 @@ if ($permissionsHandler->getPermAccountsView()) {
     $nav_items2 = [];
     if ($permissionsHandler->getPermAccountsSubmit()) {
         $nav_items2[] = ['href' => 'accounts.php?op=list', 'icon' => '<i class="fa fa-list-ol fa-fw fa-lg"></i>','label' => \_MA_WGSIMPLEACC_ACCOUNTS_LIST, 'sub_items3' => []];
+        if ((bool)$helper->getConfig('use_cascadingacc')) {
+            $nav_items2[] = ['href' => 'accounts.php?op=compare_alloc', 'icon' => '<i class="fa fa-link fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_ALLOCATION_ACCOUNTS_COMPARE, 'sub_items3' => []];
+        }
         $nav_items2[] = ['href' => 'accounts.php?op=new', 'icon' => '<i class="fa fa-plus-square fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_ACCOUNT_SUBMIT, 'sub_items3' => []];
         $nav_items1[] = ['href' => '#', 'icon' => '<i class="fa fa-table fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_ACCOUNTS, 'sub_items2' => $nav_items2];
     } else {

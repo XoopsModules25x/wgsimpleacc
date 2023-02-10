@@ -27,10 +27,9 @@
             <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ACCOUNT_ID}></th>
             <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ACCOUNT_KEY}></th>
             <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ACCOUNT_NAME}></th>
-            <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ACCOUNT_ALLOCATIONS}></th>
+            <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ALLOCATIONS}></th>
             <th class="center"><{$smarty.const._MA_WGSIMPLEACC_DATECREATED}></th>
             <th class="center"><{$smarty.const._MA_WGSIMPLEACC_SUBMITTER}></th>
-            <th class="center width5"><{$smarty.const._MA_WGSIMPLEACC_FORM_ACTION}></th>
         </tr>
         </thead>
         <{if $accounts_count}>
@@ -44,16 +43,16 @@
                             <{if $account.allocations|default:false}>
                                 <ul>
                                     <{foreach item=alloc from=$account.allocations|default:false}>
-                                    <li><{$alloc}></li>
+                                    <li>
+                                        <{$alloc.name}>
+                                        <img class="wgsa-img-online" style="height:16px" src="<{$smarty.const.WGSIMPLEACC_ICONS_URL}>/32/<{$alloc.online}>.png" title="<{$alloc.online_text}>" alt="<{$alloc.online_text}>">
+                                    </li>
                                     <{/foreach}>
                                 </ul>
                             <{/if}>
                         </td>
                         <td class='center'><{$account.datecreated}></td>
                         <td class='center'><{$account.submitter}></td>
-                        <td class="center  width5">
-                            <a href="accounts.php?op=edit&amp;acc_id=<{$account.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="<{$smarty.const._EDIT}> accounts"></a>
-                        </td>
                     </tr>
                 <{/foreach}>
             </tbody>

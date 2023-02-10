@@ -115,7 +115,8 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_PERMISSIONS_TRATEMPLATE_VIEW', 'Berechtigungen zum Ansehen der Transaktionensvorlagen');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_OUTTEMPLATE_SUBMIT', 'Berechtigungen zum Erstellen von Ausgabevorlagen');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_OUTTEMPLATE_VIEW', 'Berechtigungen zum Ansehen der Ausgabevorlagen');
-\define('_AM_WGSIMPLEACC_PERMISSIONS_CLIENT_SUBMIT', 'Berechtigungen zum Erstellen von Klienten');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_CLIENT_ADMIN', 'Berechtigungen zum Verwalten von Klienten');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_CLIENT_SUBMIT', 'Berechtigungen zum Einsenden von Klienten');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_CLIENT_VIEW', 'Berechtigungen zum Ansehen der Klienten');
 // ---------------- Admin Others ----------------
 \define('_AM_WGSIMPLEACC_ABOUT_MAKE_DONATION', 'Senden');

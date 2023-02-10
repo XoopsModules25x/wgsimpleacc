@@ -12,6 +12,10 @@
  - fixed bug for datecreate and non-admins (goffy)
  - fixed bugs with deleted accounts/allocations (goffy)
  - added cascading accounts (goffy)
+ - fixed problem with tratemplates and cascading accounts (goffy)
+ - added sums to transaction list (goffy)
+ - display combinations accounts/allocations (goffy)
+ - new permission "admin clients" (goffy)
 
 ==============================================================
 1.3.0 RC1 [2022/02/23]

@@ -31,8 +31,8 @@
                             <{/if}>
                             <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_DESC}></th>
                             <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_REFERENCE}></th>
-                            <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_ACCID}></th>
                             <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_ALLID}></th>
+                            <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_ACCID}></th>
                             <th scope="col">
                                 <{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_DATE}>
                                 <a class='btn btn-warning btn-xs wgsa-btn-sort' href='transactions.php?op=list&amp;sortby=tra_date&amp;order=asc<{$traOpSorter|default:''}>' title='<{$smarty.const._ASCENDING}>' <{if $sort_order|default:'' == 'tra_date_asc'}>disabled<{/if}>><i class="fa fa-arrow-up fa-fw"></i></a>
@@ -68,6 +68,33 @@
             </div>
         <{/if}>
         <div class="alert alert-danger"><{$noData|default:''}></div>
+    <{/if}>
+    <{if $sumAmountIn|default:''}>
+        <h3><{$smarty.const._MA_WGSIMPLEACC_SUMS}></h3>
+        <table class="wgsa-transaction-sum">
+            <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th><{$smarty.const._MA_WGSIMPLEACC_BALANCES_OUT_TOTAL}></th>
+                    <th><{$smarty.const._MA_WGSIMPLEACC_TRASTATUS_SUBMITTED}></th>
+                    <th><{$smarty.const._MA_WGSIMPLEACC_TRASTATUS_APPROVED}></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="row-class-3">
+                    <td class="left"><{$smarty.const._MA_WGSIMPLEACC_CLASS_INCOME}></td>
+                    <td class="right"><{$sumAmountIn.total|default:0}></td>
+                    <td class="right"><{$sumAmountIn.submitted|default:0}></td>
+                    <td class="right"><{$sumAmountIn.approved|default:0}></td>
+                </tr>
+                <tr class="row-class-2">
+                    <td class="left"><{$smarty.const._MA_WGSIMPLEACC_CLASS_EXPENSES}></td>
+                    <td class="right"><{$sumAmountOut.total|default:0}></td>
+                    <td class="right"><{$sumAmountOut.submitted|default:0}></td>
+                    <td class="right"><{$sumAmountOut.approved|default:0}></td>
+                </tr>
+            </tbody>
+        </table>
     <{/if}>
 <{/if}>
 

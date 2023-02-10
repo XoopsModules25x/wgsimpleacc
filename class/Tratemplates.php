@@ -110,22 +110,22 @@ class Tratemplates extends \XoopsObject
         $editorConfigs['editor'] = $editor;
         $traDesc = new \XoopsFormEditor(\_MA_WGSIMPLEACC_TRATEMPLATE_DESC, 'ttpl_desc', $editorConfigs);
         $form->addElement($traDesc);
-        // Form Table accounts
-        $accountsHandler = $helper->getHandler('Accounts');
-        $tplAccidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRATEMPLATE_ACCID, 'ttpl_accid', $this->getVar('ttpl_accid'));
-        $accounts = $accountsHandler->getSelectTreeOfAccounts(Constants::CLASS_INCOME);
-        foreach ($accounts as $account) {
-            $tplAccidSelect->addOption($account['id'], $account['text']);
-        }
-        $form->addElement($tplAccidSelect);
         // Form Table allocations
         $allocationsHandler = $helper->getHandler('Allocations');
-        $tplAllidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRATEMPLATE_ALLID, 'ttpl_allid', $this->getVar('ttpl_allid'));
+        $tplAllidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRATEMPLATE_ALLID, 'ttpl_allid', $this->getVar('ttpl_allid'), 15);
         $allocations = $allocationsHandler->getSelectTreeOfAllocations();
         foreach ($allocations as $allocation) {
             $tplAllidSelect->addOption($allocation['id'], $allocation['text']);
         }
         $form->addElement($tplAllidSelect);
+        // Form Table accounts
+        $accountsHandler = $helper->getHandler('Accounts');
+        $tplAccidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRATEMPLATE_ACCID, 'ttpl_accid', $this->getVar('ttpl_accid'), 15);
+        $accounts = $accountsHandler->getSelectTreeOfAccounts(Constants::CLASS_BOTH);
+        foreach ($accounts as $account) {
+            $tplAccidSelect->addOption($account['id'], $account['text']);
+        }
+        $form->addElement($tplAccidSelect);
         // Form Table assets
         $assetsHandler = $helper->getHandler('Assets');
         $ttplAsidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRATEMPLATE_ASID, 'ttpl_asid', $this->getVar('ttpl_asid'));
@@ -190,11 +190,14 @@ class Tratemplates extends \XoopsObject
 
         $accountsHandler = $helper->getHandler('Accounts');
         $accountsObj = $accountsHandler->get($this->getVar('ttpl_accid'));
-        $accKey = '';
+        $accKey  = '';
+        $accName = '';
         if (\is_object($accountsObj)) {
-            $accKey = $accountsObj->getVar('acc_key');
+            $accKey  = $accountsObj->getVar('acc_key');
+            $accName = $accountsObj->getVar('acc_name');
         }
-        $ret['accid'] = $accKey;
+        $ret['accid']   = $accKey;
+        $ret['accname'] = $accName;
 
         $allocationsHandler = $helper->getHandler('Allocations');
         $allocationsObj = $allocationsHandler->get($this->getVar('ttpl_allid'));

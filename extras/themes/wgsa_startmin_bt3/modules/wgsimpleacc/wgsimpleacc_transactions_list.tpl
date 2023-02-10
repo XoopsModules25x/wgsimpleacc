@@ -16,8 +16,8 @@
         <{/if}>
     </td>
     <td><{$transaction.reference}></td>
-    <td><{$transaction.account}></td>
     <td><{$transaction.allocation}></td>
+    <td><{$transaction.account}></td>
     <td><{$transaction.date}></td>
     <td>
         <{if $useCurrencies}>

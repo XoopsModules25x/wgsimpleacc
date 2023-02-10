@@ -291,8 +291,8 @@ switch ($op) {
                                 $transactions[$i]['account'],
                                 $transactions[$i]['allocation'],
                                 $transactions[$i]['date'],
-                                $transactions[$i]['amountin'],
-                                $transactions[$i]['amountout'],
+                                $transactions[$i]['tra_amountin'],
+                                $transactions[$i]['tra_amountout'],
                                 $transactions[$i]['asset'],
                                 $transactions[$i]['status_text']
                             ];

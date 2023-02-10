@@ -92,7 +92,7 @@ switch ($op) {
             // Get All Clients
             foreach (\array_keys($clientsAll) as $i) {
                 $clients[$i] = $clientsAll[$i]->getValuesClients();
-                $clients[$i]['editable'] = $permissionsHandler->getPermClientsEdit($clients[$i]['cli_submitter']);
+                $clients[$i]['editable'] = ($permissionsHandler->getPermClientsAdmin()  || $permissionsHandler->getPermClientsEdit($clients[$i]['cli_submitter']));
                 $crTransactions = new \CriteriaCompo();
                 $crTransactions->add(new \Criteria('tra_cliid', $clients[$i]['cli_id']));
                 $transactionsCount = $transactionsHandler->getCount($crTransactions);
