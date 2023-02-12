@@ -187,6 +187,9 @@ ul.menu > li + li:before {
 .wgsa-img-online {
 	margin:0 20px;
 }
+.wgsa-img-online-small {
+	height:16px;
+}
 .wgsa-client-td p {
 	padding:0 !important;
 	margin:0 !important;

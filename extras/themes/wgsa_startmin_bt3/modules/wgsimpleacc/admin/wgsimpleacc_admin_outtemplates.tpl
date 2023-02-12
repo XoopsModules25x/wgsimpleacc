@@ -23,8 +23,30 @@
                         <td class='center'><{$outtemplate.id}></td>
                         <td class='center'><{$outtemplate.name}></td>
                         <td class='center'><{$outtemplate.type_text}></td>
-                        <td class="center"><{$outtemplate.allid}></td>
-                        <td class="center"><{$outtemplate.accid}></td>
+                        <td class="center">
+                            <ul>
+                                <{foreach item=alloc from=$outtemplate.allocations}>
+                                    <li>
+                                        <{$alloc.name}>
+                                        <{if $alloc.online_text|default:false}>
+                                            <img class="wgsa-img-online wgsa-img-online-small" src="<{$wgsimpleacc_icons_url_32}>/<{$alloc.online}>.png" alt="<{$alloc.online_text}>">
+                                        <{/if}>
+                                    </li>
+                                <{/foreach}>
+                            </ul>
+                        </td>
+                        <td class="center">
+                            <ul>
+                                <{foreach item=account from=$outtemplate.accounts}>
+                                    <li>
+                                        <{$account.name}>
+                                        <{if $account.online_text|default:false}>
+                                            <img class="wgsa-img-online wgsa-img-online-small" src="<{$wgsimpleacc_icons_url_32}>/<{$account.online}>.png" alt="<{$account.online_text}>">
+                                        <{/if}>
+                                    </li>
+                                <{/foreach}>
+                            </ul>
+                        </td>
                         <td class='center'><{$outtemplate.online}></td>
                         <td class='center'><{$outtemplate.datecreated}></td>
                         <td class='center'><{$outtemplate.submitter}></td>

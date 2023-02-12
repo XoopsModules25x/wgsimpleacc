@@ -96,7 +96,7 @@ switch ($op) {
                 // get text on-/offline
                 $allocation['online_text'] = (1 == (int)$allocationsAll[$i]->getVar('all_online')) ? \_MA_WGSIMPLEACC_ONLINE : \_MA_WGSIMPLEACC_OFFLINE;
                 // get accounts defined for this allocation
-                $arrAccounts = \unserialize($allocationsAll[$i]->getVar('all_accounts'));
+                $arrAccounts = \unserialize($allocationsAll[$i]->getVar('all_accounts'), ['allowed_classes' => false]);
                 $allAccounts = [];
                 if (\is_array($arrAccounts)) {
                     foreach ($arrAccounts as $account) {

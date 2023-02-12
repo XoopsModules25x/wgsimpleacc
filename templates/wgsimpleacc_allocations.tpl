@@ -32,7 +32,7 @@
             <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ALLOCATION_NAME}></th>
             <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ALLOCATION_ONLINE}></th>
             <th class="center"><{$smarty.const._MA_WGSIMPLEACC_TRANSACTIONS}></th>
-            <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ALLOCATION_ACCOUNTS}></th>
+            <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ALLOCATION_ACCOUNTS}> (<{$smarty.const._MA_WGSIMPLEACC_ONLINE}>)</th>
             <th class="center width5"><{$smarty.const._MA_WGSIMPLEACC_FORM_ACTION}></th>
         </tr>
         </thead>
@@ -43,7 +43,7 @@
                 <td class='center'><{$allocation.id}></td>
                 <td class='center'><{$allocation.name}></td>
                 <td class='center'>
-                    <img class="wgsa-img-online" style="height:16px" src="<{$smarty.const.WGSIMPLEACC_ICONS_URL}>/32/<{$allocation.all_online}>.png" title="<{$allocation.online_text}>" alt="<{$allocation.online_text}>">
+                    <img class="wgsa-img-online wgsa-img-online-small" src="<{$smarty.const.WGSIMPLEACC_ICONS_URL}>/32/<{$allocation.all_online}>.png" title="<{$allocation.online_text}>" alt="<{$allocation.online_text}>">
                 </td>
                 <td class='center'><{$allocation.tracount}></td>
                 <td class='left'>
@@ -52,7 +52,7 @@
                         <{foreach item=account from=$allocation.accounts|default:false}>
                         <li>
                             <{$account.name}>
-                            <img class="wgsa-img-online" style="height:16px" src="<{$smarty.const.WGSIMPLEACC_ICONS_URL}>/32/<{$account.online}>.png" title="<{$account.online_text}>" alt="<{$account.online_text}>">
+                            <img class="wgsa-img-online wgsa-img-online-small" src="<{$smarty.const.WGSIMPLEACC_ICONS_URL}>/32/<{$account.online}>.png" title="<{$account.online_text}>" alt="<{$account.online_text}>">
                         </li>
                         <{/foreach}>
                     </ul>

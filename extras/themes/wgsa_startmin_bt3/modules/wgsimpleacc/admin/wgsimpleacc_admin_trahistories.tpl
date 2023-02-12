@@ -46,7 +46,7 @@
                     <td class='center'><{$transaction.desc_short}></td>
                     <td class='center'><{$transaction.reference}></td>
                     <td class='center'><{$transaction.remarks_short}></td>
-                    <td class='center'><{$transaction.accid}></td>
+                    <td class='center'><{$transaction.account}></td>
                     <td class='center'><{$transaction.allocation}></td>
                     <td class='center'><{$transaction.date}></td>
                     <td class='center'><{$transaction.curid}></td>

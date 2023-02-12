@@ -27,7 +27,7 @@
             <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ACCOUNT_ID}></th>
             <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ACCOUNT_KEY}></th>
             <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ACCOUNT_NAME}></th>
-            <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ALLOCATIONS}></th>
+            <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ALLOCATIONS}> (<{$smarty.const._MA_WGSIMPLEACC_ONLINE}>)</th>
             <th class="center"><{$smarty.const._MA_WGSIMPLEACC_DATECREATED}></th>
             <th class="center"><{$smarty.const._MA_WGSIMPLEACC_SUBMITTER}></th>
         </tr>
@@ -45,7 +45,7 @@
                                     <{foreach item=alloc from=$account.allocations|default:false}>
                                     <li>
                                         <{$alloc.name}>
-                                        <img class="wgsa-img-online" style="height:16px" src="<{$smarty.const.WGSIMPLEACC_ICONS_URL}>/32/<{$alloc.online}>.png" title="<{$alloc.online_text}>" alt="<{$alloc.online_text}>">
+                                        <img class="wgsa-img-online wgsa-img-online-small" src="<{$smarty.const.WGSIMPLEACC_ICONS_URL}>/32/<{$alloc.online}>.png" title="<{$alloc.online_text}>" alt="<{$alloc.online_text}>">
                                     </li>
                                     <{/foreach}>
                                 </ul>

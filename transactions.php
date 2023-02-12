@@ -212,9 +212,9 @@ switch ($op) {
                 foreach (\array_keys($outtemplatesAll) as $j) {
                     $otplType = $outtemplatesAll[$j]->getVar('otpl_type');
                     $showOtpl = false;
-                    $arrAllid  = unserialize($outtemplatesAll[$j]->getVar('otpl_allid'));
+                    $arrAllid  = \unserialize($outtemplatesAll[$j]->getVar('otpl_allid'), ['allowed_classes' => false]);
                     if (0 == (int)$arrAllid[0] || \in_array($transactionsAll[$i]->getVar('tra_allid'), $arrAllid)) {
-                        $arrAccid  = unserialize($outtemplatesAll[$j]->getVar('otpl_accid'));
+                        $arrAccid  = \unserialize($outtemplatesAll[$j]->getVar('otpl_accid'), ['allowed_classes' => false]);
                         if (0 == (int)$arrAccid[0] || \in_array($transactionsAll[$i]->getVar('tra_accid'), $arrAccid)) {
                             $showOtpl = true;
                         }

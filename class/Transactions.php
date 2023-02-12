@@ -297,7 +297,7 @@ class Transactions extends \XoopsObject
             // get all accounts associated with allocations
             foreach ($allocations as $allocation) {
                 $allObj = $allocationsHandler->get($allocation['id']);
-                $allAccounts = \unserialize($allObj->getVar('all_accounts'));
+                $allAccounts = \unserialize($allObj->getVar('all_accounts'), ['allowed_classes' => false]);
                 foreach ($allAccounts as $account) {
                     foreach ($accountsAll as $accSingle) {
                         if ((int)$accSingle['id'] == (int)$account) {
