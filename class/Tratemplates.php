@@ -190,41 +190,53 @@ class Tratemplates extends \XoopsObject
 
         $accountsHandler = $helper->getHandler('Accounts');
         $accountsObj = $accountsHandler->get($this->getVar('ttpl_accid'));
-        $accKey  = '';
-        $accName = '';
+        $accKey    = '';
+        $accName   = '';
+        $accOnline = 0;
         if (\is_object($accountsObj)) {
-            $accKey  = $accountsObj->getVar('acc_key');
-            $accName = $accountsObj->getVar('acc_name');
+            $accKey    = $accountsObj->getVar('acc_key');
+            $accName   = $accountsObj->getVar('acc_name');
+            $accOnline = (int)(Constants::ONOFF_ONLINE === (int)$accountsObj->getVar('acc_online'));
         }
-        $ret['accid']   = $accKey;
-        $ret['accname'] = $accName;
-
+        $ret['accid']         = $accKey;
+        $ret['accname']       = $accName;
+        $ret['acconline']     = $accOnline;
+        $ret['acconlinetext'] = $accOnline > 0 ? \_MA_WGSIMPLEACC_ONLINE : \_MA_WGSIMPLEACC_OFFLINE;
         $allocationsHandler = $helper->getHandler('Allocations');
         $allocationsObj = $allocationsHandler->get($this->getVar('ttpl_allid'));
-        $allName = '';
+        $allName   = '';
+        $allOnline = 0;
         if (\is_object($allocationsObj)) {
-            $allName = $allocationsObj->getVar('all_name');
+            $allName   = $allocationsObj->getVar('all_name');
+            $allOnline = (int)(Constants::ONOFF_ONLINE === (int)$allocationsObj->getVar('all_online'));
         }
-        $ret['allid'] = $allName;
-
+        $ret['allid']         = $allName;
+        $ret['allonline']     = $allOnline;
+        $ret['allonlinetext'] = $allOnline > 0 ? \_MA_WGSIMPLEACC_ONLINE : \_MA_WGSIMPLEACC_OFFLINE;
         $assetsHandler = $helper->getHandler('Assets');
         $assetsObj = $assetsHandler->get($this->getVar('ttpl_asid'));
-        $asName = '';
+        $asName   = '';
+        $asOnline = 0;
         if (\is_object($assetsObj)) {
-            $asName = $assetsObj->getVar('as_name');
+            $asName   = $assetsObj->getVar('as_name');
+            $asOnline = (int)(Constants::ONOFF_ONLINE === (int)$assetsObj->getVar('as_online'));
         }
-        $ret['asid'] = $asName;
-
+        $ret['asid']         = $asName;
+        $ret['asonline']     = $asOnline;
+        $ret['asonlinetext'] = $asOnline > 0 ? \_MA_WGSIMPLEACC_ONLINE : \_MA_WGSIMPLEACC_OFFLINE;
         $clientsHandler = $helper->getHandler('Clients');
         $clientsObj = $clientsHandler->get($this->getVar('ttpl_cliid'));
-        $cliName = '';
+        $cliName   = '';
+        $cliOnline = 0;
         if (\is_object($clientsObj)) {
-            $cliName = $clientsObj->getVar('cli_name');
+            $cliName   = $clientsObj->getVar('cli_name');
+            $cliOnline = (int)(Constants::ONOFF_ONLINE === (int)$clientsObj->getVar('cli_online'));
         }
-        $ret['cliid']        = $cliName;
-
-        $ttplClass           = $this->getVar('ttpl_class');
-        $ret['class']       = $ttplClass;
+        $ret['cliid']         = $cliName;
+        $ret['clionline']     = $cliOnline;
+        $ret['clionlinetext'] = $cliOnline > 0 ? \_MA_WGSIMPLEACC_ONLINE : \_MA_WGSIMPLEACC_OFFLINE;
+        $ttplClass        = $this->getVar('ttpl_class');
+        $ret['class']     = $ttplClass;
         switch ($ttplClass) {
             case Constants::CLASS_BOTH:
             default:

@@ -88,7 +88,7 @@ switch ($op) {
                 $allocationsAll = $allocationsHandler->getAllAllocations();
                 $accUsedIn = [];
                 foreach (\array_keys($allocationsAll) as $all) {
-                    $arrAccounts = \unserialize($allocationsAll[$all]->getVar('all_accounts'));
+                    $arrAccounts = \unserialize($allocationsAll[$all]->getVar('all_accounts'), ['allowed_classes' => false]);
                     if (\is_array($arrAccounts) && \in_array($acc, $arrAccounts)) {
                         $accUsedIn[] = [
                             'id' => $all,

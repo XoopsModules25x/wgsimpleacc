@@ -65,7 +65,7 @@ class Outtemplates extends \XoopsObject
 
     /**
      * The new inserted $Id
-     * @return inserted id
+     * @return integer
      */
     public function getNewInsertedIdOuttemplates()
     {
@@ -79,7 +79,7 @@ class Outtemplates extends \XoopsObject
      */
     public function getFormOuttemplates($action = false)
     {
-        $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+        $helper = Helper::getInstance();
         if (!$action) {
             $action = $_SERVER['REQUEST_URI'];
         }
@@ -142,7 +142,7 @@ class Outtemplates extends \XoopsObject
         $form->addElement(new \XoopsFormLabel(\_MA_WGSIMPLEACC_OUTTEMPLATE_SMARTY, _MA_WGSIMPLEACC_OUTTEMPLATE_SMARTY_DESC));
         // Form Select otplAllid
 
-        $otplAllid = $this->isNew() ? 0 : unserialize($this->getVar('otpl_allid'));
+        $otplAllid = $this->isNew() ? 0 : \unserialize($this->getVar('otpl_allid'), ['allowed_classes' => false]);
         $allocationsHandler = $helper->getHandler('Allocations');
         $otplAllidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_OUTTEMPLATE_ALLID, 'otpl_allid', $otplAllid, 10, true);
         $otplAllidSelect->addOption(Constants::OUTTEMPLATE_ALL, \_MA_WGSIMPLEACC_OUTTEMPLATE_ALL);
@@ -153,7 +153,7 @@ class Outtemplates extends \XoopsObject
         }
         $form->addElement($otplAllidSelect);
         // Form Select otplAccid
-        $otplAccid = $this->isNew() ? 0 : unserialize($this->getVar('otpl_accid'));
+        $otplAccid = $this->isNew() ? 0 : \unserialize($this->getVar('otpl_accid'), ['allowed_classes' => false]);
         $accountsHandler = $helper->getHandler('Accounts');
         $otplAccidSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_OUTTEMPLATE_ACCID, 'otpl_accid', $otplAccid, 10, true);
         $otplAccidSelect->addOption(Constants::OUTTEMPLATE_ALL, \_MA_WGSIMPLEACC_OUTTEMPLATE_ALL);
@@ -185,7 +185,7 @@ class Outtemplates extends \XoopsObject
      */
     public function getValuesOuttemplates($keys = null, $format = null, $maxDepth = null)
     {
-        $helper  = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+        $helper  = Helper::getInstance();
         $ret = $this->getValues($keys, $format, $maxDepth);
         $ret['id']   = $this->getVar('otpl_id');
         $ret['name'] = $this->getVar('otpl_name');
@@ -209,38 +209,38 @@ class Outtemplates extends \XoopsObject
         $ret['header']    = $this->getVar('otpl_header', 'e');
         $ret['body']      = $this->getVar('otpl_body', 'e');
         $ret['footer']    = $this->getVar('otpl_footer', 'e');
-        $arrAllid  = unserialize($this->getVar('otpl_allid'));
-        $otplAllid = '';
-        if (0 == (int)$arrAllid[0]) {
-            $otplAllid .= \_MA_WGSIMPLEACC_OUTTEMPLATE_ALL;
+        $arrAllid  = \unserialize($this->getVar('otpl_allid'), ['allowed_classes' => false]);
+        $otplAllid = [];
+        if (0 === (int)$arrAllid[0]) {
+            $otplAllid[] = ['name' => \_MA_WGSIMPLEACC_OUTTEMPLATE_ALL];
         } else {
-            $otplAllid .= '<ul>';
             $allocationsHandler = $helper->getHandler('Allocations');
             $allocationsAll     = $allocationsHandler->getAllAllocations();
             foreach (\array_keys($allocationsAll) as $i) {
                 if(\in_array($allocationsAll[$i]->getVar('all_id'),$arrAllid)) {
-                    $otplAllid .= '<li>' . $allocationsAll[$i]->getVar('all_name') . '</li>';
+                    $otplAllid[] = ['name' => $allocationsAll[$i]->getVar('all_name'),
+                                    'online' => $allocationsAll[$i]->getVar('all_online'),
+                                    'online_text' => (int)$allocationsAll[$i]->getVar('all_online') > 0 ? \_MA_WGSIMPLEACC_ONLINE : \_MA_WGSIMPLEACC_OFFLINE];
                 }
             }
-            $otplAllid .= '</ul>';
         }
-        $ret['allid']       = $otplAllid;
-        $arrAccid  = unserialize($this->getVar('otpl_accid'));
-        $otplAccid = '';
+        $ret['allocations'] = $otplAllid;
+        $arrAccid  = \unserialize($this->getVar('otpl_accid'), ['allowed_classes' => false]);
+        $otplAccid = [];
         if (0 == (int)$arrAccid[0]) {
-            $otplAccid .= \_MA_WGSIMPLEACC_OUTTEMPLATE_ALL;
+            $otplAccid[] = ['name' => \_MA_WGSIMPLEACC_OUTTEMPLATE_ALL];
         } else {
-            $otplAccid .= '<ul>';
             $accountsHandler = $helper->getHandler('Accounts');
             $accountsAll     = $accountsHandler->getAllAccounts();
             foreach (\array_keys($accountsAll) as $i) {
                 if(\in_array($accountsAll[$i]->getVar('acc_id'),$arrAccid)) {
-                    $otplAccid .= '<li>' . $accountsAll[$i]->getVar('acc_name') . '</li>';
+                    $otplAccid[] = ['name' => $accountsAll[$i]->getVar('acc_name'),
+                                    'online' => $accountsAll[$i]->getVar('acc_online'),
+                                    'online_text' => (int)$accountsAll[$i]->getVar('acc_online') > 0 ? \_MA_WGSIMPLEACC_ONLINE : \_MA_WGSIMPLEACC_OFFLINE];
                 }
             }
-            $otplAccid .= '</ul>';
         }
-        $ret['accid']       = $otplAccid;
+        $ret['accounts']    = $otplAccid;
         $ret['online']      = (int)$this->getVar('otpl_online') > 0 ? \_YES : \_NO;
         $ret['datecreated'] = \formatTimestamp($this->getVar('otpl_datecreated'), 's');
         $ret['submitter']   = \XoopsUser::getUnameFromId($this->getVar('otpl_submitter'));

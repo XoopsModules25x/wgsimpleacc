@@ -462,6 +462,7 @@ $modversion['config'][] = [
     'default'     => 'even',
     'category'    => 'group_header',
 ];
+/*
 // Balance : types
 $modversion['config'][] = [
     'name'        => 'balance_period',
@@ -492,6 +493,7 @@ $modversion['config'][] = [
     'default'     => 12,
     'options'     => ['_MI_WGSIMPLEACC_JANUARY' => 1, '_MI_WGSIMPLEACC_FEBRUARY' => 2, '_MI_WGSIMPLEACC_MARCH' => 3, '_MI_WGSIMPLEACC_APRIL' => 4, '_MI_WGSIMPLEACC_MAY' => 5, '_MI_WGSIMPLEACC_JUNE' => 6, '_MI_WGSIMPLEACC_JULY' => 7, '_MI_WGSIMPLEACC_AUGUST' => 8, '_MI_WGSIMPLEACC_SEPTEMBER' => 9, '_MI_WGSIMPLEACC_OCTOBER' => 10, '_MI_WGSIMPLEACC_NOVEMBER' => 11, '_MI_WGSIMPLEACC_DECEMBER' => 12],
 ];
+*/
 // Balance : default setttings for output
 $modversion['config'][] = [
     'name'        => 'balance_level_alloc',

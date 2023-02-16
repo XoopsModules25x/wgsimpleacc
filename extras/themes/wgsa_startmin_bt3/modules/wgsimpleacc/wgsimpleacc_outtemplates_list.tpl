@@ -1,8 +1,30 @@
 <tr id='oplId_<{$template.otpl_id}>'>
     <td><{$template.name}></td>
     <td class="center"><{$template.type_text}></td>
-    <td class="center"><{$template.allid}></td>
-    <td class="center"><{$template.accid}></td>
+    <td class="center">
+        <ul>
+            <{foreach item=alloc from=$template.allocations}>
+                <li>
+                    <{$alloc.name}>
+                    <{if $alloc.online_text|default:false}>
+                        <img class="wgsa-img-online wgsa-img-online-small" src="<{$wgsimpleacc_icons_url_32}>/<{$alloc.online}>.png" alt="<{$alloc.online_text}>">
+                    <{/if}>
+                </li>
+            <{/foreach}>
+        </ul>
+    </td>
+    <td class="center">
+        <ul>
+            <{foreach item=account from=$template.accounts}>
+                <li>
+                    <{$account.name}>
+                    <{if $account.online_text|default:false}>
+                        <img class="wgsa-img-online wgsa-img-online-small" src="<{$wgsimpleacc_icons_url_32}>/<{$account.online}>.png" alt="<{$account.online_text}>">
+                    <{/if}>
+                </li>
+            <{/foreach}>
+        </ul>
+    </td>
     <td class="center">
         <{if $template.otpl_online|default:0 == 1}>
     <img src="<{$wgsimpleacc_icons_url_32}>/1.png" alt="<{$template.online}>">

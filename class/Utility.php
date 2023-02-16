@@ -161,123 +161,31 @@ class Utility
 
     /**
      * @public function to get form for filter period
-     * @param $filterYear
-     * @param $filterType
-     * @param $filterMonthFrom
-     * @param $filterYearFrom
-     * @param $filterMonthTo
-     * @param $filterYearTo
+     * @param int $filterFrom
+     * @param int $filterTo
      * @param string $op
-     * @param bool $action
      * @return \XoopsForm FormInline
      */
-    public static function getFormFilterPeriod($filterYear, $filterType, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $op = 'list', $action = false)
+    public static function getFormFilterPeriod($filterFrom, $filterTo, $op = 'list')
     {
-        $helper = Helper::getInstance();
-        if (!$action) {
-            $action = $_SERVER['REQUEST_URI'];
-        }
-        $period_type = $helper->getConfig('balance_period');
+
         // Get Theme Form
         \xoops_load('XoopsFormLoader');
-        $form = new FormInline('', 'formFilter', $action, 'post', true);
+        $form = new FormInline('', 'formFilter', $_SERVER['REQUEST_URI'], 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
         $form->setExtra('class="wgsa-form-inline"');
-        //get first and last year
-        $transactionsHandler = $helper->getHandler('Transactions');
-        $yearMin = date('Y');
-        $yearMax = date('Y');
-        $crTransactions           = new \CriteriaCompo();
-        $crTransactions->setSort('tra_date');
-        $crTransactions->setOrder('ASC');
-        $crTransactions->setStart();
-        $crTransactions->setLimit(1);
-        $transactionsAll   = $transactionsHandler->getAll($crTransactions);
-        foreach (\array_keys($transactionsAll) as $i) {
-            $yearMin = date('Y', $transactionsAll[$i]->getVar('tra_date'));
-        }
-        $crTransactions->setSort('tra_date');
-        $crTransactions->setOrder('DESC');
-        $crTransactions->setStart();
-        $crTransactions->setLimit(1);
-        $transactionsAll   = $transactionsHandler->getAll($crTransactions);
-        foreach (\array_keys($transactionsAll) as $i) {
-            $yearMax = date('Y', $transactionsAll[$i]->getVar('tra_date'));
-        }
-        //create filter depending on preferences
-        if (Constants::FILTER_PYEARLY == $period_type) {
-            $filterYearSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_FILTERBY_YEAR, 'filterYear', $filterYear);
-            $filterYearSelect->addOption(Constants::FILTER_TYPEALL, \_MA_WGSIMPLEACC_SHOW_ALL);
-            for ($i = $yearMin; $i <= $yearMax; $i++) {
-                $filterYearSelect->addOption($i, $i);
-            }
-            $filterYearSelect->addOption(\date('Y'), \date('Y')); //if no transactions available for current year
-            $filterYearSelect->setExtra('onchange="submit()"');
-            $form->addElement($filterYearSelect, true);
-        } else {
-            $filterType = new \XoopsFormRadio(\_MA_WGSIMPLEACC_FILTERTYPE, 'filterType', $filterType);
-            $filterType->addOption(Constants::FILTER_TYPEALL, \_MA_WGSIMPLEACC_SHOW_ALL);
-            $filterType->addOption(Constants::FILTER_TYPECUSTOM, \_MA_WGSIMPLEACC_SHOW_CUSTOM);
-            $form->addElement($filterType);
-            //linebreak
-            $form->addElement(new \XoopsFormHidden('linebreak', ''));
-            //select from/to
-            $selectFromToTray = new \XoopsFormElementTray(\_MA_WGSIMPLEACC_FILTERBY_PERIOD, '&nbsp;');
-            //select from
-            if (0 == $filterMonthFrom) {
-                $filterMonthFrom = $helper->getConfig('balance_period_from');
-            }
-            $filterMonthFromSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_FILTER_PERIODFROM, 'filterMonthFrom', $filterMonthFrom);
-            $filterMonthFromSelect->addOption(1, \_MI_WGSIMPLEACC_JANUARY);
-            $filterMonthFromSelect->addOption(2, \_MI_WGSIMPLEACC_FEBRUARY);
-            $filterMonthFromSelect->addOption(3, \_MI_WGSIMPLEACC_MARCH);
-            $filterMonthFromSelect->addOption(4, \_MI_WGSIMPLEACC_APRIL);
-            $filterMonthFromSelect->addOption(5, \_MI_WGSIMPLEACC_MAY);
-            $filterMonthFromSelect->addOption(6, \_MI_WGSIMPLEACC_JUNE);
-            $filterMonthFromSelect->addOption(7, \_MI_WGSIMPLEACC_JULY);
-            $filterMonthFromSelect->addOption(8, \_MI_WGSIMPLEACC_AUGUST);
-            $filterMonthFromSelect->addOption(9, \_MI_WGSIMPLEACC_SEPTEMBER);
-            $filterMonthFromSelect->addOption(10, \_MI_WGSIMPLEACC_OCTOBER);
-            $filterMonthFromSelect->addOption(11, \_MI_WGSIMPLEACC_NOVEMBER);
-            $filterMonthFromSelect->addOption(12, \_MI_WGSIMPLEACC_DECEMBER);
-            $selectFromToTray->addElement($filterMonthFromSelect);
-            $filterYearFromSelect = new \XoopsFormSelect('', 'filterYearFrom', $filterYearFrom);
-            for ($i = $yearMin; $i <= $yearMax; $i++) {
-                $filterYearFromSelect->addOption($i, $i);
-            }
-            $filterYearFromSelect->addOption(\date('Y'), \date('Y')); //if no transactions available for current year
-            $selectFromToTray->addElement($filterYearFromSelect);
-            //select to
-            if (0 == $filterMonthTo) {
-                $filterMonthTo = $helper->getConfig('balance_period_to');
-            }
-            $filterMonthToSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_FILTER_PERIODTO, 'filterMonthTo', $filterMonthTo);
-            $filterMonthToSelect->addOption(1, \_MI_WGSIMPLEACC_JANUARY);
-            $filterMonthToSelect->addOption(2, \_MI_WGSIMPLEACC_FEBRUARY);
-            $filterMonthToSelect->addOption(3, \_MI_WGSIMPLEACC_MARCH);
-            $filterMonthToSelect->addOption(4, \_MI_WGSIMPLEACC_APRIL);
-            $filterMonthToSelect->addOption(5, \_MI_WGSIMPLEACC_MAY);
-            $filterMonthToSelect->addOption(6, \_MI_WGSIMPLEACC_JUNE);
-            $filterMonthToSelect->addOption(7, \_MI_WGSIMPLEACC_JULY);
-            $filterMonthToSelect->addOption(8, \_MI_WGSIMPLEACC_AUGUST);
-            $filterMonthToSelect->addOption(9, \_MI_WGSIMPLEACC_SEPTEMBER);
-            $filterMonthToSelect->addOption(10, \_MI_WGSIMPLEACC_OCTOBER);
-            $filterMonthToSelect->addOption(11, \_MI_WGSIMPLEACC_NOVEMBER);
-            $filterMonthToSelect->addOption(12, \_MI_WGSIMPLEACC_DECEMBER);
-            $selectFromToTray->addElement($filterMonthToSelect);
-            $filterYearToSelect = new \XoopsFormSelect('', 'filterYearTo', $filterYearTo);
-            for ($i = $yearMin; $i <= $yearMax; $i++) {
-                $filterYearToSelect->addOption($i, $i);
-            }
-            $filterYearToSelect->addOption(\date('Y'), \date('Y')); //if no transactions available for current year
-            $selectFromToTray->addElement($filterYearToSelect);
-            $form->addElement($selectFromToTray);
-            //linebreak
-            $form->addElement(new \XoopsFormHidden('linebreak', ''));
-            //button
-            $btnApply = new \XoopsFormButton('', 'submit', \_MA_WGSIMPLEACC_FILTER_APPLY, 'submit');
-            $form->addElement($btnApply);
-        }
+        //linebreak
+        $form->addElement(new \XoopsFormHidden('linebreak', ''));
+        //Form  Tray with select date from/to
+        $selectFromToTray = new \XoopsFormElementTray(\_MA_WGSIMPLEACC_FILTERBY_PERIOD . ': ', '&nbsp;');
+        $selectFromToTray->addElement(new \XoopsFormTextDateSelect(\_MA_WGSIMPLEACC_FILTER_PERIODFROM, 'filterFrom', '', $filterFrom));
+        $selectFromToTray->addElement(new \XoopsFormTextDateSelect(\_MA_WGSIMPLEACC_FILTER_PERIODTO, 'filterTo', '', $filterTo));
+        $form->addElement($selectFromToTray);
+        //linebreak
+        $form->addElement(new \XoopsFormHidden('linebreak', ''));
+        //button
+        $btnApply = new \XoopsFormButton('', 'submit', \_MA_WGSIMPLEACC_FILTER_APPLY, 'submit');
+        $form->addElement($btnApply);
         $form->addElement(new \XoopsFormHidden('op', $op));
 
         return $form;

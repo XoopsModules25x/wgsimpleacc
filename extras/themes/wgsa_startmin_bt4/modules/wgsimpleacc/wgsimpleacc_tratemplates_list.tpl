@@ -1,11 +1,25 @@
 <tr id='tplId_<{$template.ttpl_id}>'>
     <td><{$template.name}></td>
     <td><{$template.desc}></td>
-    <td><{$template.allid}></td>
-    <td><{$template.accid}> <{$template.accname}></td>
-    <td><{$template.asid}></td>
+    <td>
+        <{$template.allid}>
+        <img class="wgsa-img-online wgsa-img-online-small" src="<{$smarty.const.WGSIMPLEACC_ICONS_URL}>/32/<{$template.allonline}>.png" title="<{$template.allonlinetext}>" alt="<{$template.allonlinetext}>">
+    </td>
+    <td>
+        <{$template.accid}> <{$template.accname}>
+        <img class="wgsa-img-online wgsa-img-online-small" src="<{$smarty.const.WGSIMPLEACC_ICONS_URL}>/32/<{$template.acconline}>.png" title="<{$template.acconlinetext}>" alt="<{$template.acconlinetext}>">
+    </td>
+    <td>
+        <{$template.asid}>
+        <img class="wgsa-img-online wgsa-img-online-small" src="<{$smarty.const.WGSIMPLEACC_ICONS_URL}>/32/<{$template.asonline}>.png" title="<{$template.asonlinetext}>" alt="<{$template.asonlinetext}>">
+    </td>
     <{if $useClients|default:''}>
-        <td><{$template.cliid}></td>
+        <td>
+            <{if $template.ttpl_cliid|default:0 > 0}>
+                <{$template.cliid}>
+                <img class="wgsa-img-online wgsa-img-online-small" src="<{$smarty.const.WGSIMPLEACC_ICONS_URL}>/32/<{$template.clionline}>.png" title="<{$template.clionlinetext}>" alt="<{$template.clionlinetext}>">
+            <{/if}>
+        </td>
     <{/if}>
     <td><{$template.class_text}></td>
     <td><{$template.amountin}></td>

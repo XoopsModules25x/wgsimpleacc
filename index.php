@@ -30,17 +30,12 @@ require_once \XOOPS_ROOT_PATH . '/header.php';
 $GLOBALS['xoopsTpl']->assign('template_sub', 'db:wgsimpleacc_index.tpl');
 require __DIR__ . '/navbar.php';
 
-$op     = Request::getCmd('op', 'list');
-$allPid = Request::getInt('all_pid');
-$level  = Request::getInt('level', 1);
-$filterYear      = date('Y');
-$filterMonthFrom = $helper->getConfig('balance_period_from');
-$filterYearFrom  = date('Y');
-$filterMonthTo   = $helper->getConfig('balance_period_from');
-$filterYearTo    = date('Y');
+$op       = Request::getCmd('op', 'list');
+$allPid   = Request::getInt('all_pid');
+$level    = Request::getInt('level', 1);
+$dateFrom = \DateTime::createFromFormat('Y-m-d', \date('Y') . '-1-1')->getTimestamp();
+$dateTo   = \time();
 $filterType      = Request::getInt('filterType', Constants::FILTER_TYPEALL);
-
-$period_type = $helper->getConfig('balance_period');
 
 // Permissions
 if (!$permissionsHandler->getPermGlobalView()) {
@@ -73,28 +68,6 @@ $GLOBALS['xoopsTpl']->assign('indexAssetsPieTotal', $indexAssetsPieTotal);
 //create filter for
 // - transaction hbar chart
 // - assets pie chart
-$tradateFrom = 0;
-$tradateTo = \time();
-if ($indexAssetsPie || $indexTrahbar || $indexTraInExSums || $indexAssetsPie) {
-    if (Constants::FILTER_PYEARLY == $period_type) {
-        //filter data based on form select year
-        if ($filterYear > Constants::FILTER_TYPEALL) {
-            $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYear-1-1");
-            $tradateFrom = $dtime->getTimestamp();
-            $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYear-12-31");
-            $tradateTo = $dtime->getTimestamp();
-        }
-    } else {
-        //filter data based on form select month and year from/to
-        if ($filterType > Constants::FILTER_TYPEALL) {
-            $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYearFrom-$filterMonthFrom-1");
-            $tradateFrom = $dtime->getTimestamp();
-            $last = \DateTime::createFromFormat('Y-m-d', "$filterYearTo-$filterMonthTo-1")->format('Y-m-t');
-            $dtime = \DateTime::createFromFormat('Y-m-d', $last);
-            $tradateTo = $dtime->getTimestamp();
-        }
-    }
-}
 
 if ($indexTrahbar || $indexTraInExSums || $indexAssetsPie) {
 //******************************
@@ -116,8 +89,6 @@ if ($indexTrahbar || $indexTraInExSums || $indexAssetsPie) {
         $crAllocations->setOrder('ASC');
         $allocationsCount = $allocationsHandler->getCount($crAllocations);
         $allocationsAll = $allocationsHandler->getAll($crAllocations);
-        //$transactions_datain = '';
-        //$transactions_dataout = '';
         $transactions_datain1 = '';
         $transactions_datain2 = '';
         $transactions_dataout1 = '';
@@ -126,9 +97,6 @@ if ($indexTrahbar || $indexTraInExSums || $indexAssetsPie) {
         $transactions_total_in = 0;
         $transactions_total_out = 0;
         $tra_allocs_list = [];
-        $strFilter = "&amp;filterYear=$filterYear&amp;filterType=$filterType";
-        $strFilter .= "&amp;filterMonthFrom=$filterMonthFrom&amp;filterYearFrom=$filterYearFrom";
-        $strFilter .= "&amp;filterMonthTo=$filterMonthTo&amp;filterYearTo=$filterYearTo";
         $allPidName = '';
         if ($allocationsCount > 0) {
             if ($allPid > 0) {
@@ -141,8 +109,8 @@ if ($indexTrahbar || $indexTraInExSums || $indexAssetsPie) {
                 $sumAmountout2 = 0; //submitted
                 $crTransactions = new \CriteriaCompo();
                 $crTransactions->add(new \Criteria('tra_allid', $allPid));
-                $crTransactions->add(new \Criteria('tra_date', $tradateFrom, '>='));
-                $crTransactions->add(new \Criteria('tra_date', $tradateTo, '<='));
+                $crTransactions->add(new \Criteria('tra_date', $dateFrom, '>='));
+                $crTransactions->add(new \Criteria('tra_date', $dateTo, '<='));
                 $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_SUBMITTED, '>='));
                 $transactionsAll = $transactionsHandler->getAll($crTransactions);
                 foreach (\array_keys($transactionsAll) as $i) {
@@ -158,8 +126,6 @@ if ($indexTrahbar || $indexTraInExSums || $indexAssetsPie) {
                 }
 
                 if ((float)$sumAmountin1 > 0 || (float)$sumAmountout1 > 0 || (float)$sumAmountin2 > 0 || (float)$sumAmountout2 > 0) {
-                    //$allocations_list[] = ['all_id' => $allId, 'all_name' => $allPidName];
-                    //$tra_allocs_list[] = ['all_id' => $allId, 'all_name' => $allPidName, 'allSubs' => \count($subAllIds), 'href' => $href];
                     $transactions_datain1 .= $sumAmountin1 . ',';
                     $transactions_datain2 .= $sumAmountin2 . ',';
                     $transactions_dataout1 .= $sumAmountout1 . ',';
@@ -191,7 +157,6 @@ if ($indexTrahbar || $indexTraInExSums || $indexAssetsPie) {
             foreach (\array_keys($allocationsAll) as $i) {
                 $allId = $allocationsAll[$i]->getVar('all_id');
                 $allName = $allocationsAll[$i]->getVar('all_name');
-                //$allocations_list[] = ['all_id' => $allId, 'all_name' => $allName];
                 $transactions_labels .= "'" . $allName . "',";
                 $sumAmountin1 = 0; //approved
                 $sumAmountout1 = 0; //approved
@@ -201,8 +166,8 @@ if ($indexTrahbar || $indexTraInExSums || $indexAssetsPie) {
                 foreach ($subAllIds as $subAllId) {
                     $crTransactions = new \CriteriaCompo();
                     $crTransactions->add(new \Criteria('tra_allid', $subAllId));
-                    $crTransactions->add(new \Criteria('tra_date', $tradateFrom, '>='));
-                    $crTransactions->add(new \Criteria('tra_date', $tradateTo, '<='));
+                    $crTransactions->add(new \Criteria('tra_date', $dateFrom, '>='));
+                    $crTransactions->add(new \Criteria('tra_date', $dateTo, '<='));
                     $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_SUBMITTED, '>='));
                     $transactionsCount = $transactionsHandler->getCount($crTransactions);
                     $transactionsAll = $transactionsHandler->getAll($crTransactions);
@@ -236,8 +201,8 @@ if ($indexTrahbar || $indexTraInExSums || $indexAssetsPie) {
             $headerTra .= "'" . $allPidName . "'<br>";
             $headerTraSums .= "'" . $allPidName . "'<br>";
         }
-        $headerTra .= \_MA_WGSIMPLEACC_TRANSACTIONS_OVERVIEW . ': ' . $filterYear;
-        $headerTraSums .= \_MA_WGSIMPLEACC_CHART_TRAINEXSUMS . ': ' . $filterYear;
+        $headerTra .= \_MA_WGSIMPLEACC_TRANSACTIONS_OVERVIEW . ': ' . \date('Y', $dateFrom);
+        $headerTraSums .= \_MA_WGSIMPLEACC_CHART_TRAINEXSUMS . ': ' . \date('Y', $dateFrom);
         $GLOBALS['xoopsTpl']->assign('header_transactions', $headerTra);
         $GLOBALS['xoopsTpl']->assign('header_transactions_sums', $headerTraSums);
         $GLOBALS['xoopsTpl']->assign('tra_allocs_list', $tra_allocs_list);
@@ -263,10 +228,10 @@ if ($indexAssetsPie) {
 //**************************
 // handle assets chart total
 //**************************
-    $assetsCurrent = $assetsHandler->getAssetsValues($tradateFrom, $tradateTo, false, true);
+    $assetsCurrent = $assetsHandler->getAssetsValues($dateFrom, $dateTo, false, true);
     $assetsCount = \count($assetsCurrent);
     if ($assetsCount > 0) {
-        $GLOBALS['xoopsTpl']->assign('assets_header', \_MA_WGSIMPLEACC_ASSETS_CURRENT  . ': ' . $filterYear);
+        $GLOBALS['xoopsTpl']->assign('assets_header', \_MA_WGSIMPLEACC_ASSETS_CURRENT  . ': ' . \date('Y', $dateFrom));
         $GLOBALS['xoopsTpl']->assign('assetsCount', $assetsCount);
         $assets_data = '';
         $assets_labels = '';
@@ -274,7 +239,7 @@ if ($indexAssetsPie) {
         $pcolors = [];
         $assetList = [];
         foreach ($assetsCurrent as $asset) {
-            if (1 == (int)$asset['iecalc']) {
+            if (1 === (int)$asset['iecalc']) {
                 $amountVal = $asset['amount_end_val'] - $asset['amount_start_val'];
                 $assets_data .= $amountVal . ',';
                 $assets_labels .= "'" . $asset['name'] . "',";
@@ -308,7 +273,7 @@ if ($indexAssetsPieTotal) {
         $pcolors = [];
         $assetList = [];
         foreach ($assetsCurrent as $asset) {
-            if (1 == (int)$asset['iecalc'] && (float)$asset['amount_val'] > 0) {
+            if (1 === (int)$asset['iecalc'] && (float)$asset['amount_val'] > 0) {
                 $assets_data .= $asset['amount_val'] . ',';
                 $assets_labels .= "'" . $asset['name'] . "',";
                 $assets_total += $asset['amount_val'];
@@ -348,7 +313,6 @@ function showLogin() {
     $block['lang_login']       = _LOGIN;
     $block['lang_lostpass']    = _MB_SYSTEM_LPASS;
     $block['lang_registernow'] = _MB_SYSTEM_RNOW;
-    //$block['lang_rememberme'] = _MB_SYSTEM_REMEMBERME;
     if ($xoopsConfig['use_ssl'] == 1 && $xoopsConfig['sslloginlink'] != '') {
         $block['sslloginlink'] = "<a href=\"javascript:openWithSelfMain('" . $xoopsConfig['sslloginlink'] . "', 'ssllogin', 300, 200);\">" . _MB_SYSTEM_SECURE . '</a>';
     } elseif ($GLOBALS['xoopsConfig']['usercookie']) {

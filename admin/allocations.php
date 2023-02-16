@@ -50,7 +50,7 @@ switch ($op) {
             foreach (\array_keys($allocationsAll) as $i) {
                 $allocation = $allocationsAll[$i]->getValuesAllocations();
                 // get accounts defined for this allocation
-                $arrAccounts = \unserialize($allocationsAll[$i]->getVar('all_accounts'));
+                $arrAccounts = \unserialize($allocationsAll[$i]->getVar('all_accounts'), ['allowed_classes' => false]);
                 $allAccounts = [];
                 foreach ($arrAccounts as $account) {
                     $accountsObj = $accountsHandler->get($account);
