@@ -35,20 +35,22 @@ if (!$permissionsHandler->getPermGlobalView()) {
     \redirect_header('index.php', 0);
 }
 
-$op     = Request::getCmd('op', 'list');
-$allId  = Request::getInt('all_id');
-$allPid = Request::getInt('all_pid');
-$accId  = Request::getInt('acc_id');
-$accPid = Request::getInt('acc_pid');
-$level  = Request::getInt('level', 1);
-$filterYear      = Request::getInt('filterYear', date('Y'));
-$filterMonthFrom = Request::getInt('filterMonthFrom');
-$filterYearFrom  = Request::getInt('filterYearFrom', date('Y'));
-$filterMonthTo   = Request::getInt('filterMonthTo');
-$filterYearTo    = Request::getInt('filterYearTo', date('Y'));
-$filterType      = Request::getInt('filterType', Constants::FILTER_TYPEALL);
-
-$period_type = $helper->getConfig('balance_period');
+$op         = Request::getCmd('op', 'list');
+$allId      = Request::getInt('all_id');
+$allPid     = Request::getInt('all_pid');
+$accId      = Request::getInt('acc_id');
+$accPid     = Request::getInt('acc_pid');
+$level      = Request::getInt('level', 1);
+$dateFrom   = Request::getInt('dateFrom', \DateTime::createFromFormat('Y-m-d', \date('Y') . '-1-1')->getTimestamp());
+$dateTo     = Request::getInt('dateTo',\time());
+$dateFrom   = Request::getInt('dateFrom', \DateTime::createFromFormat('Y-m-d', \date('Y') . '-1-1')->getTimestamp());
+if (Request::hasVar('filterFrom')) {
+    $dateFrom = \DateTime::createFromFormat(\_SHORTDATESTRING, Request::getString('filterFrom'))->getTimestamp();
+}
+$dateTo = Request::getInt('dateTo', \time());
+if (Request::hasVar('filterTo')) {
+    $dateTo = \DateTime::createFromFormat(\_SHORTDATESTRING, Request::getString('filterTo'))->getTimestamp();
+}
 
 $keywords = [];
 
@@ -60,16 +62,6 @@ $colors = Utility::getColors();
 $GLOBALS['xoopsTpl']->assign('colors', $colors);
 
 switch ($op) {
-    case 'test':
-        $GLOBALS['xoTheme']->addStylesheet(\WGSIMPLEACC_URL . '/assets/css/nestedcheckboxes.css', null);
-        $paramsArr = [];
-        $statisticshandler = new XoopsModules\Wgsimpleacc\StatisticsHandler;
-        $formFilter = $statisticshandler::getFormStatisticsSelect($paramsArr);
-        $GLOBALS['xoopsTpl']->assign('formFilter', $formFilter->render());
-
-
-
-        break;
     case 'allocations':
         $GLOBALS['xoopsTpl']->assign('header_allocs_bar', \_MA_WGSIMPLEACC_ALLOCATIONS_BARCHART);
         //*************************
@@ -97,9 +89,7 @@ switch ($op) {
             $transactions_total_in = 0;
             $transactions_total_out = 0;
             $tra_allocs_list = [];
-            $strFilter = "&amp;filterYear=$filterYear&amp;filterType=$filterType";
-            $strFilter .= "&amp;filterMonthFrom=$filterMonthFrom&amp;filterYearFrom=$filterYearFrom";
-            $strFilter .= "&amp;filterMonthTo=$filterMonthTo&amp;filterYearTo=$filterYearTo";
+            $strFilter = "&amp;dateFrom=$dateFrom&amp;dateTo=$dateTo";
             if ($allocationsCount > 0) {
                 if ($allPid > 0) {
                     //read current allocations
@@ -108,31 +98,10 @@ switch ($op) {
                     $sumAmountin = 0;
                     $sumAmountout = 0;
                     //create filter
-                    $tradateFrom = 0;
-                    $tradateTo = \time();
-                    if (Constants::FILTER_PYEARLY == $period_type) {
-                        //filter data based on form select year
-                        if ($filterYear > Constants::FILTER_TYPEALL) {
-                            $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYear-1-1");
-                            $tradateFrom = $dtime->getTimestamp();
-                            $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYear-12-31");
-                            $tradateTo = $dtime->getTimestamp();
-                        }
-                    } else {
-                        //filter data based on form select month and year from/to
-                        if ($filterType > Constants::FILTER_TYPEALL) {
-                            $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYearFrom-$filterMonthFrom-1");
-                            $tradateFrom = $dtime->getTimestamp();
-                            $last = \DateTime::createFromFormat('Y-m-d', "$filterYearTo-$filterMonthTo-1")->format('Y-m-t');
-                            $dtime = \DateTime::createFromFormat('Y-m-d', $last);
-                            $tradateTo = $dtime->getTimestamp();
-                        }
-                    }
-
                     $crTransactions = new \CriteriaCompo();
                     $crTransactions->add(new \Criteria('tra_allid', $allPid));
-                    $crTransactions->add(new \Criteria('tra_date', $tradateFrom, '>='));
-                    $crTransactions->add(new \Criteria('tra_date', $tradateTo, '<='));
+                    $crTransactions->add(new \Criteria('tra_date', $dateFrom, '>='));
+                    $crTransactions->add(new \Criteria('tra_date', $dateTo, '<='));
                     $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_SUBMITTED, '>'));
                     $transactionsAll   = $transactionsHandler->getAll($crTransactions);
                     foreach (\array_keys($transactionsAll) as $i) {
@@ -180,42 +149,21 @@ switch ($op) {
                     $sumAmountin  = 0;
                     $sumAmountout = 0;
                     //create filter
-                    $tradateFrom = 0;
-                    $tradateTo = \time();
-                    if (Constants::FILTER_PYEARLY == $period_type) {
-                        //filter data based on form select year
-                        if ($filterYear > Constants::FILTER_TYPEALL) {
-                            $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYear-1-1");
-                            $tradateFrom = $dtime->getTimestamp();
-                            $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYear-12-31");
-                            $tradateTo = $dtime->getTimestamp();
-                        }
-                    } else {
-                        //filter data based on form select month and year from/to
-                        if ($filterType > Constants::FILTER_TYPEALL) {
-                            $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYearFrom-$filterMonthFrom-1");
-                            $tradateFrom = $dtime->getTimestamp();
-                            $last = \DateTime::createFromFormat('Y-m-d', "$filterYearTo-$filterMonthTo-1")->format('Y-m-t');
-                            $dtime = \DateTime::createFromFormat('Y-m-d', $last);
-                            $tradateTo= $dtime->getTimestamp();
-                        }
-                    }
-
                     $subAllIds = $allocationsHandler->getSubsOfAllocations($allId);
                     foreach ($subAllIds as $subAllId) {
                         $crTransactions = new \CriteriaCompo();
                         $crTransactions->add(new \Criteria('tra_allid', $subAllId));
-                        $crTransactions->add(new \Criteria('tra_date', $tradateFrom, '>='));
-                        $crTransactions->add(new \Criteria('tra_date', $tradateTo, '<='));
+                        $crTransactions->add(new \Criteria('tra_date', $dateFrom, '>='));
+                        $crTransactions->add(new \Criteria('tra_date', $dateTo, '<='));
                         $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_SUBMITTED, '>'));
                         $transactionsCount = $transactionsHandler->getCount($crTransactions);
-                        $transactionsAll   = $transactionsHandler->getAll($crTransactions);
                         if ($transactionsCount > 0) {
-                            foreach (\array_keys($transactionsAll) as $i) {
-                                $sumAmountin += $transactionsAll[$i]->getVar('tra_amountin');
-                                $sumAmountout += $transactionsAll[$i]->getVar('tra_amountout');
-                                $transactions_total_in += $transactionsAll[$i]->getVar('tra_amountin');
-                                $transactions_total_out += $transactionsAll[$i]->getVar('tra_amountout');
+                            $transactionsAll   = $transactionsHandler->getAll($crTransactions);
+                            foreach (\array_keys($transactionsAll) as $j) {
+                                $sumAmountin += $transactionsAll[$j]->getVar('tra_amountin');
+                                $sumAmountout += $transactionsAll[$j]->getVar('tra_amountout');
+                                $transactions_total_in += $transactionsAll[$j]->getVar('tra_amountin');
+                                $transactions_total_out += $transactionsAll[$j]->getVar('tra_amountout');
                             }
                         }
                         unset($crTransactions);
@@ -242,7 +190,7 @@ switch ($op) {
 
         //get form filter
         if (\count($tra_allocs_list) > 0) {
-            $formFilter = Utility::getFormFilterPeriod($filterYear, $filterType, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, 'allocations');
+            $formFilter = Utility::getFormFilterPeriod($dateFrom, $dateTo, 'allocations');
             $GLOBALS['xoopsTpl']->assign('formTraFilter', $formFilter->render());
         }
 
@@ -260,10 +208,11 @@ switch ($op) {
         $assetsCount = \count($assetsCurrent);
         if ($assetsCount > 0) {
             $GLOBALS['xoopsTpl']->assign('assetsCount', $assetsCount);
-            $assets_data = '';
+            $assets_data   = '';
             $assets_labels = '';
-            $assets_total = 0;
-            $pcolors = [];
+            $assets_total  = 0;
+            $pcolors       = [];
+            $assetList     = [];
             foreach ($assetsCurrent as $asset) {
                 $assets_data .= $asset['amount_val'] . ',';
                 $assets_labels .= "'" . $asset['name'] . "',";
@@ -415,7 +364,7 @@ switch ($op) {
         if ($accountsCount > 0) {
             $accountsAll   = $accountsHandler->getAll($crAccounts);
             foreach (\array_keys($accountsAll) as $a) {
-                if (1 == $level) {
+                if (1 === $level) {
                     $accTopLevel = $accountsHandler->getTopLevelAccount($a);
                     $dataAccounts[$accTopLevel['id']]['label'] = $accTopLevel['name'];
                     $dataAccounts[$accTopLevel['id']]['color'] = Utility::getColorName($colors, $accTopLevel['color']);
@@ -424,7 +373,7 @@ switch ($op) {
                     $dataAccounts[$accountsAll[$a]->getVar('acc_id')]['color'] = Utility::getColorName($colors, $accountsAll[$a]->getVar('acc_color'));
                 }
                 for ($i = $minYearFrom; $i <= date('Y'); $i++) {
-                    if (1 == $level) {
+                    if (1 === $level) {
                         $dataAccounts[$accTopLevel['id']]['values'][$i] = 0;
                     } else {
                         $dataAccounts[$accountsAll[$a]->getVar('acc_id')]['values'][$i] = 0;
@@ -443,7 +392,7 @@ switch ($op) {
             foreach (\array_keys($transactionsAll) as $i) {
                 $period = date('Y', $transactionsAll[$i]->getVar('tra_date'));
                 $sum = $transactionsAll[$i]->getVar('tra_amountin') - $transactionsAll[$i]->getVar('tra_amountout');
-                if (1 == $level) {
+                if (1 === $level) {
                     $accTopLevel = $accountsHandler->getTopLevelAccount($transactionsAll[$i]->getVar('tra_accid'));
                     $dataAccounts[$accTopLevel['id']]['values'][$period] += $sum;
                 } else {
@@ -491,17 +440,15 @@ switch ($op) {
             $crAccounts->setOrder('ASC');
             $accountsCount = $accountsHandler->getCount($crAccounts);
             $GLOBALS['xoopsTpl']->assign('accountsBarCount', $accountsCount);
-            $accountsAll   = $accountsHandler->getAll($crAccounts);
             $transactions_datain = '';
             $transactions_dataout = '';
             $transactions_labels = '';
             $transactions_total_in = 0;
             $transactions_total_out = 0;
             $tra_accounts_list = [];
-            $strFilter = "&amp;filterYear=$filterYear&amp;filterType=$filterType";
-            $strFilter .= "&amp;filterMonthFrom=$filterMonthFrom&amp;filterYearFrom=$filterYearFrom";
-            $strFilter .= "&amp;filterMonthTo=$filterMonthTo&amp;filterYearTo=$filterYearTo";
+            $strFilter = "&amp;dateFrom=$dateFrom&amp;dateTo=$dateTo";
             if ($accountsCount > 0) {
+                $accountsAll   = $accountsHandler->getAll($crAccounts);
                 if ($accPid > 0) {
                     //read current accounts
                     $accountCurrObj = $accountsHandler->get($accPid);
@@ -509,31 +456,10 @@ switch ($op) {
                     $sumAmountin = 0;
                     $sumAmountout = 0;
                     //create filter
-                    $tradateFrom = 0;
-                    $tradateTo = \time();
-                    if (Constants::FILTER_PYEARLY == $period_type) {
-                        //filter data based on form select year
-                        if ($filterYear > Constants::FILTER_TYPEALL) {
-                            $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYear-1-1");
-                            $tradateFrom = $dtime->getTimestamp();
-                            $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYear-12-31");
-                            $tradateTo = $dtime->getTimestamp();
-                        }
-                    } else {
-                        //filter data based on form select month and year from/to
-                        if ($filterType > Constants::FILTER_TYPEALL) {
-                            $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYearFrom-$filterMonthFrom-1");
-                            $tradateFrom = $dtime->getTimestamp();
-                            $last = \DateTime::createFromFormat('Y-m-d', "$filterYearTo-$filterMonthTo-1")->format('Y-m-t');
-                            $dtime = \DateTime::createFromFormat('Y-m-d', $last);
-                            $tradateTo = $dtime->getTimestamp();
-                        }
-                    }
-
                     $crTransactions = new \CriteriaCompo();
                     $crTransactions->add(new \Criteria('tra_accid', $accPid));
-                    $crTransactions->add(new \Criteria('tra_date', $tradateFrom, '>='));
-                    $crTransactions->add(new \Criteria('tra_date', $tradateTo, '<='));
+                    $crTransactions->add(new \Criteria('tra_date', $dateFrom, '>='));
+                    $crTransactions->add(new \Criteria('tra_date', $dateTo, '<='));
                     $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_SUBMITTED, '>'));
                     $transactionsAll   = $transactionsHandler->getAll($crTransactions);
                     foreach (\array_keys($transactionsAll) as $i) {
@@ -581,33 +507,12 @@ switch ($op) {
                     $sumAmountin  = 0;
                     $sumAmountout = 0;
                     //create filter
-                    $tradateFrom = 0;
-                    $tradateTo = \time();
-                    if (Constants::FILTER_PYEARLY == $period_type) {
-                        //filter data based on form select year
-                        if ($filterYear > Constants::FILTER_TYPEALL) {
-                            $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYear-1-1");
-                            $tradateFrom = $dtime->getTimestamp();
-                            $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYear-12-31");
-                            $tradateTo = $dtime->getTimestamp();
-                        }
-                    } else {
-                        //filter data based on form select month and year from/to
-                        if ($filterType > Constants::FILTER_TYPEALL) {
-                            $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYearFrom-$filterMonthFrom-1");
-                            $tradateFrom = $dtime->getTimestamp();
-                            $last = \DateTime::createFromFormat('Y-m-d', "$filterYearTo-$filterMonthTo-1")->format('Y-m-t');
-                            $dtime = \DateTime::createFromFormat('Y-m-d', $last);
-                            $tradateTo= $dtime->getTimestamp();
-                        }
-                    }
-
                     $subAccIds = $accountsHandler->getSubsOfAccounts($accId);
                     foreach ($subAccIds as $subAccId) {
                         $crTransactions = new \CriteriaCompo();
                         $crTransactions->add(new \Criteria('tra_accid', $subAccId));
-                        $crTransactions->add(new \Criteria('tra_date', $tradateFrom, '>='));
-                        $crTransactions->add(new \Criteria('tra_date', $tradateTo, '<='));
+                        $crTransactions->add(new \Criteria('tra_date', $dateFrom, '>='));
+                        $crTransactions->add(new \Criteria('tra_date', $dateTo, '<='));
                         $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_SUBMITTED, '>'));
                         $transactionsCount = $transactionsHandler->getCount($crTransactions);
                         $transactionsAll   = $transactionsHandler->getAll($crTransactions);
@@ -643,7 +548,7 @@ switch ($op) {
 
         //get form filter year
         if (\count($tra_accounts_list) > 0) {
-            $formFilter = Utility::getFormFilterPeriod($filterYear, $filterType, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, 'hbar_accounts');
+            $formFilter = Utility::getFormFilterPeriod($dateFrom, $dateTo, 'hbar_accounts');
             $GLOBALS['xoopsTpl']->assign('formTraFilter', $formFilter->render());
         }
 

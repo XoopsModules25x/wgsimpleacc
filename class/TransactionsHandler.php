@@ -139,7 +139,6 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
     public static function getFormFilter($filterFrom, $filterTo, $allId, $asId, $accId, $cliId, $op, $allSubs, $traStatus, $traDesc, $filterInvalid, $limit)
     {
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
-        $period_type = $helper->getConfig('balance_period');
         $permissionsHandler = $helper->getHandler('Permissions');
         $permApprove = $permissionsHandler->getPermTransactionsApprove();
         $action = $_SERVER['REQUEST_URI'];

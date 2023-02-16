@@ -50,7 +50,6 @@ $asId      = Request::getInt('as_id');
 $cliId     = Request::getInt('cli_id');
 $outType   = Request::getString('output_type', 'none');
 
-$period_type = $helper->getConfig('balance_period');
 $GLOBALS['xoopsTpl']->assign('displayfilter', 1);
 
 switch ($op) {
