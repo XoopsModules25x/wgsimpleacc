@@ -211,3 +211,11 @@ ul.menu > li + li:before {
 	width:100% !important;
 }
 
+/*resize calendar button*/
+#formFilter .input-group .btn {
+	font-size:18px !important;
+	height:34px;
+	padding:0 12px;
+	margin-top:5px;
+}
+

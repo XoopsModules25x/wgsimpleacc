@@ -16,6 +16,7 @@
  - added sums to transaction list (goffy)
  - display combinations accounts/allocations (goffy)
  - new permission "admin clients" (goffy)
+ - rebuilt filter transactions (goffy)
 
 ==============================================================
 1.3.0 RC1 [2022/02/23]

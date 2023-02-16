@@ -1,10 +1,3 @@
-check auf online bei outtemplate
-
-Filter Jahr durch von/bis ersetzen
-
-Einträge bei Liste Alloc deaktivieren wenn keine Accounts verfügbar
-
-all_accounts anpassen wenn account offline gesetzt wird
 
 https://www.jqueryscript.net/other/dashboard-starter-template-bootstrap.html
 

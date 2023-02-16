@@ -153,36 +153,9 @@ switch ($op) {
         break;
     case 'transactions';
         $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/js/forms.js');
-        $filterYear      = Request::getInt('filterYear');
-        $filterMonthFrom = Request::getInt('filterMonthFrom');
-        $filterYearFrom  = Request::getInt('filterYearFrom');
-        $filterMonthTo   = Request::getInt('filterMonthTo');
-        $filterYearTo    = Request::getInt('filterYearTo', date('Y'));
-        $traStatus       = Request::getArray('tra_status');
-        $traDesc         = Request::getString('tra_desc');
-        $filterInvalid   = Request::getInt('filterInvalid');
-        //get first and last year
-        $transactionsHandler = $helper->getHandler('Transactions');
-        $yearMin = date('Y');
-        $yearMax = date('Y');
-        $crTransactions = new \CriteriaCompo();
-        $crTransactions->setSort('tra_date');
-        $crTransactions->setOrder('ASC');
-        $crTransactions->setStart();
-        $crTransactions->setLimit(1);
-        $transactionsAll = $transactionsHandler->getAll($crTransactions);
-        foreach (\array_keys($transactionsAll) as $i) {
-            $yearMin = date('Y', $transactionsAll[$i]->getVar('tra_date'));
-        }
-        $crTransactions->setSort('tra_date');
-        $crTransactions->setOrder('DESC');
-        $crTransactions->setStart();
-        $crTransactions->setLimit(1);
-        $transactionsAll = $transactionsHandler->getAll($crTransactions);
-        foreach (\array_keys($transactionsAll) as $i) {
-            $yearMax = date('Y', $transactionsAll[$i]->getVar('tra_date'));
-        }
-        $formFilter = $transactionsHandler::getFormFilter($allId, $filterYear, $filterMonthFrom, $filterYearFrom, $filterMonthTo, $filterYearTo, $yearMin, $yearMax, $asId, $accId, $cliId, 'tra_output', $allSubs, $traStatus, $traDesc, $filterInvalid, $limit);
+        $dateFrom   = \time() - 60*60*24*365;
+        $dateTo     = \time();
+        $formFilter = $transactionsHandler::getFormFilter($dateFrom, $dateTo, 0, 0, 0, 0, 'tra_output', 0, [], '', 0, 0);
         $GLOBALS['xoopsTpl']->assign('formFilter', $formFilter->render());
 
         // Breadcrumbs
@@ -206,30 +179,13 @@ switch ($op) {
 
                 // Add data
                 $crTransactions = new \CriteriaCompo();
-                $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_DELETED, '>'));
                 if ($traId > 0) {
                     $crTransactions->add(new \Criteria('tra_id', $traId));
                 } else {
-                    $tradateFrom = 0;
-                    $tradateTo = \time();
-                    if (Constants::FILTER_PYEARLY == $period_type) {
-                        //filter data based on form select year
-                        if ($filterYear > Constants::FILTER_TYPEALL) {
-                            $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYear-1-1");
-                            $tradateFrom = $dtime->getTimestamp();
-                            $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYear-12-31");
-                            $tradateTo = $dtime->getTimestamp();
-                        }
-                    } else {
-                        //filter data based on form select month and year from/to
-                        $dtime = \DateTime::createFromFormat('Y-m-d', "$filterYearFrom-$filterMonthFrom-1");
-                        $tradateFrom = $dtime->getTimestamp();
-                        $last = \DateTime::createFromFormat('Y-m-d', "$filterYearTo-$filterMonthTo-1")->format('Y-m-t');
-                        $dtime = \DateTime::createFromFormat('Y-m-d', $last);
-                        $tradateTo = $dtime->getTimestamp();
-                    }
-                    $crTransactions->add(new \Criteria('tra_date', $tradateFrom, '>='));
-                    $crTransactions->add(new \Criteria('tra_date', $tradateTo, '<='));
+                    $dateFrom = \DateTime::createFromFormat(\_SHORTDATESTRING, Request::getString('filterFrom'))->getTimestamp();
+                    $dateTo = \DateTime::createFromFormat(\_SHORTDATESTRING, Request::getString('filterTo'))->getTimestamp();
+                    $crTransactions->add(new \Criteria('tra_date', $dateFrom, '>='));
+                    $crTransactions->add(new \Criteria('tra_date', $dateTo, '<='));
                 }
                 if ($allId > 0) {
                     if ($allSubs) {
@@ -249,6 +205,8 @@ switch ($op) {
                 if (\count($traStatus) > 0) {
                     $critStatus = '(' . \implode(',', $traStatus) . ')';
                     $crTransactions->add(new \Criteria('tra_status', $critStatus, 'IN'));
+                } else {
+                    $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_DELETED, '>'));
                 }
                 if ('' != $traDesc) {
                     $crTransactions->add(new \Criteria('tra_desc', $traDesc, 'LIKE'));
@@ -260,7 +218,7 @@ switch ($op) {
                 $transactionsAll = $transactionsHandler->getAll($crTransactions);
                 if ($transactionsCount > 0) {
                     //add field names
-                    if ('xlsx' == $outType) {
+                    if ('xlsx' === $outType) {
                         $data[] = [\_MA_WGSIMPLEACC_TRANSACTION_YEARNB, \_MA_WGSIMPLEACC_TRANSACTION_DESC, \_MA_WGSIMPLEACC_TRANSACTION_REFERENCE,
                             \_MA_WGSIMPLEACC_TRANSACTION_ACCID, \_MA_WGSIMPLEACC_TRANSACTION_ALLID, \_MA_WGSIMPLEACC_TRANSACTION_DATE,
                             \_MA_WGSIMPLEACC_TRANSACTION_AMOUNTIN, \_MA_WGSIMPLEACC_TRANSACTION_AMOUNTOUT, \_MA_WGSIMPLEACC_TRANSACTION_ASID,  \_MA_WGSIMPLEACC_TRANSACTION_STATUS];
@@ -283,7 +241,7 @@ switch ($op) {
                     // Get All Transactions
                     foreach (\array_keys($transactionsAll) as $i) {
                         $transactions[$i] = $transactionsAll[$i]->getValuesTransactions();
-                        if ('xlsx' == $outType) {
+                        if ('xlsx' === $outType) {
                             $data[] = [
                                 $transactions[$i]['year'] . '/' . $transactions[$i]['nb'],
                                 cleanOutputXlsx($transactions[$i]['desc']),
@@ -314,7 +272,7 @@ switch ($op) {
                     }
                     unset($transactions);
                 }
-                if ('xlsx' == $outType) {
+                if ('xlsx' === $outType) {
                     $xlsx = Simplexlsxgen\SimpleXLSXGen::fromArray($data);
                     $xlsx->downloadAs($filename);
                 } else {

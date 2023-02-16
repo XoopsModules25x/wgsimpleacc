@@ -23,6 +23,7 @@ namespace XoopsModules\Wgsimpleacc;
 
 use XoopsModules\Wgsimpleacc;
 use XoopsModules\Wgsimpleacc\{
+    Helper,
     Constants,
     Utility
 };
@@ -82,7 +83,7 @@ class Transactions extends \XoopsObject
 
     /**
      * The new inserted $Id
-     * @return inserted id
+     * @return integer
      */
     public function getNewInsertedIdTransactions()
     {
@@ -101,20 +102,20 @@ class Transactions extends \XoopsObject
      */
     public function getFormTransactions($action = false, $admin = false, $type = 0, $start = 0, $limit = 0, $approve = false)
     {
-        $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+        $helper = Helper::getInstance();
         if (!$action) {
             $action = $_SERVER['REQUEST_URI'];
         }
         $isAdmin = $GLOBALS['xoopsUser']->isAdmin($GLOBALS['xoopsModule']->mid());
         $cascadingAccounts = (bool)$helper->getConfig('use_cascadingacc');
-        $traClass = $this->isNew() ? $type : $this->getVar('tra_class');
+        $traClass = $this->isNew() ? $type : (int)$this->getVar('tra_class');
 
         // Title
         $title = $this->isNew() ? \_MA_WGSIMPLEACC_TRANSACTION_ADD : \_MA_WGSIMPLEACC_TRANSACTION_EDIT;
-        if (Constants::CLASS_INCOME == $traClass || Constants::CLASS_BOTH == $traClass) {
+        if (Constants::CLASS_INCOME === $traClass || Constants::CLASS_BOTH === $traClass) {
             $title = $this->isNew() ? \_MA_WGSIMPLEACC_TRANSACTION_ADD_INCOME : \_MA_WGSIMPLEACC_TRANSACTION_EDIT_INCOME;
         }
-        if (Constants::CLASS_EXPENSES == $traClass || Constants::CLASS_BOTH == $traClass) {
+        if (Constants::CLASS_EXPENSES === $traClass || Constants::CLASS_BOTH === $traClass) {
             $title = $this->isNew() ? \_MA_WGSIMPLEACC_TRANSACTION_ADD_EXPENSES : \_MA_WGSIMPLEACC_TRANSACTION_EDIT_EXPENSES;
         }
 
@@ -160,7 +161,7 @@ class Transactions extends \XoopsObject
                     $cliName = Utility::cleanTextDropdown($clientsObj->getVar('cli_name'));
                 }
                 $form->addElement(new \XoopsFormHidden('ttpl_client[' . $tplId . ']', $cliName));
-                if (Constants::CLASS_INCOME == $traClass) {
+                if (Constants::CLASS_INCOME === $traClass) {
                     $form->addElement(new \XoopsFormHidden('ttpl_amount[' . $tplId . ']', Utility::FloatToString($tratemplate->getVar('ttpl_amountin'))));
                 } else {
                     $form->addElement(new \XoopsFormHidden('ttpl_amount[' . $tplId . ']', Utility::FloatToString($tratemplate->getVar('ttpl_amountout'))));
@@ -191,7 +192,7 @@ class Transactions extends \XoopsObject
             $clientsHandler = $helper->getHandler('Clients');
             $crClients = new \CriteriaCompo();
             $crClients->add(new \Criteria('cli_online', 1));
-            if (Constants::CLASS_INCOME == $type || Constants::CLASS_INCOME == $traClass || Constants::CLASS_BOTH == $type) {
+            if (Constants::CLASS_INCOME === $type || Constants::CLASS_INCOME === $traClass || Constants::CLASS_BOTH === $type) {
                 $crClients->add(new \Criteria('cli_debtor', 1));
             } else {
                 $crClients->add(new \Criteria('cli_creditor', 1));
@@ -300,7 +301,7 @@ class Transactions extends \XoopsObject
                 $allAccounts = \unserialize($allObj->getVar('all_accounts'), ['allowed_classes' => false]);
                 foreach ($allAccounts as $account) {
                     foreach ($accountsAll as $accSingle) {
-                        if ((int)$accSingle['id'] == (int)$account) {
+                        if ((int)$accSingle['id'] === (int)$account) {
                             $arrAccounts[] = ['id' => $accSingle['id'] . '_' . $allocation['id'], 'text' => $accSingle['text'], 'rel' => $allocation['id'], 'init' => $traAllid];
                         }
                     }
@@ -345,10 +346,10 @@ class Transactions extends \XoopsObject
         $form->addElement($traClassSelect);
         // Form Text traAmount
         $traAmount = 0;
-        if (Constants::CLASS_INCOME == $type || Constants::CLASS_INCOME == $traClass || Constants::CLASS_BOTH == $type) {
+        if (Constants::CLASS_INCOME === $type || Constants::CLASS_INCOME === $traClass || Constants::CLASS_BOTH === $type) {
             $traAmount = $traAmountin;
         }
-        if (Constants::CLASS_EXPENSES == $type || Constants::CLASS_EXPENSES == $traClass || Constants::CLASS_BOTH == $type) {
+        if (Constants::CLASS_EXPENSES === $type || Constants::CLASS_EXPENSES == $traClass || Constants::CLASS_BOTH === $type) {
             $traAmount = $traAmountout;
         }
         $traAmountTray = new \XoopsFormElementTray(\_MA_WGSIMPLEACC_TRANSACTION_AMOUNT, '&nbsp;');
@@ -387,9 +388,9 @@ class Transactions extends \XoopsObject
         // Form Text Date Select traDatecreated
         $traDatecreated = $this->isNew() ? \time() : $this->getVar('tra_datecreated');
         // Form Select User traSubmitter
-        $traSubmitter = $this->isNew() ? $GLOBALS['xoopsUser']->uid() : $this->getVar('tra_submitter');
+        $traSubmitter = $this->isNew() ? (int)$GLOBALS['xoopsUser']->uid() : (int)$this->getVar('tra_submitter');
         $permissionsHandler = $helper->getHandler('Permissions');
-        $traStatus = $this->getVar('tra_status');
+        $traStatus = (int)$this->getVar('tra_status');
         if ($admin) {
             // Form Select Status traStatus
             $traStatusSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_TRANSACTION_STATUS, 'tra_status', $traStatus);
