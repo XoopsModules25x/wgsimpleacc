@@ -57,11 +57,10 @@ if (Request::hasVar('filterTo')) {
 }
 $filterInvalid = Request::getInt('filterInvalid');
 $traStatus = '';
-$status        = Request::getString('tra_status'); // status from pagination
-if ('' === $status) {
-    $traStatus  = Request::getArray('filterStatus'); // status from form filter
-} elseif ($traId > 0) {
-    $traStatus = \explode('_', $status);
+if (Request::hasVar('filterStatus')) {
+    $traStatus  = Request::getArray('filterStatus');
+} else {
+    $traStatus = \explode('_', Request::getString('tra_status'));
 }
 $traDesc = Request::getString('tra_desc');
 $sortBy  = Request::getString('sortby', 'tra_id');
