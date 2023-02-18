@@ -138,7 +138,7 @@ switch ($op) {
         if ($cliId > 0) {
             $crTransactions->add(new \Criteria('tra_cliid', $cliId));
         }
-        if (\count($traStatus) > 0) {
+        if (\count($traStatus) > 0 && '' !== (string)$traStatus[0]) {
             $critStatus = '(' . \implode(',', $traStatus) . ')';
             $crTransactions->add(new \Criteria('tra_status', $critStatus, 'IN'));
         } else {
@@ -582,7 +582,7 @@ switch ($op) {
         if ($accId > 0) {
             $crTransactions->add(new \Criteria('tra_accid', $accId));
         }
-        if (\count($traStatus) > 0) {
+        if (\count($traStatus) > 0 && '' !== (string)$traStatus[0]) {
             $critStatus = '(' . \implode(',', $traStatus) . ')';
             $crTransactions->add(new \Criteria('tra_status', $critStatus, 'IN'));
         }

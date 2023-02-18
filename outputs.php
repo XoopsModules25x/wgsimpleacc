@@ -201,7 +201,7 @@ switch ($op) {
                 if ($accId > 0) {
                     $crTransactions->add(new \Criteria('tra_accid', $accId));
                 }
-                if (\count($traStatus) > 0) {
+                if (\count($traStatus) > 0 && '' !== (string)$traStatus[0]) {
                     $critStatus = '(' . \implode(',', $traStatus) . ')';
                     $crTransactions->add(new \Criteria('tra_status', $critStatus, 'IN'));
                 } else {
