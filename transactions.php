@@ -56,7 +56,7 @@ if (Request::hasVar('filterTo')) {
     $dateTo = \DateTime::createFromFormat(\_SHORTDATESTRING, Request::getString('filterTo'))->getTimestamp();
 }
 $filterInvalid = Request::getInt('filterInvalid');
-$traStatus = '';
+$traStatus = [];
 if (Request::hasVar('filterStatus')) {
     $traStatus  = Request::getArray('filterStatus');
 } else {

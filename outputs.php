@@ -166,15 +166,9 @@ switch ($op) {
             case 'csv':
             case 'xlsx':
                 //$creator = ('' != $GLOBALS['xoopsUser']->getVar('name')) ? $GLOBALS['xoopsUser']->getVar('name') : $GLOBALS['xoopsUser']->getVar('uname');
-                $filename = date('Ymd_H_i_s_', \time()) . \_MA_WGSIMPLEACC_TRANSACTIONS . '.' . $outType;
-
-                $filterYear      = Request::getInt('filterYear');
-                $filterMonthFrom = Request::getInt('filterMonthFrom');
-                $filterYearFrom  = Request::getInt('filterYearFrom');
-                $filterMonthTo   = Request::getInt('filterMonthTo');
-                $filterYearTo    = Request::getInt('filterYearTo', date('Y'));
-                $traStatus       = Request::getArray('tra_status');
-                $traDesc         = Request::getString('tra_desc');
+                $filename  = date('Ymd_H_i_s_', \time()) . \_MA_WGSIMPLEACC_TRANSACTIONS . '.' . $outType;
+                $traStatus = Request::getArray('tra_status');
+                $traDesc   = Request::getString('tra_desc');
 
                 // Add data
                 $crTransactions = new \CriteriaCompo();
