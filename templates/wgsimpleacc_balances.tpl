@@ -35,7 +35,7 @@
                                 <{/if}>
                             </td>
                             <td><{$balance.from}></td>
-                            <td><{$balance.to}></td>
+                            <td><{$balance.to|default:''}></td>
                             <td><{$balance.amountstart}></td>
                             <td><{$balance.amountend}></td>
                             <td><{$balance.datecreated}></td>
@@ -77,13 +77,13 @@
             <{foreach item=balance from=$balances}>
                 <tr>
                     <td><{$balance.from}></td>
-                    <td><{$balance.to}></td>
-                    <td><{$balance.asset}></td>
-                    <td><{$balance.curid}></td>
+                    <td><{$balance.to|default:''}></td>
+                    <td><{$balance.asset|default:''}></td>
+                    <td><{$balance.curid|default:''}></td>
                     <td><{$balance.amountstart}></td>
                     <td><{$balance.amountend}></td>
-                    <td><{$balance.datecreated}></td>
-                    <td><{$balance.submitter}></td>
+                    <td><{$balance.datecreated|default:''}></td>
+                    <td><{$balance.submitter|default:''}></td>
                 </tr>
                 <{/foreach}>
             <tr>
