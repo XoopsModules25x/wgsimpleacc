@@ -26,7 +26,7 @@ $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 // ------------------- Informations ------------------- //
 $modversion = [
     'name'                => \_MI_WGSIMPLEACC_NAME,
-    'version'             => '1.3.0',
+    'version'             => '1.3.1',
     'module_status'       => 'Stable',
     'description'         => \_MI_WGSIMPLEACC_DESC,
     'author'              => 'Goffy - XOOPS Development Team',
@@ -39,7 +39,7 @@ $modversion = [
     'help'                => 'page=help',
     'release_info'        => 'release_info',
     'release_file'        => \XOOPS_URL . '/modules/wgsimpleacc/docs/release_info file',
-    'release_date'        => '2023/02/28', // format: yyyy/mm/dd
+    'release_date'        => '2023/03/11', // format: yyyy/mm/dd
     'manual'              => 'link to manual file',
     'manual_file'         => \XOOPS_URL . '/modules/wgsimpleacc/docs/install.txt',
     'min_php'             => '7.4',
@@ -59,7 +59,7 @@ $modversion = [
     'support_name'        => 'Support Forum',
     'module_website_url'  => 'www.xoops.org',
     'module_website_name' => 'XOOPS Project',
-    'release'             => '28.02.2023',
+    'release'             => '11.03.2023',
     'system_menu'         => 1,
     'hasAdmin'            => 1,
     'hasMain'             => 1,
