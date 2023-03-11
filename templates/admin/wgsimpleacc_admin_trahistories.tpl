@@ -54,7 +54,10 @@
                     <td class='center'><{$transaction.amountout}></td>
                     <td class='center'><{$transaction.taxid}></td>
                     <td class='center'><{$transaction.asset}></td>
-                    <td class='center'><img src="<{$modPathIcon16}>status<{$transaction.status}>.png" alt="<{$transaction.status_text}>" title="<{$transaction.status_text}>"></td>
+                    <td class='center'>
+                        <img src="<{$modPathIcon16}>status<{$transaction.status}>.png" alt="<{$transaction.status_text}>" title="<{$transaction.status_text}>">
+                        (<{$transaction.status}> <{$transaction.status_text}>)
+                    </td>
                     <td class='center'><{$transaction.comments}></td>
                     <td class='center'><{$transaction.class_text}></td>
                     <td class='center'><{$transaction.balid}></td>

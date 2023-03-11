@@ -213,7 +213,7 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
             }
             $form->addElement($traCliidSelect);
         }
-        if ($permApprove) {
+        if ($permApprove && 'list' === $op) {
             //linebreak
             $form->addElement(new \XoopsFormHidden('linebreak', ''));
             // Form Select Status traStatus

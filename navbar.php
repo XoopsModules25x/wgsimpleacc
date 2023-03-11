@@ -81,7 +81,7 @@ if ($permissionsHandler->getPermTransactionsView()) {
         $nav_items2[] = ['href' => 'transactions.php?op=list', 'icon' => '<i class="fa fa-list-ol fa-fw fa-lg"></i>','label' => \_MA_WGSIMPLEACC_TRANSACTIONS_LIST, 'sub_items3' => []];
         $nav_items2[] = ['href' => 'transactions.php?op=new&tra_type=3', 'icon' => '<i class="fa fa-plus-square fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_TRANSACTION_SUBMIT_INCOME, 'sub_items3' => []];
         $nav_items2[] = ['href' => 'transactions.php?op=new&tra_type=2', 'icon' => '<i class="fa fa-plus-square fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_TRANSACTION_SUBMIT_EXPENSE, 'sub_items3' => []];
-        if ($permissionsHandler->getPermGlobalApprove()) {
+        if ($permissionsHandler->getPermTransactionsApprove()) {
             $nav_items2[] = ['href' => 'transactions.php?op=listhist', 'icon' => '<i class="fa fa-trash fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_TRAHISTORY_DELETED, 'sub_items3' => []];
         }
         $nav_items1[] = ['href' => '#', 'icon' => '<i class="fa fa-files-o fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_TRANSACTIONS, 'sub_items2' => $nav_items2];
