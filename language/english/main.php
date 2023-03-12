@@ -52,7 +52,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_FILTERBY_ALLOC', 'Select allocation');
 \define('_MA_WGSIMPLEACC_FILTERBY_ALLOCSUB', 'Include all sub allocations');
 \define('_MA_WGSIMPLEACC_FILTERBY_ACCOUNT', 'Select account');
-\define('_MA_WGSIMPLEACC_FILTERBY_PERIOD', 'Select period');
+\define('_MA_WGSIMPLEACC_FILTERBY_PERIOD', 'Select period (date created)');
 \define('_MA_WGSIMPLEACC_FILTERBY_CLIENT', 'Select client');
 \define('_MA_WGSIMPLEACC_FILTERBY_STATUS', 'Select status');
 \define('_MA_WGSIMPLEACC_FILTERBY_DESC', 'Filter by description text (use % as wildcard for zero, one or multiple characters)');

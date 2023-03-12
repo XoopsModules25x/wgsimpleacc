@@ -48,6 +48,7 @@ $asId          = Request::getInt('as_id');
 $cliId         = Request::getInt('cli_id');
 $displayfilter = Request::getInt('displayfilter');
 if ('listhist' === $op) {
+    // if showing historical transactions then take full period
     $dateFrom = 1;
     $crTransactions = new \CriteriaCompo();
     $crTransactions->setSort('tra_id');
@@ -61,6 +62,7 @@ if ('listhist' === $op) {
         }
     }
 } else {
+    // if showing current transaction list then exent to one month before
     $dateFrom = Request::getInt('dateFrom', \time() - 60*60*24*365);
 }
 if (Request::hasVar('filterFrom')) {
@@ -132,8 +134,8 @@ switch ($op) {
         if ($traId > 0) {
             $crTransactions->add(new \Criteria('tra_id', $traId));
         } else {
-            $crTransactions->add(new \Criteria('tra_date', $dateFrom, '>='));
-            $crTransactions->add(new \Criteria('tra_date', $dateTo, '<='));
+            $crTransactions->add(new \Criteria('tra_datecreated', $dateFrom, '>='));
+            $crTransactions->add(new \Criteria('tra_datecreated', $dateTo, '<='));
         }
         if ($allId > 0) {
             if ($allSubs) {
@@ -581,8 +583,8 @@ switch ($op) {
         if ($traId > 0) {
             $crTransactions->add(new \Criteria('tra_id', $traId));
         } else {
-            $crTransactions->add(new \Criteria('tra_date', $dateFrom, '>='));
-            $crTransactions->add(new \Criteria('tra_date', $dateTo, '<='));
+            $crTransactions->add(new \Criteria('tra_datecreated', $dateFrom, '>='));
+            $crTransactions->add(new \Criteria('tra_datecreated', $dateTo, '<='));
         }
         if ($allId > 0) {
             $crTransactions->add(new \Criteria('tra_allid', $allId));

@@ -26,8 +26,8 @@ $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 // ------------------- Informations ------------------- //
 $modversion = [
     'name'                => \_MI_WGSIMPLEACC_NAME,
-    'version'             => '1.3.1',
-    'module_status'       => 'Stable',
+    'version'             => '1.3.2',
+    'module_status'       => 'RC1',
     'description'         => \_MI_WGSIMPLEACC_DESC,
     'author'              => 'Goffy - XOOPS Development Team',
     'author_mail'         => 'webmaster@wedega.com',

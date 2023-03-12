@@ -52,7 +52,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_FILTERBY_ALLOC', 'Zuordnung auswählen');
 \define('_MA_WGSIMPLEACC_FILTERBY_ALLOCSUB', 'Alle Unterzuordnungen einschließen');
 \define('_MA_WGSIMPLEACC_FILTERBY_ACCOUNT', 'Konto auswählen');
-\define('_MA_WGSIMPLEACC_FILTERBY_PERIOD', 'Zeitraum auswählen');
+\define('_MA_WGSIMPLEACC_FILTERBY_PERIOD', 'Zeitraum (erstellt am) auswählen');
 \define('_MA_WGSIMPLEACC_FILTERBY_CLIENT', 'Klient auswählen');
 \define('_MA_WGSIMPLEACC_FILTERBY_STATUS', 'Status auswählen');
 \define('_MA_WGSIMPLEACC_FILTERBY_DESC', 'Nach Beschreibungstext filtern (verwende % als Platzhalter für keine, ein oder mehrere Zeichen)');
