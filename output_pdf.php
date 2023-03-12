@@ -63,10 +63,26 @@ class MYPDF extends TCPDF {
 
     // Page footer
     public function Footer() {
-        // Position at 15 mm from bottom
-        $this->SetY(-15);
+        // Position at 20 mm from bottom
+        $defaultFooter = -20;
+        $countLines    = 0;
+        $htmlFooter    = $this->htmlFooter;
+        if (\strpos($htmlFooter,'</table>') > 0) {
+            // there is a table in the footer, therefore get number of lines and adjust the height
+            $linesArr = \explode('</tr>', $htmlFooter);
+            $countLines = \count($linesArr) - 1;
+            $defaultFooter = -10 * $countLines - 20;
+        }
+        $htmlFooter = str_replace(['</p>', '<br/>', '<br />'], '<br>', $htmlFooter);
+        if (0 === $countLines && \strpos($htmlFooter,'<br>') > 0) {
+            // there is a p or br in the footer, therefore get number of lines and adjust the height
+            $linesArr = \explode('<br>', $htmlFooter);
+            $countLines = \count($linesArr) - 1;
+            $defaultFooter = -10 * $countLines;
+        }
+        $this->SetY($defaultFooter);
         //add my custom footer
-        $this->MultiCell(0,0, $this->htmlFooter,0,'J', false, 1, '', '', true, 0, true);
+        $this->MultiCell(0,0, $this->htmlFooter,'T','J', false, 1, '', '', true, 0, true);
     }
 }
 
