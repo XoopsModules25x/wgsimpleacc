@@ -14,7 +14,7 @@
         <{/if}>
             <div class="pull-right">
                 <{if $xoops_isuser|default:false}>
-                    <{if isset($xoops_isadmin) && $xoops_isadmin}>
+                    <{if !empty($xoops_isadmin)}>
                         <a class="wgsa-startminheader-link" href="<{$xoops_url}>/admin.php"><span class="glyphicon glyphicon-wrench" alt="<{$smarty.const._MA_WGSIMPLEACC_MENUADMIN}>" title="<{$smarty.const._MA_WGSIMPLEACC_MENUADMIN}>"></span></a>
                     <{/if}>
                     <a class="wgsa-startminheader-link" href="<{$xoops_url}>/user.php"><span class="glyphicon glyphicon-user" alt="<{$smarty.const._MA_WGSIMPLEACC_MENUUSER}>" title="<{$smarty.const._MA_WGSIMPLEACC_MENUUSER}>"> <{$currentUser}></span></a>

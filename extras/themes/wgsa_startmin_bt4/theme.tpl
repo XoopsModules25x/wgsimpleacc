@@ -22,7 +22,7 @@
     <script src="<{$xoops_url}>/browse.php?Frameworks/jquery/jquery.js"></script>
     <script src="<{xoImgUrl}>js/bootstrap.bundle.min.js"></script>
     <{include file="$theme_name/tpl/cookieConsent.tpl"}>
-    <{if isset($xoops_isadmin) && $xoops_isadmin}>
+    <{if !empty($xoops_isadmin)}>
     <script src="<{xoImgUrl}>js/js.cookie.min.js"></script>
     <{/if}>
     <link rel="alternate" type="application/rss+xml" title="" href="<{xoAppUrl backend.php}>">
