@@ -51,9 +51,9 @@
                         <td class='center'><{$outtemplate.datecreated}></td>
                         <td class='center'><{$outtemplate.submitter}></td>
                         <td class="center  width5">
-                            <a href="outtemplates.php?op=edit&amp;otpl_id=<{$outtemplate.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="<{$smarty.const._EDIT}> outtemplates"></a>
-                            <a href="outtemplates.php?op=clone&amp;otpl_id_clone=<{$outtemplate.id}>" title="<{$smarty.const._CLONE}>"><img src="<{xoModuleIcons16 editcopy.png}>" alt="<{$smarty.const._CLONE}> outtemplates"></a>
-                            <a href="outtemplates.php?op=delete&amp;otpl_id=<{$outtemplate.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> outtemplates"></a>
+                            <a href="outtemplates.php?op=edit&amp;otpl_id=<{$outtemplate.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 'edit.png'}>" alt="<{$smarty.const._EDIT}> outtemplates"></a>
+                            <a href="outtemplates.php?op=clone&amp;otpl_id_clone=<{$outtemplate.id}>" title="<{$smarty.const._CLONE}>"><img src="<{xoModuleIcons16 'editcopy.png'}>" alt="<{$smarty.const._CLONE}> outtemplates"></a>
+                            <a href="outtemplates.php?op=delete&amp;otpl_id=<{$outtemplate.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 'delete.png'}>" alt="<{$smarty.const._DELETE}> outtemplates"></a>
                         </td>
                     </tr>
                 <{/foreach}>
@@ -61,15 +61,15 @@
         <{/if}>
     </table>
     <div class="clear">&nbsp;</div>
-    <{if $pagenav|default:''}>
+    <{if !empty($pagenav)}>
         <div class="xo-pagenav floatright"><{$pagenav}></div>
         <div class="clear spacer"></div>
     <{/if}>
 <{/if}>
-<{if $form|default:''}>
+<{if !empty($form)}>
     <{$form}>
 <{/if}>
-<{if $error|default:''}>
+<{if !empty($error)}>
     <div class="errorMsg"><strong><{$error}></strong></div>
 <{/if}>
 

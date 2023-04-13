@@ -43,8 +43,8 @@
                         <td class='center'><{$asset.datecreated}></td>
                         <td class='center'><{$asset.submitter}></td>
                         <td class="center  width5">
-                            <a href="assets.php?op=edit&amp;as_id=<{$asset.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="<{$smarty.const._EDIT}> assets"></a>
-                            <a href="assets.php?op=delete&amp;as_id=<{$asset.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> assets"></a>
+                            <a href="assets.php?op=edit&amp;as_id=<{$asset.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 'edit.png'}>" alt="<{$smarty.const._EDIT}> assets"></a>
+                            <a href="assets.php?op=delete&amp;as_id=<{$asset.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 'delete.png'}>" alt="<{$smarty.const._DELETE}> assets"></a>
                         </td>
                     </tr>
                 <{/foreach}>
@@ -52,15 +52,15 @@
         <{/if}>
     </table>
     <div class="clear">&nbsp;</div>
-    <{if $pagenav|default:''}>
+    <{if !empty($pagenav)}>
         <div class="xo-pagenav floatright"><{$pagenav}></div>
         <div class="clear spacer"></div>
     <{/if}>
 <{/if}>
-<{if $form|default:''}>
+<{if !empty($form)}>
     <{$form}>
 <{/if}>
-<{if $error|default:''}>
+<{if !empty($error)}>
     <div class="errorMsg"><strong><{$error}></strong></div>
 <{/if}>
 
