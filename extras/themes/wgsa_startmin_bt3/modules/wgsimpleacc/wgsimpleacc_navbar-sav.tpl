@@ -12,7 +12,7 @@
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
                     <li class="sidebar-search">
-                        <form class="navbar-form" role="search" action="<{xoAppUrl search.php}>" method="get">
+                        <form class="navbar-form" role="search" action="<{xoAppUrl 'search.php'}>" method="get">
                             <div class="form-group">
                                 <input type="text" name="query" style='width:75%' class="form-control" placeholder="<{$smarty.const.THEME_SEARCH_TEXT}>"><button class="btn btn-primary" type="submit"><i class="fa fa-search fa-fw"></i></button>
                                 <input type="hidden" name="action" value="results">

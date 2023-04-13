@@ -1,7 +1,7 @@
 <!-- Header -->
 <{include file='db:wgsimpleacc_admin_header.tpl' }>
 
-<{if $accounts_list|default:''}>
+<{if isset($accounts_list)}>
     <table class='table table-bordered'>
         <thead>
             <tr class='head'>
@@ -49,8 +49,8 @@
                 <td class='center'><{$account.datecreated}></td>
                 <td class='center'><{$account.submitter}></td>
                 <td class="center  width5">
-                    <a href="accounts.php?op=edit&amp;acc_id=<{$account.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="<{$smarty.const._EDIT}> accounts"></a>
-                    <a href="accounts.php?op=delete&amp;acc_id=<{$account.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> accounts"></a>
+                    <a href="accounts.php?op=edit&amp;acc_id=<{$account.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 'edit.png'}>" alt="<{$smarty.const._EDIT}> accounts"></a>
+                    <a href="accounts.php?op=delete&amp;acc_id=<{$account.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 'delete.png'}>" alt="<{$smarty.const._DELETE}> accounts"></a>
                 </td>
             </tr>
             <{/foreach}>
@@ -58,15 +58,15 @@
         <{/if}>
     </table>
     <div class="clear">&nbsp;</div>
-    <{if $pagenav|default:''}>
+    <{if !empty($pagenav)}>
         <div class="xo-pagenav floatright"><{$pagenav}></div>
         <div class="clear spacer"></div>
     <{/if}>
 <{/if}>
-<{if $form|default:''}>
+<{if !empty($form)}>
     <{$form}>
 <{/if}>
-<{if $error|default:''}>
+<{if !empty($error)}>
     <div class="errorMsg"><strong><{$error}></strong></div>
 <{/if}>
 

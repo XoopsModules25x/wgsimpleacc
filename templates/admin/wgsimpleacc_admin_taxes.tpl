@@ -27,8 +27,8 @@
                 <td class='center'><{$tax.datecreated}></td>
                 <td class='center'><{$tax.submitter}></td>
                 <td class="center  width5">
-                    <a href="taxes.php?op=edit&amp;tax_id=<{$tax.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 edit.png}>" alt="<{$smarty.const._EDIT}> taxes"></a>
-                    <a href="taxes.php?op=delete&amp;tax_id=<{$tax.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> taxes"></a>
+                    <a href="taxes.php?op=edit&amp;tax_id=<{$tax.id}>" title="<{$smarty.const._EDIT}>"><img src="<{xoModuleIcons16 'edit.png'}>" alt="<{$smarty.const._EDIT}> taxes"></a>
+                    <a href="taxes.php?op=delete&amp;tax_id=<{$tax.id}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 'delete.png'}>" alt="<{$smarty.const._DELETE}> taxes"></a>
                 </td>
             </tr>
             <{/foreach}>
@@ -36,15 +36,15 @@
         <{/if}>
     </table>
     <div class="clear">&nbsp;</div>
-    <{if $pagenav|default:''}>
+    <{if !empty($pagenav)}>
         <div class="xo-pagenav floatright"><{$pagenav}></div>
         <div class="clear spacer"></div>
     <{/if}>
 <{/if}>
-<{if $form|default:''}>
+<{if !empty($form)}>
     <{$form}>
 <{/if}>
-<{if $error|default:''}>
+<{if !empty($error)}>
     <div class="errorMsg"><strong><{$error}></strong></div>
 <{/if}>
 

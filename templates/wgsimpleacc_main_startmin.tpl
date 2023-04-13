@@ -14,7 +14,7 @@
         <{/if}>
             <div class="pull-right">
                 <{if $xoops_isuser|default:false}>
-                    <{if $xoops_isadmin|default:false}>
+                    <{if isset($xoops_isadmin) && $xoops_isadmin}>
                         <a class="wgsa-startminheader-link" href="<{$xoops_url}>/admin.php"><span class="glyphicon glyphicon-wrench" alt="<{$smarty.const._MA_WGSIMPLEACC_MENUADMIN}>" title="<{$smarty.const._MA_WGSIMPLEACC_MENUADMIN}>"></span></a>
                     <{/if}>
                     <a class="wgsa-startminheader-link" href="<{$xoops_url}>/user.php"><span class="glyphicon glyphicon-user" alt="<{$smarty.const._MA_WGSIMPLEACC_MENUUSER}>" title="<{$smarty.const._MA_WGSIMPLEACC_MENUUSER}>"> <{$currentUser}></span></a>
@@ -45,10 +45,10 @@
             <div class="col-sm-4 col-md-4 col-lg-2 col-xl-2 wgsa-mainnav"><{include file='db:wgsimpleacc_navbar.tpl'}></div>
             <div class="col-sm-8 col-md-8 col-lg-10 col-xl-10 wgsa-maincontent">
                 <{include file=$template_sub}>
-                <{if $error|default:''}>
+                <{if !empty($error)}>
                     <div class="errorMsg"><strong><{$error}></strong></div>
                 <{/if}>
-                <{if $form|default:''}>
+                <{if !empty($form)}>
                     <{$form}>
                 <{/if}>
             </div>

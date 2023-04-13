@@ -15,9 +15,9 @@
                         <th>
                             <{$smarty.const._MA_WGSIMPLEACC_CLIENT_NAME}>
                             <a href="clients.php?op=list&amp;orderby=ASC&amp;sortby=name&amp;start=<{$start}>&amp;limit=<{$limit}>" title="<{$smarty.const._ASCENDING}>">
-                                <img src="<{xoModuleIcons16 up.png}>" alt="<{$smarty.const._ASCENDING}>"></a>
+                                <img src="<{xoModuleIcons16 'up.png'}>" alt="<{$smarty.const._ASCENDING}>"></a>
                             <a href="clients.php?op=list&amp;orderby=DESC&amp;sortby=name&amp;start=<{$start}>&amp;limit=<{$limit}>" title="<{$smarty.const._DESCENDING}>">
-                                <img src="<{xoModuleIcons16 down.png}>" alt="<{$smarty.const._DESCENDING}>"></a>
+                                <img src="<{xoModuleIcons16 'down.png'}>" alt="<{$smarty.const._DESCENDING}>"></a>
                         </th>
                         <th><{$smarty.const._MA_WGSIMPLEACC_CLIENT_FULLADDRESS}></th>
                         <th><{$smarty.const._MA_WGSIMPLEACC_CLIENT_PHONE}></th>
@@ -28,9 +28,9 @@
                         <th class="center">
                             <{$smarty.const._MA_WGSIMPLEACC_DATECREATED}>
                             <a href="clients.php?op=list&amp;orderby=ASC&amp;sortby=datecreated&amp;start=<{$start}>&amp;limit=<{$limit}>" title="<{$smarty.const._ASCENDING}>">
-                                <img src="<{xoModuleIcons16 up.png}>" alt="<{$smarty.const._ASCENDING}>"></a>
+                                <img src="<{xoModuleIcons16 'up.png'}>" alt="<{$smarty.const._ASCENDING}>"></a>
                             <a href="clients.php?op=list&amp;orderby=DESC&amp;sortby=datecreated&amp;start=<{$start}>&amp;limit=<{$limit}>" title="<{$smarty.const._DESCENDING}>">
-                                <img src="<{xoModuleIcons16 down.png}>" alt="<{$smarty.const._DESCENDING}>"></a>
+                                <img src="<{xoModuleIcons16 'down.png'}>" alt="<{$smarty.const._DESCENDING}>"></a>
                         </th>
                         <th></th>
                     </tr>

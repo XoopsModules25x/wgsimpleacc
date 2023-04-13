@@ -54,21 +54,21 @@
 
 <{if $xoBlocks.canvas_left || $xoBlocks.canvas_right}>
     <div class="row">
-        <{includeq file="$theme_name/tpl/leftBlock.tpl"}>
-        <{includeq file="$theme_name/tpl/rightBlock.tpl"}>
+        <{include file="$theme_name/tpl/leftBlock.tpl"}>
+        <{include file="$theme_name/tpl/rightBlock.tpl"}>
     </div>
 <{/if}>
 
 <{if $xoBlocks.page_topleft || $xoBlocks.page_topcenter || $xoBlocks.page_topright}>
     <div class="row">
-        <{includeq file="$theme_name/tpl/centerBlock.tpl"}>
-        <{includeq file="$theme_name/tpl/centerLeft.tpl"}>
-        <{includeq file="$theme_name/tpl/centerRight.tpl"}>
+        <{include file="$theme_name/tpl/centerBlock.tpl"}>
+        <{include file="$theme_name/tpl/centerLeft.tpl"}>
+        <{include file="$theme_name/tpl/centerRight.tpl"}>
     </div>
 <{/if}>
 
 <div class="row">
-    <{includeq file="$theme_name/tpl/contents.tpl"}>
+    <{include file="$theme_name/tpl/contents.tpl"}>
 </div>
 
 </div><!-- .maincontainer -->
@@ -77,11 +77,11 @@
     <div class="bottom-blocks">
         <div class="container-fluid">
             <div class="row">
-                <{includeq file="$theme_name/tpl/leftBottom.tpl"}>
+                <{include file="$theme_name/tpl/leftBottom.tpl"}>
 
-                <{includeq file="$theme_name/tpl/centerBottom.tpl"}>
+                <{include file="$theme_name/tpl/centerBottom.tpl"}>
 
-                <{includeq file="$theme_name/tpl/rightBottom.tpl"}>
+                <{include file="$theme_name/tpl/rightBottom.tpl"}>
             </div>
         </div>
     </div><!-- .bottom-blocks -->
@@ -91,11 +91,11 @@
     <div class="footer-blocks">
         <div class="container-fluid">
             <div class="row">
-                <{includeq file="$theme_name/tpl/leftFooter.tpl"}>
+                <{include file="$theme_name/tpl/leftFooter.tpl"}>
 
-                <{includeq file="$theme_name/tpl/centerFooter.tpl"}>
+                <{include file="$theme_name/tpl/centerFooter.tpl"}>
 
-                <{includeq file="$theme_name/tpl/rightFooter.tpl"}>
+                <{include file="$theme_name/tpl/rightFooter.tpl"}>
             </div>
         </div>
     </div><!-- .footer-blocks -->

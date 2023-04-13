@@ -66,7 +66,7 @@
                     <td class='center'><{$transaction.datecreated}></td>
                     <td class='center'><{$transaction.submitter}></td>
                     <td class="center  width5">
-                        <a href="trahistories.php?op=delete&amp;hist_id=<{$transaction.histid}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 delete.png}>" alt="<{$smarty.const._DELETE}> trahistories"></a>
+                        <a href="trahistories.php?op=delete&amp;hist_id=<{$transaction.histid}>" title="<{$smarty.const._DELETE}>"><img src="<{xoModuleIcons16 'delete.png'}>" alt="<{$smarty.const._DELETE}> trahistories"></a>
                     </td>
                 </tr>
                 <{/foreach}>
@@ -74,15 +74,15 @@
         <{/if}>
     </table>
     <div class="clear">&nbsp;</div>
-    <{if $pagenav|default:''}>
+    <{if !empty($pagenav)}>
         <div class="xo-pagenav floatright"><{$pagenav}></div>
         <div class="clear spacer"></div>
     <{/if}>
 <{/if}>
-<{if $form|default:''}>
+<{if !empty($form)}>
     <{$form}>
 <{/if}>
-<{if $error|default:''}>
+<{if !empty($error)}>
     <div class="errorMsg"><strong><{$error}></strong></div>
 <{/if}>
 
