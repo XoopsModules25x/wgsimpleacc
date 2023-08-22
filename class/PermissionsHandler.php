@@ -603,4 +603,70 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     {
         return $this->getPermView(Constants::PERM_TRANSACTIONS_VIEW);
     }
+
+    /**
+     * @public function getPermFileDirAdmin
+     * returns right for edit/delete files in file dir
+     *  - User must have perm to admin
+     *
+     * @return bool
+     */
+    public function getPermFileDirAdmin()
+    {
+        if ($this->getPermGlobalApprove()) {
+            return true;
+        }
+
+        return $this->getPermView(Constants::PERM_FILEDIR_ADMIN);
+    }
+
+    /**
+     * @public function getPermFileDirSubmit
+     * returns right for submit files to file dir
+     * @param null
+     * @return bool
+     */
+    public function getPermFileDirSubmit()
+    {
+        if ($this->getPermGlobalApprove()) {
+            return true;
+        }
+
+        return $this->getPermSubmit(Constants::PERM_FILEDIR_SUBMIT);
+    }
+
+    /**
+     * @public function getPermFileDirEdit
+     * returns right for edit/delete files in file dir
+     *  - User must have perm to submit and must be owner
+     * @param $filSubmitter
+     * @return bool
+     */
+    public function getPermFileDirEdit($filSubmitter)
+    {
+        global $xoopsUser, $xoopsModule;
+
+        if ($this->getPermGlobalApprove()) {
+            return true;
+        }
+        $currentuid = 0;
+        if (isset($xoopsUser) && \is_object($xoopsUser)) {
+            if ($xoopsUser->isAdmin($xoopsModule->mid())) {
+                return true;
+            }
+            $currentuid = $xoopsUser->uid();
+        }
+        return $this->getPermFileDirSubmit() && $currentuid == $filSubmitter;
+    }
+
+    /**
+     * @public function getPermFileDirView
+     * returns right for view files from file dir
+     * @param null
+     * @return bool
+     */
+    public function getPermFileDirView()
+    {
+        return $this->getPermView(Constants::PERM_FILEDIR_VIEW);
+    }
 }

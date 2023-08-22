@@ -251,6 +251,8 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_FILES_TEMP_DESC_NO', 'There are no uploaded files in folder: %f');
 \define('_MA_WGSIMPLEACC_FILE_DETAILS', 'Details for file');
 \define('_MA_WGSIMPLEACC_FILES_TEMP_DELETE', 'Delete shown file');
+\define('_MA_WGSIMPLEACC_FILES_LIST_FILEDIR', 'List of files without linkage to a transaction');
+\define('_MA_WGSIMPLEACC_FILE_NO_TRANSACTION', 'Files without linkage to a transaction');
 // Caption of File
 \define('_MA_WGSIMPLEACC_FILE_ID', 'Id');
 \define('_MA_WGSIMPLEACC_FILE_TRAID', 'Transaction');

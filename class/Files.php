@@ -151,8 +151,13 @@ class Files extends \XoopsObject
         $form->setExtra('enctype="multipart/form-data"');
         // Form Table transactions
         $transactionsHandler = $helper->getHandler('Transactions');
-        $transactionsObj = $transactionsHandler->get($this->getVar('fil_traid'));
-        $transaction = $transactionsObj->getVar('tra_year') . '/' . $transactionsObj->getVar('tra_nb') . ' ' . $transactionsObj->getVar('tra_desc');
+        $filTraid = (int)$this->getVar('fil_traid');
+        if ($filTraid > 0) {
+            $transactionsObj = $transactionsHandler->get($filTraid);
+            $transaction = $transactionsObj->getVar('tra_year') . '/' . $transactionsObj->getVar('tra_nb') . ' ' . $transactionsObj->getVar('tra_desc');
+        } else {
+            $transaction = \_MA_WGSIMPLEACC_FILE_NO_TRANSACTION;
+        }
         $form->addElement(new \XoopsFormLabel(\_MA_WGSIMPLEACC_TRANSACTION, $transaction));
         // Form filName
         $form->addElement(new \XoopsFormLabel(\_MA_WGSIMPLEACC_FILE_NAME, $this->getVar('fil_name')));
@@ -215,7 +220,11 @@ class Files extends \XoopsObject
         // Form Editor TextArea filDesc
         $form->addElement(new \XoopsFormTextArea(\_MA_WGSIMPLEACC_FILE_DESC, 'fil_desc', $this->getVar('fil_desc', 'e'), 4, 47));
         // To Save
-        $form->addElement(new \XoopsFormHidden('op', 'upload_file'));
+        if (0 === $filTraid) {
+            $form->addElement(new \XoopsFormHidden('op', 'upload_filedir'));
+        } else {
+            $form->addElement(new \XoopsFormHidden('op', 'upload_file'));
+        }
         $form->addElement(new \XoopsFormHidden('fil_traid', $filTraid));
         $form->addElement(new \XoopsFormHidden('traOp', $traOp));
         $form->addElement(new \XoopsFormButtonTray('', \_SUBMIT, 'submit', '', false));

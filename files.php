@@ -117,18 +117,92 @@ switch ($op) {
                 }
                 exit;
         }
-    case 'list':
-    default:
+    case 'filedir_new':
+        // Check permissions
+        if (!$permissionsHandler->getPermFileDirSubmit()) {
+            \redirect_header('index.php', 3, \_NOPERM);
+        }
+        // Get Form
+        $filesObj = $filesHandler->create();
+        $form = $filesObj->getFormFiles(0);
+        $GLOBALS['xoopsTpl']->assign('formFilesDir', $form->render());
+        $GLOBALS['xoopsTpl']->assign('header_fileslist', \_MA_WGSIMPLEACC_FILES_UPLOAD);
+        break;
+    case 'filedir_edit':
+        // Check permissions
+        if (!$permissionsHandler->getPermFileDirSubmit()) {
+            \redirect_header('index.php', 3, \_NOPERM);
+        }
+        // Check params
+        if (0 == $filId && 'filedir_edit' === $op) {
+            \redirect_header('index.php', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
+        }
+        // Get Form
+        $filesObj = $filesHandler->get($filId);
+        $form = $filesObj->getFormFilesEdit();
+        $GLOBALS['xoopsTpl']->assign('formFilesDir', $form->render());
+        break;
+    case 'filedir_list':
+        $GLOBALS['xoopsTpl']->assign('filedir', true);
+        $GLOBALS['xoopsTpl']->assign('header_fileslist', \_MA_WGSIMPLEACC_FILES_LIST_FILEDIR);
+        $crFiles = new \CriteriaCompo();
+        $crFiles->add(new \Criteria('fil_traid', 0));
+        $filesCount = $filesHandler->getCount($crFiles);
+        $GLOBALS['xoopsTpl']->assign('filedirCount', $filesCount);
+        $filesAll = $filesHandler->getAll($crFiles);
+        if ($filesCount > 0) {
+            $files = [];
+            // Get All Files
+            foreach (\array_keys($filesAll) as $i) {
+                $files[$i] = $filesAll[$i]->getValuesFiles();
+                $keywords[$i] = $filesAll[$i]->getVar('fil_name');
+            }
+            $GLOBALS['xoopsTpl']->assign('files', $files);
+            unset($files);
+        }
+        break;
+    case 'show':
         if ($filTraid > 0) {
             $transactionsObj = $transactionsHandler->get($filTraid);
             $title = $transactionsObj->getVar('tra_year') . '/' . $transactionsObj->getVar('tra_nb') . ' ' . $transactionsObj->getVar('tra_desc');
             $GLOBALS['xoopsTpl']->assign('header_fileslist', \str_replace('%t', $title, \_MA_WGSIMPLEACC_FILES_LISTHEADER));
+        } else {
+            $GLOBALS['xoopsTpl']->assign('header_fileslist', 'xxxx');
         }
         $crFiles = new \CriteriaCompo();
         if ($filId > 0) {
             $GLOBALS['xoopsTpl']->assign('template_sub', 'db:wgsimpleacc_files_item.tpl');
             $crFiles->add(new \Criteria('fil_id', $filId));
+        } else {
+            break;
         }
+        $crFiles->add(new \Criteria('fil_traid', $filTraid));
+        $filesCount = $filesHandler->getCount($crFiles);
+        $GLOBALS['xoopsTpl']->assign('filesCount', $filesCount);
+        $filesAll = $filesHandler->getAll($crFiles);
+        if ($filesCount > 0) {
+            $files = [];
+            // Get All Files
+            foreach (\array_keys($filesAll) as $i) {
+                $files[$i] = $filesAll[$i]->getValuesFiles();
+                $keywords[$i] = $filesAll[$i]->getVar('fil_name');
+            }
+            $GLOBALS['xoopsTpl']->assign('files', $files);
+            unset($files);
+        }
+        break;
+    case 'list':
+    case 'show_uploadform':
+    default:
+        // show be only called if upload form for a transaction should be shown
+        if ($filTraid > 0) {
+            $transactionsObj = $transactionsHandler->get($filTraid);
+            $title = $transactionsObj->getVar('tra_year') . '/' . $transactionsObj->getVar('tra_nb') . ' ' . $transactionsObj->getVar('tra_desc');
+            $GLOBALS['xoopsTpl']->assign('header_fileslist', \str_replace('%t', $title, \_MA_WGSIMPLEACC_FILES_LISTHEADER));
+        } else {
+            break;
+        }
+        $crFiles = new \CriteriaCompo();
         $crFiles->add(new \Criteria('fil_traid', $filTraid));
         $filesCount = $filesHandler->getCount($crFiles);
         $GLOBALS['xoopsTpl']->assign('filesCount', $filesCount);
@@ -160,11 +234,11 @@ switch ($op) {
     case 'save_edit':
         // Security Check
         if (!$GLOBALS['xoopsSecurity']->check()) {
-            \redirect_header('files.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
+            \redirect_header('index.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
         // Check permissions
         if (!$permissionsHandler->getPermTransactionsSubmit()) {
-            \redirect_header('files.php?op=list', 3, \_NOPERM);
+            \redirect_header('index.php', 3, \_NOPERM);
         }
         if ($filId > 0) {
             $filesObj = $filesHandler->get($filId);
@@ -172,7 +246,7 @@ switch ($op) {
                 $filesHandler->saveHistoryFiles($filId);
             }
         } else {
-            \redirect_header('files.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
+            \redirect_header('index.php', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
         }
         $filesObj->setVar('fil_desc', Request::getString('fil_desc'));
         $filesObj->setVar('fil_ip', $_SERVER['REMOTE_ADDR']);
@@ -180,7 +254,12 @@ switch ($op) {
         $filesObj->setVar('fil_submitter', $GLOBALS['xoopsUser']->id());
         // Insert Data
         if ($filesHandler->insert($filesObj)) {
-            \redirect_header('files.php?op=list&amp;fil_traid=' . $filesObj->getVar('fil_traid') . $traOp, 2, \_MA_WGSIMPLEACC_FORM_OK);
+            $filTraid = (int)$filesObj->getVar('fil_traid');
+            if ($filTraid > 0) {
+                \redirect_header('files.php?op=list&amp;fil_traid=' . $filTraid . $traOp, 2, \_MA_WGSIMPLEACC_FORM_OK);
+            } else {
+                \redirect_header('files.php?op=filedir_list&amp;fil_traid=0', 2, \_MA_WGSIMPLEACC_FORM_OK);
+            }
         }
         // Get Form Error
         $GLOBALS['xoopsTpl']->assign('error', $filesObj->getHtmlErrors());
@@ -188,14 +267,21 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('formFilesEdit', $formFiles->render());
         break;
     case 'upload_file':
+    case 'upload_filedir':
     case 'save_temp':
         // Security Check
         if (!$GLOBALS['xoopsSecurity']->check()) {
-            \redirect_header('files.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
+            \redirect_header('index.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
         // Check permissions
-        if (!$permissionsHandler->getPermTransactionsSubmit()) {
-            \redirect_header('files.php?op=list', 3, \_NOPERM);
+        if ('upload_filedir' === $op) {
+            if (!$permissionsHandler->getPermFileDirSubmit()) {
+                \redirect_header('index.php', 3, \_NOPERM);
+            }
+        } else {
+            if (!$permissionsHandler->getPermTransactionsSubmit()) {
+                \redirect_header('index.php', 3, \_NOPERM);
+            }
         }
         if ($filId > 0) {
             $filesObj = $filesHandler->get($filId);
@@ -205,7 +291,7 @@ switch ($op) {
         $filesObj->setVar('fil_traid', $filTraid);
         // Set Var fil_name
         $uploaderErrors = '';
-        if ('upload_file' == $op) {
+        if ('upload_file' === $op || 'upload_filedir' === $op) {
             require_once \XOOPS_ROOT_PATH . '/class/uploader.php';
             $filename    = $_FILES['fil_name']['name'];
             $imgMimetype = $_FILES['fil_name']['type'];
@@ -267,7 +353,11 @@ switch ($op) {
             if ('' !== $uploaderErrors) {
                 \redirect_header('files.php?op=edit&fil_id=' . $newFilId, 5, $uploaderErrors);
             } else {
-                \redirect_header('files.php?op=list&amp;fil_traid=' . $filTraid . $traOp, 2, \_MA_WGSIMPLEACC_FORM_OK);
+                if (0 === $filTraid) {
+                    \redirect_header('files.php?op=filedir_list', 2, \_MA_WGSIMPLEACC_FORM_OK);
+                } else {
+                    \redirect_header('files.php?op=list&amp;fil_traid=' . $filTraid . $traOp, 2, \_MA_WGSIMPLEACC_FORM_OK);
+                }
             }
         }
         // Get Form Error
@@ -284,11 +374,11 @@ switch ($op) {
     case 'edit':
         // Check permissions
         if (!$permissionsHandler->getPermTransactionsSubmit()) {
-            \redirect_header('files.php?op=list', 3, \_NOPERM);
+            \redirect_header('index.php', 3, \_NOPERM);
         }
         // Check params
         if (0 == $filId) {
-            \redirect_header('files.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
+            \redirect_header('index.php', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
         }
         // Get Form
         $filesObj = $filesHandler->get($filId);
@@ -299,12 +389,12 @@ switch ($op) {
     case 'delete':
         // Check params
         if (0 == $filId) {
-            \redirect_header('files.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
+            \redirect_header('index.php', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
         }
         $filesObj = $filesHandler->get($filId);
         // Check permissions
         if (!$permissionsHandler->getPermFilesEdit($filesObj->getVar('fil_submitter'))) {
-            \redirect_header('files.php?op=list', 3, \_NOPERM);
+            \redirect_header('index.php', 3, \_NOPERM);
         }
         $filName = $filesObj->getVar('fil_name');
         $filTraid = $filesObj->getVar('fil_traid');
@@ -318,7 +408,11 @@ switch ($op) {
                 \unlink(\XOOPS_ROOT_PATH . '/uploads/wgsimpleacc/files/' . $filName);
             }
             if ($filesHandler->delete($filesObj)) {
-                \redirect_header('files.php?op=list&amp;fil_traid=' . $filTraid . $traOp, 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
+                if (0 === $filTraid) {
+                    \redirect_header('files.php?op=filedir_list', 2, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
+                } else {
+                    \redirect_header('files.php?op=list&amp;fil_traid=' . $filTraid . $traOp, 3, \_MA_WGSIMPLEACC_FORM_DELETE_OK);
+                }
             } else {
                 $GLOBALS['xoopsTpl']->assign('error', $filesObj->getHtmlErrors());
             }
@@ -334,7 +428,7 @@ switch ($op) {
     case 'delete_filtemp':
         // Security Check
         if (!$GLOBALS['xoopsSecurity']->check()) {
-            \redirect_header('files.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
+            \redirect_header('index.php', 3, \implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
         }
         $fileName = Request::getString('fil_temp');
         $filePath = \XOOPS_ROOT_PATH . '/uploads/wgsimpleacc/temp/' . $fileName;
