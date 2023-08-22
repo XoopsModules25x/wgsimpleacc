@@ -1,4 +1,39 @@
 <h3><{$header_fileslist|default:''}></h3>
+<!-- start code for show files non-related to transactions -->
+<{if $filedir|default:false}>
+    <{if $filedirCount|default:0 > 0}>
+    <div class='table-responsive'>
+        <table class='table table-striped'>
+            <thead>
+            <tr>
+                <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_FILE_NAME}></th>
+                <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_FILE_DESC}></th>
+                <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_FILE_TYPE}></th>
+                <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_FILE_PREVIEW}></th>
+                <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_DATECREATED}></th>
+                <th scope="col"><{$smarty.const._MA_WGSIMPLEACC_SUBMITTER}></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <{foreach item=file from=$files}>
+                <{include file='db:wgsimpleacc_files_list.tpl' }>
+                <{/foreach}>
+            </tbody>
+        </table>
+    </div>
+    <{else}>
+    <{$smarty.const._MA_WGSIMPLEACC_THEREARENT_FILES}>
+    <{/if}>
+    <div class="clear"></div>
+    <{/if}>
+<{if $formFilesDir|default:''}>
+    <{$formFilesDir}>
+    <div class="clear"></div>
+<{/if}>
+
+<!-- end code for show files non-related to transactions -->
+<!-- start code for show files related to transactions -->
 <{if $formFilesUpload|default:''}>
     <div id='filehandler' class='col-xs-12 col-sm-12'>
         <ul class='nav nav-tabs'>

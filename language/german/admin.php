@@ -118,6 +118,9 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_PERMISSIONS_CLIENT_ADMIN', 'Berechtigungen zum Verwalten von Klienten');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_CLIENT_SUBMIT', 'Berechtigungen zum Einsenden von Klienten');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_CLIENT_VIEW', 'Berechtigungen zum Ansehen der Klienten');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_FILEDIR_ADMIN', 'Berechtigungen zum Verwalten der Dateien im Dateiverzeichnis');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_FILEDIR_SUBMIT', 'Berechtigungen zum Hochladen von Dateien in das Dateiverzeichnis');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_FILEDIR_VIEW', 'Berechtigungen zum Ansehen der Dateien im Dateiverzeichnis');
 // ---------------- Admin Others ----------------
 \define('_AM_WGSIMPLEACC_ABOUT_MAKE_DONATION', 'Senden');
 \define('_AM_WGSIMPLEACC_SUPPORT_FORUM', 'Support Forum');

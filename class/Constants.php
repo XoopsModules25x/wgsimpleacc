@@ -84,6 +84,9 @@ interface Constants
     public const PERM_CLIENTS_SUBMIT       = 19;
     public const PERM_CLIENTS_VIEW         = 20;
     public const PERM_CLIENTS_ADMIN        = 21;
+    public const PERM_FILEDIR_ADMIN        = 22;
+    public const PERM_FILEDIR_SUBMIT       = 23;
+    public const PERM_FILEDIR_VIEW         = 24;
 
     // Constants for account class
     public const CLASS_BOTH   = 1;

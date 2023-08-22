@@ -84,9 +84,9 @@ if ($permissionsHandler->getPermTransactionsView()) {
         if ($permissionsHandler->getPermTransactionsApprove()) {
             $nav_items2[] = ['href' => 'transactions.php?op=listhist', 'icon' => '<i class="fa fa-trash fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_TRAHISTORY_DELETED, 'sub_items3' => []];
         }
-        $nav_items1[] = ['href' => '#', 'icon' => '<i class="fa fa-files-o fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_TRANSACTIONS, 'sub_items2' => $nav_items2];
+        $nav_items1[] = ['href' => '#', 'icon' => '<i class="fa fa-money fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_TRANSACTIONS, 'sub_items2' => $nav_items2];
     } else {
-        $nav_items1[] = ['href' => 'transactions.php', 'icon' => '<i class="fa fa-files-o fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_TRANSACTIONS_LIST];
+        $nav_items1[] = ['href' => 'transactions.php', 'icon' => '<i class="fa fa-money fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_TRANSACTIONS_LIST];
     }
 }
 
@@ -182,6 +182,16 @@ if ($permissionsHandler->getPermGlobalView()) {
     }
     if ($permissionsHandler->getPermTransactionsView() || $permissionsHandler->getPermBalancesView()) {
         $nav_items1[] = ['href' => '#', 'icon' => '<i class="fa fa-bar-chart-o fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_STATISTICS, 'sub_items2' => $nav_items2];
+    }
+}
+if ($permissionsHandler->getPermFileDirView()) {
+    $nav_items2 = [];
+    if ($permissionsHandler->getPermFileDirSubmit()) {
+        $nav_items2[] = ['href' => 'files.php?op=filedir_list', 'icon' => '<i class="fa fa-list-ol fa-fw fa-lg"></i>','label' => \_MA_WGSIMPLEACC_FILES_LIST, 'sub_items3' => []];
+        $nav_items2[] = ['href' => 'files.php?op=filedir_new', 'icon' => '<i class="fa fa-plus-square fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_FILE_ADD, 'sub_items3' => []];
+        $nav_items1[] = ['href' => '#', 'icon' => '<i class="fa fa-files-o fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_FILES, 'sub_items2' => $nav_items2];
+    } else {
+        $nav_items1[] = ['href' => 'files.php?op=filedir_list', 'icon' => '<i class="fa fa-files-o fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_FILES_LIST];
     }
 }
 if ($permissionsHandler->getPermGlobalView()) {

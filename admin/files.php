@@ -43,7 +43,7 @@ switch ($op) {
         $adminObject->addItemButton(\_AM_WGSIMPLEACC_ADD_FILE, 'files.php?op=new');
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
         $filesCount = $filesHandler->getCountFiles();
-        $filesAll = $filesHandler->getAllFiles($start, $limit);
+        $filesAll = $filesHandler->getAllFiles($start, $limit, 'fil_id', 'DESC');
         $GLOBALS['xoopsTpl']->assign('files_count', $filesCount);
         $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
         $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_url', \WGSIMPLEACC_UPLOAD_URL);
