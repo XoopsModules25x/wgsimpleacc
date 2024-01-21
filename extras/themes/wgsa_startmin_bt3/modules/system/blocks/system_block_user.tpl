@@ -13,6 +13,6 @@
         <{else}>
             <li><a href="<{xoAppUrl 'viewpmsg.php'}>" title="<{$block.lang_inbox}>"><span class="glyphicon glyphicon-envelope"></span><{$block.lang_inbox}></a></li>
         <{/if}>
-        <li><a href="<{xoAppUrl 'user.php'?op=logout}>" title="<{$block.lang_logout}>"><span class="glyphicon glyphicon-off"></span><{$block.lang_logout}></a></li>
+        <li><a href="<{xoAppUrl 'user.php?op=logout'}>" title="<{$block.lang_logout}>"><span class="glyphicon glyphicon-off"></span><{$block.lang_logout}></a></li>
     </ul>
 </div>

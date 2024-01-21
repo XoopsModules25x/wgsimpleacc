@@ -214,33 +214,46 @@ class OuttemplatesHandler extends \XoopsPersistableObjectHandler
             \redirect_header('index.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
         }
         $otplBody = \str_replace(['&lt;', '&gt;'], ['<', '>'], $outtemplateObj->getVar('otpl_body', 'n'));
+        $otplHeader = \str_replace(['&lt;', '&gt;'], ['<', '>'], $outtemplateObj->getVar('otpl_header', 'n'));
+        $otplFooter = \str_replace(['&lt;', '&gt;'], ['<', '>'], $outtemplateObj->getVar('otpl_footer', 'n'));
 
+        // add extra data to outParams
+        $user = ('' != $GLOBALS['xoopsUser']->getVar('name')) ? $GLOBALS['xoopsUser']->getVar('name') : $GLOBALS['xoopsUser']->getVar('uname');
+        $outParams['sender'] = $helper->getConfig('otpl_sender');
+        $outParams['output_date'] = date(_SHORTDATESTRING);
+        $outParams['output_user'] = $user;
+        $outParams['xoops_url'] = \XOOPS_URL;
+        $outParams['xoops_sitename'] = htmlspecialchars($GLOBALS['xoopsConfig']['sitename'], ENT_QUOTES);
+        $outParams['xoops_slogan'] = htmlspecialchars($GLOBALS['xoopsConfig']['slogan'], ENT_QUOTES);
+        $outParams['xoops_pagetitle'] = isset($GLOBALS['xoopsModule']) && is_object($GLOBALS['xoopsModule'])
+            ? $GLOBALS['xoopsModule']->getVar('name')
+            : htmlspecialchars($GLOBALS['xoopsConfig']['slogan'], ENT_QUOTES);
+
+        /*
+        //TODO: fix error with function.eval.php
         // assign data of transaction
         foreach ($outParams as $key => $value) {
             $letterTpl->assign($key, $value);
         }
-        // assign extra data
-        $letterTpl->assign('sender', $helper->getConfig('otpl_sender'));
-        $letterTpl->assign('output_date', date(_SHORTDATESTRING));
-        $user = ('' != $GLOBALS['xoopsUser']->getVar('name')) ? $GLOBALS['xoopsUser']->getVar('name') : $GLOBALS['xoopsUser']->getVar('uname');
-        $letterTpl->assign('output_user', $user);
-        $letterTpl->assign('xoops_url', \XOOPS_URL);
-        $letterTpl->assign('xoops_sitename', htmlspecialchars($GLOBALS['xoopsConfig']['sitename'], ENT_QUOTES));
-        $letterTpl->assign('xoops_slogan', htmlspecialchars($GLOBALS['xoopsConfig']['slogan'], ENT_QUOTES));
-        $letterTpl->assign('xoops_pagetitle', isset($GLOBALS['xoopsModule']) && is_object($GLOBALS['xoopsModule'])
-            ? $GLOBALS['xoopsModule']->getVar('name')
-            : htmlspecialchars($GLOBALS['xoopsConfig']['slogan'], ENT_QUOTES));
-
         // fetch templates
         $template['body'] = $letterTpl->fetchFromData($otplBody);
-
-        $otplHeader = \str_replace(['&lt;', '&gt;'], ['<', '>'], $outtemplateObj->getVar('otpl_header', 'n'));
         $template['header'] = $letterTpl->fetchFromData($otplHeader);
-
-        $otplFooter= \str_replace(['&lt;', '&gt;'], ['<', '>'], $outtemplateObj->getVar('otpl_footer', 'n'));
         $template['footer'] = $letterTpl->fetchFromData($otplFooter);
+        */
+        // temporary fix for fetchFromData
+        $outtemplatesHandler = $helper->getHandler('Outtemplates');
+        $template['body'] = $outtemplatesHandler->fixFetchFromData($otplBody, $outParams); //fix fetchFromData
+        $template['header'] = $outtemplatesHandler->fixFetchFromData($otplHeader, $outParams); //fix fetchFromData
+        $template['footer'] = $outtemplatesHandler->fixFetchFromData($otplFooter, $outParams); //fix fetchFromData
 
         return $template;
+    }
+
+    private function fixFetchFromData($text, $outParams) {
+        foreach ($outParams as $key => $value) {
+            $text = str_replace('<{$' . $key . '}>', $value, $text);
+        }
+        return $text;
     }
 
     /**
