@@ -172,5 +172,5 @@ function execute_output ($template, $outParams)
         $pdf->Output($outParams['file_temp'], 'F');
     }
 
-    return $pdf->Output($pdfFilename, 'D');
+    return $pdf->Output($pdfFilename, 'I');
 }

@@ -21,7 +21,7 @@
             <li class="nav-item"><a class="nav-link" href="<{xoAppUrl 'viewpmsg.php'}>" title="<{$block.lang_inbox}>"><span class="fa fa-envelope-open-o"></span><{$block.lang_inbox}></a>
             </li>
         <{/if}>
-        <li class="nav-item"><a class="nav-link" href="<{xoAppUrl 'user.php'?op=logout}>" title="<{$block.lang_logout}>"><span class="fa fa-sign-out"></span><{$block.lang_logout}></a>
+        <li class="nav-item"><a class="nav-link" href="<{xoAppUrl 'user.php?op=logout'}>" title="<{$block.lang_logout}>"><span class="fa fa-sign-out"></span><{$block.lang_logout}></a>
         </li>
     </ul>
 </div>
