@@ -207,8 +207,6 @@ class OuttemplatesHandler extends \XoopsPersistableObjectHandler
 
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
 
-        $letterTpl = new \XoopsTpl();
-
         $outtemplateObj = $helper->getHandler('Outtemplates')->get($outParams['otpl_id']);
         if (!\is_object($outtemplateObj)) {
             \redirect_header('index.php?op=list', 3, \_MA_WGSIMPLEACC_INVALID_PARAM);
@@ -232,6 +230,7 @@ class OuttemplatesHandler extends \XoopsPersistableObjectHandler
         /*
         //TODO: fix error with function.eval.php
         // assign data of transaction
+        $letterTpl = new \XoopsTpl();
         foreach ($outParams as $key => $value) {
             $letterTpl->assign($key, $value);
         }
