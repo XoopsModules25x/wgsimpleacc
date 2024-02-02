@@ -39,10 +39,11 @@ function xoops_module_update_wgsimpleacc($module, $prev_version = null)
     $moduleDirName = $module->dirname();
 
     /*
-    if ($prev_version < 120) {
-        update_wgsimpleacc_v120($module);
+    if ($prev_version < 133) {
+        update_wgsimpleacc_v133($module);
     }
     */
+
     //wgsimpleacc_check_db($module);
 
     //check upload directory
@@ -109,20 +110,37 @@ function wgsimpleacc_check_db($module)
  * @return bool
  */
 /*
-function update_wgsimpleacc_v120($module)
+function update_wgsimpleacc_v133($module)
 {
-    $table = $GLOBALS['xoopsDB']->prefix('wgsimpleacc_transactions');
-    $sql = "UPDATE `$table` SET `tra_status` = '9' WHERE `$table`.`tra_status` = 6;";
-    $sql .= "UPDATE `$table` SET `tra_status` = '7' WHERE `$table`.`tra_status` = 3;";
-    $sql .= "UPDATE `$table` SET `tra_status` = '3' WHERE `$table`.`tra_status` = 1;";
-    $sql .= "UPDATE `$table` SET `tra_status` = '1' WHERE `$table`.`tra_status` = 5;";
-    $sql .= "UPDATE `$table` SET `tra_status` = '22' WHERE `$table`.`tra_status` = 2;";
-    $sql .= "UPDATE `$table` SET `tra_status` = '2' WHERE `$table`.`tra_status` = 4;";
-    $sql .= "UPDATE `$table` SET `tra_status` = '4' WHERE `$table`.`tra_status` = 22;";
-    if (!$result = $GLOBALS['xoopsDB']->queryF($sql)) {
-        xoops_error($GLOBALS['xoopsDB']->error() . '<br>' . $sql);
-        $module->setErrors("Error when updating table '$table'.");
-        return false;
+    $helper = XoopsModules\Wgsimpleacc\Helper::getInstance();
+    $transactionsHandler = $helper->getHandler('Transactions');
+    $trahistoriesHandler = $helper->getHandler('Trahistories');
+
+    $transactionsAll = $transactionsHandler->getAll();
+
+    foreach (\array_keys($transactionsAll) as $i) {
+        if (0 === (int)$transactionsAll[$i]->getVar('tra_dateupdated')) {
+            //save last tra_datecreated as tra_dateupdated
+            $traId = $transactionsAll[$i]->getVar('tra_id');
+            $transactionsObj = $transactionsHandler->get($traId);
+            $transactionsObj->setVar('tra_dateupdated', $transactionsAll[$i]->getVar('tra_datecreated'));
+            //get first tra_datecreated from history as tra_datecreated
+            $crHistory = new \CriteriaCompo();
+            $crHistory->add(new \Criteria('tra_id', $traId));
+            $crHistory->setSort('hist_id');
+            $crHistory->setOrder('ASC');
+            $crHistory->setStart();
+            $crHistory->setLimit(1);
+            $trahistorCount = $trahistoriesHandler->getCount($crHistory);
+            if ($trahistorCount > 0) {
+                // Get All Transactions
+                $trahistorAll = $trahistoriesHandler->getAll($crHistory);
+                foreach (\array_keys($trahistorAll) as $j) {
+                    $transactionsObj->setVar('tra_datecreated', $trahistorAll[$j]->getVar('tra_datecreated'));
+                }
+            }
+            $transactionsHandler->insert($transactionsObj);
+        }
     }
 
     return true;
