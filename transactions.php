@@ -134,8 +134,8 @@ switch ($op) {
         if ($traId > 0) {
             $crTransactions->add(new \Criteria('tra_id', $traId));
         } else {
-            $crTransactions->add(new \Criteria('tra_datecreated', $dateFrom, '>='));
-            $crTransactions->add(new \Criteria('tra_datecreated', $dateTo, '<='));
+            $crTransactions->add(new \Criteria('tra_date', $dateFrom, '>='));
+            $crTransactions->add(new \Criteria('tra_date', $dateTo, '<='));
         }
         if ($allId > 0) {
             if ($allSubs) {
