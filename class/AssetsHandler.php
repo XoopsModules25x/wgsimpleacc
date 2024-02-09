@@ -235,6 +235,7 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
             $crTransactions->add(new \Criteria('tra_asid', $asId));
             $crTransactions->add(new \Criteria('tra_date', $dateFrom, '>='));
             $crTransactions->add(new \Criteria('tra_date', $dateTo, '<='));
+            $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_DELETED, '<>'));
             if ($onlyApproved) {
                 $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_APPROVED, '>='));
             }
