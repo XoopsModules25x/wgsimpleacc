@@ -51,7 +51,7 @@
                 <a class='btn btn-warning disabled right' href='transactions.php?op=approve&amp;tra_id=<{$transaction.tra_id}><{$traOp}>' title='<{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_STATUS_WAITING}>'><i class="fa fa-hourglass fa-fw"></i></a>
             <{/if}>
         <{/if}>
-        <a class='btn btn-success right' href='transactions.php?op=show&amp;tra_id=<{$transaction.tra_id}><{$traOp}>' title='<{$smarty.const._MA_WGSIMPLEACC_DETAILS}>'><i class="fa fa-search fa-fw"></i></a>
+        <a class='btn btn-success right' href='transactions.php?op=show<{$histOp}>&amp;tra_id=<{$transaction.tra_id}><{$traOp}>' title='<{$smarty.const._MA_WGSIMPLEACC_DETAILS}>'><i class="fa fa-search fa-fw"></i></a>
         <{if $permSubmit && $transaction.editable}>
             <a class='btn btn-primary right' href='transactions.php?op=edit&amp;tra_id=<{$transaction.tra_id}><{$traOp}>' title='<{$smarty.const._EDIT}>'><i class="fa fa-edit fa-fw"></i></a>
             <{if $permDelete|default:0}>

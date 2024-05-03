@@ -47,7 +47,7 @@ $accId         = Request::getInt('acc_id');
 $asId          = Request::getInt('as_id');
 $cliId         = Request::getInt('cli_id');
 $displayfilter = Request::getInt('displayfilter');
-if ('listhist' === $op) {
+if ('listhist' === $op || 'showhist' === $op) {
     // if showing historical transactions then take full period
     $dateFrom = 1;
     $crTransactions = new \CriteriaCompo();
@@ -61,6 +61,7 @@ if ('listhist' === $op) {
             $dateFrom = (int)$transactionsAll[$i]->getVar('tra_datecreated');
         }
     }
+    $GLOBALS['xoopsTpl']->assign('histOp','hist');
 } else {
     // if showing current transaction list then exent to one month before
     $dateFrom = Request::getInt('dateFrom', \time() - 60*60*24*365);
@@ -119,6 +120,7 @@ $keywords = [];
 
 switch ($op) {
     case 'show':
+    case 'showhist':
     case 'list':
     default:
         $GLOBALS['xoopsTpl']->assign('showList', true);
@@ -159,7 +161,9 @@ switch ($op) {
             $critStatus = '(' . \implode(',', $traStatus) . ')';
             $crTransactions->add(new \Criteria('tra_status', $critStatus, 'IN'));
         } else {
-            $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_DELETED, '>'));
+            if ('showhist' !== $op) {
+                $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_DELETED, '>'));
+            }
         }
 
         if ('' !== $traDesc) {
