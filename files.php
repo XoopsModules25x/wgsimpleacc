@@ -28,7 +28,8 @@ use XoopsModules\Wgsimpleacc\{
 require __DIR__ . '/header.php';
 require_once \XOOPS_ROOT_PATH . '/header.php';
 $GLOBALS['xoopsTpl']->assign('template_sub', 'db:wgsimpleacc_files.tpl');
-require __DIR__ . '/navbar.php';
+
+$GLOBALS['xoTheme']->addStylesheet($style, null);
 
 // Permissions
 if (!$permissionsHandler->getPermFilesView()) {
@@ -76,8 +77,6 @@ if ('' === $traOp) {
 
 $uploadByApp = $helper->getConfig('upload_by_app');
 
-$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_files_url', \WGSIMPLEACC_UPLOAD_FILES_URL);
 $GLOBALS['xoopsTpl']->assign('upload_by_app', $uploadByApp);
 $GLOBALS['xoopsTpl']->assign('start', $start);

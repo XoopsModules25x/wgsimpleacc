@@ -29,7 +29,8 @@ use XoopsModules\Wgsimpleacc\{
 require __DIR__ . '/header.php';
 require_once \XOOPS_ROOT_PATH . '/header.php';
 $GLOBALS['xoopsTpl']->assign('template_sub', 'db:wgsimpleacc_assets.tpl');
-require __DIR__ . '/navbar.php';
+
+$GLOBALS['xoTheme']->addStylesheet($style, null);
 
 // Permissions
 if (!$permissionsHandler->getPermAssetsView()) {
@@ -40,11 +41,6 @@ $op    = Request::getCmd('op', 'list');
 $start = Request::getInt('start');
 $limit = Request::getInt('limit', $helper->getConfig('userpager'));
 $asId  = Request::getInt('as_id');
-
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icon_url_16', \WGSIMPLEACC_ICONS_URL . '/16/');
-$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icons_url_32', \WGSIMPLEACC_ICONS_URL . '/32/');
 
 $keywords = [];
 

@@ -11,7 +11,7 @@
     <{$formTraFilter}>
  <{/if}>
 <{foreach item=alloc from=$tra_allocs_list}>
-	<a class='btn btn-default <{if $alloc.allSubs == 1}>disabled<{/if}>' href='<{$alloc.href}>' title='<{$alloc.all_name}>'>
+	<a class='btn btn-secondary <{if $alloc.allSubs == 1}>disabled<{/if}>' href='<{$alloc.href}>' title='<{$alloc.all_name}>'>
 		<{$alloc.all_name}>
 		<{if $alloc.allSubs > 1}>
             <i class="fa fa-angle-double-down"></i>

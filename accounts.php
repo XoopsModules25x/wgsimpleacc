@@ -28,7 +28,8 @@ use XoopsModules\Wgsimpleacc\{
 require __DIR__ . '/header.php';
 require_once \XOOPS_ROOT_PATH . '/header.php';
 $GLOBALS['xoopsTpl']->assign('template_sub', 'db:wgsimpleacc_accounts.tpl');
-require __DIR__ . '/navbar.php';
+
+$GLOBALS['xoTheme']->addStylesheet($style, null);
 
 // Permissions
 if (!$permissionsHandler->getPermAccountsView()) {
@@ -41,10 +42,6 @@ $limit = Request::getInt('limit', $helper->getConfig('userpager'));
 $accId = Request::getInt('acc_id');
 
 $permAccountsSubmit = $permissionsHandler->getPermAccountsSubmit();
-
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icon_url_16', \WGSIMPLEACC_ICONS_URL . '/16/');
-$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
 
 $keywords = [];
 

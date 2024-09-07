@@ -11,9 +11,9 @@
 	<td scope="col"><{$file.submitter}></td>
 	<td scope="col">
 		<{if $file.image}>
-			<a class='btn btn-default' href='#' data-toggle="modal" data-target="#imgModal" data-title="<{$file.name}>" data-info="<{$wgsimpleacc_upload_files_url}>/<{$file.name}>" title='<{$file.name}>'><i class="fa fa-search fa-fw"></i></a>
+			<a class='btn btn-secondary' href='#' data-toggle="modal" data-target="#imgModal" data-title="<{$file.name}>" data-info="<{$wgsimpleacc_upload_files_url}>/<{$file.name}>" title='<{$file.name}>'><i class="fa fa-search fa-fw"></i></a>
 		<{else}>
-			<a class='btn btn-default' href='files.php?op=showfile&amp;fil_id=<{$file.id}>&amp;start=<{$start}>&amp;limit=<{$limit}>' title='<{$file.name}>'><i class="fa fa-download fa-fw"></i></a>
+			<a class='btn btn-secondary' href='files.php?op=showfile&amp;fil_id=<{$file.id}>&amp;start=<{$start}>&amp;limit=<{$limit}>' title='<{$file.name}>'><i class="fa fa-download fa-fw"></i></a>
 		<{/if}>
 		<a class='btn btn-success right' href='files.php?op=show&amp;fil_id=<{$file.fil_id}>&amp;fil_traid=<{$file.fil_traid}>&amp;start=<{$start}>&amp;limit=<{$limit}>' title='<{$smarty.const._MA_WGSIMPLEACC_DETAILS}>'><{$smarty.const._MA_WGSIMPLEACC_DETAILS}></a>
 		<a class='btn btn-success right' onclick="printFile('<{$wgsimpleacc_upload_files_url}>/<{$file.name}>')" href='#' title='<{$smarty.const._MA_WGSIMPLEACC_PRINT}>'><{$smarty.const._MA_WGSIMPLEACC_PRINT}></a>

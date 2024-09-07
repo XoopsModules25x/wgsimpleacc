@@ -23,7 +23,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">&times;</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">&times;</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->

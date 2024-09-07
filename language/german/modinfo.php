@@ -175,3 +175,11 @@ require_once __DIR__ . '/common.php';
 \define('_MI_WGSIMPLEACC_NOTIFY_TRANSACTION_COMMENT_CAPTION', 'Notify me about comments for transaction');
 \define('_MI_WGSIMPLEACC_NOTIFY_TRANSACTION_COMMENT_SUBJECT', 'Notification about comments for transaction');
 // ---------------- End ----------------
+//1.3.2
+\define('_MI_WGFILEMANAGER_SHOW_STARTMIN_NAV', 'Zeige Startmin Navigation');
+\define('_MI_WGFILEMANAGER_SHOW_STARTMIN_NAV_DESC', "Definiere ob die Startmin Navigationsleiste angezeigt werden soll");
+\define('_MI_WGFILEMANAGER_SHOW_STARTMIN_NAV_LEFT', 'Zeige die Startmin Navigationsleiste auf der linken Seite');
+\define('_MI_WGFILEMANAGER_SHOW_STARTMIN_NAV_NONE', 'Navigationsleiste nicht anzeigen, ich verwende stattdessen einen anderen Block');
+// Blocks
+\define('_MI_WGSIMPLEACC_STARTMIN_BLOCK', 'Block Startmin Navigation');
+\define('_MI_WGSIMPLEACC_STARTMIN_BLOCK_DESC', 'Block zur Anzeige des Startmin Navigation Menüs');

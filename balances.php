@@ -29,7 +29,8 @@ use XoopsModules\Wgsimpleacc\{
 require __DIR__ . '/header.php';
 require_once \XOOPS_ROOT_PATH . '/header.php';
 $GLOBALS['xoopsTpl']->assign('template_sub', 'db:wgsimpleacc_balances.tpl');
-require __DIR__ . '/navbar.php';
+
+$GLOBALS['xoTheme']->addStylesheet($style, null);
 
 // Permissions
 if (!$permissionsHandler->getPermBalancesView()) {
@@ -41,10 +42,6 @@ $start   = Request::getInt('start');
 $limit   = Request::getInt('limit', $helper->getConfig('userpager'));
 $balId   = Request::getInt('bal_id');
 $balType = Request::getInt('bal_type');
-
-$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icons_url_32', \WGSIMPLEACC_ICONS_URL . '/32/');
 
 $keywords = [];
 

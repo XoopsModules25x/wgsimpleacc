@@ -29,7 +29,8 @@ use XoopsModules\Wgsimpleacc\{
 require __DIR__ . '/header.php';
 require_once \XOOPS_ROOT_PATH . '/header.php';
 $GLOBALS['xoopsTpl']->assign('template_sub', 'db:wgsimpleacc_transactions.tpl');
-require_once __DIR__ . '/navbar.php';
+
+$GLOBALS['xoTheme']->addStylesheet($style, null);
 
 // Permissions
 if (!$permissionsHandler->getPermTransactionsView()) {
@@ -95,10 +96,6 @@ $traOpSorter = '&amp;start=' . $start . '&amp;limit=' . $limit . $traFilter;
 $traOp = $traOpSorter . '&amp;sortby=' . $sortBy . '&amp;order=' . $order;
 
 $GLOBALS['xoopsTpl']->assign('traOp',$traOp);
-
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icon_url_16', \WGSIMPLEACC_ICONS_URL . '/16/');
-$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_upload_files_url', \WGSIMPLEACC_UPLOAD_FILES_URL);
 
 $permSubmit = $permissionsHandler->getPermTransactionsSubmit();

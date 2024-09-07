@@ -50,7 +50,12 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      */
     private function getPerm($constantPerm)
     {
-        global $xoopsUser, $xoopsModule;
+        global $xoopsUser;
+
+        $moduleDirName = \basename(\dirname(__DIR__));
+        /** @var XoopsModuleHandler $module_handler */
+        $module_handler = xoops_getHandler('module');
+        $xoopsModule    = $module_handler->getByDirname($moduleDirName);
 
         $currentuid = 0;
         if (isset($xoopsUser) && \is_object($xoopsUser)) {

@@ -4,6 +4,6 @@
 <{if ($addtoken)}>
     <{$token}>
 <{/if}>
-    <input type="submit" class="btn btn-default btn-secondary" name="confirm_submit" value="<{$submit}>" title="<{$submit}>">&nbsp;<input type="button" class="btn btn-default btn-secondary" name="confirm_back" value="<{$smarty.const._CANCEL}>" onclick="history.go(-1);" title="<{$smarty.const._CANCEL}>">
+    <input type="submit" class="btn btn-secondary btn-secondary" name="confirm_submit" value="<{$submit}>" title="<{$submit}>">&nbsp;<input type="button" class="btn btn-secondary btn-secondary" name="confirm_back" value="<{$smarty.const._CANCEL}>" onclick="history.go(-1);" title="<{$smarty.const._CANCEL}>">
     </form>
 </div>

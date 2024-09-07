@@ -25,7 +25,7 @@
 
         <input type="hidden" name="op" value="login">
         <input type="hidden" name="xoops_redirect" value="<{$redirect_page|default:''}>">
-        <button type="submit" class="btn btn-default"><{$lang_login}></button>
+        <button type="submit" class="btn btn-secondary"><{$lang_login}></button>
     </form>
     <br>
     <a name="lost"></a>
@@ -45,7 +45,7 @@
         </div>
         <input type="hidden" name="op" value="mailpasswd">
         <input type="hidden" name="t"  value="<{$mailpasswd_token}>">
-        <button type="submit" class="btn btn-default"><{$lang_sendpassword}></button>
+        <button type="submit" class="btn btn-secondary"><{$lang_sendpassword}></button>
     </form>
     </div>
     </div>

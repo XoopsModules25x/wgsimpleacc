@@ -151,7 +151,7 @@ body {
 @media(min-width:768px) {
     .sidebar {
         z-index: 1;
-        position: absolute;
+        position: relative;
         /* min-width: 175px;
         margin-top: 51px;*/
     }
@@ -656,4 +656,7 @@ table.dataTable thead .sorting:after {
 .tabbed-panel.panel-danger .nav-tabs > li.dropdown .dropdown-menu > .active > a:focus {
     color: #fff; /* active text color */
     background-color: #a94442; /* active bg color */
+}
+.sortable li div {
+    height: 100px !important;
 }

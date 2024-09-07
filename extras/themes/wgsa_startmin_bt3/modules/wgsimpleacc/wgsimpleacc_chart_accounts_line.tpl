@@ -10,11 +10,11 @@
 <h3><{$header_accounts_line}></h3>
 <p>
     <{if $level|default:0 == 1}>
-        <a class="btn btn-default disabled" href="statistics.php?op=accounts&amp;level=1" title="<{$smarty.const._MA_WGSIMPLEACC_SHOW_TOP}>"><{$smarty.const._MA_WGSIMPLEACC_SHOW_TOP}></a>
-        <a class="btn btn-default"href="statistics.php?op=accounts&amp;level=2" title="<{$smarty.const._MA_WGSIMPLEACC_SHOW_ALL}>"><{$smarty.const._MA_WGSIMPLEACC_SHOW_ALL}></a>
+        <a class="btn btn-secondary disabled" href="statistics.php?op=accounts&amp;level=1" title="<{$smarty.const._MA_WGSIMPLEACC_SHOW_TOP}>"><{$smarty.const._MA_WGSIMPLEACC_SHOW_TOP}></a>
+        <a class="btn btn-secondary"href="statistics.php?op=accounts&amp;level=2" title="<{$smarty.const._MA_WGSIMPLEACC_SHOW_ALL}>"><{$smarty.const._MA_WGSIMPLEACC_SHOW_ALL}></a>
     <{else}>
-        <a class="btn btn-default" href="statistics.php?op=accounts&amp;level=1" title="<{$smarty.const._MA_WGSIMPLEACC_SHOW_TOP}>"><{$smarty.const._MA_WGSIMPLEACC_SHOW_TOP}></a>
-        <a class="btn btn-default disabled" href="statistics.php?op=accounts&amp;level=2" title="<{$smarty.const._MA_WGSIMPLEACC_SHOW_ALL}>"><{$smarty.const._MA_WGSIMPLEACC_SHOW_ALL}></a>
+        <a class="btn btn-secondary" href="statistics.php?op=accounts&amp;level=1" title="<{$smarty.const._MA_WGSIMPLEACC_SHOW_TOP}>"><{$smarty.const._MA_WGSIMPLEACC_SHOW_TOP}></a>
+        <a class="btn btn-secondary disabled" href="statistics.php?op=accounts&amp;level=2" title="<{$smarty.const._MA_WGSIMPLEACC_SHOW_ALL}>"><{$smarty.const._MA_WGSIMPLEACC_SHOW_ALL}></a>
     <{/if}>
 </p>
 <div id="canvas-holder2" class="canvas-accounts" style="width:100%">
