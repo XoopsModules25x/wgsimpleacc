@@ -158,7 +158,7 @@ $modversion['search'] = [
 $currdirname = isset($GLOBALS['xoopsModule']) && \is_object($GLOBALS['xoopsModule']) ? $GLOBALS['xoopsModule']->getVar('dirname') : 'system';
 
 if ($moduleDirName == $currdirname) {
-    $wgmenu = new \XoopsModules\Wgsimpleacc\Wgmenu;
+    $wgmenu = new \XoopsModules\Wgsimpleacc\Modulemenu;
     $menuItems = $wgmenu->getMenuitemsDefault();
     foreach ($menuItems as $key => $menuItem) {
         $modversion['sub'][$key]['name'] = $menuItem['name'];

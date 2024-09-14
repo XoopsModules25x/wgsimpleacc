@@ -47,7 +47,7 @@ function b_wgsimpleacc_startminnav_show($options)
     $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/js/metisMenu.min.js');
     $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/js/startmin.js');
 
-    $wgmenu = new \XoopsModules\Wgsimpleacc\Wgmenu;
+    $wgmenu = new \XoopsModules\Wgsimpleacc\Modulemenu;
     //$block=$wgmenu->getMenuitemsStartmin();
     return $wgmenu->getMenuitemsStartmin();
 
