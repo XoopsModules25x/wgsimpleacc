@@ -66,6 +66,7 @@ $modPathIcon32   = $GLOBALS['xoopsModule']->getInfo('modicons16');
 $styles  = [];
 $scripts = [];
 // Default Css Style
-$style = \WGSIMPLEACC_URL . '/assets/css/style.css';
+$styles[] = \WGSIMPLEACC_URL . '/assets/css/style.css';
+$styles[] = \WGSIMPLEACC_URL . '/assets/css/wgsa_default.css';
 
 $GLOBALS['xoopsOption']['template_main'] = 'wgsimpleacc_main.tpl';

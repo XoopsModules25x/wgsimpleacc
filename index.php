@@ -29,7 +29,9 @@ require __DIR__ . '/header.php';
 require_once \XOOPS_ROOT_PATH . '/header.php';
 $GLOBALS['xoopsTpl']->assign('template_sub', 'db:wgsimpleacc_index.tpl');
 
-$GLOBALS['xoTheme']->addStylesheet($style, null);
+foreach ($styles as $style) {
+    $GLOBALS['xoTheme']->addStylesheet($style, null);
+}
 
 $op       = Request::getCmd('op', 'list');
 $allPid   = Request::getInt('all_pid');

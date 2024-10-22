@@ -27,7 +27,9 @@ require __DIR__ . '/header.php';
 require_once \XOOPS_ROOT_PATH . '/header.php';
 $GLOBALS['xoopsTpl']->assign('template_sub', 'db:wgsimpleacc_outtemplates.tpl');
 
-$GLOBALS['xoTheme']->addStylesheet($style, null);
+foreach ($styles as $style) {
+    $GLOBALS['xoTheme']->addStylesheet($style, null);
+}
 
 // Permissions
 if (!$permissionsHandler->getPermOuttemplatesView()) {
@@ -54,6 +56,7 @@ switch ($op) {
     case 'list':
     default:
         $GLOBALS['xoopsTpl']->assign('showList', true);
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_icons_url_32', \WGSIMPLEACC_ICONS_URL . '/32');
         $crOuttemplates = new \CriteriaCompo();
         if ($otplId > 0) {
             $crOuttemplates->add(new \Criteria('otpl_id', $otplId));

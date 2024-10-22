@@ -30,7 +30,9 @@ require __DIR__ . '/header.php';
 require_once \XOOPS_ROOT_PATH . '/header.php';
 $GLOBALS['xoopsTpl']->assign('template_sub', 'db:wgsimpleacc_assets.tpl');
 
-$GLOBALS['xoTheme']->addStylesheet($style, null);
+foreach ($styles as $style) {
+    $GLOBALS['xoTheme']->addStylesheet($style, null);
+}
 
 // Permissions
 if (!$permissionsHandler->getPermAssetsView()) {
@@ -84,6 +86,20 @@ switch ($op) {
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
             }
         }
+        $minTra = 0;
+        $crTransactions = new \CriteriaCompo();
+        $crTransactions->setSort('tra_date');
+        $crTransactions->setOrder('ASC');
+        $crTransactions->setStart();
+        $crTransactions->setLimit(1);
+        if ($transactionsHandler->getCount($crTransactions) > 0) {
+            $transactionsAll = $transactionsHandler->getAll($crTransactions);
+            foreach (\array_keys($transactionsAll) as $i) {
+                $minTra = (int)$transactionsAll[$i]->getVar('tra_date');
+            }
+        }
+        $GLOBALS['xoopsTpl']->assign('dateFrom', $minTra);
+        $GLOBALS['xoopsTpl']->assign('dateTo', \time());
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ASSETS];
         break;

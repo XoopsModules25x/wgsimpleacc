@@ -5,7 +5,8 @@
     <{/if}>
     <td>
         <{if $transaction.remarks}>
-        <span class="wgsa-modal" data-toggle="modal" data-target="#infoModal" data-title="<{$transaction.modaltitle}>" data-info="<{$transaction.remarks}>">
+        <span class="wgsa-modal" data-bs-toggle="modal" data-bs-target="#infoModal" data-bs-title="<{$transaction.modaltitle}>" data-bs-info="<{$transaction.remarks}>">
+
         <{/if}>
         <{$transaction.desc}>
         <{if $transaction.remarks}>

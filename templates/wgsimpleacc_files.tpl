@@ -103,15 +103,15 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="imgModalLabel">Default Title</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="<{$smarty.const._CLOSE}>">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="<{$smarty.const._CLOSE}>">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <img id="modalimg" class="modal-img" src="assets/images/blank.gif" alt="blank" title="blank">
+                <img id="modalimg" class="modal-img img-fluid" src="assets/images/blank.gif" alt="blank" title="blank">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"><{$smarty.const._CLOSE}></button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><{$smarty.const._CLOSE}></button>
             </div>
         </div>
     </div>
@@ -122,33 +122,56 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="pdfModalLabel">Default Title</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="<{$smarty.const._CLOSE}>">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="<{$smarty.const._CLOSE}>">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <embed id="embedPdf" src="assets/images/blank.gif"
+                <embed id="embedPdf" class="embedPdf" src="assets/images/blank.gif"
                        frameborder="0" width="100%" height="400px">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"><{$smarty.const._CLOSE}></button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><{$smarty.const._CLOSE}></button>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    $('#imgModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget);
-        var info = button.data('info');
-        var title = button.data('title');
-        var modal = $(this);
-        modal.find('.modal-title').text(title);
-        var modalimg = document.getElementById("modalimg");
-        modalimg.src = info;
-        var width = modalimg.naturalWidth;
-        modal.find(".modal-dialog").css("width", width + 100);
-    });
+    const imgModal = document.getElementById('imgModal')
+    if (imgModal) {
+        imgModal.addEventListener('show.bs.modal', event => {
+            // Button that triggered the modal
+            const button = event.relatedTarget
+            // Extract info from data-bs-* attributes
+            const info = button.getAttribute('data-bs-info')
+            const title = button.getAttribute('data-bs-title')
+            // Update the modal's content.
+            const modalTitle = imgModal.querySelector('.modal-title')
+            const modalImg = imgModal.querySelector('.modal-img')
+
+            modalTitle.textContent = title
+            modalImg.src = info
+        })
+    }
+    const pdfModal = document.getElementById('pdfModal')
+    if (pdfModal) {
+        pdfModal.addEventListener('show.bs.modal', event => {
+            // Button that triggered the modal
+            const button = event.relatedTarget
+            // Extract info from data-bs-* attributes
+            const info = button.getAttribute('data-bs-info')
+            const title = button.getAttribute('data-bs-title')
+            // Update the modal's content.
+            const modalTitle = document.getElementById('pdfModalLabel')
+            const modalpdf = document.getElementById("embedPdf");
+            modalpdf.src = info;
+
+            modalTitle.textContent = title
+
+        })
+    }
+
     window.onload = function() {
         var btnDel = document.getElementById('delete_filtemp');
         btnDel.classList.add("btn-danger");
@@ -158,17 +181,7 @@
         var btnDel = document.getElementById('delete_filtemp');
         btnDel.classList.remove("hidden");
     }
-    $('#pdfModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget);
-        var info = button.data('info');
-        var title = button.data('title');
-        var modal = $(this);
-        modal.find('.modal-title').text(title);
-        var modalpdf = document.getElementById("embedPdf");
-        modalpdf.src = info;
-        var width = modalpdf.naturalWidth;
-        modal.find(".modal-dialog").css("width", width + 100);
-    });
+
 </script>
 <!-- End code for show files as modal-->
 

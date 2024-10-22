@@ -130,6 +130,8 @@ $modversion['templates'] = [
     ['file' => 'wgsimpleacc_clients.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_clients_list.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_clients_item.tpl', 'description' => ''],
+    ['file' => 'wgsimpleacc_allocations_listcoll.tpl', 'description' => ''],
+    ['file' => 'wgsimpleacc_accounts_listcoll.tpl', 'description' => ''],
 ];
 // ------------------- Mysql ------------------- //
 $modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
@@ -158,8 +160,8 @@ $modversion['search'] = [
 $currdirname = isset($GLOBALS['xoopsModule']) && \is_object($GLOBALS['xoopsModule']) ? $GLOBALS['xoopsModule']->getVar('dirname') : 'system';
 
 if ($moduleDirName == $currdirname) {
-    $wgmenu = new \XoopsModules\Wgsimpleacc\Modulemenu;
-    $menuItems = $wgmenu->getMenuitemsDefault();
+    $submenu = new \XoopsModules\Wgsimpleacc\Modulemenu;
+    $menuItems = $submenu->getMenuitemsDefault();
     foreach ($menuItems as $key => $menuItem) {
         $modversion['sub'][$key]['name'] = $menuItem['name'];
         $modversion['sub'][$key]['url'] = $menuItem['url'];

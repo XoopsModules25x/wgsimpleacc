@@ -197,10 +197,10 @@ ul.menu > li + li:before {
 	padding:0;
 }
 .wgsa-btn-sort {
-	padding: .15rem .3rem;
-	font-size: .600rem;
-	line-height: 1;
-	border-radius: .2rem;
+	padding: .30rem .20rem !important;
+	font-size: .600rem !important;
+	line-height: 1 !important;
+	border-radius: .2rem !important;
 }
 .wgsa-panel-sum {
 	margin-top:50px;
@@ -226,4 +226,3 @@ ul.menu > li + li:before {
 	padding:0 12px;
 	margin-top:5px;
 }
-

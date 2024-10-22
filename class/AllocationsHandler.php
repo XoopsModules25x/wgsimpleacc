@@ -313,6 +313,9 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
 
         $arrayAllTree = [];
 
+        $helper       = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+        $transactionsHandler = $helper->getHandler('Transactions');
+
         $crItems           = new \CriteriaCompo();
         $crItems->add(new \Criteria('all_pid', $allPid));
         $crItems->add(new \Criteria('all_online', Constants::ONOFF_HIDDEN, '<'));
@@ -323,13 +326,26 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
         // Table view items
         if ($itemsCount > 0) {
             foreach (\array_keys($itemsAll) as $i) {
+                $crTransactions = new \CriteriaCompo();
+                $crTransactions->add(new \Criteria('tra_allid', $i));
+                $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_DELETED, '>'));
+                $transactionsCount = $transactionsHandler->getCount($crTransactions);
                 $arrayAllTree[$i]['id'] = $i;
                 $arrayAllTree[$i]['name'] = $itemsAll[$i]->getVar('all_name');
+                $arrayAllTree[$i]['tracount'] = $transactionsCount;
+                $arrayAllTree[$i]['online'] = 0;
+                $arrayAllTree[$i]['online_text'] = \_MA_WGSIMPLEACC_OFFLINE;
+                if (Constants::ONOFF_ONLINE == $itemsAll[$i]->getVar('all_online')) {
+                    $arrayAllTree[$i]['online'] = 1;
+                    $arrayAllTree[$i]['online_text'] = \_MA_WGSIMPLEACC_ONLINE;
+                }
                 $child     = $this->getArrayTreeOfAllocations($i);
                 if ($child) {
                     $arrayAllTree[$i]['child'] = $child;
+                    $arrayAllTree[$i]['childs'] = \count($child);
                 } else {
                     $arrayAllTree[$i]['child'] = [];
+                    $arrayAllTree[$i]['childs'] = 0;
                 }
             }
         } else {

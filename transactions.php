@@ -30,7 +30,10 @@ require __DIR__ . '/header.php';
 require_once \XOOPS_ROOT_PATH . '/header.php';
 $GLOBALS['xoopsTpl']->assign('template_sub', 'db:wgsimpleacc_transactions.tpl');
 
-$GLOBALS['xoTheme']->addStylesheet($style, null);
+foreach ($styles as $style) {
+    $GLOBALS['xoTheme']->addStylesheet($style, null);
+}
+$GLOBALS['xoTheme']->addScript('browse.php?Frameworks/jquery/jquery.js');
 
 // Permissions
 if (!$permissionsHandler->getPermTransactionsView()) {

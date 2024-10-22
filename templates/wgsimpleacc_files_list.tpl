@@ -11,9 +11,9 @@
     <td scope="col"><{$file.submitter}></td>
     <td scope="col">
         <{if $file.image}>
-            <a class='btn btn-secondary' href='#' data-toggle="modal" data-target="#imgModal" data-title="<{$file.name}>" data-info="<{$wgsimpleacc_upload_files_url}>/<{$file.name}>" title='<{$file.name}>'><i class="fa fa-eye fa-fw"></i></a>
+            <a class='btn btn-secondary' href='#' data-bs-toggle="modal" data-bs-target="#imgModal" data-bs-title="<{$file.name}>" data-bs-info="<{$wgsimpleacc_upload_files_url}>/<{$file.name}>" title='<{$file.name}>'><i class="fa fa-eye fa-fw"></i></a>
         <{elseif $file.pdf}>
-            <a class='btn btn-secondary' href='#' data-toggle="modal" data-target="#pdfModal" data-title="<{$file.name}>" data-info="<{$wgsimpleacc_upload_files_url}>/<{$file.name}>" title='<{$file.name}>'><i class="fa fa-eye fa-fw"></i></a>
+            <a class='btn btn-secondary' href='#' data-bs-toggle="modal" data-bs-target="#pdfModal" data-bs-title="<{$file.name}>" data-bs-info="<{$wgsimpleacc_upload_files_url}>/<{$file.name}>" title='<{$file.name}>'><i class="fa fa-eye fa-fw"></i></a>
         <{else}>
             <a class='btn btn-secondary' href='files.php?op=showfile&amp;fil_id=<{$file.id}><{$traOp}>' target="_blank" title='<{$file.name}>'><i class="fa fa-download fa-fw"></i></a>
         <{/if}>
