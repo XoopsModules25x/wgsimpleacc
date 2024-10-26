@@ -164,7 +164,7 @@ class Utility
      * @param int $filterFrom
      * @param int $filterTo
      * @param string $op
-     * @return \XoopsForm FormInline
+     * @return Form\FormInline
      */
     public static function getFormFilterPeriod(int $filterFrom, int $filterTo, string $op = 'list')
     {

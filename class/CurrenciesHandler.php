@@ -53,7 +53,7 @@ class CurrenciesHandler extends \XoopsPersistableObjectHandler
      * retrieve a field
      *
      * @param int $id field id
-     * @param null $fields fields
+     * @param null $fields
      * @return \XoopsObject|null reference to the {@link Get} object
      */
     public function get($id = null, $fields = null): ?\XoopsObject

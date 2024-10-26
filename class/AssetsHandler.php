@@ -53,7 +53,7 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
      * retrieve a field
      *
      * @param int $id field id
-     * @param null $fields fields
+     * @param null $fields
      * @return \XoopsObject|null reference to the {@link Get} object
      */
     public function get($id = null, $fields = null): ?\XoopsObject
@@ -369,7 +369,7 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
      */
     public function getPrimaryAsset(): int
     {
-        $asId = '';
+        $asId = 0;
         $crAssets = new \CriteriaCompo();
         $crAssets->add(new \Criteria('as_primary', 1));
         $assetsCount = $this->getCount($crAssets);

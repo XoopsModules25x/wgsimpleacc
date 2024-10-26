@@ -90,6 +90,7 @@ function execute_output ($template, $outParams)
 {
     $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
 
+    $pdfData = [];
     if (\file_exists($tcpdf = \XOOPS_ROOT_PATH . '/Frameworks/tcpdf/')) {
         require_once $tcpdf . 'tcpdf.php';
     } else {
