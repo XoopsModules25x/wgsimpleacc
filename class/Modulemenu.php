@@ -358,7 +358,6 @@ class Modulemenu
     public function getMenuitemsSbadmin5()
     {
         $moduleDirName = \basename(\dirname(__DIR__));
-        $subcount      = 1;
         $pathname      = \XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/';
         $urlModule     = \XOOPS_URL . '/modules/' . $moduleDirName . '/';
 
@@ -556,8 +555,7 @@ class Modulemenu
                 ];
             }
         }
-
-        $highlight1 = strpos($requestUri, 'assets.php') > 0;
+        
         if ($permissionsHandler->getPermAssetsView()) {
             $nav_items2 = [];
             if ($permissionsHandler->getPermAssetsSubmit()) {
