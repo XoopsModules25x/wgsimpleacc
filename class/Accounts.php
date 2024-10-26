@@ -33,8 +33,6 @@ class Accounts extends \XoopsObject
 {
     /**
      * Constructor
-     *
-     * @param null
      */
     public function __construct()
     {
@@ -55,8 +53,6 @@ class Accounts extends \XoopsObject
 
     /**
      * @static function &getInstance
-     *
-     * @param null
      */
     public static function getInstance()
     {
@@ -68,9 +64,9 @@ class Accounts extends \XoopsObject
 
     /**
      * The new inserted $Id
-     * @return inserted id
+     * @return int|string
      */
-    public function getNewInsertedIdAccounts()
+    public function getNewInsertedIdAccounts(): int|string
     {
         return $GLOBALS['xoopsDB']->getInsertId();
     }
@@ -81,7 +77,7 @@ class Accounts extends \XoopsObject
      * @param bool $admin
      * @return \XoopsThemeForm
      */
-    public function getFormAccounts($action = false, $admin = false)
+    public function getFormAccounts(bool $action = false, bool $admin = false): \XoopsThemeForm
     {
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         if (!$action) {
@@ -182,7 +178,7 @@ class Accounts extends \XoopsObject
      * @param null $maxDepth
      * @return array
      */
-    public function getValuesAccounts($keys = null, $format = null, $maxDepth = null)
+    public function getValuesAccounts($keys = null, $format = null, $maxDepth = null): array
     {
         $helper  = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $utility = new \XoopsModules\Wgsimpleacc\Utility();
@@ -237,7 +233,7 @@ class Accounts extends \XoopsObject
      *
      * @return array
      */
-    public function toArrayAccounts()
+    public function toArrayAccounts(): array
     {
         $ret = [];
         $vars = $this->getVars();

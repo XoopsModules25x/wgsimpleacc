@@ -5,10 +5,10 @@ namespace XoopsModules\Wgsimpleacc\Export\Simplecsv;
 use XoopsModules\Wgsimpleacc;
 
 class SimpleCSV {
-    private $_delimiter;
-    private $_enclosure;
-    private $_linebreak;
-    private $_csv = '';
+    private mixed $_delimiter;
+    private mixed $_enclosure;
+    private mixed $_linebreak;
+    private string $_csv = '';
     public static function import( $filename_or_data, $is_data = false, $delimiter = 'auto', $enclosure = 'auto', $linebreak = 'auto' ) {
         $csv = new static( $delimiter, $enclosure, $linebreak );
         return $csv->toArray( $filename_or_data, $is_data );

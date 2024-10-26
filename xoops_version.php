@@ -42,7 +42,7 @@ $modversion = [
     'release_date'        => '2023/03/11', // format: yyyy/mm/dd
     'manual'              => 'link to manual file',
     'manual_file'         => \XOOPS_URL . '/modules/wgsimpleacc/docs/install.txt',
-    'min_php'             => '7.4',
+    'min_php'             => '8.1',
     'min_xoops'           => '2.5.11 Stable',
     'min_admin'           => '1.2',
     'min_db'              => ['mysql' => '5.5', 'mysqli' => '5.5'],

@@ -33,8 +33,6 @@ class Trahistories extends \XoopsObject
 {
     /**
      * Constructor
-     *
-     * @param null
      */
     public function __construct()
     {
@@ -68,8 +66,6 @@ class Trahistories extends \XoopsObject
 
     /**
      * @static function &getInstance
-     *
-     * @param null
      */
     public static function getInstance()
     {
@@ -86,7 +82,7 @@ class Trahistories extends \XoopsObject
      * @param null $maxDepth
      * @return array
      */
-    public function getValuesTrahistories($keys = null, $format = null, $maxDepth = null)
+    public function getValuesTrahistories($keys = null, $format = null, $maxDepth = null): array
     {
         $helper  = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $utility = new \XoopsModules\Wgsimpleacc\Utility();

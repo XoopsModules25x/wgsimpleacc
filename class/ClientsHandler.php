@@ -46,7 +46,7 @@ class ClientsHandler extends \XoopsPersistableObjectHandler
      *
      * @return object
      */
-    public function create($isNew = true)
+    public function create($isNew = true): object
     {
         return parent::create($isNew);
     }
@@ -55,10 +55,10 @@ class ClientsHandler extends \XoopsPersistableObjectHandler
      * retrieve a field
      *
      * @param int $id field id
-     * @param null fields
+     * @param null $fields fields
      * @return \XoopsObject|null reference to the {@link Get} object
      */
-    public function get($id = null, $fields = null)
+    public function get($id = null, $fields = null): ?\XoopsObject
     {
         return parent::get($id, $fields);
     }
@@ -66,23 +66,22 @@ class ClientsHandler extends \XoopsPersistableObjectHandler
     /**
      * get inserted id
      *
-     * @param null
      * @return int reference to the {@link Get} object
      */
-    public function getInsertId()
+    public function getInsertId(): int
     {
         return $this->db->getInsertId();
     }
 
     /**
      * Get Count Clients in the database
-     * @param int    $start
-     * @param int    $limit
+     * @param int $start
+     * @param int $limit
      * @param string $sort
      * @param string $order
      * @return int
      */
-    public function getCountClients($start = 0, $limit = 0, $sort = 'cli_name', $order = 'ASC')
+    public function getCountClients(int $start = 0, int $limit = 0, string $sort = 'cli_name', string $order = 'ASC'): int
     {
         $crCountClients = new \CriteriaCompo();
         $crCountClients = $this->getClientsCriteria($crCountClients, $start, $limit, $sort, $order);
@@ -91,13 +90,13 @@ class ClientsHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get All Clients in the database
-     * @param int    $start
-     * @param int    $limit
+     * @param int $start
+     * @param int $limit
      * @param string $sort
      * @param string $order
      * @return array
      */
-    public function getAllClients($start = 0, $limit = 0, $sort = 'cli_name', $order = 'ASC')
+    public function getAllClients(int $start = 0, int $limit = 0, string $sort = 'cli_name', string $order = 'ASC'): array
     {
         $crAllClients = new \CriteriaCompo();
         $crAllClients = $this->getClientsCriteria($crAllClients, $start, $limit, $sort, $order);
@@ -113,7 +112,7 @@ class ClientsHandler extends \XoopsPersistableObjectHandler
      * @param $order
      * @return int
      */
-    private function getClientsCriteria($crClients, $start, $limit, $sort, $order)
+    private function getClientsCriteria($crClients, $start, $limit, $sort, $order): int
     {
         $crClients->setStart($start);
         $crClients->setLimit($limit);
@@ -127,7 +126,7 @@ class ClientsHandler extends \XoopsPersistableObjectHandler
      * @param  $cliId
      * @return string
      */
-    public function getClientFullAddress($cliId)
+    public function getClientFullAddress($cliId): string
     {
         $clientsObj = $this->get($cliId);
         $line1 = '';
@@ -155,9 +154,9 @@ class ClientsHandler extends \XoopsPersistableObjectHandler
     /**
      * @public function to get form for filter clients
      * @param string $cliName
-     * @return \XoopsSimpleForm
+     * @return Form\FormInline
      */
-    public static function getFormFilterClients($cliName = '')
+    public static function getFormFilterClients(string $cliName = ''): Form\FormInline
     {
         $action = $_SERVER['REQUEST_URI'];
 

@@ -1,7 +1,5 @@
 <i id='cliId_<{$client.cli_id}>'></i>
-<div class='panel-heading'>
-</div>
-<div class='panel-body'>
+<div class='panel-body row'>
     <div class='col-sm-2'><{$smarty.const._MA_WGSIMPLEACC_CLIENT_NAME}></div><div class='col-sm-10'><{$client.name|default:' '}></div><div class='clear'></div>
     <div class='col-sm-2'><{$smarty.const._MA_WGSIMPLEACC_CLIENT_POSTAL}></div><div class='col-sm-10'><{$client.postal|default:' '}></div><div class='clear'></div>
     <div class='col-sm-2'><{$smarty.const._MA_WGSIMPLEACC_CLIENT_CITY}></div><div class='col-sm-10'><{$client.city|default:' '}></div><div class='clear'></div>

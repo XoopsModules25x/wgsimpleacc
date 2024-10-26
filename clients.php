@@ -66,6 +66,8 @@ switch ($op) {
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_CLIENTS];
 
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_icon_url', \WGSIMPLEACC_ICONS_URL);
+
         $showFiltered= false;
         $crClients = new \CriteriaCompo();
         if ($cliId > 0) {
@@ -109,10 +111,6 @@ switch ($op) {
                 $pagenav = new \XoopsPageNav($clientsCount, $limit, $start, 'start', 'op=list&amp;limit=' . $limit . '&amp;cli_name=' . $cliName);
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
             }
-            $GLOBALS['xoopsTpl']->assign('table_type', $helper->getConfig('table_type'));
-            $GLOBALS['xoopsTpl']->assign('panel_type', $helper->getConfig('panel_type'));
-            $GLOBALS['xoopsTpl']->assign('divideby', $helper->getConfig('divideby'));
-            $GLOBALS['xoopsTpl']->assign('numb_col', $helper->getConfig('numb_col'));
             if ('show' == $op && '' != $clientName) {
                 $GLOBALS['xoopsTpl']->assign('xoops_pagetitle', \strip_tags($clientName . ' - ' . $GLOBALS['xoopsModule']->getVar('name')));
             }

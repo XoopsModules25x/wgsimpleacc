@@ -166,7 +166,7 @@ class Utility
      * @param string $op
      * @return \XoopsForm FormInline
      */
-    public static function getFormFilterPeriod($filterFrom, $filterTo, $op = 'list')
+    public static function getFormFilterPeriod(int $filterFrom, int $filterTo, string $op = 'list')
     {
 
         // Get Theme Form
@@ -193,10 +193,10 @@ class Utility
 
     /**
      * @public function to convert float into string
-     * @param  float $float
+     * @param float $float
      * @return string
      */
-    public static function FloatToString($float) {
+    public static function FloatToString(float $float) {
 
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $dec = $helper->getConfig('sep_comma');
@@ -207,10 +207,10 @@ class Utility
 
     /**
      * @public function to convert string into float
-     * @param  string $str
+     * @param string $str
      * @return float
      */
-    public static function StringToFloat($str) {
+    public static function StringToFloat(string $str) {
 
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $dec = $helper->getConfig('sep_comma');
@@ -227,10 +227,10 @@ class Utility
 
     /**
      * @public function to convert mimetypes into extensions
-     * @param  string $mime
+     * @param string $mime
      * @return string
      */
-    public static function MimetypeToExtension($mime) {
+    public static function MimetypeToExtension(string $mime) {
         $mime_map = [
             'video/3gpp2'                                                               => '3g2',
             'video/3gp'                                                                 => '3gp',
@@ -429,14 +429,14 @@ class Utility
      * www.cakephp.org
      *
      * @param string $text         String to truncate.
-     * @param int    $length       Length of returned string, including ellipsis.
+     * @param int $length       Length of returned string, including ellipsis.
      * @param string $ending       Ending to be appended to the trimmed string.
-     * @param bool   $exact        If false, $text will not be cut mid-word
-     * @param bool   $considerHtml If true, HTML tags would be handled correctly
+     * @param bool $exact        If false, $text will not be cut mid-word
+     * @param bool $considerHtml If true, HTML tags would be handled correctly
      *
      * @return string Trimmed string.
      */
-    public static function truncateHtml($text, $length = 100, $ending = '...', $exact = false, $considerHtml = true)
+    public static function truncateHtml(string $text, int $length = 100, string $ending = '...', bool $exact = false, bool $considerHtml = true)
     {
         if ($considerHtml) {
             // if the plain text is shorter than the maximum length, return the whole text
@@ -530,11 +530,11 @@ class Utility
     }
 
     /**
-     * @param \Xmf\Module\Helper $helper
-     * @param array|null         $options
+     * @param \Xmf\Module\Helper|null $helper
+     * @param array|null $options
      * @return \XoopsFormDhtmlTextArea|\XoopsFormEditor
      */
-    public static function getEditor($helper = null, $options = null)
+    public static function getEditor(\Xmf\Module\Helper $helper = null, array $options = null)
     {
         /** @var Wgsimpleacc\Helper $helper */
         if (null === $options) {

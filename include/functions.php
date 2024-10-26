@@ -47,7 +47,7 @@ function wgsimpleaccGetMyItemIds($permtype, $dirname)
  * @return void
  */
 
-function wgsimpleaccMetaKeywords($content)
+function wgsimpleaccMetaKeywords($content): void
 {
     global $xoopsTpl, $xoTheme;
     $myts = MyTextSanitizer::getInstance();
@@ -65,7 +65,7 @@ function wgsimpleaccMetaKeywords($content)
  * @return void
  */
  
-function wgsimpleaccMetaDescription($content)
+function wgsimpleaccMetaDescription($content): void
 {
     global $xoopsTpl, $xoTheme;
     $myts = MyTextSanitizer::getInstance();
@@ -80,12 +80,12 @@ function wgsimpleaccMetaDescription($content)
 /**
  * Rewrite all url
  *
- * @param string  $module  module name
- * @param array   $array   array
- * @param string  $type    type
+ * @param string $module  module name
+ * @param array $array   array
+ * @param string $type    type
  * @return null|string $type    string replacement for any blank case
  */
-function wgsimpleacc_RewriteUrl($module, $array, $type = 'content')
+function wgsimpleacc_RewriteUrl(string $module, array $array, string $type = 'content'): ?string
 {
     $comment = '';
     $helper = Helper::getInstance();
@@ -169,7 +169,8 @@ function wgsimpleacc_RewriteUrl($module, $array, $type = 'content')
  * @param string $type     string replacement for any blank case
  * @return string $url
  */
-function wgsimpleacc_Filter($url, $type = '') {
+function wgsimpleacc_Filter(string $url, string $type = ''): string
+{
 
     // Get regular expression from module setting. default setting is : `[^a-z0-9]`i
     $helper = Helper::getInstance();

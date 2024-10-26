@@ -27,7 +27,7 @@ use XoopsModules\Wgsimpleacc\Helper;
  * @param mixed  $itemNumb
  * @return bool
  */
-function wgsimpleaccCommentsUpdate($itemId, $itemNumb)
+function wgsimpleaccCommentsUpdate(mixed $itemId, mixed $itemNumb): bool
 {
     // Get instance of module
     /*
@@ -50,7 +50,7 @@ function wgsimpleaccCommentsUpdate($itemId, $itemNumb)
  * @param mixed $comment
  * @return bool
  */
-function wgsimpleaccCommentsApprove(&$comment)
+function wgsimpleaccCommentsApprove(mixed &$comment): bool
 {
     // Notification event
     // Get instance of module

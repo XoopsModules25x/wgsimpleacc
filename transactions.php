@@ -212,18 +212,11 @@ switch ($op) {
                         }
                     }
                     if ($showOtpl) {
-                        switch ($otplType) {
-                            case Constants::OUTTEMPLATE_TYPE_READY:
-                                $outputOp = 'exec_output&amp;target=pdf';
-                                break;
-                            case Constants::OUTTEMPLATE_TYPE_FORM:
-                                $outputOp = 'exec_output&amp;target=editoutput';
-                                break;
-                            case 0:
-                            default:
-                                $outputOp = 'exec_output&amp;target=browser';
-                                break;
-                        }
+                        $outputOp = match ($otplType) {
+                            Constants::OUTTEMPLATE_TYPE_READY => 'exec_output&amp;target=pdf',
+                            Constants::OUTTEMPLATE_TYPE_FORM => 'exec_output&amp;target=editoutput',
+                            default => 'exec_output&amp;target=browser',
+                        };
                         $outputTpls[] = [
                             'href' => 'outtemplates.php?op=' . $outputOp . '&amp;otpl_id=' . $outtemplatesAll[$j]->getVar('otpl_id') . '&amp;tra_id=' . $transactions[$i]['tra_id'],
                             'title' => $outtemplatesAll[$j]->getVar('otpl_name'),

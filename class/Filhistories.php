@@ -35,8 +35,6 @@ class Filhistories extends \XoopsObject
 {
     /**
      * Constructor
-     *
-     * @param null
      */
     public function __construct()
     {
@@ -56,8 +54,6 @@ class Filhistories extends \XoopsObject
 
     /**
      * @static function &getInstance
-     *
-     * @param null
      */
     public static function getInstance()
     {
@@ -74,7 +70,7 @@ class Filhistories extends \XoopsObject
      * @param null $maxDepth
      * @return array
      */
-    public function getValuesFilhistories($keys = null, $format = null, $maxDepth = null)
+    public function getValuesFilhistories($keys = null, $format = null, $maxDepth = null): array
     {
         $helper  = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $utility = new \XoopsModules\Wgsimpleacc\Utility();

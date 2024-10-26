@@ -44,7 +44,7 @@ class TaxesHandler extends \XoopsPersistableObjectHandler
      *
      * @return object
      */
-    public function create($isNew = true)
+    public function create($isNew = true): object
     {
         return parent::create($isNew);
     }
@@ -53,10 +53,10 @@ class TaxesHandler extends \XoopsPersistableObjectHandler
      * retrieve a field
      *
      * @param int $id field id
-     * @param null fields
+     * @param null $fields fields
      * @return \XoopsObject|null reference to the {@link Get} object
      */
-    public function get($id = null, $fields = null)
+    public function get($id = null, $fields = null): ?\XoopsObject
     {
         return parent::get($id, $fields);
     }
@@ -64,23 +64,22 @@ class TaxesHandler extends \XoopsPersistableObjectHandler
     /**
      * get inserted id
      *
-     * @param null
-     * @return int reference to the {@link Get} object
+     * @return int|string
      */
-    public function getInsertId()
+    public function getInsertId(): int|string
     {
         return $this->db->getInsertId();
     }
 
     /**
      * Get Count Taxes in the database
-     * @param int    $start
-     * @param int    $limit
+     * @param int $start
+     * @param int $limit
      * @param string $sort
      * @param string $order
      * @return int
      */
-    public function getCountTaxes($start = 0, $limit = 0, $sort = 'tax_id ASC, tax_name', $order = 'ASC')
+    public function getCountTaxes(int $start = 0, int $limit = 0, string $sort = 'tax_id ASC, tax_name', string $order = 'ASC'): int
     {
         $crCountTaxes = new \CriteriaCompo();
         $crCountTaxes = $this->getTaxesCriteria($crCountTaxes, $start, $limit, $sort, $order);
@@ -89,13 +88,13 @@ class TaxesHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get All Taxes in the database
-     * @param int    $start
-     * @param int    $limit
+     * @param int $start
+     * @param int $limit
      * @param string $sort
      * @param string $order
      * @return array
      */
-    public function getAllTaxes($start = 0, $limit = 0, $sort = 'tax_id ASC, tax_name', $order = 'ASC')
+    public function getAllTaxes(int $start = 0, int $limit = 0, string $sort = 'tax_id ASC, tax_name', string $order = 'ASC'): array
     {
         $crAllTaxes = new \CriteriaCompo();
         $crAllTaxes = $this->getTaxesCriteria($crAllTaxes, $start, $limit, $sort, $order);
@@ -105,13 +104,12 @@ class TaxesHandler extends \XoopsPersistableObjectHandler
     /**
      * Get Criteria Taxes
      * @param        $crTaxes
-     * @param int    $start
-     * @param int    $limit
+     * @param int $start
+     * @param int $limit
      * @param string $sort
      * @param string $order
-     * @return int
      */
-    private function getTaxesCriteria($crTaxes, $start, $limit, $sort, $order)
+    private function getTaxesCriteria($crTaxes, int $start, int $limit, string $sort, string $order)
     {
         $crTaxes->setStart($start);
         $crTaxes->setLimit($limit);
@@ -125,7 +123,7 @@ class TaxesHandler extends \XoopsPersistableObjectHandler
      * @param int $taxId
      * @return bool
      */
-    public function setPrimaryTaxes($taxId)
+    public function setPrimaryTaxes(int $taxId): bool
     {
         $helper  = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $taxesObj = null;
@@ -153,7 +151,7 @@ class TaxesHandler extends \XoopsPersistableObjectHandler
      * Get primary tax
      * @return int
      */
-    public function getPrimaryTax()
+    public function getPrimaryTax(): int
     {
         $taxId = 0;
         $crTaxes = new \CriteriaCompo();

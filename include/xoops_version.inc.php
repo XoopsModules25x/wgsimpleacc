@@ -22,19 +22,12 @@
  * @param $val
  * @return float|int
  */
-function wgsimpleaccReturnBytes($val)
+function wgsimpleaccReturnBytes($val): float|int
 {
-    switch (mb_substr($val, -1)) {
-        case 'K':
-        case 'k':
-            return (int)$val * 1024;
-        case 'M':
-        case 'm':
-            return (int)$val * 1048576;
-        case 'G':
-        case 'g':
-            return (int)$val * 1073741824;
-        default:
-            return $val;
-    }
+    return match (mb_substr($val, -1)) {
+        'K', 'k' => (int)$val * 1024,
+        'M', 'm' => (int)$val * 1048576,
+        'G', 'g' => (int)$val * 1073741824,
+        default => $val,
+    };
 }

@@ -28,16 +28,14 @@ namespace XoopsModules\Wgsimpleacc\Common;
  */
 class ModuleFeedback extends \XoopsObject
 {
-    public $name    = '';
-    public $email   = '';
-    public $site    = '';
-    public $type    = '';
-    public $content = '';
+    public string $name    = '';
+    public string $email   = '';
+    public string $site    = '';
+    public string $type    = '';
+    public string $content = '';
 
     /**
      * Constructor
-     *
-     * @param null
      */
     public function __construct()
     {
@@ -45,8 +43,6 @@ class ModuleFeedback extends \XoopsObject
 
     /**
      * @static function &getInstance
-     *
-     * @param null
      */
     public static function getInstance()
     {
@@ -61,7 +57,7 @@ class ModuleFeedback extends \XoopsObject
      * provide form for sending a feedback to module author
      * @return \XoopsThemeForm
      */
-    public function getFormFeedback()
+    public function getFormFeedback(): \XoopsThemeForm
     {
         $moduleDirName      = \basename(\dirname(__DIR__, 2));
         $moduleDirNameUpper = \mb_strtoupper($moduleDirName);

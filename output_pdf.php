@@ -48,12 +48,12 @@ class MYPDF extends TCPDF {
     /**
      * @var mixed
      */
-    public $htmlHeader = '';
+    public mixed $htmlHeader = '';
 
     /**
      * @var mixed
      */
-    public $htmlFooter = '';
+    public mixed $htmlFooter = '';
 
     //Page header
     public function Header() {

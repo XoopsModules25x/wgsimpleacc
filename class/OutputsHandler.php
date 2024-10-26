@@ -43,7 +43,7 @@ class OutputsHandler extends \XoopsPersistableObjectHandler
      * @param bool $action
      * @return \XoopsThemeForm
      */
-    public static function getFormBalancesSelect($action = false)
+    public static function getFormBalancesSelect(bool $action = false): \XoopsThemeForm
     {
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         if (!$action) {
@@ -113,7 +113,7 @@ class OutputsHandler extends \XoopsPersistableObjectHandler
      * @param array $bal_ids
      * @return array
      */
-    public function getListBalances($bal_ids)
+    public function getListBalances(array $bal_ids): array
     {
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $balancesHandler = $helper->getHandler('Balances');
@@ -141,7 +141,7 @@ class OutputsHandler extends \XoopsPersistableObjectHandler
      * @param array $bal_ids
      * @return array
      */
-    public function getListAccountsValues($bal_ids)
+    public function getListAccountsValues(array $bal_ids): array
     {
         global $xoopsDB;
 
@@ -196,7 +196,7 @@ class OutputsHandler extends \XoopsPersistableObjectHandler
      * @param array $bal_ids
      * @return array
      */
-    public function getListAllocationsValues($bal_ids)
+    public function getListAllocationsValues(array $bal_ids): array
     {
         global $xoopsDB;
 
@@ -245,10 +245,10 @@ class OutputsHandler extends \XoopsPersistableObjectHandler
     /**
      * Get current value of level 1 allocations including sub allocs
      * @param array $bal_ids
-     * @param       $level
+     * @param int $level
      * @return array
      */
-    public function getLevelAllocations($bal_ids, $level = 1)
+    public function getLevelAllocations(array $bal_ids, int $level = 1): array
     {
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $allocationsHandler = $helper->getHandler('Allocations');

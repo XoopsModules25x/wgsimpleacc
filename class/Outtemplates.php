@@ -32,8 +32,6 @@ class Outtemplates extends \XoopsObject
 {
     /**
      * Constructor
-     *
-     * @param null
      */
     public function __construct()
     {
@@ -52,8 +50,6 @@ class Outtemplates extends \XoopsObject
 
     /**
      * @static function &getInstance
-     *
-     * @param null
      */
     public static function getInstance()
     {
@@ -65,9 +61,9 @@ class Outtemplates extends \XoopsObject
 
     /**
      * The new inserted $Id
-     * @return integer
+     * @return int|string
      */
-    public function getNewInsertedIdOuttemplates()
+    public function getNewInsertedIdOuttemplates(): int|string
     {
         return $GLOBALS['xoopsDB']->getInsertId();
     }
@@ -77,7 +73,7 @@ class Outtemplates extends \XoopsObject
      * @param bool $action
      * @return \XoopsThemeForm
      */
-    public function getFormOuttemplates($action = false)
+    public function getFormOuttemplates(bool $action = false): \XoopsThemeForm
     {
         $helper = Helper::getInstance();
         if (!$action) {
@@ -183,7 +179,7 @@ class Outtemplates extends \XoopsObject
      * @param null $maxDepth
      * @return array
      */
-    public function getValuesOuttemplates($keys = null, $format = null, $maxDepth = null)
+    public function getValuesOuttemplates($keys = null, $format = null, $maxDepth = null): array
     {
         $helper  = Helper::getInstance();
         $ret = $this->getValues($keys, $format, $maxDepth);
@@ -252,7 +248,7 @@ class Outtemplates extends \XoopsObject
      *
      * @return array
      */
-    public function toArrayOuttemplates()
+    public function toArrayOuttemplates(): array
     {
         $ret = [];
         $vars = $this->getVars();

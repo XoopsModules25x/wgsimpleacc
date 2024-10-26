@@ -71,7 +71,7 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
         // Form Create
         $filesObj = $filesHandler->create();
-        $form = $filesObj->getFormFilesAdmin($filTraid, false);
+        $form = $filesObj->getFormFilesAdmin($filTraid);
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
     case 'save':
@@ -127,7 +127,7 @@ switch ($op) {
         }
         // Get Form
         $GLOBALS['xoopsTpl']->assign('error', $filesObj->getHtmlErrors());
-        $form = $filesObj->getFormFilesAdmin($filTraid, false);
+        $form = $filesObj->getFormFilesAdmin($filTraid);
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
     case 'edit':
@@ -138,7 +138,7 @@ switch ($op) {
         $GLOBALS['xoopsTpl']->assign('buttons', $adminObject->displayButton('left'));
         // Get Form
         $filesObj = $filesHandler->get($filId);
-        $form = $filesObj->getFormFilesAdmin($filTraid, false);
+        $form = $filesObj->getFormFilesAdmin($filTraid);
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
         break;
     case 'delete':

@@ -29,7 +29,7 @@ class Wgmenu
      *
      * @return array
      */
-    public function getMenuitemsDefault()
+    public function getMenuitemsDefault(): array
     {
 
         $moduleDirName = \basename(\dirname(__DIR__));
@@ -193,7 +193,7 @@ class Wgmenu
      *
      * @return array
      */
-    public function getMenuitemsStartmin()
+    public function getMenuitemsStartmin(): array
     {
         $moduleDirName = \basename(\dirname(__DIR__));
         $subcount      = 1;
@@ -201,8 +201,8 @@ class Wgmenu
 
         require_once $pathname . 'include/common.php';
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
-        $helper->loadLanguage('common', 'wgsimpleacc');
-        \xoops_loadLanguage('main', 'wgsimpleacc');
+        $helper->loadLanguage('common');
+        $helper->loadLanguage('main');
 
         $permissionsHandler = $helper->getHandler('Permissions');
 

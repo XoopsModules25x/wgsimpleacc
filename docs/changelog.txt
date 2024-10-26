@@ -8,6 +8,8 @@
  - templates for xswatch4 (goffy)
  - removed startmin (goffy)
  - updated test data (goffy)
+ - updates for PHP 8.1 (goffy)
+ - code inspection (goffy)
 
 ==============================================================
 1.3.2 RC1 [2023/03/12]

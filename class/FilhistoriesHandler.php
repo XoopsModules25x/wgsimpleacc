@@ -47,7 +47,7 @@ class FilhistoriesHandler extends \XoopsPersistableObjectHandler
      *
      * @return object
      */
-    public function create($isNew = true)
+    public function create($isNew = true): object
     {
         return parent::create($isNew);
     }
@@ -56,10 +56,10 @@ class FilhistoriesHandler extends \XoopsPersistableObjectHandler
      * retrieve a field
      *
      * @param int $id field id
-     * @param null fields
+     * @param null $fields fields
      * @return \XoopsObject|null reference to the {@link Get} object
      */
-    public function get($id = null, $fields = null)
+    public function get($id = null, $fields = null): ?\XoopsObject
     {
         return parent::get($id, $fields);
     }
@@ -67,23 +67,22 @@ class FilhistoriesHandler extends \XoopsPersistableObjectHandler
     /**
      * get inserted id
      *
-     * @param null
-     * @return int reference to the {@link Get} object
+     * @return int|string
      */
-    public function getInsertId()
+    public function getInsertId(): int|string
     {
         return $this->db->getInsertId();
     }
 
     /**
      * Get Count Filhistories in the database
-     * @param int    $start
-     * @param int    $limit
+     * @param int $start
+     * @param int $limit
      * @param string $sort
      * @param string $order
      * @return int
      */
-    public function getCountFilhistories($start = 0, $limit = 0, $sort = 'hist_id ASC, fil_name', $order = 'ASC')
+    public function getCountFilhistories(int $start = 0, int $limit = 0, string $sort = 'hist_id ASC, fil_name', string $order = 'ASC'): int
     {
         $crCountFilhistories = new \CriteriaCompo();
         $crCountFilhistories = $this->getFilhistoriesCriteria($crCountFilhistories, $start, $limit, $sort, $order);
@@ -92,13 +91,13 @@ class FilhistoriesHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get All Filhistories in the database
-     * @param int    $start
-     * @param int    $limit
+     * @param int $start
+     * @param int $limit
      * @param string $sort
      * @param string $order
      * @return array
      */
-    public function getAllFilhistories($start = 0, $limit = 0, $sort = 'hist_id ASC, fil_name', $order = 'ASC')
+    public function getAllFilhistories(int $start = 0, int $limit = 0, string $sort = 'hist_id ASC, fil_name', string $order = 'ASC'): array
     {
         $crAllFilhistories = new \CriteriaCompo();
         $crAllFilhistories = $this->getFilhistoriesCriteria($crAllFilhistories, $start, $limit, $sort, $order);
@@ -108,13 +107,12 @@ class FilhistoriesHandler extends \XoopsPersistableObjectHandler
     /**
      * Get Criteria Filhistories
      * @param        $crFilhistories
-     * @param int    $start
-     * @param int    $limit
+     * @param int $start
+     * @param int $limit
      * @param string $sort
      * @param string $order
-     * @return int
      */
-    private function getFilhistoriesCriteria($crFilhistories, $start, $limit, $sort, $order)
+    private function getFilhistoriesCriteria($crFilhistories, int $start, int $limit, string $sort, string $order)
     {
         $crFilhistories->setStart($start);
         $crFilhistories->setLimit($limit);

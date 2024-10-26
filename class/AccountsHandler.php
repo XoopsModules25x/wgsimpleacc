@@ -44,7 +44,7 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
      *
      * @return object
      */
-    public function create($isNew = true)
+    public function create($isNew = true): object
     {
         return parent::create($isNew);
     }
@@ -53,10 +53,10 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
      * retrieve a field
      *
      * @param int $id field id
-     * @param null fields
+     * @param null $fields fields
      * @return \XoopsObject|null reference to the {@link Get} object
      */
-    public function get($id = null, $fields = null)
+    public function get($id = null, $fields = null): ?\XoopsObject
     {
         return parent::get($id, $fields);
     }
@@ -64,23 +64,22 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
     /**
      * get inserted id
      *
-     * @param null
      * @return int reference to the {@link Get} object
      */
-    public function getInsertId()
+    public function getInsertId(): int
     {
         return $this->db->getInsertId();
     }
 
     /**
      * Get Count Accounts in the database
-     * @param int    $start
-     * @param int    $limit
+     * @param int $start
+     * @param int $limit
      * @param string $sort
      * @param string $order
      * @return int
      */
-    public function getCountAccounts($start = 0, $limit = 0, $sort = 'acc_key ASC, acc_id', $order = 'ASC')
+    public function getCountAccounts(int $start = 0, int $limit = 0, string $sort = 'acc_key ASC, acc_id', string $order = 'ASC'): int
     {
         $crCountAccounts = new \CriteriaCompo();
         $crCountAccounts = $this->getAccountsCriteria($crCountAccounts, $start, $limit, $sort, $order);
@@ -89,13 +88,13 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get All Accounts in the database
-     * @param int    $start
-     * @param int    $limit
+     * @param int $start
+     * @param int $limit
      * @param string $sort
      * @param string $order
      * @return array
      */
-    public function getAllAccounts($start = 0, $limit = 0, $sort = 'acc_weight ASC, acc_key ASC, acc_id', $order = 'ASC')
+    public function getAllAccounts(int $start = 0, int $limit = 0, string $sort = 'acc_weight ASC, acc_key ASC, acc_id', string $order = 'ASC'): array
     {
         $crAllAccounts = new \CriteriaCompo();
         $crAllAccounts = $this->getAccountsCriteria($crAllAccounts, $start, $limit, $sort, $order);
@@ -109,7 +108,6 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
      * @param $limit
      * @param $sort
      * @param $order
-     * @return int
      */
     private function getAccountsCriteria($crAccounts, $start, $limit, $sort, $order)
     {
@@ -125,7 +123,7 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
      * @param $class
      * @return array|false
      */
-    public function getSelectTreeOfAccounts($class)
+    public function getSelectTreeOfAccounts($class): bool|array
     {
         $list = [];
 
@@ -145,15 +143,10 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
         if ($accountsCount > 0) {
             foreach (\array_keys($accountsAll) as $i) {
                 $level = $accountsAll[$i]->getVar('acc_level');
-                switch ($level) {
-                    case 1:
-                        $dots = \str_repeat('- ', $level);
-                        break;
-                    case 2:
-                    default:
-                        $dots = \str_repeat('&nbsp; ', $level) . \str_repeat('- ', $level);
-                        break;
-                }
+                $dots = match ($level) {
+                    1 => \str_repeat('- ', $level),
+                    default => \str_repeat('&nbsp; ', $level) . \str_repeat('- ', $level),
+                };
                 $list[] = ['id' => $accountsAll[$i]->getVar('acc_id'), 'text' => $dots . $accountsAll[$i]->getVar('acc_key') . ' ' . $accountsAll[$i]->getVar('acc_name')];
             }
         } else {
@@ -168,7 +161,7 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
      * @param $itemPid
      * @return bool|string
      */
-    public function getListOfAccountsEdit($itemPid)
+    public function getListOfAccountsEdit($itemPid): bool|string
     {
         if ($itemPid > 0) {
             $childsAll = '<ol>';
@@ -266,7 +259,7 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
      * @param $itemPid
      * @return bool|string
      */
-    public function getListOfAccounts($itemPid)
+    public function getListOfAccounts($itemPid): bool|string
     {
         if ($itemPid > 0) {
             $childsAll = '<ol>';
@@ -318,7 +311,7 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
      * @param $accId
      * @return array
      */
-    public function getTopLevelAccount($accId)
+    public function getTopLevelAccount($accId): array
     {
 
         $ret = [];
@@ -402,7 +395,7 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
      * @param $accId
      * @return array|false
      */
-    public function getSubsOfAccounts($accId)
+    public function getSubsOfAccounts($accId): bool|array
     {
         $list = [];
 
@@ -431,7 +424,7 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
      * @param $accId
      * @return array
      */
-    public function AccountIsOnline($accId)
+    public function AccountIsOnline($accId): array
     {
         $accountObj = $this->get($accId);
 
@@ -443,7 +436,7 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
      * @param $accPid
      * @return bool|array
      */
-    public function getArrayTreeOfAccounts($accPid)
+    public function getArrayTreeOfAccounts($accPid): bool|array
     {
 
         $arrayAccTree = [];

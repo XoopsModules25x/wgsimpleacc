@@ -32,8 +32,6 @@ class Currencies extends \XoopsObject
 {
     /**
      * Constructor
-     *
-     * @param null
      */
     public function __construct()
     {
@@ -49,8 +47,6 @@ class Currencies extends \XoopsObject
 
     /**
      * @static function &getInstance
-     *
-     * @param null
      */
     public static function getInstance()
     {
@@ -62,9 +58,9 @@ class Currencies extends \XoopsObject
 
     /**
      * The new inserted $Id
-     * @return inserted id
+     * @return int|string
      */
-    public function getNewInsertedIdCurrencies()
+    public function getNewInsertedIdCurrencies(): int|string
     {
         return $GLOBALS['xoopsDB']->getInsertId();
     }
@@ -74,7 +70,7 @@ class Currencies extends \XoopsObject
      * @param bool $action
      * @return \XoopsThemeForm
      */
-    public function getFormCurrencies($action = false)
+    public function getFormCurrencies(bool $action = false): \XoopsThemeForm
     {
         //$helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         if (!$action) {
@@ -116,7 +112,7 @@ class Currencies extends \XoopsObject
      * @param null $maxDepth
      * @return array
      */
-    public function getValuesCurrencies($keys = null, $format = null, $maxDepth = null)
+    public function getValuesCurrencies($keys = null, $format = null, $maxDepth = null): array
     {
         $ret = $this->getValues($keys, $format, $maxDepth);
         $ret['id']          = $this->getVar('cur_id');
@@ -135,7 +131,7 @@ class Currencies extends \XoopsObject
      *
      * @return array
      */
-    public function toArrayCurrencies()
+    public function toArrayCurrencies(): array
     {
         $ret = [];
         $vars = $this->getVars();

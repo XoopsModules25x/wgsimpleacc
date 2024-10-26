@@ -32,8 +32,6 @@ class Allocations extends \XoopsObject
 {
     /**
      * Constructor
-     *
-     * @param null
      */
     public function __construct()
     {
@@ -51,8 +49,6 @@ class Allocations extends \XoopsObject
 
     /**
      * @static function &getInstance
-     *
-     * @param null
      */
     public static function getInstance()
     {
@@ -64,9 +60,9 @@ class Allocations extends \XoopsObject
 
     /**
      * The new inserted $Id
-     * @return inserted id
+     * @return int|string
      */
-    public function getNewInsertedIdAllocations()
+    public function getNewInsertedIdAllocations(): int|string
     {
         return $GLOBALS['xoopsDB']->getInsertId();
     }
@@ -80,7 +76,7 @@ class Allocations extends \XoopsObject
      * @param string $redir
      * @return \XoopsThemeForm
      */
-    public function getFormAllocations($start, $limit, $redir = '', $action = false, $admin = false)
+    public function getFormAllocations(int $start, int $limit, string $redir = '', bool $action = false, bool $admin = false): \XoopsThemeForm
     {
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         if (!$action) {
@@ -164,7 +160,7 @@ class Allocations extends \XoopsObject
      * @param null $maxDepth
      * @return array
      */
-    public function getValuesAllocations($keys = null, $format = null, $maxDepth = null)
+    public function getValuesAllocations($keys = null, $format = null, $maxDepth = null): array
     {
         $helper  = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $utility = new \XoopsModules\Wgsimpleacc\Utility();
@@ -201,7 +197,7 @@ class Allocations extends \XoopsObject
      *
      * @return array
      */
-    public function toArrayAllocations()
+    public function toArrayAllocations(): array
     {
         $ret = [];
         $vars = $this->getVars();

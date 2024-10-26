@@ -39,7 +39,7 @@ class FormInline extends XoopsSimpleForm
      *
      * @return string
      */
-    public function render()
+    public function render(): string
     {
         $ret = $this->getTitle() . "\n<form name='" . $this->getName() . "' id='" . $this->getName() . "' action='" . $this->getAction() . "' method='" . $this->getMethod() . "'" . $this->getExtra() . ">\n";
         foreach ($this->getElements() as $ele) {
@@ -63,7 +63,7 @@ class FormInline extends XoopsSimpleForm
      *
      * @return string
      */
-    public function renderSearch()
+    public function renderSearch(): string
     {
         $ret = "<form name='" . $this->getName() . "' id='" . $this->getName() . "' action='" . $this->getAction() . "' method='" . $this->getMethod() . "'" . $this->getExtra() . ">\n";
         foreach ($this->getElements() as $ele) {

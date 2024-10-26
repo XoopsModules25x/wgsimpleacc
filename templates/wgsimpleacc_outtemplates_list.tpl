@@ -7,7 +7,7 @@
                 <li>
                     <{$alloc.name}>
                     <{if $alloc.online_text|default:false}>
-                        <img class="wgsa-img-online wgsa-img-online-small" src="<{$wgsimpleacc_icons_url_32}>/<{$alloc.online}>.png" alt="<{$alloc.online_text}>">
+                        <img class="wgsa-img-online wgsa-img-online-small" src="<{$wgsimpleacc_icon_url_32}>/<{$alloc.online}>.png" alt="<{$alloc.online_text}>">
                     <{/if}>
                 </li>
             <{/foreach}>
@@ -19,7 +19,7 @@
                 <li>
                     <{$account.name}>
                     <{if $account.online_text|default:false}>
-                        <img class="wgsa-img-online wgsa-img-online-small" src="<{$wgsimpleacc_icons_url_32}>/<{$account.online}>.png" alt="<{$account.online_text}>">
+                        <img class="wgsa-img-online wgsa-img-online-small" src="<{$wgsimpleacc_icon_url_32}>/<{$account.online}>.png" alt="<{$account.online_text}>">
                     <{/if}>
                 </li>
             <{/foreach}>
@@ -27,9 +27,9 @@
     </td>
     <td class="center">
         <{if $template.otpl_online|default:0 == 1}>
-    <img src="<{$wgsimpleacc_icons_url_32}>/1.png" alt="<{$template.online}>">
+    <img src="<{$wgsimpleacc_icon_url_32}>/1.png" alt="<{$template.online}>">
         <{else}>
-    <img src="<{$wgsimpleacc_icons_url_32}>/0.png" alt="<{$template.online}>">
+    <img src="<{$wgsimpleacc_icon_url_32}>/0.png" alt="<{$template.online}>">
         <{/if}>
     </td>
     <td class="center">

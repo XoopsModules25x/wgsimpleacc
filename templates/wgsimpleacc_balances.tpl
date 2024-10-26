@@ -29,9 +29,9 @@
                         <tr>
                             <td>
                                 <{if $balance.type|default:0 == $balTypeTemporary}>
-                                    <img src="<{$wgsimpleacc_icons_url_32}>/temporary.png" alt="<{$smarty.const._MA_WGSIMPLEACC_BALANCE_TYPE_TEMPORARY}>" title="<{$smarty.const._MA_WGSIMPLEACC_BALANCE_TYPE_TEMPORARY}>">
+                                    <img src="<{$wgsimpleacc_icon_url_32}>/temporary.png" alt="<{$smarty.const._MA_WGSIMPLEACC_BALANCE_TYPE_TEMPORARY}>" title="<{$smarty.const._MA_WGSIMPLEACC_BALANCE_TYPE_TEMPORARY}>">
                                 <{elseif $balance.type|default:0 == $balTypeFinal}>
-                                    <img src="<{$wgsimpleacc_icons_url_32}>/final.png" alt="<{$smarty.const._MA_WGSIMPLEACC_BALANCE_TYPE_FINAL}>" title="<{$smarty.const._MA_WGSIMPLEACC_BALANCE_TYPE_FINAL}>">
+                                    <img src="<{$wgsimpleacc_icon_url_32}>/final.png" alt="<{$smarty.const._MA_WGSIMPLEACC_BALANCE_TYPE_FINAL}>" title="<{$smarty.const._MA_WGSIMPLEACC_BALANCE_TYPE_FINAL}>">
                                 <{/if}>
                             </td>
                             <td><{$balance.from}></td>

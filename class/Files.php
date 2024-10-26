@@ -32,8 +32,6 @@ class Files extends \XoopsObject
 {
     /**
      * Constructor
-     *
-     * @param null
      */
     public function __construct()
     {
@@ -49,8 +47,6 @@ class Files extends \XoopsObject
 
     /**
      * @static function &getInstance
-     *
-     * @param null
      */
     public static function getInstance()
     {
@@ -62,20 +58,20 @@ class Files extends \XoopsObject
 
     /**
      * The new inserted $Id
-     * @return inserted id
+     * @return int|string
      */
-    public function getNewInsertedIdFiles()
+    public function getNewInsertedIdFiles(): int|string
     {
         return $GLOBALS['xoopsDB']->getInsertId();
     }
 
     /**
      * @public function getForm
-     * @param      $traId
+     * @param int  $traId
      * @param bool $action
      * @return \XoopsThemeForm
      */
-    public function getFormFilesAdmin($traId, $action = false)
+    public function getFormFilesAdmin(int $traId, bool $action = false): \XoopsThemeForm
     {
         if (!$GLOBALS['xoopsUser']->isAdmin($GLOBALS['xoopsModule']->mid())) {
             \redirect_header('accounts.php?op=list', 3, \_NOPERM);
@@ -138,7 +134,7 @@ class Files extends \XoopsObject
      * @param bool $action
      * @return \XoopsThemeForm
      */
-    public function getFormFilesEdit($traOp = '', $action = false)
+    public function getFormFilesEdit(string $traOp = '', bool $action = false): \XoopsThemeForm
     {
 
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
@@ -174,12 +170,12 @@ class Files extends \XoopsObject
 
     /**
      * @public function getForm
-     * @param int  $traId
-     * @param int  $traOp
+     * @param int $traId
+     * @param string $traOp
      * @param bool $action
      * @return \XoopsThemeForm
      */
-    public function getFormFiles($traId, $traOp = '', $action = false)
+    public function getFormFiles(int $traId, string $traOp = '', bool $action = false): \XoopsThemeForm
     {
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         if (!$action) {
@@ -233,12 +229,13 @@ class Files extends \XoopsObject
 
     /**
      * @public function getForm
-     * @param int  $traId
-     * @param int  $traOp
-     * @param bool $action
+     * @param int    $traId
+     * @param string $traOp
+     * @param bool   $action
      * @return \XoopsThemeForm
      */
-    public function getFormTemp($traId, $traOp = '', $action = false) {
+    public function getFormTemp(int $traId, string $traOp = '', bool $action = false): \XoopsThemeForm
+    {
         //$helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         if (!$action) {
             $action = $_SERVER['REQUEST_URI'];
@@ -263,7 +260,7 @@ class Files extends \XoopsObject
             }
         }
         $imageSelect->setExtra("onchange='showBtnDel();showImgSelected(\"imglabel_fil_temp\", \"fil_temp\", \"" . $imageDirectory . '", "", "' . \XOOPS_URL . "\")'");
-        $imageTray->addElement($imageSelect, false);
+        $imageTray->addElement($imageSelect);
         $imageTray->addElement(new \XoopsFormLabel('', "<br><img src='" . \XOOPS_URL . $imageDirectory . '/' . $filTemp . "' id='imglabel_fil_temp' alt='' style='max-width:100px'>"));
         $form->addElement($imageTray);
 
@@ -287,7 +284,7 @@ class Files extends \XoopsObject
      * @param null $maxDepth
      * @return array
      */
-    public function getValuesFiles($keys = null, $format = null, $maxDepth = null)
+    public function getValuesFiles($keys = null, $format = null, $maxDepth = null): array
     {
         $helper  = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $utility = new \XoopsModules\Wgsimpleacc\Utility();
@@ -330,7 +327,7 @@ class Files extends \XoopsObject
      *
      * @return array
      */
-    public function toArrayFiles()
+    public function toArrayFiles(): array
     {
         $ret = [];
         $vars = $this->getVars();

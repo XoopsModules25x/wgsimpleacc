@@ -59,7 +59,7 @@ class StatisticsHandler
      * @param array $paramsArr
      * @return \XoopsThemeForm
      */
-    public static function getFormStatisticsSelect($paramsArr)
+    public static function getFormStatisticsSelect(array $paramsArr)
     {
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $action = $_SERVER['REQUEST_URI'];

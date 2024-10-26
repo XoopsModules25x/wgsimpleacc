@@ -103,7 +103,7 @@ class FormSelectCascading extends \XoopsFormSelect
      *
      * @return string
      */
-    public function render()
+    public function render(): string
     {
         $ele_name    = $this->getName();
         $ele_title   = $this->getTitle();
@@ -118,7 +118,7 @@ class FormSelectCascading extends \XoopsFormSelect
             $ret .= ' secondList" ';
         }
         $ret .= ' size="' . $this->getSize() . '"' . $this->getExtra();
-        if ($this->isMultiple() != false) {
+        if ($this->isMultiple()) {
             $ret .= ' name="' . $ele_name . '[]" id="' . $ele_name . '" title="' . $ele_title
                 . ' multiple="multiple">';
         } else {
@@ -159,7 +159,7 @@ class FormSelectCascading extends \XoopsFormSelect
      *
      * @param int $value
      */
-    public function setType($value) {
+    public function setType(int $value) {
         $this->type = $value;
     }
 
@@ -168,7 +168,8 @@ class FormSelectCascading extends \XoopsFormSelect
      *
      * @return int
      */
-    public function getType() {
+    public function getType(): int
+    {
         return $this->type;
     }
 
@@ -177,16 +178,17 @@ class FormSelectCascading extends \XoopsFormSelect
      *
      * @param array $value
      */
-    public function setCustomOptions($value) {
+    public function setCustomOptions(array $value) {
         $this->custom_options = $value;
     }
 
     /**
      * Get custom options of select
      *
-     * @param array $value
+     * @return array
      */
-    public function getCustomOptions() {
+    public function getCustomOptions(): array
+    {
         return $this->custom_options;
     }
 }

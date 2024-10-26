@@ -34,7 +34,7 @@ use XoopsModules\Wgsimpleacc\Common\ {
  *
  * @return bool|null
  */
-function xoops_module_update_wgsimpleacc($module, $prev_version = null)
+function xoops_module_update_wgsimpleacc($module, $prev_version = null): ?bool
 {
     $moduleDirName = $module->dirname();
 

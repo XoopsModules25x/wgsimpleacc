@@ -290,7 +290,8 @@ require __DIR__ . '/footer.php';
  * @param $text
  * @return string
  */
-function cleanOutputCsv ($text) {
+function cleanOutputCsv ($text): string
+{
     //replace possible column break in output
     $cleanText = \str_replace(';', ',', $text);
 
@@ -309,7 +310,8 @@ function cleanOutputCsv ($text) {
  * @param $text
  * @return string
  */
-function cleanOutputXlsx ($text) {
+function cleanOutputXlsx ($text): string
+{
     //replace line breaks by blank space
     $cleanText = \str_replace(['<br>', '</p>'], ' ', $text);
     //replace html code by clean char

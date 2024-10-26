@@ -38,8 +38,6 @@ class Transactions extends \XoopsObject
 {
     /**
      * Constructor
-     *
-     * @param null
      */
     public function __construct()
     {
@@ -70,8 +68,6 @@ class Transactions extends \XoopsObject
 
     /**
      * @static function &getInstance
-     *
-     * @param null
      */
     public static function getInstance()
     {
@@ -83,9 +79,9 @@ class Transactions extends \XoopsObject
 
     /**
      * The new inserted $Id
-     * @return integer
+     * @return int|string
      */
-    public function getNewInsertedIdTransactions()
+    public function getNewInsertedIdTransactions(): int|string
     {
         return $GLOBALS['xoopsDB']->getInsertId();
     }
@@ -94,13 +90,13 @@ class Transactions extends \XoopsObject
      * @public function getForm
      * @param bool $action
      * @param bool $admin
-     * @param int  $type
-     * @param int  $start
-     * @param int  $limit
+     * @param int $type
+     * @param int $start
+     * @param int $limit
      * @param bool $approve
      * @return \XoopsThemeForm
      */
-    public function getFormTransactions($action = false, $admin = false, $type = 0, $start = 0, $limit = 0, $approve = false)
+    public function getFormTransactions(bool $action = false, bool $admin = false, int $type = 0, int $start = 0, int $limit = 0, bool $approve = false): \XoopsThemeForm
     {
         $helper = Helper::getInstance();
         if (!$action) {
@@ -467,7 +463,7 @@ class Transactions extends \XoopsObject
      * @param null $maxDepth
      * @return array
      */
-    public function getValuesTransactions($keys = null, $format = null, $maxDepth = null)
+    public function getValuesTransactions($keys = null, $format = null, $maxDepth = null): array
     {
         $helper  = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $utility = new \XoopsModules\Wgsimpleacc\Utility();
@@ -572,7 +568,7 @@ class Transactions extends \XoopsObject
      *
      * @return array
      */
-    public function toArrayTransactions()
+    public function toArrayTransactions(): array
     {
         $ret = [];
         $vars = $this->getVars();
