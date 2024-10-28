@@ -26,9 +26,9 @@ use XoopsModules\Wgsimpleacc\Common;
 
 class Migrate extends \Xmf\Database\Migrate
 {
-    private mixed $renameTables;
+    private $renameTables;
 
-    private mixed $renameColumns;
+    private $renameColumns;
 
     /**
      * @param \XoopsModules\Wgsimpleacc\Common\Configurator|null $configurator
@@ -80,7 +80,7 @@ class Migrate extends \Xmf\Database\Migrate
      * @param string $tableName  table to convert
      * @param string $columnName column with IP address
      */
-    private function convertIPAddresses(string $tableName, string $columnName)
+    private function convertIPAddresses($tableName, $columnName)
     {
         if ($this->tableHandler->useTable($tableName)) {
             $attributes = $this->tableHandler->getColumnAttributes($tableName, $columnName);

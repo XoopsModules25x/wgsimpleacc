@@ -66,8 +66,6 @@ switch ($op) {
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_CLIENTS];
 
-        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_icon_url', \WGSIMPLEACC_ICONS_URL);
-
         $showFiltered= false;
         $crClients = new \CriteriaCompo();
         if ($cliId > 0) {

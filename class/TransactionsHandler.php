@@ -44,7 +44,7 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
      *
      * @return object
      */
-    public function create($isNew = true): object
+    public function create($isNew = true)
     {
         return parent::create($isNew);
     }
@@ -53,10 +53,10 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
      * retrieve a field
      *
      * @param int $id field id
-     * @param null $fields
+     * @param null fields
      * @return \XoopsObject|null reference to the {@link Get} object
      */
-    public function get($id = null, $fields = null): ?\XoopsObject
+    public function get($id = null, $fields = null)
     {
         return parent::get($id, $fields);
     }
@@ -64,22 +64,22 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
     /**
      * get inserted id
      *
-     * @return int|string
+     * @return int reference to the {@link Get} object
      */
-    public function getInsertId(): int|string
+    public function getInsertId()
     {
         return $this->db->getInsertId();
     }
 
     /**
      * Get Count Transactions in the database
-     * @param int $start
-     * @param int $limit
+     * @param int    $start
+     * @param int    $limit
      * @param string $sort
      * @param string $order
      * @return int
      */
-    public function getCountTransactions(int $start = 0, int $limit = 0, string $sort = 'tra_id ASC, tra_desc', string $order = 'ASC'): int
+    public function getCountTransactions($start = 0, $limit = 0, $sort = 'tra_id ASC, tra_desc', $order = 'ASC')
     {
         $crCountTransactions = new \CriteriaCompo();
         $crCountTransactions = $this->getTransactionsCriteria($crCountTransactions, $start, $limit, $sort, $order);
@@ -88,13 +88,13 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get All Transactions in the database
-     * @param int $start
-     * @param int $limit
+     * @param int    $start
+     * @param int    $limit
      * @param string $sort
      * @param string $order
      * @return array
      */
-    public function getAllTransactions(int $start = 0, int $limit = 0, string $sort = 'tra_id ASC, tra_desc', string $order = 'ASC'): array
+    public function getAllTransactions($start = 0, $limit = 0, $sort = 'tra_id ASC, tra_desc', $order = 'ASC')
     {
         $crAllTransactions = new \CriteriaCompo();
         $crAllTransactions = $this->getTransactionsCriteria($crAllTransactions, $start, $limit, $sort, $order);
@@ -104,12 +104,13 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
     /**
      * Get Criteria Transactions
      * @param        $crTransactions
-     * @param int $start
-     * @param int $limit
+     * @param int    $start
+     * @param int    $limit
      * @param string $sort
      * @param string $order
+     * @return \CriteriaCompo
      */
-    private function getTransactionsCriteria($crTransactions, int $start, int $limit, string $sort, string $order)
+    private function getTransactionsCriteria($crTransactions, $start, $limit, $sort, $order)
     {
         $crTransactions->setStart($start);
         $crTransactions->setLimit($limit);
@@ -134,7 +135,7 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
      * @param int $limit
      * @return Form\FormInline
      */
-    public static function getFormFilter(int $filterFrom, int $filterTo, int $allId, int $asId, int $accId, int $cliId, string $op, int $allSubs, array $traStatus, string $traDesc, int $filterInvalid, int $limit): Form\FormInline
+    public static function getFormFilter($filterFrom, $filterTo, $allId, $asId, $accId, $cliId, $op, $allSubs, $traStatus, $traDesc, $filterInvalid, $limit)
     {
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $permissionsHandler = $helper->getHandler('Permissions');
@@ -263,11 +264,11 @@ class TransactionsHandler extends \XoopsPersistableObjectHandler
 
     /**
      * @public function to save old transaction as history before updating or deleting
-     * @param int $traId
+     * @param int    $traId
      * @param string $type
      * @return bool
      */
-    public function saveHistoryTransactions(int $traId, string $type = 'update'): bool
+    public function saveHistoryTransactions($traId, $type = 'update')
     {
         global $xoopsUser;
         $uid = \is_object($xoopsUser) ? $xoopsUser->uid() : 0;

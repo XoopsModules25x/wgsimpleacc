@@ -44,7 +44,7 @@ class FilesHandler extends \XoopsPersistableObjectHandler
      *
      * @return object
      */
-    public function create($isNew = true): object
+    public function create($isNew = true)
     {
         return parent::create($isNew);
     }
@@ -53,10 +53,10 @@ class FilesHandler extends \XoopsPersistableObjectHandler
      * retrieve a field
      *
      * @param int $id field id
-     * @param null $fields
+     * @param null fields
      * @return \XoopsObject|null reference to the {@link Get} object
      */
-    public function get($id = null, $fields = null): ?\XoopsObject
+    public function get($id = null, $fields = null)
     {
         return parent::get($id, $fields);
     }
@@ -64,22 +64,22 @@ class FilesHandler extends \XoopsPersistableObjectHandler
     /**
      * get inserted id
      *
-     * @return int|string
+     * @return int reference to the {@link Get} object
      */
-    public function getInsertId(): int|string
+    public function getInsertId()
     {
         return $this->db->getInsertId();
     }
 
     /**
      * Get Count Files in the database
-     * @param int $start
-     * @param int $limit
+     * @param int    $start
+     * @param int    $limit
      * @param string $sort
      * @param string $order
      * @return int
      */
-    public function getCountFiles(int $start = 0, int $limit = 0, string $sort = 'fil_id ASC, fil_name', string $order = 'ASC'): int
+    public function getCountFiles($start = 0, $limit = 0, $sort = 'fil_id ASC, fil_name', $order = 'ASC')
     {
         $crCountFiles = new \CriteriaCompo();
         $crCountFiles = $this->getFilesCriteria($crCountFiles, $start, $limit, $sort, $order);
@@ -88,13 +88,13 @@ class FilesHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get All Files in the database
-     * @param int $start
-     * @param int $limit
+     * @param int    $start
+     * @param int    $limit
      * @param string $sort
      * @param string $order
      * @return array
      */
-    public function getAllFiles(int $start = 0, int $limit = 0, string $sort = 'fil_id ASC, fil_name', string $order = 'ASC'): array
+    public function getAllFiles($start = 0, $limit = 0, $sort = 'fil_id ASC, fil_name', $order = 'ASC')
     {
         $crAllFiles = new \CriteriaCompo();
         $crAllFiles = $this->getFilesCriteria($crAllFiles, $start, $limit, $sort, $order);
@@ -103,11 +103,12 @@ class FilesHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get Criteria Files
-     * @param $crFiles
-     * @param $start
-     * @param $limit
-     * @param $sort
-     * @param $order
+     * @param \CriteriaCompo $crFiles
+     * @param int $start
+     * @param int $limit
+     * @param string $sort
+     * @param string $order
+     * @return \CriteriaCompo
      */
     private function getFilesCriteria($crFiles, $start, $limit, $sort, $order)
     {
@@ -120,11 +121,11 @@ class FilesHandler extends \XoopsPersistableObjectHandler
 
     /**
      * @public function to save old files as history before updating or deleting
-     * @param int $filId
+     * @param int    $filId
      * @param string $type
      * @return bool
      */
-    public function saveHistoryFiles(int $filId, string $type = 'update'): bool
+    public function saveHistoryFiles($filId, $type = 'update')
     {
         global $xoopsUser;
         $uid = \is_object($xoopsUser) ? $xoopsUser->uid() : 0;

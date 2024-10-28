@@ -23,9 +23,9 @@
  *
  * @param  $category
  * @param  $item_id
- * @return array|null item
+ * @return array item|null
  */
-function wgsimpleacc_notify_iteminfo($category, $item_id): ?array
+function wgsimpleacc_notify_iteminfo($category, $item_id)
 {
     global $xoopsDB;
 

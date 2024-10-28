@@ -26,12 +26,12 @@ use XoopsModules\Wgsimpleacc\Helper;
  *
  * @param $queryarray
  * @param $andor
- * @param $limit
+ * @param int $limit
  * @param $offset
  * @param $userid
  * @return array $itemIds
  */
-function wgsimpleacc_search($queryarray, $andor, $limit, $offset, $userid): array
+function wgsimpleacc_search($queryarray, $andor, $limit, $offset, $userid)
 {
     $ret = [];
     $helper = Helper::getInstance();

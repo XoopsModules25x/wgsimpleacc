@@ -44,7 +44,7 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
      *
      * @return object
      */
-    public function create($isNew = true): object
+    public function create($isNew = true)
     {
         return parent::create($isNew);
     }
@@ -53,10 +53,10 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
      * retrieve a field
      *
      * @param int $id field id
-     * @param null $fields
+     * @param null fields
      * @return \XoopsObject|null reference to the {@link Get} object
      */
-    public function get($id = null, $fields = null): ?\XoopsObject
+    public function get($id = null, $fields = null)
     {
         return parent::get($id, $fields);
     }
@@ -64,22 +64,22 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
     /**
      * get inserted id
      *
-     * @return int|string
+     * @return int reference to the {@link Get} object
      */
-    public function getInsertId(): int|string
+    public function getInsertId()
     {
         return $this->db->getInsertId();
     }
 
     /**
      * Get Count Assets in the database
-     * @param int $start
-     * @param int $limit
+     * @param int    $start
+     * @param int    $limit
      * @param string $sort
      * @param string $order
      * @return int
      */
-    public function getCountAssets(int $start = 0, int $limit = 0, string $sort = 'as_id ASC, as_name', string $order = 'ASC'): int
+    public function getCountAssets($start = 0, $limit = 0, $sort = 'as_id ASC, as_name', $order = 'ASC')
     {
         $crCountAssets = new \CriteriaCompo();
         $crCountAssets = $this->getAssetsCriteria($crCountAssets, $start, $limit, $sort, $order);
@@ -88,13 +88,13 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get All Assets in the database
-     * @param int $start
-     * @param int $limit
+     * @param int    $start
+     * @param int    $limit
      * @param string $sort
      * @param string $order
      * @return array
      */
-    public function getAllAssets(int $start = 0, int $limit = 0, string $sort = 'as_id ASC, as_name', string $order = 'ASC'): array
+    public function getAllAssets($start = 0, $limit = 0, $sort = 'as_id ASC, as_name', $order = 'ASC')
     {
         $crAllAssets = new \CriteriaCompo();
         $crAllAssets = $this->getAssetsCriteria($crAllAssets, $start, $limit, $sort, $order);
@@ -103,11 +103,12 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get Criteria Assets
-     * @param $crAssets
-     * @param $start
-     * @param $limit
-     * @param $sort
-     * @param $order
+     * @param \CriteriaCompo $crAssets
+     * @param int $start
+     * @param int $limit
+     * @param string $sort
+     * @param string $order
+     * @return \CriteriaCompo
      */
     private function getAssetsCriteria($crAssets, $start, $limit, $sort, $order)
     {
@@ -122,7 +123,7 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
      * Get current value of all assets
      * @return array
      */
-    public function getCurrentAssetsValues(): array
+    public function getCurrentAssetsValues()
     {
         global $xoopsDB;
 
@@ -152,7 +153,7 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
      * Get value of all assets from last balance
      * @return array
      */
-    public function getAssetsValuesLastBalance(): array
+    public function getAssetsValuesLastBalance()
     {
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $assetsHandler = $helper->getHandler('Assets');
@@ -188,13 +189,13 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get value of all assets for a period
-     * @param      $dateFrom
-     * @param      $dateTo
+     * @param int  $dateFrom
+     * @param int  $dateTo
      * @param bool $includeSum
      * @param bool $onlyApproved
      * @return array
      */
-    public function getAssetsValues($dateFrom, $dateTo, bool $includeSum = false, bool $onlyApproved = false): array
+    public function getAssetsValues($dateFrom, $dateTo, $includeSum = false, $onlyApproved = false)
     {
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $transactionsHandler = $helper->getHandler('Transactions');
@@ -339,7 +340,7 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
      * @param int $asId
      * @return bool
      */
-    public function setPrimaryAssets(int $asId): bool
+    public function setPrimaryAssets($asId)
     {
         $helper  = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $assetsObj = null;
@@ -367,16 +368,16 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
      * Get primary asset
      * @return int
      */
-    public function getPrimaryAsset(): int
+    public function getPrimaryAsset()
     {
-        $asId = 0;
+        $asId = '';
         $crAssets = new \CriteriaCompo();
         $crAssets->add(new \Criteria('as_primary', 1));
         $assetsCount = $this->getCount($crAssets);
         $assetsAll = $this->getAll($crAssets);
         if ($assetsCount > 0) {
             foreach (\array_keys($assetsAll) as $i) {
-                $asId = (int)$assetsAll[$i]->getVar('as_id');
+                $asId = $assetsAll[$i]->getVar('as_id');
             }
         }
 

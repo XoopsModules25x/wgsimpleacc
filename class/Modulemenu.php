@@ -29,7 +29,7 @@ class Modulemenu
      *
      * @return array
      */
-    public function getMenuitemsDefault(): array
+    public function getMenuitemsDefault()
     {
 
         $moduleDirName = \basename(\dirname(__DIR__));
@@ -199,7 +199,7 @@ class Modulemenu
      *
      * @return array
      */
-    public function getMenuitemsStartmin(): array
+    public function getMenuitemsStartmin()
     {
         $moduleDirName = \basename(\dirname(__DIR__));
         $subcount      = 1;
@@ -355,7 +355,7 @@ class Modulemenu
      *
      * @return array
      */
-    public function getMenuitemsSbadmin5(): array
+    public function getMenuitemsSbadmin5()
     {
         $moduleDirName = \basename(\dirname(__DIR__));
         $pathname      = \XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/';
@@ -555,7 +555,7 @@ class Modulemenu
                 ];
             }
         }
-        
+
         if ($permissionsHandler->getPermAssetsView()) {
             $nav_items2 = [];
             if ($permissionsHandler->getPermAssetsSubmit()) {

@@ -70,7 +70,7 @@ class Filhistories extends \XoopsObject
      * @param null $maxDepth
      * @return array
      */
-    public function getValuesFilhistories($keys = null, $format = null, $maxDepth = null): array
+    public function getValuesFilhistories($keys = null, $format = null, $maxDepth = null)
     {
         $helper  = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $utility = new \XoopsModules\Wgsimpleacc\Utility();

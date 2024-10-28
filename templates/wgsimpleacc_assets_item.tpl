@@ -5,22 +5,22 @@
     <td><div style="width:50px;background-color:<{$asset.color}>">&nbsp;</div></td>
     <td class="center">
         <{if $asset.as_primary}>
-            <img src="<{$wgsimpleacc_icon_url_16}><{$asset.as_primary}>.png" alt="<{$smarty.const._MA_WGSIMPLEACC_ASSET_PRIMARY}>">
+            <img src="<{$wgsimpleacc_icons_url_16}><{$asset.as_primary}>.png" alt="<{$smarty.const._MA_WGSIMPLEACC_ASSET_PRIMARY}>">
         <{/if}>
     </td>
     <{if $permSubmit}>
         <td class="center">
             <{if $asset.as_iecalc|default:0 == 1}>
-                <img src="<{$wgsimpleacc_icon_url_32}>/1.png" alt="<{$asset.iecalc}>">
+                <img src="<{$wgsimpleacc_icons_url_32}>/1.png" alt="<{$asset.iecalc}>">
             <{else}>
-                <img src="<{$wgsimpleacc_icon_url_32}>/0.png" alt="<{$asset.iecalc}>">
+                <img src="<{$wgsimpleacc_icons_url_32}>/0.png" alt="<{$asset.iecalc}>">
             <{/if}>
         </td>
         <td class="center">
             <{if $asset.as_online|default:0 == 1}>
-                <img src="<{$wgsimpleacc_icon_url_32}>/1.png" alt="<{$asset.online}>">
+                <img src="<{$wgsimpleacc_icons_url_32}>/1.png" alt="<{$asset.online}>">
             <{else}>
-                <img src="<{$wgsimpleacc_icon_url_32}>/0.png" alt="<{$asset.online}>">
+                <img src="<{$wgsimpleacc_icons_url_32}>/0.png" alt="<{$asset.online}>">
             <{/if}>
         </td>
     <{/if}>

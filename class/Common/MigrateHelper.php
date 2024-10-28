@@ -28,12 +28,12 @@ class MigrateHelper
     /**
      * @var string
      */
-    private string $fileYaml;
+    private $fileYaml;
 
     /**
      * @var string
      */
-    private string $fileSql;
+    private $fileSql;
 
 
     /**
@@ -49,6 +49,7 @@ class MigrateHelper
     /**
      * Create a yaml file based on a sql file
      *
+     * @param null
      * @return bool
      */
     public function createSchemaFromSqlfile(): bool
@@ -99,7 +100,7 @@ class MigrateHelper
                 $tables[$tableName]['columns'] = [];
                 $tables[$tableName]['keys'] = [];
             } else {
-                if (!$skip) {
+                if (false == $skip) {
                     if (')' === \mb_strtoupper(\substr($line, 0, 1))) {
                         // end of table definition
                         // get options
@@ -163,7 +164,7 @@ class MigrateHelper
 
         // create new file and write schema array into this file
         $myfile = \fopen($this->fileYaml, "w");
-        if (!$myfile) {
+        if (false == $myfile || \is_null($myfile)) {
             \xoops_error('Error: Unable to open sql file!');
             return false;
         }
@@ -182,7 +183,7 @@ class MigrateHelper
      * @param  string $line
      * @return string|bool
      */
-    private function getTableName (string $line): bool|string
+    private function getTableName (string $line)
     {
 
         $arrLine = \explode( '`', $line);
@@ -200,7 +201,7 @@ class MigrateHelper
      * @param string $line
      * @return array|bool
      */
-    private function getColumns (string $line): bool|array
+    private function getColumns (string $line)
     {
 
         $columns = [];
@@ -255,7 +256,7 @@ class MigrateHelper
      * @param string $line
      * @return array
      */
-    private function getKey (string $line): array
+    private function getKey (string $line)
     {
 
         $key = [];

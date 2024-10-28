@@ -37,12 +37,12 @@ $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 class FileChecker
 {
     /**
-     * @param string $file_path
+     * @param string      $file_path
      * @param string|null $original_file_path
-     * @param string $redirectFile
+     * @param string      $redirectFile
      * @return bool|string
      */
-    public static function getFileStatus(string $file_path, string $original_file_path = null, string $redirectFile)
+    public static function getFileStatus($file_path, $original_file_path = null, $redirectFile)
     {
         $pathIcon16 = \Xmf\Module\Admin::iconUrl('', '16');
 
@@ -135,7 +135,7 @@ class FileChecker
      *
      * @return bool
      */
-    public static function setFilePermissions($target, int $mode = 0777)
+    public static function setFilePermissions($target, $mode = 0777)
     {
         $target = \str_replace('..', '', $target);
 

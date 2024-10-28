@@ -62,7 +62,7 @@ $GLOBALS['xoopsTpl']->assign('permOuttemplatesView', $permissionsHandler->getPer
 $GLOBALS['xoopsTpl']->assign('permClientsSubmit', $permissionsHandler->getPermClientsSubmit());
 $GLOBALS['xoopsTpl']->assign('permClientsView', $permissionsHandler->getPermClientsView());
 */
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icon_url_32', WGSIMPLEACC_ICONS_URL . '/32/');
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icons_url_32', WGSIMPLEACC_ICONS_URL . '/32/');
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_image_url', WGSIMPLEACC_IMAGE_URL);
 
 $currentUser = '';

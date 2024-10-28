@@ -5,7 +5,7 @@
     <td><div style="width:50px;background-color:<{$asset.color}>">&nbsp;</div></td>
     <td class="center">
         <{if $asset.as_primary}>
-            <img src="<{$wgsimpleacc_icon_url_16}><{$asset.as_primary}>.png" alt="<{$smarty.const._MA_WGSIMPLEACC_ASSET_PRIMARY}>">
+            <img src="<{$wgsimpleacc_icons_url_16}><{$asset.as_primary}>.png" alt="<{$smarty.const._MA_WGSIMPLEACC_ASSET_PRIMARY}>">
         <{/if}>
     </td>
     <{if $permSubmit}>

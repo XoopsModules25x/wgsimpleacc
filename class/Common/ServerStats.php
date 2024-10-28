@@ -24,7 +24,7 @@ trait ServerStats
      *
      * @return string
      */
-    public static function getServerStats(): string
+    public static function getServerStats()
     {
         $moduleDirName      = \basename(\dirname(__DIR__, 2));
         $moduleDirNameUpper = \mb_strtoupper($moduleDirName);

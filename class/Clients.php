@@ -66,9 +66,9 @@ class Clients extends \XoopsObject
 
     /**
      * The new inserted $Id
-     * @return int|string
+     * @return int
      */
-    public function getNewInsertedIdClients(): int|string
+    public function getNewInsertedIdClients()
     {
         return $GLOBALS['xoopsDB']->getInsertId();
     }
@@ -78,7 +78,7 @@ class Clients extends \XoopsObject
      * @param bool $action
      * @return \XoopsThemeForm
      */
-    public function getFormClients(bool $action = false): \XoopsThemeForm
+    public function getFormClients($action = false)
     {
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         if (!$action) {
@@ -169,7 +169,7 @@ class Clients extends \XoopsObject
      * @param null $maxDepth
      * @return array
      */
-    public function getValuesClients($keys = null, $format = null, $maxDepth = null): array
+    public function getValuesClients($keys = null, $format = null, $maxDepth = null)
     {
         $helper  = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $utility = new \XoopsModules\Wgsimpleacc\Utility();
@@ -222,7 +222,7 @@ class Clients extends \XoopsObject
      *
      * @return array
      */
-    public function toArrayClients(): array
+    public function toArrayClients()
     {
         $ret = [];
         $vars = $this->getVars();

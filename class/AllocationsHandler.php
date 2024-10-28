@@ -44,7 +44,7 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
      *
      * @return object
      */
-    public function create($isNew = true): object
+    public function create($isNew = true)
     {
         return parent::create($isNew);
     }
@@ -53,10 +53,10 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
      * retrieve a field
      *
      * @param int $id field id
-     * @param null $fields
+     * @param null fields
      * @return \XoopsObject|null reference to the {@link Get} object
      */
-    public function get($id = null, $fields = null): ?\XoopsObject
+    public function get($id = null, $fields = null)
     {
         return parent::get($id, $fields);
     }
@@ -66,20 +66,20 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
      *
      * @return int reference to the {@link Get} object
      */
-    public function getInsertId(): int
+    public function getInsertId()
     {
         return $this->db->getInsertId();
     }
 
     /**
      * Get Count Allocations in the database
-     * @param int $start
-     * @param int $limit
+     * @param int    $start
+     * @param int    $limit
      * @param string $sort
      * @param string $order
      * @return int
      */
-    public function getCountAllocations(int $start = 0, int $limit = 0, string $sort = 'all_id ASC, all_name', string $order = 'ASC'): int
+    public function getCountAllocations($start = 0, $limit = 0, $sort = 'all_id ASC, all_name', $order = 'ASC')
     {
         $crCountAllocations = new \CriteriaCompo();
         $crCountAllocations = $this->getAllocationsCriteria($crCountAllocations, $start, $limit, $sort, $order);
@@ -88,13 +88,13 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get All Allocations in the database
-     * @param int $start
-     * @param int $limit
+     * @param int    $start
+     * @param int    $limit
      * @param string $sort
      * @param string $order
      * @return array
      */
-    public function getAllAllocations(int $start = 0, int $limit = 0, string $sort = 'all_weight ASC, all_id', string $order = 'ASC'): array
+    public function getAllAllocations($start = 0, $limit = 0, $sort = 'all_weight ASC, all_id', $order = 'ASC')
     {
         $crAllAllocations = new \CriteriaCompo();
         $crAllAllocations = $this->getAllocationsCriteria($crAllAllocations, $start, $limit, $sort, $order);
@@ -103,14 +103,14 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get Criteria Allocations
-     * @param $crAllocations
-     * @param $start
-     * @param $limit
-     * @param $sort
-     * @param $order
-     * @return int
+     * @param \CriteriaCompo $crAllocations
+     * @param int $start
+     * @param int $limit
+     * @param string $sort
+     * @param string $order
+     * @return \CriteriaCompo
      */
-    private function getAllocationsCriteria($crAllocations, $start, $limit, $sort, $order): int
+    private function getAllocationsCriteria($crAllocations, $start, $limit, $sort, $order)
     {
         $crAllocations->setStart($start);
         $crAllocations->setLimit($limit);
@@ -123,7 +123,7 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
      * Get all allocations for selectbox
      * @return array|false
      */
-    public function getSelectTreeOfAllocations(): bool|array
+    public function getSelectTreeOfAllocations()
     {
         $list = [];
 
@@ -173,10 +173,10 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get all childs of an item
-     * @param $itemPid
+     * @param int $itemPid
      * @return bool|string
      */
-    public function getListOfAllocationsEdit($itemPid): bool|string
+    public function getListOfAllocationsEdit($itemPid)
     {
         if ($itemPid > 0) {
             $childsAll = '<ol>';
@@ -254,10 +254,10 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get all childs of an item
-     * @param $itemPid
+     * @param int $itemPid
      * @return bool|string
      */
-    public function getListOfAllocations($itemPid): bool|string
+    public function getListOfAllocations($itemPid)
     {
         if ($itemPid > 0) {
             $childsAll = '<ol>';
@@ -304,10 +304,10 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get array of allocations with all childs
-     * @param $allPid
+     * @param int $allPid
      * @return bool|array
      */
-    public function getArrayTreeOfAllocations($allPid): bool|array
+    public function getArrayTreeOfAllocations($allPid)
     {
 
         $arrayAllTree = [];
@@ -395,10 +395,10 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
 
     /**
     * Get all sub allocations for given allocation
-    * @param $allId
+    * @param int $allId
     * @return array|false
     */
-    public function getSubsOfAllocations($allId): bool|array
+    public function getSubsOfAllocations($allId)
     {
         $list = [];
 
@@ -424,10 +424,10 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Check whether given allocation is online or not
-     * @param $allId
+     * @param int $allId
      * @return array
      */
-    public function AllocationIsOnline($allId): array
+    public function AllocationIsOnline($allId)
     {
         $allocationObj = $this->get($allId);
 

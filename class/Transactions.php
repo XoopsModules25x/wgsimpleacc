@@ -79,9 +79,9 @@ class Transactions extends \XoopsObject
 
     /**
      * The new inserted $Id
-     * @return int|string
+     * @return integer
      */
-    public function getNewInsertedIdTransactions(): int|string
+    public function getNewInsertedIdTransactions()
     {
         return $GLOBALS['xoopsDB']->getInsertId();
     }
@@ -90,13 +90,13 @@ class Transactions extends \XoopsObject
      * @public function getForm
      * @param bool $action
      * @param bool $admin
-     * @param int $type
-     * @param int $start
-     * @param int $limit
+     * @param int  $type
+     * @param int  $start
+     * @param int  $limit
      * @param bool $approve
      * @return \XoopsThemeForm
      */
-    public function getFormTransactions(bool $action = false, bool $admin = false, int $type = 0, int $start = 0, int $limit = 0, bool $approve = false): \XoopsThemeForm
+    public function getFormTransactions($action = false, $admin = false, $type = 0, $start = 0, $limit = 0, $approve = false)
     {
         $helper = Helper::getInstance();
         if (!$action) {
@@ -463,7 +463,7 @@ class Transactions extends \XoopsObject
      * @param null $maxDepth
      * @return array
      */
-    public function getValuesTransactions($keys = null, $format = null, $maxDepth = null): array
+    public function getValuesTransactions($keys = null, $format = null, $maxDepth = null)
     {
         $helper  = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $utility = new \XoopsModules\Wgsimpleacc\Utility();
@@ -568,7 +568,7 @@ class Transactions extends \XoopsObject
      *
      * @return array
      */
-    public function toArrayTransactions(): array
+    public function toArrayTransactions()
     {
         $ret = [];
         $vars = $this->getVars();

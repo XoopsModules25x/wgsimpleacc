@@ -43,7 +43,7 @@ class Helper extends \Xmf\Module\Helper
      *
      * @return \XoopsModules\Wgsimpleacc\Helper
      */
-    public static function getInstance(bool $debug = false): Helper
+    public static function getInstance($debug = false)
     {
         static $instance;
         if (null === $instance) {
@@ -56,7 +56,7 @@ class Helper extends \Xmf\Module\Helper
     /**
      * @return string
      */
-    public function getDirname(): string
+    public function getDirname()
     {
         return $this->dirname;
     }
@@ -68,7 +68,7 @@ class Helper extends \Xmf\Module\Helper
      *
      * @return bool|\XoopsObjectHandler|\XoopsPersistableObjectHandler
      */
-    public function getHandler($name): \XoopsObjectHandler|bool|\XoopsPersistableObjectHandler
+    public function getHandler($name)
     {
         $class = __NAMESPACE__ . '\\' . \ucfirst($name) . 'Handler';
         if (!\class_exists($class)) {

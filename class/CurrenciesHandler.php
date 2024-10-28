@@ -44,7 +44,7 @@ class CurrenciesHandler extends \XoopsPersistableObjectHandler
      *
      * @return object
      */
-    public function create($isNew = true): object
+    public function create($isNew = true)
     {
         return parent::create($isNew);
     }
@@ -53,10 +53,10 @@ class CurrenciesHandler extends \XoopsPersistableObjectHandler
      * retrieve a field
      *
      * @param int $id field id
-     * @param null $fields
+     * @param null fields
      * @return \XoopsObject|null reference to the {@link Get} object
      */
-    public function get($id = null, $fields = null): ?\XoopsObject
+    public function get($id = null, $fields = null)
     {
         return parent::get($id, $fields);
     }
@@ -66,20 +66,20 @@ class CurrenciesHandler extends \XoopsPersistableObjectHandler
      *
      * @return int reference to the {@link Get} object
      */
-    public function getInsertId(): int
+    public function getInsertId()
     {
         return $this->db->getInsertId();
     }
 
     /**
      * Get Count Currencies in the database
-     * @param int $start
-     * @param int $limit
+     * @param int    $start
+     * @param int    $limit
      * @param string $sort
      * @param string $order
      * @return int
      */
-    public function getCountCurrencies(int $start = 0, int $limit = 0, string $sort = 'cur_id ASC, cur_code', string $order = 'ASC'): int
+    public function getCountCurrencies($start = 0, $limit = 0, $sort = 'cur_id ASC, cur_code', $order = 'ASC')
     {
         $crCountCurrencies = new \CriteriaCompo();
         $crCountCurrencies = $this->getCurrenciesCriteria($crCountCurrencies, $start, $limit, $sort, $order);
@@ -88,13 +88,13 @@ class CurrenciesHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get All Currencies in the database
-     * @param int $start
-     * @param int $limit
+     * @param int    $start
+     * @param int    $limit
      * @param string $sort
      * @param string $order
      * @return array
      */
-    public function getAllCurrencies(int $start = 0, int $limit = 0, string $sort = 'cur_id ASC, cur_code', string $order = 'ASC'): array
+    public function getAllCurrencies($start = 0, $limit = 0, $sort = 'cur_id ASC, cur_code', $order = 'ASC')
     {
         $crAllCurrencies = new \CriteriaCompo();
         $crAllCurrencies = $this->getCurrenciesCriteria($crAllCurrencies, $start, $limit, $sort, $order);
@@ -103,14 +103,14 @@ class CurrenciesHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get Criteria Currencies
-     * @param $crCurrencies
-     * @param $start
-     * @param $limit
-     * @param $sort
-     * @param $order
-     * @return int
+     * @param \CriteriaCompo $crCurrencies
+     * @param int $start
+     * @param int $limit
+     * @param string $sort
+     * @param string $order
+     * @return \CriteriaCompo
      */
-    private function getCurrenciesCriteria($crCurrencies, $start, $limit, $sort, $order): int
+    private function getCurrenciesCriteria($crCurrencies, $start, $limit, $sort, $order)
     {
         $crCurrencies->setStart($start);
         $crCurrencies->setLimit($limit);
@@ -124,7 +124,7 @@ class CurrenciesHandler extends \XoopsPersistableObjectHandler
      * @param int $curId
      * @return bool
      */
-    public function setPrimaryCurrencies(int $curId): bool
+    public function setPrimaryCurrencies($curId)
     {
         $helper  = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $currenciesObj = null;
@@ -152,7 +152,7 @@ class CurrenciesHandler extends \XoopsPersistableObjectHandler
      * Get primary currency
      * @return int
      */
-    public function getPrimaryCurrency(): int
+    public function getPrimaryCurrency()
     {
         $curId = 0;
         $crCurrencies = new \CriteriaCompo();

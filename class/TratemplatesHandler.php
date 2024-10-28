@@ -44,7 +44,7 @@ class TratemplatesHandler extends \XoopsPersistableObjectHandler
      *
      * @return object
      */
-    public function create($isNew = true): object
+    public function create($isNew = true)
     {
         return parent::create($isNew);
     }
@@ -53,10 +53,10 @@ class TratemplatesHandler extends \XoopsPersistableObjectHandler
      * retrieve a field
      *
      * @param int $id field id
-     * @param null $fields
+     * @param null fields
      * @return \XoopsObject|null reference to the {@link Get} object
      */
-    public function get($id = null, $fields = null): ?\XoopsObject
+    public function get($id = null, $fields = null)
     {
         return parent::get($id, $fields);
     }
@@ -64,22 +64,22 @@ class TratemplatesHandler extends \XoopsPersistableObjectHandler
     /**
      * get inserted id
      *
-     * @return int|string
+     * @return int reference to the {@link Get} object
      */
-    public function getInsertId(): int|string
+    public function getInsertId()
     {
         return $this->db->getInsertId();
     }
 
     /**
      * Get Count Templates in the database
-     * @param int $start
-     * @param int $limit
+     * @param int    $start
+     * @param int    $limit
      * @param string $sort
      * @param string $order
      * @return int
      */
-    public function getCountTratemplates(int $start = 0, int $limit = 0, string $sort = 'ttpl_id ASC, ttpl_name', string $order = 'ASC'): int
+    public function getCountTratemplates($start = 0, $limit = 0, $sort = 'ttpl_id ASC, ttpl_name', $order = 'ASC')
     {
         $crCountTratemplates = new \CriteriaCompo();
         $crCountTratemplates = $this->getTratemplatesCriteria($crCountTratemplates, $start, $limit, $sort, $order);
@@ -88,13 +88,13 @@ class TratemplatesHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get All Templates in the database
-     * @param int $start
-     * @param int $limit
+     * @param int    $start
+     * @param int    $limit
      * @param string $sort
      * @param string $order
      * @return array
      */
-    public function getAllTratemplates(int $start = 0, int $limit = 0, string $sort = 'ttpl_id ASC, ttpl_name', string $order = 'ASC'): array
+    public function getAllTratemplates($start = 0, $limit = 0, $sort = 'ttpl_id ASC, ttpl_name', $order = 'ASC')
     {
         $crAllTratemplates = new \CriteriaCompo();
         $crAllTratemplates = $this->getTratemplatesCriteria($crAllTratemplates, $start, $limit, $sort, $order);
@@ -104,12 +104,13 @@ class TratemplatesHandler extends \XoopsPersistableObjectHandler
     /**
      * Get Criteria Templates
      * @param        $crTratemplates
-     * @param int $start
-     * @param int $limit
+     * @param int    $start
+     * @param int    $limit
      * @param string $sort
      * @param string $order
+     * @return \CriteriaCompo
      */
-    private function getTratemplatesCriteria($crTratemplates, int $start, int $limit, string $sort, string $order)
+    private function getTratemplatesCriteria($crTratemplates, $start, $limit, $sort, $order)
     {
         $crTratemplates->setStart($start);
         $crTratemplates->setLimit($limit);

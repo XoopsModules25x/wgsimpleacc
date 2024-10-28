@@ -48,12 +48,12 @@ class MYPDF extends TCPDF {
     /**
      * @var mixed
      */
-    public mixed $htmlHeader = '';
+    public $htmlHeader = '';
 
     /**
      * @var mixed
      */
-    public mixed $htmlFooter = '';
+    public $htmlFooter = '';
 
     //Page header
     public function Header() {
@@ -90,7 +90,6 @@ function execute_output ($template, $outParams)
 {
     $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
 
-    $pdfData = [];
     if (\file_exists($tcpdf = \XOOPS_ROOT_PATH . '/Frameworks/tcpdf/')) {
         require_once $tcpdf . 'tcpdf.php';
     } else {
@@ -105,6 +104,7 @@ function execute_output ($template, $outParams)
     $title = $GLOBALS['xoopsConfig']['sitename'];
     //$subject = 'Pdf Subject';
 
+    $pdfData = [];
     // Read data from table and create pdfData
     $pdfData['date'] = $outParams['date'];
     $pdfData['author'] = $outParams['submitter'];

@@ -17,8 +17,8 @@
             </tr>
             </thead>
             <tbody>
-                <{foreach item=asset from=$assets}>
-                    <{include file='db:wgsimpleacc_assets_item.tpl' }>
+            <{foreach item=asset from=$assets}>
+                <{include file='db:wgsimpleacc_assets_item.tpl' }>
                 <{/foreach}>
             </tbody>
         </table>

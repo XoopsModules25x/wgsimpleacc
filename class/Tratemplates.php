@@ -63,9 +63,9 @@ class Tratemplates extends \XoopsObject
 
     /**
      * The new inserted $Id
-     * @return int|string
+     * @return int
      */
-    public function getNewInsertedIdTratemplates(): int|string
+    public function getNewInsertedIdTratemplates()
     {
         return $GLOBALS['xoopsDB']->getInsertId();
     }
@@ -75,7 +75,7 @@ class Tratemplates extends \XoopsObject
      * @param bool $action
      * @return \XoopsThemeForm
      */
-    public function getFormTratemplates(bool $action = false): \XoopsThemeForm
+    public function getFormTratemplates($action = false)
     {
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         if (!$action) {
@@ -176,7 +176,7 @@ class Tratemplates extends \XoopsObject
      * @param null $maxDepth
      * @return array
      */
-    public function getValuesTratemplates($keys = null, $format = null, $maxDepth = null): array
+    public function getValuesTratemplates($keys = null, $format = null, $maxDepth = null)
     {
         $helper  = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $ret = $this->getValues($keys, $format, $maxDepth);
@@ -260,7 +260,7 @@ class Tratemplates extends \XoopsObject
      *
      * @return array
      */
-    public function toArrayTratemplates(): array
+    public function toArrayTratemplates()
     {
         $ret = [];
         $vars = $this->getVars();

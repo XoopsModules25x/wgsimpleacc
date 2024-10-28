@@ -52,7 +52,7 @@ class Confirm
      * @param string $title
      * @param string $label
      */
-    public function __construct($hiddens, $action, $object, string $title = '', string $label = '')
+    public function __construct($hiddens, $action, $object, $title = '', $label = '')
     {
         $this->hiddens = $hiddens;
         $this->action  = $action;
@@ -65,7 +65,7 @@ class Confirm
      * @public function getFormConfirm
      * @return \XoopsThemeForm
      */
-    public function getFormConfirm(): \XoopsThemeForm
+    public function getFormConfirm()
     {
         $moduleDirName      = \basename(__DIR__);
         $moduleDirNameUpper = \mb_strtoupper($moduleDirName);

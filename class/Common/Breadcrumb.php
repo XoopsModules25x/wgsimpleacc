@@ -52,7 +52,7 @@ class Breadcrumb
      * @param string $title
      * @param string $link
      */
-    public function addLink(string $title = '', string $link = ''): void
+    public function addLink($title = '', $link = '')
     {
         $this->bread[] = [
             'link'  => $link,

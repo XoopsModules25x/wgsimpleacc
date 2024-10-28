@@ -29,15 +29,15 @@
                         <td class='center'><{$template.desc}></td>
                         <td class='center'>
                                 <{$template.accid}> <{$template.accname}>
-                                <img class="wgsa-img-online wgsa-img-online-small" src="<{$wgsimpleacc_icon_url_32}>/<{$template.acconline}>.png" alt="<{$template.acconlinetext}>">
+                                <img class="wgsa-img-online wgsa-img-online-small" src="<{$wgsimpleacc_icons_url_32}>/<{$template.acconline}>.png" alt="<{$template.acconlinetext}>">
                         </td>
                         <td class='center'>
                             <{$template.allid}>
-                            <img class="wgsa-img-online wgsa-img-online-small" src="<{$wgsimpleacc_icon_url_32}>/<{$template.allonline}>.png" alt="<{$template.allonlinetext}>">
+                            <img class="wgsa-img-online wgsa-img-online-small" src="<{$wgsimpleacc_icons_url_32}>/<{$template.allonline}>.png" alt="<{$template.allonlinetext}>">
                         </td>
                         <td class='center'>
                             <{$template.asid}>
-                            <img class="wgsa-img-online wgsa-img-online-small" src="<{$wgsimpleacc_icon_url_32}>/<{$template.asonline}>.png" alt="<{$template.asonlinetext}>">
+                            <img class="wgsa-img-online wgsa-img-online-small" src="<{$wgsimpleacc_icons_url_32}>/<{$template.asonline}>.png" alt="<{$template.asonlinetext}>">
                         </td>
                         <td class='center'><{$template.class_text}></td>
                         <td class='center'><{$template.amountin}></td>

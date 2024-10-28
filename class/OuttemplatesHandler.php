@@ -44,7 +44,7 @@ class OuttemplatesHandler extends \XoopsPersistableObjectHandler
      *
      * @return object
      */
-    public function create($isNew = true): object
+    public function create($isNew = true)
     {
         return parent::create($isNew);
     }
@@ -53,10 +53,10 @@ class OuttemplatesHandler extends \XoopsPersistableObjectHandler
      * retrieve a field
      *
      * @param int $id field id
-     * @param null $fields
+     * @param null fields
      * @return \XoopsObject|null reference to the {@link Get} object
      */
-    public function get($id = null, $fields = null): ?\XoopsObject
+    public function get($id = null, $fields = null)
     {
         return parent::get($id, $fields);
     }
@@ -64,22 +64,22 @@ class OuttemplatesHandler extends \XoopsPersistableObjectHandler
     /**
      * get inserted id
      *
-     * @return int|string
+     * @return int reference to the {@link Get} object
      */
-    public function getInsertId(): int|string
+    public function getInsertId()
     {
         return $this->db->getInsertId();
     }
 
     /**
      * Get Count Outtemplates in the database
-     * @param int $start
-     * @param int $limit
+     * @param int    $start
+     * @param int    $limit
      * @param string $sort
      * @param string $order
      * @return int
      */
-    public function getCountOuttemplates(int $start = 0, int $limit = 0, string $sort = 'otpl_id ASC, otpl_name', string $order = 'ASC'): int
+    public function getCountOuttemplates($start = 0, $limit = 0, $sort = 'otpl_id ASC, otpl_name', $order = 'ASC')
     {
         $crCountOuttemplates = new \CriteriaCompo();
         $crCountOuttemplates = $this->getOuttemplatesCriteria($crCountOuttemplates, $start, $limit, $sort, $order);
@@ -88,13 +88,13 @@ class OuttemplatesHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get All Outtemplates in the database
-     * @param int $start
-     * @param int $limit
+     * @param int    $start
+     * @param int    $limit
      * @param string $sort
      * @param string $order
      * @return array
      */
-    public function getAllOuttemplates(int $start = 0, int $limit = 0, string $sort = 'otpl_id ASC, otpl_name', string $order = 'ASC'): array
+    public function getAllOuttemplates($start = 0, $limit = 0, $sort = 'otpl_id ASC, otpl_name', $order = 'ASC')
     {
         $crAllOuttemplates = new \CriteriaCompo();
         $crAllOuttemplates = $this->getOuttemplatesCriteria($crAllOuttemplates, $start, $limit, $sort, $order);
@@ -103,13 +103,14 @@ class OuttemplatesHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get Criteria Outtemplates
-     * @param        $crOuttemplates
-     * @param int $start
-     * @param int $limit
+     * @param \CriteriaCompo $crOuttemplates
+     * @param int    $start
+     * @param int    $limit
      * @param string $sort
      * @param string $order
+     * @return \CriteriaCompo
      */
-    private function getOuttemplatesCriteria($crOuttemplates, int $start, int $limit, string $sort, string $order)
+    private function getOuttemplatesCriteria($crOuttemplates, $start, $limit, $sort, $order)
     {
         $crOuttemplates->setStart($start);
         $crOuttemplates->setLimit($limit);
@@ -122,7 +123,7 @@ class OuttemplatesHandler extends \XoopsPersistableObjectHandler
      * @param array $template
      * @return \XoopsThemeForm
      */
-    public static function getFormEditTraOutput(array $template = []): \XoopsThemeForm
+    public static function getFormEditTraOutput($template = [])
     {
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $action = $_SERVER['REQUEST_URI'];
@@ -199,7 +200,7 @@ class OuttemplatesHandler extends \XoopsPersistableObjectHandler
      * @param array $outParams
      * @return array
      */
-    public static function getFetchedOutput(array $outParams): array
+    public static function getFetchedOutput($outParams)
     {
         global $XoopsTpl;
 
@@ -255,11 +256,10 @@ class OuttemplatesHandler extends \XoopsPersistableObjectHandler
 
     /**
      * @public function to get output
-     * @param $traId
+     * @param int $traId
      * @return array
      */
-    public function getOutParams($traId): array
-    {
+    public function getOutParams($traId) {
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $transactionsHandler = $helper->getHandler('Transactions');
         $clientsHandler = $helper->getHandler('Clients');

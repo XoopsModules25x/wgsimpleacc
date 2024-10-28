@@ -57,9 +57,9 @@ class Taxes extends \XoopsObject
 
     /**
      * The new inserted $Id
-     * @return int|string
+     * @return int
      */
-    public function getNewInsertedIdTaxes(): int|string
+    public function getNewInsertedIdTaxes()
     {
         return $GLOBALS['xoopsDB']->getInsertId();
     }
@@ -69,7 +69,7 @@ class Taxes extends \XoopsObject
      * @param bool $action
      * @return \XoopsThemeForm
      */
-    public function getFormTaxes(bool $action = false): \XoopsThemeForm
+    public function getFormTaxes($action = false)
     {
         //$helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         if (!$action) {
@@ -110,7 +110,7 @@ class Taxes extends \XoopsObject
      * @param null $maxDepth
      * @return array
      */
-    public function getValuesTaxes($keys = null, $format = null, $maxDepth = null): array
+    public function getValuesTaxes($keys = null, $format = null, $maxDepth = null)
     {
         $ret = $this->getValues($keys, $format, $maxDepth);
         $ret['id']          = $this->getVar('tax_id');
@@ -129,7 +129,7 @@ class Taxes extends \XoopsObject
      *
      * @return array
      */
-    public function toArrayTaxes(): array
+    public function toArrayTaxes()
     {
         $ret = [];
         $vars = $this->getVars();

@@ -23,22 +23,22 @@ namespace XoopsModules\Wgsimpleacc\Common;
  */
 class Resizer
 {
-    public string $sourceFile    = '';
-    public string $endFile       = '';
-    public int $maxWidth      = 0;
-    public int $maxHeight     = 0;
-    public string $imageMimetype = '';
-    public int $jpgQuality    = 90;
-    public int $mergeType     = 0;
-    public int $mergePos      = 0;
-    public int $degrees       = 0;
-    public string $error         = '';
+    public $sourceFile    = '';
+    public $endFile       = '';
+    public $maxWidth      = 0;
+    public $maxHeight     = 0;
+    public $imageMimetype = '';
+    public $jpgQuality    = 90;
+    public $mergeType     = 0;
+    public $mergePos      = 0;
+    public $degrees       = 0;
+    public $error         = '';
 
     /**
      * resize image if size exceed given width/height
      * @return string|bool
      */
-    public function resizeImage(): bool|string
+    public function resizeImage()
     {
         // check file extension
         switch ($this->imageMimetype) {
@@ -116,7 +116,7 @@ class Resizer
     /**
      * @return bool|string
      */
-    public function resizeAndCrop(): bool|string
+    public function resizeAndCrop()
     {
         // check file extension
         switch ($this->imageMimetype) {
@@ -182,7 +182,7 @@ class Resizer
         return true;
     }
 
-    public function mergeImage(): void
+    public function mergeImage()
     {
         $dest = \imagecreatefromjpeg($this->endFile);
         $src  = \imagecreatefromjpeg($this->sourceFile);
@@ -243,7 +243,7 @@ class Resizer
     /**
      * @return bool|string
      */
-    public function rotateImage(): bool|string
+    public function rotateImage()
     {
         // check file extension
         switch ($this->imageMimetype) {

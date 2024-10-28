@@ -44,7 +44,7 @@ class BalancesHandler extends \XoopsPersistableObjectHandler
      *
      * @return object
      */
-    public function create($isNew = true): object
+    public function create($isNew = true)
     {
         return parent::create($isNew);
     }
@@ -53,10 +53,10 @@ class BalancesHandler extends \XoopsPersistableObjectHandler
      * retrieve a field
      *
      * @param int $id field id
-     * @param null $fields
+     * @param null fields
      * @return \XoopsObject|null reference to the {@link Get} object
      */
-    public function get($id = null, $fields = null): ?\XoopsObject
+    public function get($id = null, $fields = null)
     {
         return parent::get($id, $fields);
     }
@@ -66,20 +66,20 @@ class BalancesHandler extends \XoopsPersistableObjectHandler
      *
      * @return int reference to the {@link Get} object
      */
-    public function getInsertId(): int
+    public function getInsertId()
     {
         return $this->db->getInsertId();
     }
 
     /**
      * Get Count Balances in the database
-     * @param int $start
-     * @param int $limit
+     * @param int    $start
+     * @param int    $limit
      * @param string $sort
      * @param string $order
      * @return int
      */
-    public function getCountBalances(int $start = 0, int $limit = 0, string $sort = 'bal_id', string $order = 'ASC'): int
+    public function getCountBalances($start = 0, $limit = 0, $sort = 'bal_id', $order = 'ASC')
     {
         $crCountBalances = new \CriteriaCompo();
         $crCountBalances = $this->getBalancesCriteria($crCountBalances, $start, $limit, $sort, $order);
@@ -88,13 +88,13 @@ class BalancesHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get All Balances in the database
-     * @param int $start
-     * @param int $limit
+     * @param int    $start
+     * @param int    $limit
      * @param string $sort
      * @param string $order
      * @return array
      */
-    public function getAllBalances(int $start = 0, int $limit = 0, string $sort = 'bal_to DESC, bal_asid', string $order = 'ASC'): array
+    public function getAllBalances($start = 0, $limit = 0, $sort = 'bal_to DESC, bal_asid', $order = 'ASC')
     {
         $crAllBalances = new \CriteriaCompo();
         $crAllBalances = $this->getBalancesCriteria($crAllBalances, $start, $limit, $sort, $order);
@@ -103,14 +103,14 @@ class BalancesHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get Criteria Balances
-     * @param $crBalances
-     * @param $start
-     * @param $limit
-     * @param $sort
-     * @param $order
-     * @return int
+     * @param \CriteriaCompo $crBalances
+     * @param int $start
+     * @param int $limit
+     * @param string $sort
+     * @param string $order
+     * @return \CriteriaCompo
      */
-    private function getBalancesCriteria($crBalances, $start, $limit, $sort, $order): int
+    private function getBalancesCriteria($crBalances, $start, $limit, $sort, $order)
     {
         $crBalances->setStart($start);
         $crBalances->setLimit($limit);

@@ -20,8 +20,8 @@
 
 $GLOBALS['xoopsTpl']->assign('indexHeader', $helper->getConfig('index_header'));
 $GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icon_url_16', \WGSIMPLEACC_ICONS_URL . '/16/');
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icon_url_32', \WGSIMPLEACC_ICONS_URL . '/32/');
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icons_url_16', \WGSIMPLEACC_ICONS_URL . '/16/');
+$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icons_url_32', \WGSIMPLEACC_ICONS_URL . '/32/');
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_image_url', \WGSIMPLEACC_IMAGE_URL);
 

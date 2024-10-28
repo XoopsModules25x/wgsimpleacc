@@ -61,9 +61,9 @@ class Assets extends \XoopsObject
 
     /**
      * The new inserted $Id
-     * @return int|string
+     * @return int
      */
-    public function getNewInsertedIdAssets(): int|string
+    public function getNewInsertedIdAssets()
     {
         return $GLOBALS['xoopsDB']->getInsertId();
     }
@@ -74,7 +74,7 @@ class Assets extends \XoopsObject
      * @param bool $admin
      * @return \XoopsThemeForm
      */
-    public function getFormAssets(bool $action = false, bool $admin = false): \XoopsThemeForm
+    public function getFormAssets($action = false, $admin = false)
     {
         if (!$action) {
             $action = $_SERVER['REQUEST_URI'];
@@ -142,7 +142,7 @@ class Assets extends \XoopsObject
      * @param null $maxDepth
      * @return array
      */
-    public function getValuesAssets($keys = null, $format = null, $maxDepth = null): array
+    public function getValuesAssets($keys = null, $format = null, $maxDepth = null)
     {
         $helper  = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $utility = new \XoopsModules\Wgsimpleacc\Utility();
@@ -168,7 +168,7 @@ class Assets extends \XoopsObject
      *
      * @return array
      */
-    public function toArrayAssets(): array
+    public function toArrayAssets()
     {
         $ret = [];
         $vars = $this->getVars();

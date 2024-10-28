@@ -61,9 +61,9 @@ class Outtemplates extends \XoopsObject
 
     /**
      * The new inserted $Id
-     * @return int|string
+     * @return integer
      */
-    public function getNewInsertedIdOuttemplates(): int|string
+    public function getNewInsertedIdOuttemplates()
     {
         return $GLOBALS['xoopsDB']->getInsertId();
     }
@@ -73,7 +73,7 @@ class Outtemplates extends \XoopsObject
      * @param bool $action
      * @return \XoopsThemeForm
      */
-    public function getFormOuttemplates(bool $action = false): \XoopsThemeForm
+    public function getFormOuttemplates($action = false)
     {
         $helper = Helper::getInstance();
         if (!$action) {
@@ -179,7 +179,7 @@ class Outtemplates extends \XoopsObject
      * @param null $maxDepth
      * @return array
      */
-    public function getValuesOuttemplates($keys = null, $format = null, $maxDepth = null): array
+    public function getValuesOuttemplates($keys = null, $format = null, $maxDepth = null)
     {
         $helper  = Helper::getInstance();
         $ret = $this->getValues($keys, $format, $maxDepth);
@@ -248,7 +248,7 @@ class Outtemplates extends \XoopsObject
      *
      * @return array
      */
-    public function toArrayOuttemplates(): array
+    public function toArrayOuttemplates()
     {
         $ret = [];
         $vars = $this->getVars();

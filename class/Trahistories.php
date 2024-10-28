@@ -82,7 +82,7 @@ class Trahistories extends \XoopsObject
      * @param null $maxDepth
      * @return array
      */
-    public function getValuesTrahistories($keys = null, $format = null, $maxDepth = null): array
+    public function getValuesTrahistories($keys = null, $format = null, $maxDepth = null)
     {
         $helper  = \XoopsModules\Wgsimpleacc\Helper::getInstance();
         $utility = new \XoopsModules\Wgsimpleacc\Utility();
