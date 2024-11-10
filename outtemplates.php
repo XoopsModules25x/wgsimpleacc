@@ -44,8 +44,10 @@ $traId  = Request::getInt('tra_id');
 
 $GLOBALS['xoopsTpl']->assign('showItem', $otplId > 0);
 $permSubmitOTpl = $permissionsHandler->getPermOuttemplatesSubmit();
-$permSubmitTra = $permissionsHandler->getPermTransactionsSubmit();
+$permSubmitTra  = $permissionsHandler->getPermTransactionsSubmit();
+$permApprove    = $permissionsHandler->getPermOuttemplatesApprove();
 $GLOBALS['xoopsTpl']->assign('permSubmit', $permSubmitOTpl);
+$GLOBALS['xoopsTpl']->assign('permApprove', $permApprove);
 
 $keywords = [];
 
@@ -171,7 +173,7 @@ switch ($op) {
         // Get Form
         $outtemplatesObj = $outtemplatesHandler->get($otplId);
         // Check permissions
-        if (!$permissionsHandler->getPermOuttemplatesSubmit()) {
+        if (!$permApprove && !$permissionsHandler->getPermOuttemplatesSubmit()) {
             \redirect_header('outtemplates.php?op=list', 3, \_NOPERM);
         }
         $form = $outtemplatesObj->getFormOuttemplates();
@@ -183,7 +185,7 @@ switch ($op) {
         break;
     case 'delete':
         // Check permissions
-        if (!$permSubmitOTpl) {
+        if (!$permApprove && !$permSubmitOTpl) {
             \redirect_header('outtemplates.php?op=list', 3, \_NOPERM);
         }
         // Check params

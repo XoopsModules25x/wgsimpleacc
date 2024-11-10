@@ -46,7 +46,8 @@ $tplId = Request::getInt('ttpl_id');
 
 $GLOBALS['xoopsTpl']->assign('showItem', $tplId > 0);
 
-$permSubmit = $permissionsHandler->getPermTratemplatesSubmit();
+$permSubmit  = $permissionsHandler->getPermTratemplatesSubmit();
+$permApprove = $permissionsHandler->getPermTratemplatesApprove();
 
 $keywords = [];
 
@@ -75,6 +76,7 @@ switch ($op) {
             }
             $GLOBALS['xoopsTpl']->assign('tratemplates', $tratemplates);
             $GLOBALS['xoopsTpl']->assign('permSubmit', $permSubmit);
+            $GLOBALS['xoopsTpl']->assign('permApprove', $permApprove);
             unset($tratemplates);
             // Display Navigation
             if ($tratemplatesCount > $limit) {
@@ -160,7 +162,7 @@ switch ($op) {
         // Get Form
         $tratemplatesObj = $tratemplatesHandler->get($tplId);
         // Check permissions
-        if (!$permissionsHandler->getPermTratemplatesEdit($tratemplatesObj->getVar('ttpl_submitter'))) {
+        if (!$permApprove && !$permissionsHandler->getPermTratemplatesEdit($tratemplatesObj->getVar('ttpl_submitter'))) {
             \redirect_header('tratemplates.php?op=list', 3, \_NOPERM);
         }
         $form = $tratemplatesObj->getFormTratemplates();
@@ -177,7 +179,7 @@ switch ($op) {
         }
         $tratemplatesObj = $tratemplatesHandler->get($tplId);
         // Check permissions
-        if (!$permissionsHandler->getPermTratemplatesEdit($tratemplatesObj->getVar('ttpl_submitter'))) {
+        if (!$permApprove && !$permissionsHandler->getPermTratemplatesEdit($tratemplatesObj->getVar('ttpl_submitter'))) {
             \redirect_header('tratemplates.php?op=list', 3, \_NOPERM);
         }
         $tplName = $tratemplatesObj->getVar('ttpl_name');

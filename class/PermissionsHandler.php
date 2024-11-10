@@ -424,12 +424,30 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
+     * @public function getPermTratemplatesApprove
+     * returns right for edit/delete all tratemplates
+     * @return bool
+     */
+    public function getPermTratemplatesApprove()
+    {
+        if ($this->getPermGlobalApprove()) {
+            return true;
+        }
+
+        return $this->getPerm(Constants::PERM_TRATEMPLATES_APPROVE);
+    }
+
+    /**
      * @public function getPermTratemplatesSubmit
      * returns right for submit tratemplate
      * @return bool
      */
     public function getPermTratemplatesSubmit()
     {
+        if ($this->getPermTratemplatesApprove()) {
+            return true;
+        }
+
         return $this->getPermSubmit(Constants::PERM_TRATEMPLATES_SUBMIT);
     }
 
@@ -470,6 +488,21 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     {
         return $this->getPermView(Constants::PERM_TRATEMPLATES_VIEW);
     }
+
+    /**
+     * @public function getPermOuttemplatesApprove
+     * returns right for edit/delete all outtemplates
+     * @return bool
+     */
+    public function getPermOuttemplatesApprove()
+    {
+        if ($this->getPermGlobalApprove()) {
+            return true;
+        }
+
+        return $this->getPerm(Constants::PERM_OUTTEMPLATES_APPROVE);
+    }
+
     /**
      * @public function getPermOuttemplatesSubmit
      * returns right for submit outtemplate
@@ -477,12 +510,16 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      */
     public function getPermOuttemplatesSubmit()
     {
+        if ($this->getPermOuttemplatesApprove()) {
+            return true;
+        }
+
         return $this->getPermSubmit(Constants::PERM_OUTTEMPLATES_SUBMIT);
     }
 
     /**
      * @public function getPermOutemplatesEdit
-     * returns right for edit/delete outtemplates
+     * returns right for edit/delete own outtemplates
      * - User must have perm to submit and must be owner
      * @param int $tplSubmitter
      * @return bool
@@ -599,7 +636,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
             return true;
         }
 
-        return $this->getPermView(Constants::PERM_FILEDIR_ADMIN);
+        return $this->getPerm(Constants::PERM_FILEDIR_ADMIN);
     }
 
     /**

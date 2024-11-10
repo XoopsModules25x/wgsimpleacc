@@ -69,4 +69,10 @@ $scripts = [];
 $styles[] = \WGSIMPLEACC_URL . '/assets/css/style.css';
 $styles[] = \WGSIMPLEACC_URL . '/assets/css/wgsa_default.css';
 
-$GLOBALS['xoopsOption']['template_main'] = 'wgsimpleacc_main.tpl';
+$displayStartminNav = (string)$helper->getConfig('displayStartminNav');
+if ('left' === $displayStartminNav) {
+    $GLOBALS['xoopsOption']['template_main'] = 'wgsimpleacc_main_startmin.tpl';
+} else {
+    $GLOBALS['xoopsOption']['template_main'] = 'wgsimpleacc_main.tpl';
+}
+

@@ -18,6 +18,11 @@
  * @author         Goffy - XOOPS Development Team - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
+$displayStartminNav = (string)$helper->getConfig('displayStartminNav');
+if ('left' === $displayStartminNav) {
+    require_once __DIR__ . '/navbar.php';
+}
+
 $GLOBALS['xoopsTpl']->assign('indexHeader', $helper->getConfig('index_header'));
 $GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
 $GLOBALS['xoopsTpl']->assign('wgsimpleacc_icons_url_16', \WGSIMPLEACC_ICONS_URL . '/16/');
