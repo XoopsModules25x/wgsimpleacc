@@ -62,7 +62,7 @@
                         <td>
                             <{foreach item=file from=$transaction.files}>
                             <{if $file.image}>
-                                <span class="wgsa-modal" data-toggle="modal" data-target="#imgModal" data-title="<{$file.name}>" data-info="<{$wgsimpleacc_upload_files_url}>/<{$file.name}>">
+                                <span class="wgsa-modal" data-bs-toggle="modal" data-bs-target="#imgModal" data-bs-title="<{$file.name}>" data-bs-info="<{$wgsimpleacc_upload_files_url}>/<{$file.name}>">
                                     <img class="wgsa-transaction-img-list" src="<{$wgsimpleacc_upload_files_url}>/<{$file.name}>" alt="<{$file.name}>" title="<{$file.name}>">
                                 </span><br>
                             <{else}>

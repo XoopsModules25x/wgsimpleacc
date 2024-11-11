@@ -296,6 +296,9 @@ switch ($op) {
             require_once \XOOPS_ROOT_PATH . '/class/uploader.php';
             $filename    = $_FILES['fil_name']['name'];
             $imgMimetype = $_FILES['fil_name']['type'];
+            if ('' === $filename && '' === $imgMimetype) {
+                \redirect_header('transactions.php?op=list' . $traOp, 0);
+            }
             $uploader = new \XoopsMediaUploader(\WGSIMPLEACC_UPLOAD_FILES_PATH . '/',
                 $helper->getConfig('mimetypes_file'),
                 $helper->getConfig('maxsize_file'), null, null);

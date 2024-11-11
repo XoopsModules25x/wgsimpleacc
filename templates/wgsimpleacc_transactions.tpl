@@ -257,7 +257,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="imgModalLabel">Default Title</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="<{$smarty.const._CLOSE}>">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="<{$smarty.const._CLOSE}>">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -265,7 +265,7 @@
                 <img id="modalimg" class="modal-img" src="" alt="" title="">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"><{$smarty.const._CLOSE}></button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><{$smarty.const._CLOSE}></button>
             </div>
         </div>
     </div>

@@ -12,6 +12,7 @@
  - code inspection (goffy)
  - updates for compatibility with startmin (goffy)
  - new permissions (goffy)
+ - fixed bugs with bt5 navtabs (goffy)
 
 ==============================================================
 1.3.2 RC1 [2023/03/12]

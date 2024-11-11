@@ -218,6 +218,9 @@ ul.menu > li + li:before {
 #formTransaction #tra_allid {
 	width:100% !important;
 }
+#form_getfiles .col-form-label {
+	padding-right:10px;
+}
 
 /*resize calendar button*/
 #formFilter .input-group .btn {
