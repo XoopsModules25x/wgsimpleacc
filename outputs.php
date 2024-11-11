@@ -60,6 +60,7 @@ switch ($op) {
     default:
         break;
     case 'balances':
+        $GLOBALS['xoTheme']->addScript('browse.php?Frameworks/jquery/jquery.js');
         $GLOBALS['xoTheme']->addStylesheet(\WGSIMPLEACC_URL . '/assets/css/nestedcheckboxes.css', null);
         $formFilter = $outputsHandler::getFormBalancesSelect();
         $GLOBALS['xoopsTpl']->assign('formFilter', $formFilter->render());

@@ -197,7 +197,7 @@ class Files extends \XoopsObject
             $fileUploadTray->addElement(new \XoopsFormLabel(\sprintf(\_MA_WGSIMPLEACC_FILE_NAME_UPLOADS, ".$fileDirectory/"), $filName));
         }
         $maxsize = $helper->getConfig('maxsize_file');
-        $fileUploadTray->addElement(new \XoopsFormFile('', 'fil_name', $maxsize));
+        $fileUploadTray->addElement(new \XoopsFormFile('', 'fil_name', $maxsize), true);
         $fileUploadTray->addElement(new \XoopsFormLabel(\_MA_WGSIMPLEACC_FORM_UPLOAD_SIZE, ($maxsize / 1048576) . ' '  . \_MA_WGSIMPLEACC_FORM_UPLOAD_SIZE_MB));
         $mimetypes = $helper->getConfig('mimetypes_file');
         $extensions = '';
