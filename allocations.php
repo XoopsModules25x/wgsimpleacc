@@ -26,7 +26,10 @@ use XoopsModules\Wgsimpleacc\Common;
 require __DIR__ . '/header.php';
 require_once \XOOPS_ROOT_PATH . '/header.php';
 $GLOBALS['xoopsTpl']->assign('template_sub', 'db:wgsimpleacc_allocations.tpl');
-require __DIR__ . '/navbar.php';
+
+foreach ($styles as $style) {
+    $GLOBALS['xoTheme']->addStylesheet($style, null);
+}
 
 // Permissions
 if (!$permissionsHandler->getPermAllocationsView()) {
@@ -39,9 +42,6 @@ $limit = Request::getInt('limit', $helper->getConfig('userpager'));
 $allId = Request::getInt('all_id');
 $redir = Request::getString('redir', 'list');
 
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icon_url_16', \WGSIMPLEACC_ICONS_URL . '/16/');
-$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
 $GLOBALS['xoopsTpl']->assign('start', $start);
 $GLOBALS['xoopsTpl']->assign('limit', $limit);
 
@@ -58,9 +58,11 @@ switch ($op) {
     case 'list':
     default:
         if ($allocationsCount > 0) {
+            $GLOBALS['xoopsTpl']->assign('wgsimpleacc_icon_url', \WGSIMPLEACC_ICONS_URL);
             $GLOBALS['xoTheme']->addStylesheet(\WGSIMPLEACC_URL . '/assets/css/nestedsortable.css');
             if ($permAllocationsSubmit) {
                 // add scripts
+                $GLOBALS['xoTheme']->addScript('browse.php?Frameworks/jquery/jquery.js');
                 $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/js/jquery-ui.min.js');
                 $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/js/sortable-allocations.js');
                 $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/js/jquery.mjs.nestedSortable.js');
@@ -71,9 +73,26 @@ switch ($op) {
                 // add list for sorting
                 $allocationlist_sort = $allocationsHandler->getListOfAllocations(0);
             }
-            // var_dump($allocationlist_sort);
-            $GLOBALS['xoopsTpl']->assign('allocationlist_sort', $allocationlist_sort);
+            $allocationlist_coll = $allocationsHandler->getArrayTreeOfAllocations(0);
+            //new collabpsible list
+            $GLOBALS['xoopsTpl']->assign('allocationlist_collapsible', $allocationlist_coll);
+            //use allocationlist_sort only for older xoops and bootstrap3
+            //$GLOBALS['xoopsTpl']->assign('allocationlist_sort', $allocationlist_sort);
             $GLOBALS['xoopsTpl']->assign('allocations_submit', $permAllocationsSubmit);
+            $minTra = 0;
+            $crTransactions = new \CriteriaCompo();
+            $crTransactions->setSort('tra_date');
+            $crTransactions->setOrder('ASC');
+            $crTransactions->setStart();
+            $crTransactions->setLimit(1);
+            if ($transactionsHandler->getCount($crTransactions) > 0) {
+                $transactionsAll = $transactionsHandler->getAll($crTransactions);
+                foreach (\array_keys($transactionsAll) as $i) {
+                    $minTra = (int)$transactionsAll[$i]->getVar('tra_date');
+                }
+            }
+            $GLOBALS['xoopsTpl']->assign('dateFrom', $minTra);
+            $GLOBALS['xoopsTpl']->assign('dateTo', \time());
         }
         // Breadcrumbs
         $xoBreadcrumbs[] = ['title' => \_MA_WGSIMPLEACC_ALLOCATIONS];

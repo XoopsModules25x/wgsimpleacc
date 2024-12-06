@@ -245,7 +245,7 @@ class OutputsHandler extends \XoopsPersistableObjectHandler
     /**
      * Get current value of level 1 allocations including sub allocs
      * @param array $bal_ids
-     * @param       $level
+     * @param int   $level
      * @return array
      */
     public function getLevelAllocations($bal_ids, $level = 1)

@@ -18,7 +18,12 @@ Main features:
 
 Most of the templates on user side are fully responsive, but for proper displaying you must use a Bootstrap theme.
 
-wgSimpleAcc Version 1.22 is based on Bootstrap 3. It is recommended to to use theme 'wgsa_startmin' from folder 'extras/themes'
+#### extras/themes:
+wgSimpleAcc provides following themes:
+* wgsa_startmin_bt3: Bootstrap 3 theme, this startmin theme isn't supported anymore
+* wgsa_startmin_bt4: Bootstrap 4 theme, this startmin theme isn't supported anymore
+* xbootstrap: Bootstrap 3 theme, this theme isn't supported anymore
+* xswatch4: Bootstrap 4 theme
 
 Next versions will be updated to Bootstrap 4.
 

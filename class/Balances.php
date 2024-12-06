@@ -32,8 +32,6 @@ class Balances extends \XoopsObject
 {
     /**
      * Constructor
-     *
-     * @param null
      */
     public function __construct()
     {
@@ -51,8 +49,6 @@ class Balances extends \XoopsObject
 
     /**
      * @static function &getInstance
-     *
-     * @param null
      */
     public static function getInstance()
     {
@@ -64,7 +60,7 @@ class Balances extends \XoopsObject
 
     /**
      * The new inserted $Id
-     * @return inserted id
+     * @return int
      */
     public function getNewInsertedIdBalances()
     {

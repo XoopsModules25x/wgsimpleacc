@@ -16,7 +16,7 @@
         padding-right: 20px;
         padding-left: 10px;
     }
-    button {
+    .btn-calc {
         height: 60px;
         font-size: 24px !important;
     }
@@ -42,7 +42,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="calcModalLabel"><{$smarty.const._MA_WGSIMPLEACC_CALC}></h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="<{$smarty.const._CLOSE}>">
+                <button type="button" class="close btn-calc" data-bs-dismiss="modal" aria-label="<{$smarty.const._CLOSE}>">
                     <span class="btn btn-danger" aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -50,28 +50,28 @@
                 <div class="calculator">
                     <input id="calc-screen" type="text" class="calculator-screen" value="" disabled />
                     <div class="calculator-keys">
-                        <button type="button" class="btn btn-warning operator" value="+">+</button>
-                        <button type="button" class="btn btn-warning operator" value="-">-</button>
-                        <button type="button" class="btn btn-warning operator" value="*">&times;</button>
-                        <button type="button" class="btn btn-warning operator" value="/">&divide;</button>
-                        <button type="button" class="btn btn-primary digit" value="7">7</button>
-                        <button type="button" class="btn btn-primary digit" value="8">8</button>
-                        <button type="button" class="btn btn-primary digit" value="9">9</button>
-                        <button type="button" class="btn btn-primary digit" value="4">4</button>
-                        <button type="button" class="btn btn-primary digit" value="5">5</button>
-                        <button type="button" class="btn btn-primary digit" value="6">6</button>
-                        <button type="button" class="btn btn-primary digit" value="1">1</button>
-                        <button type="button" class="btn btn-primary digit" value="2">2</button>
-                        <button type="button" class="btn btn-primary digit" value="3">3</button>
-                        <button type="button" class="btn btn-primary digit" value="0">0</button>
-                        <button type="button" class="btn btn-primary decimal" value="."><{$sepComma}></button>
-                        <button type="button" class="btn btn-danger all-clear" value="all-clear">AC</button>
-                        <button type="button" class="btn btn-warning equal-sign operator" value="=">=</button>
+                        <button type="button" class="btn btn-warning operator btn-calc" value="+">+</button>
+                        <button type="button" class="btn btn-warning operator btn-calc" value="-">-</button>
+                        <button type="button" class="btn btn-warning operator btn-calc" value="*">&times;</button>
+                        <button type="button" class="btn btn-warning operator btn-calc" value="/">&divide;</button>
+                        <button type="button" class="btn btn-primary digit btn-calc" value="7">7</button>
+                        <button type="button" class="btn btn-primary digit btn-calc" value="8">8</button>
+                        <button type="button" class="btn btn-primary digit btn-calc" value="9">9</button>
+                        <button type="button" class="btn btn-primary digit btn-calc" value="4">4</button>
+                        <button type="button" class="btn btn-primary digit btn-calc" value="5">5</button>
+                        <button type="button" class="btn btn-primary digit btn-calc" value="6">6</button>
+                        <button type="button" class="btn btn-primary digit btn-calc" value="1">1</button>
+                        <button type="button" class="btn btn-primary digit btn-calc" value="2">2</button>
+                        <button type="button" class="btn btn-primary digit btn-calc" value="3">3</button>
+                        <button type="button" class="btn btn-primary digit btn-calc" value="0">0</button>
+                        <button type="button" class="btn btn-primary decimal btn-calc" value="."><{$sepComma}></button>
+                        <button type="button" class="btn btn-danger all-clear btn-calc" value="all-clear">AC</button>
+                        <button type="button" class="btn btn-warning equal-sign operator btn-calc" value="=">=</button>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="btnApplyResult" type="button" class="btn btn-secondary btn-success" data-dismiss="modal"><{$smarty.const._MA_WGSIMPLEACC_CALC_APPLY}></button>
+                <button id="btnApplyResult" type="button" class="btn btn-secondary btn-success btn-calc" data-bs-dismiss="modal"><{$smarty.const._MA_WGSIMPLEACC_CALC_APPLY}></button>
             </div>
         </div>
     </div>

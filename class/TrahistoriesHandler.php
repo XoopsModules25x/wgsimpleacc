@@ -64,7 +64,6 @@ class TrahistoriesHandler extends \XoopsPersistableObjectHandler
     /**
      * get inserted id
      *
-     * @param null
      * @return int reference to the {@link Get} object
      */
     public function getInsertId()
@@ -109,7 +108,7 @@ class TrahistoriesHandler extends \XoopsPersistableObjectHandler
      * @param int    $limit
      * @param string $sort
      * @param string $order
-     * @return int
+     * @return \CriteriaCompo
      */
     private function getTrahistoriesCriteria($crTrahistories, $start, $limit, $sort, $order)
     {

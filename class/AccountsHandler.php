@@ -64,7 +64,6 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
     /**
      * get inserted id
      *
-     * @param null
      * @return int reference to the {@link Get} object
      */
     public function getInsertId()
@@ -104,12 +103,12 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get Criteria Accounts
-     * @param $crAccounts
-     * @param $start
-     * @param $limit
-     * @param $sort
-     * @param $order
-     * @return int
+     * @param \CriteriaCompo $crAccounts
+     * @param int $start
+     * @param int $limit
+     * @param string $sort
+     * @param string $order
+     * @return \CriteriaCompo
      */
     private function getAccountsCriteria($crAccounts, $start, $limit, $sort, $order)
     {
@@ -165,7 +164,7 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get all childs of an item
-     * @param $itemPid
+     * @param int $itemPid
      * @return bool|string
      */
     public function getListOfAccountsEdit($itemPid)
@@ -263,7 +262,7 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get all childs of an item
-     * @param $itemPid
+     * @param int $itemPid
      * @return bool|string
      */
     public function getListOfAccounts($itemPid)
@@ -315,7 +314,7 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get top level of given accounts
-     * @param $accId
+     * @param int $accId
      * @return array
      */
     public function getTopLevelAccount($accId)
@@ -399,7 +398,7 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get all sub accounts for given account
-     * @param $accId
+     * @param int $accId
      * @return array|false
      */
     public function getSubsOfAccounts($accId)
@@ -428,7 +427,7 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Check whether given account is online or not
-     * @param $accId
+     * @param int $accId
      * @return array
      */
     public function AccountIsOnline($accId)
@@ -440,13 +439,16 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get array of accounts with all childs
-     * @param $accPid
+     * @param int $accPid
      * @return bool|array
      */
     public function getArrayTreeOfAccounts($accPid)
     {
 
         $arrayAccTree = [];
+
+        $helper       = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+        $transactionsHandler = $helper->getHandler('Transactions');
 
         $crItems           = new \CriteriaCompo();
         $crItems->add(new \Criteria('acc_pid', $accPid));
@@ -458,13 +460,43 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
         // Table view items
         if ($itemsCount > 0) {
             foreach (\array_keys($itemsAll) as $i) {
+                $crTransactions = new \CriteriaCompo();
+                $crTransactions->add(new \Criteria('tra_accid', $i));
+                $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_DELETED, '>'));
+                $transactionsCount = $transactionsHandler->getCount($crTransactions);
                 $arrayAccTree[$i]['id'] = $i;
-                $arrayAccTree[$i]['name'] = $itemsAll[$i]->getVar('acc_name');
+                $accName = $itemsAll[$i]->getVar('acc_key') . ' ' . $itemsAll[$i]->getVar('acc_name');
+                $arrayAccTree[$i]['name'] = $accName;
+                $arrayAccTree[$i]['color'] = $itemsAll[$i]->getVar('acc_color');
+                $arrayAccTree[$i]['tracount'] = $transactionsCount;
+                $arrayAccTree[$i]['online'] = 0;
+                $arrayAccTree[$i]['online_text'] = \_MA_WGSIMPLEACC_OFFLINE;
+                if (Constants::ONOFF_ONLINE == $itemsAll[$i]->getVar('acc_online')) {
+                    $arrayAccTree[$i]['online'] = 1;
+                    $arrayAccTree[$i]['online_text'] = \_MA_WGSIMPLEACC_ONLINE;
+                }
                 $child     = $this->getArrayTreeOfAccounts($i);
                 if ($child) {
                     $arrayAccTree[$i]['child'] = $child;
+                    $arrayAccTree[$i]['childs'] = \count($child);
                 } else {
                     $arrayAccTree[$i]['child'] = [];
+                    $arrayAccTree[$i]['childs'] = 0;
+                }
+                switch ($itemsAll[$i]->getVar('acc_classification')) {
+                    case Constants::CLASS_BOTH:
+                    default:
+                        $arrayAccTree[$i]['income'] = 1;
+                        $arrayAccTree[$i]['expenses'] = 1;
+                        break;
+                    case Constants::CLASS_INCOME:
+                        $arrayAccTree[$i]['income'] = 1;
+                        $arrayAccTree[$i]['expenses'] = 0;
+                        break;
+                    case Constants::CLASS_EXPENSES:
+                        $arrayAccTree[$i]['income'] = 0;
+                        $arrayAccTree[$i]['expenses'] = 1;
+                        break;
                 }
             }
         } else {

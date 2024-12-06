@@ -29,7 +29,10 @@ use XoopsModules\Wgsimpleacc\Common;
 require __DIR__ . '/header.php';
 require_once \XOOPS_ROOT_PATH . '/header.php';
 $GLOBALS['xoopsTpl']->assign('template_sub', 'db:wgsimpleacc_clients.tpl');
-require __DIR__ . '/navbar.php';
+
+foreach ($styles as $style) {
+    $GLOBALS['xoTheme']->addStylesheet($style, null);
+}
 
 // Permissions
 if (!$permissionsHandler->getPermClientsView()) {
@@ -49,9 +52,6 @@ $cliOp = '&amp;start=' . $start . '&amp;limit=' . $limit . '&amp;sortby=' . $sor
 $GLOBALS['xoopsTpl']->assign('cliOp', $cliOp);
 $GLOBALS['xoopsTpl']->assign('start', $start);
 $GLOBALS['xoopsTpl']->assign('limit', $limit);
-$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icons_url_32', WGSIMPLEACC_ICONS_URL . '/32/');
 
 $keywords = [];
 
@@ -109,10 +109,6 @@ switch ($op) {
                 $pagenav = new \XoopsPageNav($clientsCount, $limit, $start, 'start', 'op=list&amp;limit=' . $limit . '&amp;cli_name=' . $cliName);
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
             }
-            $GLOBALS['xoopsTpl']->assign('table_type', $helper->getConfig('table_type'));
-            $GLOBALS['xoopsTpl']->assign('panel_type', $helper->getConfig('panel_type'));
-            $GLOBALS['xoopsTpl']->assign('divideby', $helper->getConfig('divideby'));
-            $GLOBALS['xoopsTpl']->assign('numb_col', $helper->getConfig('numb_col'));
             if ('show' == $op && '' != $clientName) {
                 $GLOBALS['xoopsTpl']->assign('xoops_pagetitle', \strip_tags($clientName . ' - ' . $GLOBALS['xoopsModule']->getVar('name')));
             }

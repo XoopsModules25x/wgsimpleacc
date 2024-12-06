@@ -42,7 +42,7 @@
                 <{include file='db:wgsimpleacc_breadcrumbs.tpl'}>
             <{/if}>
             <div class="clear"></div>
-            <div class="col-sm-4 col-md-4 col-lg-2 col-xl-2 wgsa-mainnav"><{include file='db:wgsimpleacc_navbar.tpl'}></div>
+            <div class="col-sm-4 col-md-4 col-lg-2 col-xl-2 wgsa-mainnav"><{include file='db:wgsimpleacc_navbar_startmin.tpl'}></div>
             <div class="col-sm-8 col-md-8 col-lg-10 col-xl-10 wgsa-maincontent">
                 <{include file=$template_sub}>
                 <{if !empty($error)}>

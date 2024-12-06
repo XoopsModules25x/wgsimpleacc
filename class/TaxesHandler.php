@@ -109,7 +109,7 @@ class TaxesHandler extends \XoopsPersistableObjectHandler
      * @param int    $limit
      * @param string $sort
      * @param string $order
-     * @return int
+     * @return \CriteriaCompo
      */
     private function getTaxesCriteria($crTaxes, $start, $limit, $sort, $order)
     {

@@ -29,7 +29,10 @@ use XoopsModules\Wgsimpleacc\{
 require __DIR__ . '/header.php';
 require_once \XOOPS_ROOT_PATH . '/header.php';
 $GLOBALS['xoopsTpl']->assign('template_sub', 'db:wgsimpleacc_tratemplates.tpl');
-require __DIR__ . '/navbar.php';
+
+foreach ($styles as $style) {
+    $GLOBALS['xoTheme']->addStylesheet($style, null);
+}
 
 // Permissions
 if (!$permissionsHandler->getPermTratemplatesView()) {
@@ -41,12 +44,10 @@ $start = Request::getInt('start');
 $limit = Request::getInt('limit', $helper->getConfig('userpager'));
 $tplId = Request::getInt('ttpl_id');
 
-$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icons_url_32', \WGSIMPLEACC_ICONS_URL . '/32/');
 $GLOBALS['xoopsTpl']->assign('showItem', $tplId > 0);
 
-$permSubmit = $permissionsHandler->getPermTratemplatesSubmit();
+$permSubmit  = $permissionsHandler->getPermTratemplatesSubmit();
+$permApprove = $permissionsHandler->getPermTratemplatesApprove();
 
 $keywords = [];
 
@@ -75,6 +76,7 @@ switch ($op) {
             }
             $GLOBALS['xoopsTpl']->assign('tratemplates', $tratemplates);
             $GLOBALS['xoopsTpl']->assign('permSubmit', $permSubmit);
+            $GLOBALS['xoopsTpl']->assign('permApprove', $permApprove);
             unset($tratemplates);
             // Display Navigation
             if ($tratemplatesCount > $limit) {
@@ -160,7 +162,7 @@ switch ($op) {
         // Get Form
         $tratemplatesObj = $tratemplatesHandler->get($tplId);
         // Check permissions
-        if (!$permissionsHandler->getPermTratemplatesEdit($tratemplatesObj->getVar('ttpl_submitter'))) {
+        if (!$permApprove && !$permissionsHandler->getPermTratemplatesEdit($tratemplatesObj->getVar('ttpl_submitter'))) {
             \redirect_header('tratemplates.php?op=list', 3, \_NOPERM);
         }
         $form = $tratemplatesObj->getFormTratemplates();
@@ -177,7 +179,7 @@ switch ($op) {
         }
         $tratemplatesObj = $tratemplatesHandler->get($tplId);
         // Check permissions
-        if (!$permissionsHandler->getPermTratemplatesEdit($tratemplatesObj->getVar('ttpl_submitter'))) {
+        if (!$permApprove && !$permissionsHandler->getPermTratemplatesEdit($tratemplatesObj->getVar('ttpl_submitter'))) {
             \redirect_header('tratemplates.php?op=list', 3, \_NOPERM);
         }
         $tplName = $tratemplatesObj->getVar('ttpl_name');

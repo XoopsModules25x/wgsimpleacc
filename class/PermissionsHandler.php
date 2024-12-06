@@ -35,8 +35,6 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
 {
     /**
      * Constructor
-     *
-     * @param null
      */
     public function __construct()
     {
@@ -45,12 +43,17 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     /**
      * @private function getPermSubmit
      * returns right to submit for given perm
-     * @param $constantPerm
+     * @param int $constantPerm
      * @return bool
      */
     private function getPerm($constantPerm)
     {
-        global $xoopsUser, $xoopsModule;
+        global $xoopsUser;
+
+        $moduleDirName = \basename(\dirname(__DIR__));
+        /** @var XoopsModuleHandler $module_handler */
+        $module_handler = xoops_getHandler('module');
+        $xoopsModule    = $module_handler->getByDirname($moduleDirName);
 
         $currentuid = 0;
         if (isset($xoopsUser) && \is_object($xoopsUser)) {
@@ -78,7 +81,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     /**
      * @private function getPermSubmit
      * returns right to submit for given perm
-     * @param $constantPerm
+     * @param int $constantPerm
      * @return bool
      */
     private function getPermSubmit($constantPerm)
@@ -93,7 +96,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     /**
      * @private function getPermView
      * returns right for view of given perm
-     * @param $constantPerm
+     * @param int $constantPerm
      * @return bool
      */
     private function getPermView($constantPerm)
@@ -108,7 +111,6 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     /**
      * @public function permGlobalApprove
      * returns right for global approve
-     * @param null
      * @return bool
      */
     public function getPermGlobalApprove()
@@ -119,7 +121,6 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     /**
      * @public function permGlobalSubmit
      * returns right for global submit
-     * @param null
      * @return bool
      */
     public function getPermGlobalSubmit()
@@ -130,7 +131,6 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     /**
      * @public function permGlobalView
      * returns right for global view
-     * @param null
      * @return bool
      */
     public function getPermGlobalView()
@@ -145,7 +145,6 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     /**
      * @public function getPermTransactionsApprove
      * returns right for approve transactions
-     * @param null
      * @return bool
      */
     public function getPermTransactionsApprove()
@@ -161,7 +160,6 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     /**
      * @public function getPermTransactionsSubmit
      * returns right for submit transactions
-     * @param null
      * @return bool
      */
     public function getPermTransactionsSubmit()
@@ -178,9 +176,9 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      * returns right for edit/delete transactions
      *  - User must have perm to submit and must be owner
      *  - transaction is not closed
-     * @param $traSubmitter
-     * @param $traStatus
-     * @param $traBalId
+     * @param int $traSubmitter
+     * @param int $traStatus
+     * @param int $traBalId
      * @return bool
      */
     public function getPermTransactionsEdit($traSubmitter, $traStatus, $traBalId)
@@ -216,7 +214,6 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     /**
      * @public function getPermTransactionsView
      * returns right for view Transactions
-     * @param null
      * @return bool
      */
     public function getPermTransactionsView()
@@ -227,7 +224,6 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     /**
      * @public function getPermAllocationsSubmit
      * returns right for submit allocations
-     * @param null
      * @return bool
      */
     public function getPermAllocationsSubmit()
@@ -239,7 +235,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      * @public function getPermAllocationsEdit
      * returns right for edit/delete allocations
      *  - User must have perm to submit and must be owner
-     * @param null
+     * @param int $allSubmitter
      * @return bool
      */
     public function getPermAllocationsEdit($allSubmitter)
@@ -266,7 +262,6 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     /**
      * @public function getPermAllocationsView
      * returns right for view Allocations
-     * @param null
      * @return bool
      */
     public function getPermAllocationsView()
@@ -277,7 +272,6 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     /**
      * @public function getPermAccountsSubmit
      * returns right for submit accounts
-     * @param null
      * @return bool
      */
     public function getPermAccountsSubmit()
@@ -289,7 +283,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      * @public function getPermAccountsEdit
      * returns right for edit/delete accounts
      * - User must have perm to submit and must be owner
-     * @param null
+     * @param int $accSubmitter
      * @return bool
      */
     public function getPermAccountsEdit($accSubmitter)
@@ -316,7 +310,6 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     /**
      * @public function getPermAccountsView
      * returns right for view accounts
-     * @param null
      * @return bool
      */
     public function getPermAccountsView()
@@ -327,7 +320,6 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     /**
      * @public function getPermAssetsSubmit
      * returns right for submit assets
-     * @param null
      * @return bool
      */
     public function getPermAssetsSubmit()
@@ -339,7 +331,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      * @public function getPermAssetsEdit
      * returns right for edit/delete assets
      * - User must have perm to submit and must be owner
-     * @param null
+     * @param int $asSubmitter
      * @return bool
      */
     public function getPermAssetsEdit($asSubmitter)
@@ -366,7 +358,6 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     /**
      * @public function getPermAssetsView
      * returns right for view assets
-     * @param null
      * @return bool
      */
     public function getPermAssetsView()
@@ -378,7 +369,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      * @public function getPermFilesEdit
      * returns right for edit/delete files
      * - User must have perm to submit and must be owner
-     * @param null
+     * @param int $asSubmitter
      * @return bool
      */
     public function getPermFilesEdit($asSubmitter)
@@ -405,7 +396,6 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     /**
      * @public function getPermAssetsView
      * returns right for view assets
-     * @param null
      * @return bool
      */
     public function getPermFilesView()
@@ -416,7 +406,6 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     /**
      * @public function getPermBalancesSubmit
      * returns right for create balances
-     * @param null
      * @return bool
      */
     public function getPermBalancesSubmit()
@@ -427,7 +416,6 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     /**
      * @public function getPermBalancesView
      * returns right for view balances
-     * @param null
      * @return bool
      */
     public function getPermBalancesView()
@@ -436,13 +424,30 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
+     * @public function getPermTratemplatesApprove
+     * returns right for edit/delete all tratemplates
+     * @return bool
+     */
+    public function getPermTratemplatesApprove()
+    {
+        if ($this->getPermGlobalApprove()) {
+            return true;
+        }
+
+        return $this->getPerm(Constants::PERM_TRATEMPLATES_APPROVE);
+    }
+
+    /**
      * @public function getPermTratemplatesSubmit
      * returns right for submit tratemplate
-     * @param null
      * @return bool
      */
     public function getPermTratemplatesSubmit()
     {
+        if ($this->getPermTratemplatesApprove()) {
+            return true;
+        }
+
         return $this->getPermSubmit(Constants::PERM_TRATEMPLATES_SUBMIT);
     }
 
@@ -450,7 +455,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      * @public function getPermTratemplatesEdit
      * returns right for edit/delete tratemplate
      * - User must have perm to submit and must be owner
-     * @param null
+     * @param int $tplSubmitter
      * @return bool
      */
     public function getPermTratemplatesEdit($tplSubmitter)
@@ -477,29 +482,46 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     /**
      * @public function getPermTratemplatesSubmit
      * returns right for submit tratemplate
-     * @param null
      * @return bool
      */
     public function getPermTratemplatesView()
     {
         return $this->getPermView(Constants::PERM_TRATEMPLATES_VIEW);
     }
+
+    /**
+     * @public function getPermOuttemplatesApprove
+     * returns right for edit/delete all outtemplates
+     * @return bool
+     */
+    public function getPermOuttemplatesApprove()
+    {
+        if ($this->getPermGlobalApprove()) {
+            return true;
+        }
+
+        return $this->getPerm(Constants::PERM_OUTTEMPLATES_APPROVE);
+    }
+
     /**
      * @public function getPermOuttemplatesSubmit
      * returns right for submit outtemplate
-     * @param null
      * @return bool
      */
     public function getPermOuttemplatesSubmit()
     {
+        if ($this->getPermOuttemplatesApprove()) {
+            return true;
+        }
+
         return $this->getPermSubmit(Constants::PERM_OUTTEMPLATES_SUBMIT);
     }
 
     /**
      * @public function getPermOutemplatesEdit
-     * returns right for edit/delete outtemplates
+     * returns right for edit/delete own outtemplates
      * - User must have perm to submit and must be owner
-     * @param null
+     * @param int $tplSubmitter
      * @return bool
      */
     public function getPermOuttemplatesEdit($tplSubmitter)
@@ -526,7 +548,6 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     /**
      * @public function getPermOuttemplatesView
      * returns right for view outtemplate
-     * @param null
      * @return bool
      */
     public function getPermOuttemplatesView()
@@ -553,7 +574,6 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     /**
      * @public function getPermClientsSubmit
      * returns right for submit Clients
-     * @param null
      * @return bool
      */
     public function getPermClientsSubmit()
@@ -569,7 +589,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      * @public function getPermClientsEdit
      * returns right for edit/delete Clients
      *  - User must have perm to submit and must be owner
-     * @param $cliSubmitter
+     * @param int $cliSubmitter
      * @return bool
      */
     public function getPermClientsEdit($cliSubmitter)
@@ -596,7 +616,6 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     /**
      * @public function getPermClientsView
      * returns right for view Clients
-     * @param null
      * @return bool
      */
     public function getPermClientsView()
@@ -617,7 +636,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
             return true;
         }
 
-        return $this->getPermView(Constants::PERM_FILEDIR_ADMIN);
+        return $this->getPerm(Constants::PERM_FILEDIR_ADMIN);
     }
 
     /**
@@ -639,7 +658,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      * @public function getPermFileDirEdit
      * returns right for edit/delete files in file dir
      *  - User must have perm to submit and must be owner
-     * @param $filSubmitter
+     * @param int $filSubmitter
      * @return bool
      */
     public function getPermFileDirEdit($filSubmitter)
@@ -662,7 +681,6 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     /**
      * @public function getPermFileDirView
      * returns right for view files from file dir
-     * @param null
      * @return bool
      */
     public function getPermFileDirView()

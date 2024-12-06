@@ -67,7 +67,6 @@ class FilhistoriesHandler extends \XoopsPersistableObjectHandler
     /**
      * get inserted id
      *
-     * @param null
      * @return int reference to the {@link Get} object
      */
     public function getInsertId()
@@ -107,12 +106,12 @@ class FilhistoriesHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get Criteria Filhistories
-     * @param        $crFilhistories
+     * @param \CriteriaCompo $crFilhistories
      * @param int    $start
      * @param int    $limit
      * @param string $sort
      * @param string $order
-     * @return int
+     * @return \CriteriaCompo
      */
     private function getFilhistoriesCriteria($crFilhistories, $start, $limit, $sort, $order)
     {

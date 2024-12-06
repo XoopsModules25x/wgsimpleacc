@@ -28,7 +28,10 @@ use XoopsModules\Wgsimpleacc\{
 require __DIR__ . '/header.php';
 require_once \XOOPS_ROOT_PATH . '/header.php';
 $GLOBALS['xoopsTpl']->assign('template_sub', 'db:wgsimpleacc_accounts.tpl');
-require __DIR__ . '/navbar.php';
+
+foreach ($styles as $style) {
+    $GLOBALS['xoTheme']->addStylesheet($style, null);
+}
 
 // Permissions
 if (!$permissionsHandler->getPermAccountsView()) {
@@ -42,10 +45,6 @@ $accId = Request::getInt('acc_id');
 
 $permAccountsSubmit = $permissionsHandler->getPermAccountsSubmit();
 
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_icon_url_16', \WGSIMPLEACC_ICONS_URL . '/16/');
-$GLOBALS['xoopsTpl']->assign('xoops_icons32_url', \XOOPS_ICONS32_URL);
-$GLOBALS['xoopsTpl']->assign('wgsimpleacc_url', \WGSIMPLEACC_URL);
-
 $keywords = [];
 
 $GLOBALS['xoopsTpl']->assign('showItem', $accId > 0);
@@ -57,10 +56,12 @@ switch ($op) {
     case 'list':
     default:
         $accountsCount = $accountsHandler->getCount();
+        $GLOBALS['xoopsTpl']->assign('wgsimpleacc_icon_url', \WGSIMPLEACC_ICONS_URL);
         if ($accountsCount > 0) {
             $GLOBALS['xoTheme']->addStylesheet(\WGSIMPLEACC_URL . '/assets/css/nestedsortable.css');
             if ($permAccountsSubmit) {
                 // add scripts
+                $GLOBALS['xoTheme']->addScript('browse.php?Frameworks/jquery/jquery.js');
                 $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/js/jquery-ui.min.js');
                 $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/js/sortable-accounts.js');
                 $GLOBALS['xoTheme']->addScript(\WGSIMPLEACC_URL . '/assets/js/jquery.mjs.nestedSortable.js');
@@ -70,8 +71,26 @@ switch ($op) {
                 // add list for sorting
                 $accountlist_sort = $accountsHandler->getListOfAccounts(0);
             }
-            $GLOBALS['xoopsTpl']->assign('accountlist_sort', $accountlist_sort);
+            //new collabpsible list
+            $accountlist_coll= $accountsHandler->getArrayTreeOfAccounts(0);
+            $GLOBALS['xoopsTpl']->assign('accountlist_collapsible', $accountlist_coll);
+            //use allocationlist_sort only for older xoops and bootstrap3
+            //$GLOBALS['xoopsTpl']->assign('accountlist_sort', $accountlist_sort);
             $GLOBALS['xoopsTpl']->assign('accounts_submit', $permAccountsSubmit);
+            $minTra = 0;
+            $crTransactions = new \CriteriaCompo();
+            $crTransactions->setSort('tra_date');
+            $crTransactions->setOrder('ASC');
+            $crTransactions->setStart();
+            $crTransactions->setLimit(1);
+            if ($transactionsHandler->getCount($crTransactions) > 0) {
+                $transactionsAll = $transactionsHandler->getAll($crTransactions);
+                foreach (\array_keys($transactionsAll) as $i) {
+                    $minTra = (int)$transactionsAll[$i]->getVar('tra_date');
+                }
+            }
+            $GLOBALS['xoopsTpl']->assign('dateFrom', $minTra);
+            $GLOBALS['xoopsTpl']->assign('dateTo', \time());
         }
 
         // Breadcrumbs

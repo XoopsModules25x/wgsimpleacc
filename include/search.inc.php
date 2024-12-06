@@ -26,7 +26,7 @@ use XoopsModules\Wgsimpleacc\Helper;
  *
  * @param $queryarray
  * @param $andor
- * @param $limit
+ * @param int $limit
  * @param $offset
  * @param $userid
  * @return array $itemIds

@@ -32,8 +32,6 @@ class Taxes extends \XoopsObject
 {
     /**
      * Constructor
-     *
-     * @param null
      */
     public function __construct()
     {
@@ -48,8 +46,6 @@ class Taxes extends \XoopsObject
 
     /**
      * @static function &getInstance
-     *
-     * @param null
      */
     public static function getInstance()
     {
@@ -61,7 +57,7 @@ class Taxes extends \XoopsObject
 
     /**
      * The new inserted $Id
-     * @return inserted id
+     * @return int
      */
     public function getNewInsertedIdTaxes()
     {

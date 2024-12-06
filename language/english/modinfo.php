@@ -89,6 +89,8 @@ require_once __DIR__ . '/common.php';
 \define('_MI_WGSIMPLEACC_USE_TAXES_DESC', 'Please define whether you want use taxes');
 \define('_MI_WGSIMPLEACC_USE_FILES', 'Use file system');
 \define('_MI_WGSIMPLEACC_USE_FILES_DESC', 'Please define whether you want use the possibility to add files to your transactions');
+\define('_MI_WGSIMPLEACC_USE_FILES_ADD', 'Use additional file system');
+\define('_MI_WGSIMPLEACC_USE_FILES_ADD_DESC', 'Please define whether you want use the simple filemanager to add files with no link to specific transaction');
 \define('_MI_WGSIMPLEACC_USE_CLIENTS', 'Use clients system');
 \define('_MI_WGSIMPLEACC_USE_CLIENTS_DESC', 'Please define whether you want use the possibility to handle client data');
 \define('_MI_WGSIMPLEACC_USE_TRAHISTORY', 'Use transaction histories');
@@ -176,3 +178,11 @@ require_once __DIR__ . '/common.php';
 \define('_MI_WGSIMPLEACC_NOTIFY_TRANSACTION_COMMENT_CAPTION', 'Notify me about comments for transaction');
 \define('_MI_WGSIMPLEACC_NOTIFY_TRANSACTION_COMMENT_SUBJECT', 'Notification about comments for transaction');
 // ---------------- End ----------------
+//1.3.2
+\define('_MI_WGFILEMANAGER_SHOW_STARTMIN_NAV', 'Show Startmin navigation');
+\define('_MI_WGFILEMANAGER_SHOW_STARTMIN_NAV_DESC', "Define whether Startmin navigation should be shown");
+\define('_MI_WGFILEMANAGER_SHOW_STARTMIN_NAV_LEFT', 'Show Startmin navigation on left side');
+\define('_MI_WGFILEMANAGER_SHOW_STARTMIN_NAV_NONE', 'Do not show it, I use another block instead');
+// Blocks
+\define('_MI_WGSIMPLEACC_STARTMIN_BLOCK', 'Block Startmin Navigation');
+\define('_MI_WGSIMPLEACC_STARTMIN_BLOCK_DESC', 'Block for displaying startmin navigation menu');

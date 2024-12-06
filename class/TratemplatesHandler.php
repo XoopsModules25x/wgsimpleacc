@@ -64,7 +64,6 @@ class TratemplatesHandler extends \XoopsPersistableObjectHandler
     /**
      * get inserted id
      *
-     * @param null
      * @return int reference to the {@link Get} object
      */
     public function getInsertId()
@@ -109,7 +108,7 @@ class TratemplatesHandler extends \XoopsPersistableObjectHandler
      * @param int    $limit
      * @param string $sort
      * @param string $order
-     * @return int
+     * @return \CriteriaCompo
      */
     private function getTratemplatesCriteria($crTratemplates, $start, $limit, $sort, $order)
     {

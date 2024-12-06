@@ -33,7 +33,10 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 require __DIR__ . '/header.php';
 require_once \XOOPS_ROOT_PATH . '/header.php';
 $GLOBALS['xoopsTpl']->assign('template_sub', 'db:wgsimpleacc_outputs.tpl');
-require_once __DIR__ . '/navbar.php';
+
+foreach ($styles as $style) {
+    $GLOBALS['xoTheme']->addStylesheet($style, null);
+}
 
 // Permissions
 if (!$permissionsHandler->getPermGlobalView()) {
@@ -57,6 +60,7 @@ switch ($op) {
     default:
         break;
     case 'balances':
+        $GLOBALS['xoTheme']->addScript('browse.php?Frameworks/jquery/jquery.js');
         $GLOBALS['xoTheme']->addStylesheet(\WGSIMPLEACC_URL . '/assets/css/nestedcheckboxes.css', null);
         $formFilter = $outputsHandler::getFormBalancesSelect();
         $GLOBALS['xoopsTpl']->assign('formFilter', $formFilter->render());

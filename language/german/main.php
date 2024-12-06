@@ -61,6 +61,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_FILTER_APPLY', 'Filter anwenden');
 \define('_MA_WGSIMPLEACC_FILTER_SHOW', 'Filter anzeigen');
 \define('_MA_WGSIMPLEACC_FILTER_HIDE', 'Filter ausblenden');
+\define('_MA_WGSIMPLEACC_FILTER_SHOWHIDE', 'Anzeigen/ausblenden Filter');
 \define('_MA_WGSIMPLEACC_FILTER_OUTPUT', 'Gewählte Daten ausgeben');
 \define('_MA_WGSIMPLEACC_FILTER_OUTPUTTYPE', 'Art der Ausgabe');
 \define('_MA_WGSIMPLEACC_FILTER_NO_TRANSACTIONS', "Es gibt keine Transaktionen, die dem Filter entsprechen");

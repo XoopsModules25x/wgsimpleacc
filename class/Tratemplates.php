@@ -32,8 +32,6 @@ class Tratemplates extends \XoopsObject
 {
     /**
      * Constructor
-     *
-     * @param null
      */
     public function __construct()
     {
@@ -54,8 +52,6 @@ class Tratemplates extends \XoopsObject
 
     /**
      * @static function &getInstance
-     *
-     * @param null
      */
     public static function getInstance()
     {
@@ -67,7 +63,7 @@ class Tratemplates extends \XoopsObject
 
     /**
      * The new inserted $Id
-     * @return inserted id
+     * @return int
      */
     public function getNewInsertedIdTratemplates()
     {

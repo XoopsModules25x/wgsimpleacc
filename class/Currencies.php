@@ -32,8 +32,6 @@ class Currencies extends \XoopsObject
 {
     /**
      * Constructor
-     *
-     * @param null
      */
     public function __construct()
     {
@@ -49,8 +47,6 @@ class Currencies extends \XoopsObject
 
     /**
      * @static function &getInstance
-     *
-     * @param null
      */
     public static function getInstance()
     {
@@ -62,7 +58,7 @@ class Currencies extends \XoopsObject
 
     /**
      * The new inserted $Id
-     * @return inserted id
+     * @return int
      */
     public function getNewInsertedIdCurrencies()
     {

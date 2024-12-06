@@ -1,0 +1,490 @@
+-
+    cli_id: '1'
+    cli_name: '<p>Stefanie Gro&szlig;<br />Bader Bauer Friseur</p>'
+    cli_postal: '84489'
+    cli_city: Burghausen
+    cli_address: '<p>Mautnerstr. 285</p>'
+    cli_ctry: DE
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '0'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616161677'
+    cli_submitter: '3'
+-
+    cli_id: '2'
+    cli_name: '<p>G&auml;rtnerei &amp; Floristik Henker<br />Inh. Andreas Kampitsch</p>'
+    cli_postal: '84489'
+    cli_city: Burghausen
+    cli_address: '<p>Mehringer Str. 3</p>'
+    cli_ctry: DE
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '1'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616161757'
+    cli_submitter: '3'
+-
+    cli_id: '3'
+    cli_name: '<p>G&uuml;nter Buchner<br />KFZ Meisterbetrieb</p>'
+    cli_postal: '84489'
+    cli_city: Burghausen
+    cli_address: '<p>Gewerbepark Lindach D7</p>'
+    cli_ctry: DE
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '0'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616161815'
+    cli_submitter: '3'
+-
+    cli_id: '4'
+    cli_name: '<p>Manfred Buchsteiner<br />Weine aus &Ouml;sterreich</p>'
+    cli_postal: '5122'
+    cli_city: Hochburg-Ach
+    cli_address: '<p>Kapellenweg 10</p>'
+    cli_ctry: AT
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '1'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616161871'
+    cli_submitter: '3'
+-
+    cli_id: '5'
+    cli_name: '<p>Schuh Schi Tennis Daum</p>'
+    cli_postal: '5122'
+    cli_city: Hochburg-Ach
+    cli_address: '<p>Ach 15</p>'
+    cli_ctry: AT
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '1'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616161935'
+    cli_submitter: '3'
+-
+    cli_id: '6'
+    cli_name: '<p>Doser Store KG<br />Jack Wolfskin Store Burghausen</p>'
+    cli_postal: '84489'
+    cli_city: Burghausen
+    cli_address: '<p>Marktlerstrasse 38</p>'
+    cli_ctry: DE
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '1'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616166539'
+    cli_submitter: '3'
+-
+    cli_id: '7'
+    cli_name: '<p>KFZ Erwin Esterbauer<br /><br /></p>'
+    cli_postal: '5122'
+    cli_city: Hochburg-Ach
+    cli_address: '<p>Braunauer Str.1</p>'
+    cli_ctry: AT
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '0'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616162054'
+    cli_submitter: '3'
+-
+    cli_id: '8'
+    cli_name: '<p>Fun Sport &amp; Bikecenter</p>'
+    cli_postal: '84489'
+    cli_city: Burghausen
+    cli_address: '<p>Gewerbepark Lindach D</p>'
+    cli_ctry: DE
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '1'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616166569'
+    cli_submitter: '3'
+-
+    cli_id: '9'
+    cli_name: '<p>Brennst&uuml;berl Geistreich<br />Horst Karaosmangil<br />Joachim Kuntz</p>'
+    cli_postal: '84489'
+    cli_city: Burghausen
+    cli_address: '<p>In den Gr&uuml;ben 145</p>'
+    cli_ctry: DE
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '0'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616166401'
+    cli_submitter: '3'
+-
+    cli_id: '10'
+    cli_name: '<p>GRAFIKGARAGE e.U.</p>'
+    cli_postal: '5122'
+    cli_city: Hochburg-Ach
+    cli_address: '<p>Erlenweg 1</p>'
+    cli_ctry: AT
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '1'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616162336'
+    cli_submitter: '3'
+-
+    cli_id: '11'
+    cli_name: '<p>Physiotherapie<br />Markus &amp; Elvira Hebel</p>'
+    cli_postal: '5122'
+    cli_city: Hochburg-Ach
+    cli_address: '<p>Am Sandh&uuml;gel 23</p>'
+    cli_ctry: AT
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '0'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616166608'
+    cli_submitter: '3'
+-
+    cli_id: '12'
+    cli_name: '<p>Wohnservice Gasteiger<br />Hermann Gasteiger</p>'
+    cli_postal: '5122'
+    cli_city: Hochburg-Ach
+    cli_address: '<p>Athalerstra&szlig;e 6</p>'
+    cli_ctry: AT
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '1'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616162471'
+    cli_submitter: '3'
+-
+    cli_id: '13'
+    cli_name: '<p>Johann Kaufleitner<br />S&auml;gewerk</p>'
+    cli_postal: '5122'
+    cli_city: Hochburg-Ach
+    cli_address: '<p>Lindach 1</p>'
+    cli_ctry: AT
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '1'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616166643'
+    cli_submitter: '3'
+-
+    cli_id: '14'
+    cli_name: '<p>Waldgasthaus<br />Joachim Kuntz</p>'
+    cli_postal: '5122'
+    cli_city: Hochburg-Ach
+    cli_address: '<p>Birkenweg 44</p>'
+    cli_ctry: AT
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '1'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616166688'
+    cli_submitter: '3'
+-
+    cli_id: '15'
+    cli_name: '<p>LARsys Automation GmbH</p>'
+    cli_postal: '5122'
+    cli_city: Hochburg-Ach
+    cli_address: '<p>Sinzinger Stra&szlig;e 3</p>'
+    cli_ctry: AT
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '0'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616166710'
+    cli_submitter: '3'
+-
+    cli_id: '16'
+    cli_name: '<p>Acher Kunstschmiede-Schlosserei<br />Anton Lechner</p>'
+    cli_postal: '5122'
+    cli_city: Hochburg-Ach
+    cli_address: '<p>Holzgassen 19</p>'
+    cli_ctry: AT
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '0'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616166730'
+    cli_submitter: '3'
+-
+    cli_id: '17'
+    cli_name: '<p>Florian Leitner<br />Erdbewegung &ndash; Baumf&auml;llung<br />Au&szlig;enanlagen - Forstpflege</p>'
+    cli_postal: '5122'
+    cli_city: Hochburg-Ach
+    cli_address: '<p>Sonnenweg 9</p>'
+    cli_ctry: AT
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '0'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616166391'
+    cli_submitter: '3'
+-
+    cli_id: '18'
+    cli_name: '<p>Meidl IT-Service<br />J&ouml;rg Meidl</p>'
+    cli_postal: '5122'
+    cli_city: Hochburg-Ach
+    cli_address: '<p>Buchenweg 1</p>'
+    cli_ctry: AT
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '1'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616166748'
+    cli_submitter: '3'
+-
+    cli_id: '19'
+    cli_name: '<p>Metzgerei Habl GmbH</p>'
+    cli_postal: '5121'
+    cli_city: Tarsdorf
+    cli_address: '<p>Tarsdorf 61</p>'
+    cli_ctry: AT
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '1'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616162791'
+    cli_submitter: '3'
+-
+    cli_id: '20'
+    cli_name: '<p>Peter M&uuml;hlthaler e. K.</p>'
+    cli_postal: '84533'
+    cli_city: Haiming
+    cli_address: '<p>Burghauser Stra&szlig;e 28</p>'
+    cli_ctry: DE
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '0'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616162853'
+    cli_submitter: '3'
+-
+    cli_id: '21'
+    cli_name: '<p>OMV Deutschland GmbH<br />z. Hd. Herrn Thomas Bauer<br />Abt. Communications</p>'
+    cli_postal: '84489'
+    cli_city: Burghausen
+    cli_address: '<p>Haiminger Stra&szlig;e 1</p>'
+    cli_ctry: DE
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '0'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616162894'
+    cli_submitter: '3'
+-
+    cli_id: '22'
+    cli_name: '<p>Pizzeria Fermano e.U.<br />Fermano Kartal</p>'
+    cli_postal: '5122'
+    cli_city: Hochburg-Ach
+    cli_address: '<p>Neue Mitte 5</p>'
+    cli_ctry: AT
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '0'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616166765'
+    cli_submitter: '3'
+-
+    cli_id: '23'
+    cli_name: '<p>Planungsb&uuml;ro Rupert Plasser</p>'
+    cli_postal: '5122'
+    cli_city: Hochburg-Ach
+    cli_address: '<p>Athalerstra&szlig;e 14</p>'
+    cli_ctry: AT
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '0'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616162977'
+    cli_submitter: '3'
+-
+    cli_id: '24'
+    cli_name: '<p>Priller GmbH<br />Metall / Schwei&szlig;betrieb</p>'
+    cli_postal: '5122'
+    cli_city: Hochburg-Ach
+    cli_address: '<p>Dorfen 12a</p>'
+    cli_ctry: AT
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '1'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616163216'
+    cli_submitter: '3'
+-
+    cli_id: '25'
+    cli_name: '<p>Steuerberater August Pro&szlig;egger</p>'
+    cli_postal: '5122'
+    cli_city: Hochburg-Ach
+    cli_address: '<p>Fichtenweg 3</p>'
+    cli_ctry: AT
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '0'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616166808'
+    cli_submitter: '3'
+-
+    cli_id: '26'
+    cli_name: '<p>radlMetzgerei<br />Baumgartner &amp; Binder GbR</p>'
+    cli_postal: '84489'
+    cli_city: Burghausen
+    cli_address: '<p>Kanzelm&uuml;llerstra&szlig;e 94</p>'
+    cli_ctry: DE
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '1'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616163780'
+    cli_submitter: '3'
+-
+    cli_id: '27'
+    cli_name: '<p>Raiffeisenkasse Hochburg-Ach</p>'
+    cli_postal: '5122'
+    cli_city: Hochburg-Ach
+    cli_address: '<p>Oberkriebach 59</p>'
+    cli_ctry: AT
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '1'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616163347'
+    cli_submitter: '3'
+-
+    cli_id: '28'
+    cli_name: '<p>B&auml;ckerei Feinkost Reschenhofer</p>'
+    cli_postal: '5122'
+    cli_city: Hochburg-Ach
+    cli_address: '<p>Hochburg 23</p>'
+    cli_ctry: AT
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '1'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616163386'
+    cli_submitter: '3'
+-
+    cli_id: '29'
+    cli_name: '<p>Roadhouse Music Store e.U.</p>'
+    cli_postal: '5122'
+    cli_city: Hochburg-Ach
+    cli_address: '<p>Sengstatt 6</p>'
+    cli_ctry: AT
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '0'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616163451'
+    cli_submitter: '3'
+-
+    cli_id: '30'
+    cli_name: '<p>Sabine Schlaffner<br />Bodytalk</p>'
+    cli_postal: '84489'
+    cli_city: Burghausen
+    cli_address: '<p>Robert-Koch-Stra&szlig;e 25</p>'
+    cli_ctry: DE
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '0'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616163489'
+    cli_submitter: '3'
+-
+    cli_id: '31'
+    cli_name: '<p>Salzburger Sparkasse<br />Zweigstelle Hochburg-Ach</p>'
+    cli_postal: '5122'
+    cli_city: Hochburg-Ach
+    cli_address: '<p>Sparkassenweg 1</p>'
+    cli_ctry: AT
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '1'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616163533'
+    cli_submitter: '3'
+-
+    cli_id: '32'
+    cli_name: '<p>Talad Thai Restaurant</p>'
+    cli_postal: '84489'
+    cli_city: Burghausen
+    cli_address: '<p>In den Gr&uuml;ben 150</p>'
+    cli_ctry: DE
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '0'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616163571'
+    cli_submitter: '3'
+-
+    cli_id: '33'
+    cli_name: '<p>Taverna Tassos<br />Ioannis Boitsos</p>'
+    cli_postal: '84489'
+    cli_city: Burghausen
+    cli_address: '<p>Josef Stegmair Stra&szlig;e 1</p>'
+    cli_ctry: DE
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '0'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616163610'
+    cli_submitter: '3'
+-
+    cli_id: '34'
+    cli_name: '<p>Wedega - Webdesign Gabor<br />Ilse Gabor</p>'
+    cli_postal: '5122'
+    cli_city: Hochburg-Ach
+    cli_address: '<p>Birkenweg 7</p>'
+    cli_ctry: AT
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '0'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616163684'
+    cli_submitter: '3'
+-
+    cli_id: '35'
+    cli_name: '<p>Andreas Weyand<br /> Fahrzeugservice</p>'
+    cli_postal: '5123'
+    cli_city: Überackern
+    cli_address: '<p>Gewerbegebiet 5</p>'
+    cli_ctry: AT
+    cli_phone: ''
+    cli_vat: ''
+    cli_creditor: '0'
+    cli_debtor: '1'
+    cli_online: '0'
+    cli_datecreated: '1616163751'
+    cli_submitter: '3'

@@ -62,11 +62,11 @@
                         <td>
                             <{foreach item=file from=$transaction.files}>
                             <{if $file.image}>
-                                <span class="wgsa-modal" data-toggle="modal" data-target="#imgModal" data-title="<{$file.name}>" data-info="<{$wgsimpleacc_upload_files_url}>/<{$file.name}>">
+                                <span class="wgsa-modal" data-bs-toggle="modal" data-bs-target="#imgModal" data-bs-title="<{$file.name}>" data-bs-info="<{$wgsimpleacc_upload_files_url}>/<{$file.name}>">
                                     <img class="wgsa-transaction-img-list" src="<{$wgsimpleacc_upload_files_url}>/<{$file.name}>" alt="<{$file.name}>" title="<{$file.name}>">
                                 </span><br>
                             <{else}>
-                                <{$file.name}> <a class='btn btn-default' href='files.php?op=showfile&amp;fil_id=<{$file.id}>' title='<{$file.name}>' target="_blank"><i class="fa fa-download fa-fw"></i></a><br>
+                                <{$file.name}> <a class='btn btn-secondary' href='files.php?op=showfile&amp;fil_id=<{$file.id}>' title='<{$file.name}>' target="_blank"><i class="fa fa-download fa-fw"></i></a><br>
                             <{/if}>
                             <{/foreach}>
                             <{if $permSubmit && $transaction.edit}>
@@ -84,7 +84,7 @@
                 <tr>
                     <th><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_HIST}></th>
                     <td>
-                        <a class='btn btn-default right' href='transactions.php?op=history&amp;tra_id=<{$transaction.tra_id}><{$traOp}>' title='<{$smarty.const._MA_WGSIMPLEACC_DETAILS}>'><{$smarty.const._MA_WGSIMPLEACC_DETAILS}></a>
+                        <a class='btn btn-secondary right' href='transactions.php?op=history&amp;tra_id=<{$transaction.tra_id}><{$traOp}>' title='<{$smarty.const._MA_WGSIMPLEACC_DETAILS}>'><{$smarty.const._MA_WGSIMPLEACC_DETAILS}></a>
                     </td>
                 </tr>
             <{/if}>

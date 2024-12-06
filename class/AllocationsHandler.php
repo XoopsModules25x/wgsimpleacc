@@ -64,7 +64,6 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
     /**
      * get inserted id
      *
-     * @param null
      * @return int reference to the {@link Get} object
      */
     public function getInsertId()
@@ -104,12 +103,12 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get Criteria Allocations
-     * @param $crAllocations
-     * @param $start
-     * @param $limit
-     * @param $sort
-     * @param $order
-     * @return int
+     * @param \CriteriaCompo $crAllocations
+     * @param int $start
+     * @param int $limit
+     * @param string $sort
+     * @param string $order
+     * @return \CriteriaCompo
      */
     private function getAllocationsCriteria($crAllocations, $start, $limit, $sort, $order)
     {
@@ -174,7 +173,7 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get all childs of an item
-     * @param $itemPid
+     * @param int $itemPid
      * @return bool|string
      */
     public function getListOfAllocationsEdit($itemPid)
@@ -255,7 +254,7 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get all childs of an item
-     * @param $itemPid
+     * @param int $itemPid
      * @return bool|string
      */
     public function getListOfAllocations($itemPid)
@@ -305,13 +304,16 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get array of allocations with all childs
-     * @param $allPid
+     * @param int $allPid
      * @return bool|array
      */
     public function getArrayTreeOfAllocations($allPid)
     {
 
         $arrayAllTree = [];
+
+        $helper       = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+        $transactionsHandler = $helper->getHandler('Transactions');
 
         $crItems           = new \CriteriaCompo();
         $crItems->add(new \Criteria('all_pid', $allPid));
@@ -323,13 +325,26 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
         // Table view items
         if ($itemsCount > 0) {
             foreach (\array_keys($itemsAll) as $i) {
+                $crTransactions = new \CriteriaCompo();
+                $crTransactions->add(new \Criteria('tra_allid', $i));
+                $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_DELETED, '>'));
+                $transactionsCount = $transactionsHandler->getCount($crTransactions);
                 $arrayAllTree[$i]['id'] = $i;
                 $arrayAllTree[$i]['name'] = $itemsAll[$i]->getVar('all_name');
+                $arrayAllTree[$i]['tracount'] = $transactionsCount;
+                $arrayAllTree[$i]['online'] = 0;
+                $arrayAllTree[$i]['online_text'] = \_MA_WGSIMPLEACC_OFFLINE;
+                if (Constants::ONOFF_ONLINE == $itemsAll[$i]->getVar('all_online')) {
+                    $arrayAllTree[$i]['online'] = 1;
+                    $arrayAllTree[$i]['online_text'] = \_MA_WGSIMPLEACC_ONLINE;
+                }
                 $child     = $this->getArrayTreeOfAllocations($i);
                 if ($child) {
                     $arrayAllTree[$i]['child'] = $child;
+                    $arrayAllTree[$i]['childs'] = \count($child);
                 } else {
                     $arrayAllTree[$i]['child'] = [];
+                    $arrayAllTree[$i]['childs'] = 0;
                 }
             }
         } else {
@@ -380,7 +395,7 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
 
     /**
     * Get all sub allocations for given allocation
-    * @param $allId
+    * @param int $allId
     * @return array|false
     */
     public function getSubsOfAllocations($allId)
@@ -409,7 +424,7 @@ class AllocationsHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Check whether given allocation is online or not
-     * @param $allId
+     * @param int $allId
      * @return array
      */
     public function AllocationIsOnline($allId)

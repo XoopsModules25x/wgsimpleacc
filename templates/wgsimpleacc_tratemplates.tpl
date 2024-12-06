@@ -17,6 +17,7 @@
                     <th><{$smarty.const._MA_WGSIMPLEACC_TRATEMPLATE_AMOUNTIN}></th>
                     <th><{$smarty.const._MA_WGSIMPLEACC_TRATEMPLATE_AMOUNTOUT}></th>
                     <th><{$smarty.const._MA_WGSIMPLEACC_TRATEMPLATE_ONLINE}></th>
+                    <th><{$smarty.const._MA_WGSIMPLEACC_SUBMITTER}></th>
                     <th></th>
                 </tr>
                 </thead>

@@ -31,8 +31,6 @@ class StatisticsHandler
 {
     /**
      * Constructor
-     *
-
      */
     public function __construct()
     {

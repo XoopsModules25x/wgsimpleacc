@@ -145,7 +145,7 @@ trait FilesManagement
         if ($dirInfo->isDir()) {
             $fileList = \array_diff(\scandir($src, \SCANDIR_SORT_NONE), ['..', '.']);
             foreach ($fileList as $k => $v) {
-                $fileInfo = new \SplFileInfo("{$src}/{$v}");
+                $fileInfo = new \SplFileInfo("$src/$v");
                 if ($fileInfo->isDir()) {
                     // recursively handle subdirectories
                     if (!$success = self::deleteDirectory($fileInfo->getRealPath())) {
@@ -240,10 +240,10 @@ trait FilesManagement
         $iterator = new \DirectoryIterator($src);
         foreach ($iterator as $fObj) {
             if ($fObj->isFile()) {
-                \rename($fObj->getPathname(), "{$dest}/" . $fObj->getFilename());
+                \rename($fObj->getPathname(), "$dest/" . $fObj->getFilename());
             } elseif (!$fObj->isDot() && $fObj->isDir()) {
                 // Try recursively on directory
-                self::rmove($fObj->getPathname(), "{$dest}/" . $fObj->getFilename());
+                self::rmove($fObj->getPathname(), "$dest/" . $fObj->getFilename());
                 //                \rmdir($fObj->getPath()); // now delete the directory
             }
         }
@@ -283,9 +283,9 @@ trait FilesManagement
         $iterator = new \DirectoryIterator($src);
         foreach ($iterator as $fObj) {
             if ($fObj->isFile()) {
-                \copy($fObj->getPathname(), "{$dest}/" . $fObj->getFilename());
+                \copy($fObj->getPathname(), "$dest/" . $fObj->getFilename());
             } elseif (!$fObj->isDot() && $fObj->isDir()) {
-                self::rcopy($fObj->getPathname(), "{$dest}/" . $fObj->getFilename());
+                self::rcopy($fObj->getPathname(), "$dest/" . $fObj->getFilename());
             }
         }
 

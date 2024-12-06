@@ -64,7 +64,6 @@ class CurrenciesHandler extends \XoopsPersistableObjectHandler
     /**
      * get inserted id
      *
-     * @param null
      * @return int reference to the {@link Get} object
      */
     public function getInsertId()
@@ -104,12 +103,12 @@ class CurrenciesHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get Criteria Currencies
-     * @param $crCurrencies
-     * @param $start
-     * @param $limit
-     * @param $sort
-     * @param $order
-     * @return int
+     * @param \CriteriaCompo $crCurrencies
+     * @param int $start
+     * @param int $limit
+     * @param string $sort
+     * @param string $order
+     * @return \CriteriaCompo
      */
     private function getCurrenciesCriteria($crCurrencies, $start, $limit, $sort, $order)
     {

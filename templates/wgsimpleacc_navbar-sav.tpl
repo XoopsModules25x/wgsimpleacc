@@ -1,7 +1,7 @@
 <!-- Navigation Startmin Theme-->
 <{if $permGlobalView}>
     <nav class="navbar" role="navigation">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <button type="button" class="navbar-toggle" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>

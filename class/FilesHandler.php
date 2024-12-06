@@ -64,7 +64,6 @@ class FilesHandler extends \XoopsPersistableObjectHandler
     /**
      * get inserted id
      *
-     * @param null
      * @return int reference to the {@link Get} object
      */
     public function getInsertId()
@@ -104,12 +103,12 @@ class FilesHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get Criteria Files
-     * @param $crFiles
-     * @param $start
-     * @param $limit
-     * @param $sort
-     * @param $order
-     * @return int
+     * @param \CriteriaCompo $crFiles
+     * @param int $start
+     * @param int $limit
+     * @param string $sort
+     * @param string $order
+     * @return \CriteriaCompo
      */
     private function getFilesCriteria($crFiles, $start, $limit, $sort, $order)
     {

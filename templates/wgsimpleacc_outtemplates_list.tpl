@@ -33,7 +33,7 @@
         <{/if}>
     </td>
     <td class="center">
-        <{if $permSubmit && $template.edit}>
+        <{if $permSubmit || $template.edit}>
         <a class='btn btn-primary right' href='outtemplates.php?op=edit&amp;otpl_id=<{$template.otpl_id}><{$tplOp|default:''}>' title='<{$smarty.const._EDIT}>'><i class="fa fa-edit fa-fw"></i></a>
         <a class='btn btn-primary right' href='outtemplates.php?op=clone&amp;otpl_id_clone=<{$template.otpl_id}><{$tplOp|default:''}>' title='<{$smarty.const._CLONE}>'><i class="fa fa-copy fa-fw"></i></a>
         <a class='btn btn-danger right' href='outtemplates.php?op=delete&amp;otpl_id=<{$template.otpl_id}><{$tplOp|default:''}>' title='<{$smarty.const._DELETE}>'><i class="fa fa-trash fa-fw"></i></a>

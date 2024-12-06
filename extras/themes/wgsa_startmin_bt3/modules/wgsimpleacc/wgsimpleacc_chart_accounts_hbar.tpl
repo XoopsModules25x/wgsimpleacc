@@ -13,7 +13,7 @@
     <{$formTraFilter}>
 <{/if}>
 <{foreach item=account from=$tra_accounts_list}>
-    <a class='btn btn-default <{if $account.accSubs == 1}>disabled<{/if}>' href='<{$account.href}>' title='<{$account.acc_name}>'>
+    <a class='btn btn-secondary <{if $account.accSubs == 1}>disabled<{/if}>' href='<{$account.href}>' title='<{$account.acc_name}>'>
         <{$account.acc_name}>
         <{if $account.accSubs > 1}>
             <i class="fa fa-angle-double-down"></i>

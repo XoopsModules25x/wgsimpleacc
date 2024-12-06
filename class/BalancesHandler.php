@@ -64,7 +64,6 @@ class BalancesHandler extends \XoopsPersistableObjectHandler
     /**
      * get inserted id
      *
-     * @param null
      * @return int reference to the {@link Get} object
      */
     public function getInsertId()
@@ -104,12 +103,12 @@ class BalancesHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get Criteria Balances
-     * @param $crBalances
-     * @param $start
-     * @param $limit
-     * @param $sort
-     * @param $order
-     * @return int
+     * @param \CriteriaCompo $crBalances
+     * @param int $start
+     * @param int $limit
+     * @param string $sort
+     * @param string $order
+     * @return \CriteriaCompo
      */
     private function getBalancesCriteria($crBalances, $start, $limit, $sort, $order)
     {

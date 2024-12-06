@@ -32,8 +32,6 @@ class Allocations extends \XoopsObject
 {
     /**
      * Constructor
-     *
-     * @param null
      */
     public function __construct()
     {
@@ -51,8 +49,6 @@ class Allocations extends \XoopsObject
 
     /**
      * @static function &getInstance
-     *
-     * @param null
      */
     public static function getInstance()
     {
@@ -64,7 +60,7 @@ class Allocations extends \XoopsObject
 
     /**
      * The new inserted $Id
-     * @return inserted id
+     * @return integer
      */
     public function getNewInsertedIdAllocations()
     {

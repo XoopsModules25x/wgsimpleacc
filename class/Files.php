@@ -32,8 +32,6 @@ class Files extends \XoopsObject
 {
     /**
      * Constructor
-     *
-     * @param null
      */
     public function __construct()
     {
@@ -49,8 +47,6 @@ class Files extends \XoopsObject
 
     /**
      * @static function &getInstance
-     *
-     * @param null
      */
     public static function getInstance()
     {
@@ -62,7 +58,7 @@ class Files extends \XoopsObject
 
     /**
      * The new inserted $Id
-     * @return inserted id
+     * @return int
      */
     public function getNewInsertedIdFiles()
     {
@@ -189,7 +185,7 @@ class Files extends \XoopsObject
         $title = $this->isNew() ? '' : \_MA_WGSIMPLEACC_FILE_EDIT;
         // Get Theme Form
         \xoops_load('XoopsFormLoader');
-        $form = new \XoopsThemeForm($title, 'form', $action, 'post', true);
+        $form = new \XoopsThemeForm($title, 'form_getfiles', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
         // Form Table transactions
         $filTraid = $this->isNew() ? $traId : $this->getVar('fil_traid');
@@ -212,7 +208,7 @@ class Files extends \XoopsObject
             $extensions .= Utility::MimetypeToExtension($mimetype);
         }
         $fileUploadTray->addElement(new \XoopsFormLabel(\_MA_WGSIMPLEACC_FORM_UPLOAD_ALLOWEDMIME, $extensions));
-        $form->addElement($fileUploadTray, true);
+        $form->addElement($fileUploadTray);
         if (!$this->isNew()) {
             // Form Select filType
             $form->addElement(new \XoopsFormText(\_MA_WGSIMPLEACC_FILE_TYPE, 'fil_type', 20, 150, $this->getVar('fil_type')));

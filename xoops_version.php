@@ -27,7 +27,7 @@ $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 $modversion = [
     'name'                => \_MI_WGSIMPLEACC_NAME,
     'version'             => '1.3.2',
-    'module_status'       => 'RC2',
+    'module_status'       => 'RC3',
     'description'         => \_MI_WGSIMPLEACC_DESC,
     'author'              => 'Goffy - XOOPS Development Team',
     'author_mail'         => 'webmaster@wedega.com',
@@ -42,7 +42,7 @@ $modversion = [
     'release_date'        => '2023/03/11', // format: yyyy/mm/dd
     'manual'              => 'link to manual file',
     'manual_file'         => \XOOPS_URL . '/modules/wgsimpleacc/docs/install.txt',
-    'min_php'             => '7.4',
+    'min_php'             => '8.1',
     'min_xoops'           => '2.5.11 Stable',
     'min_admin'           => '1.2',
     'min_db'              => ['mysql' => '5.5', 'mysqli' => '5.5'],
@@ -91,7 +91,7 @@ $modversion['templates'] = [
     ['file' => 'wgsimpleacc_admin_tratemplates.tpl', 'description' => '', 'type' => 'admin'],
     ['file' => 'wgsimpleacc_admin_clients.tpl', 'description' => '', 'type' => 'admin'],
     // User templates
-    ['file' => 'wgsimpleacc_main_startmin.tpl', 'description' => ''],
+    ['file' => 'wgsimpleacc_main.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_accounts.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_allocations.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_assets.tpl', 'description' => ''],
@@ -114,7 +114,7 @@ $modversion['templates'] = [
     ['file' => 'wgsimpleacc_header.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_index.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_modal_calc.tpl', 'description' => ''],
-    ['file' => 'wgsimpleacc_navbar.tpl', 'description' => ''],
+    ['file' => 'wgsimpleacc_navbar_startmin.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_outputs.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_outtemplates.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_outtemplates_list.tpl', 'description' => ''],
@@ -130,6 +130,8 @@ $modversion['templates'] = [
     ['file' => 'wgsimpleacc_clients.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_clients_list.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_clients_item.tpl', 'description' => ''],
+    ['file' => 'wgsimpleacc_allocations_listcoll.tpl', 'description' => ''],
+    ['file' => 'wgsimpleacc_accounts_listcoll.tpl', 'description' => ''],
 ];
 // ------------------- Mysql ------------------- //
 $modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
@@ -155,6 +157,16 @@ $modversion['search'] = [
     'file' => 'include/search.inc.php',
     'func' => 'wgsimpleacc_search',
 ];
+$currdirname = isset($GLOBALS['xoopsModule']) && \is_object($GLOBALS['xoopsModule']) ? $GLOBALS['xoopsModule']->getVar('dirname') : 'system';
+
+if ($moduleDirName == $currdirname) {
+    $submenu = new \XoopsModules\Wgsimpleacc\Modulemenu;
+    $menuItems = $submenu->getMenuitemsDefault();
+    foreach ($menuItems as $key => $menuItem) {
+        $modversion['sub'][$key]['name'] = $menuItem['name'];
+        $modversion['sub'][$key]['url'] = $menuItem['url'];
+    }
+}
 // ------------------- Comments ------------------- //
 $modversion['hasComments'] = 1;
 $modversion['comments']['pageName'] = 'transactions.php';
@@ -164,6 +176,18 @@ $modversion['comments']['callbackFile'] = 'include/comment_functions.php';
 $modversion['comments']['callback'] = [
     'approve' => 'wgsimpleaccCommentsApprove',
     'update'  => 'wgsimpleaccCommentsUpdate',
+];
+// ------------------- Blocks ------------------- //
+
+// Albums default block
+$modversion['blocks'][] = [
+    'file'        => 'startminnav.php',
+    'name'        => \_MI_WGSIMPLEACC_STARTMIN_BLOCK,
+    'description' => \_MI_WGSIMPLEACC_STARTMIN_BLOCK_DESC,
+    'show_func'   => 'b_wgsimpleacc_startminnav_show',
+    'edit_func'   => '',
+    'template'    => 'wgsimpleacc_block_startminnav.tpl',
+    'options'     => 'startmin',
 ];
 // ------------------- Config ------------------- //
 // ------------------- Group header: General ------------------- //
@@ -366,6 +390,16 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'default'     => 1,
 ];
+// show startmin navigation
+$modversion['config'][] = [
+    'name'        => 'displayStartminNav',
+    'title'       => '\_MI_WGFILEMANAGER_SHOW_STARTMIN_NAV',
+    'description' => '\_MI_WGFILEMANAGER_SHOW_STARTMIN_NAV_DESC',
+    'formtype'    => 'select',
+    'valuetype'   => 'text',
+    'default'     => 'none',
+    'options'     => ['_MI_WGFILEMANAGER_SHOW_STARTMIN_NAV_NONE' => 'none', '_MI_WGFILEMANAGER_SHOW_STARTMIN_NAV_LEFT' => 'left'],
+];
 // ------------------- Group header: Formats ------------------- //
 $modversion['config'][] = [
     'name'        => 'group_formats',
@@ -548,6 +582,15 @@ $modversion['config'][] = [
     'name'        => 'use_files',
     'title'       => '_MI_WGSIMPLEACC_USE_FILES',
     'description' => '_MI_WGSIMPLEACC_USE_FILES_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0,
+];
+// use files additional
+$modversion['config'][] = [
+    'name'        => 'use_files_add',
+    'title'       => '_MI_WGSIMPLEACC_USE_FILES_ADD',
+    'description' => '_MI_WGSIMPLEACC_USE_FILES_ADD_DESC',
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
     'default'     => 0,

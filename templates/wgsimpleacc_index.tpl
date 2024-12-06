@@ -15,8 +15,9 @@
     }
 </style>
 
+<div class="row">
 <{if $indexTrahbar|default:0 > 0}>
-    <div class="col-sm-12 col-md-12 col-lg-6">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
         <div class="wgsa-index-panel">
             <h3 class="center"><{$header_transactions}></h3>
             <{include file='db:wgsimpleacc_chart_transactions_hbar.tpl'}>
@@ -25,7 +26,7 @@
 <{/if}>
 
 <{if $indexAssetsPie|default:0 > 0}>
-    <div class="col-sm-12 col-md-12 col-lg-6">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
         <div class="wgsa-index-panel">
             <h3 class="center"><{$assets_header}></h3>
             <{include file='db:wgsimpleacc_chart_assets_pie.tpl'}>
@@ -44,7 +45,7 @@
 <{/if}>
 
 <{if $indexAssetsPieTotal|default:0 > 0}>
-    <div class="col-sm-12 col-md-12 col-lg-6">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
         <div class="wgsa-index-panel">
             <h3 class="center"><{$assetsTotal_header}></h3>
             <{include file='db:wgsimpleacc_chart_assets_pietotal.tpl'}>
@@ -70,3 +71,4 @@
         </div>
     </div>
 <{/if}>
+</div>

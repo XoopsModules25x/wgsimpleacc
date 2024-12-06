@@ -74,7 +74,7 @@ class MigrateHelper
                 unset($lines[$key]);
             }
             // remove comment lines
-            if ('#' === \substr($line, 0, 1)) {
+            if (str_starts_with($line, '#')) {
                 unset($lines[$key]);
             }
         }
@@ -214,7 +214,7 @@ class MigrateHelper
         }
 
         $attributes = \trim(\str_replace([$name, '`'], '', $line));
-        if (',' == \substr($attributes, - 1)) {
+        if (str_ends_with($attributes, ',')) {
             $attributes = substr($attributes, 0, strlen($attributes) - 1);
         }
         $columns['name'] = $name;

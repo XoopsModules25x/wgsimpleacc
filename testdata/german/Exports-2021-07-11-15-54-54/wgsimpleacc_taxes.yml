@@ -1,0 +1,16 @@
+-
+    tax_id: '1'
+    tax_name: 'Ermäßigter Steuersatz Ö'
+    tax_rate: '10'
+    tax_online: '1'
+    tax_primary: '0'
+    tax_datecreated: '1600330052'
+    tax_submitter: '1'
+-
+    tax_id: '2'
+    tax_name: 'Allgemeiner Steuersatz Ö'
+    tax_rate: '20'
+    tax_online: '1'
+    tax_primary: '1'
+    tax_datecreated: '1600330065'
+    tax_submitter: '1'

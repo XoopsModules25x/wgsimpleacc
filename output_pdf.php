@@ -104,6 +104,7 @@ function execute_output ($template, $outParams)
     $title = $GLOBALS['xoopsConfig']['sitename'];
     //$subject = 'Pdf Subject';
 
+    $pdfData = [];
     // Read data from table and create pdfData
     $pdfData['date'] = $outParams['date'];
     $pdfData['author'] = $outParams['submitter'];

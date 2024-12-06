@@ -1,0 +1,250 @@
+-
+    gperm_groupid: '5'
+    gperm_itemid: '12'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '5'
+    gperm_itemid: '10'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '5'
+    gperm_itemid: '8'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '5'
+    gperm_itemid: '6'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '5'
+    gperm_itemid: '5'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '5'
+    gperm_itemid: '1'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '5'
+    gperm_itemid: '14'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '4'
+    gperm_itemid: '20'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '4'
+    gperm_itemid: '19'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '4'
+    gperm_itemid: '18'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '4'
+    gperm_itemid: '17'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '4'
+    gperm_itemid: '16'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '4'
+    gperm_itemid: '15'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '4'
+    gperm_itemid: '14'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '4'
+    gperm_itemid: '13'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '4'
+    gperm_itemid: '12'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '4'
+    gperm_itemid: '11'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '4'
+    gperm_itemid: '10'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '4'
+    gperm_itemid: '9'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '4'
+    gperm_itemid: '8'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '4'
+    gperm_itemid: '7'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '4'
+    gperm_itemid: '6'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '4'
+    gperm_itemid: '5'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '4'
+    gperm_itemid: '4'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '4'
+    gperm_itemid: '1'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '2'
+    gperm_itemid: '1'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '1'
+    gperm_itemid: '20'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '1'
+    gperm_itemid: '19'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '1'
+    gperm_itemid: '18'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '1'
+    gperm_itemid: '17'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '1'
+    gperm_itemid: '16'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '1'
+    gperm_itemid: '15'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '1'
+    gperm_itemid: '14'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '1'
+    gperm_itemid: '13'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '1'
+    gperm_itemid: '12'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '1'
+    gperm_itemid: '11'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '1'
+    gperm_itemid: '10'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '1'
+    gperm_itemid: '9'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '1'
+    gperm_itemid: '8'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '1'
+    gperm_itemid: '7'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '1'
+    gperm_itemid: '6'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '1'
+    gperm_itemid: '5'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '1'
+    gperm_itemid: '4'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '1'
+    gperm_itemid: '1'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '1'
+    gperm_itemid: '2'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '1'
+    gperm_itemid: '3'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '5'
+    gperm_itemid: '16'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '5'
+    gperm_itemid: '18'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '5'
+    gperm_itemid: '19'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac
+-
+    gperm_groupid: '5'
+    gperm_itemid: '20'
+    gperm_modid: '5'
+    gperm_name: wgsimpleacc_ac

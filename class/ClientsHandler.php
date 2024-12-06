@@ -66,7 +66,6 @@ class ClientsHandler extends \XoopsPersistableObjectHandler
     /**
      * get inserted id
      *
-     * @param null
      * @return int reference to the {@link Get} object
      */
     public function getInsertId()
@@ -106,12 +105,12 @@ class ClientsHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get Criteria Clients
-     * @param $crClients
-     * @param $start
-     * @param $limit
-     * @param $sort
-     * @param $order
-     * @return int
+     * @param \CriteriaCompo $crClients
+     * @param int $start
+     * @param int $limit
+     * @param string $sort
+     * @param string $order
+     * @return \CriteriaCompo
      */
     private function getClientsCriteria($crClients, $start, $limit, $sort, $order)
     {
@@ -124,7 +123,7 @@ class ClientsHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get All Clients in the database
-     * @param  $cliId
+     * @param  int $cliId
      * @return string
      */
     public function getClientFullAddress($cliId)

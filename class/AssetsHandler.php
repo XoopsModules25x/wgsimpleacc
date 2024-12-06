@@ -64,7 +64,6 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
     /**
      * get inserted id
      *
-     * @param null
      * @return int reference to the {@link Get} object
      */
     public function getInsertId()
@@ -104,12 +103,12 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get Criteria Assets
-     * @param $crAssets
-     * @param $start
-     * @param $limit
-     * @param $sort
-     * @param $order
-     * @return int
+     * @param \CriteriaCompo $crAssets
+     * @param int $start
+     * @param int $limit
+     * @param string $sort
+     * @param string $order
+     * @return \CriteriaCompo
      */
     private function getAssetsCriteria($crAssets, $start, $limit, $sort, $order)
     {
@@ -190,8 +189,8 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get value of all assets for a period
-     * @param      $dateFrom
-     * @param      $dateTo
+     * @param int  $dateFrom
+     * @param int  $dateTo
      * @param bool $includeSum
      * @param bool $onlyApproved
      * @return array

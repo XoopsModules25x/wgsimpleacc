@@ -7,7 +7,7 @@
             <{/foreach}>
         <{else}>
             <div class="col-sm-12">
-                <a id="toggleFormFilter" class='btn btn-default pull-right' href='#' title='<{$btnfilter}>'><{$btnfilter}></a>
+                <a id="toggleFormFilter" class='btn btn-secondary pull-right' href='#' title='<{$btnfilter}>'><{$btnfilter}></a>
             </div>
             <{if $formFilter|default:''}>
                 <div id="formFilter" class="row" style="display:<{$displayfilter|default:''}>">
@@ -62,7 +62,7 @@
     <{else}>
         <div class="row">
             <div class="col-sm-12">
-                <a id="toggleFormFilter" class='btn btn-default pull-right' href='#' title='<{$btnfilter}>'><{$btnfilter}></a>
+                <a id="toggleFormFilter" class='btn btn-secondary pull-right' href='#' title='<{$btnfilter}>'><{$btnfilter}></a>
             </div>
         </div>
         <{if $formFilter|default:''}>

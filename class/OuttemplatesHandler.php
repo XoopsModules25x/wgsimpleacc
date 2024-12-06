@@ -64,7 +64,6 @@ class OuttemplatesHandler extends \XoopsPersistableObjectHandler
     /**
      * get inserted id
      *
-     * @param null
      * @return int reference to the {@link Get} object
      */
     public function getInsertId()
@@ -104,12 +103,12 @@ class OuttemplatesHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get Criteria Outtemplates
-     * @param        $crOuttemplates
+     * @param \CriteriaCompo $crOuttemplates
      * @param int    $start
      * @param int    $limit
      * @param string $sort
      * @param string $order
-     * @return int
+     * @return \CriteriaCompo
      */
     private function getOuttemplatesCriteria($crOuttemplates, $start, $limit, $sort, $order)
     {
@@ -257,7 +256,7 @@ class OuttemplatesHandler extends \XoopsPersistableObjectHandler
 
     /**
      * @public function to get output
-     * @param $traId
+     * @param int $traId
      * @return array
      */
     public function getOutParams($traId) {

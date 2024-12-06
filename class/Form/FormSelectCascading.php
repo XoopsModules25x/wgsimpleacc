@@ -184,7 +184,7 @@ class FormSelectCascading extends \XoopsFormSelect
     /**
      * Get custom options of select
      *
-     * @param array $value
+     * @return array
      */
     public function getCustomOptions() {
         return $this->custom_options;

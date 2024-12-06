@@ -13,11 +13,11 @@
     <{$formFilter}>
  <{/if}>
 <{if $tra_allocs_level > 2}>
-	<a class='btn btn-default ' href='index.php?op=list&amp;all_pid=0&amp;level=1<{$filter}>' title='<{$alloc.all_name}>'>...
+	<a class='btn btn-secondary ' href='index.php?op=list&amp;all_pid=0&amp;level=1<{$filter}>' title='<{$alloc.all_name}>'>...
 	</a>
 <{/if}>
 <{foreach item=alloc from=$tra_allocs_list}>
-	<a class='btn btn-default <{if $alloc.allSubs == 1}>disabled<{/if}>' href='index.php?op=list&amp;all_pid=<{$alloc.all_id}>&amp;level=<{$tra_allocs_level}><{$filter}>' title='<{$alloc.all_name}>'>
+	<a class='btn btn-secondary <{if $alloc.allSubs == 1}>disabled<{/if}>' href='index.php?op=list&amp;all_pid=<{$alloc.all_id}>&amp;level=<{$tra_allocs_level}><{$filter}>' title='<{$alloc.all_name}>'>
 		<{$alloc.all_name}>
 		<{if $alloc.allSubs > 1}>
         <i class="fa fa-angle-double-down"></i>
