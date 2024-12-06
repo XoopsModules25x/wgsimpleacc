@@ -324,7 +324,7 @@ class Modulemenu
                 $nav_items1[] = ['href' => '#', 'icon' => '<i class="fa fa-bar-chart-o fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_STATISTICS, 'sublinks' => $nav_items2];
             }
         }
-        if ($permissionsHandler->getPermFileDirView()) {
+        if ($permissionsHandler->getPermFileDirView() && $helper->getConfig('use_files_add')) {
             $nav_items2 = [];
             if ($permissionsHandler->getPermFileDirSubmit()) {
                 $nav_items2[] = ['href' => 'files.php?op=filedir_list', 'icon' => '<i class="fa fa-list-ol fa-fw fa-lg"></i>', 'label' => \_MA_WGSIMPLEACC_FILES_LIST, 'sub_items3' => []];
@@ -763,7 +763,7 @@ class Modulemenu
             }
         }
 
-        if ($permissionsHandler->getPermFileDirView()) {
+        if ($permissionsHandler->getPermFileDirView() && $helper->getConfig('use_files_add')) {
             $nav_items2 = [];
             if ($permissionsHandler->getPermFileDirSubmit()) {
                 $nav_items2[] = [

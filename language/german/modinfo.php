@@ -89,6 +89,8 @@ require_once __DIR__ . '/common.php';
 \define('_MI_WGSIMPLEACC_USE_TAXES_DESC', 'Bitte definieren Sie, ob Sie Steuerarten verwenden wollen');
 \define('_MI_WGSIMPLEACC_USE_FILES', 'Dateisystem verwenden');
 \define('_MI_WGSIMPLEACC_USE_FILES_DESC', 'Bitte definieren Sie, ob Sie die Möglichkeit zum Hinzufügen von Dateien zu Transaktionen verwenden wollen');
+\define('_MI_WGSIMPLEACC_USE_FILES_ADD', 'Zusaätzliches Dateisystem verwenden');
+\define('_MI_WGSIMPLEACC_USE_FILES_ADD_DESC', 'Bitte definieren Sie, ob Sie die einfache Dateiverwaltung verwenden möchten, mit der Sie Dateien ohne Bezug zu speziellen Transaktionen hinzufügen können');
 \define('_MI_WGSIMPLEACC_USE_CLIENTS', 'Klientensystem verwenden');
 \define('_MI_WGSIMPLEACC_USE_CLIENTS_DESC', 'Bitte definieren Sie, ob Sie die Möglichkeit zum Verwendung von Klienten verwenden wollen');
 \define('_MI_WGSIMPLEACC_USE_TRAHISTORY', 'Historie Transaktionen verwenden');

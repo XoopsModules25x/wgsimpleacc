@@ -89,6 +89,8 @@ require_once __DIR__ . '/common.php';
 \define('_MI_WGSIMPLEACC_USE_TAXES_DESC', 'Please define whether you want use taxes');
 \define('_MI_WGSIMPLEACC_USE_FILES', 'Use file system');
 \define('_MI_WGSIMPLEACC_USE_FILES_DESC', 'Please define whether you want use the possibility to add files to your transactions');
+\define('_MI_WGSIMPLEACC_USE_FILES_ADD', 'Use additional file system');
+\define('_MI_WGSIMPLEACC_USE_FILES_ADD_DESC', 'Please define whether you want use the simple filemanager to add files with no link to specific transaction');
 \define('_MI_WGSIMPLEACC_USE_CLIENTS', 'Use clients system');
 \define('_MI_WGSIMPLEACC_USE_CLIENTS_DESC', 'Please define whether you want use the possibility to handle client data');
 \define('_MI_WGSIMPLEACC_USE_TRAHISTORY', 'Use transaction histories');

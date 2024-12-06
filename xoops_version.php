@@ -586,6 +586,15 @@ $modversion['config'][] = [
     'valuetype'   => 'int',
     'default'     => 0,
 ];
+// use files additional
+$modversion['config'][] = [
+    'name'        => 'use_files_add',
+    'title'       => '_MI_WGSIMPLEACC_USE_FILES_ADD',
+    'description' => '_MI_WGSIMPLEACC_USE_FILES_ADD_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0,
+];
 // use clients
 $modversion['config'][] = [
     'name'        => 'use_clients',
