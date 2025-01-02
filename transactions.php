@@ -73,7 +73,7 @@ if ('listhist' === $op || 'showhist' === $op) {
 if (Request::hasVar('filterFrom')) {
     $dateFrom = \DateTime::createFromFormat(\_SHORTDATESTRING, Request::getString('filterFrom'))->getTimestamp();
 }
-$dateTo = Request::getInt('dateTo', \time());
+$dateTo = Request::getInt('dateTo', \time() + 60*60*24*365);
 if (Request::hasVar('filterTo')) {
     $dateTo = \DateTime::createFromFormat(\_SHORTDATESTRING, Request::getString('filterTo'))->getTimestamp();
 }
