@@ -33,6 +33,7 @@ CREATE TABLE `wgsimpleacc_transactions` (
   `tra_balid`       INT(10)         NOT NULL DEFAULT '0',
   `tra_balidt`      INT(10)         NOT NULL DEFAULT '0',
   `tra_hist`        INT(1)          NOT NULL DEFAULT '0',
+  `tra_processing`  INT(1)          NOT NULL DEFAULT '0',
   `tra_datecreated` INT(10)         NOT NULL DEFAULT '0',
   `tra_submitter`   INT(10)         NOT NULL DEFAULT '0',
   PRIMARY KEY (`tra_id`)
@@ -68,6 +69,7 @@ CREATE TABLE `wgsimpleacc_trahistories` (
   `tra_balid`        INT(10)         NOT NULL DEFAULT '0',
   `tra_balidt`       INT(10)         NOT NULL DEFAULT '0',
   `tra_hist`         INT(1)          NOT NULL DEFAULT '0',
+  `tra_processing`   INT(1)          NOT NULL DEFAULT '0',
   `tra_datecreated`  INT(10)         NOT NULL DEFAULT '0',
   `tra_submitter`    INT(10)         NOT NULL DEFAULT '0',
   PRIMARY KEY (`hist_id`)
@@ -275,4 +277,21 @@ CREATE TABLE `wgsimpleacc_clients` (
   `cli_datecreated` INT(10)         NOT NULL DEFAULT '0',
   `cli_submitter`   INT(10)         NOT NULL DEFAULT '0',
   PRIMARY KEY (`cli_id`)
+) ENGINE=InnoDB;
+
+#
+# Structure table for `wgsimpleacc_processing` 8
+#
+
+CREATE TABLE `wgsimpleacc_processing` (
+   `pro_id`          INT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
+   `pro_text`        VARCHAR(255)    NOT NULL DEFAULT '',
+   `pro_income`      INT(1)          NOT NULL DEFAULT '0',
+   `pro_expenses`    INT(1)          NOT NULL DEFAULT '0',
+   `pro_weight`      INT(1)          NOT NULL DEFAULT '0',
+   `pro_online`      INT(1)          NOT NULL DEFAULT '0',
+   `pro_default`     INT(1)          NOT NULL DEFAULT '0',
+   `pro_datecreated` INT(10)         NOT NULL DEFAULT '0',
+   `pro_submitter`   INT(10)         NOT NULL DEFAULT '0',
+   PRIMARY KEY (`pro_id`)
 ) ENGINE=InnoDB;

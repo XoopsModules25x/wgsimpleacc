@@ -120,6 +120,7 @@ switch ($op) {
         $transactionsObj->setVar('tra_comments', Request::getInt('tra_comments'));
         $transactionsObj->setVar('tra_class', $traClass);
         $transactionsObj->setVar('tra_hist', Request::getInt('tra_hist'));
+        $transactionsObj->setVar('tra_processing', Request::getInt('tra_processing'));
         $transactionDatecreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('tra_datecreated'));
         $transactionsObj->setVar('tra_datecreated', $transactionDatecreatedObj->getTimestamp());
         $transactionsObj->setVar('tra_submitter', Request::getInt('tra_submitter'));

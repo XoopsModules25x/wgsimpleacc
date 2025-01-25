@@ -504,3 +504,26 @@ require_once __DIR__ . '/admin.php';
 // Admin link
 \define('_MA_WGSIMPLEACC_ADMIN', 'Admin');
 // ---------------- End ----------------
+// version 1.3.3
+\define('_MA_WGSIMPLEACC_THEREARENT_PROCESSING', 'Es gibt derzeit keine Verarbeitungsschritte in der Datenbank');
+//Transaction
+\define('_MA_WGSIMPLEACC_TRANSACTION_PROCESSING', 'Weitere Verarbeitung');
+// Processing
+\define('_MA_WGSIMPLEACC_PROCESSING', 'Verarbeitungsschritte');
+\define('_MA_WGSIMPLEACC_PROCESSING_NEXT', 'Weitere Verarbeitung');
+\define('_MA_WGSIMPLEACC_PROCESSING_LIST', 'Liste der Verarbeitungsschritte');
+// Processing add/edit
+\define('_MA_WGSIMPLEACC_PROCESSING_ADD', 'Verarbeitungsschritt hinzufügen');
+\define('_MA_WGSIMPLEACC_PROCESSING_EDIT', 'Verarbeitungsschritt bearbeiten');
+\define('_MA_WGSIMPLEACC_PROCESSING_DETAILS', 'Details für Verarbeitungsschritt');
+// Elements of Processing
+\define('_MA_WGSIMPLEACC_PROCESSING_ID', 'Id');
+\define('_MA_WGSIMPLEACC_PROCESSING_TEXT', 'Text');
+\define('_MA_WGSIMPLEACC_PROCESSING_INCOME', 'Einnahmen');
+\define('_MA_WGSIMPLEACC_PROCESSING_EXPENSES', 'Ausgaben');
+\define('_MA_WGSIMPLEACC_PROCESSING_WEIGHT', 'Reihung');
+\define('_MA_WGSIMPLEACC_PROCESSING_ONLINE', 'Online');
+\define('_MA_WGSIMPLEACC_PROCESSING_DEFAULT', 'Standardwert');
+\define('_MA_WGSIMPLEACC_PROCESSING_ONOFF', 'Wechsle On-/Offline');
+//Errors
+\define('_MA_WGSIMPLEACC_ERROR_SAVE', 'Fehler beim Speichern');

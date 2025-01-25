@@ -289,6 +289,7 @@ switch ($op) {
             $GLOBALS['xoopsTpl']->assign('useTaxes', $helper->getConfig('use_taxes'));
             $GLOBALS['xoopsTpl']->assign('useFiles', $helper->getConfig('use_files'));
             $GLOBALS['xoopsTpl']->assign('useClients', $helper->getConfig('use_clients'));
+            $GLOBALS['xoopsTpl']->assign('useProcessing', $helper->getConfig('use_processing'));
             $GLOBALS['xoopsTpl']->assign('modPathIcon32', \WGSIMPLEACC_URL . '/' . $GLOBALS['xoopsModule']->getInfo('modicons32') . '/');
 
         } else {
@@ -382,6 +383,7 @@ switch ($op) {
         $transactionsObj->setVar('tra_comments', Request::getInt('tra_comments'));
         $transactionsObj->setVar('tra_class', $traClass);
         $transactionsObj->setVar('tra_hist', $traHist);
+        $transactionsObj->setVar('tra_processing', Request::getInt('tra_processing'));
         $transactionsObj->setVar('tra_datecreated', Request::getInt('tra_datecreated'));
         $transactionsObj->setVar('tra_submitter', Request::getInt('tra_submitter'));
         // Insert Data

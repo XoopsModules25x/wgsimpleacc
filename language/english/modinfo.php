@@ -186,3 +186,7 @@ require_once __DIR__ . '/common.php';
 // Blocks
 \define('_MI_WGSIMPLEACC_STARTMIN_BLOCK', 'Block Startmin Navigation');
 \define('_MI_WGSIMPLEACC_STARTMIN_BLOCK_DESC', 'Block for displaying startmin navigation menu');
+// version 1.3.3
+\define('_MI_WGSIMPLEACC_ADMENU17', 'Processing steps');
+\define('_MI_WGSIMPLEACC_USE_PROCESSING', 'Use Processing steps');
+\define('_MI_WGSIMPLEACC_USE_PROCESSING_DESC', 'This option make sense if the one who is adding a transaction is not the same as the one who is executing the next steps, e.g. the one is creates a transaction with an invoice and the other one should pay to invoice creator or to transaction submitter');

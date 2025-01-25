@@ -65,6 +65,9 @@ wgsimpleacc_transactions:
             name: tra_hist
             attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
         -
+            name: tra_processing
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
             name: tra_datecreated
             attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
         -
@@ -151,6 +154,9 @@ wgsimpleacc_trahistories:
             attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
         -
             name: tra_hist
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: tra_processing
             attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
         -
             name: tra_datecreated
@@ -583,4 +589,38 @@ wgsimpleacc_clients:
     keys:
         PRIMARY:
             columns: cli_id
+            unique: true
+wgsimpleacc_processing:
+    options: 'ENGINE=InnoDB'
+    columns: 
+        -
+            name: pro_id
+            attributes: ' INT(8) UNSIGNED NOT NULL AUTO_INCREMENT '
+        -
+            name: pro_text
+            attributes: ' VARCHAR(255)    NOT NULL DEFAULT '''''''' '
+        -
+            name: pro_income
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: pro_expenses
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: pro_weight
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: pro_online
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: pro_default
+            attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
+        -
+            name: pro_datecreated
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+        -
+            name: pro_submitter
+            attributes: ' INT(10)         NOT NULL DEFAULT ''0'' '
+    keys:
+        PRIMARY:
+            columns: pro_id
             unique: true

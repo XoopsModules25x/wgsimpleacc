@@ -108,6 +108,13 @@ if ($helper->getConfig('use_clients')) {
         'icon' => 'assets/icons/32/clients.png',
     ];
 }
+if ($helper->getConfig('use_processing')) {
+    $adminmenu[] = [
+        'title' => \_MI_WGSIMPLEACC_ADMENU17,
+        'link' => 'admin/processing.php',
+        'icon' => 'assets/icons/32/processing.png',
+    ];
+}
 $adminmenu[] = [
     'title' => \_MI_WGSIMPLEACC_ADMENU12,
     'link' => 'admin/permissions.php',

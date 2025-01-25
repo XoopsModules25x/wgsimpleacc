@@ -43,6 +43,12 @@
                 <th><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_AMOUNT}></th>
                 <td><{$transaction.curid}> <{$transaction.amount}></td>
             </tr>
+            <{if $useProcessing|default:''}>
+                <tr>
+                    <th><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_PROCESSING}></th>
+                    <td><{$transaction.pro_text}></td>
+                </tr>
+                <{/if}>
             <{if $showAssets|default:''}>
                 <tr>
                     <th><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_ASID}></th>
@@ -50,10 +56,10 @@
                 </tr>
             <{/if}>
             <{if $useTaxes|default:''}>
-            <tr>
-                <th><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_TAXID}></th>
-                <td><{$transaction.taxrate}></td>
-            </tr>
+                <tr>
+                    <th><{$smarty.const._MA_WGSIMPLEACC_TRANSACTION_TAXID}></th>
+                    <td><{$transaction.taxrate}></td>
+                </tr>
             <{/if}>
             <{if $useFiles|default:''}>
                 <{if $transaction.nbfiles > 0}>

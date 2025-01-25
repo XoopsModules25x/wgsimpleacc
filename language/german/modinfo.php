@@ -185,3 +185,7 @@ require_once __DIR__ . '/common.php';
 // Blocks
 \define('_MI_WGSIMPLEACC_STARTMIN_BLOCK', 'Block Startmin Navigation');
 \define('_MI_WGSIMPLEACC_STARTMIN_BLOCK_DESC', 'Block zur Anzeige des Startmin Navigation Menüs');
+// version 1.3.3
+\define('_MI_WGSIMPLEACC_ADMENU17', 'Weitere Verarbeitung');
+\define('_MI_WGSIMPLEACC_USE_PROCESSING', 'Verwende Verarbeitungsschritte');
+\define('_MI_WGSIMPLEACC_USE_PROCESSING_DESC', 'Diese Option macht Sinn wenn eine Person die Transakation erfasst und eine andere Person die weiteren Aktionen setzt, z.B. der eine erfasst eine Transaktion mit einer Rechnung, und eine andere Person soll nun die Rechnung bezahlten oder den Rechnungsbetrag an den Transaktionsersteller überweisen.');

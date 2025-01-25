@@ -50,6 +50,7 @@ $outtemplatesHandler = $helper->getHandler('Outtemplates');
 $outputsHandler = $helper->getHandler('Outputs');
 $trahistoriesHandler = $helper->getHandler('Trahistories');
 $clientsHandler = $helper->getHandler('Clients');
+$processingHandler = $helper->getHandler('Processing');
 // 
 $myts = MyTextSanitizer::getInstance();
 
