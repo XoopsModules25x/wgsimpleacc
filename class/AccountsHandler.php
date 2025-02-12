@@ -136,7 +136,7 @@ class AccountsHandler extends \XoopsPersistableObjectHandler
             $crItemClass->add(new \Criteria('acc_classification', Constants::CLASS_BOTH), 'OR');
             $crItems->add($crItemClass);
         }
-        $crItems->setSort('acc_weight ASC, acc_key');
+        $crItems->setSort('acc_key ASC, acc_weight');
         $crItems->setOrder('ASC');
         $accountsCount = $this->getCount($crItems);
         $accountsAll   = $this->getAll($crItems);
