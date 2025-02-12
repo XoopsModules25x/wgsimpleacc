@@ -342,7 +342,10 @@ switch ($op) {
         }
         $filePath = \XOOPS_ROOT_PATH . '/uploads/wgsimpleacc/files/' . $filName;
         if ('' === $filName) {
-            \redirect_header('files.php?op=list&fil_traid=' . $filTraid, 5, \_MA_WGSIMPLEACC_FILES_UPLOAD_ERROR);
+            if ('' === $uploaderErrors) {
+                $uploaderErrors = \_MA_WGSIMPLEACC_FILES_UPLOAD_ERROR;
+            }
+            \redirect_header('files.php?op=list&fil_traid=' . $filTraid, 5, $uploaderErrors);
         }
         $fileMimetype   = \mime_content_type($filePath);
         $filesObj->setVar('fil_type', $fileMimetype);
