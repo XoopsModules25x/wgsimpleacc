@@ -3,6 +3,7 @@
 ==============================================================
  - added feature for next processing steps (goffy)
  - updated test data (goffy)
+ - added option to use/not use assets in balances (goffy)
 
 ==============================================================
 1.3.2 RC3 [2024/01/21]

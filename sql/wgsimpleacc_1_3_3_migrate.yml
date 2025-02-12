@@ -193,6 +193,9 @@ wgsimpleacc_assets:
             name: as_online
             attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
         -
+            name: as_balance
+            attributes: ' INT(1)          NOT NULL DEFAULT ''1'' '
+        -
             name: as_primary
             attributes: ' INT(1)          NOT NULL DEFAULT ''0'' '
         -

@@ -87,6 +87,7 @@ CREATE TABLE `wgsimpleacc_assets` (
   `as_color`        VARCHAR(7)      NOT NULL DEFAULT '',
   `as_iecalc`       INT(1)          NOT NULL DEFAULT '0',
   `as_online`       INT(1)          NOT NULL DEFAULT '0',
+  `as_balance`      INT(1)          NOT NULL DEFAULT '1',
   `as_primary`      INT(1)          NOT NULL DEFAULT '0',
   `as_datecreated`  INT(11)         NOT NULL DEFAULT '0',
   `as_submitter`    INT(10)         NOT NULL DEFAULT '0',

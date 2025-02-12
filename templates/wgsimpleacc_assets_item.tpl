@@ -23,6 +23,13 @@
                 <img src="<{$wgsimpleacc_icons_url_32}>/0.png" alt="<{$asset.online}>">
             <{/if}>
         </td>
+        <td class="center">
+            <{if $asset.as_balance|default:0 == 1}>
+                <img src="<{$wgsimpleacc_icons_url_32}>/1.png" alt="<{$asset.balance}>">
+            <{else}>
+                <img src="<{$wgsimpleacc_icons_url_32}>/0.png" alt="<{$asset.balance}>">
+            <{/if}>
+        </td>
     <{/if}>
     <td>
         <{if $permSubmit}>

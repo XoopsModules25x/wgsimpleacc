@@ -205,6 +205,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_ASSET_IECALC', 'Use for income/expenses');
 \define('_MA_WGSIMPLEACC_ASSET_IECALC_DESC', 'Use this assets for assigning to income or expenses');
 \define('_MA_WGSIMPLEACC_ASSET_ONLINE', 'Online');
+\define('_MA_WGSIMPLEACC_ASSET_BALANCE', 'Use for balances');
 \define('_MA_WGSIMPLEACC_ASSET_PRIMARY', 'Primary');
 \define('_MA_WGSIMPLEACC_ASSET_ERR_DELETE', 'Deleting asset not possible!<br>Assert is defined as primary!<br>Please define another asset as primary first');
 //Charts

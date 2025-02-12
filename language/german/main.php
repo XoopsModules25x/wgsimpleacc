@@ -205,6 +205,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_ASSET_IECALC', 'Verwendung Einnahmen/Ausgaben');
 \define('_MA_WGSIMPLEACC_ASSET_IECALC_DESC', 'Verwendung für die Zuweisung bei Einnahmen oder Ausgaben');
 \define('_MA_WGSIMPLEACC_ASSET_ONLINE', 'Online');
+\define('_MA_WGSIMPLEACC_ASSET_BALANCE', 'Für Abschlüsse verwenden');
 \define('_MA_WGSIMPLEACC_ASSET_PRIMARY', 'Primär');
 \define('_MA_WGSIMPLEACC_ASSET_ERR_DELETE', 'Löschen des Vermögenswertes nicht zulässig!<br>Der Vermögenswert wurde als primär definiert!<br>Bitte zuerst einen anderen Vermögenswert als primär definieren');
 //Charts

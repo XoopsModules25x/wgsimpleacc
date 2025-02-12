@@ -214,6 +214,8 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
             $asName = $assetsAll[$i]->getVar('as_name');
             $asColor = $assetsAll[$i]->getVar('as_color');
             $asIecalc = $assetsAll[$i]->getVar('as_iecalc');
+            $asBalance = $assetsAll[$i]->getVar('as_balance');
+
             $crBalances = new \CriteriaCompo();
             $crBalances->add(new \Criteria('bal_asid', $asId));
             $crBalances->add(new \Criteria('bal_to', $dateFrom, '<'));
@@ -264,6 +266,7 @@ class AssetsHandler extends \XoopsPersistableObjectHandler
                 'curid' => $balCurid,
                 'color' => $asColor,
                 'iecalc' => $asIecalc,
+                'balance' => $asBalance,
             ];
         }
         if ($includeSum) {
