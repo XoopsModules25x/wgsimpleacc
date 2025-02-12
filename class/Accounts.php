@@ -151,7 +151,7 @@ class Accounts extends \XoopsObject
             $form->addElement(new \XoopsFormHidden('acc_level', $accLevel));
         }
         // Form Text accWeight
-        $accWeight = $this->isNew() ? 99 : $this->getVar('acc_weight');
+        $accWeight = $this->isNew() ? 9999 : $this->getVar('acc_weight');
         // Form Text Date Select accDatecreated
         $accDatecreated = $this->isNew() ? \time() : $this->getVar('acc_datecreated');
         // Form Select User accSubmitter

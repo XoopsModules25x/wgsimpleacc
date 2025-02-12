@@ -157,13 +157,17 @@ switch ($op) {
         $accountsObj->setVar('acc_online', Request::getInt('acc_online'));
         $accountsObj->setVar('acc_allocations', \serialize(Request::getArray('acc_allocations')));
         $level = 1;
+        $accWeight = Request::getInt('acc_weight');
         if ($accPid > 0) {
             $accParentObj = $accountsHandler->get($accPid);
             $level = $accParentObj->getVar('acc_level') + 1;
+            if (9999 === $accWeight) {
+                $accWeight = $accParentObj->getVar('acc_weight');
+            }
         }
         unset($accParentObj);
-        $accountsObj->setVar('acc_level', Request::getInt('acc_level'));
-        $accountsObj->setVar('acc_weight', Request::getInt('acc_weight'));
+        $accountsObj->setVar('acc_level', $level);
+        $accountsObj->setVar('acc_weight', $accWeight);
         $accountsObj->setVar('acc_datecreated', \time());
         $accountsObj->setVar('acc_submitter', Request::getInt('acc_submitter'));
         // Insert Data
