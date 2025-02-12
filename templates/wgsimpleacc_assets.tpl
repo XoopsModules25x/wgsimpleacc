@@ -12,6 +12,7 @@
                 <{if $permSubmit}>
                     <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ASSET_IECALC}></th>
                     <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ASSET_ONLINE}></th>
+                    <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ASSET_BALANCE}></th>
                 <{/if}>
                 <th></th>
             </tr>

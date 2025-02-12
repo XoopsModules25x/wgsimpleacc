@@ -274,7 +274,8 @@ if ($indexAssetsPieTotal) {
         $pcolors = [];
         $assetList = [];
         foreach ($assetsCurrent as $asset) {
-            if (1 === (int)$asset['iecalc'] && (float)$asset['amount_val'] > 0) {
+            //if (1 === (int)$asset['iecalc'] && (float)$asset['amount_val'] <> 0) {
+            if (1 === (int)$asset['iecalc']) {
                 $assets_data .= $asset['amount_val'] . ',';
                 $assets_labels .= "'" . $asset['name'] . "',";
                 $assets_total += $asset['amount_val'];

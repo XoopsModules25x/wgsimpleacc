@@ -205,6 +205,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_ASSET_IECALC', 'Use for income/expenses');
 \define('_MA_WGSIMPLEACC_ASSET_IECALC_DESC', 'Use this assets for assigning to income or expenses');
 \define('_MA_WGSIMPLEACC_ASSET_ONLINE', 'Online');
+\define('_MA_WGSIMPLEACC_ASSET_BALANCE', 'Use for balances');
 \define('_MA_WGSIMPLEACC_ASSET_PRIMARY', 'Primary');
 \define('_MA_WGSIMPLEACC_ASSET_ERR_DELETE', 'Deleting asset not possible!<br>Assert is defined as primary!<br>Please define another asset as primary first');
 //Charts
@@ -504,3 +505,26 @@ require_once __DIR__ . '/admin.php';
 // Admin link
 \define('_MA_WGSIMPLEACC_ADMIN', 'Admin');
 // ---------------- End ----------------
+// version 1.3.3
+\define('_MA_WGSIMPLEACC_THEREARENT_PROCESSING', "There aren't processing steps at the moment");
+//Transaction
+\define('_MA_WGSIMPLEACC_TRANSACTION_PROCESSING', 'Next Processing');
+// Processing
+\define('_MA_WGSIMPLEACC_PROCESSING', 'Processing steps');
+\define('_MA_WGSIMPLEACC_PROCESSING_NEXT', 'Next Processing');
+\define('_MA_WGSIMPLEACC_PROCESSING_LIST', 'List of Processing steps');
+// Processing add/edit
+\define('_MA_WGSIMPLEACC_PROCESSING_ADD', 'Add Processing steps');
+\define('_MA_WGSIMPLEACC_PROCESSING_EDIT', 'Edit Processing steps');
+\define('_MA_WGSIMPLEACC_PROCESSING_DETAILS', 'Details for Processing steps');
+// Elements of Processing
+\define('_MA_WGSIMPLEACC_PROCESSING_ID', 'Id');
+\define('_MA_WGSIMPLEACC_PROCESSING_TEXT', 'Text');
+\define('_MA_WGSIMPLEACC_PROCESSING_INCOME', 'Income');
+\define('_MA_WGSIMPLEACC_PROCESSING_EXPENSES', 'Expenses');
+\define('_MA_WGSIMPLEACC_PROCESSING_WEIGHT', 'Weight');
+\define('_MA_WGSIMPLEACC_PROCESSING_ONLINE', 'Online');
+\define('_MA_WGSIMPLEACC_PROCESSING_DEFAULT', 'Default');
+\define('_MA_WGSIMPLEACC_PROCESSING_ONOFF', 'Change On-/Offline');
+//Errors
+\define('_MA_WGSIMPLEACC_ERROR_SAVE', 'Error when saving data');

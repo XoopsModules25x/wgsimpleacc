@@ -60,6 +60,7 @@ class Trahistories extends \XoopsObject
         $this->initVar('tra_balid', \XOBJ_DTYPE_INT);
         $this->initVar('tra_balidt', \XOBJ_DTYPE_INT);
         $this->initVar('tra_hist', \XOBJ_DTYPE_TXTBOX);
+        $this->initVar('tra_processing', \XOBJ_DTYPE_INT);
         $this->initVar('tra_datecreated', \XOBJ_DTYPE_INT);
         $this->initVar('tra_submitter', \XOBJ_DTYPE_INT);
     }
@@ -161,6 +162,7 @@ class Trahistories extends \XoopsObject
         $ret['balid']           = $this->getVar('tra_balid');
         $ret['balidt']          = $this->getVar('tra_balidt');
         $ret['hist']            = $this->getVar('tra_hist');
+        $ret['processing']      = $this->getVar('tra_processing');
         $ret['datecreated']     = \formatTimestamp($this->getVar('tra_datecreated'), _SHORTDATESTRING);
         $ret['datetimecreated'] = \formatTimestamp($this->getVar('tra_datecreated'), _DATESTRING);
         $ret['submitter']       = \XoopsUser::getUnameFromId($this->getVar('tra_submitter'));

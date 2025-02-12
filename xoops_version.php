@@ -26,8 +26,8 @@ $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 // ------------------- Informations ------------------- //
 $modversion = [
     'name'                => \_MI_WGSIMPLEACC_NAME,
-    'version'             => '1.3.2',
-    'module_status'       => 'RC3',
+    'version'             => '1.3.3',
+    'module_status'       => 'RC1',
     'description'         => \_MI_WGSIMPLEACC_DESC,
     'author'              => 'Goffy - XOOPS Development Team',
     'author_mail'         => 'webmaster@wedega.com',
@@ -90,6 +90,7 @@ $modversion['templates'] = [
     ['file' => 'wgsimpleacc_admin_trahistories.tpl', 'description' => '', 'type' => 'admin'],
     ['file' => 'wgsimpleacc_admin_tratemplates.tpl', 'description' => '', 'type' => 'admin'],
     ['file' => 'wgsimpleacc_admin_clients.tpl', 'description' => '', 'type' => 'admin'],
+    ['file' => 'wgsimpleacc_admin_processing.tpl', 'description' => '', 'type' => 'admin'],
     // User templates
     ['file' => 'wgsimpleacc_main.tpl', 'description' => ''],
     ['file' => 'wgsimpleacc_accounts.tpl', 'description' => ''],
@@ -150,6 +151,7 @@ $modversion['tables'] = [
     'wgsimpleacc_outtemplates',
     'wgsimpleacc_tratemplates',
     'wgsimpleacc_clients',
+    'wgsimpleacc_processing',
 ];
 // ------------------- Search ------------------- //
 $modversion['hasSearch'] = 1;
@@ -627,6 +629,15 @@ $modversion['config'][] = [
     'name'        => 'use_cascadingacc',
     'title'       => '_MI_WGSIMPLEACC_USE_CASCADINGACC',
     'description' => '_MI_WGSIMPLEACC_USE_CASCADINGACC_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 0,
+];
+// use processing steps
+$modversion['config'][] = [
+    'name'        => 'use_processing',
+    'title'       => '_MI_WGSIMPLEACC_USE_PROCESSING',
+    'description' => '_MI_WGSIMPLEACC_USE_PROCESSING_DESC',
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
     'default'     => 0,

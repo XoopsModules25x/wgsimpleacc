@@ -100,8 +100,13 @@ switch ($op) {
             $info = \str_replace('%f', $balFrom, \_MA_WGSIMPLEACC_BALANCE_CALC_PERIOD);
             $info = \str_replace('%t', $balTo, $info);
             $GLOBALS['xoopsTpl']->assign('calc_info', $info);
-
-            $GLOBALS['xoopsTpl']->assign('balances_calc', $assetsCurrent);
+            $assetsList = [];
+            foreach ($assetsCurrent as $asset) {
+                if ((int)$asset['balance'] > 0) {
+                    $assetsList[] = $asset;
+                }
+            }
+            $GLOBALS['xoopsTpl']->assign('balances_calc', $assetsList);
             $filterMonthFrom = $balanceFromObj->format('m');
             $filterYearFrom = $balanceFromObj->format('Y');
             $filterMonthTo = $balanceToObj->format('m');
@@ -298,38 +303,40 @@ switch ($op) {
         $assetsCount = \count($assetsCurrent);
         $balDatecreated = \time(); //all balances made at once must have same time
         foreach ($assetsCurrent as $asset) {
-            $balancesObj = $balancesHandler->create();
-            $balancesObj->setVar('bal_from', $balanceFrom);
-            $balancesObj->setVar('bal_to', $balanceTo);
-            $balancesObj->setVar('bal_asid', $asset['id']);
-            $balancesObj->setVar('bal_curid', $asset['curid']);
-            $balancesObj->setVar('bal_amountstart', $asset['amount_start_val']);
-            $balancesObj->setVar('bal_amountend', $asset['amount_end_val']);
-            if (Constants::BALANCE_TYPE_FINAL == $balType) {
-                $balancesObj->setVar('bal_status', Request::getInt('bal_status', Constants::TRASTATUS_APPROVED));
-            } else {
-                $balancesObj->setVar('bal_status', Request::getInt('bal_status', Constants::BALSTATUS_TEMPORARY));
-            }
-            $balancesObj->setVar('bal_datecreated', $balDatecreated);
-            $balancesObj->setVar('bal_submitter', $submitter);
-            // Insert Data
-            if ($balancesHandler->insert($balancesObj)) {
-                $newBalId = $balId > 0 ? $balId : $balancesObj->getNewInsertedIdBalances();
-                //lock all transactions for this period
-                $crTransactions = new \CriteriaCompo();
-                $crTransactions->add(new \Criteria('tra_date', $balanceFrom, '>='));
-                $crTransactions->add(new \Criteria('tra_date', $balanceTo, '<='));
-                $crTransactions->add(new \Criteria('tra_asid', $asset['id']));
-                $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_SUBMITTED, '>'));
+            if ((int)$asset['balance'] > 0) {
+                $balancesObj = $balancesHandler->create();
+                $balancesObj->setVar('bal_from', $balanceFrom);
+                $balancesObj->setVar('bal_to', $balanceTo);
+                $balancesObj->setVar('bal_asid', $asset['id']);
+                $balancesObj->setVar('bal_curid', $asset['curid']);
+                $balancesObj->setVar('bal_amountstart', $asset['amount_start_val']);
+                $balancesObj->setVar('bal_amountend', $asset['amount_end_val']);
                 if (Constants::BALANCE_TYPE_FINAL == $balType) {
-                    //$transactionsHandler->updateAll('tra_status', Constants::TRASTATUS_LOCKED, $crTransactions, true);
-                    $transactionsHandler->updateAll('tra_balid', $newBalId, $crTransactions, true);
+                    $balancesObj->setVar('bal_status', Request::getInt('bal_status', Constants::TRASTATUS_APPROVED));
                 } else {
-                    $transactionsHandler->updateAll('tra_balidt', $newBalId, $crTransactions, true);
+                    $balancesObj->setVar('bal_status', Request::getInt('bal_status', Constants::BALSTATUS_TEMPORARY));
                 }
-                unset($crTransactions);
-            } else {
-                $errors++;
+                $balancesObj->setVar('bal_datecreated', $balDatecreated);
+                $balancesObj->setVar('bal_submitter', $submitter);
+                // Insert Data
+                if ($balancesHandler->insert($balancesObj)) {
+                    $newBalId = $balId > 0 ? $balId : $balancesObj->getNewInsertedIdBalances();
+                    //lock all transactions for this period
+                    $crTransactions = new \CriteriaCompo();
+                    $crTransactions->add(new \Criteria('tra_date', $balanceFrom, '>='));
+                    $crTransactions->add(new \Criteria('tra_date', $balanceTo, '<='));
+                    $crTransactions->add(new \Criteria('tra_asid', $asset['id']));
+                    $crTransactions->add(new \Criteria('tra_status', Constants::TRASTATUS_SUBMITTED, '>'));
+                    if (Constants::BALANCE_TYPE_FINAL == $balType) {
+                        //$transactionsHandler->updateAll('tra_status', Constants::TRASTATUS_LOCKED, $crTransactions, true);
+                        $transactionsHandler->updateAll('tra_balid', $newBalId, $crTransactions, true);
+                    } else {
+                        $transactionsHandler->updateAll('tra_balidt', $newBalId, $crTransactions, true);
+                    }
+                    unset($crTransactions);
+                } else {
+                    $errors++;
+                }
             }
         }
         // redirect after insert

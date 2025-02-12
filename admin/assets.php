@@ -93,6 +93,7 @@ switch ($op) {
         $assetsObj->setVar('as_color', Request::getString('as_color'));
         $assetsObj->setVar('as_iecalc', Request::getInt('as_iecalc'));
         $assetsObj->setVar('as_online', Request::getInt('as_online'));
+        $assetsObj->setVar('as_balance', Request::getInt('as_balance'));
         $assetDatecreatedObj = \DateTime::createFromFormat(_SHORTDATESTRING, Request::getString('as_datecreated'));
         $assetsObj->setVar('as_datecreated', $assetDatecreatedObj->getTimestamp());
         $assetsObj->setVar('as_submitter', Request::getInt('as_submitter'));

@@ -129,3 +129,7 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_DONATION_AMOUNT', 'Spendenbetrag Amount');
 \define('_AM_WGSIMPLEACC_MAINTAINEDBY', ' wird unterstützt von ');
 // ---------------- End ----------------
+// version 1.3.3
+\define('_AM_WGSIMPLEACC_THEREARE_PROCESSING', "Es gibt <span class='bold'>%s</span> Verarbeitungsschritte in der Datenbank");
+\define('_AM_WGSIMPLEACC_ADD_PROCESSING', 'Neuen Verarbeitungsschritt hinzufügen');
+\define('_AM_WGSIMPLEACC_LIST_PROCESSING', 'Liste der Verarbeitungsschritte');

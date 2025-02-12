@@ -62,6 +62,7 @@ class Transactions extends \XoopsObject
         $this->initVar('tra_balid', \XOBJ_DTYPE_INT);
         $this->initVar('tra_balidt', \XOBJ_DTYPE_INT);
         $this->initVar('tra_hist', \XOBJ_DTYPE_TXTBOX);
+        $this->initVar('tra_processing', \XOBJ_DTYPE_INT);
         $this->initVar('tra_datecreated', \XOBJ_DTYPE_INT);
         $this->initVar('tra_submitter', \XOBJ_DTYPE_INT);
     }
@@ -365,6 +366,33 @@ class Transactions extends \XoopsObject
             $traTaxidSelect->addOptionArray($taxesHandler->getList($crTaxes));
             $form->addElement($traTaxidSelect);
         }
+        if ($helper->getConfig('use_processing')) {
+            // Form Select traProcessing
+            $processingHandler = $helper->getHandler('Processing');
+            $proDefault = 0;
+            $arrProcessing = [];
+            $crProcessing = new \CriteriaCompo();
+            $crProcessing->add(new \Criteria('pro_online', 1));
+            if (Constants::CLASS_INCOME === $type || Constants::CLASS_INCOME === $traClass) {
+                $crProcessing->add(new \Criteria('pro_income', 1));
+            }
+            if (Constants::CLASS_EXPENSES === $type || Constants::CLASS_EXPENSES == $traClass) {
+                $crProcessing->add(new \Criteria('pro_expenses', 1));
+            }
+            $processingAll = $processingHandler->getAll($crProcessing);
+            foreach (\array_keys($processingAll) as $p) {
+                $arrProcessing[$p]= $processingAll[$p]->getVar('pro_text');
+                if (1 === (int)$processingAll[$p]->getVar('pro_default')) {
+                    $proDefault = $p;
+                }
+            }
+            $traProcessing = $this->isNew() ? $proDefault : $this->getVar('tra_processing');
+            $traProcessingSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_PROCESSING_NEXT, 'tra_processing', $traProcessing);
+            $traProcessingSelect->addOptionArray($arrProcessing);
+            $form->addElement($traProcessingSelect);
+        } else {
+            $form->addElement(new \XoopsFormHidden('tra_processing', (int)$this->getVar('tra_processing')));
+        }
         // Form Table assets
         $assetsHandler = $helper->getHandler('Assets');
         $crAssets = new \CriteriaCompo();
@@ -542,6 +570,12 @@ class Transactions extends \XoopsObject
         $ret['balid']           = $this->getVar('tra_balid');
         $ret['balidt']          = $this->getVar('tra_balidt');
         $ret['hist']            = $this->getVar('tra_hist');
+        $ret['processing']      = $this->getVar('tra_processing');
+        if ($helper->getConfig('use_processing')) {
+            // Form Select traProcessing
+            $processingHandler = $helper->getHandler('Processing');
+            $ret['pro_text'] = $processingHandler->get((int)$this->getVar('tra_processing'))->getVar('pro_text');
+        }
         $ret['datecreated']     = \formatTimestamp($this->getVar('tra_datecreated'), _SHORTDATESTRING);
         $ret['datetimecreated'] = \formatTimestamp($this->getVar('tra_datecreated'), _DATESTRING);
         $ret['submitter']       = \XoopsUser::getUnameFromId($this->getVar('tra_submitter'));

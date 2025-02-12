@@ -12,6 +12,7 @@
                 <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ASSET_COLOR}></th>
                 <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ASSET_IECALC}></th>
                 <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ASSET_ONLINE}></th>
+                <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ASSET_BALANCE}></th>
                 <th class="center"><{$smarty.const._MA_WGSIMPLEACC_ASSET_PRIMARY}></th>
                 <th class="center"><{$smarty.const._MA_WGSIMPLEACC_DATECREATED}></th>
                 <th class="center"><{$smarty.const._MA_WGSIMPLEACC_SUBMITTER}></th>
@@ -39,6 +40,7 @@
                         </td>
                         <td class='center'><{$asset.iecalc}></td>
                         <td class='center'><{$asset.online}></td>
+                        <td class='center'><{$asset.balance}></td>
                         <td class='center'><{$asset.primary}></td>
                         <td class='center'><{$asset.datecreated}></td>
                         <td class='center'><{$asset.submitter}></td>
