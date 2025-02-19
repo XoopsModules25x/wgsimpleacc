@@ -280,7 +280,7 @@ switch ($op) {
             // Display Navigation
             if ($transactionsCount > $limit) {
                 require_once \XOOPS_ROOT_PATH . '/class/pagenav.php';
-                $pagenav = new \XoopsPageNav($transactionsCount, $limit, $start, 'start', 'op=list&amp;limit=' . $limit . $traFilter);
+                $pagenav = new \XoopsPageNav($transactionsCount, $limit, $start, 'start', 'op=list&amp;limit=' . $limit . $traFilter. '&amp;sortby=' . $sortBy . '&amp;order=' . $order);
                 $GLOBALS['xoopsTpl']->assign('pagenav', $pagenav->renderNav());
             }
             $GLOBALS['xoopsTpl']->assign('showAssets', 0 === $asId);
