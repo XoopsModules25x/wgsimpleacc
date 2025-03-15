@@ -27,6 +27,16 @@ wgSimpleAcc provides following themes:
 
 Next versions will be updated to Bootstrap 4.
 
+### Require:
+- XOOPS 2.5.11;
+- XOOPS Admin 1.2;
+- PHP 7.4 or higher;
+- MySQL 5.5; -> Minimum Recommended Using InnoDB Version 5.1 or Later
+
+# Info
+
+**wgSimpleAcc is ready for PHP 8.4**
+
 #### Demo:
 * https://wgsimpleacc.wedega.com/
 
