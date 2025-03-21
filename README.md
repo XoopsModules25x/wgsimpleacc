@@ -4,11 +4,13 @@
 
 ## wgSimpleAcc module for  [XOOPS CMS 2.5.11+](https://xoops.org)
 
+![module image](./assets/images/wgsimpleacc.jpg)
+
+**wgSimpleAcc** module for [XOOPS CMS](https://xoops.org) for incomes/expenses calculation for small communities (like my sports community)
+
 [![Software License](https://img.shields.io/badge/license-GPL-brightgreen.svg?style=flat)](LICENSE)
 [![Latest Pre-Release](https://img.shields.io/github/tag/XoopsModules25x/wgsimpleacc.svg?style=flat)](https://github.com/XoopsModules25x/wgsimpleacc/tags/)
 [![Latest Version](https://img.shields.io/github/release/XoopsModules25x/wgsimpleacc.svg?style=flat)](https://github.com/XoopsModules25x/wgsimpleacc/releases/)
-
-**wgSimpleAcc** module for [XOOPS CMS](https://xoops.org) for incomes/expenses calculation for small communities (like my sports community)
 
 Main features:
 * Usage of departments, assets and accounts
