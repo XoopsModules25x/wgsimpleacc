@@ -172,7 +172,7 @@ function execute_output ($template, $outParams)
         // create file in temp folder for adding automatically to transaction
         $pdf->Output($outParams['file_temp'], 'F');
     } else {
-        $pdf->Output($outParams['file_temp'], 'I');
+        $pdf->Output($pdfFilename, 'D');
     }
 
     return true;
