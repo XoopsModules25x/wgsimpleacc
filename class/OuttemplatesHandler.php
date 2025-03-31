@@ -249,7 +249,9 @@ class OuttemplatesHandler extends \XoopsPersistableObjectHandler
 
     private function fixFetchFromData($text, $outParams) {
         foreach ($outParams as $key => $value) {
-            $text = str_replace('<{$' . $key . '}>', $value, $text);
+            if(!\is_array($value)) {
+                $text = \str_replace('<{$' . $key . '}>', (string)$value, $text);
+            }
         }
         return $text;
     }

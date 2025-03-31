@@ -197,11 +197,13 @@ class Utility
      * @return string
      */
     public static function FloatToString($float) {
-
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
+        if (empty($float)) {
+            $float = 0;
+        }
         $dec = $helper->getConfig('sep_comma');
         $thnd = $helper->getConfig('sep_thousand');
-        return number_format($float, 2, $dec, $thnd);
+        return \number_format($float, 2, $dec, $thnd);
 
     }
 
@@ -643,6 +645,9 @@ var hasSelected = false; var selectBox = myform.item[A][amount];for (i = 0; i < 
      */
     public static function cleanTextDropdown($string) {
 
+        if (empty($string)) {
+            return '';
+        }
         // ----- remove HTML TAGs -----
         $string = preg_replace ('/<[^>]*>/', ' ', $string);
 

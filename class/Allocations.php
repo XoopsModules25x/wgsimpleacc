@@ -112,7 +112,7 @@ class Allocations extends \XoopsObject
         if ((bool)$helper->getConfig('use_cascadingacc')) {
             // Form Select allAccounts
             $accountsHandler = $helper->getHandler('Accounts');
-            $allAccounts = \unserialize($this->getVar('all_accounts'), ['allowed_classes' => false]);
+            $allAccounts = $this->isNew() ? [] : \unserialize($this->getVar('all_accounts'), ['allowed_classes' => false]);
             $allAccountsSelect = new \XoopsFormSelect(\_MA_WGSIMPLEACC_ALLOCATION_ACCOUNTS, 'all_accounts', $allAccounts, 15, true);
             $allAccountsSelect->setDescription(\_MA_WGSIMPLEACC_ALLOCATION_ACCOUNTS_DESC);
             $accounts = $accountsHandler->getSelectTreeOfAccounts(Constants::CLASS_BOTH);

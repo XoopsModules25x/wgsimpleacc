@@ -4,11 +4,13 @@
 
 ## wgSimpleAcc module for  [XOOPS CMS 2.5.11+](https://xoops.org)
 
+![module image](./assets/images/wgsimpleacc.jpg)
+
+**wgSimpleAcc** module for [XOOPS CMS](https://xoops.org) for incomes/expenses calculation for small communities (like my sports community)
+
 [![Software License](https://img.shields.io/badge/license-GPL-brightgreen.svg?style=flat)](LICENSE)
 [![Latest Pre-Release](https://img.shields.io/github/tag/XoopsModules25x/wgsimpleacc.svg?style=flat)](https://github.com/XoopsModules25x/wgsimpleacc/tags/)
 [![Latest Version](https://img.shields.io/github/release/XoopsModules25x/wgsimpleacc.svg?style=flat)](https://github.com/XoopsModules25x/wgsimpleacc/releases/)
-
-**wgSimpleAcc** module for [XOOPS CMS](https://xoops.org) for incomes/expenses calculation for small communities (like my sports community)
 
 Main features:
 * Usage of departments, assets and accounts
@@ -26,6 +28,16 @@ wgSimpleAcc provides following themes:
 * xswatch4: Bootstrap 4 theme
 
 Next versions will be updated to Bootstrap 4.
+
+### Require:
+- XOOPS 2.5.11;
+- XOOPS Admin 1.2;
+- PHP 7.4 or higher;
+- MySQL 5.5; -> Minimum Recommended Using InnoDB Version 5.1 or Later
+
+# Info
+
+**wgSimpleAcc is ready for PHP 8.4**
 
 #### Demo:
 * https://wgsimpleacc.wedega.com/

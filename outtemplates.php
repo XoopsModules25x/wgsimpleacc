@@ -272,14 +272,14 @@ switch ($op) {
                 $filePdf = $filePdf . '_' . time() . '.pdf';
 
                 $outParams['file_name'] = $filePdf;
-                if ($outParams['auto_add']) {
+                //if ($outParams['auto_add']) {
                     $tempPdf = \WGSIMPLEACC_UPLOAD_TEMP_PATH. '/' . $filePdf;
                     $outParams['file_temp'] = $tempPdf;
                     // delete if exists
                     if (\file_exists($tempPdf)) {
                         \unlink($tempPdf);
                     }
-                }
+                //}
 
                 $result = execute_output($template, $outParams);
                 if ($outParams['auto_add']) {
@@ -299,8 +299,8 @@ switch ($op) {
                     $filesObj->setVar('fil_submitter', $GLOBALS['xoopsUser']->id());
                     // Insert Data
                     $filesHandler->insert($filesObj);
+                    \redirect_header('transactions.php?op=list&amp;filePdf=' . $filePdf, 3, \_MA_WGSIMPLEACC_OUTTEMPLATE_PDF_SUCCESS);
                 }
-                \redirect_header('transactions.php?op=list&amp;filePdf=' . $filePdf, 3, \_MA_WGSIMPLEACC_OUTTEMPLATE_PDF_SUCCESS);
                 break;
         }
         break;

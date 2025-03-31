@@ -171,7 +171,9 @@ function execute_output ($template, $outParams)
     if ($outParams['auto_add']) {
         // create file in temp folder for adding automatically to transaction
         $pdf->Output($outParams['file_temp'], 'F');
+    } else {
+        $pdf->Output($pdfFilename, 'D');
     }
 
-    return $pdf->Output($pdfFilename, 'I');
+    return true;
 }
