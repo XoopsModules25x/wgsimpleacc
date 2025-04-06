@@ -33,7 +33,6 @@ class Modulemenu
     {
 
         $moduleDirName = \basename(\dirname(__DIR__));
-        $subcount      = 1;
         $pathname      = \XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/';
         $urlModule     = \XOOPS_URL . '/modules/' . $moduleDirName . '/';
 
@@ -241,7 +240,6 @@ class Modulemenu
     public function getMenuitemsStartmin()
     {
         $moduleDirName = \basename(\dirname(__DIR__));
-        $subcount      = 1;
         $pathname      = \XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/';
 
         require_once $pathname . 'include/common.php';
