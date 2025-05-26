@@ -34,7 +34,6 @@ class Modulemenu
 
         $moduleDirName = \basename(\dirname(__DIR__));
         $pathname      = \XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/';
-        $urlModule     = \XOOPS_URL . '/modules/' . $moduleDirName . '/';
 
         require_once $pathname . 'include/common.php';
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
@@ -46,27 +45,27 @@ class Modulemenu
         $items = [];
         $items[] = [
             'name' => \_MA_WGSIMPLEACC_DASHBOARD,
-            'url'  =>  $urlModule . 'index.php',
+            'url'  => 'index.php',
         ];
         $permissionsHandler = $helper->getHandler('Permissions');
         if ($permissionsHandler->getPermTransactionsView()) {
             $items[] = [
                 'name' => \_MA_WGSIMPLEACC_TRANSACTIONS_LIST,
-                'url'  =>  $urlModule . 'transactions.php?op=list',
+                'url'  =>  'transactions.php?op=list',
             ];
             if ($permissionsHandler->getPermTransactionsSubmit()) {
                 $items[] = [
                     'name' => \_MA_WGSIMPLEACC_TRANSACTION_SUBMIT_INCOME,
-                    'url'  =>  $urlModule . 'transactions.php?op=new&tra_type=3',
+                    'url'  => 'transactions.php?op=new&tra_type=3',
                 ];
                 $items[] = [
                     'name' => \_MA_WGSIMPLEACC_TRANSACTION_SUBMIT_EXPENSE,
-                    'url'  =>  $urlModule . 'transactions.php?op=new&tra_type=2',
+                    'url'  => 'transactions.php?op=new&tra_type=2',
                 ];
                 if ($permissionsHandler->getPermTransactionsApprove()) {
                     $items[] = [
                         'name' => \_MA_WGSIMPLEACC_TRAHISTORY_DELETED,
-                        'url'  =>  $urlModule . 'transactions.php?op=listhist',
+                        'url'  => 'transactions.php?op=listhist',
                     ];
                 }
             }
@@ -75,12 +74,12 @@ class Modulemenu
         if ($permissionsHandler->getPermClientsView() && $helper->getConfig('use_clients')) {
             $items[] = [
                 'name' => \_MA_WGSIMPLEACC_CLIENTS_LIST,
-                'url'  =>  $urlModule . 'clients.php?op=list',
+                'url'  => 'clients.php?op=list',
             ];
             if ($permissionsHandler->getPermClientsSubmit()) {
                 $items[] = [
                     'name' => \_MA_WGSIMPLEACC_CLIENT_SUBMIT,
-                    'url'  =>  $urlModule . 'clients.php?op=new',
+                    'url'  => 'clients.php?op=new',
                 ];
             }
         }
@@ -88,18 +87,18 @@ class Modulemenu
         if ($permissionsHandler->getPermAllocationsView()) {
             $items[] = [
                 'name' => \_MA_WGSIMPLEACC_ALLOCATIONS_LIST,
-                'url'  =>  $urlModule . 'allocations.php?op=list',
+                'url'  => 'allocations.php?op=list',
             ];
             if ($permissionsHandler->getPermAllocationsSubmit()) {
                 if ((bool)$helper->getConfig('use_cascadingacc')) {
                     $items[] = [
                         'name' => \_MA_WGSIMPLEACC_ALLOCATION_ACCOUNTS_COMPARE,
-                        'url'  =>  $urlModule . 'allocations.php?op=compare_accounts',
+                        'url'  => 'allocations.php?op=compare_accounts',
                     ];
                 }
                 $items[] = [
                     'name' => \_MA_WGSIMPLEACC_ALLOCATION_SUBMIT,
-                    'url'  =>  $urlModule . 'allocations.php?op=new',
+                    'url'  => 'allocations.php?op=new',
                 ];
             }
         }
@@ -107,18 +106,18 @@ class Modulemenu
         if ($permissionsHandler->getPermAccountsView()) {
             $items[] = [
                 'name' => \_MA_WGSIMPLEACC_ACCOUNTS_LIST,
-                'url'  =>  $urlModule . 'accounts.php?op=list',
+                'url'  => 'accounts.php?op=list',
             ];
             if ($permissionsHandler->getPermAccountsSubmit()) {
                 if ((bool)$helper->getConfig('use_cascadingacc')) {
                     $items[] = [
                         'name' => \_MA_WGSIMPLEACC_ALLOCATION_ACCOUNTS_COMPARE,
-                        'url'  =>  $urlModule . 'accounts.php?op=compare_alloc',
+                        'url'  => 'accounts.php?op=compare_alloc',
                     ];
                 }
                 $items[] = [
                     'name' => \_MA_WGSIMPLEACC_ACCOUNT_SUBMIT,
-                    'url'  =>  $urlModule . 'accounts.php?op=new',
+                    'url'  => 'accounts.php?op=new',
                 ];
             }
         }
@@ -126,12 +125,12 @@ class Modulemenu
         if ($permissionsHandler->getPermAssetsView()) {
             $items[] = [
                 'name' => \_MA_WGSIMPLEACC_ASSETS_LIST,
-                'url'  =>  $urlModule . 'assets.php?op=list',
+                'url'  => 'assets.php?op=list',
             ];
             if ($permissionsHandler->getPermAssetsSubmit()) {
                 $items[] = [
                     'name' => \_MA_WGSIMPLEACC_ASSET_SUBMIT,
-                    'url'  =>  $urlModule . 'assets.php?op=new',
+                    'url'  => 'assets.php?op=new',
                 ];
             }
         }
@@ -139,22 +138,22 @@ class Modulemenu
         if ($permissionsHandler->getPermTratemplatesView() || $permissionsHandler->getPermOuttemplatesView()) {
             $items[] = [
                 'name' => \_MA_WGSIMPLEACC_TRATEMPLATES_LIST,
-                'url'  =>  $urlModule . 'tratemplates.php?op=list',
+                'url'  => 'tratemplates.php?op=list',
             ];
             if ($permissionsHandler->getPermTratemplatesSubmit()) {
                 $items[] = [
                     'name' => \_MA_WGSIMPLEACC_TRATEMPLATE_SUBMIT,
-                    'url'  =>  $urlModule . 'tratemplates.php?op=new',
+                    'url'  => 'tratemplates.php?op=new',
                 ];
             }
             $items[] = [
                 'name' => \_MA_WGSIMPLEACC_OUTTEMPLATES_LIST,
-                'url'  =>  $urlModule . 'outtemplates.php?op=list',
+                'url'  => 'outtemplates.php?op=list',
             ];
             if ($permissionsHandler->getPermOuttemplatesSubmit()) {
                 $items[] = [
                     'name' => \_MA_WGSIMPLEACC_OUTTEMPLATE_SUBMIT,
-                    'url'  =>  $urlModule . 'outtemplates.php?op=new',
+                    'url'  => 'outtemplates.php?op=new',
                 ];
             }
         }
@@ -162,12 +161,12 @@ class Modulemenu
         if ($permissionsHandler->getPermBalancesView()) {
             $items[] = [
                 'name' => \_MA_WGSIMPLEACC_BALANCES_LIST,
-                'url'  =>  $urlModule . 'balances.php?op=list',
+                'url'  => 'balances.php?op=list',
             ];
             if ($permissionsHandler->getPermBalancesSubmit()) {
                 $items[] = [
                     'name' => \_MA_WGSIMPLEACC_BALANCE_SUBMIT,
-                    'url'  =>  $urlModule . 'balances.php?op=new',
+                    'url'  => 'balances.php?op=new',
                 ];
             }
         }
@@ -176,26 +175,26 @@ class Modulemenu
             if ($permissionsHandler->getPermTransactionsView()) {
                 $items[] = [
                     'name' => \_MA_WGSIMPLEACC_STATISTICS . ' ' . \_MA_WGSIMPLEACC_ALLOCATIONS,
-                    'url'  =>  $urlModule . 'statistics.php?op=allocations',
+                    'url'  => 'statistics.php?op=allocations',
                 ];
                 $items[] = [
                     'name' => \_MA_WGSIMPLEACC_STATISTICS . ' ' . \_MA_WGSIMPLEACC_ASSETS,
-                    'url'  =>  $urlModule . 'statistics.php?op=assets',
+                    'url'  => 'statistics.php?op=assets',
                 ];
                 $items[] = [
                     'name' => \_MA_WGSIMPLEACC_STATISTICS . ' ' . \_MA_WGSIMPLEACC_ACCOUNTS_LINECHART,
-                    'url'  =>  $urlModule . 'statistics.php?op=accounts',
+                    'url'  => 'statistics.php?op=accounts',
                 ];
                 $items[] = [
                     'name' => \_MA_WGSIMPLEACC_STATISTICS . ' ' . \_MA_WGSIMPLEACC_ACCOUNTS_BARCHART,
-                    'url'  =>  $urlModule . 'statistics.php?op=hbar_accounts',
+                    'url'  => 'statistics.php?op=hbar_accounts',
                 ];
 
             }
             if ($permissionsHandler->getPermBalancesView()) {
                 $items[] = [
                     'name' => \_MA_WGSIMPLEACC_STATISTICS . ' ' . \_MA_WGSIMPLEACC_BALANCES,
-                    'url'  =>  $urlModule . 'statistics.php?op=balances',
+                    'url'  => 'statistics.php?op=balances',
                 ];
             }
         }
@@ -203,12 +202,12 @@ class Modulemenu
         if ($permissionsHandler->getPermFileDirView()) {
             $items[] = [
                 'name' => \_MA_WGSIMPLEACC_FILES_LIST,
-                'url'  =>  $urlModule . 'files.php?op=list',
+                'url'  => 'files.php?op=list',
             ];
             if ($permissionsHandler->getPermFileDirSubmit()) {
                 $items[] = [
                     'name' => \_MA_WGSIMPLEACC_FILE_ADD,
-                    'url'  =>  $urlModule . 'files.php?op=filedir_new',
+                    'url'  => 'files.php?op=filedir_new',
                 ];
             }
         }
@@ -218,13 +217,13 @@ class Modulemenu
             if ($permissionsHandler->getPermTransactionsView()) {
                 $items[] = [
                     'name' => \_MA_WGSIMPLEACC_OUTPUTS . ' ' . \_MA_WGSIMPLEACC_TRANSACTIONS_LIST,
-                    'url'  =>  $urlModule . 'outputs.php?op=transactions',
+                    'url'  => 'outputs.php?op=transactions',
                 ];
             }
             if ($permissionsHandler->getPermBalancesView()) {
                 $items[] = [
                     'name' => \_MA_WGSIMPLEACC_OUTPUTS . ' ' . \_MA_WGSIMPLEACC_BALANCES,
-                    'url'  =>  $urlModule . 'outputs.php?op=balances',
+                    'url'  => 'outputs.php?op=balances',
                 ];
             }
         }
