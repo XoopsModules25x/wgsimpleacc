@@ -33,161 +33,198 @@ class Modulemenu
     {
 
         $moduleDirName = \basename(\dirname(__DIR__));
-        $subcount      = 1;
         $pathname      = \XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/';
-        $urlModule     = \XOOPS_URL . '/modules/' . $moduleDirName . '/';
 
         require_once $pathname . 'include/common.php';
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
 
         //load necesaary language files from this module
-        $helper->loadLanguage('common');
         $helper->loadLanguage('main');
 
         // start creation of link list as array
         $items = [];
-        $items[$subcount]['name']  = \_MA_WGSIMPLEACC_DASHBOARD;
-        $items[$subcount]['url'] =  $urlModule . 'index.php';
-
+        $items[] = [
+            'name' => \_MA_WGSIMPLEACC_DASHBOARD,
+            'url'  => 'index.php',
+        ];
         $permissionsHandler = $helper->getHandler('Permissions');
         if ($permissionsHandler->getPermTransactionsView()) {
-            $subcount++;
-            $items[$subcount]['name']  = \_MA_WGSIMPLEACC_TRANSACTIONS_LIST;
-            $items[$subcount]['url'] =  $urlModule . 'transactions.php?op=list';
+            $items[] = [
+                'name' => \_MA_WGSIMPLEACC_TRANSACTIONS_LIST,
+                'url'  =>  'transactions.php?op=list',
+            ];
             if ($permissionsHandler->getPermTransactionsSubmit()) {
-                $subcount++;
-                $items[$subcount]['name']  = \_MA_WGSIMPLEACC_TRANSACTION_SUBMIT_INCOME;
-                $items[$subcount]['url'] =  $urlModule . 'transactions.php?op=new&tra_type=3';
-                $subcount++;
-                $items[$subcount]['name']  = \_MA_WGSIMPLEACC_TRANSACTION_SUBMIT_EXPENSE;
-                $items[$subcount]['url'] =  $urlModule . 'transactions.php?op=new&tra_type=2';
+                $items[] = [
+                    'name' => \_MA_WGSIMPLEACC_TRANSACTION_SUBMIT_INCOME,
+                    'url'  => 'transactions.php?op=new&tra_type=3',
+                ];
+                $items[] = [
+                    'name' => \_MA_WGSIMPLEACC_TRANSACTION_SUBMIT_EXPENSE,
+                    'url'  => 'transactions.php?op=new&tra_type=2',
+                ];
                 if ($permissionsHandler->getPermTransactionsApprove()) {
-                    $subcount++;
-                    $items[$subcount]['name']  = \_MA_WGSIMPLEACC_TRAHISTORY_DELETED;
-                    $items[$subcount]['url'] =  $urlModule . 'transactions.php?op=listhist';
+                    $items[] = [
+                        'name' => \_MA_WGSIMPLEACC_TRAHISTORY_DELETED,
+                        'url'  => 'transactions.php?op=listhist',
+                    ];
                 }
             }
         }
+
         if ($permissionsHandler->getPermClientsView() && $helper->getConfig('use_clients')) {
-            $subcount++;
-            $items[$subcount]['name']  = \_MA_WGSIMPLEACC_CLIENTS_LIST;
-            $items[$subcount]['url'] =  $urlModule . 'clients.php?op=list';
+            $items[] = [
+                'name' => \_MA_WGSIMPLEACC_CLIENTS_LIST,
+                'url'  => 'clients.php?op=list',
+            ];
             if ($permissionsHandler->getPermClientsSubmit()) {
-                $subcount++;
-                $items[$subcount]['name']  = \_MA_WGSIMPLEACC_CLIENT_SUBMIT;
-                $items[$subcount]['url'] =  $urlModule . 'clients.php?op=new';
+                $items[] = [
+                    'name' => \_MA_WGSIMPLEACC_CLIENT_SUBMIT,
+                    'url'  => 'clients.php?op=new',
+                ];
             }
         }
+
         if ($permissionsHandler->getPermAllocationsView()) {
-            $subcount++;
-            $items[$subcount]['name']  = \_MA_WGSIMPLEACC_ALLOCATIONS_LIST;
-            $items[$subcount]['url'] =  $urlModule . 'allocations.php?op=list';
+            $items[] = [
+                'name' => \_MA_WGSIMPLEACC_ALLOCATIONS_LIST,
+                'url'  => 'allocations.php?op=list',
+            ];
             if ($permissionsHandler->getPermAllocationsSubmit()) {
                 if ((bool)$helper->getConfig('use_cascadingacc')) {
-                    $subcount++;
-                    $items[$subcount]['name']  = \_MA_WGSIMPLEACC_ALLOCATION_ACCOUNTS_COMPARE;
-                    $items[$subcount]['url'] =  $urlModule . 'allocations.php?op=compare_accounts';
+                    $items[] = [
+                        'name' => \_MA_WGSIMPLEACC_ALLOCATION_ACCOUNTS_COMPARE,
+                        'url'  => 'allocations.php?op=compare_accounts',
+                    ];
                 }
-                $subcount++;
-                $items[$subcount]['name']  = \_MA_WGSIMPLEACC_ALLOCATION_SUBMIT;
-                $items[$subcount]['url'] =  $urlModule . 'allocations.php?op=new';
+                $items[] = [
+                    'name' => \_MA_WGSIMPLEACC_ALLOCATION_SUBMIT,
+                    'url'  => 'allocations.php?op=new',
+                ];
             }
         }
+
         if ($permissionsHandler->getPermAccountsView()) {
-            $subcount++;
-            $items[$subcount]['name']  = \_MA_WGSIMPLEACC_ACCOUNTS_LIST;
-            $items[$subcount]['url'] =  $urlModule . 'accounts.php?op=list';
+            $items[] = [
+                'name' => \_MA_WGSIMPLEACC_ACCOUNTS_LIST,
+                'url'  => 'accounts.php?op=list',
+            ];
             if ($permissionsHandler->getPermAccountsSubmit()) {
                 if ((bool)$helper->getConfig('use_cascadingacc')) {
-                    $subcount++;
-                    $items[$subcount]['name']  = \_MA_WGSIMPLEACC_ALLOCATION_ACCOUNTS_COMPARE;
-                    $items[$subcount]['url'] =  $urlModule . 'accounts.php?op=compare_alloc';
+                    $items[] = [
+                        'name' => \_MA_WGSIMPLEACC_ALLOCATION_ACCOUNTS_COMPARE,
+                        'url'  => 'accounts.php?op=compare_alloc',
+                    ];
                 }
-                $subcount++;
-                $items[$subcount]['name']  = \_MA_WGSIMPLEACC_ACCOUNT_SUBMIT;
-                $items[$subcount]['url'] =  $urlModule . 'accounts.php?op=new';
+                $items[] = [
+                    'name' => \_MA_WGSIMPLEACC_ACCOUNT_SUBMIT,
+                    'url'  => 'accounts.php?op=new',
+                ];
             }
         }
+
         if ($permissionsHandler->getPermAssetsView()) {
-            $subcount++;
-            $items[$subcount]['name']  = \_MA_WGSIMPLEACC_ASSETS_LIST;
-            $items[$subcount]['url'] =  $urlModule . 'assets.php?op=list';
+            $items[] = [
+                'name' => \_MA_WGSIMPLEACC_ASSETS_LIST,
+                'url'  => 'assets.php?op=list',
+            ];
             if ($permissionsHandler->getPermAssetsSubmit()) {
-                $subcount++;
-                $items[$subcount]['name']  = \_MA_WGSIMPLEACC_ASSET_SUBMIT;
-                $items[$subcount]['url'] =  $urlModule . 'assets.php?op=new';
+                $items[] = [
+                    'name' => \_MA_WGSIMPLEACC_ASSET_SUBMIT,
+                    'url'  => 'assets.php?op=new',
+                ];
             }
         }
+
         if ($permissionsHandler->getPermTratemplatesView() || $permissionsHandler->getPermOuttemplatesView()) {
-            $subcount++;
-            $items[$subcount]['name']  = \_MA_WGSIMPLEACC_TRATEMPLATES_LIST;
-            $items[$subcount]['url'] =  $urlModule . 'tratemplates.php?op=list';
+            $items[] = [
+                'name' => \_MA_WGSIMPLEACC_TRATEMPLATES_LIST,
+                'url'  => 'tratemplates.php?op=list',
+            ];
             if ($permissionsHandler->getPermTratemplatesSubmit()) {
-                $subcount++;
-                $items[$subcount]['name']  = \_MA_WGSIMPLEACC_TRATEMPLATE_SUBMIT;
-                $items[$subcount]['url'] =  $urlModule . 'tratemplates.php?op=new';
+                $items[] = [
+                    'name' => \_MA_WGSIMPLEACC_TRATEMPLATE_SUBMIT,
+                    'url'  => 'tratemplates.php?op=new',
+                ];
             }
-            $subcount++;
-            $items[$subcount]['name']  = \_MA_WGSIMPLEACC_OUTTEMPLATES_LIST;
-            $items[$subcount]['url'] =  $urlModule . 'outtemplates.php?op=list';
+            $items[] = [
+                'name' => \_MA_WGSIMPLEACC_OUTTEMPLATES_LIST,
+                'url'  => 'outtemplates.php?op=list',
+            ];
             if ($permissionsHandler->getPermOuttemplatesSubmit()) {
-                $subcount++;
-                $items[$subcount]['name']  = \_MA_WGSIMPLEACC_OUTTEMPLATE_SUBMIT;
-                $items[$subcount]['url'] =  $urlModule . 'outtemplates.php?op=new';
+                $items[] = [
+                    'name' => \_MA_WGSIMPLEACC_OUTTEMPLATE_SUBMIT,
+                    'url'  => 'outtemplates.php?op=new',
+                ];
             }
         }
+
         if ($permissionsHandler->getPermBalancesView()) {
-            $subcount++;
-            $items[$subcount]['name']  = \_MA_WGSIMPLEACC_BALANCES_LIST;
-            $items[$subcount]['url'] =  $urlModule . 'balances.php?op=list';
+            $items[] = [
+                'name' => \_MA_WGSIMPLEACC_BALANCES_LIST,
+                'url'  => 'balances.php?op=list',
+            ];
             if ($permissionsHandler->getPermBalancesSubmit()) {
-                $subcount++;
-                $items[$subcount]['name']  = \_MA_WGSIMPLEACC_BALANCE_SUBMIT;
-                $items[$subcount]['url'] =  $urlModule . 'balances.php?op=new';
+                $items[] = [
+                    'name' => \_MA_WGSIMPLEACC_BALANCE_SUBMIT,
+                    'url'  => 'balances.php?op=new',
+                ];
             }
         }
+
         if ($permissionsHandler->getPermGlobalView()) {
             if ($permissionsHandler->getPermTransactionsView()) {
-                $subcount++;
-                $items[$subcount]['name']  = \_MA_WGSIMPLEACC_STATISTICS . ' ' . \_MA_WGSIMPLEACC_ALLOCATIONS;
-                $items[$subcount]['url'] =  $urlModule . 'statistics.php?op=allocations';
-                $subcount++;
-                $items[$subcount]['name']  = \_MA_WGSIMPLEACC_STATISTICS . ' ' . \_MA_WGSIMPLEACC_ASSETS;
-                $items[$subcount]['url'] =  $urlModule . 'statistics.php?op=assets';
-                $subcount++;
-                $items[$subcount]['name']  = \_MA_WGSIMPLEACC_STATISTICS . ' ' . \_MA_WGSIMPLEACC_ACCOUNTS_LINECHART;
-                $items[$subcount]['url'] =  $urlModule . 'statistics.php?op=accounts';
-                $subcount++;
-                $items[$subcount]['name']  = \_MA_WGSIMPLEACC_STATISTICS . ' ' . \_MA_WGSIMPLEACC_ACCOUNTS_BARCHART;
-                $items[$subcount]['url'] =  $urlModule . 'statistics.php?op=hbar_accounts';
+                $items[] = [
+                    'name' => \_MA_WGSIMPLEACC_STATISTICS . ' ' . \_MA_WGSIMPLEACC_ALLOCATIONS,
+                    'url'  => 'statistics.php?op=allocations',
+                ];
+                $items[] = [
+                    'name' => \_MA_WGSIMPLEACC_STATISTICS . ' ' . \_MA_WGSIMPLEACC_ASSETS,
+                    'url'  => 'statistics.php?op=assets',
+                ];
+                $items[] = [
+                    'name' => \_MA_WGSIMPLEACC_STATISTICS . ' ' . \_MA_WGSIMPLEACC_ACCOUNTS_LINECHART,
+                    'url'  => 'statistics.php?op=accounts',
+                ];
+                $items[] = [
+                    'name' => \_MA_WGSIMPLEACC_STATISTICS . ' ' . \_MA_WGSIMPLEACC_ACCOUNTS_BARCHART,
+                    'url'  => 'statistics.php?op=hbar_accounts',
+                ];
+
             }
             if ($permissionsHandler->getPermBalancesView()) {
-                $subcount++;
-                $items[$subcount]['name']  = \_MA_WGSIMPLEACC_STATISTICS . ' ' . \_MA_WGSIMPLEACC_BALANCES;
-                $items[$subcount]['url'] =  $urlModule . 'statistics.php?op=balances';
+                $items[] = [
+                    'name' => \_MA_WGSIMPLEACC_STATISTICS . ' ' . \_MA_WGSIMPLEACC_BALANCES,
+                    'url'  => 'statistics.php?op=balances',
+                ];
             }
         }
+
         if ($permissionsHandler->getPermFileDirView()) {
-            $subcount++;
-            $items[$subcount]['name']  = \_MA_WGSIMPLEACC_FILES_LIST;
-            $items[$subcount]['url'] =  $urlModule . 'files.php?op=list';
+            $items[] = [
+                'name' => \_MA_WGSIMPLEACC_FILES_LIST,
+                'url'  => 'files.php?op=list',
+            ];
             if ($permissionsHandler->getPermFileDirSubmit()) {
-                $subcount++;
-                $items[$subcount]['name']  = \_MA_WGSIMPLEACC_FILE_ADD;
-                $items[$subcount]['url'] =  $urlModule . 'files.php?op=filedir_new';
+                $items[] = [
+                    'name' => \_MA_WGSIMPLEACC_FILE_ADD,
+                    'url'  => 'files.php?op=filedir_new',
+                ];
             }
         }
+
         if ($permissionsHandler->getPermGlobalView()) {
             $nav_items2 = [];
             if ($permissionsHandler->getPermTransactionsView()) {
-                $subcount++;
-                $items[$subcount]['name']  = \_MA_WGSIMPLEACC_OUTPUTS . ' ' . \_MA_WGSIMPLEACC_TRANSACTIONS_LIST;
-                $items[$subcount]['url'] =  $urlModule . 'outputs.php?op=transactions';
+                $items[] = [
+                    'name' => \_MA_WGSIMPLEACC_OUTPUTS . ' ' . \_MA_WGSIMPLEACC_TRANSACTIONS_LIST,
+                    'url'  => 'outputs.php?op=transactions',
+                ];
             }
             if ($permissionsHandler->getPermBalancesView()) {
-                $subcount++;
-                $items[$subcount]['name']  = \_MA_WGSIMPLEACC_OUTPUTS . ' ' . \_MA_WGSIMPLEACC_BALANCES;
-                $items[$subcount]['url'] =  $urlModule . 'outputs.php?op=balances';
+                $items[] = [
+                    'name' => \_MA_WGSIMPLEACC_OUTPUTS . ' ' . \_MA_WGSIMPLEACC_BALANCES,
+                    'url'  => 'outputs.php?op=balances',
+                ];
             }
         }
         // end creation of link list as array
@@ -202,7 +239,6 @@ class Modulemenu
     public function getMenuitemsStartmin()
     {
         $moduleDirName = \basename(\dirname(__DIR__));
-        $subcount      = 1;
         $pathname      = \XOOPS_ROOT_PATH . '/modules/' . $moduleDirName . '/';
 
         require_once $pathname . 'include/common.php';
@@ -365,7 +401,6 @@ class Modulemenu
         $helper = \XoopsModules\Wgsimpleacc\Helper::getInstance();
 
         //load necessary language files from this module
-        $helper->loadLanguage('common');
         $helper->loadLanguage('main');
 
         // start creation of link list as array
