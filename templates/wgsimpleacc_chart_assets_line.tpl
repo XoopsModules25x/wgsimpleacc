@@ -8,6 +8,8 @@
 </style>
 
 <h3><{$header_assets_line}></h3>
+<a href="statistics.php?op=assets" class="btn btn-primary<{if $showoffline|default:0 == 0}> disabled<{/if}> wgsa-btn-list" title="">Nur online</a><a href="statistics.php?op=assets&amp;showoffline=1" class="btn btn-primary<{if $showoffline|default:0 == 1}> disabled<{/if}> wgsa-btn-list" title="">alle anzeigen</a>
+
 <div id="canvas-holder2" class="canvas-assets" style="width:100%">
     <canvas id="chart-assets-line"></canvas>
 </div>

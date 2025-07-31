@@ -54,6 +54,8 @@ $dateTo = Request::getInt('dateTo', \time());
 if (Request::hasVar('filterTo')) {
     $dateTo = \DateTime::createFromFormat(\_SHORTDATESTRING, Request::getString('filterTo'))->getTimestamp();
 }
+$showOffline = Request::getInt('showoffline', 0);
+$GLOBALS['xoopsTpl']->assign('showoffline', $showOffline);
 
 $keywords = [];
 
@@ -258,21 +260,25 @@ switch ($op) {
         foreach (\array_keys($assetsAll) as $i) {
             $asId = $assetsAll[$i]->getVar('as_id');
             $asName = $assetsAll[$i]->getVar('as_name');
-            $asColor = Utility::getColorName($colors, $assetsAll[$i]->getVar('as_color'));
-            $dataAmounts = '';
-            $amount = 0;
-            for ($y = $minYear; $y <= $maxYear; $y++) {
-                // get all assets per year
-                $sql = 'SELECT Sum(`tra_amountin`) AS Sum_tra_amountin, Sum(`tra_amountout`) AS Sum_tra_amountout ';
-                $sql .= 'FROM ' . $xoopsDB->prefix('wgsimpleacc_transactions') . ' ';
-                $sql .= 'WHERE (((' . $xoopsDB->prefix('wgsimpleacc_transactions') . '.tra_year)=' . $y;
-                $sql .= ') AND ((' . $xoopsDB->prefix('wgsimpleacc_transactions') . '.tra_asid)=' . $asId . '));';
-                $result = $xoopsDB->query($sql);
-                while (list($sumIn, $sumOut) = $xoopsDB->fetchRow($result)) {
-                    $amount += (float)($sumIn - $sumOut);
-                    $dataAmounts .= round($amount, 2) . ',';
-                    $labels[$y] = $y;
-                    $line_assets[$asId] = ['name' => $asName, 'color' => $asColor, 'data' => $dataAmounts];
+            $asOnline  = (int)$assetsAll[$i]->getVar('as_online');
+            if (1 === $asOnline || 1 === $showOffline) {
+                $asColor = Utility::getColorName($colors, $assetsAll[$i]->getVar('as_color'));
+                $dataAmounts = '';
+                $amount = 0;
+                for ($y = $minYear; $y <= $maxYear; $y++) {
+                    // get all assets per year
+                    $sql = 'SELECT Sum(`tra_amountin`) AS Sum_tra_amountin, Sum(`tra_amountout`) AS Sum_tra_amountout ';
+                    $sql .= 'FROM ' . $xoopsDB->prefix('wgsimpleacc_transactions') . ' ';
+                    $sql .= 'WHERE (((' . $xoopsDB->prefix('wgsimpleacc_transactions') . '.tra_year)=' . $y;
+                    $sql .= ') AND ((' . $xoopsDB->prefix('wgsimpleacc_transactions') . '.tra_asid)=' . $asId;
+                    $sql .= ') AND ((' . $xoopsDB->prefix('wgsimpleacc_transactions') . '.tra_status) > ' . Constants::TRASTATUS_SUBMITTED . '));';
+                    $result = $xoopsDB->query($sql);
+                    while (list($sumIn, $sumOut) = $xoopsDB->fetchRow($result)) {
+                        $amount += (float)($sumIn - $sumOut);
+                        $dataAmounts .= round($amount, 2) . ',';
+                        $labels[$y] = $y;
+                        $line_assets[$asId] = ['name' => $asName, 'color' => $asColor, 'data' => $dataAmounts];
+                    }
                 }
             }
         }
@@ -301,19 +307,22 @@ switch ($op) {
         while (list($balAsid) = $xoopsDB->fetchRow($result)) {
             $balAmounts = '';
             $assetsObj = $assetsHandler->get($balAsid);
-            $asName = $assetsObj->getVar('as_name');
-            $asColor = Utility::getColorName($colors, $assetsObj->getVar('as_color'));
-            $crBalances = new \CriteriaCompo();
-            $crBalances->add(new \Criteria('bal_asid', $balAsid));
-            $balancesAll = $balancesHandler->getAll($crBalances);
-            foreach (\array_keys($balancesAll) as $i) {
-                $balAmounts .= $balancesAll[$i]->getVar('bal_amountend') . ',';
-                $labelDate = $balancesAll[$i]->getVar('bal_to');
-                $labels[$labelDate] = \formatTimestamp($labelDate, 's');
-                $year =  date("Y-m", $labelDate);
-                $data[] = ["year" => $year, 'name' => $asName, 'color' => $asColor, 'data' => $balancesAll[$i]->getVar('bal_amountend')];
+            $asName    = $assetsObj->getVar('as_name');
+            $asOnline  = (int)$assetsObj->getVar('as_online');
+            if (1 === $asOnline || 1 === $showOffline) {
+                $asColor   = Utility::getColorName($colors, $assetsObj->getVar('as_color'));
+                $crBalances = new \CriteriaCompo();
+                $crBalances->add(new \Criteria('bal_asid', $balAsid));
+                $balancesAll = $balancesHandler->getAll($crBalances);
+                foreach (\array_keys($balancesAll) as $i) {
+                    $balAmounts .= $balancesAll[$i]->getVar('bal_amountend') . ',';
+                    $labelDate = $balancesAll[$i]->getVar('bal_to');
+                    $labels[$labelDate] = \formatTimestamp($labelDate, 's');
+                    $year =  date("Y-m", $labelDate);
+                    $data[] = ["year" => $year, 'name' => $asName, 'color' => $asColor, 'data' => $balancesAll[$i]->getVar('bal_amountend')];
+                }
+                unset($crBalances);
             }
-            unset($crBalances);
         }
 
         // get all years and sort
