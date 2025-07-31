@@ -295,6 +295,7 @@ switch ($op) {
         //*****************************
         $line_balances = [];
         $labels = [];
+        $data=[];
         // get all balances in balances
         $result = $xoopsDB->query('SELECT `bal_asid` FROM ' . $xoopsDB->prefix('wgsimpleacc_balances') . ' GROUP BY `bal_asid`');
         while (list($balAsid) = $xoopsDB->fetchRow($result)) {
@@ -309,10 +310,43 @@ switch ($op) {
                 $balAmounts .= $balancesAll[$i]->getVar('bal_amountend') . ',';
                 $labelDate = $balancesAll[$i]->getVar('bal_to');
                 $labels[$labelDate] = \formatTimestamp($labelDate, 's');
+                $year =  date("Y-m", $labelDate);
+                $data[] = ["year" => $year, 'name' => $asName, 'color' => $asColor, 'data' => $balancesAll[$i]->getVar('bal_amountend')];
             }
             unset($crBalances);
-            $line_balances[] = ['name' => $asName, 'color' => $asColor, 'data' => $balAmounts];
         }
+
+        // get all years and sort
+        $allYears = [];
+        foreach ($data as $entry) {
+            $allYears[$entry['year']] = true;
+        }
+        $allYears = array_keys($allYears);
+        sort($allYears); // z. B. ['2021-12', '2022-12', '2023-12', '2024-12']
+
+        // group data by name + color
+        $grouped = [];
+        foreach ($data as $entry) {
+            $key = $entry['name'] . '||' . $entry['color'];
+            $grouped[$key]['name'] = $entry['name'];
+            $grouped[$key]['color'] = $entry['color'];
+            $grouped[$key]['values'][$entry['year']] = $entry['data'];
+        }
+
+        // prepare output
+        foreach ($grouped as $group) {
+            $values = [];
+            foreach ($allYears as $year) {
+                $val = $group['values'][$year] ?? '0.00';
+                $values[] = $val;
+            }
+            $line_balances[] = [
+                'name'  => $group['name'],
+                'color' => $group['color'],
+                'data'  => implode(',', $values) . ',', // mit abschließendem Komma
+            ];
+        }
+
         $GLOBALS['xoopsTpl']->assign('balancesCount', \count($line_balances));
         $line_labels = '';
         foreach($labels as $label) {
