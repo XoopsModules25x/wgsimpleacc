@@ -8,7 +8,7 @@
 </style>
 
 <h3><{$header_balances_line}></h3>
-<a href="statistics.php?op=balances" class="btn btn-primary<{if $showoffline|default:0 == 0}> disabled<{/if}> wgsa-btn-list" title="">Nur online</a><a href="statistics.php?op=balances&amp;showoffline=1" class="btn btn-primary<{if $showoffline|default:0 == 1}> disabled<{/if}> wgsa-btn-list" title="">alle anzeigen</a>
+<a href="statistics.php?op=balances" class="btn btn-primary<{if $showoffline|default:0 == 0}> disabled<{/if}> wgsa-btn-list" title="<{$smarty.const._MA_WGSIMPLEACC_SHOW_ONLINE}>"><{$smarty.const._MA_WGSIMPLEACC_SHOW_ONLINE}></a><a href="statistics.php?op=balances&amp;showoffline=1" class="btn btn-primary<{if $showoffline|default:0 == 1}> disabled<{/if}> wgsa-btn-list" title="<{$smarty.const._MA_WGSIMPLEACC_SHOW_ALL}>"><{$smarty.const._MA_WGSIMPLEACC_SHOW_ALL}></a>
 <div id="canvas-holder2" class="canvas-balances" style="width:100%">
     <canvas id="chart-balances-line"></canvas>
 </div>

@@ -47,6 +47,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_SHOW_ALL', 'Show all');
 \define('_MA_WGSIMPLEACC_SHOW_CUSTOM', 'Show custom selection');
 \define('_MA_WGSIMPLEACC_SHOW_TOP', 'Show top levels');
+\define('_MA_WGSIMPLEACC_SHOW_ONLINE', 'Show Online only');
 \define('_MA_WGSIMPLEACC_FILTERBY_YEAR', 'Select year');
 \define('_MA_WGSIMPLEACC_FILTERBY_ASSET', 'Select asset');
 \define('_MA_WGSIMPLEACC_FILTERBY_ALLOC', 'Select allocation');
