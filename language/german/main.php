@@ -464,6 +464,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_FORM_UPLOAD_ALLOWEDMIME', 'Erlaubte Dateitypen:');
 \define('_MA_WGSIMPLEACC_FORM_DELETE_CONFIRM', 'Löschen bestätigen');
 \define('_MA_WGSIMPLEACC_FORM_DELETE_LABEL', 'Wollen Sie wirklich löschen:');
+\define('_MA_WGSIMPLEACC_FORM_UPLOAD_MULTIDOTS', 'Der Dateiname enthält mehrere Punkte. Dies kann zu Problemen beim Upload führen');
 //Constants class
 \define('_MA_WGSIMPLEACC_CLASS_EXPENSES', 'Ausgaben');
 \define('_MA_WGSIMPLEACC_CLASS_INCOME', 'Einnahmen');
