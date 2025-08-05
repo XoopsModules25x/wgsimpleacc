@@ -228,3 +228,28 @@
     }
 </style>
 <!-- End code for printing files -->
+
+<!-- ----------------------------- -->
+<!-- Start code for checking multiple dots in file name -->
+<!-- ----------------------------- -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const uploadInput = document.getElementById('fil_name');
+
+        if (uploadInput) {
+            uploadInput.addEventListener('change', function() {
+                const file = this.files[0];
+
+                if (file) {
+                    const filename = file.name;
+                    const dotCount = (filename.match(/\./g) || []).length;
+
+                    if (dotCount > 1) {
+                        alert("<{$smarty.const._MA_WGSIMPLEACC_FORM_UPLOAD_MULTIDOTS}>");
+                    }
+                }
+            });
+        }
+    });
+</script>
+<!-- End code for checking multiple dots in file name -->

@@ -464,6 +464,7 @@ require_once __DIR__ . '/admin.php';
 \define('_MA_WGSIMPLEACC_FORM_UPLOAD_ALLOWEDMIME', 'Allowed mimetypes:');
 \define('_MA_WGSIMPLEACC_FORM_DELETE_CONFIRM', 'Confirm delete');
 \define('_MA_WGSIMPLEACC_FORM_DELETE_LABEL', 'Do you really want to delete:');
+\define('_MA_WGSIMPLEACC_FORM_UPLOAD_MULTIDOTS', 'The file name contains multiple dots. This can cause problems during file upload');
 //Constants class
 \define('_MA_WGSIMPLEACC_CLASS_EXPENSES', 'Expenses');
 \define('_MA_WGSIMPLEACC_CLASS_INCOME', 'Incomes');
