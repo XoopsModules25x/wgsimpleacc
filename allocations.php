@@ -191,6 +191,9 @@ switch ($op) {
         }
         // Form Create
         $allocationsObj = $allocationsHandler->create();
+        if ($allId > 0) {
+            $allocationsObj->setVar('all_pid', $allId);
+        }
         $form = $allocationsObj->getFormAllocations($start, $limit);
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
 

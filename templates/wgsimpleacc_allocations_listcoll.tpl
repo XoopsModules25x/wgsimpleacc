@@ -10,6 +10,8 @@
                         onclick="location.href='allocations.php?op=edit&amp;all_id=<{$listitem.id}>'" target="_blank" type="button"><{$smarty.const._EDIT}></button>
                 <button class="btn btn btn-danger wgsa-btn-list<{if $listitem.tracount > 0 || $listitem.childs > 0}> disabled<{/if}>"
                         onclick="location.href='allocations.php?op=delete&amp;all_id=<{$listitem.id}>'" target="_blank" type="button"><{$smarty.const._DELETE}></button>
+                <button class="btn btn btn-primary wgsa-btn-list"
+                        onclick="location.href='allocations.php?op=new&amp;all_id=<{$listitem.id}>'" target="_blank" type="button"><{$smarty.const._ADD}></button>
             </span>
         </div>
         <div class="list-group collapse" id="item-<{$listitem.id}>">
@@ -26,6 +28,8 @@
                         onclick="location.href='allocations.php?op=edit&amp;all_id=<{$listitem.id}>'" target="_blank" type="button"><{$smarty.const._EDIT}></button>
                 <button class="btn btn btn-danger wgsa-btn-list<{if $listitem.tracount > 0 || $listitem.childs > 0}> disabled<{/if}>"
                         onclick="location.href='allocations.php?op=delete&amp;all_id=<{$listitem.id}>'" target="_blank" type="button"><{$smarty.const._DELETE}></button>
+                <button class="btn btn btn-primary wgsa-btn-list"
+                        onclick="location.href='allocations.php?op=new&amp;all_id=<{$listitem.id}>'" target="_blank" type="button"><{$smarty.const._ADD}></button>
             </span></div>
     <{/if}>
 <{/foreach}>

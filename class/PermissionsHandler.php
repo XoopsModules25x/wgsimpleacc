@@ -222,12 +222,30 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
+     * @public function getPermAllocationsAdmin
+     * returns right for edit/delete all allocations
+     * @return bool
+     */
+    public function getPermAllocationsAdmin()
+    {
+        if ($this->getPermGlobalApprove()) {
+            return true;
+        }
+
+        return $this->getPerm(Constants::PERM_ALLOCATIONS_ADMIN);
+    }
+
+    /**
      * @public function getPermAllocationsSubmit
      * returns right for submit allocations
      * @return bool
      */
     public function getPermAllocationsSubmit()
     {
+        if ($this->getPermAllocationsAdmin()) {
+            return true;
+        }
+
         return $this->getPermSubmit(Constants::PERM_ALLOCATIONS_SUBMIT);
     }
 
@@ -252,6 +270,9 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
             }
             $currentuid = $xoopsUser->uid();
         }
+        if ($this->getPermAllocationsAdmin()) {
+            return true;
+        }
         if ($this->getPermAllocationsSubmit() && $currentuid == $allSubmitter) {
             return true;
         }
@@ -270,12 +291,30 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
+     * @public function getPermAccountsAdmin
+     * returns right for edit/delete accounts
+     * @return bool
+     */
+    public function getPermAccountsAdmin()
+    {
+        if ($this->getPermGlobalApprove()) {
+            return true;
+        }
+
+        return $this->getPerm(Constants::PERM_ACCOUNTS_ADMIN);
+    }
+
+    /**
      * @public function getPermAccountsSubmit
      * returns right for submit accounts
      * @return bool
      */
     public function getPermAccountsSubmit()
     {
+        if ($this->getPermAccountsAdmin()) {
+            return true;
+        }
+
         return $this->getPermSubmit(Constants::PERM_ACCOUNTS_SUBMIT);
     }
 
@@ -300,6 +339,9 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
             }
             $currentuid = $xoopsUser->uid();
         }
+        if ($this->getPermAccountsAdmin()) {
+            return true;
+        }
         if ($this->getPermAccountsSubmit() && $currentuid == $accSubmitter) {
             return true;
         }
@@ -318,12 +360,30 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
+     * @public function getPermAssetsAdmin
+     * returns right for edit/delete assets
+     * @return bool
+     */
+    public function getPermAssetsAdmin()
+    {
+        if ($this->getPermGlobalApprove()) {
+            return true;
+        }
+
+        return $this->getPerm(Constants::PERM_ASSETS_ADMIN);
+    }
+
+    /**
      * @public function getPermAssetsSubmit
      * returns right for submit assets
      * @return bool
      */
     public function getPermAssetsSubmit()
     {
+        if ($this->getPermAssetsAdmin()) {
+            return true;
+        }
+        
         return $this->getPermSubmit(Constants::PERM_ASSETS_SUBMIT);
     }
 
@@ -347,6 +407,9 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
                 return true;
             }
             $currentuid = $xoopsUser->uid();
+        }
+        if ($this->getPermAssetsAdmin()) {
+            return true;
         }
         if ($this->getPermAssetsSubmit() && $currentuid == $asSubmitter) {
             return true;
@@ -404,6 +467,20 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
     }
 
     /**
+     * @public function getPermBalancesAdmin
+     * returns right for edit/delete all balances
+     * @return bool
+     */
+    public function getPermBalancesAdmin()
+    {
+        if ($this->getPermGlobalApprove()) {
+            return true;
+        }
+
+        return $this->getPerm(Constants::PERM_BALANCES_ADMIN);
+    }
+
+    /**
      * @public function getPermBalancesSubmit
      * returns right for create balances
      * @return bool
@@ -434,7 +511,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
             return true;
         }
 
-        return $this->getPerm(Constants::PERM_TRATEMPLATES_APPROVE);
+        return $this->getPerm(Constants::PERM_TRATEMPLATES_ADMIN);
     }
 
     /**
@@ -472,6 +549,9 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
             }
             $currentuid = $xoopsUser->uid();
         }
+        if ($this->getPermTratemplatesApprove()) {
+            return true;
+        }
         if ($this->getPermTratemplatesSubmit() && $currentuid == $tplSubmitter) {
             return true;
         }
@@ -500,7 +580,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
             return true;
         }
 
-        return $this->getPerm(Constants::PERM_OUTTEMPLATES_APPROVE);
+        return $this->getPerm(Constants::PERM_OUTTEMPLATES_ADMIN);
     }
 
     /**
@@ -537,6 +617,9 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
                 return true;
             }
             $currentuid = $xoopsUser->uid();
+        }
+        if ($this->getPermOuttemplatesApprove()) {
+            return true;
         }
         if ($this->getPermOuttemplatesSubmit() && $currentuid == $tplSubmitter) {
             return true;
@@ -578,7 +661,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      */
     public function getPermClientsSubmit()
     {
-        if ($this->getPermGlobalApprove()) {
+        if ($this->getPermClientsAdmin()) {
             return true;
         }
 
@@ -605,6 +688,9 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
                 return true;
             }
             $currentuid = $xoopsUser->uid();
+        }
+        if ($this->getPermClientsAdmin()) {
+            return true;
         }
         if ($this->getPermClientsSubmit() && $currentuid == $cliSubmitter) {
             return true;
@@ -647,7 +733,7 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
      */
     public function getPermFileDirSubmit()
     {
-        if ($this->getPermGlobalApprove()) {
+        if ($this->getPermFileDirAdmin()) {
             return true;
         }
 
@@ -674,6 +760,9 @@ class PermissionsHandler extends \XoopsPersistableObjectHandler
                 return true;
             }
             $currentuid = $xoopsUser->uid();
+        }
+        if ($this->getPermFileDirAdmin()) {
+            return true;
         }
         return $this->getPermFileDirSubmit() && $currentuid == $filSubmitter;
     }
