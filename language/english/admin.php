@@ -37,6 +37,7 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_THEREARE_TRATEMPLATES', "There are <span class='bold'>%s</span> transaction templates in the database");
 \define('_AM_WGSIMPLEACC_THEREARE_OUTTEMPLATES', "There are <span class='bold'>%s</span> output templates in the database");
 \define('_AM_WGSIMPLEACC_THEREARE_CLIENTS', "There are <span class='bold'>%s</span> clients in the database");
+\define('_AM_WGSIMPLEACC_THEREARE_PROCESSING', "There are <span class='bold'>%s</span> processing steps in the database");
 // ---------------- Admin Files ----------------
 // Buttons
 \define('_AM_WGSIMPLEACC_ADD_ACCOUNT', 'Add New Account');
