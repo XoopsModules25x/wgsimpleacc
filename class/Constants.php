@@ -77,10 +77,10 @@ interface Constants
     public const PERM_ACCOUNTS_VIEW        = 12;
     public const PERM_BALANCES_SUBMIT      = 13;
     public const PERM_BALANCES_VIEW        = 14;
-    public const PERM_TRATEMPLATES_APPROVE = 25;
+    public const PERM_TRATEMPLATES_ADMIN   = 25;
     public const PERM_TRATEMPLATES_SUBMIT  = 15;
     public const PERM_TRATEMPLATES_VIEW    = 16;
-    public const PERM_OUTTEMPLATES_APPROVE = 26;
+    public const PERM_OUTTEMPLATES_ADMIN   = 26;
     public const PERM_OUTTEMPLATES_SUBMIT  = 17;
     public const PERM_OUTTEMPLATES_VIEW    = 18;
     public const PERM_CLIENTS_SUBMIT       = 19;
@@ -89,6 +89,10 @@ interface Constants
     public const PERM_FILEDIR_ADMIN        = 22;
     public const PERM_FILEDIR_SUBMIT       = 23;
     public const PERM_FILEDIR_VIEW         = 24;
+    public const PERM_ALLOCATIONS_ADMIN    = 27;
+    public const PERM_ASSETS_ADMIN         = 28;
+    public const PERM_ACCOUNTS_ADMIN       = 29;
+    public const PERM_BALANCES_ADMIN       = 30;
 
     // Constants for account class
     public const CLASS_BOTH   = 1;

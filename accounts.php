@@ -186,6 +186,9 @@ switch ($op) {
         }
         // Form Create
         $accountsObj = $accountsHandler->create();
+        if ($accId > 0) {
+            $accountsObj->setVar('acc_pid', $accId);
+        }
         $form = $accountsObj->getFormAccounts();
         $GLOBALS['xoopsTpl']->assign('form', $form->render());
 
