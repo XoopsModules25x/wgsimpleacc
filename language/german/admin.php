@@ -37,7 +37,6 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_THEREARE_TRATEMPLATES', "Es gibt <span class='bold'>%s</span> Transaktionsvorlagen in der Datenbank");
 \define('_AM_WGSIMPLEACC_THEREARE_OUTTEMPLATES', "Es gibt <span class='bold'>%s</span> Ausgabevorlagen in der Datenbank");
 \define('_AM_WGSIMPLEACC_THEREARE_CLIENTS', "Es gibt <span class='bold'>%s</span> Klienten in der Datenbank");
-\define('_AM_WGSIMPLEACC_THEREARE_PROCESSING', "Es gibt <span class='bold'>%s</span> Verarbeitungsschritte in der Datenbank");
 // ---------------- Admin Files ----------------
 // Buttons
 \define('_AM_WGSIMPLEACC_ADD_ACCOUNT', 'Neues Konto hinzufügen');
