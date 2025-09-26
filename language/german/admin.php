@@ -110,7 +110,7 @@ require_once __DIR__ . '/main.php';
 \define('_AM_WGSIMPLEACC_PERMISSIONS_ASSET_ADMIN', 'Berechtigungen zum Bearbeiten/Löschen aller Vermögenswerte');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_ASSET_SUBMIT', 'Berechtigungen zum Einsenden von eines Vermögenswertes');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_ASSET_VIEW', 'Berechtigungen zum Ansehen der Vermögenswerten');
-\define('_AM_WGSIMPLEACC_PERMISSIONS_ACCOUNT_ADMIN', 'Berechtigungen zum zum Bearbeiten/Löschen aller Vermögenswerte');
+\define('_AM_WGSIMPLEACC_PERMISSIONS_ACCOUNT_ADMIN', 'Berechtigungen zum zum Bearbeiten/Löschen aller Konten');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_ACCOUNT_SUBMIT', 'Berechtigungen zum Einsenden von eines Kontos');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_ACCOUNT_VIEW', 'Berechtigungen zum Ansehen der Konten');
 \define('_AM_WGSIMPLEACC_PERMISSIONS_BALANCE_ADMIN', 'Berechtigungen zum zum Bearbeiten/Löschen aller Abschlüsse');
